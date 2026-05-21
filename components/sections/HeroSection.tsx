@@ -50,7 +50,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
 
         {/* Title — centered, vertical orange→black gradient */}
         <h1
-          className="text-5xl md:text-6xl lg:text-[64px] leading-[1.1] mb-6 text-center"
+          className="hero-title text-5xl md:text-6xl lg:text-[64px] leading-[1.1] mb-6 text-center"
           style={{
             fontFamily: "var(--font-tasa-orbiter)",
             fontWeight: 400,
@@ -64,9 +64,9 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
           {titleLine2 && <><br />{titleLine2}</>}
         </h1>
 
-        {/* Subtitle — centered, single line */}
+        {/* Subtitle — centered */}
         <p
-          className="mb-10"
+          className="hero-subtitle mb-10"
           style={{
             fontFamily: "Inter, sans-serif",
             fontSize: 16,
@@ -74,7 +74,6 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
             lineHeight: "160%",
             color: "#555",
             textAlign: "center",
-            whiteSpace: "nowrap",
             margin: "0 auto 40px",
           }}
         >
@@ -172,9 +171,9 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
 
       {/* Logo carousel strip */}
       <div className="bg-[#F3F3F3] pt-10 pb-12">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 flex items-center gap-[60px]">
+        <div className="hero-logos-row max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 flex items-center gap-[60px]">
           {/* Left label — two lines, left-aligned */}
-          <div className="flex-shrink-0">
+          <div className="hero-logos-label flex-shrink-0">
             {labelLines.map((line, i) => (
               <p
                 key={i}

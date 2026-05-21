@@ -108,8 +108,8 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
               </div>
             </div>
 
-            {/* CENTER — blue oval */}
-            <div className="flex items-center justify-center relative cmp-center-col">
+            {/* CENTER — blue oval (hidden on mobile) */}
+            <div className="hidden md:flex items-center justify-center relative cmp-center-col">
               <div
                 className="absolute border border-[#1C2BFF]/20"
                 style={{ width: "395px", height: "446px", borderRadius: "220px", animation: "subtlePulse 3.5s ease-in-out infinite" }}

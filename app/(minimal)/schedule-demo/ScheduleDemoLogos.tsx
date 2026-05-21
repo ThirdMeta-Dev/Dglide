@@ -9,10 +9,10 @@ export default function ScheduleDemoLogos({ data }: { data?: Record<string, stri
   const doubled = [...logos, ...logos];
 
   return (
-    <div style={{ background: "#F3F3F3", padding: "40px 0 48px" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 64px", display: "flex", alignItems: "center", gap: 60 }}>
+    <div style={{ background: "#F3F3F3", padding: "40px 0 48px", overflow: "hidden" }}>
+      <div className="sd-logos-row" style={{ maxWidth: 1280, margin: "0 auto", padding: "0 64px", display: "flex", alignItems: "center", gap: 60 }}>
         {/* Left label */}
-        <div style={{ flexShrink: 0 }}>
+        <div className="sd-logos-label" style={{ flexShrink: 0 }}>
           <p style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 18, fontWeight: 400, lineHeight: "1.4", color: "#000", margin: 0 }}>{headingLine1}</p>
           <p style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 18, fontWeight: 400, lineHeight: "1.4", color: "#000", margin: 0 }}>{headingLine2}</p>
         </div>

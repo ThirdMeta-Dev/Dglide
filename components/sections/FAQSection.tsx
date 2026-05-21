@@ -67,6 +67,7 @@ export default function FAQSection({ data }: { data?: Record<string, string> } =
       }}
     >
       <div
+        className="faq-cols"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -77,7 +78,7 @@ export default function FAQSection({ data }: { data?: Record<string, string> } =
         }}
       >
         {/* Left: title */}
-        <div style={{ flex: "0 0 380px", paddingTop: 8 }}>
+        <div className="faq-left" style={{ flex: "0 0 380px", paddingTop: 8 }}>
           <div style={{ position: "relative", display: "inline-block" }}>
             <h2
               style={{

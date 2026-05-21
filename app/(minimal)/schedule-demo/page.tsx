@@ -9,7 +9,7 @@ import FAQSection from "@/components/sections/FAQSection";
 export default async function ScheduleDemoPage() {
   const sections = await getScheduleDemoSections();
   return (
-    <div style={{ minHeight: "100vh" }}>
+    <div className="sd-page-root" style={{ minHeight: "100vh" }}>
       <ScheduleDemoHero data={sections.hero} />
       <ScheduleDemoLogos data={sections.logo_strip} />
       <WhyDGlideSection data={sections.why_dglide} />

@@ -145,7 +145,7 @@ export default function WhyDGlideSection({ data }: { data?: Record<string, strin
         </div>
 
         {/* Top row — 3 cards */}
-        <div style={{ display: "flex", gap: 16, marginBottom: 16 }}>
+        <div className="wdg-top-row" style={{ display: "flex", gap: 16, marginBottom: 16 }}>
           {topCards.map((card) => (
             <div
               key={card.title}
@@ -191,7 +191,7 @@ export default function WhyDGlideSection({ data }: { data?: Record<string, strin
         </div>
 
         {/* Bottom row — 2 wider cards */}
-        <div style={{ display: "flex", gap: 16 }}>
+        <div className="wdg-bottom-row" style={{ display: "flex", gap: 16 }}>
           {bottomCards.map((card) => (
             <div
               key={card.title}

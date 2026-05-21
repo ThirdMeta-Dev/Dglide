@@ -95,7 +95,13 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
               WebkitTextFillColor: "transparent",
             }}
           >
-            {sectionTitle}
+            {sectionTitle.includes("Teams") ? (
+              <>
+                {sectionTitle.slice(0, sectionTitle.indexOf("Teams") + 5)}
+                <br className="testi-desktop-br" />
+                {sectionTitle.slice(sectionTitle.indexOf("Teams") + 5)}
+              </>
+            ) : sectionTitle}
           </h2>
           <div className="testi-nav-desktop" style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: 8, flexShrink: 0 }}>
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 300, color: "#6F7276", letterSpacing: "0.5px" }}>

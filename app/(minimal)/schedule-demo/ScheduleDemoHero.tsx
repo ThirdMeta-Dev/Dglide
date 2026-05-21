@@ -94,7 +94,7 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
   }
 
   return (
-    <div style={{ minHeight: "100vh", position: "relative", overflow: "hidden" }}>
+    <div style={{ minHeight: "100vh", position: "relative", overflow: "hidden", maxWidth: "100vw" }}>
 
       {/* Decorative waves — Figma node 765-112, full viewport width, shifted down to testimonial area */}
       <svg
@@ -136,11 +136,11 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
       </svg>
 
       {/* ── Main two-column section ── */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 48px 0", position: "relative", zIndex: 1 }}>
-        <div style={{ display: "flex", gap: 68, alignItems: "flex-start" }}>
+      <div className="sd-hero-wrap" style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 48px 0", position: "relative", zIndex: 1 }}>
+        <div className="sd-hero-cols" style={{ display: "flex", gap: 68, alignItems: "flex-start" }}>
 
           {/* ── LEFT column ── */}
-          <div style={{ flex: "0 0 530px", display: "flex", flexDirection: "column", gap: 38 }}>
+          <div className="sd-hero-left" style={{ flex: "0 0 530px", display: "flex", flexDirection: "column", gap: 38 }}>
 
             {/* Logo */}
             <Link href="/" style={{ display: "inline-block" }}>
@@ -162,6 +162,7 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
 
               {/* Heading — two lines, gradient text */}
               <h1
+                className="sd-hero-title"
                 style={{
                   fontFamily: "var(--font-tasa-orbiter)",
                   fontSize: 44,
@@ -199,7 +200,7 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
             </div>
 
             {/* Divider line */}
-            <svg xmlns="http://www.w3.org/2000/svg" width="469" height="1" viewBox="0 0 469 1" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="1" viewBox="0 0 469 1" fill="none" preserveAspectRatio="none">
               <path d="M0.5 0.500031L467.676 0.49999" stroke="white" strokeLinecap="round"/>
             </svg>
 
@@ -262,7 +263,7 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
           </div>
 
           {/* ── RIGHT column: Form card ── */}
-          <div style={{ flex: 1, background: "#FFF", borderRadius: 16, padding: "32px 40px", boxShadow: "0 4px 32px rgba(0,0,0,0.08)", display: "flex", flexDirection: "column", gap: 24 }}>
+          <div className="sd-hero-right" style={{ flex: 1, background: "#FFF", borderRadius: 16, padding: "32px 40px", boxShadow: "0 4px 32px rgba(0,0,0,0.08)", display: "flex", flexDirection: "column", gap: 24 }}>
 
             {submitted ? (
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 480, gap: 20, textAlign: "center" }}>

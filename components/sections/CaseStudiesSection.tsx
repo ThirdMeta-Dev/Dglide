@@ -1,5 +1,6 @@
 "use client";
 
+
 const RIGHT_ITEM_DEFAULTS = [
   "Every tool replaced by one platform",
   "One dashboard for the whole operation",
@@ -16,7 +17,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
   const challengeTag1  = data?.challenge_tag_1 ?? "Automated Operational Flows";
   const challengeTag2  = data?.challenge_tag_2 ?? "Workflow Coordination";
   const metricsTitle   = data?.metrics_title   ?? "The Success Metrics";
-  const metricsBody    = data?.metrics_body    ?? "After DGlide, the team could see and act in real time. The numbers moved within the first quarter.";
+  const metricsBody    = data?.metrics_body    ?? "After DGlide, the team could see and act in real time.\n The numbers moved within the first quarter.";
   const metric1Num     = data?.metric_1_num    ?? "3X";
   const metric1Label   = data?.metric_1_label  ?? "Lead Capture";
   const metric2Num     = data?.metric_2_num    ?? "8 Min";
@@ -118,6 +119,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
                     color: "#555",
                     lineHeight: "25px",
                     margin: 0,
+                    maxWidth: 370,
                   }}
                 >
                   {challengeBody}
@@ -159,6 +161,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
                     textTransform: "capitalize" as const,
                     color: "#555",
                     margin: 0,
+                    maxWidth: 350,
                   }}
                 >
                   {metricsBody}
