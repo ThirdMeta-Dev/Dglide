@@ -1,26 +1,81 @@
 @import "tailwindcss";
+@import "@fontsource-variable/tasa-orbiter";
+@import "@fontsource-variable/sora";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #1C2BFF;
+  --color-primary-dark: #141FB5;
+  --color-navy: #0C126B;
+  --color-orange: #FF7F1C;
+  --color-page-bg: #F3F3F3;
+  --color-nav-pill: #F3F3F3;
+
+  --font-tasa-orbiter: "TASA Orbiter Variable", sans-serif;
+  --font-sora: "Sora", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    background-color: #F3F3F3;
+    font-family: var(--font-inter);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: #F3F3F3;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%);
+  }
+
+  .gradient-footer-bg {
+    background: linear-gradient(to top, #F3F3F3 0%, #FFFFFF 100%);
+  }
+
+  .font-sora {
+    font-family: var(--font-sora);
+  }
+
+  .font-montserrat {
+    font-family: var(--font-montserrat);
+  }
+}
+
+@keyframes fillBar {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+@keyframes scrollLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes clockSpin {
+  0%   { stroke-dashoffset: 113; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes subtlePulse {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(1.07); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }

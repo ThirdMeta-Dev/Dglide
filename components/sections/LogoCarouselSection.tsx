@@ -1,0 +1,90 @@
+"use client";
+
+const LOGO_COUNT = 7;
+const FALLBACK_SRC = "/logo.png";
+
+function LogoPill({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div
+      style={{
+        width: 212,
+        height: 68,
+        borderRadius: 40,
+        flexShrink: 0,
+        border: "1px solid #FF7F1C",
+        background: "#FFF",
+        backdropFilter: "blur(12.5px)",
+        WebkitBackdropFilter: "blur(12.5px)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <img src={src} alt={alt} style={{ maxWidth: 99, maxHeight: 33, objectFit: "contain" }} />
+    </div>
+  );
+}
+
+export default function LogoCarouselSection({
+  data,
+  title,
+}: {
+  data?: Record<string, string>;
+  title?: string;
+}) {
+  const heading = title ?? data?.title ?? "Who's Already Running on DGlide";
+
+  const logos = Array.from({ length: LOGO_COUNT }, (_, i) => ({
+    src: data?.[`logo_${i + 1}_image`] || FALLBACK_SRC,
+    alt: data?.[`logo_${i + 1}_alt`]   || "Client Logo",
+  })).filter((l) => l.src);
+
+  const displayLogos = logos.length > 0 ? logos : Array(LOGO_COUNT).fill({ src: FALLBACK_SRC, alt: "Client Logo" });
+  const duplicated = [...displayLogos, ...displayLogos, ...displayLogos];
+  const trackWidth = displayLogos.length * (212 + 16);
+
+  return (
+    <section style={{ width: "100%", background: "transparent", padding: "48px 0 24px", overflow: "hidden" }}>
+      {heading && (
+        <p
+          style={{
+            fontFamily: "var(--font-tasa-orbiter)",
+            fontSize: 18,
+            fontWeight: 400,
+            lineHeight: "24px",
+            color: "#000",
+            textAlign: "center",
+            marginBottom: 28,
+          }}
+        >
+          {heading}
+        </p>
+      )}
+      <style>{`
+        @keyframes dg-marquee-left {
+          from { transform: translateX(0); }
+          to   { transform: translateX(calc(-${trackWidth}px - 16px)); }
+        }
+        @keyframes dg-marquee-right {
+          from { transform: translateX(calc(-${trackWidth}px - 16px)); }
+          to   { transform: translateX(0); }
+        }
+        .dg-marquee-row:hover .dg-marquee-track {
+          animation-play-state: paused !important;
+        }
+      `}</style>
+
+      <div className="dg-marquee-row" style={{ marginBottom: 20 }}>
+        <div className="dg-marquee-track" style={{ display: "flex", gap: 16, width: "max-content", animation: `dg-marquee-left 28s linear infinite` }}>
+          {duplicated.map((logo, i) => <LogoPill key={i} src={logo.src} alt={logo.alt} />)}
+        </div>
+      </div>
+
+      <div className="dg-marquee-row">
+        <div className="dg-marquee-track" style={{ display: "flex", gap: 16, width: "max-content", animation: `dg-marquee-right 32s linear infinite` }}>
+          {duplicated.map((logo, i) => <LogoPill key={i} src={logo.src} alt={logo.alt} />)}
+        </div>
+      </div>
+    </section>
+  );
+}
