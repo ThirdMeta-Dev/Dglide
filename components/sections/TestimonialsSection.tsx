@@ -79,9 +79,10 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
   return (
     <section style={{ width: "100%", backgroundImage: "url(/testimonials-bg.png)", backgroundSize: "100% 100%", backgroundRepeat: "no-repeat", marginTop: 60, overflow: "hidden" }}>
       <div className="testi-header" style={{ maxWidth: 1200, margin: "0 auto", padding: "81px 48px 0" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 40 }}>
+        {/* Desktop: title + nav on one row */}
+        <div className="testi-header-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 40 }}>
           <h2
-            className="testi-h2 testi-title-wrap"
+            className="testi-h2"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontSize: 56,
@@ -96,13 +97,25 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
           >
             {sectionTitle}
           </h2>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: 8 }}>
+          <div className="testi-nav-desktop" style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: 8, flexShrink: 0 }}>
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 300, color: "#6F7276", letterSpacing: "0.5px" }}>
               {current + 1}/{N}
             </span>
             <NavButton dir="prev" onClick={prev} disabled={current === 0} />
             <NavButton dir="next" onClick={next} disabled={current === N - 1} />
           </div>
+        </div>
+
+        {/* Mobile only: subtitle + nav below title */}
+        <p className="testi-mobile-subtitle" style={{ display: "none", fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: "22px", color: "#555", margin: "0 0 20px" }}>
+          {subtitle}
+        </p>
+        <div className="testi-mobile-nav" style={{ display: "none", alignItems: "center", justifyContent: "flex-end", gap: 10, marginBottom: 20 }}>
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 300, color: "#6F7276" }}>
+            {current + 1}/{N}
+          </span>
+          <NavButton dir="prev" onClick={prev} disabled={current === 0} />
+          <NavButton dir="next" onClick={next} disabled={current === N - 1} />
         </div>
       </div>
 
