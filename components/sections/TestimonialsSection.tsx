@@ -157,6 +157,7 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
 function TestimonialCard({ quote, name, company, image, width }: { quote: string; name: string; company: string; image?: string; width: number }) {
   return (
     <div
+      className="testi-card"
       style={{
         width,
         flexShrink: 0,

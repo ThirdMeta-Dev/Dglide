@@ -134,8 +134,9 @@
   .testi-nav-desktop   { display: none !important; }
   .testi-mobile-subtitle { display: block !important; }
   .testi-mobile-nav    { display: flex !important; }
-  .testi-body          { padding-left: 20px !important; padding-right: 20px !important; padding-bottom: 60px !important; }
+  .testi-body          { padding-left: 20px !important; padding-right: 20px !important; padding-bottom: 60px !important; overflow: hidden !important; }
   .testi-left-col      { display: none !important; }
+  .testi-card          { max-width: calc(100vw - 40px) !important; box-sizing: border-box !important; padding: 28px 20px !important; }
 
   /* ── CTASection ── */
   .cta-heading    { font-size: 22px !important; line-height: 30px !important; max-width: 100% !important; }
