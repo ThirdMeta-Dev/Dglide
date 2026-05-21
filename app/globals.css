@@ -83,9 +83,14 @@
 /* ─── Mobile Responsive ──────────────────────────────────────────── */
 @media (max-width: 768px) {
 
+  /* ── Global font reduction ── */
+  section h2 { font-size: 22px !important; line-height: 30px !important; }
+  section h3 { font-size: 16px !important; line-height: 24px !important; }
+  section p  { font-size: 14px !important; line-height: 22px !important; }
+
   /* ── Shared ── */
   .sec-inner   { padding: 0 20px !important; }
-  .sec-h2      { font-size: 28px !important; line-height: 36px !important; }
+  .sec-h2      { font-size: 22px !important; line-height: 30px !important; }
 
   /* ── SoftwareWorksSection ── */
   .sw-two-col  { flex-direction: column !important; padding: 0 20px !important; gap: 24px !important; }
@@ -124,12 +129,12 @@
 
   /* ── TestimonialsSection ── */
   .testi-header  { padding: 48px 20px 0 !important; }
-  .testi-h2      { font-size: 32px !important; line-height: 40px !important; }
+  .testi-h2      { font-size: 22px !important; line-height: 30px !important; }
   .testi-body    { padding-left: 20px !important; padding-right: 20px !important; padding-bottom: 60px !important; flex-direction: column !important; gap: 24px !important; }
   .testi-left-col{ width: 100% !important; }
 
   /* ── CTASection ── */
-  .cta-heading    { font-size: 28px !important; line-height: 38px !important; max-width: 100% !important; }
+  .cta-heading    { font-size: 22px !important; line-height: 30px !important; max-width: 100% !important; }
   .cta-inner-card { padding: 36px 20px !important; gap: 32px !important; }
 
   /* ── Footer ── */
