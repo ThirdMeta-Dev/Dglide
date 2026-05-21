@@ -52,7 +52,20 @@ function OrangeIcon() {
   );
 }
 
-export default function WhyDGlideSection() {
+export default function WhyDGlideSection({ data }: { data?: Record<string, string> } = {}) {
+  const sectionTitle = data?.title ?? "Why Businesses Move to DGlide";
+  const sectionSubtitle = data?.subtitle ?? "DGlide is not one more tool to manage. It is one connected system built to fit how your operation actually runs.";
+
+  const topCards = [
+    { title: data?.card_1_title ?? TOP_CARDS[0].title, desc: data?.card_1_desc ?? TOP_CARDS[0].desc },
+    { title: data?.card_2_title ?? TOP_CARDS[1].title, desc: data?.card_2_desc ?? TOP_CARDS[1].desc },
+    { title: data?.card_3_title ?? TOP_CARDS[2].title, desc: data?.card_3_desc ?? TOP_CARDS[2].desc },
+  ];
+  const bottomCards = [
+    { title: data?.card_4_title ?? BOTTOM_CARDS[0].title, desc: data?.card_4_desc ?? BOTTOM_CARDS[0].desc },
+    { title: data?.card_5_title ?? BOTTOM_CARDS[1].title, desc: data?.card_5_desc ?? BOTTOM_CARDS[1].desc },
+  ];
+
   return (
     <section
       style={{
@@ -94,7 +107,7 @@ export default function WhyDGlideSection() {
                 margin: 0,
               }}
             >
-              Why Businesses Move to DGlide
+              {sectionTitle}
             </h2>
             <h2
               aria-hidden
@@ -113,7 +126,7 @@ export default function WhyDGlideSection() {
                 pointerEvents: "none",
               }}
             >
-              Why Businesses Move to DGlide
+              {sectionTitle}
             </h2>
           </div>
           <p
@@ -127,13 +140,13 @@ export default function WhyDGlideSection() {
               maxWidth: 760,
             }}
           >
-            DGlide is not one more tool to manage. It is one connected system built to fit how your operation actually runs.
+            {sectionSubtitle}
           </p>
         </div>
 
         {/* Top row — 3 cards */}
         <div style={{ display: "flex", gap: 16, marginBottom: 16 }}>
-          {TOP_CARDS.map((card) => (
+          {topCards.map((card) => (
             <div
               key={card.title}
               style={{
@@ -179,7 +192,7 @@ export default function WhyDGlideSection() {
 
         {/* Bottom row — 2 wider cards */}
         <div style={{ display: "flex", gap: 16 }}>
-          {BOTTOM_CARDS.map((card) => (
+          {bottomCards.map((card) => (
             <div
               key={card.title}
               style={{

@@ -19,9 +19,11 @@ type SectionMeta = {
 export default function HomepageSectionGrid({
   sections,
   sectionMeta,
+  baseHref = "/admin/homepage",
 }: {
   sections: SectionRow[];
   sectionMeta: Record<string, SectionMeta>;
+  baseHref?: string;
 }) {
   const [visibility, setVisibility] = useState<Record<string, boolean>>(
     Object.fromEntries(sections.map((s) => [s.section_type, s.is_visible]))
@@ -84,7 +86,7 @@ export default function HomepageSectionGrid({
 
             {/* Card link */}
             <Link
-              href={exists ? `/admin/homepage/${type}` : "#"}
+              href={exists ? `${baseHref}/${type}` : "#"}
               className={`block ${!exists ? "pointer-events-none cursor-not-allowed" : ""}`}
             >
               <div className="w-10 h-10 rounded-[10px] bg-[#1C2BFF]/8 flex items-center justify-center mb-4">

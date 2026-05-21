@@ -46,7 +46,12 @@ function PlusIcon({ open }: { open: boolean }) {
   );
 }
 
-export default function FAQSection() {
+export default function FAQSection({ data }: { data?: Record<string, string> } = {}) {
+  const sectionTitle = data?.title ?? "Frequently Asked questions";
+  const faqs = FAQS.map((faq, i) => ({
+    q: data?.[`faq_${i + 1}_q`] ?? faq.q,
+    a: data?.[`faq_${i + 1}_a`] ?? faq.a,
+  }));
   const [openIdx, setOpenIdx] = useState(1);
 
   function toggle(i: number) {
@@ -84,7 +89,7 @@ export default function FAQSection() {
                 margin: 0,
               }}
             >
-              Frequently Asked questions
+              {sectionTitle}
             </h2>
             <h2
               aria-hidden
@@ -103,14 +108,14 @@ export default function FAQSection() {
                 pointerEvents: "none",
               }}
             >
-              Frequently Asked questions
+              {sectionTitle}
             </h2>
           </div>
         </div>
 
         {/* Right: accordion */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-          {FAQS.map((faq, i) => {
+          {faqs.map((faq, i) => {
             const isOpen = openIdx === i;
             return (
               <div key={i}>
