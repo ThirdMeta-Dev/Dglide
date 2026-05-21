@@ -124,8 +124,8 @@
   .comp-right   { width: 100% !important; }
 
   /* ── CapabilitiesSection ── */
-  .cap-grid { flex-wrap: wrap !important; gap: 24px !important; }
-  .cap-item { flex: 0 0 calc(50% - 12px) !important; min-width: 0 !important; }
+  .cap-grid { flex-wrap: wrap !important; gap: 20px !important; }
+  .cap-item { flex: 0 0 100% !important; min-width: 0 !important; }
 
   /* ── TestimonialsSection ── */
   .testi-header        { padding: 24px 20px 0 !important; }
