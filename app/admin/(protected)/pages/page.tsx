@@ -16,6 +16,7 @@ type Page = {
 
 const PAGE_EDITOR_ROUTES: Record<string, string> = {
   home: "/admin/homepage",
+  "schedule-demo": "/admin/schedule-demo",
 };
 
 export default function PagesAdminPage() {
