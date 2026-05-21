@@ -6,6 +6,7 @@ const FALLBACK_SRC = "/logo.png";
 function LogoPill({ src, alt }: { src: string; alt: string }) {
   return (
     <div
+      className="logo-pill"
       style={{
         width: 212,
         height: 68,
@@ -20,7 +21,7 @@ function LogoPill({ src, alt }: { src: string; alt: string }) {
         justifyContent: "center",
       }}
     >
-      <img src={src} alt={alt} style={{ maxWidth: 99, maxHeight: 33, objectFit: "contain" }} />
+      <img className="logo-pill-img" src={src} alt={alt} style={{ maxWidth: 99, maxHeight: 33, objectFit: "contain" }} />
     </div>
   );
 }

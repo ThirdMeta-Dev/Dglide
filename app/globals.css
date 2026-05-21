@@ -193,6 +193,10 @@
   .usr-card-img { width: 100% !important; min-height: 180px !important; border-radius: 20px 20px 0 0 !important; }
   .usr-card-text { padding: 20px !important; }
 
+  /* ── LogoCarouselSection ── */
+  .logo-pill     { width: 130px !important; height: 48px !important; border-radius: 24px !important; }
+  .logo-pill-img { max-width: 70px !important; max-height: 24px !important; }
+
   /* ── Section spacing ── */
   section { margin-bottom: 0 !important; }
 }
