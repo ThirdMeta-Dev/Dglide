@@ -111,7 +111,7 @@
 
   /* ── LiveFasterSection ── */
   .lfs-cards   { flex-direction: column !important; }
-  .lfs-card    { margin-top: 0 !important; width: 100% !important; align-self: stretch !important; box-sizing: border-box !important; padding-right: 28px !important; }
+  .lfs-card    { margin-top: 0 !important; width: 100% !important; flex: 0 0 auto !important; align-self: stretch !important; box-sizing: border-box !important; padding-right: 28px !important; }
 
   /* ── CaseStudiesSection ── */
   .css-two-col { flex-direction: column !important; }
