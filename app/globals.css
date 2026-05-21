@@ -79,3 +79,70 @@
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
+/* ─── Mobile Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* ── Shared ── */
+  .sec-inner   { padding: 0 20px !important; }
+  .sec-h2      { font-size: 28px !important; line-height: 36px !important; }
+
+  /* ── SoftwareWorksSection ── */
+  .sw-two-col  { flex-direction: column !important; padding: 0 20px !important; gap: 24px !important; }
+  .sw-image-col{ width: 100% !important; }
+
+  /* ── LivingServiceSection ── */
+  .lss-outer   { padding: 48px 20px 60px !important; }
+  .lss-waves   { display: none !important; }
+  .lss-nav     { position: static !important; display: flex !important; justify-content: flex-end !important; margin-bottom: 24px !important; }
+  .lss-two-col { flex-direction: column !important; }
+  .lss-left    { width: 100% !important; }
+  .lss-right   { display: none !important; }
+
+  /* ── BusinessTabsSection ── */
+  .bts-tab-row          { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; gap: 8px !important; padding-bottom: 8px !important; }
+  .bts-content-card     { flex-direction: column !important; min-height: unset !important; gap: 24px !important; background-image: none !important; background-color: #f8f6f3 !important; }
+  .bts-content-left     { width: 100% !important; }
+
+  /* ── LiveFasterSection ── */
+  .lfs-cards   { flex-direction: column !important; }
+  .lfs-card    { margin-top: 0 !important; }
+
+  /* ── CaseStudiesSection ── */
+  .css-two-col { flex-direction: column !important; }
+  .css-left    { width: 100% !important; }
+  .css-right   { width: 100% !important; margin-left: 0 !important; }
+
+  /* ── CompetitorSection ── */
+  .comp-two-col { flex-direction: column !important; }
+  .comp-card    { margin-left: 0 !important; }
+  .comp-right   { width: 100% !important; }
+
+  /* ── CapabilitiesSection ── */
+  .cap-grid { flex-wrap: wrap !important; gap: 24px !important; }
+  .cap-item { flex: 0 0 calc(50% - 12px) !important; min-width: 0 !important; }
+
+  /* ── TestimonialsSection ── */
+  .testi-header  { padding: 48px 20px 0 !important; }
+  .testi-h2      { font-size: 32px !important; line-height: 40px !important; }
+  .testi-body    { padding-left: 20px !important; padding-right: 20px !important; padding-bottom: 60px !important; flex-direction: column !important; gap: 24px !important; }
+  .testi-left-col{ width: 100% !important; }
+
+  /* ── CTASection ── */
+  .cta-heading    { font-size: 28px !important; line-height: 38px !important; max-width: 100% !important; }
+  .cta-inner-card { padding: 36px 20px !important; gap: 32px !important; }
+
+  /* ── Footer ── */
+  .footer-nl-outer   { padding: 0 16px !important; }
+  .footer-newsletter { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; padding: 20px !important; border-radius: 20px !important; }
+  .footer-nl-title   { white-space: normal !important; font-size: 17px !important; }
+  .footer-nl-actions { flex-direction: column !important; width: 100% !important; align-items: stretch !important; gap: 10px !important; }
+  .footer-nl-input   { width: 100% !important; }
+  .footer-body-wrapper { padding: 40px 20px 0 !important; }
+  .footer-body       { flex-direction: column !important; gap: 32px !important; }
+  .footer-brand-col  { width: 100% !important; }
+  .footer-nav-grid   { gap: 20px !important; }
+  .footer-nav-row    { flex-wrap: wrap !important; gap: 20px !important; }
+  .footer-nav-row > div { flex: 0 0 calc(50% - 10px) !important; min-width: 120px !important; }
+  .footer-bottom     { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; padding: 20px 0 24px !important; }
+}

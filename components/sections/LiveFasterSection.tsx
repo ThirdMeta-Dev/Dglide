@@ -22,11 +22,12 @@ export default function LiveFasterSection({ data }: { data?: Record<string, stri
 
   return (
     <section style={{ width: "100%", background: "#F3F3F3", padding: "80px 0 120px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+      <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Header — right-aligned */}
         <div style={{ textAlign: "right", marginBottom: 48 }}>
           <h2
+            className="sec-h2"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontSize: 48,
@@ -57,10 +58,11 @@ export default function LiveFasterSection({ data }: { data?: Record<string, stri
         </div>
 
         {/* Staggered cards row */}
-        <div style={{ display: "flex", gap: 16 }}>
+        <div className="lfs-cards" style={{ display: "flex", gap: 16 }}>
           {steps.map((step, i) => (
             <div
               key={i}
+              className="lfs-card"
               style={{
                 flex: "1 0 0",
                 alignSelf: "flex-start",

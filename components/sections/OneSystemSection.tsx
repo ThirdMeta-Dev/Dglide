@@ -52,7 +52,7 @@ export default function OneSystemSection({ data }: { data?: Record<string, strin
         </div>
 
         {/* 3-column layout */}
-        <div className="grid grid-cols-[1fr_360px_1fr] gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_360px_1fr] gap-8 items-center">
 
           {/* LEFT column */}
           <div className="flex flex-col gap-6">

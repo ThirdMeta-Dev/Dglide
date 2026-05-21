@@ -167,8 +167,9 @@ export default function Footer({
   return (
     <footer style={{ width: "100%", marginTop: "auto" }}>
       {/* Newsletter banner */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+      <div className="footer-nl-outer" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
         <div
+          className="footer-newsletter"
           style={{
             display: "flex",
             alignItems: "center",
@@ -180,6 +181,7 @@ export default function Footer({
           }}
         >
           <p
+            className="footer-nl-title"
             style={{
               fontFamily: "var(--font-sora), Sora, sans-serif",
               fontSize: 20,
@@ -194,8 +196,9 @@ export default function Footer({
             {newsletterHeading}
           </p>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+          <div className="footer-nl-actions" style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
             <div
+              className="footer-nl-input"
               style={{
                 width: 370,
                 height: 48,
@@ -257,12 +260,12 @@ export default function Footer({
 
       {/* Footer body */}
       <div style={{ width: "100%", background: "transparent", borderRadius: "30px 30px 0 0" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 48px 0" }}>
+        <div className="footer-body-wrapper" style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 48px 0" }}>
 
-          <div style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
+          <div className="footer-body" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
 
             {/* Brand column */}
-            <div style={{ width: 272, flexShrink: 0, display: "flex", flexDirection: "column", gap: 26 }}>
+            <div className="footer-brand-col" style={{ width: 272, flexShrink: 0, display: "flex", flexDirection: "column", gap: 26 }}>
               <div style={{ position: "relative", width: 205, height: 36 }}>
                 <Image
                   src="/logo.png"
@@ -341,11 +344,11 @@ export default function Footer({
             </div>
 
             {/* Nav grid — 2 rows × 3 columns */}
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 36 }}>
-              <div style={{ display: "flex", gap: 60 }}>
+            <div className="footer-nav-grid" style={{ flex: 1, display: "flex", flexDirection: "column", gap: 36 }}>
+              <div className="footer-nav-row" style={{ display: "flex", gap: 60 }}>
                 {row1.map((col) => <NavColumn key={col.heading} {...col} />)}
               </div>
-              <div style={{ display: "flex", gap: 60 }}>
+              <div className="footer-nav-row" style={{ display: "flex", gap: 60 }}>
                 {row2.map((col) => <NavColumn key={col.heading} {...col} />)}
               </div>
             </div>
@@ -355,7 +358,7 @@ export default function Footer({
           <div style={{ height: 1, background: "linear-gradient(90deg, #FBFBFB 0%, #D5D5D5 100%)", margin: "48px 0 0" }} />
 
           {/* Bottom bar */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 0 32px" }}>
+          <div className="footer-bottom" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 0 32px" }}>
             <p style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: "22.4px", color: "#545454", margin: 0 }}>
               {copyright}
             </p>

@@ -78,9 +78,10 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
 
   return (
     <section style={{ width: "100%", backgroundImage: "url(/testimonials-bg.png)", backgroundSize: "100% 100%", backgroundRepeat: "no-repeat", marginTop: 60, overflow: "hidden" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "81px 48px 0" }}>
+      <div className="testi-header" style={{ maxWidth: 1200, margin: "0 auto", padding: "81px 48px 0" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 40 }}>
           <h2
+            className="testi-h2"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontSize: 56,
@@ -106,6 +107,7 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
       </div>
 
       <div
+        className="testi-body"
         style={{
           display: "flex",
           gap: LEFT_COL_GAP,
@@ -114,7 +116,7 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
           paddingBottom: 137,
         }}
       >
-        <div style={{ width: LEFT_COL, flexShrink: 0 }}>
+        <div className="testi-left-col" style={{ width: LEFT_COL, flexShrink: 0 }}>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 400, lineHeight: "26px", color: "#555", margin: 0 }}>
             {subtitle}
           </p>

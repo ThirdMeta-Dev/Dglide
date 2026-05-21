@@ -37,11 +37,12 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
         overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+      <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Title */}
         <div style={{ marginBottom: 56, position: "relative", display: "inline-block" }}>
           <h2
+            className="sec-h2"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontSize: 48,
@@ -55,6 +56,7 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
           </h2>
           <h2
             aria-hidden
+            className="sec-h2"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontSize: 48,
@@ -75,13 +77,14 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
         </div>
 
         {/* Two-column layout */}
-        <div style={{ display: "flex", gap: 24, alignItems: "stretch" }}>
+        <div className="comp-two-col" style={{ display: "flex", gap: 24, alignItems: "stretch" }}>
 
           {/* LEFT — 3 staggered cards */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 16 }}>
             {competitors.map((comp, i) => (
               <div
                 key={i}
+                className="comp-card"
                 style={{
                   display: "flex",
                   padding: "24px 28px",
@@ -141,6 +144,7 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
 
           {/* RIGHT — DGlide card */}
           <div
+            className="comp-right"
             style={{
               width: 432,
               flexShrink: 0,

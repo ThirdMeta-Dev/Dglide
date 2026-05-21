@@ -38,11 +38,12 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
         padding: "80px 0 96px",
       }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+      <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Title */}
         <div style={{ marginBottom: 56, position: "relative", display: "inline-block" }}>
           <h2
+            className="sec-h2"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontSize: 48,
@@ -56,6 +57,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
           </h2>
           <h2
             aria-hidden
+            className="sec-h2"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontSize: 48,
@@ -76,10 +78,11 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
         </div>
 
         {/* Two-column */}
-        <div style={{ display: "flex", alignItems: "flex-start", isolation: "isolate" }}>
+        <div className="css-two-col" style={{ display: "flex", alignItems: "flex-start", isolation: "isolate" }}>
 
           {/* LEFT CARD */}
           <div
+            className="css-left"
             style={{
               width: 699,
               flexShrink: 0,
@@ -235,6 +238,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
 
           {/* RIGHT CARD */}
           <div
+            className="css-right"
             style={{
               width: 445,
               flexShrink: 0,

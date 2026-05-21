@@ -150,11 +150,12 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
         padding: "80px 0 96px",
       }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+      <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Title */}
         <div style={{ position: "relative", marginBottom: 56, textAlign: "center" }}>
           <h2
+            className="sec-h2"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontSize: 48,
@@ -169,6 +170,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
           </h2>
           <h2
             aria-hidden
+            className="sec-h2"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontSize: 48,
@@ -191,6 +193,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
 
         {/* Tab row */}
         <div
+          className="bts-tab-row"
           style={{
             display: "flex",
             justifyContent: "center",
@@ -213,6 +216,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
 
         {/* Content card */}
         <div
+          className="bts-content-card"
           style={{
             backgroundImage: "url(/business-tabs-content.png)",
             backgroundSize: "100% 100%",
@@ -228,6 +232,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
         >
           {/* LEFT: text content */}
           <div
+            className="bts-content-left"
             style={{
               width: 423,
               flexShrink: 0,

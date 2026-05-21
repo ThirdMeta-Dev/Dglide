@@ -69,6 +69,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
       <img
         src={data?.waves_image ?? "/living-service-waves.png"}
         alt=""
+        className="lss-waves"
         style={{
           position: "absolute",
           bottom: 0,
@@ -81,11 +82,12 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
       />
 
       <div
-        className="max-w-[1280px] mx-auto"
+        className="max-w-[1280px] mx-auto lss-outer"
         style={{ padding: "80px 64px 80px", position: "relative", zIndex: 1 }}
       >
         {/* Counter + Nav */}
         <div
+          className="lss-nav"
           style={{
             position: "absolute",
             top: 40,
@@ -112,11 +114,12 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
         </div>
 
         {/* Two-column layout */}
-        <div style={{ display: "flex", gap: 0, alignItems: "flex-start" }}>
+        <div className="lss-two-col" style={{ display: "flex", gap: 0, alignItems: "flex-start" }}>
 
           {/* LEFT */}
-          <div style={{ width: "55%", flexShrink: 0 }}>
+          <div className="lss-left" style={{ width: "55%", flexShrink: 0 }}>
             <h2
+              className="sec-h2"
               style={{
                 fontFamily: "var(--font-tasa-orbiter)",
                 fontWeight: 400,
@@ -160,7 +163,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
           </div>
 
           {/* RIGHT */}
-          <div style={{ flex: 1, position: "relative", marginTop: 40, marginLeft: -120 }}>
+          <div className="lss-right" style={{ flex: 1, position: "relative", marginTop: 40, marginLeft: -120 }}>
             <div style={{ position: "relative", width: 480, height: 480 }}>
               <img
                 src={data?.circle_image ?? "/living-service-circle.png"}

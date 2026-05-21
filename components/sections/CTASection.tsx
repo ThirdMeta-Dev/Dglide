@@ -16,6 +16,7 @@ export default function CTASection({ data }: { data?: Record<string, string> }) 
     <section style={{ width: "100%", padding: "48px 16px 80px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div
+          className="cta-inner-card"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -113,6 +114,7 @@ export default function CTASection({ data }: { data?: Record<string, string> }) 
 
               {/* Heading */}
               <h2
+                className="cta-heading"
                 style={{
                   fontFamily: "var(--font-tasa-orbiter)",
                   fontSize: 48,

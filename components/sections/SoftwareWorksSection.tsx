@@ -64,7 +64,7 @@ export default function SoftwareWorksSection({ data }: { data?: Record<string, s
       {/* Heading */}
       <div className="text-center mb-16 px-4">
         <h2
-          className="[font-family:var(--font-tasa-orbiter)]"
+          className="[font-family:var(--font-tasa-orbiter)] sec-h2"
           style={{
             fontSize: "48px",
             fontWeight: 400,
@@ -88,10 +88,10 @@ export default function SoftwareWorksSection({ data }: { data?: Record<string, s
       </div>
 
       {/* Two-column layout */}
-      <div className="max-w-[1200px] mx-auto px-12 flex gap-12 items-start">
+      <div className="max-w-[1200px] mx-auto px-12 flex gap-12 items-start sw-two-col">
         {/* Left: image (or placeholder) */}
         <div
-          className="flex-shrink-0 rounded-2xl overflow-hidden"
+          className="sw-image-col flex-shrink-0 rounded-2xl overflow-hidden"
           style={{ width: "55%", aspectRatio: "4 / 3", background: "#E8E8E8" }}
         >
           {activeImage && (

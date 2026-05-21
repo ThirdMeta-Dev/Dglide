@@ -19,12 +19,13 @@ export default function CapabilitiesSection({ data }: { data?: Record<string, st
 
   return (
     <section style={{ width: "100%", background: "#F3F3F3", padding: "80px 0 96px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+      <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Title + subtitle */}
         <div style={{ textAlign: "center", marginBottom: 68 }}>
           <div style={{ position: "relative", display: "inline-block", marginBottom: 18 }}>
             <h2
+              className="sec-h2"
               style={{
                 fontFamily: "var(--font-tasa-orbiter)",
                 fontSize: 48,
@@ -38,6 +39,7 @@ export default function CapabilitiesSection({ data }: { data?: Record<string, st
             </h2>
             <h2
               aria-hidden
+              className="sec-h2"
               style={{
                 fontFamily: "var(--font-tasa-orbiter)",
                 fontSize: 48,
@@ -62,9 +64,9 @@ export default function CapabilitiesSection({ data }: { data?: Record<string, st
         </div>
 
         {/* 4-column cards */}
-        <div style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
+        <div className="cap-grid" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
           {caps.map((cap, i) => (
-            <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+            <div key={i} className="cap-item" style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
               <div
                 style={{
                   width: 40, height: 40, borderRadius: 10, background: "#FF7F1C",
