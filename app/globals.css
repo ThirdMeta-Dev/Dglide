@@ -145,4 +145,46 @@
   .footer-nav-row    { flex-wrap: wrap !important; gap: 20px !important; }
   .footer-nav-row > div { flex: 0 0 calc(50% - 10px) !important; min-width: 120px !important; }
   .footer-bottom     { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; padding: 20px 0 24px !important; }
+
+  /* ── ComparisonSection ── */
+  .cmp-grid { gap: 32px !important; }
+  .cmp-center-col { order: -1 !important; justify-self: center !important; }
+  .cmp-right-col-outer { align-items: flex-start !important; }
+  .cmp-right-col-outer .flex.flex-col.items-end { align-items: flex-start !important; }
+  .cmp-bottom { padding: 0 20px !important; }
+  .cmp-bottom-bar { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
+
+  /* ── LivingServiceSection mobile card ── */
+  .lss-mobile-slide { display: block !important; }
+  .lss-nav { display: none !important; }
+
+  /* ── BusinessTabsSection tabs ── */
+  .bts-tab { width: auto !important; min-width: 0 !important; font-size: 12px !important; padding: 10px 14px !important; white-space: nowrap !important; }
+  .bts-content-left { width: 100% !important; }
+  .bts-img-col { display: none !important; }
+
+  /* ── CaseStudiesSection metrics ── */
+  .css-metrics { gap: 16px !important; flex-wrap: wrap !important; }
+  .css-metric-num { font-size: 28px !important; line-height: 36px !important; }
+
+  /* ── TestimonialsSection title wrap ── */
+  .testi-title-wrap { max-width: 280px !important; }
+
+  /* ── LiveFasterSection header ── */
+  .lfs-header { text-align: left !important; }
+
+  /* ── CompetitorSection fix ── */
+  .comp-right { width: 100% !important; margin-top: 16px !important; }
+
+  /* ── UsefulResourcesSection ── */
+  .usr-outer { padding: 0 20px !important; }
+  .usr-content { flex-direction: column !important; gap: 24px !important; }
+  .usr-tabs { flex-direction: row !important; width: 100% !important; flex-wrap: wrap !important; gap: 8px !important; }
+  .usr-tabs button { flex: 1 1 auto !important; min-width: 80px !important; }
+  .usr-card { flex-direction: column !important; }
+  .usr-card-img { width: 100% !important; min-height: 180px !important; border-radius: 20px 20px 0 0 !important; }
+  .usr-card-text { padding: 20px !important; }
+
+  /* ── Section spacing ── */
+  section { margin-bottom: 0 !important; }
 }

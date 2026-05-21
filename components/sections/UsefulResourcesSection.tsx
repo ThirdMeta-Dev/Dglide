@@ -16,7 +16,7 @@ export default function UsefulResourcesSection() {
 
   return (
     <section style={{ width: "100%", background: "#F3F3F3", padding: "80px 0 60px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+      <div className="usr-outer" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Heading */}
         <div style={{ textAlign: "center", marginBottom: 56 }}>
@@ -50,10 +50,10 @@ export default function UsefulResourcesSection() {
         </div>
 
         {/* Content row */}
-        <div style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
+        <div className="usr-content" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
 
           {/* Left — tab buttons */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 16, width: 244, flexShrink: 0 }}>
+          <div className="usr-tabs" style={{ display: "flex", flexDirection: "column", gap: 16, width: 244, flexShrink: 0 }}>
             {TABS.map((tab) => {
               const isActive = tab === active;
               return (
@@ -83,6 +83,7 @@ export default function UsefulResourcesSection() {
 
           {/* Right — card */}
           <div
+            className="usr-card"
             style={{
               flex: 1,
               display: "flex",
@@ -96,6 +97,7 @@ export default function UsefulResourcesSection() {
           >
             {/* Image placeholder */}
             <div
+              className="usr-card-img"
               style={{
                 width: "48%",
                 flexShrink: 0,
@@ -106,7 +108,7 @@ export default function UsefulResourcesSection() {
             />
 
             {/* Text */}
-            <div style={{ flex: 1, padding: "32px 36px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16 }}>
+            <div className="usr-card-text" style={{ flex: 1, padding: "32px 36px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16 }}>
               <h3
                 style={{
                   fontFamily: "var(--font-tasa-orbiter)",

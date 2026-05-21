@@ -61,7 +61,7 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
   const updateCardWidth = useCallback(() => {
     if (!carouselRef.current) return;
     const w    = carouselRef.current.offsetWidth;
-    const peek = window.innerWidth >= 1500 ? 2.5 : 1.5;
+    const peek = window.innerWidth >= 1500 ? 2.5 : window.innerWidth >= 768 ? 1.5 : 1.0;
     const cw   = Math.min(668, Math.floor((w - (Math.ceil(peek) - 1) * CARD_GAP) / peek));
     setCardWidth(Math.max(260, cw));
   }, []);
@@ -81,7 +81,7 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
       <div className="testi-header" style={{ maxWidth: 1200, margin: "0 auto", padding: "81px 48px 0" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 40 }}>
           <h2
-            className="testi-h2"
+            className="testi-h2 testi-title-wrap"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontSize: 56,

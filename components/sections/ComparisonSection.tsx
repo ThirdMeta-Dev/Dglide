@@ -72,10 +72,10 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
           </div>
 
           {/* 3-column layout */}
-          <div className="grid grid-cols-[1fr_320px_1fr] gap-10 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_320px_1fr] gap-10 items-center cmp-grid">
 
             {/* LEFT column */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 cmp-left-col">
               <div className="flex flex-col gap-3">
                 <img src="/dglide-icon-orange.png" className="w-12 h-12" alt="" />
                 <h3
@@ -109,7 +109,7 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
             </div>
 
             {/* CENTER — blue oval */}
-            <div className="flex items-center justify-center relative">
+            <div className="flex items-center justify-center relative cmp-center-col">
               <div
                 className="absolute border border-[#1C2BFF]/20"
                 style={{ width: "395px", height: "446px", borderRadius: "220px", animation: "subtlePulse 3.5s ease-in-out infinite" }}
@@ -150,7 +150,7 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
             </div>
 
             {/* RIGHT column (mirrored) */}
-            <div className="flex flex-col gap-6 items-end">
+            <div className="flex flex-col gap-6 items-end cmp-right-col-outer">
               <div className="flex flex-col gap-3 items-end">
                 <img src="/dglide-icon-orange.png" className="w-12 h-12" alt="" />
                 <h3
@@ -187,8 +187,9 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
         </div>
 
         {/* Bottom bar */}
-        <div style={{ maxWidth: 1200, margin: "48px auto 0", padding: "0 48px" }}>
+        <div className="cmp-bottom" style={{ maxWidth: 1200, margin: "48px auto 0", padding: "0 48px" }}>
           <div
+            className="cmp-bottom-bar"
             style={{
               display: "flex",
               padding: "12px 40px",

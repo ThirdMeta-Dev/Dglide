@@ -160,6 +160,46 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
                 </div>
               ))}
             </div>
+
+            {/* Mobile slide — shown only on mobile via CSS */}
+            <div className="lss-mobile-slide" style={{ display: "none", marginTop: 28 }}>
+              <div style={{ background: "#FFF", borderRadius: 20, padding: "24px", display: "flex", flexDirection: "column", gap: 14 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 500, color: "#FF7F1C" }}>
+                    {tabs[current]}
+                  </span>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ fontFamily: "Sora, sans-serif", fontSize: 13, color: "#6F7276" }}>{slide.counter}</span>
+                    <NavButton dir="prev" spinning={spinDir === "prev"} onClick={() => navigate("prev")} />
+                    <NavButton dir="next" spinning={spinDir === "next"} onClick={() => navigate("next")} />
+                  </div>
+                </div>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, color: "#000", lineHeight: "22px", margin: 0 }}>
+                  {slide.detail}
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  {slide.bullets.map((b, idx) => (
+                    <span key={idx} style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#555", lineHeight: "20px" }}>
+                      › {b}
+                    </span>
+                  ))}
+                </div>
+                <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
+                  {tabs.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrent(idx)}
+                      style={{
+                        width: idx === current ? 20 : 8, height: 8, borderRadius: 4,
+                        background: idx === current ? "#FF7F1C" : "#E0E0E0",
+                        border: "none", padding: 0, cursor: "pointer",
+                        transition: "width 0.3s ease",
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* RIGHT */}

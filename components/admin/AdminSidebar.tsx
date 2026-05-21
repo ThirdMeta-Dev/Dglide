@@ -20,8 +20,6 @@ const navItems = [
   { label: "Dashboard",    href: "/admin",               icon: LayoutDashboard },
   { label: "Pages",        href: "/admin/pages",          icon: FileText },
   { label: "Demo Requests",href: "/admin/demo-requests",  icon: CalendarCheck },
-  { label: "Homepage",     href: "/admin/homepage",        icon: Layout },
-  { label: "Schedule Demo",href: "/admin/schedule-demo",   icon: Layout },
   { label: "Header / Nav", href: "/admin/header",         icon: Navigation },
   { label: "Footer",       href: "/admin/footer",         icon: Layout },
   { label: "Media",        href: "/admin/media",          icon: ImageIcon },

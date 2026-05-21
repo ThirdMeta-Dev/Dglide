@@ -206,6 +206,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
           {tabs.map((t, i) => (
             <button
               key={i}
+              className="bts-tab"
               onClick={() => setActive(i)}
               style={getTabStyle(i, active)}
             >
@@ -329,6 +330,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
 
           {/* RIGHT: product image */}
           <div
+            className="bts-img-col"
             style={{
               flex: 1,
               borderRadius: 16,

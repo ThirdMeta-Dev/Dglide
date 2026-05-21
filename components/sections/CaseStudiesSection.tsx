@@ -164,7 +164,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
                   {metricsBody}
                 </p>
               </div>
-              <div style={{ display: "flex", gap: 40 }}>
+              <div className="css-metrics" style={{ display: "flex", gap: 40 }}>
                 {[
                   { num: metric1Num, label: metric1Label },
                   { num: metric2Num, label: metric2Label },
@@ -172,6 +172,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
                 ].map((m, i) => (
                   <div key={i}>
                     <p
+                      className="css-metric-num"
                       style={{
                         fontFamily: "var(--font-tasa-orbiter)",
                         fontSize: 40,

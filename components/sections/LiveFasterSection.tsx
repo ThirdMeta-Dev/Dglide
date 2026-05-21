@@ -25,7 +25,7 @@ export default function LiveFasterSection({ data }: { data?: Record<string, stri
       <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Header — right-aligned */}
-        <div style={{ textAlign: "right", marginBottom: 48 }}>
+        <div className="lfs-header" style={{ textAlign: "right", marginBottom: 48 }}>
           <h2
             className="sec-h2"
             style={{
