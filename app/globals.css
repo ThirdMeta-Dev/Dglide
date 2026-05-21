@@ -85,8 +85,8 @@
 
   /* ── Global font reduction ── */
   section h2 { font-size: 22px !important; line-height: 30px !important; }
-  section h3 { font-size: 16px !important; line-height: 24px !important; }
-  section p  { font-size: 14px !important; line-height: 22px !important; }
+  section h3 { font-size: 15px !important; line-height: 22px !important; }
+  section p  { font-size: 13px !important; line-height: 20px !important; }
 
   /* ── Shared ── */
   .sec-inner   { padding: 0 20px !important; }
@@ -119,9 +119,14 @@
   .css-right   { width: 100% !important; margin-left: 0 !important; }
 
   /* ── CompetitorSection ── */
-  .comp-two-col { flex-direction: column !important; }
-  .comp-card    { margin-left: 0 !important; }
-  .comp-right   { width: 100% !important; }
+  .comp-two-col        { flex-direction: column !important; }
+  .comp-card           { margin-left: 0 !important; flex-direction: column !important; gap: 14px !important; padding: 20px !important; align-items: flex-start !important; }
+  .comp-card-header    { flex-direction: row !important; width: 100% !important; align-items: center !important; gap: 12px !important; }
+  .comp-card-icon      { width: 36px !important; height: 36px !important; flex-shrink: 0 !important; }
+  .comp-card-label     { font-size: 13px !important; }
+  .comp-card-bullets   { width: 100% !important; gap: 8px !important; }
+  .comp-card-bullets span { font-size: 12px !important; line-height: 18px !important; }
+  .comp-right          { width: 100% !important; margin-top: 16px !important; padding: 24px 20px !important; }
 
   /* ── CapabilitiesSection ── */
   .cap-grid { flex-wrap: wrap !important; gap: 20px !important; }

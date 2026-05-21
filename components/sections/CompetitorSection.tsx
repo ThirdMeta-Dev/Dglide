@@ -97,8 +97,9 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
                 }}
               >
                 {/* Icon + Label */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 16, flexShrink: 0, width: 130 }}>
+                <div className="comp-card-header" style={{ display: "flex", flexDirection: "column", gap: 16, flexShrink: 0, width: 130 }}>
                   <div
+                    className="comp-card-icon"
                     style={{
                       width: 48,
                       height: 48,
@@ -115,6 +116,7 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
                     <img src="/dglide-icon-orange.png" alt="" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                   </div>
                   <span
+                    className="comp-card-label"
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: 14,
@@ -128,7 +130,7 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
                 </div>
 
                 {/* Bullets */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
+                <div className="comp-card-bullets" style={{ display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
                   {[comp.bullet1, comp.bullet2].map((b, j) => (
                     <div key={j} style={{ display: "flex", alignItems: "center", gap: 8 }}>
                       <img src="/dglide-icon-orange.png" alt="" style={{ width: 20, height: 20, flexShrink: 0 }} />
