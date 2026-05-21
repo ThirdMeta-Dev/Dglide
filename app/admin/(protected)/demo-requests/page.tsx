@@ -1,8 +1,8 @@
-import { createServiceClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 import DemoRequestsClient from "./DemoRequestsClient";
 
 export default async function DemoRequestsPage() {
-  const supabase = await createServiceClient();
+  const supabase = await createClient();
   const { data: requests, error } = await supabase
     .from("dglide_demo_requests")
     .select("*")
