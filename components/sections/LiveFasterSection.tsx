@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const SECTION_TITLE    = "From Demo to Live in Weeks";
 const SECTION_SUBTITLE = "Live Faster Than a Custom Build Would Even Start";
 
@@ -104,24 +106,7 @@ export default function LiveFasterSection({ data }: { data?: Record<string, stri
               </div>
 
               {/* Icon */}
-              <div
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 10,
-                  background: "#FF7F1C",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                }}
-              >
-                <img
-                  src="/dglide-icon.svg"
-                  alt=""
-                  style={{ width: 26, height: 26, filter: "brightness(0) invert(1)" }}
-                />
-              </div>
+              <Image src={`/live-faster/icon-${i + 1}.png`} alt="" width={86} height={44} className="object-contain flex-shrink-0" />
 
               {/* Title */}
               <h3

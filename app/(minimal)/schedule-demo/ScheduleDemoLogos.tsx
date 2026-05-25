@@ -1,12 +1,25 @@
 "use client";
 
-const LOGO_DEFAULTS = ["Husqvarna", "TechCorp", "BuildFast", "Nexus Ltd", "Apex Systems", "CoreFlow", "Virenxia"];
+import Image from "next/image";
+
+const LOGO_SRCS = [
+  "/logos/logo-1.png",
+  "/logos/logo-2.png",
+  "/logos/logo-3.png",
+  "/logos/logo-4.png",
+  "/logos/logo-5.png",
+];
 
 export default function ScheduleDemoLogos({ data }: { data?: Record<string, string> }) {
   const headingLine1 = data?.heading_line_1 ?? "Who's Already Running";
   const headingLine2 = data?.heading_line_2 ?? "on DGlide";
-  const logos = LOGO_DEFAULTS.map((d, i) => data?.[`logo_${i + 1}`] ?? d);
-  const doubled = [...logos, ...logos];
+
+  const logos = LOGO_SRCS.map((src, i) => ({
+    src: data?.[`logo_${i + 1}_image`] || src,
+    alt: data?.[`logo_${i + 1}_alt`]   || "Client Logo",
+  }));
+
+  const doubled = [...logos, ...logos, ...logos];
 
   return (
     <div style={{ background: "#F3F3F3", padding: "40px 0 48px", overflow: "hidden" }}>
@@ -16,22 +29,19 @@ export default function ScheduleDemoLogos({ data }: { data?: Record<string, stri
           <p style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 18, fontWeight: 400, lineHeight: "1.4", color: "#000", margin: 0 }}>{headingLine1}</p>
           <p style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 18, fontWeight: 400, lineHeight: "1.4", color: "#000", margin: 0 }}>{headingLine2}</p>
         </div>
-        {/* Scrolling pills */}
+        {/* Scrolling logos */}
         <div style={{ flex: 1, overflow: "hidden" }}>
+          <style>{`
+            @keyframes sd-marquee { from { transform: translateX(0); } to { transform: translateX(calc(-${logos.length * (160 + 16)}px)); } }
+            .sd-marquee-track:hover { animation-play-state: paused !important; }
+          `}</style>
           <div
-            style={{
-              display: "flex",
-              gap: 12,
-              width: "max-content",
-              animation: "scrollLeft 28s linear infinite",
-            }}
+            className="sd-marquee-track"
+            style={{ display: "flex", gap: 16, width: "max-content", animation: `sd-marquee 28s linear infinite` }}
           >
-            {doubled.map((name, i) => (
-              <div
-                key={i}
-                style={{ flexShrink: 0, width: 160, height: 48, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 40, border: "1px solid #FF7F1C", background: "#FFF", backdropFilter: "blur(12.5px)" }}
-              >
-                <span style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 500, color: "#7E7E7E" }}>{name}</span>
+            {doubled.map((logo, i) => (
+              <div key={i} style={{ flexShrink: 0 }}>
+                <Image src={logo.src} alt={logo.alt} width={160} height={48} className="object-contain" />
               </div>
             ))}
           </div>

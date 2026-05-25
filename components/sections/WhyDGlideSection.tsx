@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const TOP_CARDS = [
   {
     title: "Ready to Deploy",
@@ -25,32 +27,6 @@ const BOTTOM_CARDS = [
     desc: "Service, field work, sales, and coordination run on one platform",
   },
 ];
-
-function OrangeIcon() {
-  return (
-    <div
-      style={{
-        width: 52,
-        height: 52,
-        borderRadius: 10,
-        background: "#FF7F1C",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexShrink: 0,
-      }}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/dglide-icon-orange.png"
-        alt=""
-        width={32}
-        height={32}
-        style={{ filter: "brightness(0) invert(1)" }}
-      />
-    </div>
-  );
-}
 
 export default function WhyDGlideSection({ data }: { data?: Record<string, string> } = {}) {
   const sectionTitle = data?.title ?? "Why Businesses Move to DGlide";
@@ -146,7 +122,7 @@ export default function WhyDGlideSection({ data }: { data?: Record<string, strin
 
         {/* Top row — 3 cards */}
         <div className="wdg-top-row" style={{ display: "flex", gap: 16, marginBottom: 16 }}>
-          {topCards.map((card) => (
+          {topCards.map((card, i) => (
             <div
               key={card.title}
               style={{
@@ -159,7 +135,7 @@ export default function WhyDGlideSection({ data }: { data?: Record<string, strin
                 gap: 22,
               }}
             >
-              <OrangeIcon />
+              <Image src={`/why-dglide/icon-${i + 1}.png`} alt="" width={85} height={42} className="object-contain" style={{ flexShrink: 0 }} />
               <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                 <h3
                   style={{
@@ -192,7 +168,7 @@ export default function WhyDGlideSection({ data }: { data?: Record<string, strin
 
         {/* Bottom row — 2 wider cards */}
         <div className="wdg-bottom-row" style={{ display: "flex", gap: 16 }}>
-          {bottomCards.map((card) => (
+          {bottomCards.map((card, i) => (
             <div
               key={card.title}
               style={{
@@ -206,7 +182,7 @@ export default function WhyDGlideSection({ data }: { data?: Record<string, strin
                 gap: 22,
               }}
             >
-              <OrangeIcon />
+              <Image src={`/why-dglide/icon-${i + 4}.png`} alt="" width={85} height={42} className="object-contain" style={{ flexShrink: 0 }} />
               <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                 <h3
                   style={{

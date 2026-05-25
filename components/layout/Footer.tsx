@@ -68,7 +68,7 @@ const DEFAULT_COLS = [
   {
     heading: "Resources",
     links: [
-      { label: "Blog",              href: "#" },
+      { label: "Blog",              href: "https://dglide.com/blog" },
       { label: "Guides / Playbooks", href: "#" },
     ],
   },
@@ -292,18 +292,13 @@ export default function Footer({
               {/* Contact info */}
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                    <polyline points="22,6 12,13 2,6" />
-                  </svg>
+                  <Image src="/footer/icon-email.png" alt="" width={24} height={24} className="object-contain" style={{ flexShrink: 0 }} />
                   <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, color: "#000" }}>
                     {email}
                   </span>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                  </svg>
+                  <Image src="/footer/icon-phone.png" alt="" width={24} height={24} className="object-contain" style={{ flexShrink: 0 }} />
                   <span style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 15, fontWeight: 600, color: "#000" }}>
                     {phone}
                   </span>
@@ -311,35 +306,33 @@ export default function Footer({
               </div>
 
               {/* Social icons */}
-              <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                <Link href={social.linkedin || "#"} aria-label="LinkedIn" style={{ color: "#333", display: "flex" }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                    <rect x="2" y="9" width="4" height="12" />
-                    <circle cx="4" cy="4" r="2" />
-                  </svg>
-                </Link>
-                <Link
-                  href={social.twitter || "#"}
-                  aria-label="Twitter"
-                  style={{ width: 44, height: 44, borderRadius: 23, background: "#1C2BFF", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", flexShrink: 0 }}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                  </svg>
-                </Link>
-                <Link href={social.whatsapp || "#"} aria-label="WhatsApp" style={{ color: "#333", display: "flex" }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                  </svg>
-                </Link>
-                <Link href={social.instagram || "#"} aria-label="Instagram" style={{ color: "#333", display: "flex" }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                  </svg>
-                </Link>
+              <style>{`
+                .dg-social-icon {
+                  width: 40px; height: 40px; border-radius: 50%;
+                  border: 1.5px solid #FF7F1C;
+                  display: flex; align-items: center; justify-content: center;
+                  flex-shrink: 0; transition: background 0.2s ease, border-color 0.2s ease;
+                  overflow: hidden;
+                }
+                .dg-social-icon:hover {
+                  background: #1C2BFF;
+                  border-color: #1C2BFF;
+                }
+                .dg-social-icon:hover img {
+                  filter: brightness(0) invert(1);
+                }
+              `}</style>
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                {[
+                  { href: social.linkedin  || "#", src: "/footer/social-linkedin.png",  label: "LinkedIn"  },
+                  { href: social.twitter   || "#", src: "/footer/social-twitter.png",   label: "Twitter"   },
+                  { href: social.whatsapp  || "#", src: "/footer/social-whatsapp.png",  label: "WhatsApp"  },
+                  { href: social.instagram || "#", src: "/footer/social-instagram.png", label: "Instagram" },
+                ].map(({ href, src, label }) => (
+                  <Link key={label} href={href} aria-label={label} className="dg-social-icon">
+                    <Image src={src} alt="" width={20} height={20} className="object-contain" />
+                  </Link>
+                ))}
               </div>
             </div>
 

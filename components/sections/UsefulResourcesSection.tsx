@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 const TABS = ["Case Studies", "Blogs", "Glossary"];
@@ -95,17 +96,25 @@ export default function UsefulResourcesSection() {
               boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
             }}
           >
-            {/* Image placeholder */}
+            {/* Featured image */}
             <div
               className="usr-card-img"
               style={{
                 width: "48%",
                 flexShrink: 0,
-                background: "#D9D9D9",
                 minHeight: 240,
                 borderRadius: "20px 0 0 20px",
+                overflow: "hidden",
+                position: "relative",
               }}
-            />
+            >
+              <Image
+                src="/useful-resources/featured.png"
+                alt=""
+                fill
+                className="object-cover"
+              />
+            </div>
 
             {/* Text */}
             <div className="usr-card-text" style={{ flex: 1, padding: "32px 36px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16 }}>

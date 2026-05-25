@@ -120,23 +120,7 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
               >
                 {/* Icon + Label */}
                 <div className="comp-card-header" style={{ display: "flex", flexDirection: "column", gap: 16, flexShrink: 0, width: 130 }}>
-                  <div
-                    className="comp-card-icon"
-                    style={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: 10,
-                      background: "#FFF",
-                      border: "1.5px solid #FF7F1C",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      padding: 3,
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Image src={`/competitor/icon-${i + 1}.png`} alt="" width={26} height={26} className="object-contain" />
-                  </div>
+                  <Image src={`/competitor/card-icon-${i + 1}.png`} alt="" width={80} height={40} className="object-contain" style={{ flexShrink: 0 }} />
                   <span
                     className="comp-card-label"
                     style={{

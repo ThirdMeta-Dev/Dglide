@@ -7,23 +7,8 @@ const LOGO_SRCS = ["/logos/logo-1.png", "/logos/logo-2.png", "/logos/logo-3.png"
 
 function LogoPill({ src, alt }: { src: string; alt: string }) {
   return (
-    <div
-      className="logo-pill"
-      style={{
-        width: 212,
-        height: 68,
-        borderRadius: 40,
-        flexShrink: 0,
-        border: "1px solid #FF7F1C",
-        background: "#FFF",
-        backdropFilter: "blur(12.5px)",
-        WebkitBackdropFilter: "blur(12.5px)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Image src={src} alt={alt} width={160} height={48} className="object-contain" style={{ maxWidth: 99, maxHeight: 33 }} />
+    <div className="logo-pill" style={{ flexShrink: 0 }}>
+      <Image src={src} alt={alt} width={160} height={48} className="object-contain" />
     </div>
   );
 }

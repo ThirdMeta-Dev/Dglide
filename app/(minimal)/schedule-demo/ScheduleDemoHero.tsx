@@ -50,9 +50,10 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
   const [tIdx, setTIdx] = useState(0);
 
   const testimonials = [1, 2, 3].map((n) => ({
-    quote: data?.[`testimonial_${n}_quote`] ?? TESTIMONIALS_DEFAULT[n - 1].quote,
-    name: data?.[`testimonial_${n}_name`] ?? TESTIMONIALS_DEFAULT[n - 1].name,
-    role: data?.[`testimonial_${n}_role`] ?? TESTIMONIALS_DEFAULT[n - 1].role,
+    quote:  data?.[`testimonial_${n}_quote`]  ?? TESTIMONIALS_DEFAULT[n - 1].quote,
+    name:   data?.[`testimonial_${n}_name`]   ?? TESTIMONIALS_DEFAULT[n - 1].name,
+    role:   data?.[`testimonial_${n}_role`]   ?? TESTIMONIALS_DEFAULT[n - 1].role,
+    avatar: data?.[`testimonial_${n}_avatar`] ?? "/demo/author-1.png",
   }));
 
   const bullets = [1, 2, 3].map((n) => data?.[`bullet_${n}`] ?? BULLETS_DEFAULT[n - 1]);
@@ -190,7 +191,7 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {bullets.map((b, idx) => (
                   <div key={idx} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                    <Image src="/dglide-icon-orange.png" alt="" width={28} height={28} style={{ flexShrink: 0 }} />
+                    <Image src="/demo/tick-bullet.svg" alt="" width={24} height={14} style={{ flexShrink: 0 }} />
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 400, lineHeight: "24px", color: "#545454" }}>
                       {b}
                     </span>
@@ -204,61 +205,42 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
               <path d="M0.5 0.500031L467.676 0.49999" stroke="white" strokeLinecap="round"/>
             </svg>
 
-            {/* Testimonial card — gradient border + dots on bottom border */}
-            <div style={{ position: "relative", paddingBottom: 12 }}>
-              {/* Gradient border wrapper */}
-              <div style={{ borderRadius: 24, padding: 1, background: "linear-gradient(180deg, #F6F6F6 0%, #FF7F1C 100%)" }}>
-                <div style={{ borderRadius: 23, background: "#F4F4F4", padding: "24px 20px 32px" }}>
-                  {/* Quote SVG */}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="29" viewBox="0 0 50 29" fill="none" style={{ display: "block", marginBottom: 16 }}>
-                    <path d="M0 28.764L1.71444 21.1946C2.21449 18.8957 3.25029 16.4566 4.82187 13.8774C6.42916 11.2701 8.48291 8.76099 10.9832 6.34995C13.5191 3.9109 16.4301 1.79425 19.7161 0L24.1093 3.57448C20.9662 6.01353 18.1445 8.74698 15.6443 11.7747C13.144 14.7745 11.5546 17.8724 10.876 21.0684L9.16157 28.764H0ZM25.1273 28.764L26.8417 21.1946C27.3418 18.8957 28.3776 16.4566 29.9492 13.8774C31.5565 11.2701 33.6102 8.76099 36.1105 6.34995C38.6464 3.9109 41.5574 1.79425 44.8434 0L49.2366 3.57448C46.0935 6.01353 43.2719 8.74698 40.7716 11.7747C38.2713 14.7745 36.6819 17.8724 36.0033 21.0684L34.2889 28.764H25.1273Z" fill="url(#quoteGrad)"/>
-                    <defs>
-                      <linearGradient id="quoteGrad" x1="24.6183" y1="0" x2="24.6183" y2="28.764" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#F3F3F3" stopOpacity="0"/>
-                        <stop offset="1" stopColor="#FF7F1C"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
+            {/* Testimonial card — gradient border + matches Figma 374:5883 */}
+            <div style={{ borderRadius: 21, padding: 1, background: "linear-gradient(180deg, #F6F6F6 7%, #FF7F1C 100%)", position: "relative" }}>
+              {/* Decorative quote icon — top-left, sits on the border */}
+              <div style={{ position: "absolute", top: 14, left: 18, pointerEvents: "none", zIndex: 2 }}>
+                <Image src="/demo/quote-icon.png" alt="" width={49} height={29} className="object-contain" />
+              </div>
+            <div style={{ position: "relative", borderRadius: 20, background: "#F4F4F4", padding: "52px 20px 20px" }}>
 
-                  {/* Quote text */}
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: "24px", color: "#545454", margin: "0 0 20px" }}>
-                    {t.quote}
-                  </p>
+              {/* Quote text */}
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: "24px", color: "#545454", margin: "0 0 20px" }}>
+                {t.quote}
+              </p>
 
-                  {/* Person row */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#DDD", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="#999"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" /></svg>
-                    </div>
-                    <div style={{ width: 3, height: 36, background: "#FABF5A", borderRadius: 2, flexShrink: 0 }} />
-                    <div>
-                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: "#545454", margin: 0, lineHeight: "20px" }}>{t.name}</p>
-                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 400, color: "#888", margin: 0, lineHeight: "18px" }}>{t.role}</p>
-                    </div>
-                  </div>
+              {/* Person row */}
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+                <div style={{ width: 40, height: 40, borderRadius: "50%", overflow: "hidden", position: "relative", flexShrink: 0 }}>
+                  <Image src={t.avatar} alt={t.name} fill className="object-cover" />
+                </div>
+                <div style={{ width: 3, height: 32, background: "#FABF5A", borderRadius: 2, flexShrink: 0 }} />
+                <div>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: "#545454", margin: 0, lineHeight: "20px" }}>{t.name}</p>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 400, color: "#888", margin: 0, lineHeight: "18px" }}>{t.role}</p>
                 </div>
               </div>
 
-              {/* Dots — centred on the bottom border line */}
-              <div style={{
-                position: "absolute",
-                bottom: 4,
-                left: "50%",
-                transform: "translateX(-50%)",
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                background: "#FFF",
-                padding: "0 10px",
-              }}>
+              {/* Dots */}
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 6 }}>
                 {testimonials.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setTIdx(i)}
-                    style={{ width: i === tIdx ? 20 : 8, height: 8, borderRadius: 4, background: i === tIdx ? "#FF7F1C" : "#CCC", border: "none", cursor: "pointer", padding: 0, transition: "all 0.2s" }}
+                    style={{ width: 6, height: 6, borderRadius: 3, background: i === tIdx ? "#1C2BFF" : "#E1E8EF", border: "none", cursor: "pointer", padding: 0, transition: "background 0.2s", flexShrink: 0 }}
                   />
                 ))}
               </div>
+            </div>
             </div>
           </div>
 
@@ -279,8 +261,8 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
               <>
                 {/* Avatar + chat bubble */}
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                  <div style={{ width: 72, height: 72, borderRadius: "50%", background: "#E8E8E8", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <svg width="36" height="36" viewBox="0 0 24 24" fill="#AAAAAA"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" /></svg>
+                  <div style={{ width: 72, height: 72, borderRadius: "50%", overflow: "hidden", position: "relative", flexShrink: 0 }}>
+                    <Image src="/demo/avatar.png" alt="Vinayak from DGlide" fill className="object-cover" />
                   </div>
                   <div style={{ width: 0, height: 0, borderLeft: "8px solid transparent", borderRight: "8px solid transparent", borderTop: "8px solid #F3F3F3" }} />
                   <div style={{ width: "100%", background: "#F3F3F3", borderRadius: 12, padding: "16px 20px" }}>
