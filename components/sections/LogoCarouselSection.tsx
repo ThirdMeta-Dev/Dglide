@@ -1,7 +1,9 @@
 "use client";
 
-const LOGO_COUNT = 7;
-const FALLBACK_SRC = "/logo.png";
+import Image from "next/image";
+
+const LOGO_COUNT = 5;
+const LOGO_SRCS = ["/logos/logo-1.png", "/logos/logo-2.png", "/logos/logo-3.png", "/logos/logo-4.png", "/logos/logo-5.png"];
 
 function LogoPill({ src, alt }: { src: string; alt: string }) {
   return (
@@ -21,7 +23,7 @@ function LogoPill({ src, alt }: { src: string; alt: string }) {
         justifyContent: "center",
       }}
     >
-      <img className="logo-pill-img" src={src} alt={alt} style={{ maxWidth: 99, maxHeight: 33, objectFit: "contain" }} />
+      <Image src={src} alt={alt} width={160} height={48} className="object-contain" style={{ maxWidth: 99, maxHeight: 33 }} />
     </div>
   );
 }
@@ -36,11 +38,11 @@ export default function LogoCarouselSection({
   const heading = title ?? data?.title ?? "Who's Already Running on DGlide";
 
   const logos = Array.from({ length: LOGO_COUNT }, (_, i) => ({
-    src: data?.[`logo_${i + 1}_image`] || FALLBACK_SRC,
+    src: data?.[`logo_${i + 1}_image`] || LOGO_SRCS[i % LOGO_SRCS.length],
     alt: data?.[`logo_${i + 1}_alt`]   || "Client Logo",
-  })).filter((l) => l.src);
+  }));
 
-  const displayLogos = logos.length > 0 ? logos : Array(LOGO_COUNT).fill({ src: FALLBACK_SRC, alt: "Client Logo" });
+  const displayLogos = logos;
   const duplicated = [...displayLogos, ...displayLogos, ...displayLogos];
   const trackWidth = displayLogos.length * (212 + 16);
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const LEFT_DEFAULTS = [
@@ -62,7 +63,7 @@ export default function OneSystemSection({ data }: { data?: Record<string, strin
                 className="p-6"
                 style={{ borderRadius: "16px", background: "linear-gradient(100deg, #FFF 5.48%, rgba(243,243,243,0.00) 68.68%)" }}
               >
-                <img src="/dglide-icon-orange.png" className="w-12 h-12 mb-4" alt="" />
+                <Image src={i === 0 ? "/one-system/icon-tl.png" : "/one-system/icon-bl.png"} alt="" width={81} height={41} className="mb-4 object-contain" />
                 <h3 className="text-base font-semibold text-black mb-2" style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 600 }}>
                   {data?.[`left_${i + 1}_title`] ?? def.title}
                 </h3>
@@ -90,7 +91,7 @@ export default function OneSystemSection({ data }: { data?: Record<string, strin
                 className="p-6"
                 style={{ borderRadius: "16px", background: "linear-gradient(263deg, #FFF 5.57%, rgba(243,243,243,0.00) 63.48%)" }}
               >
-                <img src="/dglide-icon-orange.png" className="w-12 h-12 mb-4 ml-auto" alt="" />
+                <Image src={i === 0 ? "/one-system/icon-tr.png" : "/one-system/icon-br.png"} alt="" width={81} height={41} className="mb-4 ml-auto object-contain" />
                 <h3 className="text-base font-semibold text-black mb-2 text-right" style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 600 }}>
                   {data?.[`right_${i + 1}_title`] ?? def.title}
                 </h3>

@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const COMP_DEFAULTS = [
   { label: "Enterprise Suites",  bullets: ["Heavy, slow to roll out", "Powerful, complex, and overkill"],   marginLeft: 28 },
   { label: "Standard Software",  bullets: ["Fixed workflows you cannot change", "Cheap upfront"],            marginLeft: 0  },
@@ -37,7 +39,27 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
         overflow: "hidden",
       }}
     >
-      <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+      {/* Background decoration — full width, pinned right */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "55%",
+          height: "100%",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        <Image
+          src="/competitor-bg.png"
+          alt=""
+          fill
+          className="object-cover object-right"
+          style={{ opacity: 0.6 }}
+        />
+      </div>
+      <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px", position: "relative", zIndex: 1 }}>
 
         {/* Title */}
         <div style={{ marginBottom: 56, position: "relative", display: "inline-block" }}>
@@ -113,7 +135,7 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
                       flexShrink: 0,
                     }}
                   >
-                    <img src="/dglide-icon-orange.png" alt="" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                    <Image src={`/competitor/icon-${i + 1}.png`} alt="" width={26} height={26} className="object-contain" />
                   </div>
                   <span
                     className="comp-card-label"
@@ -133,7 +155,7 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
                 <div className="comp-card-bullets" style={{ display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
                   {[comp.bullet1, comp.bullet2].map((b, j) => (
                     <div key={j} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <img src="/dglide-icon-orange.png" alt="" style={{ width: 20, height: 20, flexShrink: 0 }} />
+                      <Image src="/competitor/tick-bullet.svg" alt="" width={22} height={13} className="object-contain flex-shrink-0" />
                       <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 400, color: "#555", lineHeight: "24px" }}>
                         {b}
                       </span>
@@ -159,14 +181,8 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
               alignSelf: "stretch",
             }}
           >
-            <div
-              style={{
-                width: 48, height: 48, borderRadius: 10, background: "#FF7F1C",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                padding: 3, flexShrink: 0, marginBottom: 20,
-              }}
-            >
-              <img src="/dglide-icon.svg" alt="" style={{ width: "100%", height: "100%", objectFit: "contain", filter: "brightness(0) invert(1)" }} />
+            <div style={{ marginBottom: 20 }}>
+              <Image src="/competitor/dglide-logo-white.png" alt="DGlide" width={153} height={36} className="object-contain" />
             </div>
 
             <h3 style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 28, fontWeight: 600, color: "#FFF", lineHeight: "40px", margin: "0 0 8px" }}>
@@ -180,7 +196,7 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
             <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingLeft: 11 }}>
               {rightFeats.map((f, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <img src="/dglide-icon.svg" alt="" style={{ width: 20, height: 20, flexShrink: 0, filter: "brightness(0) invert(1)" }} />
+                  <Image src="/competitor/tick-bullet.svg" alt="" width={22} height={13} className="object-contain flex-shrink-0" />
                   <span style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 500, color: "#FFF", lineHeight: "24px" }}>
                     {f}
                   </span>

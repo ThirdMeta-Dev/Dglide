@@ -11,7 +11,7 @@ declare
 begin
 
   -- ── Page ──────────────────────────────────────────────────
-  insert into dglide_pages (slug, title)
+  insert into dglide_pages (slug, name)
   values ('schedule-demo', 'Schedule Demo')
   on conflict (slug) do nothing;
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 const INTERVAL = 6000;
@@ -9,25 +10,25 @@ const DEFAULTS = [
     num: "01",
     title: "You Work Around The Software",
     body:  "Every workaround costs time. Your team builds habits around software limits instead of around your actual goals.",
-    image: "",
+    image: "/accordion/accordion-1.png",
   },
   {
     num: "02",
     title: "Every Task Needs A Workaround Because The Software Won't Do It Your Way.",
     body:  "Updates, Approvals, And Follow-Ups Live In Chats And Spreadsheets No One Can Track.",
-    image: "",
+    image: "/accordion/accordion-2.png",
   },
   {
     num: "03",
     title: "What Worked At 10 People Fails At 50",
     body:  "Processes that felt seamless when your team was small start breaking down as headcount grows and complexity compounds.",
-    image: "",
+    image: "/accordion/accordion-3.png",
   },
   {
     num: "04",
     title: "You Find Out Too Late",
     body:  "By the time a bottleneck surfaces, it has already cost you days. Visibility gaps turn small issues into serious setbacks.",
-    image: "",
+    image: "/accordion/accordion-4.png",
   },
 ];
 
@@ -40,7 +41,7 @@ export default function SoftwareWorksSection({ data }: { data?: Record<string, s
     num:   d.num,
     title: data?.[`item_${i + 1}_title`] ?? d.title,
     body:  data?.[`item_${i + 1}_body`]  ?? d.body,
-    image: data?.[`item_${i + 1}_image`] ?? d.image,
+    image: data?.[`item_${i + 1}_image`] || d.image,
   }));
 
   const goTo = useCallback((idx: number) => {
@@ -89,16 +90,23 @@ export default function SoftwareWorksSection({ data }: { data?: Record<string, s
 
       {/* Two-column layout */}
       <div className="max-w-[1200px] mx-auto px-12 flex gap-12 items-start sw-two-col">
-        {/* Left: image (or placeholder) */}
+        {/* Left: image */}
         <div
           className="sw-image-col flex-shrink-0 rounded-2xl overflow-hidden"
-          style={{ width: "55%", aspectRatio: "4 / 3", background: "#E8E8E8" }}
+          style={{
+            width: "55%",
+            aspectRatio: "4 / 3",
+            background: "#E8E8E8",
+            boxShadow: "4px 4px 0 0 #E0E0E0",
+          }}
         >
           {activeImage && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <Image
+              key={activeImage}
               src={activeImage}
               alt={items[active]?.title}
+              width={608}
+              height={401}
               className="w-full h-full object-cover"
             />
           )}

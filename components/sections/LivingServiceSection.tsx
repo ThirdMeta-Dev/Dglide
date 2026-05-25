@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 const STATIC_TITLE   = "The Living Service Model: Fit That Doesn't Expire";
@@ -155,7 +156,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {features.map((f, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <img src="/dglide-icon-orange.png" alt="" style={{ width: 22, height: 22, flexShrink: 0 }} />
+                  <Image src="/living-service/feature-bullet.svg" alt="" width={31} height={18} className="object-contain flex-shrink-0" />
                   <span style={{ fontFamily: "Inter, sans-serif", color: "#555", fontSize: 15, fontWeight: 400, lineHeight: "160%" }}>{f}</span>
                 </div>
               ))}
@@ -250,7 +251,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
                         boxShadow: isActive ? "0 2px 14px rgba(255,127,28,0.18)" : "0 1px 6px rgba(0,0,0,0.06)",
                       }}
                     >
-                      <img src="/dglide-icon-orange.png" alt="" style={{ width: 20, height: 20, opacity: isActive ? 1 : 0.4, flexShrink: 0 }} />
+                      <Image src={`/living-service/tab-${i + 1}.png`} alt="" width={40} height={20} className="object-contain flex-shrink-0" style={{ opacity: isActive ? 1 : 0.4 }} />
                       {label}
                     </div>
                   </div>

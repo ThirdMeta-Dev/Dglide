@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const CARD_DEFAULTS = [
@@ -61,7 +62,7 @@ export default function FourReasonsSection({ data }: { data?: Record<string, str
                 className="flex items-start gap-5 rounded-2xl p-8 shadow-sm border border-white/80"
                 style={{ background: "linear-gradient(135deg, #FFFFFF 0%, #F6F6F6 100%)" }}
               >
-                <img src="/dglide-icon-orange.png" className="w-12 h-12 flex-shrink-0 mt-0.5" alt="" />
+                <Image src={`/four-reasons/icon-${i + 1}.png`} alt="" width={86} height={43} className="flex-shrink-0 object-contain" />
                 <div>
                   <h3 className="text-lg mb-2 text-black" style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 500 }}>
                     {data?.[`card_${i + 1}_title`] ?? def.title}

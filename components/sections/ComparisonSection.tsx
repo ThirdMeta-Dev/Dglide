@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const LEFT_DEFAULTS  = ["Fast to start. Your business bends to fit the software.", "Cheap to start, expensive in workarounds.", "Fits the category, not your business."];
@@ -77,7 +78,7 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
             {/* LEFT column */}
             <div className="flex flex-col gap-6 cmp-left-col">
               <div className="flex flex-col gap-3">
-                <img src="/dglide-icon-orange.png" className="w-12 h-12" alt="" />
+                <Image src="/comparison/col-left-header.png" alt="" width={86} height={43} className="object-contain" />
                 <h3
                   className="text-xl text-[#FF7F1C]"
                   style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 400 }}
@@ -86,14 +87,10 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
                 </h3>
               </div>
               <div className="relative flex flex-col">
-                <div
-                  className="absolute left-[17px] top-9 w-px bg-[#FF7F1C]/30"
-                  style={{ bottom: "36px" }}
-                />
                 {leftItems.map((item, i) => (
                   <div key={i} className="flex items-start gap-4 pb-6 last:pb-0">
-                    <div className="flex-shrink-0 relative z-10">
-                      <img src="/dglide-icon-orange.png" className="w-9 h-9" alt="" />
+                    <div className="flex-shrink-0 relative z-10 mt-1">
+                      <Image src="/comparison/row-bullet.svg" alt="" width={31} height={18} className="object-contain" />
                     </div>
                     <p
                       className="text-[#0D0D0D] text-[15px] leading-relaxed pt-1.5"
@@ -137,9 +134,13 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
                 <div className="flex flex-col gap-3 w-full">
                   {dglideFeatures.map((f, i) => (
                     <div key={i} className="flex items-center gap-2.5">
-                      <div className="w-6 h-6 rounded-[8px] bg-white flex items-center justify-center flex-shrink-0">
-                        <img src="/dglide-icon-orange.png" className="w-[18px] h-[18px]" alt="" />
-                      </div>
+                      <Image
+                        src="/comparison/dglide-feat-bullet.svg"
+                        alt=""
+                        width={20}
+                        height={12}
+                        className="object-contain flex-shrink-0"
+                      />
                       <span className="text-white text-base leading-snug" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>
                         {f}
                       </span>
@@ -152,7 +153,7 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
             {/* RIGHT column (mirrored) */}
             <div className="flex flex-col gap-6 items-end cmp-right-col-outer">
               <div className="flex flex-col gap-3 items-end">
-                <img src="/dglide-icon-orange.png" className="w-12 h-12" alt="" />
+                <Image src="/comparison/col-right-header.png" alt="" width={86} height={47} className="object-contain" />
                 <h3
                   className="text-xl text-[#FF7F1C] text-right"
                   style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 400 }}
@@ -161,14 +162,10 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
                 </h3>
               </div>
               <div className="relative flex flex-col items-end">
-                <div
-                  className="absolute right-[17px] top-9 w-px bg-[#FF7F1C]/30"
-                  style={{ bottom: "36px" }}
-                />
                 {rightItems.map((item, i) => (
                   <div key={i} className="flex items-start gap-4 pb-6 last:pb-0 flex-row-reverse">
-                    <div className="flex-shrink-0 relative z-10">
-                      <img src="/dglide-icon-orange.png" className="w-9 h-9" alt="" />
+                    <div className="flex-shrink-0 relative z-10 mt-1">
+                      <Image src="/comparison/row-bullet.svg" alt="" width={31} height={18} className="object-contain" />
                     </div>
                     <p
                       className="text-[#0D0D0D] text-[15px] leading-relaxed pt-1.5 text-right"
@@ -201,12 +198,13 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
           >
             {bottomBar.map((item, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 20 }}>
-                {/* Icon: orange ring + blue dot */}
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style={{ flexShrink: 0 }}>
-                  <circle cx="18" cy="18" r="13" stroke="#FF7F1C" strokeWidth="2" />
-                  <circle cx="18" cy="18" r="5" stroke="#FF7F1C" strokeWidth="2" />
-                  <circle cx="26" cy="10" r="3.5" stroke="#1C2BFF" strokeWidth="2" />
-                </svg>
+                <Image
+                  src={`/comparison/bottom-${i + 1}.png`}
+                  alt=""
+                  width={86}
+                  height={43}
+                  className="object-contain flex-shrink-0"
+                />
                 <span
                   style={{
                     fontFamily: "var(--font-tasa-orbiter)",

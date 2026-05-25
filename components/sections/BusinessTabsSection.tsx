@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 const TAB_DEFAULTS = [
@@ -7,6 +8,7 @@ const TAB_DEFAULTS = [
     label: "Field Service Operations",
     title: "Field Service Operations",
     subtitle: "Field teams running on calls, WhatsApp, and manual logs",
+    image: "/business-tabs/tab-1.png",
     bullets: [
       "Best fit when technicians update jobs via text or phone calls.",
       "Best fit when dispatch and billing run in separate tools.",
@@ -17,6 +19,7 @@ const TAB_DEFAULTS = [
     label: "Manufacturing & Process",
     title: "Manufacturing & Process",
     subtitle: "Factories running production on spreadsheets and floor knowledge",
+    image: "/business-tabs/tab-2.png",
     bullets: [
       "Best fit when production updates travel by WhatsApp.",
       "Best fit when every product line works a little differently.",
@@ -27,6 +30,7 @@ const TAB_DEFAULTS = [
     label: "Growing SMBs",
     title: "Growing SMBs",
     subtitle: "Small teams scaling faster than their current tools allow",
+    image: "/business-tabs/tab-3.png",
     bullets: [
       "Best fit when spreadsheets are your main operations system.",
       "Best fit when every new hire adds coordination overhead.",
@@ -37,6 +41,7 @@ const TAB_DEFAULTS = [
     label: "Operations & Support Teams",
     title: "Operations & Support Teams",
     subtitle: "Teams managing requests, issues, and cross-department workflows",
+    image: "/business-tabs/tab-4.png",
     bullets: [
       "Best fit when tickets fall through the cracks between teams.",
       "Best fit when everyone works in silos with no shared dashboard.",
@@ -133,6 +138,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
     label:    data?.[`tab_${i + 1}_label`]    ?? t.label,
     title:    data?.[`tab_${i + 1}_title`]    ?? t.title,
     subtitle: data?.[`tab_${i + 1}_subtitle`] ?? t.subtitle,
+    image:    data?.[`tab_${i + 1}_image`]    || t.image,
     bullets: [
       data?.[`tab_${i + 1}_bullet_1`] ?? t.bullets[0],
       data?.[`tab_${i + 1}_bullet_2`] ?? t.bullets[1],
@@ -282,10 +288,13 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
             >
               {tab.bullets.map((b, i) => (
                 <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-                  <img
-                    src="/dglide-icon-orange.png"
+                  <Image
+                    src="/business-tabs/bullet.svg"
                     alt=""
-                    style={{ width: 40, height: 40, flexShrink: 0, marginTop: 2 }}
+                    width={31}
+                    height={18}
+                    className="object-contain flex-shrink-0"
+                    style={{ marginTop: 4 }}
                   />
                   <span
                     style={{
@@ -342,15 +351,13 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
               justifyContent: "center",
             }}
           >
-            <img
-              src={data?.tab_image ?? "/section-tabs.png"}
+            <Image
+              key={tab.image}
+              src={tab.image}
               alt="DGlide dashboard"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-              }}
+              width={700}
+              height={472}
+              className="w-full h-full object-cover block"
             />
           </div>
 

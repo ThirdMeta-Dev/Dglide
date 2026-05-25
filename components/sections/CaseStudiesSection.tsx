@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 
 const RIGHT_ITEM_DEFAULTS = [
   "Every tool replaced by one platform",
@@ -128,7 +129,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
               <div style={{ display: "flex", gap: 24, flexWrap: "wrap" as const }}>
                 {[challengeTag1, challengeTag2].map((tag, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <img src="/dglide-icon-orange.png" alt="" style={{ width: 18, height: 18, flexShrink: 0 }} />
+                    <Image src="/case-studies/tag-bullet.svg" alt="" width={22} height={13} className="object-contain flex-shrink-0" />
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, color: "#000" }}>
                       {tag}
                     </span>
@@ -258,25 +259,8 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
               zIndex: 2,
             }}
           >
-            {/* Icon */}
-            <div
-              style={{
-                width: 48,
-                height: 48,
-                borderRadius: 10,
-                background: "#FF7F1C",
-                flexShrink: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="/dglide-icon.svg"
-                alt=""
-                style={{ width: 26, height: 26, filter: "brightness(0) invert(1)" }}
-              />
-            </div>
+            {/* Logo */}
+            <Image src="/case-studies/dglide-logo.png" alt="DGlide" width={160} height={28} className="object-contain" />
 
             {/* Title */}
             <h3
@@ -299,7 +283,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {rightItems.map((item, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <img src="/dglide-icon-orange.png" alt="" style={{ width: 20, height: 20, flexShrink: 0 }} />
+                  <Image src="/case-studies/list-bullet.svg" alt="" width={22} height={13} className="object-contain flex-shrink-0" />
                   <span
                     style={{
                       fontFamily: "Inter, sans-serif",

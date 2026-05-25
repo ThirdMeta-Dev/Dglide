@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const STEP_DEFAULTS = [
@@ -69,16 +70,9 @@ export default function HowItWorksSection({ data }: { data?: Record<string, stri
                 >
                   {/* Icon */}
                   <div
-                    className="relative z-10 mb-4 transition-all duration-300"
-                    style={{ borderRadius: "14px", padding: "2px" }}
+                    className={`relative z-10 mb-4 transition-all duration-300 ${isActive ? "" : "opacity-40"}`}
                   >
-                    {isActive ? (
-                      <img src="/dglide-icon-orange.png" className="w-14 h-14" alt="" />
-                    ) : (
-                      <div className="w-14 h-14 rounded-[14px] border-2 border-[#FF7F1C] bg-white flex items-center justify-center">
-                        <img src="/dglide-icon-orange.png" className="w-10 h-10 opacity-40" alt="" />
-                      </div>
-                    )}
+                    <Image src={`/how-it-works/step-${i + 1}.png`} alt="" width={97} height={49} className="object-contain" />
                   </div>
 
                   {/* Title */}

@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const CAP_DEFAULTS = [
   { title: "Automated Workflows",     desc: "Cut the manual steps between every stage." },
   { title: "Approvals & SLA Tracking", desc: "Stage-based approvals, escalations, and SLA logic built in." },
@@ -67,18 +69,14 @@ export default function CapabilitiesSection({ data }: { data?: Record<string, st
         <div className="cap-grid" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
           {caps.map((cap, i) => (
             <div key={i} className="cap-item" style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-              <div
-                style={{
-                  width: 40, height: 40, borderRadius: 10, background: "#FF7F1C",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  flexShrink: 0, marginBottom: 28, overflow: "hidden",
-                }}
-              >
-                {cap.icon ? (
-                  <img src={cap.icon} alt="" style={{ width: 40, height: 40, objectFit: "cover" }} />
-                ) : (
-                  <img src="/dglide-icon.svg" alt="" style={{ width: 24, height: 24, filter: "brightness(0) invert(1)" }} />
-                )}
+              <div style={{ flexShrink: 0, marginBottom: 28 }}>
+                <Image
+                  src={cap.icon || `/capabilities/icon-${i + 1}.png`}
+                  alt=""
+                  width={80}
+                  height={40}
+                  className="object-contain"
+                />
               </div>
               <h3 style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 17, fontWeight: 400, lineHeight: "25px", color: "#000", margin: "0 0 8px" }}>
                 {cap.title}

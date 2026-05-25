@@ -5,8 +5,21 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 const LOGOS = [
-  "Husqvarna", "TechCorp", "BuildFast", "Nexus Ltd", "Apex Systems", "CoreFlow", "Virenxia",
-  "Husqvarna", "TechCorp", "BuildFast", "Nexus Ltd", "Apex Systems", "CoreFlow", "Virenxia",
+  "/logos/logo-1.png",
+  "/logos/logo-2.png",
+  "/logos/logo-3.png",
+  "/logos/logo-4.png",
+  "/logos/logo-5.png",
+  "/logos/logo-1.png",
+  "/logos/logo-2.png",
+  "/logos/logo-3.png",
+  "/logos/logo-4.png",
+  "/logos/logo-5.png",
+  "/logos/logo-1.png",
+  "/logos/logo-2.png",
+  "/logos/logo-3.png",
+  "/logos/logo-4.png",
+  "/logos/logo-5.png",
 ];
 
 export default function HeroSection({ data }: { data?: Record<string, string> }) {
@@ -103,8 +116,8 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
           </Link>
         </div>
 
-        {/* Hero image + floating stat cards */}
-        <div className="relative w-full">
+        {/* Hero image */}
+        <div className="w-full">
           <Image
             src={data?.product_image ?? "/hero-product.png"}
             alt="DGlide Platform"
@@ -113,59 +126,6 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
             className="w-full h-auto rounded-t-2xl object-cover"
             priority
           />
-
-          {/* Deal Progress */}
-          <div className="absolute top-[10%] left-[2%] bg-white rounded-xl shadow-lg px-4 py-3 min-w-[140px] hidden md:block">
-            <p className="text-[11px] text-gray-400 mb-1" style={{ fontFamily: "Inter, sans-serif" }}>Deal Progress</p>
-            <p className="text-2xl font-bold text-[#1C2BFF]" style={{ fontFamily: "Inter, sans-serif" }}>72%</p>
-            <div className="mt-1 w-16 h-16 relative">
-              <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
-                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#F3F3F3" strokeWidth="3" />
-                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1C2BFF" strokeWidth="3"
-                  strokeDasharray="72 28" strokeLinecap="round" />
-              </svg>
-            </div>
-          </div>
-
-          {/* Client Communication */}
-          <div className="absolute top-[10%] right-[2%] bg-white rounded-xl shadow-lg px-4 py-3 hidden md:block">
-            <p className="text-[11px] text-gray-400 mb-2" style={{ fontFamily: "Inter, sans-serif" }}>Client Communication</p>
-            <div className="flex items-center gap-1">
-              {["#FF7F1C", "#1C2BFF", "#10B981", "#F59E0B"].map((c, i) => (
-                <span
-                  key={i}
-                  className="w-7 h-7 rounded-full border-2 border-white flex items-center justify-center text-white text-[10px] font-bold"
-                  style={{ background: c, marginLeft: i > 0 ? "-6px" : 0 }}
-                >
-                  {String.fromCharCode(65 + i)}
-                </span>
-              ))}
-              <span className="text-xs text-gray-500 ml-2" style={{ fontFamily: "Inter, sans-serif" }}>+5</span>
-            </div>
-          </div>
-
-          {/* Next Follow-up */}
-          <div className="absolute bottom-[15%] left-[2%] bg-white rounded-xl shadow-lg px-4 py-3 hidden md:block">
-            <p className="text-[11px] text-gray-400 mb-1" style={{ fontFamily: "Inter, sans-serif" }}>Next Follow-up</p>
-            <div className="flex items-center gap-2">
-              <span className="text-[#FF7F1C]">📅</span>
-              <span className="text-xs text-gray-700" style={{ fontFamily: "Inter, sans-serif" }}>Tomorrow, 10:30 AM</span>
-            </div>
-          </div>
-
-          {/* Task Completed */}
-          <div className="absolute bottom-[15%] right-[2%] bg-white rounded-xl shadow-lg px-4 py-3 hidden md:block">
-            <p className="text-[11px] text-gray-400 mb-1" style={{ fontFamily: "Inter, sans-serif" }}>Task Completed</p>
-            <div className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-[#1C2BFF] flex items-center justify-center">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-              <span className="text-xl font-bold text-gray-800" style={{ fontFamily: "Inter, sans-serif" }}>18</span>
-            </div>
-            <p className="text-[11px] text-green-500 mt-0.5" style={{ fontFamily: "Inter, sans-serif" }}>↑ 10% vs last week</p>
-          </div>
         </div>
       </div>
 
@@ -191,23 +151,15 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
               className="flex gap-3 w-max"
               style={{ animation: "scrollLeft 28s linear infinite" }}
             >
-              {LOGOS.map((name, i) => (
-                <div
-                  key={i}
-                  className="flex-shrink-0 w-[160px] h-[48px] flex items-center justify-center"
-                  style={{
-                    borderRadius: "40px",
-                    border: "1px solid #FF7F1C",
-                    background: "#FFF",
-                    backdropFilter: "blur(12.5px)",
-                  }}
-                >
-                  <span
-                    className="text-sm font-medium tracking-tight"
-                    style={{ fontFamily: "Inter, sans-serif", color: "#7E7E7E" }}
-                  >
-                    {name}
-                  </span>
+              {LOGOS.map((src, i) => (
+                <div key={i} className="flex-shrink-0">
+                  <Image
+                    src={src}
+                    alt="Client logo"
+                    width={160}
+                    height={48}
+                    className="object-contain"
+                  />
                 </div>
               ))}
             </div>
