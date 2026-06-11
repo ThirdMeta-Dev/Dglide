@@ -23,6 +23,7 @@ const DEFAULT_NAV: NavItemData[] = [
   { label: "Home",      href: "/",          has_dropdown: false },
   { label: "Services",  href: "/services",  has_dropdown: false },
   { label: "Solutions", href: "/solutions", has_dropdown: false },
+  { label: "Platform",  href: "/platform",  has_dropdown: false },
   { label: "Industry",  href: "/industry",  has_dropdown: true  },
   { label: "Resources", href: "/resources", has_dropdown: true  },
 ];
