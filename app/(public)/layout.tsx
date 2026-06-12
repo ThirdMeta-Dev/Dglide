@@ -6,11 +6,23 @@ async function getHeaderData(): Promise<{ navItems: NavItemData[]; settings: Hea
   try {
     const supabase = await createClient();
     const [{ data: nav }, { data: gs }] = await Promise.all([
-      supabase.from("dglide_navigation").select("label, href, has_dropdown").eq("is_visible", true).order("order_index"),
+      supabase.from("dglide_navigation").select("id, parent_id, label, href, has_dropdown").eq("is_visible", true).order("order_index"),
       supabase.from("dglide_global_settings").select("value").eq("key", "header").single(),
     ]);
+    type NavRow = { id: string; parent_id: string | null; label: string; href: string; has_dropdown: boolean };
+    const rows = (nav ?? []) as NavRow[];
+    const navItems: NavItemData[] = rows
+      .filter((r) => !r.parent_id)
+      .map((r) => ({
+        label: r.label,
+        href: r.href,
+        has_dropdown: r.has_dropdown,
+        children: rows
+          .filter((c) => c.parent_id === r.id)
+          .map((c) => ({ label: c.label, href: c.href, has_dropdown: c.has_dropdown })),
+      }));
     return {
-      navItems: (nav ?? []) as NavItemData[],
+      navItems,
       settings: gs?.value as HeaderSettings | undefined,
     };
   } catch {

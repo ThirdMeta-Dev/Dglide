@@ -1,0 +1,210 @@
+import Image from "next/image";
+import Link from "next/link";
+
+/**
+ * "Why DGlide" page — Custom-Level Fit section.
+ * Figma node 1099:564 (file 3llVZUXUn7Ozs0e9784LCF).
+ *
+ * White 1200x754 rounded panel on the #F3F3F3 page background with
+ * decorative elliptical "lens" arcs above and below, a gradient heading,
+ * three pillar cards (middle card raised 52px) connected by gradient
+ * lines to a central "Dglide Platform" pill.
+ */
+
+const ASSET = "/why-dglide/custom-fit";
+
+const CARDS = [
+  {
+    icon: `${ASSET}/icon-ready-systems.svg`,
+    title: "Ready Systems",
+    body: "Start with a working operational system, not a blank build. You go live in weeks.",
+    linkLabel: "Platform Page",
+    href: "/platform",
+    // content alignment mirrors toward the center card (right / center / left)
+    align: "lg:items-end lg:text-right",
+    raised: false,
+    cardBg: "linear-gradient(to top left, #F3F3F3 0%, #FFFFFF 100%)",
+  },
+  {
+    icon: `${ASSET}/icon-configurable-backbone.svg`,
+    title: "Configurable Backbone",
+    body: "One backbone that bends to your workflows, roles, and approvals. No workarounds.",
+    linkLabel: "Platform Page",
+    href: "/platform",
+    align: "lg:items-center lg:text-center",
+    raised: true,
+    cardBg: "linear-gradient(to top, #F3F3F3 0%, #FFFFFF 100%)",
+  },
+  {
+    icon: `${ASSET}/icon-living-service-model.svg`,
+    title: "Living Service Model",
+    body: "It keeps adapting after go-live, so you never outgrow it or rebuild.",
+    linkLabel: "LSM Page",
+    href: "/platform",
+    align: "lg:items-start lg:text-left",
+    raised: false,
+    cardBg: "linear-gradient(to top right, #F3F3F3 0%, #FFFFFF 100%)",
+  },
+];
+
+export default function WDCustomFitSection() {
+  return (
+    <section className="w-full bg-[#F3F3F3] overflow-hidden pt-[27px] pb-[92px] px-4 lg:px-0">
+      <div className="relative max-w-[1200px] mx-auto">
+        {/* Decorative elliptical arcs (desktop only) — Figma group 1099:565 */}
+        <div aria-hidden className="hidden lg:block absolute inset-0 pointer-events-none">
+          {/* top dome — Ellipse 472 */}
+          <div
+            className="absolute left-1/2 -translate-x-1/2 top-[-27px] w-[2022px] h-[214px] rounded-[50%] bg-white"
+          />
+          {/* faint bottom rings — Group 1321315192 */}
+          <div
+            className="absolute left-1/2 -translate-x-1/2 top-[632px] w-[1790px] h-[214px] rounded-[50%] bg-white/15"
+          />
+          <div
+            className="absolute left-1/2 -translate-x-1/2 top-[598px] w-[1790px] h-[214px] rounded-[50%] bg-white/40"
+          />
+          {/* bottom dome — Ellipse 473 */}
+          <div
+            className="absolute left-1/2 -translate-x-1/2 top-[562px] w-[2022px] h-[214px] rounded-[50%] bg-white"
+          />
+        </div>
+
+        {/* White panel — Frame 1618876625 (1200x754, r30) */}
+        <div className="relative bg-white rounded-[30px] flex flex-col items-center gap-12 lg:gap-[60px] pt-12 lg:pt-[60px] pb-12 px-5 lg:px-12 lg:pb-12">
+          {/* Header — Frame 1618873223 */}
+          <div className="w-full max-w-[1104px] flex flex-col items-center gap-4">
+            <h2
+              className="max-w-[854px] text-center text-[32px] leading-[1.21] lg:text-[48px] lg:leading-[58px]"
+              style={{
+                fontFamily: "var(--font-tasa-orbiter)",
+                fontWeight: 400,
+                background: "linear-gradient(180deg, #FF7F1C 0%, #000000 100%)",
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Custom-Level Fit. Productized Speed. No Software Project.
+            </h2>
+            <p
+              className="max-w-[798px] text-center text-[#6F7276] text-[15px] lg:text-[16px] leading-[26px] lg:leading-[28px] tracking-[0.2px]"
+              style={{ fontFamily: "var(--font-inter), Inter, sans-serif" }}
+            >
+              DGlide is a configurable operations platform. You start with
+              ready-to-deploy systems, adapt them to your workflows, and keep
+              evolving after go-live through the Living Service Model.
+            </p>
+          </div>
+
+          {/* Cards + connectors + platform pill — Frame 1618876651 */}
+          <div className="relative w-full max-w-[1104px] flex flex-col items-center">
+            {/* Connector lines (desktop only) */}
+            <div aria-hidden className="hidden lg:block absolute inset-0 pointer-events-none">
+              {/* vertical line from middle card to pill — Vector 6794 */}
+              <img
+                src={`${ASSET}/connector-center.svg`}
+                alt=""
+                className="absolute left-1/2 -translate-x-1/2 top-[268px] w-px h-[95px]"
+              />
+              {/* left card to pill — Vector 6795 */}
+              <img
+                src={`${ASSET}/connector-left.svg`}
+                alt=""
+                className="absolute left-[321px] top-[309px] w-[214.5px] h-[56.5px]"
+              />
+              {/* right card to pill — Vector 6792 */}
+              <img
+                src={`${ASSET}/connector-right.svg`}
+                alt=""
+                className="absolute left-[564px] top-[313px] w-[214.5px] h-[56.5px]"
+              />
+            </div>
+
+            {/* Card row — Frame 1618876520 (middle card raised 52px) */}
+            <div className="w-full flex flex-col lg:flex-row lg:items-end gap-4 lg:h-[343px]">
+              {CARDS.map((card) => (
+                <div
+                  key={card.title}
+                  className={`flex-1 rounded-[16px] p-px lg:h-[291px] ${
+                    card.raised ? "lg:self-start" : "lg:self-end"
+                  }`}
+                  style={{
+                    // 1px gradient border: #1C2BFF at the bottom fading to white
+                    background:
+                      "linear-gradient(to top, #1C2BFF 0%, #FFFFFF 40%)",
+                  }}
+                >
+                  <div
+                    className="h-full rounded-[15px] pt-[27px] pb-[27px] pl-[27px] pr-[59px]"
+                    style={{ background: card.cardBg }}
+                  >
+                    <div
+                      className={`h-full flex flex-col gap-12 lg:gap-0 lg:justify-between items-start text-left ${card.align}`}
+                    >
+                      <div className={`w-full flex flex-col gap-5 items-start ${card.align}`}>
+                        <Image
+                          src={card.icon}
+                          alt=""
+                          width={88}
+                          height={48}
+                          className="w-[88px] h-12"
+                        />
+                        <div className="w-full flex flex-col gap-2">
+                          <h3
+                            className="text-black text-[18px] leading-[26px]"
+                            style={{
+                              fontFamily: "var(--font-tasa-orbiter)",
+                              fontWeight: 500,
+                            }}
+                          >
+                            {card.title}
+                          </h3>
+                          <p
+                            className="text-[#555555] text-[15px] leading-[25px] tracking-[0.2px]"
+                            style={{
+                              fontFamily: "var(--font-inter), Inter, sans-serif",
+                            }}
+                          >
+                            {card.body}
+                          </p>
+                        </div>
+                      </div>
+                      <Link
+                        href={card.href}
+                        className="inline-flex items-center gap-[10px] text-[#1C2BFF] text-[15px] leading-[19px] hover:opacity-80 transition-opacity"
+                        style={{ fontFamily: "var(--font-sora), Sora, sans-serif", fontWeight: 400 }}
+                      >
+                        {card.linkLabel}
+                        <img
+                          src={`${ASSET}/arrow-link.svg`}
+                          alt=""
+                          className="w-[17px] h-[11px]"
+                        />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Dglide Platform pill — Frame 1618876633 */}
+            <Link
+              href="/platform"
+              className="relative z-10 mt-8 lg:-mt-6 inline-flex items-center justify-center rounded-[156px] px-12 py-6 text-white text-[24px] leading-[31px] hover:opacity-95 transition-opacity"
+              style={{
+                fontFamily: "var(--font-tasa-orbiter)",
+                fontWeight: 600,
+                background: "linear-gradient(180deg, #1C2BFF 0%, #141FB5 100%)",
+                boxShadow:
+                  "0 0 0 10px #F3F3F3, -4px -4px 4px 10px rgba(0, 0, 0, 0.04)",
+              }}
+            >
+              Dglide Platform
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -11,6 +11,7 @@ export type NavItemData = {
   label: string;
   href: string;
   has_dropdown: boolean;
+  children?: NavItemData[];
 };
 
 export type HeaderSettings = {
@@ -21,7 +22,12 @@ export type HeaderSettings = {
 
 const DEFAULT_NAV: NavItemData[] = [
   { label: "Home",      href: "/",          has_dropdown: false },
-  { label: "Services",  href: "/services",  has_dropdown: false },
+  {
+    label: "About Us",
+    href: "/about",
+    has_dropdown: true,
+    children: [{ label: "Why Us", href: "/why-dglide", has_dropdown: false }],
+  },
   { label: "Solutions", href: "/solutions", has_dropdown: false },
   { label: "Platform",  href: "/platform",  has_dropdown: false },
   { label: "Industry",  href: "/industry",  has_dropdown: true  },
@@ -34,35 +40,85 @@ const DEFAULT_SETTINGS: HeaderSettings = {
   is_sticky: true,
 };
 
-function NavItem({ item, isActive }: { item: NavItemData; isActive: boolean }) {
+function NavItem({
+  item,
+  isActive,
+  isChildActive,
+}: {
+  item: NavItemData;
+  isActive: (href: string) => boolean;
+  isChildActive: boolean;
+}) {
+  const active = isActive(item.href) || isChildActive;
+  const children = item.children ?? [];
+
   return (
-    <Link
-      href={item.href}
-      className={cn(
-        "flex items-center gap-1.5 text-sm leading-[22.4px] transition-colors duration-200 group",
-        "[font-family:var(--font-sora)]",
-        isActive ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
-      )}
-    >
-      <span
+    <div className="relative group/nav">
+      <Link
+        href={item.href}
         className={cn(
-          "w-1.5 h-1.5 rounded-full bg-[#1C2BFF] flex-shrink-0 transition-all duration-200",
-          isActive
-            ? "opacity-100 scale-100"
-            : "opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100"
+          "flex items-center gap-1.5 text-sm leading-[22.4px] transition-colors duration-200 group",
+          "[font-family:var(--font-sora)]",
+          active ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
         )}
-      />
-      <span>{item.label}</span>
-      {item.has_dropdown && (
-        <ChevronDown
+      >
+        <span
           className={cn(
-            "w-4 h-4 transition-colors duration-200",
-            isActive ? "text-[#1C2BFF]" : "text-black group-hover:text-[#1C2BFF]"
+            "w-1.5 h-1.5 rounded-full bg-[#1C2BFF] flex-shrink-0 transition-all duration-200",
+            active
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100"
           )}
-          strokeWidth={1.5}
         />
+        <span>{item.label}</span>
+        {item.has_dropdown && (
+          <ChevronDown
+            className={cn(
+              "w-4 h-4 transition-all duration-200 group-hover/nav:rotate-180",
+              active ? "text-[#1C2BFF]" : "text-black group-hover:text-[#1C2BFF]"
+            )}
+            strokeWidth={1.5}
+          />
+        )}
+      </Link>
+
+      {children.length > 0 && (
+        <div
+          className={cn(
+            "absolute left-1/2 -translate-x-1/2 top-full pt-4 z-50",
+            "invisible opacity-0 translate-y-1 transition-all duration-200",
+            "group-hover/nav:visible group-hover/nav:opacity-100 group-hover/nav:translate-y-0"
+          )}
+        >
+          <div
+            className="min-w-[210px] rounded-2xl p-2 border border-white/60 bg-white/55 backdrop-blur-2xl"
+            style={{ boxShadow: "0 8px 32px 0 rgba(28, 43, 255, 0.14), inset 0 1px 0 0 rgba(255,255,255,0.7)" }}
+          >
+            {children.map((child) => (
+              <Link
+                key={child.href}
+                href={child.href}
+                className={cn(
+                  "flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm [font-family:var(--font-sora)]",
+                  "transition-colors duration-200 group/item hover:bg-white/70",
+                  isActive(child.href) ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
+                )}
+              >
+                <span
+                  className={cn(
+                    "w-1.5 h-1.5 rounded-full bg-[#1C2BFF] flex-shrink-0 transition-all duration-200",
+                    isActive(child.href)
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-0 group-hover/item:opacity-100 group-hover/item:scale-100"
+                  )}
+                />
+                {child.label}
+              </Link>
+            ))}
+          </div>
+        </div>
       )}
-    </Link>
+    </div>
   );
 }
 
@@ -98,7 +154,12 @@ export default function Header({ navItems, settings }: Props) {
 
         <nav className="flex items-center gap-7">
           {nav.map((item) => (
-            <NavItem key={item.href} item={item} isActive={isActive(item.href)} />
+            <NavItem
+              key={item.href}
+              item={item}
+              isActive={isActive}
+              isChildActive={(item.children ?? []).some((c) => isActive(c.href))}
+            />
           ))}
         </nav>
 
@@ -130,18 +191,33 @@ export default function Header({ navItems, settings }: Props) {
         <div className="lg:hidden bg-white border-t border-[#F3F3F3] px-5 pb-5">
           <nav className="flex flex-col gap-1 pt-4">
             {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className={cn(
-                  "flex items-center gap-2 py-2.5 text-sm [font-family:var(--font-sora)]",
-                  isActive(item.href) ? "text-[#1C2BFF] font-medium" : "text-black"
-                )}
-              >
-                {isActive(item.href) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
-                {item.label}
-              </Link>
+              <div key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={cn(
+                    "flex items-center gap-2 py-2.5 text-sm [font-family:var(--font-sora)]",
+                    isActive(item.href) ? "text-[#1C2BFF] font-medium" : "text-black"
+                  )}
+                >
+                  {isActive(item.href) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
+                  {item.label}
+                </Link>
+                {(item.children ?? []).map((child) => (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      "flex items-center gap-2 py-2 pl-5 text-sm [font-family:var(--font-sora)]",
+                      isActive(child.href) ? "text-[#1C2BFF] font-medium" : "text-[#444]"
+                    )}
+                  >
+                    {isActive(child.href) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
+                    {child.label}
+                  </Link>
+                ))}
+              </div>
             ))}
           </nav>
           <Link

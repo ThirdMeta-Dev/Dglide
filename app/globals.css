@@ -20,12 +20,14 @@
   html {
     background-color: #F3F3F3;
     font-family: var(--font-inter);
-    overflow-x: hidden;
+    /* clip (not hidden) keeps position:sticky working — hidden makes
+       html/body a scroll container, which breaks sticky descendants */
+    overflow-x: clip;
   }
 
   body {
     background-color: #F3F3F3;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 }
 
