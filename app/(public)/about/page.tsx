@@ -14,6 +14,7 @@ import LogoCarouselSection from "@/components/sections/LogoCarouselSection";
 import AUJourneySection from "@/components/about/sections/AUJourneySection";
 import AUResourcesSection from "@/components/about/sections/AUResourcesSection";
 import AUFinalCTASection from "@/components/about/sections/AUFinalCTASection";
+import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export const metadata: Metadata = {
   title: "About Us | DGlide",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#F3F3F3]">
+    <AnimatedPublicPage className="bg-[#F3F3F3]">
       <AUHeroSection />
       <div className="py-12 lg:py-16">
         <AUWhatIsSection />
@@ -63,6 +64,6 @@ export default function AboutPage() {
       <div className="pt-12 lg:pt-16">
         <AUFinalCTASection />
       </div>
-    </div>
+    </AnimatedPublicPage>
   );
 }

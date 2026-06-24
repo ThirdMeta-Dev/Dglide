@@ -5,7 +5,9 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { motionEase } from "@/components/animations/MotionPrimitives";
 
 export type NavItemData = {
   label: string;
@@ -49,11 +51,23 @@ function NavItem({
   isActive: (href: string) => boolean;
   isChildActive: boolean;
 }) {
+  const [open, setOpen] = useState(false);
   const active = isActive(item.href) || isChildActive;
   const children = item.children ?? [];
 
   return (
-    <div className="relative group/nav">
+    <div
+      className="relative group/nav"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onFocus={() => setOpen(true)}
+      onBlur={(event) => {
+        const nextTarget = event.relatedTarget;
+        if (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget)) {
+          setOpen(false);
+        }
+      }}
+    >
       <Link
         href={item.href}
         className={cn(
@@ -72,23 +86,30 @@ function NavItem({
         />
         <span>{item.label}</span>
         {item.has_dropdown && (
-          <ChevronDown
-            className={cn(
-              "w-4 h-4 transition-all duration-200 group-hover/nav:rotate-180",
-              active ? "text-[#1C2BFF]" : "text-black group-hover:text-[#1C2BFF]"
-            )}
-            strokeWidth={1.5}
-          />
+          <motion.span
+            className="inline-flex"
+            animate={{ rotate: open ? 180 : 0 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+          >
+            <ChevronDown
+              className={cn(
+                "w-4 h-4 transition-colors duration-200",
+                active ? "text-[#1C2BFF]" : "text-black group-hover:text-[#1C2BFF]"
+              )}
+              strokeWidth={1.5}
+            />
+          </motion.span>
         )}
       </Link>
 
-      {children.length > 0 && (
-        <div
-          className={cn(
-            "absolute left-1/2 -translate-x-1/2 top-full pt-4 z-50",
-            "invisible opacity-0 translate-y-1 transition-all duration-200",
-            "group-hover/nav:visible group-hover/nav:opacity-100 group-hover/nav:translate-y-0"
-          )}
+      <AnimatePresence>
+        {children.length > 0 && open && (
+        <motion.div
+          className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-4"
+          initial={{ opacity: 0, y: -8, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -6, scale: 0.97 }}
+          transition={{ duration: 0.18, ease: "easeOut" }}
         >
           <div
             className="min-w-[210px] rounded-2xl p-2 border border-white/60 bg-white/55 backdrop-blur-2xl"
@@ -116,8 +137,9 @@ function NavItem({
               </Link>
             ))}
           </div>
-        </div>
-      )}
+        </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -130,6 +152,7 @@ type Props = {
 export default function Header({ navItems, settings }: Props) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [ctaHovered, setCtaHovered] = useState(false);
 
   const nav = (navItems && navItems.length > 0) ? navItems : DEFAULT_NAV;
   const cfg = settings ?? DEFAULT_SETTINGS;
@@ -163,16 +186,33 @@ export default function Header({ navItems, settings }: Props) {
           ))}
         </nav>
 
-        <Link
-          href={cfg.cta_href}
-          className="flex items-center gap-2.5 px-8 py-[14px] rounded-[40px] text-white text-base font-semibold [font-family:var(--font-sora)] leading-[20.16px] flex-shrink-0 transition-opacity hover:opacity-90 active:opacity-80"
-          style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
+        <motion.div
+          className="flex-shrink-0"
+          onHoverStart={() => setCtaHovered(true)}
+          onHoverEnd={() => setCtaHovered(false)}
+          whileHover={{ scale: 1.04, y: -2 }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ type: "spring", stiffness: 400, damping: 22 }}
         >
-          {cfg.cta_label}
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="flex-shrink-0">
-            <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </Link>
+          <Link
+            href={cfg.cta_href}
+            className="flex items-center gap-2.5 px-8 py-[14px] rounded-[40px] text-white text-base font-semibold [font-family:var(--font-sora)] leading-[20.16px] transition-opacity hover:opacity-90 active:opacity-80"
+            style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
+          >
+            {cfg.cta_label}
+            <motion.svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              className="flex-shrink-0"
+              animate={{ rotate: ctaHovered ? 8 : 0 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            >
+              <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </motion.svg>
+          </Link>
+        </motion.div>
       </div>
 
       {/* Mobile */}
@@ -182,13 +222,27 @@ export default function Header({ navItems, settings }: Props) {
             <Image src="/logo.png" alt="DGlide" fill className="object-contain object-left" priority />
           </div>
         </Link>
-        <button onClick={() => setMobileOpen((v) => !v)} className="p-2 text-black" aria-label="Toggle menu">
+        <motion.button
+          onClick={() => setMobileOpen((v) => !v)}
+          className="p-2 text-black"
+          aria-label="Toggle menu"
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.93 }}
+          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+        >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        </motion.button>
       </div>
 
-      {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-[#F3F3F3] px-5 pb-5">
+      <AnimatePresence>
+        {mobileOpen && (
+        <motion.div
+          className="lg:hidden bg-white border-t border-[#F3F3F3] px-5 pb-5"
+          initial={{ opacity: 0, y: -8, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -6, scale: 0.97 }}
+          transition={{ duration: 0.18, ease: motionEase }}
+        >
           <nav className="flex flex-col gap-1 pt-4">
             {nav.map((item) => (
               <div key={item.href}>
@@ -220,16 +274,23 @@ export default function Header({ navItems, settings }: Props) {
               </div>
             ))}
           </nav>
-          <Link
-            href={cfg.cta_href}
-            onClick={() => setMobileOpen(false)}
-            className="mt-4 flex items-center justify-center gap-2 px-6 py-3 rounded-[40px] text-white text-sm font-semibold [font-family:var(--font-sora)]"
-            style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
+          <motion.div
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 400, damping: 22 }}
           >
-            {cfg.cta_label}
-          </Link>
-        </div>
-      )}
+            <Link
+              href={cfg.cta_href}
+              onClick={() => setMobileOpen(false)}
+              className="mt-4 flex items-center justify-center gap-2 px-6 py-3 rounded-[40px] text-white text-sm font-semibold [font-family:var(--font-sora)]"
+              style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
+            >
+              {cfg.cta_label}
+            </Link>
+          </motion.div>
+        </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

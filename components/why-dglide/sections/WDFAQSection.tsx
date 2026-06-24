@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { motionEase } from "@/components/animations/MotionPrimitives";
 
 /*
  * Why DGlide — Frequently Asked Questions (Figma node 1099:1567)
@@ -124,7 +126,12 @@ export default function WDFAQSection({ data }: { data?: Record<string, string> }
               const padTop = isFirst ? 0 : 22;
               const padBottom = isOpen && faq.a ? 8 : isLast ? 0 : 22;
               return (
-                <div key={i}>
+                <motion.div
+                  key={i}
+                  layout="size"
+                  animate={{ borderRadius: isOpen ? 25 : 20 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 28 }}
+                >
                   {i > 0 && <div style={{ height: 1, background: DIVIDER }} />}
                   <button
                     onClick={() => toggle(i)}
@@ -155,30 +162,32 @@ export default function WDFAQSection({ data }: { data?: Record<string, string> }
                       {faq.q}
                     </span>
                   </button>
-                  {faq.a && (
-                    <div
-                      style={{
-                        overflow: "hidden",
-                        maxHeight: isOpen ? 260 : 0,
-                        transition: "max-height 0.3s ease",
-                      }}
-                    >
-                      <p
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: 15,
-                          fontWeight: 400,
-                          lineHeight: "26px",
-                          letterSpacing: 0.2,
-                          color: "#555555",
-                          margin: `0 0 ${isLast ? 0 : 22}px`,
-                        }}
+                  <AnimatePresence initial={false}>
+                    {faq.a && isOpen ? (
+                      <motion.div
+                        style={{ overflow: "hidden" }}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.28, ease: motionEase }}
                       >
-                        {faq.a}
-                      </p>
-                    </div>
-                  )}
-                </div>
+                        <p
+                          style={{
+                            fontFamily: "Inter, sans-serif",
+                            fontSize: 15,
+                            fontWeight: 400,
+                            lineHeight: "26px",
+                            letterSpacing: 0.2,
+                            color: "#555555",
+                            margin: `0 0 ${isLast ? 0 : 22}px`,
+                          }}
+                        >
+                          {faq.a}
+                        </p>
+                      </motion.div>
+                    ) : null}
+                  </AnimatePresence>
+                </motion.div>
               );
             })}
           </div>

@@ -1,8 +1,10 @@
 "use client";
 
 import { FunctionComponent, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { faqItems } from "@/data/solutionsPageData";
+import { motionEase } from "@/components/animations/MotionPrimitives";
 
 type FaqItem = {
   question: string;
@@ -37,7 +39,13 @@ const SolutionsFAQSection: FunctionComponent<SolutionsFAQSectionProps> = ({
                 const isOpen = openIndex === index;
 
                 return (
-                  <div key={item.question} className="sol-faq-item">
+                  <motion.div
+                    key={item.question}
+                    className="sol-faq-item"
+                    layout="size"
+                    animate={{ borderRadius: isOpen ? 25 : 20 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 28 }}
+                  >
                     <button
                       type="button"
                       onClick={() => setOpenIndex(isOpen ? -1 : index)}
@@ -49,14 +57,25 @@ const SolutionsFAQSection: FunctionComponent<SolutionsFAQSectionProps> = ({
                       {item.question}
                     </button>
 
-                    {isOpen && item.answer && (
-                      <p className="sol-faq-answer">{item.answer}</p>
-                    )}
+                    <AnimatePresence initial={false}>
+                      {isOpen && item.answer ? (
+                        <motion.p
+                          className="sol-faq-answer"
+                          style={{ overflow: "hidden" }}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.28, ease: motionEase }}
+                        >
+                          {item.answer}
+                        </motion.p>
+                      ) : null}
+                    </AnimatePresence>
 
                     {index < items.length - 1 && (
                       <span className="sol-faq-divider" aria-hidden />
                     )}
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>

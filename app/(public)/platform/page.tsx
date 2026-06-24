@@ -21,6 +21,7 @@ import PlatformIntegrationsSection from "@/components/platform/sections/Platform
 import PlatformRealOperationsSection from "@/components/platform/sections/PlatformRealOperationsSection";
 import PlatformFinalCTA from "@/components/platform/sections/PlatformFinalCTA";
 import PlatformFAQSection from "@/components/platform/sections/PlatformFAQSection";
+import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export const metadata: Metadata = {
   title: "Platform | DGlide",
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function PlatformPage() {
   return (
-    <div className="solutions-page platform-page">
+    <AnimatedPublicPage className="solutions-page platform-page" staticFirstCount={1}>
       <img
         src="/solutions/curve.svg"
         alt=""
@@ -57,6 +58,6 @@ export default function PlatformPage() {
       <PlatformRealOperationsSection />
       <PlatformFAQSection />
       <PlatformFinalCTA />
-    </div>
+    </AnimatedPublicPage>
   );
 }

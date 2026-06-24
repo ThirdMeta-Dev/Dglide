@@ -17,6 +17,7 @@ import GoLiveFasterSection from "@/components/solutions/sections/GoLiveFasterSec
 import IntegrationsHubSection from "@/components/solutions/sections/IntegrationsHubSection";
 import SolutionsFinalCTA from "@/components/solutions/sections/SolutionsFinalCTA";
 import SolutionsFAQSection from "@/components/solutions/sections/SolutionsFAQSection";
+import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export const metadata: Metadata = {
   title: "Solutions | DGlide",
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function SolutionsPage() {
   return (
-    <div className="solutions-page">
+    <AnimatedPublicPage className="solutions-page" staticFirstCount={1}>
       <img
         src="/solutions/curve.svg"
         alt=""
@@ -50,6 +51,6 @@ export default function SolutionsPage() {
       <IntegrationsHubSection />
       <SolutionsFinalCTA />
       <SolutionsFAQSection />
-    </div>
+    </AnimatedPublicPage>
   );
 }

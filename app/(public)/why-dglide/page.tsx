@@ -14,6 +14,7 @@ import WDBeforeAfterSection from "@/components/why-dglide/sections/WDBeforeAfter
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 import WDFAQSection from "@/components/why-dglide/sections/WDFAQSection";
 import WDFinalCTASection from "@/components/why-dglide/sections/WDFinalCTASection";
+import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export const metadata: Metadata = {
   title: "Why DGlide | DGlide",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function WhyDGlidePage() {
   return (
-    <div className="bg-[#F3F3F3]">
+    <AnimatedPublicPage className="bg-[#F3F3F3]">
       <WDHeroSection />
       <div className="py-12 lg:py-16">
         <WDTradeoffSection />
@@ -62,6 +63,6 @@ export default function WhyDGlidePage() {
       />
       <WDFAQSection />
       <WDFinalCTASection />
-    </div>
+    </AnimatedPublicPage>
   );
 }

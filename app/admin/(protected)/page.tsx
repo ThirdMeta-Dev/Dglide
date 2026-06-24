@@ -8,9 +8,17 @@ import {
   Settings,
   Globe,
   CalendarCheck,
+  BookOpen,
 } from "lucide-react";
 
 const quickLinks = [
+  {
+    title: "Blog",
+    description: "Write and publish blog posts with AI assistance",
+    href: "/admin/blog",
+    icon: BookOpen,
+    color: "bg-blue-50 text-blue-600",
+  },
   {
     title: "Demo Requests",
     description: "View and manage schedule demo form submissions",

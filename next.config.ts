@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "aovvrjsdsbzjlpbodasb.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
+      {
+        protocol: "https",
+        hostname: "dglide.com",
+        pathname: "/**",
+      },
     ],
   },
 };

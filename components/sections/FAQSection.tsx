@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { motionEase } from "@/components/animations/MotionPrimitives";
 
 const FAQS = [
   {
@@ -119,7 +121,12 @@ export default function FAQSection({ data }: { data?: Record<string, string> } =
           {faqs.map((faq, i) => {
             const isOpen = openIdx === i;
             return (
-              <div key={i}>
+              <motion.div
+                key={i}
+                layout="size"
+                animate={{ borderRadius: isOpen ? 25 : 20 }}
+                transition={{ type: "spring", stiffness: 300, damping: 28 }}
+              >
                 {i > 0 && <div style={{ height: 1, background: "#F0F0F0" }} />}
                 <button
                   onClick={() => toggle(i)}
@@ -151,28 +158,32 @@ export default function FAQSection({ data }: { data?: Record<string, string> } =
                   </span>
                   <PlusIcon open={isOpen} />
                 </button>
-                <div
-                  style={{
-                    overflow: "hidden",
-                    maxHeight: isOpen ? 200 : 0,
-                    transition: "max-height 0.3s ease",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: 15,
-                      fontWeight: 400,
-                      lineHeight: "25px",
-                      color: "#545454",
-                      margin: "0 0 24px",
-                      paddingRight: 48,
-                    }}
-                  >
-                    {faq.a}
-                  </p>
-                </div>
-              </div>
+                <AnimatePresence initial={false}>
+                  {isOpen ? (
+                    <motion.div
+                      style={{ overflow: "hidden" }}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: motionEase }}
+                    >
+                      <p
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: 15,
+                          fontWeight: 400,
+                          lineHeight: "25px",
+                          color: "#545454",
+                          margin: "0 0 24px",
+                          paddingRight: 48,
+                        }}
+                      >
+                        {faq.a}
+                      </p>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
           <div style={{ height: 1, background: "#F0F0F0" }} />

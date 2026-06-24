@@ -15,12 +15,13 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import LiveFasterSection from "@/components/sections/LiveFasterSection";
 import UsefulResourcesSection from "@/components/sections/UsefulResourcesSection";
 import CTASection from "@/components/sections/CTASection";
+import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export default async function HomePage() {
   const sections = await getHomepageSections();
 
   return (
-    <>
+    <AnimatedPublicPage>
       <HeroSection data={sections.hero} />
       <SoftwareWorksSection data={sections.software_works} />
       <ComparisonSection data={sections.comparison} />
@@ -37,6 +38,6 @@ export default async function HomePage() {
       <LiveFasterSection data={sections.live_faster} />
       <UsefulResourcesSection />
       <CTASection data={sections.cta} />
-    </>
+    </AnimatedPublicPage>
   );
 }

@@ -9,7 +9,19 @@ const HEADING = "Run Your Operations on a System That Adapts With You";
 const CTA_LABEL = "Explore the Platform";
 const CTA_HREF = "/platform";
 
-export default function AUFinalCTASection() {
+type AUFinalCTASectionProps = {
+  badgeText?: string;
+  heading?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+export default function AUFinalCTASection({
+  badgeText = BADGE_TEXT,
+  heading = HEADING,
+  ctaLabel = CTA_LABEL,
+  ctaHref = CTA_HREF,
+}: AUFinalCTASectionProps = {}) {
   return (
     <section className="w-full">
       <div className="mx-auto max-w-[1200px] px-4">
@@ -67,7 +79,7 @@ export default function AUFinalCTASection() {
                     fontWeight: 400,
                   }}
                 >
-                  {BADGE_TEXT}
+                  {badgeText}
                 </span>
               </div>
 
@@ -79,15 +91,16 @@ export default function AUFinalCTASection() {
                   fontWeight: 500,
                   backgroundImage:
                     "linear-gradient(90deg, #FF7F1C 0%, #FFFFFF 8.47%)",
+                  whiteSpace: "pre-line",
                 }}
               >
-                {HEADING}
+                {heading}
               </h2>
             </div>
 
             {/* Button */}
             <Link
-              href={CTA_HREF}
+              href={ctaHref}
               className="inline-flex items-center gap-2.5 rounded-[40px] bg-white px-6 py-3.5 text-base text-[#1C2BFF] no-underline"
               style={{
                 fontFamily: "var(--font-sora), Sora, sans-serif",
@@ -95,7 +108,7 @@ export default function AUFinalCTASection() {
                 lineHeight: "20.16px",
               }}
             >
-              {CTA_LABEL}
+              {ctaLabel}
               <svg
                 width="18"
                 height="18"

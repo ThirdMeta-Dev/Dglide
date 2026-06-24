@@ -2,6 +2,7 @@
 
 import type { FunctionComponent, ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const BookDemoArrow: FunctionComponent = () => (
   <svg
@@ -66,10 +67,13 @@ const SolutionsButton: FunctionComponent<SolutionsButtonProps> = ({
     variant === "workflow-cta";
 
   return (
-    <button
+    <motion.button
       type="button"
       onClick={onClick}
       className={`${classes[variant]} ${className}`}
+      whileHover={{ scale: 1.04, y: -2 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 400, damping: 22 }}
     >
       {children}
       {usesFigmaArrow ? (
@@ -77,7 +81,7 @@ const SolutionsButton: FunctionComponent<SolutionsButtonProps> = ({
       ) : (
         <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
       )}
-    </button>
+    </motion.button>
   );
 };
 
