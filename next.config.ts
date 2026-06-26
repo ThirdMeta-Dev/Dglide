@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: "dglide.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "secure.gravatar.com",
+        pathname: "/avatar/**",
+      },
     ],
   },
 };

@@ -96,7 +96,7 @@ export default function WDTradeoffSection() {
                   </div>
                 </div>
                 {/* Tradeoff tag */}
-                <div className="inline-flex w-fit items-center gap-2 h-[18px] rounded-full border border-[#FF7F1C]/20">
+                <div className="inline-flex w-fit items-center gap-2 h-[18px]">
                   <span className="w-[2px] h-[11px] rounded-full bg-[#FF0000] shrink-0" />
                   <span
                     className="text-[14px] leading-[17.64px] font-light text-[#FF0000] whitespace-nowrap"

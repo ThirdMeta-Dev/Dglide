@@ -38,7 +38,17 @@ const GoLiveLinkArrow: FunctionComponent = () => (
   </svg>
 );
 
-const GoLiveFasterSection: FunctionComponent = () => {
+type GoLiveFasterSectionProps = {
+  heading?: string;
+  description?: string;
+  cards?: typeof goLiveCards;
+};
+
+const GoLiveFasterSection: FunctionComponent<GoLiveFasterSectionProps> = ({
+  heading = "Go Live Faster, Without a Heavy Build",
+  description = goLiveSectionDescription,
+  cards = goLiveCards,
+}) => {
   const router = useRouter();
 
   return (
@@ -47,13 +57,13 @@ const GoLiveFasterSection: FunctionComponent = () => {
         <div className="sol-go-live-inner">
           <header className="sol-go-live-header">
             <h2 className="sol-go-live-heading">
-              Go Live Faster Without Heavy
+              {heading}
             </h2>
-            <p className="sol-go-live-description">{goLiveSectionDescription}</p>
+            <p className="sol-go-live-description">{description}</p>
           </header>
 
           <div className="sol-go-live-cards">
-            {goLiveCards.map((card, index) => (
+            {cards.map((card, index) => (
               <div
                 key={card.step}
                 className="sol-go-live-card-col"
@@ -77,9 +87,9 @@ const GoLiveFasterSection: FunctionComponent = () => {
                   <div className="sol-go-live-card-body">
                     <div className="sol-go-live-card-main">
                       <img
-                        src="/solutions/orange-bg.svg"
+                        src={card.icon}
                         alt=""
-                        width={48}
+                        width={88}
                         height={48}
                         className="sol-go-live-card-icon"
                         aria-hidden

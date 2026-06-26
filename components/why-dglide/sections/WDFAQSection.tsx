@@ -69,8 +69,6 @@ export default function WDFAQSection({ data }: { data?: Record<string, string> }
         style={{
           maxWidth: 1200,
           margin: "0 auto",
-          background: "#FFFFFF",
-          borderRadius: 30,
         }}
       >
         <div

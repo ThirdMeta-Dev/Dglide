@@ -30,7 +30,15 @@ const DEFAULT_NAV: NavItemData[] = [
     has_dropdown: true,
     children: [{ label: "Why Us", href: "/why-dglide", has_dropdown: false }],
   },
-  { label: "Solutions", href: "/solutions", has_dropdown: false },
+  {
+    label: "Solutions",
+    href: "/itsm",
+    has_dropdown: true,
+    children: [
+      { label: "ITSM", href: "/itsm", has_dropdown: false },
+      { label: "FSM",  href: "/fsm",  has_dropdown: false },
+    ],
+  },
   { label: "Platform",  href: "/platform",  has_dropdown: false },
   { label: "Industry",  href: "/industry",  has_dropdown: true  },
   { label: "Resources", href: "/resources", has_dropdown: true  },

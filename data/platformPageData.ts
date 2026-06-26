@@ -402,6 +402,7 @@ export const platformImproveFeatures: {
   title: string;
   description: string;
   align: PlatformImprovesAlign;
+  icon?: string;
 }[] = [
   {
     title: "Workflow Visibility",
@@ -475,8 +476,16 @@ export const platformIntegrationHeading =
 export const platformIntegrationDescription =
   "Dglide Is Designed To Work With Your Existing Business Environment Instead Of Replacing Everything At Once.";
 export const platformIntegrationNodes = {
-  left: ["CRM systems", "ITSM tools", "CRM systems"],
-  right: ["ERP systems", "IoT or device data", "Internal business applications"],
+  left: [
+    { label: "CRM systems", icon: "/solutions/integrations-hub/crm-systems.svg" },
+    { label: "ITSM tools", icon: "/solutions/integrations-hub/itsm-tools.svg" },
+    { label: "Accounting and billing tools", icon: "/solutions/integrations-hub/accounting-billing-tools.svg" },
+  ],
+  right: [
+    { label: "ERP systems", icon: "/solutions/integrations-hub/erp-systems.svg" },
+    { label: "IoT or device data", icon: "/solutions/integrations-hub/iot-device-data.svg" },
+    { label: "Internal business applications", icon: "/solutions/integrations-hub/internal-business-apps.svg" },
+  ],
 };
 
 export const platformFaqItems = [

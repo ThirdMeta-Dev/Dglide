@@ -54,36 +54,17 @@ export default function WDProblemToSystemSection({
   }));
 
   return (
-    <section className="w-full px-4">
-      {/* White rounded frame — 1200x696 in Figma. Decorative white ellipse arcs
-          overflow ~31px above and ~102px below (visible against a dark page bg);
-          horizontal overflow is clipped like in Figma. */}
-      <div
-        className="relative mx-auto w-full max-w-[1200px] rounded-[30px] bg-white py-10"
-        style={{ overflowX: "clip", overflowY: "visible" }}
-      >
-        {/* Top arc — Ellipse 469 (white, 2022x214, top -31, centered -6px) */}
-        <div
-          className="pointer-events-none absolute left-1/2 top-[-31px] h-[214px] w-[2022px] rounded-[50%] bg-white"
-          style={{ transform: "translateX(calc(-50% - 6px))" }}
-          aria-hidden="true"
-        />
-        {/* Bottom fading arcs — Ellipses 472 (15%), 471 (40%), 470 (solid) */}
-        <div
-          className="pointer-events-none absolute left-1/2 top-[584px] h-[214px] w-[1790px] -translate-x-1/2 rounded-[50%] bg-white/15"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute left-1/2 top-[550px] h-[214px] w-[1790px] -translate-x-1/2 rounded-[50%] bg-white/40"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute left-1/2 top-[514px] h-[214px] w-[2022px] -translate-x-1/2 rounded-[50%] bg-white"
-          aria-hidden="true"
-        />
-
-        {/* Content — 1104px wide, 48px side padding in Figma */}
-        <div className="relative z-10 flex flex-col gap-12 px-6 lg:flex-row lg:justify-between lg:gap-16 lg:px-12">
+    <section
+      className="w-full"
+      style={{
+        backgroundImage: "url(/why-dglide/problem-to-system/section-bg.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="relative mx-auto w-full max-w-[1200px] py-10 px-6 lg:px-12">
+        <div className="flex flex-col gap-12 lg:flex-row lg:justify-between lg:gap-16">
           {/* Left column */}
           <div className="flex w-full max-w-[467px] shrink-0 flex-col gap-4 lg:pt-8">
             <h2
@@ -107,7 +88,7 @@ export default function WDProblemToSystemSection({
             </p>
           </div>
 
-          {/* Right column — staircase of step cards (right-aligned, 16px overlap) */}
+          {/* Right column — staircase of step cards */}
           <div className="relative flex w-full flex-col gap-4 lg:block lg:h-[616px] lg:w-[646px] lg:shrink-0">
             {steps.map((step) => (
               <div

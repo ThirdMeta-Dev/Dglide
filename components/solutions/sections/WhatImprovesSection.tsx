@@ -10,7 +10,7 @@ type WhatImprovesSectionProps = {
 };
 
 const WhatImprovesSection: FunctionComponent<WhatImprovesSectionProps> = ({
-  heading = "What Improves with Dglide FSM",
+  heading = "What Improves With DGlide ITSM",
   description,
   features = improvesFeatures,
   sectionId = "benefits-outcomes",
@@ -45,10 +45,10 @@ const WhatImprovesSection: FunctionComponent<WhatImprovesSectionProps> = ({
                   className={`sol-what-improves-card sol-what-improves-card--${feature.align}`}
                 >
                   <img
-                    src="/solutions/orange-bg.svg"
+                    src={feature.icon}
                     alt=""
-                    width={40}
-                    height={40}
+                    width={88}
+                    height={48}
                     className="sol-what-improves-icon"
                     aria-hidden
                   />

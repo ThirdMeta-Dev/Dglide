@@ -20,20 +20,14 @@ import SolutionsFAQSection from "@/components/solutions/sections/SolutionsFAQSec
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export const metadata: Metadata = {
-  title: "Solutions | DGlide",
+  title: "ITSM | DGlide",
   description:
-    "Field service management solutions that fit your real operations — work orders, scheduling, technician mobile apps, and integrations.",
+    "DGlide ITSM helps service, IT, and internal teams run requests, approvals, SLAs, and resolution in one configurable system.",
 };
 
 export default function SolutionsPage() {
   return (
-    <AnimatedPublicPage className="solutions-page" staticFirstCount={1}>
-      <img
-        src="/solutions/curve.svg"
-        alt=""
-        aria-hidden
-        className="sol-hero-curve"
-      />
+    <AnimatedPublicPage className="solutions-page" staticFirstCount={2}>
       <FSMHeroSection />
       <SolutionsSectionNav />
       <FieldServiceProblemSection />

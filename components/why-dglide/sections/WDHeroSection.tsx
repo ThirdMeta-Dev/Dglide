@@ -10,9 +10,10 @@ const BULLETS = [
 export default function WDHeroSection() {
   return (
     <section
-      className="relative w-full overflow-hidden"
+      className="relative w-full"
       style={{
         background: "linear-gradient(0deg, #F3F3F3 0%, #FFFFFF 94.5%)",
+        overflowX: "clip",
       }}
     >
       {/* Decorative wave lines, bottom-left (Figma group 1099:374) */}

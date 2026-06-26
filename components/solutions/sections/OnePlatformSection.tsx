@@ -10,13 +10,43 @@ import {
   platformWorkflowFeatures,
 } from "@/data/solutionsPageData";
 
-const OrbitOutlineIcon: FunctionComponent = () => (
-  <span className="sol-platform-node-outline-icon" aria-hidden>
-    <img src="/solutions/section-1-icon.svg" alt="" width={24} height={24} />
+const TickIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="14" viewBox="0 0 24 14" fill="none" aria-hidden className="sol-platform-feature-tick-icon">
+    <path d="M4.92601 6.82587L9.4923 9.1091L18.6249 4.54263L22.2779 6.36922L9.4923 12.7623L1.27297 8.65245L4.92601 6.82587Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+    <path d="M4.92601 6.5036L9.4923 8.78683L18.6249 4.22037L22.2779 6.04695L9.4923 12.44L1.27297 8.33019L4.92601 6.5036Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+    <path d="M4.92601 6.18121L9.4923 8.46445L18.6249 3.89798L22.2779 5.72457L9.4923 12.1176L1.27297 8.0078L4.92601 6.18121Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+    <path d="M4.92601 5.85883L9.4923 8.14206L18.6249 3.57559L22.2779 5.40218L9.4923 11.7952L1.27297 7.68541L4.92601 5.85883Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+    <path d="M4.92601 5.53522L9.4923 7.81845L18.6249 3.25198L22.2779 5.07857L9.4923 11.4716L1.27297 7.3618L4.92601 5.53522Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+    <path d="M4.92601 5.211L9.4923 7.49423L18.6249 2.92776L22.2779 4.75435L9.4923 11.1474L1.27297 7.03759L4.92601 5.211Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+    <path d="M4.92601 4.88873L9.4923 7.17197L18.6249 2.6055L22.2779 4.43209L9.4923 10.8251L1.27297 6.71532L4.92601 4.88873Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+    <path d="M4.92601 4.56647L9.4923 6.8497L18.6249 2.28323L22.2779 4.10982L9.4923 10.5029L1.27297 6.39305L4.92601 4.56647Z" fill="white" stroke="#FF7F1C" strokeWidth="1.18585" strokeLinecap="round"/>
+  </svg>
+);
+
+const FeatureIcon = () => (
+  <span className="sol-platform-feature-icon-wrap" aria-hidden>
+    <TickIcon />
   </span>
 );
 
-const OnePlatformSection: FunctionComponent = () => {
+
+type OnePlatformSectionProps = {
+  heading?: string;
+  description?: string;
+  features?: string[];
+  orbitItems?: typeof platformOrbitItems;
+  footerText?: string;
+  ctaLabel?: string;
+};
+
+const OnePlatformSection: FunctionComponent<OnePlatformSectionProps> = ({
+  heading = "One Platform. Your Whole Service Workflow.",
+  description = "DGlide ITSM connects every step of a request, from the moment it arrives to the moment it's resolved, in one flow.",
+  features = platformWorkflowFeatures,
+  orbitItems = platformOrbitItems,
+  footerText = "Every workflow can be configured around how your service team actually operates.",
+  ctaLabel = "Book A Demo →",
+}) => {
   const router = useRouter();
   const [activeNodeId, setActiveNodeId] = useState<string | null>(null);
   const [pinnedNodeId, setPinnedNodeId] = useState<string | null>(null);
@@ -35,27 +65,18 @@ const OnePlatformSection: FunctionComponent = () => {
             <div className="sol-platform-content">
               <header className="sol-platform-header">
                 <h2 className="sol-platform-heading">
-                  One Platform. Multiple Operational Systems
+                  {heading}
                 </h2>
                 <p className="sol-platform-description">
-                  Dglide FSM connects every step of your field service
-                  operation, from service request to job closure. Track customer
-                  assets, field jobs, service history, and
+                  {description}
                 </p>
               </header>
 
               <div className="sol-platform-body">
                 <ul className="sol-platform-features">
-                  {platformWorkflowFeatures.map((label, index) => (
+                  {features.map((label, index) => (
                     <li key={`${label}-${index}`} className="sol-platform-feature">
-                      <img
-                        src="/solutions/orange-bg.svg"
-                        alt=""
-                        className="sol-platform-feature-icon"
-                        width={36}
-                        height={36}
-                        aria-hidden
-                      />
+                      <FeatureIcon />
                       <span className="sol-platform-feature-text">{label}</span>
                     </li>
                   ))}
@@ -67,7 +88,7 @@ const OnePlatformSection: FunctionComponent = () => {
                     onMouseLeave={() => setActiveNodeId(null)}
                   >
                     <img
-                      src="/solutions/platform.svg"
+                      src="/solutions/platform-center.png"
                       alt=""
                       className="sol-platform-orbit-diagram"
                       width={431}
@@ -75,7 +96,7 @@ const OnePlatformSection: FunctionComponent = () => {
                       aria-hidden
                     />
 
-                    {platformOrbitItems.map((item) => {
+                    {orbitItems.map((item) => {
                       const isOpen = openNodeId === item.id;
 
                       return (
@@ -95,11 +116,11 @@ const OnePlatformSection: FunctionComponent = () => {
                               aria-expanded
                             >
                               <img
-                                src="/solutions/orange-bg.svg"
+                                src={item.icon}
                                 alt=""
                                 className="sol-platform-node-card-icon"
-                                width={44}
-                                height={44}
+                                width={73}
+                                height={40}
                                 aria-hidden
                               />
                               <div className="sol-platform-node-card-body">
@@ -123,11 +144,25 @@ const OnePlatformSection: FunctionComponent = () => {
                                   <span className="sol-platform-node-pill-label">
                                     {item.label}
                                   </span>
-                                  <OrbitOutlineIcon />
+                                  <img
+                                    src={item.icon}
+                                    alt=""
+                                    className="sol-platform-node-pill-icon"
+                                    width={73}
+                                    height={40}
+                                    aria-hidden
+                                  />
                                 </>
                               ) : (
                                 <>
-                                  <OrbitOutlineIcon />
+                                  <img
+                                    src={item.icon}
+                                    alt=""
+                                    className="sol-platform-node-pill-icon"
+                                    width={73}
+                                    height={40}
+                                    aria-hidden
+                                  />
                                   <span className="sol-platform-node-pill-label">
                                     {item.label}
                                   </span>
@@ -146,14 +181,13 @@ const OnePlatformSection: FunctionComponent = () => {
 
           <footer className="sol-platform-footer">
             <p className="sol-platform-footer-text">
-              Every workflow can be configured around how your service team
-              actually operates.
+              {footerText}
             </p>
             <SolutionsButton
               variant="get-started-now"
               onClick={() => scrollToContact(router)}
             >
-              Get Started Now
+              {ctaLabel}
             </SolutionsButton>
           </footer>
         </div>

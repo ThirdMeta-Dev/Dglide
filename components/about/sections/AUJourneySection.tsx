@@ -13,7 +13,7 @@ const SUBTEXT =
 
 type Milestone = {
   title: string;
-  desc?: string; // only "The Platform Foundation" has a description in Figma
+  desc: string;
   icon: string;
   /* Stage coordinates (1200x321 stage, from Figma, rel. to section) */
   iconX: number; // icon frame is 88x48
@@ -26,6 +26,7 @@ type Milestone = {
 const MILESTONES: Milestone[] = [
   {
     title: "Where It Started",
+    desc: "We began by solving messy, real-world operations that off-the-shelf software could not fit.",
     icon: "/about/journey/icon-where-it-started.png",
     iconX: 16,
     iconY: 146,
@@ -45,15 +46,17 @@ const MILESTONES: Milestone[] = [
   },
   {
     title: "Packaged Solution Systems",
+    desc: "On that backbone, we packaged ready-to-run systems for field service, sales, service, and process.",
     icon: "/about/journey/icon-packaged-solution-systems.png",
     iconX: 804,
     iconY: 152,
-    cardX: 804,
+    cardX: 786,
     activeX: 756,
     activeY: 224,
   },
   {
     title: "Living Service Model",
+    desc: "We made continuous adaptation to the model, so your system keeps fitting long after go-live.",
     icon: "/about/journey/icon-living-service-model.png",
     iconX: 1115,
     iconY: 165,
@@ -72,7 +75,7 @@ const WAVE_D =
   "M0.172 129.726L63.404 106.587C253.266 37.109 459.722 26.774 655.574 76.944L802.918 114.688C932.996 148.009 1068.69 153.136 1200.91 129.726";
 
 const STAGE_W = 1200;
-const STAGE_H = 321;
+const STAGE_H = 385;
 /* Fill passes a milestone's icon center -> that milestone becomes active.
    Icon centers: 60 / 354 / 848 / 1159. (Figma snapshot: fill ends at
    x=733 with milestone 2 active -> 354 <= 733 < 848.) */
@@ -149,7 +152,7 @@ export default function AUJourneySection() {
             {/* Heading — TASA Orbiter 400, 44/50, vertical gradient
                 black (bottom) -> #FF7F1C (top) */}
             <h2
-              className="bg-clip-text text-center text-[32px] leading-[1.15] text-transparent lg:text-[44px] lg:leading-[50px]"
+              className="bg-clip-text text-center text-[32px] leading-[1.15] text-transparent lg:text-right lg:text-[44px] lg:leading-[50px]"
               style={{
                 fontFamily: "var(--font-tasa-orbiter)",
                 fontWeight: 400,
@@ -161,7 +164,7 @@ export default function AUJourneySection() {
             </h2>
             {/* Subtext — Inter 400, 16/26, +0.2px, #555, right-aligned */}
             <p
-              className="w-full text-left text-base leading-[26px] text-[#555555] lg:mr-[85px] lg:w-[429px] lg:self-end lg:text-right"
+              className="w-full text-left text-base leading-[26px] text-[#555555] lg:w-[429px] lg:self-end lg:text-right"
               style={{
                 fontFamily: "var(--font-inter)",
                 letterSpacing: "0.2px",
@@ -291,8 +294,8 @@ export default function AUJourneySection() {
 
           {/* ---------- Mobile / tablet: static vertical stack ---------- */}
           <div className="mt-10 flex flex-col gap-8 px-5 pb-4 lg:hidden">
-            {MILESTONES.map((m) => {
-              const highlighted = Boolean(m.desc);
+            {MILESTONES.map((m, i) => {
+              const highlighted = i === 0;
               return (
                 <div key={m.title} className="flex flex-col gap-3">
                   <Image src={m.icon} alt="" width={88} height={48} />

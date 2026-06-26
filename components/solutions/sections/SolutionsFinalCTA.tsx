@@ -46,7 +46,7 @@ type SolutionsFinalCTAProps = {
 const SolutionsFinalCTA: FunctionComponent<SolutionsFinalCTAProps> = ({
   eyebrow = finalCtaEyebrow,
   heading = finalCtaHeading,
-  buttonLabel = "Get Started Now",
+  buttonLabel = "Get A Free Demo!",
 }) => {
   const router = useRouter();
 

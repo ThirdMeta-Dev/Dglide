@@ -104,9 +104,9 @@ export default function AUSameProblemSection() {
                     </div>
                     {/* Problem tag */}
                     <div className="inline-flex w-fit items-center gap-2 rounded-[40px]">
-                      <span className="h-[11px] w-0.5 shrink-0 bg-[#FF0000]" />
+                      <span className="h-[11px] w-0.5 shrink-0 bg-black" />
                       <span
-                        className="whitespace-nowrap text-[15px] font-light leading-[18.9px] text-[#FF0000]"
+                        className="whitespace-nowrap text-[15px] font-light leading-[18.9px] text-black"
                         style={{
                           fontFamily: "var(--font-sora), Sora, sans-serif",
                         }}

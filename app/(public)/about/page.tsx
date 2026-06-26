@@ -61,7 +61,7 @@ export default function AboutPage() {
         <AUJourneySection />
       </div>
       <AUResourcesSection />
-      <div className="pt-12 lg:pt-16">
+      <div className="pt-12 pb-[130px] lg:pt-16">
         <AUFinalCTASection />
       </div>
     </AnimatedPublicPage>

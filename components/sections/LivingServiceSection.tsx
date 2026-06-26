@@ -9,10 +9,42 @@ const FEATURE_DEFAULTS = ["Real-Time Visibility", "Automated Operational Flows",
 const TAB_DEFAULTS     = ["Deploy Fast", "Use On the Go", "Adapts with You", "Optimize without Dev"];
 
 const SLIDE_DEFAULTS = [
-  { counter: "1/4", detail: "Daily work runs in one system, because DGlide maps to your real workflow, not the other way around.", bullets: ["The software follows your changes", "Configured to your integrations"] },
-  { counter: "2/4", detail: "Your system keeps up as your operation evolves — no re-implementation needed.",                       bullets: ["Auto-updated to your workflow", "No manual re-configuration needed"] },
-  { counter: "3/4", detail: "Scale your team without adding tool complexity. DGlide grows with you.",                             bullets: ["Elastic user management", "Process templates for new teams"] },
-  { counter: "4/4", detail: "Make changes yourself, without waiting on a developer or a support ticket.",                         bullets: ["Self-serve configuration", "No-code process changes"] },
+  {
+    counter: "1/4",
+    detail: "Start with a working system, not a blank slate.",
+    body: "",
+    bullets: [
+      "FSM, CRM, or process workflows ready to run on day one.",
+      "Configured to your operation before go-live, not after months of building.",
+    ],
+  },
+  {
+    counter: "2/4",
+    detail: "Real use shows what your system needs next.",
+    body: "",
+    bullets: [
+      "Your team works the way they already do, with no forced workarounds.",
+      "Gaps and edge cases surface through real operations, not guesswork.",
+    ],
+  },
+  {
+    counter: "3/4",
+    detail: "Reshape workflows around what you learn, with no rebuild.",
+    body: "",
+    bullets: [
+      "Change stages, approvals, and rules as your process evolves.",
+      "Adjustments happen on the live system, not in a new project.",
+    ],
+  },
+  {
+    counter: "4/4",
+    detail: "Keep improving as the business grows.",
+    body: "",
+    bullets: [
+      "Add workflows, teams, and use cases without starting over.",
+      "Your system stays aligned with operations, release after release.",
+    ],
+  },
 ];
 
 const N = SLIDE_DEFAULTS.length;
@@ -47,6 +79,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
   const slides   = SLIDE_DEFAULTS.map((s, i) => ({
     counter: s.counter,
     detail:  data?.[`slide_${i + 1}_detail`] ?? s.detail,
+    body:    data?.[`slide_${i + 1}_body`]   ?? s.body,
     bullets: [
       data?.[`slide_${i + 1}_bullet_1`] ?? s.bullets[0],
       data?.[`slide_${i + 1}_bullet_2`] ?? s.bullets[1],
@@ -118,14 +151,14 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
         <div className="lss-two-col" style={{ display: "flex", gap: 0, alignItems: "flex-start" }}>
 
           {/* LEFT */}
-          <div className="lss-left" style={{ width: "55%", flexShrink: 0 }}>
+          <div className="lss-left" style={{ width: "60%", flexShrink: 0 }}>
             <h2
               className="sec-h2"
               style={{
                 fontFamily: "var(--font-tasa-orbiter)",
                 fontWeight: 400,
-                fontSize: 48,
-                lineHeight: "58px",
+                fontSize: 56,
+                lineHeight: "66px",
                 textTransform: "capitalize",
                 marginBottom: 20,
                 background: "linear-gradient(90deg, #FF7F1C 0%, #000 17.79%)",
@@ -175,7 +208,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
                     <NavButton dir="next" spinning={spinDir === "next"} onClick={() => navigate("next")} />
                   </div>
                 </div>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, color: "#000", lineHeight: "22px", margin: 0 }}>
+                <p style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 15, fontWeight: 500, color: "#000", lineHeight: "22px", margin: 0 }}>
                   {slide.detail}
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -222,6 +255,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
                 return (
                   <div
                     key={i}
+                    onClick={() => setCurrent(i)}
                     style={{
                       position: "absolute",
                       left: x,
@@ -230,6 +264,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
                       transition: "left 0.65s cubic-bezier(0.4,0,0.2,1), top 0.65s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease",
                       opacity,
                       zIndex: isActive ? 10 : 6,
+                      cursor: "pointer",
                     }}
                   >
                     <div
@@ -262,20 +297,33 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
               <div style={{ position: "absolute", left: CX - 16, top: CY - 90, width: 232, zIndex: 2 }}>
                 <p
                   style={{
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "var(--font-tasa-orbiter)",
                     color: "#000",
-                    fontSize: 14,
-                    fontStyle: "normal",
-                    fontWeight: 400,
+                    fontSize: 16,
+                    fontWeight: 500,
                     lineHeight: "24px",
-                    letterSpacing: "0.2px",
-                    textTransform: "capitalize",
-                    marginBottom: 12,
+                    letterSpacing: "0.1px",
+                    marginBottom: slide.body ? 8 : 12,
                     width: "164%",
                   }}
                 >
                   {slide.detail}
                 </p>
+                {slide.body && (
+                  <p
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      color: "#555",
+                      fontSize: 13,
+                      fontWeight: 400,
+                      lineHeight: "21px",
+                      marginBottom: 10,
+                      width: "164%",
+                    }}
+                  >
+                    {slide.body}
+                  </p>
+                )}
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   {slide.bullets.map((b, i) => (
                     <span

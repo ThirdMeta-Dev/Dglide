@@ -1,22 +1,46 @@
 "use client";
 
-import { Fragment, FunctionComponent, useState } from "react";
+import Image from "next/image";
+import { Fragment, FunctionComponent, useEffect, useState } from "react";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { technicianFeatures } from "@/data/solutionsPageData";
 
-const FeatureIcon: FunctionComponent = () => (
-  <img
-    src="/solutions/orange-bg.svg"
-    alt=""
-    className="sol-technician-feature-icon"
-    width={36}
-    height={36}
-    aria-hidden
-  />
-);
+const DURATION = 7000;
 
-const TechnicianMobileSection: FunctionComponent = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
+type TechnicianMobileSectionProps = {
+  heading?: string;
+  description?: string;
+  features?: typeof technicianFeatures;
+};
+
+const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> = ({
+  heading = "Stop Running Service Out of an Inbox",
+  description = "Agents shouldn't dig through email and chat to know what's next. DGlide gives every agent one clear workspace for daily service execution.",
+  features = technicianFeatures,
+}) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [fillProgress, setFillProgress] = useState(0);
+
+  useEffect(() => {
+    let startTime: number | null = null;
+    let raf: number;
+
+    const animate = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / DURATION, 1);
+      setFillProgress(progress);
+
+      if (progress < 1) {
+        raf = requestAnimationFrame(animate);
+      } else {
+        setActiveIndex((prev) => (prev + 1) % features.length);
+      }
+    };
+
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [activeIndex, features]);
 
   return (
     <section className="sol-section sol-technician-section">
@@ -24,12 +48,10 @@ const TechnicianMobileSection: FunctionComponent = () => {
         <div className="sol-technician-inner">
           <header className="sol-technician-header">
             <h2 className="sol-technician-heading">
-              Give Technicians a Clear Field Workflow
+              {heading}
             </h2>
             <p className="sol-technician-description">
-              Field teams should not depend on calls and manual updates to know
-              what to do next. Dglide gives technicians a mobile-first workflow
-              for daily service execution. Field teams should not
+              {description}
             </p>
           </header>
 
@@ -37,18 +59,18 @@ const TechnicianMobileSection: FunctionComponent = () => {
             <div className="sol-technician-row">
               <div className="sol-technician-features">
                 <div className="sol-technician-features-list">
-                  {technicianFeatures.map((feature, index) => {
+                  {features.map((feature, index) => {
                     const isExpanded = activeIndex === index;
 
                     return (
                       <Fragment key={feature.title}>
                         {index > 0 &&
                           (isExpanded ? (
-                            <div
-                              className="sol-technician-active-bar"
-                              aria-hidden
-                            >
-                              <span className="sol-technician-active-bar-fill" />
+                            <div className="sol-technician-active-bar" aria-hidden>
+                              <span
+                                className="sol-technician-active-bar-fill"
+                                style={{ width: `${fillProgress * 100}%` }}
+                              />
                             </div>
                           ) : (
                             <hr className="sol-technician-divider" />
@@ -58,7 +80,14 @@ const TechnicianMobileSection: FunctionComponent = () => {
                           <div className="sol-technician-feature-expanded">
                             <div className="sol-technician-feature-expanded-inner">
                               <div className="sol-technician-feature-row">
-                                <FeatureIcon />
+                                <img
+                                  src={feature.icon}
+                                  alt=""
+                                  className="sol-technician-feature-icon"
+                                  width={73}
+                                  height={40}
+                                  aria-hidden
+                                />
                                 <h3 className="sol-technician-feature-title sol-technician-feature-title--active">
                                   {feature.title}
                                 </h3>
@@ -77,7 +106,14 @@ const TechnicianMobileSection: FunctionComponent = () => {
                             aria-expanded={false}
                             onClick={() => setActiveIndex(index)}
                           >
-                            <FeatureIcon />
+                            <img
+                              src={feature.icon}
+                              alt=""
+                              className="sol-technician-feature-icon"
+                              width={73}
+                              height={40}
+                              aria-hidden
+                            />
                             <span className="sol-technician-feature-title">
                               {feature.title}
                             </span>
@@ -90,13 +126,12 @@ const TechnicianMobileSection: FunctionComponent = () => {
               </div>
 
               <div className="sol-technician-phone-wrap">
-                <img
-                  src="/solutions/phone.svg"
-                  alt=""
+                <Image
+                  src="/solutions/agent-workspace.png"
+                  alt="DGlide agent workspace"
                   width={441}
                   height={647}
                   className="sol-technician-phone"
-                  aria-hidden
                 />
               </div>
             </div>

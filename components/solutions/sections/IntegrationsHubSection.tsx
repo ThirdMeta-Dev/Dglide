@@ -1,15 +1,12 @@
 import { FunctionComponent } from "react";
+import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import {
   integrationNodes,
   integrationSectionDescription,
 } from "@/data/solutionsPageData";
 
-const IntegrationPillIcon: FunctionComponent = () => (
-  <span className="sol-integrations-pill-icon" aria-hidden>
-    <img src="/solutions/orange-bg.svg" alt="" width={44} height={44} />
-  </span>
-);
+type IntegrationNode = { label: string; icon: string };
 
 type IntegrationsHubSectionProps = {
   heading?: string;
@@ -18,75 +15,75 @@ type IntegrationsHubSectionProps = {
 };
 
 const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = ({
-  heading = "Connect FSM with the Systems You Already Use",
+  heading = "Connect ITSM With the Systems You Already Use",
   description = integrationSectionDescription,
   nodes = integrationNodes,
 }) => (
   <section id="integrations" className="sol-section sol-integrations-section">
     <SolutionsContainer>
       <div className="sol-integrations-inner">
-        <span className="sol-integrations-outer-ring" aria-hidden />
-
         <header className="sol-integrations-header">
           <h2 className="sol-integrations-heading">{heading}</h2>
           <p className="sol-integrations-description">{description}</p>
         </header>
 
         <div className="sol-integrations-diagram">
-          <span
-            className="sol-integrations-band sol-integrations-band--base"
-            aria-hidden
-          />
-          <span
-            className="sol-integrations-band sol-integrations-band--glow"
-            aria-hidden
-          />
-
-          <div className="sol-integrations-hub-wrap">
-            <span className="sol-integrations-hub-ring" aria-hidden />
-            <div className="sol-integrations-hub">
-              <span className="sol-integrations-hub-text">Dglide Platform</span>
-            </div>
+          {/* Center image spans full diagram width, behind the tube columns */}
+          <div className="sol-integrations-center-img" aria-hidden>
+            <Image
+              src="/solutions/integrations-hub-center.png"
+              alt=""
+              fill
+              style={{ objectFit: "contain" }}
+              priority
+            />
           </div>
 
           <div className="sol-integrations-nodes">
             <div className="sol-integrations-nodes-col sol-integrations-nodes-col--left">
-              {nodes.left.map((label, index) => (
+              {nodes.left.map((tube: IntegrationNode, index: number) => (
                 <div
-                  key={`left-${label}-${index}`}
-                  className={`sol-integrations-node-wrap${
-                    index === 1 ? " sol-integrations-node-wrap--left-inset" : ""
-                  }`}
+                  key={`left-${tube.label}-${index}`}
+                  className="sol-integrations-node-wrap"
                 >
                   <div className="sol-integrations-pill sol-integrations-pill--left">
-                    <span className="sol-integrations-pill-label">{label}</span>
-                    <IntegrationPillIcon />
+                    <span className="sol-integrations-pill-label">{tube.label}</span>
+                    <span className="sol-integrations-pill-icon" aria-hidden>
+                      <Image
+                        src={tube.icon}
+                        alt=""
+                        width={88}
+                        height={48}
+                        style={{ objectFit: "contain" }}
+                      />
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
 
             <div className="sol-integrations-nodes-col sol-integrations-nodes-col--right">
-              {nodes.right.map((label, index) => (
+              {nodes.right.map((tube: IntegrationNode, index: number) => (
                 <div
-                  key={`right-${label}-${index}`}
-                  className={`sol-integrations-node-wrap${
-                    index === 1 ? " sol-integrations-node-wrap--right-inset" : ""
-                  }`}
+                  key={`right-${tube.label}-${index}`}
+                  className="sol-integrations-node-wrap"
                 >
                   <div className="sol-integrations-pill sol-integrations-pill--right">
-                    <IntegrationPillIcon />
-                    <span className="sol-integrations-pill-label">{label}</span>
+                    <span className="sol-integrations-pill-icon" aria-hidden>
+                      <Image
+                        src={tube.icon}
+                        alt=""
+                        width={88}
+                        height={48}
+                        style={{ objectFit: "contain" }}
+                      />
+                    </span>
+                    <span className="sol-integrations-pill-label">{tube.label}</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-
-          <span className="sol-integrations-dot sol-integrations-dot--1" aria-hidden />
-          <span className="sol-integrations-dot sol-integrations-dot--2" aria-hidden />
-          <span className="sol-integrations-dot sol-integrations-dot--3" aria-hidden />
-          <span className="sol-integrations-dot sol-integrations-dot--4" aria-hidden />
         </div>
       </div>
     </SolutionsContainer>

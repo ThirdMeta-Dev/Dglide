@@ -41,6 +41,10 @@ function postHref(post: BlogPost) {
   return `/blogs/${post.slug}`
 }
 
+function postRenderKey(section: string, post: BlogPost, index: number) {
+  return `${section}-${post.id || post.slug || post.title}-${index}`
+}
+
 function SvgIcon({
   src,
   alt = '',
@@ -162,7 +166,8 @@ function CarouselSection({
 }) {
   const [page, setPage] = useState(0)
   const totalPages = Math.max(1, Math.ceil(posts.length / 3))
-  const visiblePosts = posts.slice(page * 3, page * 3 + 3)
+  const currentPage = Math.min(page, totalPages - 1)
+  const visiblePosts = posts.slice(currentPage * 3, currentPage * 3 + 3)
 
   if (posts.length === 0) return null
 
@@ -173,13 +178,13 @@ function CarouselSection({
 
         <div className={styles.carouselControls}>
           <span className={styles.carouselCount}>
-            {page + 1}/{totalPages}
+            {currentPage + 1}/{totalPages}
           </span>
           <div className={styles.carouselButtons}>
             <button
               type="button"
               className={styles.carouselButton}
-              disabled={page === 0}
+              disabled={currentPage === 0}
               onClick={() => setPage((value) => Math.max(0, value - 1))}
               aria-label={`Previous ${title}`}
             >
@@ -188,7 +193,7 @@ function CarouselSection({
             <button
               type="button"
               className={cx(styles.carouselButton, styles.carouselButtonActive)}
-              disabled={page + 1 >= totalPages}
+              disabled={currentPage + 1 >= totalPages}
               onClick={() => setPage((value) => Math.min(totalPages - 1, value + 1))}
               aria-label={`Next ${title}`}
             >
@@ -199,9 +204,17 @@ function CarouselSection({
       </div>
 
       <div className={styles.cardGrid}>
-        {visiblePosts.map((post, index) => (
-          <BlogCard key={post.id} post={post} stat={statForIndex?.(page * 3 + index)} />
-        ))}
+        {visiblePosts.map((post, index) => {
+          const postIndex = currentPage * 3 + index
+
+          return (
+            <BlogCard
+              key={postRenderKey(title, post, postIndex)}
+              post={post}
+              stat={statForIndex?.(postIndex)}
+            />
+          )
+        })}
       </div>
     </section>
   )
@@ -221,7 +234,12 @@ function EditorialSection({ posts }: { posts: BlogPost[] }) {
 
           <div className={styles.editorialGrid}>
             {posts.slice(0, 2).map((post, index) => (
-              <BlogCard key={post.id} post={post} large stat={index === 1 ? "Editor's Pick" : undefined} />
+              <BlogCard
+                key={postRenderKey('editorial', post, index)}
+                post={post}
+                large
+                stat={index === 1 ? "Editor's Pick" : undefined}
+              />
             ))}
           </div>
         </div>
@@ -326,13 +344,17 @@ function LibrarySection({
         {visiblePosts.length > 0 ? (
           <div className={styles.libraryList}>
             <div className={styles.cardGrid}>
-              {visiblePosts.map((post, index) => (
-                <BlogCard
-                  key={post.id}
-                  post={post}
-                  stat={index === 1 || index === 4 ? "Editor's Pick" : undefined}
-                />
-              ))}
+              {visiblePosts.map((post, index) => {
+                const postIndex = (currentPage - 1) * PAGE_SIZE + index
+
+                return (
+                  <BlogCard
+                    key={postRenderKey('library', post, postIndex)}
+                    post={post}
+                    stat={index === 1 || index === 4 ? "Editor's Pick" : undefined}
+                  />
+                )
+              })}
             </div>
 
             {totalPages > 1 && (

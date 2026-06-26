@@ -18,7 +18,7 @@ export default function AUFounderQuoteSection() {
           {/* Blurred orange glow (Vector 6802): pill 876x282, blur 90, -15deg */}
           <div
             aria-hidden
-            className="pointer-events-none absolute w-[876px] h-[282px] rounded-full bg-[#FF7F1C] blur-[90px] -rotate-[15deg] left-[60%] top-[-76px] lg:left-[809px] lg:top-[-77px]"
+            className="pointer-events-none absolute left-[60%] top-[-76px] h-[282px] w-[876px] rounded-full bg-[#FF7F1C] blur-[90px] -rotate-[15deg] lg:left-[842px] lg:top-[-77px]"
           />
 
           {/* Content row: photo + quote */}

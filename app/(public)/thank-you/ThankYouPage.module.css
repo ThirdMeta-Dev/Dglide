@@ -1,0 +1,738 @@
+/* ─────────────────────────────────────────────────────────────
+   ThankYouPage.module.css
+   Pixel-perfect styles for the Thank You page.
+   Source: Figma nodes 1371:8810, 1371:12602, 1371:13787, 1415:4243
+   ───────────────────────────────────────────────────────────── */
+
+.page {
+  width: 100%;
+  overflow-x: hidden;
+  background: #f3f3f3;
+  color: #000;
+  font-family: var(--font-inter), Inter, sans-serif;
+}
+
+/* ── HERO ─────────────────────────────────────────────────── */
+
+/*
+  Outer section: white → #f3f3f3 gradient bg, rounded bottom corners.
+  Inner content: max-width 1200px, padding 60px vertical.
+  The hero is a full-width section; the content card inside is centred.
+*/
+.heroSection {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0 16px 60px;
+  background: linear-gradient(180deg, #fff 0%, #f3f3f3 100%);
+  border-radius: 0 0 30px 30px;
+}
+
+/* The centred content container (max 1200px) */
+.heroInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 84px;
+  padding-top: 60px;
+}
+
+/* ── HERO HEADING GROUP ─────────────────────────────────────── */
+
+.heroHeadingGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  width: 100%;
+}
+
+/*
+  "Thank You." — fontSize 56px, "We Have Received Your Inquiry." — fontSize 44px
+  Both TASA Orbiter Regular, lineHeight 58px
+  Gradient: #FF7F1C → #000
+*/
+.heroHeading {
+  margin: 0;
+  font-family: var(--font-tasa-orbiter), "TASA Orbiter", sans-serif;
+  font-weight: 400;
+  text-align: center;
+  line-height: 58px;
+  letter-spacing: 0;
+  width: 100%;
+  max-width: 753px;
+  background: linear-gradient(180deg, #ff7f1c 0%, #000 68%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroHeadingLine1 {
+  font-size: 56px;
+}
+
+.heroHeadingLine2 {
+  font-size: 44px;
+}
+
+.heroActionGroup {
+  width: 100%;
+  max-width: 612px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/*
+  Sub-text: Inter Italic 16px, color #6F7277, lineHeight 28px, letterSpacing 0.2px
+  "You can book a time-slot or wait for Our Team to directly get in touch with you."
+*/
+.heroSubtext {
+  margin: 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  color: #6f7277;
+  text-align: center;
+  max-width: 612px;
+}
+
+/* ── HERO CTA BUTTONS ─────────────────────────────────────── */
+
+.heroCtas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+/*
+  "Pick your demo time" button:
+  Blue gradient bg, white text, Sora SemiBold 16px, px 24 py 14, radius 40
+*/
+.heroBtnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 40px;
+  background: linear-gradient(180deg, #1c2bff 0%, #141fb5 100%);
+  color: #fff;
+  font-family: var(--font-sora), Sora, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20.16px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+
+/*
+  "Explore The Platform" button:
+  White bg, blue gradient border, blue text, Sora Regular 16px, px 24 py 14, radius 40
+*/
+.heroBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 40px;
+  background: #fff;
+  color: #1c2bff;
+  font-family: var(--font-sora), Sora, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20.16px;
+  text-decoration: none;
+  cursor: pointer;
+  /* Gradient border via border-image trick / box shadow */
+  border: 1px solid #1c2bff;
+  white-space: nowrap;
+}
+
+/* ── "WHAT HAPPENS NEXT?" SECTION ─────────────────────────── */
+
+.whatNextWrap {
+  width: 100%;
+  max-width: 1104px;
+  margin: 0 auto;
+  position: relative;
+  min-height: 295px;
+}
+
+.whatNextBackdrop {
+  position: absolute;
+  left: 50%;
+  top: 82px;
+  width: min(1200px, calc(100vw - 32px));
+  height: 208px;
+  transform: translateX(-50%);
+  border-radius: 1000px 1000px 0 0;
+  background:
+    linear-gradient(180deg, rgba(216, 217, 233, 0.5) 0%, rgba(243, 243, 243, 0.5) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.46) 0%, rgba(243, 243, 243, 0.25) 100%);
+  backdrop-filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.whatNextBadge {
+  position: absolute;
+  top: -51px;
+  left: calc(50% - 333px);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: 198px;
+  height: 37px;
+}
+
+.whatNextBadgeText {
+  font-family: var(--font-tasa-orbiter), "TASA Orbiter", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 23px;
+  color: #000;
+  white-space: nowrap;
+}
+
+.whatNextBadgeIcon {
+  width: 39px;
+  height: 23px;
+  flex: 0 0 auto;
+  display: block;
+}
+
+/* The three-step grid */
+.whatNextSteps {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 1104px;
+  min-height: 295px;
+}
+
+/* Each step card: 357.33px in Figma, 255px high, 28px x 48/24px padding */
+.whatNextStep {
+  position: relative;
+  min-height: 255px;
+  box-sizing: border-box;
+  background: linear-gradient(270deg, #fff 0%, #f6f6f6 100%);
+  border: 1px solid #fff;
+  border-radius: 16px;
+  padding: 48px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  overflow: visible;
+}
+
+.whatNextStepOffsetSmall {
+  margin-top: 20px;
+}
+
+.whatNextStepOffsetLarge {
+  margin-top: 40px;
+}
+
+.stepIllustration {
+  width: 88px;
+  height: 48px;
+  flex: 0 0 auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Ghost number watermark behind each card */
+.whatNextStepNum {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-family: var(--font-tasa-orbiter), "TASA Orbiter", sans-serif;
+  font-weight: 400;
+  font-size: 68px;
+  line-height: 58px;
+  color: #f3f3f3;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+.whatNextStepBody {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 301.33px;
+}
+
+/*
+  Step title: TASA Orbiter Medium 18px, lineHeight 26px, black
+*/
+.whatNextStepTitle {
+  margin: 0;
+  font-family: var(--font-tasa-orbiter), "TASA Orbiter", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  color: #000;
+}
+
+/*
+  Step body: Inter Regular 16px, lineHeight 27px, #6F7277
+*/
+.whatNextStepDesc {
+  margin: 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  letter-spacing: 0.2px;
+  color: #6f7277;
+}
+
+/* ── FOUR REASONS SECTION ─────────────────────────────────── */
+
+.reasonsSection {
+  width: 100%;
+  padding: 80px 16px 72px;
+  background: #f3f3f3;
+  box-sizing: border-box;
+}
+
+.reasonsInner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  box-sizing: border-box;
+}
+
+.reasonsHeading {
+  width: 100%;
+  max-width: 1005px;
+  margin: 0 auto;
+  font-family: var(--font-tasa-orbiter), "TASA Orbiter", sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: 0;
+  text-align: center;
+  background: linear-gradient(90deg, #ff7f1c 0%, #000 23.6884%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.reasonsGrid {
+  position: relative;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.reasonsGlow {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  z-index: -1;
+  width: 274px;
+  height: 249px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(138, 191, 251, 0.3) 0%, rgba(243, 243, 243, 0.3) 100%);
+  pointer-events: none;
+}
+
+.reasonCard {
+  min-height: 140px;
+  padding: 28px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 36px;
+  border: 1px solid #fff;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fff 0%, #f6f6f6 100%);
+}
+
+.reasonIcon {
+  width: 87px;
+  height: 44px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  display: block;
+}
+
+.reasonCopy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reasonTitle {
+  margin: 0;
+  font-family: var(--font-tasa-orbiter), "TASA Orbiter", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0;
+  color: #000;
+}
+
+.reasonDesc {
+  margin: 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  letter-spacing: 0.2px;
+  color: #545454;
+}
+
+/* ── TESTIMONIALS WRAPPER ─────────────────────────────────── */
+.testimonialsWrap {
+  width: 100%;
+}
+
+/* ── CTA SECTION WRAPPER ─────────────────────────────────── */
+.ctaWrap {
+  width: 100%;
+  padding: 0 0 16px;
+}
+
+/* ── FAQ SECTION ─────────────────────────────────────────── */
+
+/*
+  Outer page padding: white/light-grey bg.
+  Inner max-width 1200px, py 80.
+  Layout: two-column — left 360px title, right 680px accordion, gap 64px
+*/
+.faqSection {
+  width: 100%;
+  padding: 80px 16px;
+}
+
+.faqInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 64px;
+}
+
+/* Left column: heading (max 360px) */
+.faqLeft {
+  flex: 0 0 360px;
+  min-width: 0;
+}
+
+/*
+  "Frequently Asked Questions" TASA Orbiter Regular 44px, lineHeight 54px
+  gradient: #000 → #FF7F1C (left to right)
+*/
+.faqHeading {
+  margin: 0;
+  font-family: var(--font-tasa-orbiter), "TASA Orbiter", sans-serif;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 54px;
+  background: linear-gradient(90deg, #000 0%, #ff7f1c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Right column: accordion (flex-grow) */
+.faqRight {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* A single FAQ item row */
+.faqItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/*
+  FAQ question row: TASA Orbiter Regular 16px, lineHeight 26px, black
+  Shows as plain non-interactive collapsed line by default.
+  The first item (expanded) shows its question in orange (Medium 20px).
+*/
+.faqQuestion {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 22px 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
+.faqQuestionText {
+  font-family: var(--font-tasa-orbiter), "TASA Orbiter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #000;
+  letter-spacing: 0;
+  flex: 1;
+}
+
+/* Expanded question: orange, Medium 20px */
+.faqQuestionTextExpanded {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #ff7f1c;
+}
+
+/* Chevron icon for expanded/collapsed */
+.faqChevron {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: #6f7277;
+  transition: transform 0.2s ease;
+}
+
+.faqChevronExpanded {
+  transform: rotate(180deg);
+  color: #ff7f1c;
+}
+
+/* FAQ answer: Inter Regular 15px, lineHeight 26px, color #555 */
+.faqAnswer {
+  padding-bottom: 22px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  letter-spacing: 0.2px;
+  color: #555;
+}
+
+/* Separator line between items — gradient from #E2E2E2 to #F3F3F3 */
+.faqDivider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, #e2e2e2 0%, #f3f3f3 100%);
+  border: none;
+  margin: 0;
+}
+
+/* ── NEWSLETTER / FOOTER WIDGET (1415:4243) ───────────────── */
+
+/*
+  The FAQ accordion (1415:4243) sits below the main FAQ section
+  and contains a newsletter signup + footer nav.
+  We render it as a subtle section below FAQ.
+*/
+.newsletterSection {
+  width: 100%;
+  padding: 0 16px 80px;
+}
+
+.newsletterInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #fff 0%, #f3f3f3 100%);
+  border-radius: 30px 30px 0 0;
+  padding: 24px;
+}
+
+.newsletterTitle {
+  margin: 0 0 12px;
+  font-family: var(--font-sora), Sora, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  color: #000;
+}
+
+.newsletterForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.newsletterInput {
+  flex: 1;
+  max-width: 370px;
+  height: 48px;
+  padding: 12px 28px;
+  border-radius: 35px;
+  background: #fff;
+  border: none;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000;
+  outline: none;
+}
+
+.newsletterInput::placeholder {
+  color: #ababab;
+}
+
+.newsletterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: 40px;
+  background: linear-gradient(180deg, #1c2bff 0%, #141fb5 100%);
+  color: #fff;
+  font-family: var(--font-sora), Sora, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20.16px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ── RESPONSIVE ADJUSTMENTS ──────────────────────────────── */
+
+@media (max-width: 900px) {
+  .heroSection {
+    padding-bottom: 48px;
+  }
+
+  .heroInner {
+    gap: 56px;
+    padding-top: 48px;
+  }
+
+  .heroHeadingGroup {
+    gap: 32px;
+  }
+
+  .faqInner {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .faqLeft {
+    flex: none;
+    width: 100%;
+  }
+
+  .reasonsSection {
+    padding: 56px 16px 48px;
+  }
+
+  .reasonsInner {
+    padding: 0;
+    gap: 32px;
+  }
+
+  .reasonsHeading {
+    font-size: 38px;
+    line-height: 46px;
+  }
+
+  .reasonsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .reasonsGlow {
+    top: 120px;
+    width: 220px;
+    height: 420px;
+  }
+
+  .whatNextSteps {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 16px;
+  }
+
+  .whatNextWrap {
+    min-height: 0;
+    padding-top: 30px;
+  }
+
+  .whatNextBackdrop {
+    top: 66px;
+    height: calc(100% - 30px);
+  }
+
+  .whatNextBadge {
+    top: -18px;
+    left: 0;
+  }
+
+  .whatNextStep,
+  .whatNextStepOffsetSmall,
+  .whatNextStepOffsetLarge {
+    margin-top: 0;
+  }
+
+  .whatNextStep {
+    min-height: 0;
+  }
+
+  .heroHeadingLine1 {
+    font-size: 40px;
+  }
+
+  .heroHeadingLine2 {
+    font-size: 32px;
+  }
+
+  .heroCtas {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .heroBtnPrimary,
+  .heroBtnSecondary {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 620px) {
+  .reasonCard {
+    min-height: 0;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .reasonsHeading {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}

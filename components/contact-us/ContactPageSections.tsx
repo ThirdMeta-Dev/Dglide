@@ -390,7 +390,7 @@ function ContactMethodsSection() {
   );
 }
 
-function DemoSection() {
+export function DemoSection() {
   return (
     <section id="book-demo" className="mx-auto w-full max-w-[1200px]">
       <div className="relative min-h-[707px] overflow-hidden px-5 py-8 lg:px-0">

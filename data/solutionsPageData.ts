@@ -15,24 +15,29 @@ export const heroBullets = [
 
 export const problemCards = [
   {
-    title: "Scattered Service Requests",
-    description: "Your system adapts to how not from scratch lorem ipsum",
+    icon: "/solutions/problem-icons/requests-scattered.svg",
+    title: "Requests Scattered Across Channels",
+    description: "Requests arrive by email, chat, calls, and forms. Nothing lands in one queue you can actually track.",
   },
   {
-    title: "Manual Technician Assignment",
-    description: "Your system adapts to how not from scratch lorem ipsum",
+    icon: "/solutions/problem-icons/rigid-ticket-flows.svg",
+    title: "Rigid Ticket Flows",
+    description: "Your tool forces one fixed path. Real requests need approvals, branches, and steps it just can't model.",
   },
   {
-    title: "No Real-Time Field Visibility",
-    description: "Your system adapts to how not from scratch lorem ipsum",
+    icon: "/solutions/problem-icons/manual-approvals.svg",
+    title: "Manual Approvals and Routing",
+    description: "Tickets sit in inboxes waiting for someone to assign or approve. Work stalls between people.",
   },
   {
+    icon: "/solutions/problem-icons/sla-gaps.svg",
     title: "SLA and Escalation Gaps",
-    description: "Your system adapts to how not from scratch lorem ipsum",
+    description: "Deadlines slip with no warning. Nothing flags a breach or escalates it before the requester does.",
   },
   {
-    title: "Weak Closure Control",
-    description: "Your system adapts to how not from scratch lorem ipsum",
+    icon: "/solutions/problem-icons/workflows-stuck.svg",
+    title: "Workflows Stuck at the IT Edge",
+    description: "The moment a request touches HR, finance, or ops, it falls out of the tool and back into email.",
   },
 ];
 
@@ -67,60 +72,69 @@ export const industryItems = [
 ];
 
 export const platformWorkflowFeatures = [
-  "Fits Your Workflow",
-  "Fits Your Workflow",
-  "Fits Your Workflow",
+  "One connected flow, not a tool plus six inboxes",
+  "See every request's stage in real time",
+  "Configure each stage to how your team actually works",
 ];
-
-const platformNodeDescription =
-  "Dglide FSM connects every step of your field service operation, from service request to job";
 
 export const platformOrbitItems = [
   {
     id: "report",
     label: "Report",
-    description: platformNodeDescription,
+    description:
+      "Track SLA compliance, volume trends, and team performance across all service lines.",
     iconSide: "right" as const,
+    icon: "/solutions/orbit-icons/report.svg",
     left: "17%",
     top: "32%",
   },
   {
-    id: "request",
-    label: "Request",
-    description: platformNodeDescription,
+    id: "capture",
+    label: "Capture",
+    description:
+      "Take in every request from portal, email, and chat in one queue, nothing missed.",
     iconSide: "left" as const,
+    icon: "/solutions/orbit-icons/capture.svg",
     left: "68%",
     top: "12%",
   },
   {
-    id: "work-order",
-    label: "Work Order",
-    description: platformNodeDescription,
+    id: "log-categorize",
+    label: "Log & Categorize",
+    description:
+      "Auto-tag and sort every request by type, priority, and affected service in seconds.",
     iconSide: "left" as const,
+    icon: "/solutions/orbit-icons/log-categorize.svg",
     left: "87%",
     top: "38%",
   },
   {
-    id: "schedule",
-    label: "Schedule",
-    description: platformNodeDescription,
+    id: "route-approve",
+    label: "Route & Approve",
+    description:
+      "Send requests to the right team or approver with SLA timers running from the start.",
     iconSide: "left" as const,
+    icon: "/solutions/orbit-icons/route-approve.svg",
     left: "82%",
     top: "72%",
   },
   {
-    id: "execute",
-    label: "Execute",
-    description: platformNodeDescription,
+    id: "resolve",
+    label: "Resolve",
+    description:
+      "Track progress, post updates, and close tickets with a clear audit trail.",
     iconSide: "right" as const,
+    icon: "/solutions/orbit-icons/resolve.svg",
     left: "31%",
     top: "87%",
   },
   {
-    id: "verify",
-    label: "Verify",
-    description: platformNodeDescription,
+    id: "verify-close",
+    label: "Verify & Close",
+    description:
+      "Confirm resolution with the requester and mark closure with feedback captured.",
     iconSide: "right" as const,
+    icon: "/solutions/orbit-icons/verify-close.svg",
     left: "17%",
     top: "62%",
   },
@@ -130,41 +144,46 @@ export const workflowSteps = [
   {
     title: "Capture the Request",
     description:
-      "Create service requests from teams, customers, or internal users.",
+      "Create service requests from teams, customers, or internal users, all in one place.",
+    icon: "/solutions/workflow-icons/capture.svg",
     active: true,
   },
   {
-    title: "Create the Work Order",
+    title: "Log and Categorize",
     description:
-      "Convert requests into structured jobs with clear ownership.",
-    active: true,
-  },
-  {
-    title: "Assign the Technician",
-    description:
-      "Allocate work based on priority, availability, location, or expertise.",
+      "Convert requests into structured jobs with clear ownership and detail.",
+    icon: "/solutions/workflow-icons/log-categorize.svg",
     active: false,
   },
   {
-    title: "Track Field Execution",
+    title: "Route and Approve",
     description:
-      "Technicians update job status, notes, service details, and progress from the field.",
+      "Allocate work by priority, availability, location, or expertise.",
+    icon: "/solutions/workflow-icons/route-approve.svg",
+    active: false,
+  },
+  {
+    title: "Track Resolution",
+    description:
+      "Technicians update status, notes, and service details from the field as work happens.",
+    icon: "/solutions/workflow-icons/track-resolution.svg",
     active: false,
   },
   {
     title: "Verify and Close",
     description:
-      "Confirm completion with customer validation, job closure, and reporting.",
+      "Confirm completion with customer validation, clean closure, and reporting.",
+    icon: "/solutions/workflow-icons/verify-close.svg",
     active: false,
   },
 ];
 
 export const capabilityTabs = [
-  "Work Order Management",
-  "Scheduling & Dispatch",
-  "Technician Mobile App",
+  "Incident & Request Management",
+  "Service Catalog & Self-Service",
+  "Approvals & Workflow Automation",
   "SLA & Escalations",
-  "Route, Location & Expense",
+  "Asset & Change Visibility",
   "Reports & Dashboards",
   "Integrations",
 ] as const;
@@ -178,194 +197,213 @@ export const capabilityTabContent: Record<
     paragraphs: string[];
     features: string[];
     whyItMatters: string;
+    image: string;
   }
 > = {
-  "Work Order Management": {
-    title: "Work Order Management",
+  "Incident & Request Management": {
+    title: "Incident & Request Management",
     paragraphs: [
-      "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s.",
-      "When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book.",
+      "Capture every incident and request in one queue, then turn it into a structured ticket with type, priority, owner, and history attached.",
     ],
     features: [
-      "Work orders, scheduling, field tracking",
-      "Built for machinery, equipment, and service-heavy",
-      "Configurable workflows without",
+      "Structured tickets with clear ownership",
+      "Type, priority, and history on every request",
+      "Status visible from raised to resolved",
     ],
     whyItMatters:
-      "The lack of real-time visibility created a 40% lag in service resolution times lorem ipsum is simply of the type.",
+      "When requests are structured, nothing gets worked twice or dropped between people.",
+    image: "/business-tabs/cap-1-incident.png",
   },
-  "Scheduling & Dispatch": {
-    title: "Scheduling & Dispatch",
+  "Service Catalog & Self-Service": {
+    title: "Service Catalog & Self-Service",
     paragraphs: [
-      "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s.",
-      "When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book.",
+      "Give people a portal to raise the right request the right way, from a catalog of services you define. Fewer \"quick question\" emails, cleaner intake.",
     ],
     features: [
-      "Work orders, scheduling, field tracking",
-      "Built for machinery, equipment, and service-heavy",
-      "Configurable workflows without",
+      "Self-service portal for requesters",
+      "Catalog of defined services",
+      "Standardized intake, less back-and-forth",
     ],
     whyItMatters:
-      "The lack of real-time visibility created a 40% lag in service resolution times lorem ipsum is simply of the type.",
+      "Good intake means fewer misrouted tickets and faster first responses.",
+    image: "/business-tabs/cap-2-catalog.png",
   },
-  "Technician Mobile App": {
-    title: "Technician Mobile App",
+  "Approvals & Workflow Automation": {
+    title: "Approvals & Workflow Automation",
     paragraphs: [
-      "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s.",
-      "When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book.",
+      "Build the approvals, routing, and multi-step flows your real processes need, across IT and beyond. Tickets move by rule, not by someone remembering to forward them.",
     ],
     features: [
-      "Work orders, scheduling, field tracking",
-      "Built for machinery, equipment, and service-heavy",
-      "Configurable workflows without",
+      "Multi-step approvals and routing",
+      "Rules across IT, HR, finance, and ops",
+      "Workflows configured, not coded",
     ],
     whyItMatters:
-      "The lack of real-time visibility created a 40% lag in service resolution times lorem ipsum is simply of the type.",
+      "Automated routing stops work from stalling in inboxes between people.",
+    image: "/business-tabs/cap-3-approvals.png",
   },
   "SLA & Escalations": {
     title: "SLA & Escalations",
     paragraphs: [
-      "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s.",
-      "When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book.",
+      "Set response and resolution targets per service or contract. DGlide tracks every clock automatically and escalates a ticket before it breaches, not after the complaint.",
     ],
     features: [
-      "Work orders, scheduling, field tracking",
-      "Built for machinery, equipment, and service-heavy",
-      "Configurable workflows without",
+      "SLA timers per service or team",
+      "Automatic escalation before a breach",
+      "Breach risk visible in real time",
     ],
     whyItMatters:
-      "The lack of real-time visibility created a 40% lag in service resolution times lorem ipsum is simply of the type.",
+      "Catching a slipping SLA early protects the service experience people judge you on.",
+    image: "/business-tabs/cap-4-sla.png",
   },
-  "Route, Location & Expense": {
-    title: "Route, Location & Expense",
+  "Asset & Change Visibility": {
+    title: "Asset & Change Visibility",
     paragraphs: [
-      "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s.",
-      "When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book.",
+      "Link requests to the assets, systems, and changes they affect, so agents see context and changes don't collide. ITAM and change tracking without enterprise overhead.",
     ],
     features: [
-      "Work orders, scheduling, field tracking",
-      "Built for machinery, equipment, and service-heavy",
-      "Configurable workflows without",
+      "Assets linked to tickets and history",
+      "Change tracking and a basic calendar",
+      "Context on every related system",
     ],
     whyItMatters:
-      "The lack of real-time visibility created a 40% lag in service resolution times lorem ipsum is simply of the type.",
+      "When agents see the asset and recent changes, they resolve faster and break less.",
+    image: "/business-tabs/cap-5-asset.png",
   },
   "Reports & Dashboards": {
     title: "Reports & Dashboards",
     paragraphs: [
-      "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s.",
-      "When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book.",
+      "See response times, SLA performance, agent productivity, and request trends in one dashboard. Spot the bottleneck before it costs you a contract or a renewal.",
     ],
     features: [
-      "Work orders, scheduling, field tracking",
-      "Built for machinery, equipment, and service-heavy",
-      "Configurable workflows without",
+      "Response, SLA, and productivity in one view",
+      "Trends across teams and request types",
+      "Export-ready for reviews",
     ],
     whyItMatters:
-      "The lack of real-time visibility created a 40% lag in service resolution times lorem ipsum is simply of the type.",
+      "When you can see where service slows down, you fix the pattern, not just one ticket.",
+    image: "/business-tabs/cap-6-reports.png",
   },
   Integrations: {
     title: "Integrations",
     paragraphs: [
-      "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s.",
-      "When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book.",
+      "Connect DGlide to your CRM, HRMS, ERP, and monitoring tools so request, asset, and customer data stays in sync. Service stops being an island.",
     ],
     features: [
-      "Work orders, scheduling, field tracking",
-      "Built for machinery, equipment, and service-heavy",
-      "Configurable workflows without",
+      "Sync with CRM, HRMS, ERP, and FSM",
+      "Asset and customer data stays current",
+      "No double entry between systems",
     ],
     whyItMatters:
-      "The lack of real-time visibility created a 40% lag in service resolution times lorem ipsum is simply of the type.",
+      "When systems share data, your team stops re-keying and your records finally match.",
+    image: "/business-tabs/cap-7-integrations.png",
   },
 };
 
 export const technicianFeatures = [
   {
-    title: "View assigned work orders",
-    description: "",
-    active: false,
-  },
-  {
-    title: "Access customer and asset details",
-    description:
-      "Track Customer Assets, Field Jobs, Service History, And Support Requests. Track Customer Assets, Field Jobs",
+    title: "See your assigned queue",
+    description: "Every agent sees their tickets, priorities, and SLA clocks in one view, no hunting.",
+    icon: "/solutions/workflow-icons/capture.svg",
     active: true,
   },
   {
-    title: "Update job status in real time",
-    description: "",
+    title: "Open full request context",
+    description: "Pull up history, linked assets, and past tickets before starting work.",
+    icon: "/solutions/workflow-icons/log-categorize.svg",
     active: false,
   },
   {
-    title: "Add service notes and completion details",
-    description: "",
+    title: "Update status in real time",
+    description: "Move a ticket through stages as it happens, so everyone sees progress live.",
+    icon: "/solutions/workflow-icons/track-resolution.svg",
     active: false,
   },
   {
-    title: "Close jobs with customer confirmation",
-    description: "",
+    title: "Log actions and resolution notes",
+    description: "Capture what was done and why, right on the ticket.",
+    icon: "/solutions/workflow-icons/route-approve.svg",
     active: false,
   },
-];
-
-export const hubCenterItems = [
-  "Disconnected tools create",
-  "Disconnected tools create",
-  "Disconnected tools create lorem ipsum",
+  {
+    title: "Close with requester confirmation",
+    description: "Capture sign-off so closure is clean, billable, and auditable.",
+    icon: "/solutions/workflow-icons/verify-close.svg",
+    active: false,
+  },
 ];
 
 export const rigidToolsItems = [
-  "Disconnected tools create manual",
-  "Disconnected create manual",
-  "Disconnected tools create",
+  "Fast to start. Your business bends to fit the software.",
+  "Cheap to start, expensive in workarounds.",
+  "Fits the category, not your business.",
 ];
 
 export const customBuildItems = [
-  "Disconnected tools create",
-  "Disconnected tools create manual",
-  "Disconnected create manual",
+  "Fits at first. Becomes a software project you own forever.",
+  "Months to build, years to maintain, yours to fix.",
+  "Custom fit comes with a custom headache.",
 ];
 
+export const betterWayFooterItems = [
+  "Ready to Run",
+  "Configured to Your Process",
+  "Adapts as You Change",
+];
+
+export const workflowChangeTitle =
+  "Your Processes Keep Changing. Your System Should Keep Up.";
+
 export const workflowChangeSubtitle =
-  "New service types, technician rules, customer expectations, escalation paths";
+  "New request types, approval rules, teams, escalation paths: it all keeps shifting. DGlide shifts with it, no rebuild.";
 
 export const workflowChangeBullets = [
-  "Work orders, scheduling, field",
-  "Built for machinery, equipment, and",
-  "Configurable workflows without",
+  "Add new request types without a rebuild",
+  "Change approval and escalation rules anytime",
+  "Extend to new teams as you grow, no developers needed",
 ];
 
 export const workflowTimelineItems = [
   {
-    title: "Faster Service Response",
-    description: "",
+    icon: "/solutions/workflow-change/faster-resolution.svg",
+    title: "Faster Resolution",
+    description:
+      "Requests reach the right person in minutes, not after rounds of forwarding.",
     width: 620,
   },
   {
-    title: "Better Technician Productivity",
+    icon: "/solutions/workflow-change/realtime-visibility.svg",
+    title: "Real-Time Request Visibility",
     description:
-      "Field teams know what to do, where to go, and what to update.",
+      "See every ticket's status as it happens, with no chasing for updates.",
     width: 581,
   },
   {
-    title: "Real-Time Operational Visibility",
-    description: "",
-    width: 581,
-  },
-  {
+    icon: "/solutions/workflow-change/sla-control.svg",
     title: "Stronger SLA Control",
-    description: "",
+    description:
+      "Track every deadline and escalate before a breach, not after.",
+    width: 581,
+  },
+  {
+    icon: "/solutions/workflow-change/less-manual.svg",
+    title: "Less Manual Coordination",
+    description:
+      "Approvals and routing happen by rule, so work moves itself.",
     width: 610,
   },
   {
-    title: "Improved Customer Experience",
-    description: "",
+    icon: "/solutions/workflow-change/beyond-ticketing.svg",
+    title: "Workflows Beyond Ticketing",
+    description:
+      "Run cross-team processes your old tool couldn't model.",
     width: 664,
   },
   {
-    title: "Less Manual Coordination",
-    description: "",
+    icon: "/solutions/workflow-change/better-service.svg",
+    title: "Better Service Experience",
+    description:
+      "Faster, more reliable service your requesters actually notice.",
     width: 740,
   },
 ];
@@ -376,119 +414,127 @@ export const improvesFeatures: {
   title: string;
   description: string;
   align: ImprovesFeatureAlign;
+  icon?: string;
 }[] = [
   {
     title: "Faster Service Response",
     description:
-      "Lorem ipsim is simply model is not one product lorem ipsum is",
+      "Requests reach the right technician fast, so jobs start sooner and customers wait less.",
     align: "left",
+    icon: "/solutions/what-improves/icon-faster-service-response.svg",
   },
   {
-    title: "Better Technician Productivity",
+    title: "Real-Time Request Visibility",
     description:
-      "Lorem ipsim is simply model is not one product lorem ipsum is",
+      "See every ticket's status as it happens, so nothing stalls unseen or gets forgotten.",
     align: "center",
+    icon: "/solutions/what-improves/icon-real-time-visibility.svg",
   },
   {
-    title: "Real-Time Operational Visibility",
+    title: "Better Service Experience",
     description:
-      "Lorem ipsim is simply model is not one product lorem ipsum is",
+      "Faster, more reliable service builds the trust that keeps teams and customers happy.",
     align: "right",
+    icon: "/solutions/what-improves/icon-better-service-experience.svg",
   },
   {
     title: "Stronger SLA Control",
     description:
-      "Lorem ipsim is simply model is not one product lorem ipsum is",
+      "Track every deadline automatically and escalate before a breach, protecting the contracts you depend on.",
     align: "left",
+    icon: "/solutions/what-improves/icon-stronger-sla-control.svg",
   },
   {
-    title: "Improved Customer Experience",
+    title: "Workflows Beyond Ticketing",
     description:
-      "Lorem ipsim is simply model is not one product lorem ipsum is",
+      "Run approvals and cross-team processes your old tool forced back into email.",
     align: "center",
+    icon: "/solutions/what-improves/icon-workflows-beyond-ticketing.svg",
   },
   {
     title: "Less Manual Coordination",
     description:
-      "Lorem ipsim is simply model is not one product lorem ipsum is",
+      "Work moves itself between stages, so your team stops chasing updates and approvals.",
     align: "right",
+    icon: "/solutions/what-improves/icon-less-manual-coordination.svg",
   },
 ];
 
 export const realOpsChallengeQuote =
-  "The lack of real-time visibility created a 40% lag in service resolution times lorem ipsum is simply dummy text of the type.";
+  "We were spending lakhs to generate leads, then losing them because nobody saw the alert in time.";
 
 export const realOpsChallengeBullets = [
-  "Automated Operational Flows",
-  "Workflow Coordination",
+  "No real-time visibility",
+  "No structured follow-up",
 ];
 
 export const realOpsMetricsDescription =
-  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry";
+  "With one system tracking every lead, project, and complaint, response times collapsed and almost nothing slipped.";
 
 export const realOpsMetrics = [
-  { value: "Real Time", label: "Updated Speed" },
-  { value: "92%", label: "Efficiency Gain" },
+  { value: "3X", label: "More Leads Captured" },
+  { value: "8 min", label: "Response Time, from 40+" },
 ];
 
 export const realOpsFooterQuote =
-  "The lack of real-time visibility created a 40% lag in service resolute times lorem ipsum is simply dummy text of the type.";
+  "“Now I open my phone and see every project, every complaint, every shipment. That changed how I run the company.” — Director, Prompt Lasers";
 
 export const realOpsSolutionItems = [
-  "Disconnected tools create manual",
-  "Disconnected create manual",
-  "Disconnected tools create manual lorem is",
-  "Disconnected tools create",
-  "Disconnected tools create",
-  "Disconnected tools create",
+  "One system for every lead, project, and complaint",
+  "Instant alerts the moment a lead comes in",
+  "Response time cut from 40+ minutes to 8",
+  "Full visibility across projects and shipments",
+  "No ERP cost, no rip-and-replace",
+  "Configured to how Prompt Lasers actually runs",
 ];
 
 export const platformSectionDescription =
-  "Dglide FSM is not a disconnected field service tool. It runs on the same operational backbone that powers workflows across service, sales, process, and internal operations.";
+  "DGlide ITSM isn't a disconnected ticketing tool. It runs on the same operational backbone that powers workflows across service, sales, field, and internal operations.";
 
 export const platformFeatures = [
   "Workflow engine",
   "Forms and templates",
   "Approvals and escalations",
   "SLA logic",
+  "Self-service portal",
   "Reports and dashboards",
-  "Mobile access",
   "APIs and webhooks",
 ];
 
 export const platformCards = [
   {
-    label: "FSM.",
-    title: "Enterprise Suites",
+    label: "ITSM",
+    title: "Fully Configured",
     description:
-      "Dglide FSM is not a disconnected field service tool. It runs on the same operational backbone",
-    bullets: ["Real-Time Visibility", "Automated Operational Flows"],
+      "Your field service runs on DGlide's platform, not a siloed tool, so it connects to everything else you operate.",
+    bullets: ["Built on the same engine", "Configured to your service workflow"],
   },
   {
-    label: "Configurable backbone.",
-    title: "Enterprise Suites",
+    label: "Configurable Backbone",
+    title: "One Engine",
     description:
-      "Dglide FSM is not a disconnected field service tool. It runs on the same operational backbone",
-    bullets: ["Real-Time Visibility", "Automated Operational Flows"],
+      "The backbone that runs ITSM also runs FSM, sales, and internal ops, configured for each, not rebuilt.",
+    bullets: ["Expand into new workflows anytime", "No new tool to buy or learn"],
   },
   {
-    label: "Integrations and data.",
-    title: "Enterprise Suites",
+    label: "Integrations and Data",
+    title: "Connected Data",
     description:
-      "Dglide FSM is not a disconnected field service tool. It runs on the same operational backbone",
-    bullets: ["Real-Time Visibility", "Automated Operational Flows"],
+      "ITSM shares request, asset, and customer data with your CRM, HRMS, and ERP, so nothing lives on an island.",
+    bullets: ["Sync across your existing systems", "One source of truth for service data"],
   },
 ];
 
 export const goLiveSectionDescription =
-  "Lorem ipsim is simply model is not one product. It is a connected";
+  "A working service management system, configured to your workflows and live in weeks, not a year-long ITIL rollout.";
 
 export const goLiveCards = [
   {
     step: "01",
     title: "Understand Your Service Workflow",
     description:
-      "Map requests, work orders, technicians, SLAs, and closure rules.",
+      "Map your request types, approvals, SLAs, and resolution rules.",
+    icon: "/solutions/go-live/icon-1.svg",
     offsetTop: 0,
     cardHeight: 436,
     shadow: false,
@@ -496,7 +542,9 @@ export const goLiveCards = [
   {
     step: "02",
     title: "Configure the FSM System",
-    description: "Adapt forms, workflows, approvals, and dashboards.",
+    description:
+      "Adapt forms, workflows, approvals, and dashboards to how you work.",
+    icon: "/solutions/go-live/icon-2.svg",
     offsetTop: 36,
     cardHeight: 400,
     shadow: true,
@@ -504,7 +552,8 @@ export const goLiveCards = [
   {
     step: "03",
     title: "Train Your Teams",
-    description: "Prepare supervisors, service managers, and technicians.",
+    description: "Prepare agents, approvers, and service managers to run it.",
+    icon: "/solutions/go-live/icon-3.svg",
     offsetTop: 0,
     cardHeight: 436,
     shadow: true,
@@ -512,7 +561,8 @@ export const goLiveCards = [
   {
     step: "04",
     title: "Go Live",
-    description: "Start running service operations inside Dglide.",
+    description: "Start running real service operations inside DGlide.",
+    icon: "/solutions/go-live/icon-4.svg",
     offsetTop: 80,
     cardHeight: 356,
     shadow: true,
@@ -520,7 +570,9 @@ export const goLiveCards = [
   {
     step: "05",
     title: "Keep Improving",
-    description: "Use LSM to refine workflows after real usage begins.",
+    description:
+      "Use the Living Service Model to refine workflows after real usage begins.",
+    icon: "/solutions/go-live/icon-5.svg",
     offsetTop: 144,
     cardHeight: 292,
     shadow: true,
@@ -528,38 +580,67 @@ export const goLiveCards = [
 ];
 
 export const integrationSectionDescription =
-  "Dglide is designed to work with your existing business environment instead of replacing everything at once.";
+  "DGlide integrates with your existing business environment from the scratch.";
 
 export const integrationNodes = {
-  left: ["CRM systems", "ITSM tools", "CRM systems"],
-  right: ["ERP systems", "IoT or device data", "Internal business applications"],
+  left: [
+    { label: "CRM systems", icon: "/solutions/integrations-hub/crm-systems.svg" },
+    { label: "ITSM tools", icon: "/solutions/integrations-hub/itsm-tools.svg" },
+    { label: "Accounting and billing tools", icon: "/solutions/integrations-hub/accounting-billing-tools.svg" },
+  ],
+  right: [
+    { label: "ERP systems", icon: "/solutions/integrations-hub/erp-systems.svg" },
+    { label: "IoT or device data", icon: "/solutions/integrations-hub/iot-device-data.svg" },
+    { label: "Internal business applications", icon: "/solutions/integrations-hub/internal-business-apps.svg" },
+  ],
 };
 
-export const finalCtaEyebrow = "Lorem ipsum is simply";
+export const finalCtaEyebrow = "See It on Your Workflow";
 
 export const finalCtaHeading =
-  "Lorem Ipsum is simply dummy text of the printing and typeset";
+  "See DGlide Run on Your Real Service Workflow";
 
 export const faqItems = [
   {
-    question: "Lorem Ipsum is simply dummy text of the printing and",
-    answer: "",
+    question: "We already have a ticketing tool. Why DGlide?",
+    answer:
+      "Ticketing tools manage tickets. DGlide runs the full workflow around them: approvals, cross-team steps, and processes your tool can't model, all configurable.",
     open: false,
   },
   {
-    question: "Disconnected tools create manual friction.",
+    question: "Is this only for IT?",
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum is simply dummy Lorem Lorem Ipsum is simp",
+      "No. DGlide runs IT service, customer support, and internal ops (HR, admin, finance) on one platform, so requests don't fall out of the system at department lines.",
     open: true,
   },
   {
-    question: "Lorem Ipsum is simply dummy text of the printing and",
-    answer: "",
+    question: "Do we need ITIL or a big implementation?",
+    answer:
+      "No. DGlide gives you structured service workflows without enterprise ITIL weight. Most teams go live in weeks, configured, not coded.",
     open: false,
   },
   {
-    question: "Reactive states replace strategic momentum.",
-    answer: "",
+    question: "Can non-IT teams build their own workflows?",
+    answer:
+      "Yes. Forms, approvals, and workflows are configured, not coded. Service and ops managers adjust them without developers.",
+    open: false,
+  },
+  {
+    question: "Our processes keep changing. Will it keep up?",
+    answer:
+      "Yes, that's the Living Service Model. After go-live you reshape workflows, add request types, and change rules with no rebuild.",
+    open: false,
+  },
+  {
+    question: "Will it work with our other systems?",
+    answer:
+      "Yes. DGlide connects to CRM, HRMS, ERP, FSM, and monitoring tools, so request, asset, and customer data stays in sync.",
+    open: false,
+  },
+  {
+    question: "Is it built for teams our size?",
+    answer:
+      "DGlide fits service and ops teams of roughly 50 to 1000 people that have outgrown rigid ticketing but don't want enterprise ITSM weight.",
     open: false,
   },
 ];

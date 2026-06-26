@@ -49,29 +49,18 @@ const CARDS = [
 
 export default function WDCustomFitSection() {
   return (
-    <section className="w-full bg-[#F3F3F3] overflow-hidden pt-[27px] pb-[92px] px-4 lg:px-0">
+    <section
+      className="w-full overflow-hidden pt-[60px] pb-[92px] px-4 lg:px-0"
+      style={{
+        backgroundImage: "url(/why-dglide/custom-fit/section-bg.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="relative max-w-[1200px] mx-auto">
-        {/* Decorative elliptical arcs (desktop only) — Figma group 1099:565 */}
-        <div aria-hidden className="hidden lg:block absolute inset-0 pointer-events-none">
-          {/* top dome — Ellipse 472 */}
-          <div
-            className="absolute left-1/2 -translate-x-1/2 top-[-27px] w-[2022px] h-[214px] rounded-[50%] bg-white"
-          />
-          {/* faint bottom rings — Group 1321315192 */}
-          <div
-            className="absolute left-1/2 -translate-x-1/2 top-[632px] w-[1790px] h-[214px] rounded-[50%] bg-white/15"
-          />
-          <div
-            className="absolute left-1/2 -translate-x-1/2 top-[598px] w-[1790px] h-[214px] rounded-[50%] bg-white/40"
-          />
-          {/* bottom dome — Ellipse 473 */}
-          <div
-            className="absolute left-1/2 -translate-x-1/2 top-[562px] w-[2022px] h-[214px] rounded-[50%] bg-white"
-          />
-        </div>
-
-        {/* White panel — Frame 1618876625 (1200x754, r30) */}
-        <div className="relative bg-white rounded-[30px] flex flex-col items-center gap-12 lg:gap-[60px] pt-12 lg:pt-[60px] pb-12 px-5 lg:px-12 lg:pb-12">
+        {/* Panel */}
+        <div className="relative flex flex-col items-center gap-12 lg:gap-[60px] pt-12 lg:pt-[60px] pb-12 px-5 lg:px-12 lg:pb-12">
           {/* Header — Frame 1618873223 */}
           <div className="w-full max-w-[1104px] flex flex-col items-center gap-4">
             <h2

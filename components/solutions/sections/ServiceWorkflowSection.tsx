@@ -1,6 +1,6 @@
 "use client";
 
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { scrollToContact } from "@/lib/scroll-to-contact";
 import SolutionsButton from "@/components/solutions/shared/SolutionsButton";
@@ -10,6 +10,7 @@ import { workflowSteps as defaultWorkflowSteps } from "@/data/solutionsPageData"
 type WorkflowStep = {
   title: string;
   description: string;
+  icon?: string;
   active: boolean;
 };
 
@@ -21,26 +22,16 @@ type ServiceWorkflowSectionProps = {
   sectionId?: string;
 };
 
-const WorkflowStepIcon: FunctionComponent<{ active: boolean }> = ({ active }) =>
-  active ? (
-    <img
-      src="/solutions/orange-bg.svg"
-      alt=""
-      className="sol-workflow-step-icon"
-      width={48}
-      height={48}
-      aria-hidden
-    />
-  ) : (
-    <img
-      src="/solutions/white-bg-section.svg"
-      alt=""
-      className="sol-workflow-step-icon"
-      width={48}
-      height={48}
-      aria-hidden
-    />
-  );
+const WorkflowStepIcon: FunctionComponent<{ icon?: string; active: boolean }> = ({ icon, active }) => (
+  <img
+    src={icon ?? (active ? "/solutions/orange-bg.svg" : "/solutions/white-bg-section.svg")}
+    alt=""
+    className="sol-workflow-step-icon"
+    width={88}
+    height={48}
+    aria-hidden
+  />
+);
 
 const ServiceWorkflowSection: FunctionComponent<ServiceWorkflowSectionProps> = ({
   heading = "From Service Request to Closure, Without Losing Control",
@@ -50,6 +41,26 @@ const ServiceWorkflowSection: FunctionComponent<ServiceWorkflowSectionProps> = (
   sectionId,
 }) => {
   const router = useRouter();
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const DURATION = 8000;
+    let startTime: number | null = null;
+    let raf: number;
+
+    const animate = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+      const elapsed = (timestamp - startTime) % DURATION;
+      setProgress(elapsed / DURATION);
+      raf = requestAnimationFrame(animate);
+    };
+
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const progressWidth = `${progress * 100}%`;
+  const activeStep = Math.min(steps.length - 1, Math.floor(progress * steps.length));
 
   return (
     <section
@@ -76,17 +87,17 @@ const ServiceWorkflowSection: FunctionComponent<ServiceWorkflowSectionProps> = (
             <div className="sol-workflow-steps-wrap">
               <div className="sol-workflow-progress" aria-hidden>
                 <div className="sol-workflow-progress-track" />
-                <div className="sol-workflow-progress-active" />
+                <div className="sol-workflow-progress-active" style={{ width: progressWidth }} />
               </div>
 
               <div className="sol-workflow-steps">
-                {steps.map((step) => (
+                {steps.map((step, index) => (
                   <article key={step.title} className="sol-workflow-step">
-                    <WorkflowStepIcon active={step.active} />
+                    <WorkflowStepIcon icon={step.icon} active={step.active} />
                     <div className="sol-workflow-step-text">
                       <h3
                         className={`sol-workflow-step-title ${
-                          step.active ? "sol-workflow-step-title--active" : ""
+                          index === activeStep ? "sol-workflow-step-title--active" : ""
                         }`}
                       >
                         {step.title}
