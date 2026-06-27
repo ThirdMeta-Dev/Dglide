@@ -72,7 +72,7 @@
 /* Field Service Problem — section heading (Figma) */
 .solutions-page .sol-problem-heading {
   margin: 0 auto 12px;
-  max-width: 771px;
+  max-width: 960px;
   font-family: "TASA Orbiter", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1059,7 +1059,7 @@
   line-height: 20px;
   color: #ffffff;
   white-space: nowrap;
-  transition: opacity 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .solutions-page .sol-btn-book-demo {
@@ -1077,7 +1077,7 @@
 .solutions-page .sol-btn-book-demo:hover,
 .solutions-page .sol-btn-get-started-now:hover,
 .solutions-page .sol-btn-workflow-cta:hover {
-  opacity: 0.92;
+  background: linear-gradient(273deg, #0b148c 4.29%, #141fb5 95.71%);
 }
 
 .solutions-page .sol-btn-book-demo-arrow {
@@ -1154,12 +1154,8 @@
   font-size: 15px;
   font-weight: 600;
   line-height: 1;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease;
   white-space: nowrap;
-}
-
-.solutions-page .sol-btn-primary {
-  transition: opacity 0.2s ease;
 }
 
 .solutions-page .sol-btn-primary svg {
@@ -1167,7 +1163,7 @@
 }
 
 .solutions-page .sol-btn-primary:hover {
-  opacity: 0.93;
+  background: linear-gradient(273deg, #0b148c 4.29%, #141fb5 95.71%);
 }
 
 .solutions-page .sol-btn-primary:hover svg {
@@ -2406,10 +2402,13 @@
 
 .solutions-page .sol-better-way-visual-bg {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: 100vw;
   top: 95px;
-  height: 402px;
+  bottom: -80px;
+  height: auto;
   background: linear-gradient(
     360deg,
     rgba(255, 255, 255, 0.8) 0%,
@@ -2417,6 +2416,7 @@
   );
   border-radius: 0 0 40px 40px;
   pointer-events: none;
+  z-index: 0;
 }
 
 .solutions-page .sol-better-way-visual-panel {
@@ -2515,6 +2515,7 @@
   width: 1px;
   height: calc(100% - 28px);
   background: #ff7f1c;
+  z-index: 0;
 }
 
 .solutions-page .sol-better-way-side--right .sol-better-way-side-line {
@@ -2529,6 +2530,8 @@
   gap: 12px;
   width: 100%;
   min-height: 28px;
+  position: relative;
+  z-index: 1;
 }
 
 .solutions-page .sol-better-way-side--right .sol-better-way-side-item {
@@ -2575,7 +2578,8 @@
   background: linear-gradient(270deg, #f3f3f3 0%, #f6d9c3 100%);
   border-radius: 40px;
   position: absolute;
-  bottom: -134px;
+  bottom: -99px;
+  z-index: 4;
 }
 
 .solutions-page .sol-better-way-footer-item {
@@ -2649,6 +2653,7 @@
 
   .solutions-page .sol-better-way-visual-bg {
     top: 0;
+    bottom: auto;
     height: 100%;
   }
 
@@ -2690,6 +2695,7 @@
 /* Workflow Change — section (Figma Frame 1618876549) */
 .solutions-page .sol-workflow-change-section {
   background: var(--sol-bg);
+  margin-top: 130px;
 }
 
 .solutions-page .sol-workflow-change-inner {
@@ -3602,6 +3608,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
 /* Configurable Platform — section (Figma Frame 1618876510) */
 .solutions-page .sol-configurable-section {
   background: var(--sol-bg);
+  padding-bottom: 160px;
 }
 
 .solutions-page .sol-configurable-inner {
@@ -3687,7 +3694,6 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   align-items: flex-start;
   gap: 24px;
   width: 100%;
-  min-height: 634px;
 }
 
 .solutions-page .sol-configurable-waves {
@@ -3716,8 +3722,10 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
 }
 
 .solutions-page .sol-configurable-features {
-  position: relative;
+  position: sticky;
+  top: 170px;
   z-index: 1;
+  align-self: flex-start;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -3766,10 +3774,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
 .solutions-page .sol-configurable-cards {
   position: relative;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
+  display: block;
   flex-shrink: 0;
   width: 748px;
   max-width: 100%;
@@ -3787,6 +3792,14 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   background: linear-gradient(270deg, #ffffff 0%, #f6f6f6 100%);
   border: 1px solid #ffffff;
   border-radius: 16px;
+  /* sticky stacking: each card sticks at the same top; higher z-index (set inline) slides on top */
+  position: sticky;
+  top: 170px;
+  margin-bottom: 20px;
+}
+
+.solutions-page .sol-configurable-card:last-child {
+  margin-bottom: 0;
 }
 
 .solutions-page .sol-configurable-card-label {
@@ -3909,6 +3922,17 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     width: 100%;
   }
 
+  .solutions-page .sol-configurable-card {
+    position: static;
+    margin-bottom: 14px;
+    top: auto;
+  }
+
+  .solutions-page .sol-configurable-features {
+    position: static;
+    top: auto;
+  }
+
   .solutions-page .sol-configurable-card-body {
     flex-direction: column;
     gap: 16px;
@@ -3969,9 +3993,8 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
 }
 
 .solutions-page .sol-go-live-description {
-  margin: 0;
-  width: 100%;
-  max-width: 327px;
+  margin: 0 0 0 auto;
+  width: 327px;
   font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -4130,6 +4153,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   font-size: 15px;
   line-height: 19px;
   color: #1c2bff;
+  white-space: nowrap;
 }
 
 .solutions-page .sol-go-live-link:hover {
@@ -4150,10 +4174,16 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     max-width: 100%;
   }
 
-  .solutions-page .sol-go-live-heading,
-  .solutions-page .sol-go-live-description {
+  .solutions-page .sol-go-live-heading {
     text-align: left;
     max-width: 100%;
+  }
+
+  .solutions-page .sol-go-live-description {
+    text-align: left;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
   }
 
   .solutions-page .sol-go-live-cards {
@@ -4224,7 +4254,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
 }
 
 .solutions-page .sol-integrations-heading {
-  margin: 0;
+  margin: 0 auto;
   width: 100%;
   max-width: 730px;
   font-family: "TASA Orbiter", sans-serif;
@@ -4242,7 +4272,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
 }
 
 .solutions-page .sol-integrations-description {
-  margin: 0;
+  margin: 0 auto;
   width: 100%;
   max-width: 857px;
   font-family: "Inter", sans-serif;

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { scrollToContact } from "@/lib/scroll-to-contact";
 import SolutionsButton from "@/components/solutions/shared/SolutionsButton";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const DEFAULT_BULLETS = [
   "Tickets, approvals, and SLAs in one connected flow",
@@ -61,38 +62,50 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Left column */}
           <div className="space-y-6 lg:space-y-7">
-            <div className="sol-hero-eyebrow">
-              <span className="sol-hero-eyebrow-bar" aria-hidden />
-              <span className="sol-hero-eyebrow-text">{eyebrow}</span>
-            </div>
+            <ScrollReveal direction="up" delay={0}>
+              <div className="sol-hero-eyebrow">
+                <span className="sol-hero-eyebrow-bar" aria-hidden />
+                <span className="sol-hero-eyebrow-text">{eyebrow}</span>
+              </div>
+            </ScrollReveal>
 
-            <h1 className="sol-hero-heading">{heading}</h1>
+            <ScrollReveal direction="up" delay={0.08}>
+              <h1 className="sol-hero-heading">{heading}</h1>
+            </ScrollReveal>
 
-            <p className="sol-hero-description">{description}</p>
+            <ScrollReveal direction="up" delay={0.16}>
+              <p className="sol-hero-description">{description}</p>
+            </ScrollReveal>
 
-            <ul className="mt-6 space-y-3.5">
-              {bullets.map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <img
-                    src="/solutions/hero-tick.svg"
-                    alt=""
-                    width={24}
-                    height={14}
-                    className="mt-1 shrink-0"
-                    loading="lazy"
-                  />
-                  <span className="text-[15px] leading-snug text-[var(--sol-text-body)]">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <ScrollReveal direction="up" delay={0.2}>
+              <ul className="mt-6 space-y-3.5">
+                {bullets.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <img
+                      src="/solutions/hero-tick.svg"
+                      alt=""
+                      width={24}
+                      height={14}
+                      className="mt-1 shrink-0"
+                      loading="lazy"
+                    />
+                    <span className="text-[15px] leading-snug text-[var(--sol-text-body)]">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </ScrollReveal>
 
-            {actionsInline && <div className="pt-2">{actionButtons}</div>}
+            {actionsInline && (
+              <ScrollReveal direction="up" delay={0.24}>
+                <div className="pt-2">{actionButtons}</div>
+              </ScrollReveal>
+            )}
           </div>
 
           {/* Right column — hero illustration */}
-          <div className="flex justify-center lg:justify-end">
+          <ScrollReveal direction="right" delay={0.1} className="flex justify-center lg:justify-end">
             <Image
               src={imageSrc}
               alt={imageAlt}
@@ -101,14 +114,16 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
               className="w-full max-w-[560px] h-auto object-contain"
               priority
             />
-          </div>
+          </ScrollReveal>
         </div>
       </SolutionsContainer>
 
       {!actionsInline && (
         <div className="relative z-10 mt-10 pb-14 pt-8 lg:mt-14 lg:pb-16">
           <SolutionsContainer>
-            {actionButtons}
+            <ScrollReveal direction="up" delay={0.24}>
+              {actionButtons}
+            </ScrollReveal>
           </SolutionsContainer>
         </div>
       )}

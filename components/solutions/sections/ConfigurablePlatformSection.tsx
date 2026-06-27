@@ -5,6 +5,7 @@ import {
   platformFeatures,
   platformSectionDescription,
 } from "@/data/solutionsPageData";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const WAVE_RING_COUNT = 15;
 
@@ -38,7 +39,7 @@ type ConfigurablePlatformSectionProps = {
 };
 
 const ConfigurablePlatformSection: FunctionComponent<ConfigurablePlatformSectionProps> = ({
-  heading = "ITSM Powered by DGlide’s Configurable Operations Platform",
+  heading = "ITSM Powered by DGlide's Configurable Operations Platform",
   description = platformSectionDescription,
   features = platformFeatures,
   cards = platformCards,
@@ -56,12 +57,16 @@ const ConfigurablePlatformSection: FunctionComponent<ConfigurablePlatformSection
         />
 
         <header className="sol-configurable-header">
-          <h2 className="sol-configurable-heading">
-            {heading}
-          </h2>
-          <p className="sol-configurable-description">
-            {description}
-          </p>
+          <ScrollReveal direction="up">
+            <h2 className="sol-configurable-heading">
+              {heading}
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.1}>
+            <p className="sol-configurable-description">
+              {description}
+            </p>
+          </ScrollReveal>
         </header>
 
         <div className="sol-configurable-body">
@@ -85,8 +90,12 @@ const ConfigurablePlatformSection: FunctionComponent<ConfigurablePlatformSection
           </ul>
 
           <div className="sol-configurable-cards">
-            {cards.map((card) => (
-              <article key={card.label} className="sol-configurable-card">
+            {cards.map((card, i) => (
+              <article
+                key={card.label}
+                className="sol-configurable-card"
+                style={{ zIndex: i + 1 }}
+              >
                 <div className="sol-configurable-card-label">
                   <span className="sol-configurable-card-label-bar" aria-hidden />
                   <span className="sol-configurable-card-label-text">

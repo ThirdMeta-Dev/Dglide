@@ -8,23 +8,23 @@ import {
 } from "react";
 import {
   motion,
+  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
   type Variants,
 } from "framer-motion";
 
-export const motionEase = [0.22, 1, 0.36, 1] as [
-  number,
-  number,
-  number,
-  number,
-];
+// ─── Core easing & transition ────────────────────────────────────────────────
+
+export const motionEase = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 export const revealTransition = {
   duration: 0.65,
   ease: motionEase,
 };
+
+// ─── Legacy stagger variants (kept for MotionStagger / MotionItem) ────────────
 
 export const containerVariants: Variants = {
   hidden: {},
@@ -45,6 +45,163 @@ export const itemVariants: Variants = {
   },
 };
 
+// ─── ScrollReveal ─────────────────────────────────────────────────────────────
+// Directional entrance animation for any element.
+// Respects prefers-reduced-motion by collapsing to a plain fade.
+
+export type RevealDirection = "up" | "down" | "left" | "right" | "fade";
+
+function hiddenState(dir: RevealDirection, distance: number) {
+  switch (dir) {
+    case "up":    return { opacity: 0, y: distance, x: 0 };
+    case "down":  return { opacity: 0, y: -distance, x: 0 };
+    case "left":  return { opacity: 0, x: -distance, y: 0 };
+    case "right": return { opacity: 0, x: distance, y: 0 };
+    case "fade":  return { opacity: 0, x: 0, y: 0 };
+  }
+}
+
+function visibleState(dir: RevealDirection) {
+  switch (dir) {
+    case "left":
+    case "right": return { opacity: 1, x: 0, y: 0 };
+    case "up":
+    case "down":  return { opacity: 1, y: 0, x: 0 };
+    case "fade":  return { opacity: 1, x: 0, y: 0 };
+  }
+}
+
+type ScrollRevealProps = {
+  children: ReactNode;
+  direction?: RevealDirection;
+  delay?: number;
+  duration?: number;
+  distance?: number;
+  once?: boolean;
+  amount?: number | "some" | "all";
+  className?: string;
+  style?: CSSProperties;
+};
+
+export function ScrollReveal({
+  children,
+  direction = "up",
+  delay = 0,
+  duration = 0.65,
+  distance = 32,
+  once = true,
+  amount = 0.55,
+  className,
+  style,
+}: ScrollRevealProps) {
+  const shouldReduce = useReducedMotion();
+
+  const initial = shouldReduce ? { opacity: 0, x: 0, y: 0 } : hiddenState(direction, distance);
+  const visible = shouldReduce ? { opacity: 1, x: 0, y: 0 } : visibleState(direction);
+
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      initial={initial}
+      whileInView={visible}
+      viewport={{ once, amount }}
+      transition={{
+        duration: shouldReduce ? 0.2 : duration,
+        ease: motionEase,
+        delay,
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// ─── StaggerReveal ────────────────────────────────────────────────────────────
+// Wraps a group of StaggerItem children; fires cascade when entering viewport.
+
+type StaggerRevealProps = {
+  children: ReactNode;
+  stagger?: number;
+  delayStart?: number;
+  className?: string;
+  style?: CSSProperties;
+  once?: boolean;
+  amount?: number | "some" | "all";
+};
+
+export function StaggerReveal({
+  children,
+  stagger = 0.1,
+  delayStart = 0,
+  className,
+  style,
+  once = true,
+  amount = 0.45,
+}: StaggerRevealProps) {
+  const shouldReduce = useReducedMotion();
+
+  const variants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: shouldReduce ? 0 : stagger,
+        delayChildren: delayStart,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      variants={variants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once, amount }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// ─── StaggerItem ──────────────────────────────────────────────────────────────
+// Direct child of StaggerReveal. Inherits timing from parent.
+
+type StaggerItemProps = {
+  children: ReactNode;
+  direction?: RevealDirection;
+  distance?: number;
+  className?: string;
+  style?: CSSProperties;
+};
+
+export function StaggerItem({
+  children,
+  direction = "up",
+  distance = 28,
+  className,
+  style,
+}: StaggerItemProps) {
+  const shouldReduce = useReducedMotion();
+
+  const variants: Variants = {
+    hidden: shouldReduce ? { opacity: 0, x: 0, y: 0 } : hiddenState(direction, distance),
+    visible: shouldReduce
+      ? { opacity: 1, x: 0, y: 0, transition: { duration: 0.15 } }
+      : { ...(direction === "left" || direction === "right" ? { opacity: 1, x: 0, y: 0 } : { opacity: 1, y: 0, x: 0 }), transition: revealTransition },
+  };
+
+  return (
+    <motion.div className={className} style={style} variants={variants}>
+      {children}
+    </motion.div>
+  );
+}
+
+// ─── Legacy: MotionReveal ─────────────────────────────────────────────────────
+// Kept for AnimatedPublicPage compatibility. Respects reduced motion.
+
 type MotionRevealProps = {
   children: ReactNode;
   className?: string;
@@ -60,13 +217,15 @@ export function MotionReveal({
   hero = false,
   y = 28,
 }: MotionRevealProps) {
+  const shouldReduce = useReducedMotion();
+
   if (hero) {
     return (
       <motion.div
         className={`w-full ${className}`}
-        initial={{ opacity: 0, y: -24 }}
+        initial={{ opacity: 0, y: shouldReduce ? 0 : -24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: motionEase, delay }}
+        transition={{ duration: shouldReduce ? 0.2 : 0.7, ease: motionEase, delay }}
       >
         {children}
       </motion.div>
@@ -76,15 +235,20 @@ export function MotionReveal({
   return (
     <motion.div
       className={`w-full ${className}`}
-      initial={{ opacity: 0, y }}
+      initial={{ opacity: 0, y: shouldReduce ? 0 : y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, amount: 0.5 }}
       transition={{ ...revealTransition, delay }}
     >
       {children}
     </motion.div>
   );
 }
+
+// ─── AnimatedPublicPage ───────────────────────────────────────────────────────
+// Page-level wrapper. Wraps every direct child section with MotionReveal.
+// staticFirstCount: how many children to leave un-animated (e.g. hero).
+// The first animated child uses hero=true (animate-on-mount) not whileInView.
 
 type AnimatedPublicPageProps = {
   children: ReactNode;
@@ -116,6 +280,9 @@ export function AnimatedPublicPage({
   );
 }
 
+// ─── Legacy: MotionStagger / MotionItem ───────────────────────────────────────
+// Kept for existing usages (ContactPageSections etc.)
+
 export function MotionStagger({
   children,
   className = "",
@@ -129,7 +296,7 @@ export function MotionStagger({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, amount: 0.4 }}
     >
       {children}
     </motion.div>
@@ -150,6 +317,8 @@ export function MotionItem({
   );
 }
 
+// ─── MotionButtonShell ────────────────────────────────────────────────────────
+
 export function MotionButtonShell({
   children,
   className = "",
@@ -168,6 +337,8 @@ export function MotionButtonShell({
     </motion.span>
   );
 }
+
+// ─── ScrollWordReveal ─────────────────────────────────────────────────────────
 
 function RevealWord({
   children,
@@ -217,7 +388,7 @@ export function ScrollWordReveal({
           progress={scrollYProgress}
         >
           {word}
-          {index < words.length - 1 ? "\u00a0" : ""}
+          {index < words.length - 1 ? " " : ""}
         </RevealWord>
       ))}
     </span>

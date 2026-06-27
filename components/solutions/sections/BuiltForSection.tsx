@@ -3,6 +3,7 @@
 import { Fragment, FunctionComponent, useState } from "react";
 import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const FIT_ITEMS = [
   { label: "Service desk and support teams" },
@@ -57,6 +58,7 @@ type BuiltForSectionProps = {
   description?: string;
   fitItems?: { label: string }[];
   industryItems?: { icon: string; title: string; description: string }[];
+  centerImage?: string;
 };
 
 const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
@@ -64,6 +66,7 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
   description = "DGlide ITSM fits service and internal teams that have outgrown rigid ticketing and manual approvals.",
   fitItems = FIT_ITEMS,
   industryItems = INDUSTRY_ITEMS,
+  centerImage = "/solutions/built-for/center-illustration.png",
 }) => {
   const [activeIndex, setActiveIndex] = useState(1);
 
@@ -71,40 +74,44 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
     <section id="who-built-for" className="sol-section sol-built-for-section">
       <SolutionsContainer>
         <div className="sol-built-for-inner">
-          <header className="sol-built-for-header">
-            <h2 className="sol-built-for-heading">
-              {heading}
-            </h2>
-            <p className="sol-built-for-description">
-              {description}
-            </p>
-          </header>
+          <ScrollReveal direction="up">
+            <header className="sol-built-for-header">
+              <h2 className="sol-built-for-heading">
+                {heading}
+              </h2>
+              <p className="sol-built-for-description">
+                {description}
+              </p>
+            </header>
+          </ScrollReveal>
 
           <div className="sol-built-for-panel">
             <div className="sol-built-for-row">
               {/* Left — Best Fit For card */}
-              <article className="sol-built-for-fit-card">
-                <div className="sol-built-for-fit-body">
-                  <h3 className="sol-built-for-fit-heading">Best Fit For</h3>
-                  <ul className="sol-built-for-fit-list">
-                    {fitItems.map((item) => (
-                      <li key={item.label} className="sol-built-for-fit-item">
-                        <span className="sol-built-for-fit-icon-wrap">
-                          <TickIcon />
-                        </span>
-                        <span className="sol-built-for-fit-text">{item.label}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
+              <ScrollReveal direction="left">
+                <article className="sol-built-for-fit-card">
+                  <div className="sol-built-for-fit-body">
+                    <h3 className="sol-built-for-fit-heading">Best Fit For</h3>
+                    <ul className="sol-built-for-fit-list">
+                      {fitItems.map((item) => (
+                        <li key={item.label} className="sol-built-for-fit-item">
+                          <span className="sol-built-for-fit-icon-wrap">
+                            <TickIcon />
+                          </span>
+                          <span className="sol-built-for-fit-text">{item.label}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              </ScrollReveal>
 
               <div className="sol-built-for-columns">
                 {/* Center — illustration */}
                 <div className="sol-built-for-media">
                   <Image
-                    src="/solutions/built-for/center-illustration.png"
-                    alt="DGlide ITSM service management illustration"
+                    src={centerImage}
+                    alt="DGlide service management illustration"
                     width={600}
                     height={600}
                     className="w-full h-full object-cover"
@@ -113,68 +120,70 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
                 </div>
 
                 {/* Right — accordion industry cards */}
-                <div className="sol-built-for-industries">
-                  <div className="sol-built-for-industries-list">
-                    {industryItems.map((item, index) => {
-                      const isExpanded = activeIndex === index;
+                <ScrollReveal direction="right">
+                  <div className="sol-built-for-industries">
+                    <div className="sol-built-for-industries-list">
+                      {industryItems.map((item, index) => {
+                        const isExpanded = activeIndex === index;
 
-                      return (
-                        <Fragment key={item.title}>
-                          {index > 0 &&
-                            (isExpanded ? (
-                              <div className="sol-built-for-active-bar" aria-hidden>
-                                <span className="sol-built-for-active-bar-fill" />
+                        return (
+                          <Fragment key={item.title}>
+                            {index > 0 &&
+                              (isExpanded ? (
+                                <div className="sol-built-for-active-bar" aria-hidden>
+                                  <span className="sol-built-for-active-bar-fill" />
+                                </div>
+                              ) : (
+                                <hr className="sol-built-for-divider" />
+                              ))}
+
+                            {isExpanded ? (
+                              <div className="sol-built-for-industry-expanded">
+                                <div className="sol-built-for-industry-expanded-inner">
+                                  <div className="sol-built-for-industry-row">
+                                    <img
+                                      src={item.icon}
+                                      alt=""
+                                      className="sol-built-for-industry-icon"
+                                      width={73}
+                                      height={40}
+                                      aria-hidden
+                                    />
+                                    <h4 className="sol-built-for-industry-title sol-built-for-industry-title--active">
+                                      {item.title}
+                                    </h4>
+                                  </div>
+                                  <p className="sol-built-for-industry-description">
+                                    {item.description}
+                                  </p>
+                                </div>
                               </div>
                             ) : (
-                              <hr className="sol-built-for-divider" />
-                            ))}
-
-                          {isExpanded ? (
-                            <div className="sol-built-for-industry-expanded">
-                              <div className="sol-built-for-industry-expanded-inner">
-                                <div className="sol-built-for-industry-row">
-                                  <img
-                                    src={item.icon}
-                                    alt=""
-                                    className="sol-built-for-industry-icon"
-                                    width={73}
-                                    height={40}
-                                    aria-hidden
-                                  />
-                                  <h4 className="sol-built-for-industry-title sol-built-for-industry-title--active">
-                                    {item.title}
-                                  </h4>
-                                </div>
-                                <p className="sol-built-for-industry-description">
-                                  {item.description}
-                                </p>
-                              </div>
-                            </div>
-                          ) : (
-                            <button
-                              type="button"
-                              className="sol-built-for-industry-trigger"
-                              aria-expanded={false}
-                              onClick={() => setActiveIndex(index)}
-                            >
-                              <img
-                                src={item.icon}
-                                alt=""
-                                className="sol-built-for-industry-icon"
-                                width={36}
-                                height={36}
-                                aria-hidden
-                              />
-                              <span className="sol-built-for-industry-title">
-                                {item.title}
-                              </span>
-                            </button>
-                          )}
-                        </Fragment>
-                      );
-                    })}
+                              <button
+                                type="button"
+                                className="sol-built-for-industry-trigger"
+                                aria-expanded={false}
+                                onClick={() => setActiveIndex(index)}
+                              >
+                                <img
+                                  src={item.icon}
+                                  alt=""
+                                  className="sol-built-for-industry-icon"
+                                  width={36}
+                                  height={36}
+                                  aria-hidden
+                                />
+                                <span className="sol-built-for-industry-title">
+                                  {item.title}
+                                </span>
+                              </button>
+                            )}
+                          </Fragment>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                </ScrollReveal>
               </div>
             </div>
           </div>

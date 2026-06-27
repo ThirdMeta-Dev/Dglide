@@ -584,13 +584,13 @@ export const integrationSectionDescription =
 
 export const integrationNodes = {
   left: [
-    { label: "CRM systems", icon: "/solutions/integrations-hub/crm-systems.svg" },
-    { label: "ITSM tools", icon: "/solutions/integrations-hub/itsm-tools.svg" },
-    { label: "Accounting and billing tools", icon: "/solutions/integrations-hub/accounting-billing-tools.svg" },
+    { label: "CRM systems", icon: "/solutions/integrations-hub/crm-systems.png" },
+    { label: "ITSM tools", icon: "/solutions/integrations-hub/itsm-tools.png" },
+    { label: "Accounting and billing tools", icon: "/solutions/integrations-hub/accounting-billing-tools.png" },
   ],
   right: [
     { label: "ERP systems", icon: "/solutions/integrations-hub/erp-systems.svg" },
-    { label: "IoT or device data", icon: "/solutions/integrations-hub/iot-device-data.svg" },
+    { label: "IoT or device data", icon: "/solutions/integrations-hub/iot-device-data.png" },
     { label: "Internal business applications", icon: "/solutions/integrations-hub/internal-business-apps.svg" },
   ],
 };

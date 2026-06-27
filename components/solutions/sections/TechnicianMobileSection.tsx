@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Fragment, FunctionComponent, useEffect, useState } from "react";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { technicianFeatures } from "@/data/solutionsPageData";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const DURATION = 7000;
 
@@ -46,86 +47,90 @@ const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> =
     <section className="sol-section sol-technician-section">
       <SolutionsContainer>
         <div className="sol-technician-inner">
-          <header className="sol-technician-header">
-            <h2 className="sol-technician-heading">
-              {heading}
-            </h2>
-            <p className="sol-technician-description">
-              {description}
-            </p>
-          </header>
+          <ScrollReveal direction="up">
+            <header className="sol-technician-header">
+              <h2 className="sol-technician-heading">
+                {heading}
+              </h2>
+              <p className="sol-technician-description">
+                {description}
+              </p>
+            </header>
+          </ScrollReveal>
 
           <div className="sol-technician-panel">
             <div className="sol-technician-row">
-              <div className="sol-technician-features">
-                <div className="sol-technician-features-list">
-                  {features.map((feature, index) => {
-                    const isExpanded = activeIndex === index;
+              <ScrollReveal direction="left" delay={0.1}>
+                <div className="sol-technician-features">
+                  <div className="sol-technician-features-list">
+                    {features.map((feature, index) => {
+                      const isExpanded = activeIndex === index;
 
-                    return (
-                      <Fragment key={feature.title}>
-                        {index > 0 &&
-                          (isExpanded ? (
-                            <div className="sol-technician-active-bar" aria-hidden>
-                              <span
-                                className="sol-technician-active-bar-fill"
-                                style={{ width: `${fillProgress * 100}%` }}
-                              />
+                      return (
+                        <Fragment key={feature.title}>
+                          {index > 0 &&
+                            (isExpanded ? (
+                              <div className="sol-technician-active-bar" aria-hidden>
+                                <span
+                                  className="sol-technician-active-bar-fill"
+                                  style={{ width: `${fillProgress * 100}%` }}
+                                />
+                              </div>
+                            ) : (
+                              <hr className="sol-technician-divider" />
+                            ))}
+
+                          {isExpanded ? (
+                            <div className="sol-technician-feature-expanded">
+                              <div className="sol-technician-feature-expanded-inner">
+                                <div className="sol-technician-feature-row">
+                                  <img
+                                    src={feature.icon}
+                                    alt=""
+                                    className="sol-technician-feature-icon"
+                                    width={73}
+                                    height={40}
+                                    aria-hidden
+                                  />
+                                  <h3 className="sol-technician-feature-title sol-technician-feature-title--active">
+                                    {feature.title}
+                                  </h3>
+                                </div>
+                                {feature.description && (
+                                  <p className="sol-technician-feature-description">
+                                    {feature.description}
+                                  </p>
+                                )}
+                              </div>
                             </div>
                           ) : (
-                            <hr className="sol-technician-divider" />
-                          ))}
-
-                        {isExpanded ? (
-                          <div className="sol-technician-feature-expanded">
-                            <div className="sol-technician-feature-expanded-inner">
-                              <div className="sol-technician-feature-row">
-                                <img
-                                  src={feature.icon}
-                                  alt=""
-                                  className="sol-technician-feature-icon"
-                                  width={73}
-                                  height={40}
-                                  aria-hidden
-                                />
-                                <h3 className="sol-technician-feature-title sol-technician-feature-title--active">
-                                  {feature.title}
-                                </h3>
-                              </div>
-                              {feature.description && (
-                                <p className="sol-technician-feature-description">
-                                  {feature.description}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        ) : (
-                          <button
-                            type="button"
-                            className="sol-technician-feature-trigger"
-                            aria-expanded={false}
-                            onClick={() => setActiveIndex(index)}
-                          >
-                            <img
-                              src={feature.icon}
-                              alt=""
-                              className="sol-technician-feature-icon"
-                              width={73}
-                              height={40}
-                              aria-hidden
-                            />
-                            <span className="sol-technician-feature-title">
-                              {feature.title}
-                            </span>
-                          </button>
-                        )}
-                      </Fragment>
-                    );
-                  })}
+                            <button
+                              type="button"
+                              className="sol-technician-feature-trigger"
+                              aria-expanded={false}
+                              onClick={() => setActiveIndex(index)}
+                            >
+                              <img
+                                src={feature.icon}
+                                alt=""
+                                className="sol-technician-feature-icon"
+                                width={73}
+                                height={40}
+                                aria-hidden
+                              />
+                              <span className="sol-technician-feature-title">
+                                {feature.title}
+                              </span>
+                            </button>
+                          )}
+                        </Fragment>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
 
-              <div className="sol-technician-phone-wrap">
+              <ScrollReveal direction="right" delay={0.1} className="sol-technician-phone-wrap">
                 <Image
                   src="/solutions/agent-workspace.png"
                   alt="DGlide agent workspace"
@@ -133,7 +138,7 @@ const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> =
                   height={647}
                   className="sol-technician-phone"
                 />
-              </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>

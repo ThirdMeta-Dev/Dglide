@@ -6,6 +6,7 @@ import { scrollToContact } from "@/lib/scroll-to-contact";
 import SolutionsButton from "@/components/solutions/shared/SolutionsButton";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { workflowSteps as defaultWorkflowSteps } from "@/data/solutionsPageData";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 type WorkflowStep = {
   title: string;
@@ -78,10 +79,12 @@ const ServiceWorkflowSection: FunctionComponent<ServiceWorkflowSectionProps> = (
             aria-hidden
           />
        <div className="sol-workflow-inner">
-         
+
           <div className="sol-workflow-content">
             <header className="sol-workflow-header">
-              <h2 className="sol-workflow-heading">{heading}</h2>
+              <ScrollReveal direction="up">
+                <h2 className="sol-workflow-heading">{heading}</h2>
+              </ScrollReveal>
             </header>
 
             <div className="sol-workflow-steps-wrap">
@@ -90,25 +93,27 @@ const ServiceWorkflowSection: FunctionComponent<ServiceWorkflowSectionProps> = (
                 <div className="sol-workflow-progress-active" style={{ width: progressWidth }} />
               </div>
 
-              <div className="sol-workflow-steps">
+              <StaggerReveal className="sol-workflow-steps">
                 {steps.map((step, index) => (
-                  <article key={step.title} className="sol-workflow-step">
-                    <WorkflowStepIcon icon={step.icon} active={step.active} />
-                    <div className="sol-workflow-step-text">
-                      <h3
-                        className={`sol-workflow-step-title ${
-                          index === activeStep ? "sol-workflow-step-title--active" : ""
-                        }`}
-                      >
-                        {step.title}
-                      </h3>
-                      <p className="sol-workflow-step-description">
-                        {step.description}
-                      </p>
-                    </div>
-                  </article>
+                  <StaggerItem key={step.title}>
+                    <article className="sol-workflow-step">
+                      <WorkflowStepIcon icon={step.icon} active={step.active} />
+                      <div className="sol-workflow-step-text">
+                        <h3
+                          className={`sol-workflow-step-title ${
+                            index === activeStep ? "sol-workflow-step-title--active" : ""
+                          }`}
+                        >
+                          {step.title}
+                        </h3>
+                        <p className="sol-workflow-step-description">
+                          {step.description}
+                        </p>
+                      </div>
+                    </article>
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerReveal>
             </div>
 
             {showCta && (

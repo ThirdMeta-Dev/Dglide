@@ -6,6 +6,7 @@ import { scrollToContact } from "@/lib/scroll-to-contact";
 import SolutionsButton from "@/components/solutions/shared/SolutionsButton";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { problemCards } from "@/data/solutionsPageData";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const ProblemCard: FunctionComponent<{
   icon: string;
@@ -50,26 +51,34 @@ const FieldServiceProblemSection: FunctionComponent<FieldServiceProblemSectionPr
   return (
     <section id="field-service-problem" className="sol-section sol-problem-section">
       <SolutionsContainer>
-        <h2 className="sol-problem-heading">
-          {heading}
-        </h2>
-        <p className="sol-problem-description">
-          {description}
-        </p>
+        <ScrollReveal direction="up">
+          <h2 className="sol-problem-heading">
+            {heading}
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal direction="up" delay={0.1}>
+          <p className="sol-problem-description">
+            {description}
+          </p>
+        </ScrollReveal>
 
         <div className="sol-problem-body">
-          <div className="sol-problem-grid">
+          <StaggerReveal className="sol-problem-grid">
             <div className="sol-problem-grid-row">
               {cards.slice(0, 3).map((card) => (
-                <ProblemCard key={card.title} {...card} />
+                <StaggerItem key={card.title}>
+                  <ProblemCard {...card} />
+                </StaggerItem>
               ))}
             </div>
             <div className="sol-problem-grid-row sol-problem-grid-row--two">
               {cards.slice(3).map((card) => (
-                <ProblemCard key={card.title} {...card} />
+                <StaggerItem key={card.title}>
+                  <ProblemCard {...card} />
+                </StaggerItem>
               ))}
             </div>
-          </div>
+          </StaggerReveal>
 
           <div className="sol-problem-footer">
             <p className="sol-problem-footer-text">

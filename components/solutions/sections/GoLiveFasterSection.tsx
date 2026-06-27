@@ -8,6 +8,7 @@ import {
   goLiveCards,
   goLiveSectionDescription,
 } from "@/data/solutionsPageData";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const GoLiveLinkArrow: FunctionComponent = () => (
   <svg
@@ -56,66 +57,72 @@ const GoLiveFasterSection: FunctionComponent<GoLiveFasterSectionProps> = ({
       <SolutionsContainer>
         <div className="sol-go-live-inner">
           <header className="sol-go-live-header">
-            <h2 className="sol-go-live-heading">
-              {heading}
-            </h2>
-            <p className="sol-go-live-description">{description}</p>
+            <ScrollReveal direction="up" style={{ width: "100%" }}>
+              <h2 className="sol-go-live-heading">
+                {heading}
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.1} style={{ width: "100%" }}>
+              <p className="sol-go-live-description">{description}</p>
+            </ScrollReveal>
           </header>
 
-          <div className="sol-go-live-cards">
-            {cards.map((card, index) => (
-              <div
-                key={card.step}
-                className="sol-go-live-card-col"
-                style={
-                  {
-                    "--go-live-offset": `${card.offsetTop}px`,
-                    zIndex: index + 1,
-                  } as CSSProperties
-                }
-              >
-                <article
-                  className={`sol-go-live-card${
-                    card.shadow ? " sol-go-live-card--shadow" : ""
-                  }`}
-                  style={{ height: card.cardHeight }}
+          <ScrollReveal direction="up" delay={0.1} style={{ width: "100%" }}>
+            <div className="sol-go-live-cards">
+              {cards.map((card, index) => (
+                <div
+                  key={card.step}
+                  className="sol-go-live-card-col"
+                  style={
+                    {
+                      "--go-live-offset": `${card.offsetTop}px`,
+                      zIndex: index + 1,
+                    } as CSSProperties
+                  }
                 >
-                  <span className="sol-go-live-card-step" aria-hidden>
-                    {card.step}
-                  </span>
+                  <article
+                    className={`sol-go-live-card${
+                      card.shadow ? " sol-go-live-card--shadow" : ""
+                    }`}
+                    style={{ height: card.cardHeight }}
+                  >
+                    <span className="sol-go-live-card-step" aria-hidden>
+                      {card.step}
+                    </span>
 
-                  <div className="sol-go-live-card-body">
-                    <div className="sol-go-live-card-main">
-                      <img
-                        src={card.icon}
-                        alt=""
-                        width={88}
-                        height={48}
-                        className="sol-go-live-card-icon"
-                        aria-hidden
-                      />
+                    <div className="sol-go-live-card-body">
+                      <div className="sol-go-live-card-main">
+                        <img
+                          src={card.icon}
+                          alt=""
+                          width={88}
+                          height={48}
+                          className="sol-go-live-card-icon"
+                          aria-hidden
+                        />
 
-                      <div className="sol-go-live-card-copy">
-                        <h3 className="sol-go-live-card-title">{card.title}</h3>
-                        <p className="sol-go-live-card-description">
-                          {card.description}
-                        </p>
+                        <div className="sol-go-live-card-copy">
+                          <h3 className="sol-go-live-card-title">{card.title}</h3>
+                          <p className="sol-go-live-card-description">
+                            {card.description}
+                          </p>
+                        </div>
                       </div>
-                    </div>
 
-                    <button
-                      type="button"
-                      onClick={() => scrollToContact(router)}
-                      className="sol-go-live-link"
-                    >
-                      <span>Get Started Now</span>
-                      <GoLiveLinkArrow />
-                    </button>
-                  </div>
-                </article>
-              </div>
-            ))}
-          </div>
+                      <button
+                        type="button"
+                        onClick={() => scrollToContact(router)}
+                        className="sol-go-live-link"
+                      >
+                        <span>Get Started Now</span>
+                        <GoLiveLinkArrow />
+                      </button>
+                    </div>
+                  </article>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </SolutionsContainer>
     </section>

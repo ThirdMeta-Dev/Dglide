@@ -9,6 +9,7 @@ import {
   platformOrbitItems,
   platformWorkflowFeatures,
 } from "@/data/solutionsPageData";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const TickIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="14" viewBox="0 0 24 14" fill="none" aria-hidden className="sol-platform-feature-tick-icon">
@@ -45,7 +46,7 @@ const OnePlatformSection: FunctionComponent<OnePlatformSectionProps> = ({
   features = platformWorkflowFeatures,
   orbitItems = platformOrbitItems,
   footerText = "Every workflow can be configured around how your service team actually operates.",
-  ctaLabel = "Book A Demo →",
+  ctaLabel = "Book A Demo",
 }) => {
   const router = useRouter();
   const [activeNodeId, setActiveNodeId] = useState<string | null>(null);
@@ -64,23 +65,29 @@ const OnePlatformSection: FunctionComponent<OnePlatformSectionProps> = ({
           <div className="sol-platform-main">
             <div className="sol-platform-content">
               <header className="sol-platform-header">
-                <h2 className="sol-platform-heading">
-                  {heading}
-                </h2>
-                <p className="sol-platform-description">
-                  {description}
-                </p>
+                <ScrollReveal direction="up">
+                  <h2 className="sol-platform-heading">
+                    {heading}
+                  </h2>
+                </ScrollReveal>
+                <ScrollReveal direction="up" delay={0.1}>
+                  <p className="sol-platform-description">
+                    {description}
+                  </p>
+                </ScrollReveal>
               </header>
 
               <div className="sol-platform-body">
-                <ul className="sol-platform-features">
-                  {features.map((label, index) => (
-                    <li key={`${label}-${index}`} className="sol-platform-feature">
-                      <FeatureIcon />
-                      <span className="sol-platform-feature-text">{label}</span>
-                    </li>
-                  ))}
-                </ul>
+                <ScrollReveal direction="up" delay={0.15}>
+                  <ul className="sol-platform-features">
+                    {features.map((label, index) => (
+                      <li key={`${label}-${index}`} className="sol-platform-feature">
+                        <FeatureIcon />
+                        <span className="sol-platform-feature-text">{label}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </ScrollReveal>
 
                 <div className="sol-platform-orbit-wrap">
                   <div

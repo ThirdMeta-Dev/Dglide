@@ -8,6 +8,7 @@ import {
   workflowChangeTitle,
   workflowTimelineItems,
 } from "@/data/solutionsPageData";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 type WorkflowChangeSectionProps = {
   title?: string;
@@ -50,86 +51,90 @@ const WorkflowChangeSection: FunctionComponent<WorkflowChangeSectionProps> = ({
     <section className="sol-section sol-workflow-change-section">
       <SolutionsContainer>
         <div className="sol-workflow-change-inner">
-          <div className="sol-workflow-change-left">
-            <div className="sol-workflow-change-intro">
-              <h2 className="sol-workflow-change-heading">
-                {title}
-              </h2>
-              <p className="sol-workflow-change-subtitle">
-                {subtitle}
-              </p>
+          <ScrollReveal direction="left">
+            <div className="sol-workflow-change-left">
+              <div className="sol-workflow-change-intro">
+                <h2 className="sol-workflow-change-heading">
+                  {title}
+                </h2>
+                <p className="sol-workflow-change-subtitle">
+                  {subtitle}
+                </p>
+              </div>
+
+              <ul className="sol-workflow-change-bullets">
+                {bullets.map((bullet) => (
+                  <li key={bullet} className="sol-workflow-change-bullet">
+                    <TickIcon />
+                    <span className="sol-workflow-change-bullet-text">
+                      {bullet}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
+          </ScrollReveal>
 
-            <ul className="sol-workflow-change-bullets">
-              {bullets.map((bullet) => (
-                <li key={bullet} className="sol-workflow-change-bullet">
-                  <TickIcon />
-                  <span className="sol-workflow-change-bullet-text">
-                    {bullet}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ScrollReveal direction="right">
+            <div className="sol-workflow-change-track">
+              <img
+                src="/solutions/ellipse.svg"
+                alt=""
+                width={527}
+                height={663}
+                className="sol-workflow-change-arc"
+                aria-hidden
+              />
 
-          <div className="sol-workflow-change-track">
-            <img
-              src="/solutions/ellipse.svg"
-              alt=""
-              width={527}
-              height={663}
-              className="sol-workflow-change-arc"
-              aria-hidden
-            />
+              <div className="sol-workflow-change-timeline">
+                {timelineItems.map((item, index) => {
+                  const isActive = activeIndex === index;
 
-            <div className="sol-workflow-change-timeline">
-              {timelineItems.map((item, index) => {
-                const isActive = activeIndex === index;
+                  return (
+                    <div key={item.title} className="sol-workflow-change-row">
+                      <button
+                        type="button"
+                        onClick={() => setActiveIndex(index)}
+                        className={`sol-workflow-change-node sol-workflow-change-node-${index}${isActive ? " sol-workflow-change-node--active" : ""}`}
+                        aria-label={item.title}
+                        aria-current={isActive ? "true" : undefined}
+                      >
+                        <img
+                          src={item.icon}
+                          alt=""
+                          width={73}
+                          height={40}
+                          className="sol-workflow-change-node-icon"
+                          aria-hidden
+                        />
+                      </button>
 
-                return (
-                  <div key={item.title} className="sol-workflow-change-row">
-                    <button
-                      type="button"
-                      onClick={() => setActiveIndex(index)}
-                      className={`sol-workflow-change-node sol-workflow-change-node-${index}${isActive ? " sol-workflow-change-node--active" : ""}`}
-                      aria-label={item.title}
-                      aria-current={isActive ? "true" : undefined}
-                    >
-                      <img
-                        src={item.icon}
-                        alt=""
-                        width={73}
-                        height={40}
-                        className="sol-workflow-change-node-icon"
-                        aria-hidden
-                      />
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => setActiveIndex(index)}
-                      className={`sol-workflow-change-item${isActive ? " sol-workflow-change-item--active" : ""}`}
-                      style={{ width: item.width, maxWidth: "100%" }}
-                      aria-expanded={isActive}
-                    >
-                      <div className="sol-workflow-change-item-content">
-                        <span
-                          className={`sol-workflow-change-item-title${isActive ? " sol-workflow-change-item-title--active" : ""}`}
-                        >
-                          {item.title}
-                        </span>
-                        {isActive && item.description && (
-                          <p className="sol-workflow-change-item-description">
-                            {item.description}
-                          </p>
-                        )}
-                      </div>
-                    </button>
-                  </div>
-                );
-              })}
+                      <button
+                        type="button"
+                        onClick={() => setActiveIndex(index)}
+                        className={`sol-workflow-change-item${isActive ? " sol-workflow-change-item--active" : ""}`}
+                        style={{ width: item.width, maxWidth: "100%" }}
+                        aria-expanded={isActive}
+                      >
+                        <div className="sol-workflow-change-item-content">
+                          <span
+                            className={`sol-workflow-change-item-title${isActive ? " sol-workflow-change-item-title--active" : ""}`}
+                          >
+                            {item.title}
+                          </span>
+                          {isActive && item.description && (
+                            <p className="sol-workflow-change-item-description">
+                              {item.description}
+                            </p>
+                          )}
+                        </div>
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </SolutionsContainer>
     </section>

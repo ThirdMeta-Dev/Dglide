@@ -53,6 +53,8 @@ export default function FSMPage() {
         bullets={fsmHeroBullets}
         primaryCta={fsmHeroPrimaryCta}
         secondaryCta={fsmHeroSecondaryCta}
+        imageSrc="/solutions/fsm-hero-illustration.png"
+        imageAlt="DGlide FSM — field service management dashboard"
       />
       <SolutionsSectionNav items={fsmNavItems} />
       <FieldServiceProblemSection
@@ -65,6 +67,7 @@ export default function FSMPage() {
       <BuiltForSection
         heading={fsmBuiltForHeading}
         description={fsmBuiltForDescription}
+        centerImage="/solutions/built-for/fsm-center-illustration.png"
         fitItems={fsmFitItems}
         industryItems={fsmIndustryItems}
       />

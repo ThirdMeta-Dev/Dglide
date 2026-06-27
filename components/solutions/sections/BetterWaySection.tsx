@@ -6,6 +6,7 @@ import {
   rigidToolsItems,
   betterWayFooterItems,
 } from "@/data/solutionsPageData";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 type BetterWaySectionProps = {
   heading?: string;
@@ -40,14 +41,16 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
   <section className="sol-section sol-better-way-section">
     <SolutionsContainer>
       <div className="sol-better-way-inner">
-        <header className="sol-better-way-header">
-          <h2 className="sol-better-way-heading">
-            {heading}
-          </h2>
-          <p className="sol-better-way-description">
-            {description}
-          </p>
-        </header>
+        <ScrollReveal direction="up">
+          <header className="sol-better-way-header">
+            <h2 className="sol-better-way-heading">
+              {heading}
+            </h2>
+            <p className="sol-better-way-description">
+              {description}
+            </p>
+          </header>
+        </ScrollReveal>
 
         <div className="sol-better-way-visual">
           <div className="sol-better-way-visual-bg" aria-hidden />
@@ -55,32 +58,34 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
           <div className="sol-better-way-visual-panel">
             <div className="sol-better-way-diagram">
               {/* Left column — Fixed-Category Tools */}
-              <div className="sol-better-way-side sol-better-way-side--left">
-                <div className="sol-better-way-side-header">
-                  <img
-                    src="/solutions/better-way/icon-rigid-tools.svg"
-                    alt=""
-                    width={73}
-                    height={40}
-                    className="sol-better-way-col-icon"
-                    aria-hidden
-                  />
-                  <h3 className="sol-better-way-side-title">
-                    {leftTitle}
-                  </h3>
+              <ScrollReveal direction="left">
+                <div className="sol-better-way-side sol-better-way-side--left">
+                  <div className="sol-better-way-side-header">
+                    <img
+                      src="/solutions/better-way-icons/fixed-tools.png"
+                      alt=""
+                      width={73}
+                      height={40}
+                      className="sol-better-way-col-icon"
+                      aria-hidden
+                    />
+                    <h3 className="sol-better-way-side-title">
+                      {leftTitle}
+                    </h3>
+                  </div>
+                  <div className="sol-better-way-side-list">
+                    <div className="sol-better-way-side-line" aria-hidden />
+                    {leftItems.map((item) => (
+                      <div key={item} className="sol-better-way-side-item">
+                        <TickIcon />
+                        <span className="sol-better-way-side-item-text">
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="sol-better-way-side-list">
-                  <div className="sol-better-way-side-line" aria-hidden />
-                  {leftItems.map((item) => (
-                    <div key={item} className="sol-better-way-side-item">
-                      <TickIcon />
-                      <span className="sol-better-way-side-item-text">
-                        {item}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              </ScrollReveal>
 
               {/* Center image — DGlide Platform */}
               <div className="sol-better-way-center">
@@ -95,49 +100,52 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
               </div>
 
               {/* Right column — Building Your Own */}
-              <div className="sol-better-way-side sol-better-way-side--right">
-                <div className="sol-better-way-side-header">
-                  <img
-                    src="/solutions/better-way/icon-custom-build.svg"
-                    alt=""
-                    width={73}
-                    height={40}
-                    className="sol-better-way-col-icon"
-                    aria-hidden
-                  />
-                  <h3 className="sol-better-way-side-title">
-                    {rightTitle}
-                  </h3>
+              <ScrollReveal direction="right">
+                <div className="sol-better-way-side sol-better-way-side--right">
+                  <div className="sol-better-way-side-header">
+                    <img
+                      src="/solutions/better-way-icons/building-own.png"
+                      alt=""
+                      width={73}
+                      height={40}
+                      className="sol-better-way-col-icon"
+                      aria-hidden
+                    />
+                    <h3 className="sol-better-way-side-title">
+                      {rightTitle}
+                    </h3>
+                  </div>
+                  <div className="sol-better-way-side-list">
+                    <div className="sol-better-way-side-line" aria-hidden />
+                    {rightItems.map((item) => (
+                      <div key={item} className="sol-better-way-side-item">
+                        <span className="sol-better-way-side-item-text">
+                          {item}
+                        </span>
+                        <TickIcon />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="sol-better-way-side-list">
-                  <div className="sol-better-way-side-line" aria-hidden />
-                  {rightItems.map((item) => (
-                    <div key={item} className="sol-better-way-side-item">
-                      <span className="sol-better-way-side-item-text">
-                        {item}
-                      </span>
-                      <TickIcon />
-                    </div>
-                  ))}
-                </div>
-              </div>
+              </ScrollReveal>
             </div>
+          </div>
 
-            <div className="sol-better-way-footer-bar">
-              {footerItems.map((label) => (
-                <div key={label} className="sol-better-way-footer-item">
-                  <img
-                    src="/solutions/hero-tick.svg"
-                    alt=""
-                    width={21}
-                    height={13}
-                    className="sol-better-way-footer-tick"
-                    aria-hidden
-                  />
-                  <span className="sol-better-way-footer-text">{label}</span>
-                </div>
-              ))}
-            </div>
+          {/* Footer bar — direct child of visual so it escapes the panel's stacking context */}
+          <div className="sol-better-way-footer-bar">
+            {footerItems.map((label) => (
+              <div key={label} className="sol-better-way-footer-item">
+                <img
+                  src="/solutions/hero-tick.svg"
+                  alt=""
+                  width={21}
+                  height={13}
+                  className="sol-better-way-footer-tick"
+                  aria-hidden
+                />
+                <span className="sol-better-way-footer-text">{label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
