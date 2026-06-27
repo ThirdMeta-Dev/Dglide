@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 /* ------------------------------------------------------------------ */
 /* Data — exact strings from Figma node 1118:2261                      */
@@ -67,6 +68,7 @@ export default function AUFinalCTASection({
             {/* Text group */}
             <div className="flex w-full max-w-[796px] flex-col items-center gap-3">
               {/* Eyebrow badge */}
+              <ScrollReveal direction="up">
               <div className="flex items-center justify-center gap-2 rounded-[40px] border border-[#FF7F1C]/20">
                 <span
                   aria-hidden
@@ -82,8 +84,10 @@ export default function AUFinalCTASection({
                   {badgeText}
                 </span>
               </div>
+              </ScrollReveal>
 
               {/* Heading */}
+              <ScrollReveal direction="up" delay={0.1}>
               <h2
                 className="au-final-heading bg-clip-text text-center text-[32px] leading-[1.25] text-transparent lg:text-[48px] lg:leading-[60px]"
                 style={{
@@ -96,9 +100,11 @@ export default function AUFinalCTASection({
               >
                 {heading}
               </h2>
+              </ScrollReveal>
             </div>
 
             {/* Button */}
+            <ScrollReveal direction="up" delay={0.2}>
             <Link
               href={ctaHref}
               className="au-final-cta-btn inline-flex items-center gap-2.5 rounded-[40px] bg-white px-6 py-3.5 text-base text-[#1C2BFF] no-underline"
@@ -125,6 +131,7 @@ export default function AUFinalCTASection({
                 />
               </svg>
             </Link>
+            </ScrollReveal>
           </div>
         </div>
       </div>

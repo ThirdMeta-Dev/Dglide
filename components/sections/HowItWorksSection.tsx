@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const STEP_DEFAULTS = [
   { title: "Start With a Working System",  desc: "Begin on a ready-to-run system" },
@@ -33,21 +34,23 @@ export default function HowItWorksSection({ data }: { data?: Record<string, stri
 
       <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
         {/* Heading */}
-        <div className="text-center mb-20">
-          <h2
-            className="text-4xl md:text-5xl leading-tight"
-            style={{
-              fontFamily: "var(--font-tasa-orbiter)",
-              fontWeight: 400,
-              background: "linear-gradient(90deg, #FF7F1C 0%, #000000 55%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            {data?.title ?? "How DGlide Works"}
-          </h2>
-        </div>
+        <ScrollReveal direction="up">
+          <div className="text-center mb-20">
+            <h2
+              className="text-4xl md:text-5xl leading-tight"
+              style={{
+                fontFamily: "var(--font-tasa-orbiter)",
+                fontWeight: 400,
+                background: "linear-gradient(90deg, #FF7F1C 0%, #000000 55%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              {data?.title ?? "How DGlide Works"}
+            </h2>
+          </div>
+        </ScrollReveal>
 
         {/* Timeline */}
         <div className="relative">
@@ -59,14 +62,14 @@ export default function HowItWorksSection({ data }: { data?: Record<string, stri
             />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
+          <StaggerReveal className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
             {steps.map((step, i) => {
               const isActive = i <= activeStep;
               return (
+                <StaggerItem key={i}>
                 <button
-                  key={i}
                   onClick={() => setActiveStep(i)}
-                  className="flex flex-col items-center text-center group transition-all duration-300"
+                  className="flex flex-col items-center text-center group transition-all duration-300 w-full"
                 >
                   {/* Icon */}
                   <div
@@ -91,9 +94,10 @@ export default function HowItWorksSection({ data }: { data?: Record<string, stri
                     {step.desc}
                   </p>
                 </button>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerReveal>
         </div>
       </div>
     </section>

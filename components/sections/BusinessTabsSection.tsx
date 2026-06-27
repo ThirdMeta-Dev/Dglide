@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const TAB_DEFAULTS = [
   {
@@ -171,43 +172,45 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
       <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Title */}
-        <div style={{ position: "relative", marginBottom: 56, textAlign: "center" }}>
-          <h2
-            className="sec-h2"
-            style={{
-              fontFamily: "var(--font-tasa-orbiter)",
-              fontSize: 48,
-              fontWeight: 400,
-              color: "#000",
-              lineHeight: "60px",
-              textTransform: "capitalize",
-              margin: 0,
-            }}
-          >
-            {sectionTitle}
-          </h2>
-          <h2
-            aria-hidden
-            className="sec-h2"
-            style={{
-              fontFamily: "var(--font-tasa-orbiter)",
-              fontSize: 48,
-              fontWeight: 400,
-              lineHeight: "60px",
-              textTransform: "capitalize",
-              margin: 0,
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(180deg, #ff7f1c 0%, #000000 100%)",
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              pointerEvents: "none",
-            }}
-          >
-            {sectionTitle}
-          </h2>
-        </div>
+        <ScrollReveal direction="up">
+          <div style={{ position: "relative", marginBottom: 56, textAlign: "center" }}>
+            <h2
+              className="sec-h2"
+              style={{
+                fontFamily: "var(--font-tasa-orbiter)",
+                fontSize: 48,
+                fontWeight: 400,
+                color: "#000",
+                lineHeight: "60px",
+                textTransform: "capitalize",
+                margin: 0,
+              }}
+            >
+              {sectionTitle}
+            </h2>
+            <h2
+              aria-hidden
+              className="sec-h2"
+              style={{
+                fontFamily: "var(--font-tasa-orbiter)",
+                fontSize: 48,
+                fontWeight: 400,
+                lineHeight: "60px",
+                textTransform: "capitalize",
+                margin: 0,
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(180deg, #ff7f1c 0%, #000000 100%)",
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                pointerEvents: "none",
+              }}
+            >
+              {sectionTitle}
+            </h2>
+          </div>
+        </ScrollReveal>
 
         {/* Tab row */}
         <div
@@ -236,6 +239,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
         </div>
 
         {/* Content card */}
+        <ScrollReveal direction="up" delay={0.1}>
         <div
           className="bts-content-card"
           style={{
@@ -377,6 +381,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
           </div>
 
         </div>
+        </ScrollReveal>
 
       </div>
     </section>

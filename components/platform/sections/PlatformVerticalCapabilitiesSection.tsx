@@ -1,7 +1,9 @@
 "use client";
 
 import { FunctionComponent, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 import {
   platformCapabilitiesDescription,
   platformCapabilitiesHeading,
@@ -50,10 +52,12 @@ const PlatformVerticalCapabilitiesSection: FunctionComponent = () => {
   return (
     <section id="platform-capabilities" className="sol-section sol-plat-cap-section">
       <SolutionsContainer>
-        <header className="sol-plat-cap-header">
-          <h2 className="sol-plat-cap-heading">{platformCapabilitiesHeading}</h2>
-          <p className="sol-plat-cap-subtext">{platformCapabilitiesDescription}</p>
-        </header>
+        <ScrollReveal direction="up">
+          <header className="sol-plat-cap-header">
+            <h2 className="sol-plat-cap-heading">{platformCapabilitiesHeading}</h2>
+            <p className="sol-plat-cap-subtext">{platformCapabilitiesDescription}</p>
+          </header>
+        </ScrollReveal>
 
         <div className="sol-plat-cap-grid">
           <div className="sol-plat-cap-media-wrap">
@@ -66,15 +70,20 @@ const PlatformVerticalCapabilitiesSection: FunctionComponent = () => {
             />
           </div>
 
-          <div
+          <motion.div
             className="sol-plat-vertical-cap-list"
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.08 }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
             {platformVerticalCapabilities.map((item, index) => {
               const isActive = activeIndex === index;
               return (
-                <div key={item.id} className="sol-plat-vertical-cap-item">
+                <StaggerItem key={item.id}>
+                <div className="sol-plat-vertical-cap-item">
                   <button
                     type="button"
                     className={`sol-plat-vertical-cap-trigger${isActive ? " sol-plat-vertical-cap-trigger--active" : ""}`}
@@ -111,9 +120,10 @@ const PlatformVerticalCapabilitiesSection: FunctionComponent = () => {
                     )}
                   </div>
                 </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </SolutionsContainer>
     </section>

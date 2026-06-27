@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const SECTION_TITLE    = "From Demo to Live in Weeks";
 const SECTION_SUBTITLE = "Live Faster Than a Custom Build Would Even Start";
@@ -27,6 +28,7 @@ export default function LiveFasterSection({ data }: { data?: Record<string, stri
       <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Header — right-aligned */}
+        <ScrollReveal direction="up">
         <div className="lfs-header" style={{ textAlign: "right", marginBottom: 48 }}>
           <h2
             className="sec-h2"
@@ -58,8 +60,10 @@ export default function LiveFasterSection({ data }: { data?: Record<string, stri
             {subtitle}
           </p>
         </div>
+        </ScrollReveal>
 
         {/* Staggered cards row */}
+        <ScrollReveal direction="up" delay={0.1}>
         <div className="lfs-cards" style={{ display: "flex", gap: 16 }}>
           {steps.map((step, i) => (
             <div
@@ -167,6 +171,7 @@ export default function LiveFasterSection({ data }: { data?: Record<string, stri
             </div>
           ))}
         </div>
+        </ScrollReveal>
 
       </div>
     </section>

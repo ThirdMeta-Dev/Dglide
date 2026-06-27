@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const COMP_DEFAULTS = [
   { label: "Enterprise Suites",  bullets: ["Heavy, slow to roll out", "Powerful, complex, and overkill"],   marginLeft: 28 },
@@ -62,6 +63,7 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
       <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px", position: "relative", zIndex: 1 }}>
 
         {/* Title */}
+        <ScrollReveal direction="up">
         <div style={{ marginBottom: 56, position: "relative", display: "inline-block" }}>
           <h2
             className="sec-h2"
@@ -97,15 +99,16 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
             {sectionTitle}
           </h2>
         </div>
+        </ScrollReveal>
 
         {/* Two-column layout */}
         <div className="comp-two-col" style={{ display: "flex", gap: 24, alignItems: "stretch" }}>
 
           {/* LEFT — 3 staggered cards */}
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 16 }}>
+          <StaggerReveal style={{ flex: 1, display: "flex", flexDirection: "column", gap: 16 }}>
             {competitors.map((comp, i) => (
+              <StaggerItem key={i}>
               <div
-                key={i}
                 className="comp-card"
                 style={{
                   display: "flex",
@@ -147,8 +150,9 @@ export default function CompetitorSection({ data }: { data?: Record<string, stri
                   ))}
                 </div>
               </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerReveal>
 
           {/* RIGHT — DGlide card */}
           <div

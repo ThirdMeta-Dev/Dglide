@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const LOGO_COUNT = 5;
 const LOGO_SRCS = ["/logos/logo-1.png", "/logos/logo-2.png", "/logos/logo-3.png", "/logos/logo-4.png", "/logos/logo-5.png"];
@@ -34,19 +35,21 @@ export default function LogoCarouselSection({
   return (
     <section style={{ width: "100%", background: "transparent", padding: "48px 0 24px", overflow: "hidden" }}>
       {heading && (
-        <p
-          style={{
-            fontFamily: "var(--font-tasa-orbiter)",
-            fontSize: 18,
-            fontWeight: 400,
-            lineHeight: "24px",
-            color: "#000",
-            textAlign: "center",
-            marginBottom: 28,
-          }}
-        >
-          {heading}
-        </p>
+        <ScrollReveal direction="up">
+          <p
+            style={{
+              fontFamily: "var(--font-tasa-orbiter)",
+              fontSize: 18,
+              fontWeight: 400,
+              lineHeight: "24px",
+              color: "#000",
+              textAlign: "center",
+              marginBottom: 28,
+            }}
+          >
+            {heading}
+          </p>
+        </ScrollReveal>
       )}
       <style>{`
         @keyframes dg-marquee-left {

@@ -1,7 +1,10 @@
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
+
 export default function AUPeopleSection() {
   return (
     <section className="w-full">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-12 px-5 md:px-12">
+        <ScrollReveal direction="up">
         <div className="flex max-w-[792px] flex-col items-center gap-4">
           <h2
             className="text-center text-[36px] font-normal leading-[44px] md:text-[48px] md:leading-[58px]"
@@ -23,7 +26,9 @@ export default function AUPeopleSection() {
             learned firsthand why it stops fitting.
           </p>
         </div>
+        </ScrollReveal>
 
+        <ScrollReveal direction="up" delay={0.1}>
         <div className="flex max-w-[970px] flex-col items-center gap-2">
           <p
             className="text-center text-[16px] leading-[26px] tracking-[0.2px] text-[#414141]"
@@ -44,6 +49,7 @@ export default function AUPeopleSection() {
             around.
           </p>
         </div>
+        </ScrollReveal>
       </div>
     </section>
   );

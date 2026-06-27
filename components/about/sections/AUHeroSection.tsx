@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 /* ------------------------------------------------------------------ */
 /* Data — exact strings from Figma node 1118:1276                      */
@@ -23,40 +24,46 @@ export default function AUHeroSection() {
         {/* ---------- Left column ---------- */}
         <div className="relative z-10 flex w-full flex-col gap-5 lg:w-[576px] lg:shrink-0">
           {/* Badge */}
-          <div className="flex items-center gap-2">
-            <span className="h-[11px] w-0.5 shrink-0 bg-[#FF7F1C]" />
-            <span
-              className="text-sm leading-[18px] text-[#FF7F1C]"
-              style={{ fontFamily: "var(--font-sora), Sora, sans-serif" }}
-            >
-              Why DGlide Exists
-            </span>
-          </div>
+          <ScrollReveal direction="up" delay={0}>
+            <div className="flex items-center gap-2">
+              <span className="h-[11px] w-0.5 shrink-0 bg-[#FF7F1C]" />
+              <span
+                className="text-sm leading-[18px] text-[#FF7F1C]"
+                style={{ fontFamily: "var(--font-sora), Sora, sans-serif" }}
+              >
+                Why DGlide Exists
+              </span>
+            </div>
+          </ScrollReveal>
 
           <div className="flex flex-col gap-10 lg:gap-[60px]">
             <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-3">
                 {/* Heading — horizontal orange→black gradient (orange on the left) */}
-                <h1
-                  className="bg-clip-text text-[36px] leading-[1.15] text-transparent lg:text-[52px] lg:leading-[58px]"
-                  style={{
-                    fontFamily: "var(--font-tasa-orbiter)",
-                    fontWeight: 400,
-                    backgroundImage:
-                      "linear-gradient(to left, #000000 53%, #FF7F1C 100%)",
-                  }}
-                >
-                  Software Should Adapt to You, Not the Other Way Around
-                </h1>
+                <ScrollReveal direction="up" delay={0.08}>
+                  <h1
+                    className="bg-clip-text text-[36px] leading-[1.15] text-transparent lg:text-[52px] lg:leading-[58px]"
+                    style={{
+                      fontFamily: "var(--font-tasa-orbiter)",
+                      fontWeight: 400,
+                      backgroundImage:
+                        "linear-gradient(to left, #000000 53%, #FF7F1C 100%)",
+                    }}
+                  >
+                    Software Should Adapt to You, Not the Other Way Around
+                  </h1>
+                </ScrollReveal>
 
                 {/* Subtext */}
-                <p
-                  className="max-w-[495px] text-base leading-[27.5px] text-[#545454]"
-                  style={{ fontFamily: "var(--font-inter)" }}
-                >
-                  We built DGlide for businesses stuck between rigid software
-                  that never fits and a custom build they can&apos;t afford.
-                </p>
+                <ScrollReveal direction="up" delay={0.16}>
+                  <p
+                    className="max-w-[495px] text-base leading-[27.5px] text-[#545454]"
+                    style={{ fontFamily: "var(--font-inter)" }}
+                  >
+                    We built DGlide for businesses stuck between rigid software
+                    that never fits and a custom build they can&apos;t afford.
+                  </p>
+                </ScrollReveal>
               </div>
 
               {/* Bullets */}

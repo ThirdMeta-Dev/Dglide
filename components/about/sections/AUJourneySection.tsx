@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 /* ------------------------------------------------------------------ */
 /* Data — exact strings + geometry from Figma node 1118:2187           */
@@ -151,6 +152,7 @@ export default function AUJourneySection() {
           <div className="flex flex-col gap-5 px-5 lg:px-0">
             {/* Heading — TASA Orbiter 400, 44/50, vertical gradient
                 black (bottom) -> #FF7F1C (top) */}
+            <ScrollReveal direction="up">
             <h2
               className="bg-clip-text text-center text-[32px] leading-[1.15] text-transparent lg:text-right lg:text-[44px] lg:leading-[50px]"
               style={{
@@ -162,6 +164,7 @@ export default function AUJourneySection() {
             >
               {HEADING}
             </h2>
+            </ScrollReveal>
             {/* Subtext — Inter 400, 16/26, +0.2px, #555, right-aligned */}
             <p
               className="w-full text-left text-base leading-[26px] text-[#555555] lg:w-[429px] lg:self-end lg:text-right"
@@ -293,11 +296,12 @@ export default function AUJourneySection() {
           </div>
 
           {/* ---------- Mobile / tablet: static vertical stack ---------- */}
-          <div className="mt-10 flex flex-col gap-8 px-5 pb-4 lg:hidden">
+          <StaggerReveal className="mt-10 flex flex-col gap-8 px-5 pb-4 lg:hidden">
             {MILESTONES.map((m, i) => {
               const highlighted = i === 0;
               return (
-                <div key={m.title} className="flex flex-col gap-3">
+                <StaggerItem key={m.title}>
+                <div className="flex flex-col gap-3">
                   <Image src={m.icon} alt="" width={88} height={48} />
                   <div
                     className="rounded-2xl p-6"
@@ -331,9 +335,10 @@ export default function AUJourneySection() {
                     ) : null}
                   </div>
                 </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerReveal>
         </div>
       </div>
     </section>

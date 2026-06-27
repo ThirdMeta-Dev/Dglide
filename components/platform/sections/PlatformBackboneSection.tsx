@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 import {
   platformBackboneDescription,
   platformBackboneHeading,
@@ -13,15 +14,17 @@ const PlatformBackboneSection: FunctionComponent = () => (
   <section id="platform-backbone" className="sol-plat-backbone-section">
     <SolutionsContainer>
       <div className="sol-plat-backbone-layout">
-        <div className="sol-plat-backbone-left">
-          <h2 className="sol-plat-backbone-heading">{platformBackboneHeading}</h2>
-          <p className="sol-plat-backbone-description">{platformBackboneDescription}</p>
-        </div>
+        <ScrollReveal direction="up">
+          <div className="sol-plat-backbone-left">
+            <h2 className="sol-plat-backbone-heading">{platformBackboneHeading}</h2>
+            <p className="sol-plat-backbone-description">{platformBackboneDescription}</p>
+          </div>
+        </ScrollReveal>
 
-        <div className="sol-plat-backbone-cards">
+        <StaggerReveal className="sol-plat-backbone-cards">
           {platformBackboneLayers.map((layer, i) => (
+            <StaggerItem key={layer.title}>
             <article
-              key={layer.title}
               className="sol-plat-backbone-card"
               style={{
                 top: `${STACK_TOP_BASE + i * STACK_TOP_STEP}px`,
@@ -49,8 +52,9 @@ const PlatformBackboneSection: FunctionComponent = () => (
                 ))}
               </div>
             </article>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </SolutionsContainer>
   </section>

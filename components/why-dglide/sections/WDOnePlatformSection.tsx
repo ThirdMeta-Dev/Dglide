@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 /*
  * "One Platform Underneath. Many Solutions on Top." — Why DGlide page
@@ -101,6 +102,7 @@ export default function WDOnePlatformSection({ data }: { data?: Record<string, s
     <section className="w-full bg-[#F3F3F3] overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-12 py-20 flex flex-col gap-12 lg:gap-[60px]">
         {/* Heading + subtitle */}
+        <ScrollReveal direction="up">
         <div className="flex flex-col items-center gap-3">
           <h2
             className="text-center text-[32px] leading-[40px] md:text-[48px] md:leading-[58px]"
@@ -124,6 +126,7 @@ export default function WDOnePlatformSection({ data }: { data?: Record<string, s
             shared, configurable operations backbone.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* Capability diagram — pixel-perfect absolute layout at lg+ */}
         <div className="hidden lg:block relative w-full max-w-[1104px] mx-auto h-[301px]">
@@ -162,19 +165,21 @@ export default function WDOnePlatformSection({ data }: { data?: Record<string, s
             height={548}
             className="w-full max-w-[560px] h-auto"
           />
-          <div className="w-full flex flex-col items-center gap-3">
+          <StaggerReveal className="w-full flex flex-col items-center gap-3">
             {[...LEFT_CAPABILITIES, ...RIGHT_CAPABILITIES].map((c, i) => (
-              <CapabilityPill
-                key={c.label}
-                capability={c}
-                side={i < LEFT_CAPABILITIES.length ? "left" : "right"}
-                fullWidthOnMobile
-              />
+              <StaggerItem key={c.label}>
+                <CapabilityPill
+                  capability={c}
+                  side={i < LEFT_CAPABILITIES.length ? "left" : "right"}
+                  fullWidthOnMobile
+                />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerReveal>
         </div>
 
         {/* Closing line + CTAs */}
+        <ScrollReveal direction="up" delay={0.2}>
         <div className="flex flex-col items-center gap-6">
           <p
             className="text-center text-[20px] leading-[30px] text-black"
@@ -184,8 +189,8 @@ export default function WDOnePlatformSection({ data }: { data?: Record<string, s
           </p>
           <div className="flex flex-wrap justify-center gap-6">
             <Link
-              href={data?.cta_primary_href ?? "/demo"}
-              className="dg-btn-fill inline-flex items-center gap-[10px] px-8 py-3.5 rounded-[40px] text-white font-semibold text-base leading-[20.16px] transition-opacity hover:opacity-90"
+              href={data?.cta_primary_href ?? "/schedule-demo"}
+              className="dg-btn-fill inline-flex items-center gap-[10px] px-8 py-3.5 rounded-[40px] text-white font-semibold text-base leading-[20.16px]"
               style={{
                 fontFamily: "var(--font-sora), Sora, sans-serif",
                 background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
@@ -195,7 +200,7 @@ export default function WDOnePlatformSection({ data }: { data?: Record<string, s
               <ArrowRight stroke="#FFFFFF" />
             </Link>
             <Link
-              href={data?.cta_secondary_href ?? "/platform"}
+              href={data?.cta_secondary_href ?? "/schedule-demo"}
               className="dg-btn-outline inline-flex items-center gap-[10px] px-8 py-3.5 rounded-[40px] border border-[#1C2BFF] bg-white text-[#141FB5] text-base leading-[20.16px] transition-colors hover:bg-[#1C2BFF]/5"
               style={{ fontFamily: "var(--font-sora), Sora, sans-serif", fontWeight: 400 }}
             >
@@ -204,6 +209,7 @@ export default function WDOnePlatformSection({ data }: { data?: Record<string, s
             </Link>
           </div>
         </div>
+        </ScrollReveal>
       </div>
     </section>
   );

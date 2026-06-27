@@ -4,7 +4,7 @@ import { FunctionComponent, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { faqItems } from "@/data/solutionsPageData";
-import { motionEase } from "@/components/animations/MotionPrimitives";
+import { motionEase, ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 type FaqItem = {
   question: string;
@@ -32,8 +32,11 @@ const SolutionsFAQSection: FunctionComponent<SolutionsFAQSectionProps> = ({
           <span className="sol-faq-glow" aria-hidden />
 
           <div className="sol-faq-inner">
-            <h2 className="sol-faq-heading">{heading}</h2>
+            <ScrollReveal direction="up">
+              <h2 className="sol-faq-heading">{heading}</h2>
+            </ScrollReveal>
 
+            <ScrollReveal direction="up" delay={0.1}>
             <div className="sol-faq-list">
               {items.map((item, index) => {
                 const isOpen = openIndex === index;
@@ -79,6 +82,7 @@ const SolutionsFAQSection: FunctionComponent<SolutionsFAQSectionProps> = ({
                 );
               })}
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </SolutionsContainer>

@@ -28,6 +28,7 @@ import {
   capabilityTabs,
   capabilityTabContent,
 } from "@/data/solutionsPageData";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const NOTCH_HEIGHT = 71;
 const TAB_COLUMN_WIDTH = 320;
@@ -114,9 +115,11 @@ const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> =
   return (
     <section id="core-capabilities" className="sol-section sol-capabilities-section">
       <SolutionsContainer>
-        <h2 className="sol-capabilities-heading">
-          {heading}
-        </h2>
+        <ScrollReveal direction="up">
+          <h2 className="sol-capabilities-heading">
+            {heading}
+          </h2>
+        </ScrollReveal>
 
         <div ref={layoutRef} className="sol-capabilities-layout">
           <div ref={tabsStripRef} className="sol-capabilities-tabs">

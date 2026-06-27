@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const FeatureBullet = () => (
   <Image
@@ -16,11 +17,13 @@ const FeatureBullet = () => (
 const PlatformFeatureGridSection: FunctionComponent = () => (
   <section className="sol-section sol-plat-built-biz-section">
     <SolutionsContainer>
-      <header className="sol-plat-built-biz-header">
-        <h2 className="sol-plat-built-biz-heading">
-          Built for Business Use, Not Just Software Demos
-        </h2>
-      </header>
+      <ScrollReveal direction="up">
+        <header className="sol-plat-built-biz-header">
+          <h2 className="sol-plat-built-biz-heading">
+            Built for Business Use, Not Just Software Demos
+          </h2>
+        </header>
+      </ScrollReveal>
 
       <div className="sol-plat-built-biz-rows" style={{ position: "relative" }}>
         <svg
@@ -56,7 +59,8 @@ const PlatformFeatureGridSection: FunctionComponent = () => (
           </defs>
         </svg>
         {/* Row 1: Large left (Cloud-Ready) + Small right (Execution Control) */}
-        <div className="sol-plat-built-biz-row">
+        <StaggerReveal className="sol-plat-built-biz-row">
+          <StaggerItem>
           <article className="sol-plat-built-biz-card sol-plat-built-biz-card--lg">
             <div>
               <Image
@@ -79,7 +83,9 @@ const PlatformFeatureGridSection: FunctionComponent = () => (
               <span className="sol-plat-built-biz-tag">Always On</span>
             </div>
           </article>
+          </StaggerItem>
 
+          <StaggerItem>
           <article className="sol-plat-built-biz-card sol-plat-built-biz-card--sm">
             <div>
               <Image
@@ -107,10 +113,12 @@ const PlatformFeatureGridSection: FunctionComponent = () => (
               </div>
             </div>
           </article>
-        </div>
+          </StaggerItem>
+        </StaggerReveal>
 
         {/* Row 2: Small left (Integration-Ready) + Large right (One Connected) */}
-        <div className="sol-plat-built-biz-row">
+        <StaggerReveal className="sol-plat-built-biz-row">
+          <StaggerItem>
           <article className="sol-plat-built-biz-card sol-plat-built-biz-card--sm">
             <div>
               <Image
@@ -128,7 +136,9 @@ const PlatformFeatureGridSection: FunctionComponent = () => (
               </p>
             </div>
           </article>
+          </StaggerItem>
 
+          <StaggerItem>
           <article className="sol-plat-built-biz-card sol-plat-built-biz-card--lg">
             <div>
               <Image
@@ -156,7 +166,8 @@ const PlatformFeatureGridSection: FunctionComponent = () => (
               </span>
             </div>
           </article>
-        </div>
+          </StaggerItem>
+        </StaggerReveal>
       </div>
     </SolutionsContainer>
   </section>

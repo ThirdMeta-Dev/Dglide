@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const CARDS_ROW_1 = [
   {
@@ -72,6 +73,7 @@ export default function WDStuckBetweenSection() {
     <section className="w-full">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-10 lg:gap-12 px-6 md:px-10 lg:px-12">
         {/* Heading block */}
+        <ScrollReveal direction="up">
         <div className="flex flex-col items-center gap-2">
           <h2
             className="max-w-[942px] bg-clip-text text-center text-[32px] leading-[1.2] text-transparent lg:text-[48px] lg:leading-[58px]"
@@ -88,6 +90,7 @@ export default function WDStuckBetweenSection() {
             custom build feels like too much, this is the gap DGlide fills.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* Cards + bottom row */}
         <div className="relative flex flex-col gap-10">
@@ -111,16 +114,20 @@ export default function WDStuckBetweenSection() {
 
           {/* Card grid */}
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-4 lg:flex-row">
+            <StaggerReveal className="flex flex-col gap-4 lg:flex-row">
               {CARDS_ROW_1.map((card) => (
-                <PainCard key={card.title} {...card} />
+                <StaggerItem key={card.title} className="flex-1">
+                  <PainCard {...card} />
+                </StaggerItem>
               ))}
-            </div>
-            <div className="flex flex-col gap-4 lg:flex-row">
+            </StaggerReveal>
+            <StaggerReveal className="flex flex-col gap-4 lg:flex-row">
               {CARDS_ROW_2.map((card) => (
-                <PainCard key={card.title} {...card} />
+                <StaggerItem key={card.title} className="flex-1">
+                  <PainCard {...card} />
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerReveal>
           </div>
 
           {/* Bottom row: statement + CTA */}

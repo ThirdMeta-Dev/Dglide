@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 import {
   platformNotAToolCards,
   platformNotAToolHeading,
@@ -9,11 +10,14 @@ import {
 const PlatformNotAToolSection: FunctionComponent = () => (
   <section className="sol-section">
     <SolutionsContainer>
-      <h2 className="sol-plat-not-tool-heading">{platformNotAToolHeading}</h2>
+      <ScrollReveal direction="up">
+        <h2 className="sol-plat-not-tool-heading">{platformNotAToolHeading}</h2>
+      </ScrollReveal>
 
-      <div className="sol-plat-not-tool-grid">
+      <StaggerReveal className="sol-plat-not-tool-grid">
         {platformNotAToolCards.map((card) => (
-          <article key={card.title} className="sol-plat-not-tool-card">
+          <StaggerItem key={card.title}>
+          <article className="sol-plat-not-tool-card">
             <Image
               src={card.icon}
               alt=""
@@ -27,8 +31,9 @@ const PlatformNotAToolSection: FunctionComponent = () => (
               <p className="sol-plat-not-tool-card-desc">{card.description}</p>
             </div>
           </article>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerReveal>
     </SolutionsContainer>
   </section>
 );

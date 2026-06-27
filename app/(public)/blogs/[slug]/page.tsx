@@ -7,6 +7,7 @@ import { getBlogPostBySlug } from '@/lib/blog-db'
 import type { BlogPost } from '@/lib/blog-db'
 import BlogDetailSidebar from './BlogDetailSidebar'
 import styles from './BlogDetail.module.css'
+import { ScrollReveal } from '@/components/animations/MotionPrimitives'
 
 type BlogDetailPageProps = {
   params: Promise<{ slug: string }>
@@ -314,7 +315,9 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 
   return (
     <div className={styles.page}>
-      <HeroSection post={post} />
+      <ScrollReveal direction="up">
+        <HeroSection post={post} />
+      </ScrollReveal>
 
       <main className={styles.contentShell}>
         <div className={styles.articleGrid}>
@@ -325,12 +328,16 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             articleUrl={`${SITE_URL}/blogs/${post.slug}`}
           />
 
-          <article className={styles.article}>
-            <div id="article-start" className={styles.articleContent} dangerouslySetInnerHTML={{ __html: html }} />
-          </article>
+          <ScrollReveal direction="up" delay={0.1}>
+            <article className={styles.article}>
+              <div id="article-start" className={styles.articleContent} dangerouslySetInnerHTML={{ __html: html }} />
+            </article>
+          </ScrollReveal>
         </div>
 
-        <AuthorSection post={post} />
+        <ScrollReveal direction="up">
+          <AuthorSection post={post} />
+        </ScrollReveal>
       </main>
 
       <div className={styles.contactDemoWrap}>

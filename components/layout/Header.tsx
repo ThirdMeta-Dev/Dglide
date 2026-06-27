@@ -165,7 +165,6 @@ export default function Header({ navItems, settings }: Props) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const [ctaHovered, setCtaHovered] = useState(false);
 
   const nav = (navItems && navItems.length > 0) ? navItems : DEFAULT_NAV;
   const cfg = settings ?? DEFAULT_SETTINGS;
@@ -199,30 +198,22 @@ export default function Header({ navItems, settings }: Props) {
           ))}
         </nav>
 
-        <motion.div
-          className="flex-shrink-0"
-          onHoverStart={() => setCtaHovered(true)}
-          onHoverEnd={() => setCtaHovered(false)}
+        <Link
+          href={cfg.cta_href}
+          className="dg-btn-fill flex-shrink-0 flex items-center gap-2.5 px-8 py-[14px] rounded-[40px] text-white text-base font-semibold [font-family:var(--font-sora)] leading-[20.16px]"
+          style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
         >
-          <Link
-            href={cfg.cta_href}
-            className="dg-btn-fill flex items-center gap-2.5 px-8 py-[14px] rounded-[40px] text-white text-base font-semibold [font-family:var(--font-sora)] leading-[20.16px] transition-opacity hover:opacity-90 active:opacity-80"
-            style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
+          {cfg.cta_label}
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            className="flex-shrink-0"
           >
-            {cfg.cta_label}
-            <motion.svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              className="flex-shrink-0"
-              animate={{ rotate: ctaHovered ? -45 : 0 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            >
-              <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </motion.svg>
-          </Link>
-        </motion.div>
+            <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
       </div>
 
       {/* Mobile */}

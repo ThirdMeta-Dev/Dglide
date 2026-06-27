@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { scrollToContact } from "@/lib/scroll-to-contact";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { finalCtaEyebrow, finalCtaHeading } from "@/data/solutionsPageData";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const WAVE_RING_COUNT = 15;
 
@@ -66,24 +67,30 @@ const SolutionsFinalCTA: FunctionComponent<SolutionsFinalCTAProps> = ({
 
           <div className="sol-final-cta-content">
             <div className="sol-final-cta-copy">
-              <div className="sol-final-cta-eyebrow">
-                <span className="sol-final-cta-eyebrow-bar" aria-hidden />
-                <span className="sol-final-cta-eyebrow-text">
-                  {eyebrow}
-                </span>
-              </div>
+              <ScrollReveal direction="up" delay={0}>
+                <div className="sol-final-cta-eyebrow">
+                  <span className="sol-final-cta-eyebrow-bar" aria-hidden />
+                  <span className="sol-final-cta-eyebrow-text">
+                    {eyebrow}
+                  </span>
+                </div>
+              </ScrollReveal>
 
-              <h2 className="sol-final-cta-heading">{heading}</h2>
+              <ScrollReveal direction="up" delay={0.1}>
+                <h2 className="sol-final-cta-heading">{heading}</h2>
+              </ScrollReveal>
             </div>
 
-            <button
-              type="button"
-              onClick={() => scrollToContact(router)}
-              className="sol-final-cta-button"
-            >
-              <span>{buttonLabel}</span>
-              <FinalCtaArrow />
-            </button>
+            <ScrollReveal direction="up" delay={0.2}>
+              <button
+                type="button"
+                onClick={() => scrollToContact(router)}
+                className="sol-final-cta-button"
+              >
+                <span>{buttonLabel}</span>
+                <FinalCtaArrow />
+              </button>
+            </ScrollReveal>
           </div>
         </div>
       </SolutionsContainer>

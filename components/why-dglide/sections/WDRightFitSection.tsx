@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const BUILT_FOR_YOU_BULLETS = [
   "Your work runs on field service, installs, or maintenance",
@@ -55,6 +56,7 @@ export default function WDRightFitSection() {
         />
 
         {/* Heading row */}
+        <ScrollReveal direction="up">
         <div className="relative z-[1] flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-2">
           <h2
             className="bg-clip-text text-[32px] leading-[1.2] text-transparent lg:text-[48px] lg:leading-[56px]"
@@ -72,10 +74,12 @@ export default function WDRightFitSection() {
             is the right call, and when it isn&apos;t
           </p>
         </div>
+        </ScrollReveal>
 
         {/* Cards */}
         <div className="relative z-[1] flex flex-col gap-4 lg:flex-row">
           {/* Built For You card */}
+          <ScrollReveal direction="left" className="lg:w-[577px] lg:shrink-0">
           <div
             className="flex flex-col gap-[22px] rounded-2xl border border-white px-6 pb-6 pt-9 lg:w-[577px] lg:shrink-0 lg:px-8 lg:pb-8 lg:pt-11"
             style={{
@@ -125,8 +129,10 @@ export default function WDRightFitSection() {
               </ul>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* May Not Be Right card */}
+          <ScrollReveal direction="right" className="lg:flex-1">
           <div
             className="flex flex-col gap-[22px] rounded-2xl border border-white px-6 pb-6 pt-9 lg:flex-1 lg:px-8 lg:pb-8 lg:pt-11"
             style={{
@@ -177,6 +183,7 @@ export default function WDRightFitSection() {
               </ul>
             </div>
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

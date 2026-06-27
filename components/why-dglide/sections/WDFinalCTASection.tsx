@@ -1,3 +1,5 @@
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
+
 const BADGE_TEXT = "The third option";
 const HEADING =
   "You don't have to choose between rigid software and a custom build.";
@@ -48,6 +50,7 @@ export default function WDFinalCTASection() {
           {/* Inner content */}
           <div className="relative z-[1] flex w-full flex-col items-center gap-10 lg:gap-[60px]">
             {/* Text group */}
+            <ScrollReveal direction="up">
             <div className="flex w-full max-w-[960px] flex-col items-center gap-3">
               {/* Eyebrow badge */}
               <div className="flex items-center justify-center gap-2 rounded-[40px]">
@@ -79,8 +82,10 @@ export default function WDFinalCTASection() {
                 {HEADING}
               </h2>
             </div>
+            </ScrollReveal>
 
             {/* Button */}
+            <ScrollReveal direction="up" delay={0.2}>
             <a
               href={CTA_HREF}
               className="inline-flex items-center gap-2.5 rounded-[40px] bg-white px-6 py-3.5 text-base text-[#1C2BFF] no-underline"
@@ -107,6 +112,7 @@ export default function WDFinalCTASection() {
                 />
               </svg>
             </a>
+            </ScrollReveal>
           </div>
         </div>
       </div>

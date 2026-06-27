@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const CAP_DEFAULTS = [
   { title: "Automated Workflows",     desc: "Cut the manual steps between every stage." },
@@ -24,6 +25,7 @@ export default function CapabilitiesSection({ data }: { data?: Record<string, st
       <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Title + subtitle */}
+        <ScrollReveal direction="up">
         <div style={{ textAlign: "center", marginBottom: 68 }}>
           <div style={{ position: "relative", display: "inline-block", marginBottom: 18 }}>
             <h2
@@ -64,11 +66,12 @@ export default function CapabilitiesSection({ data }: { data?: Record<string, st
             {subtitle}
           </p>
         </div>
+        </ScrollReveal>
 
         {/* 4-column cards */}
-        <div className="cap-grid" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
+        <StaggerReveal className="cap-grid" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
           {caps.map((cap, i) => (
-            <div key={i} className="cap-item" style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+            <StaggerItem key={i} className="cap-item" style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
               <div style={{ flexShrink: 0, marginBottom: 28 }}>
                 <Image
                   src={cap.icon || `/capabilities/icon-${i + 1}.png`}
@@ -84,9 +87,9 @@ export default function CapabilitiesSection({ data }: { data?: Record<string, st
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 400, lineHeight: "24px", color: "#545454", margin: 0 }}>
                 {cap.desc}
               </p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerReveal>
 
       </div>
     </section>

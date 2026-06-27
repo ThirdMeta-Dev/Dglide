@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const LOGOS = [
   "/logos/logo-1.png",
@@ -54,79 +55,89 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
         className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 pt-20 pb-0 opacity-0 translate-y-8 transition-all duration-700 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0"
       >
         {/* Badge — centered */}
-        <div className="flex items-center justify-center gap-2 mb-6">
-          <span className="w-0.5 h-5 bg-[#FF7F1C] rounded-full flex-shrink-0" />
-          <span className="text-[#FF7F1C] text-sm" style={{ fontFamily: "Sora, sans-serif" }}>
-            {data?.badge_text ?? "Configurable Operations Platform"}
-          </span>
-        </div>
+        <ScrollReveal direction="up" delay={0}>
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <span className="w-0.5 h-5 bg-[#FF7F1C] rounded-full flex-shrink-0" />
+            <span className="text-[#FF7F1C] text-sm" style={{ fontFamily: "Sora, sans-serif" }}>
+              {data?.badge_text ?? "Configurable Operations Platform"}
+            </span>
+          </div>
+        </ScrollReveal>
 
         {/* Title — centered, vertical orange→black gradient */}
-        <h1
-          className="hero-title text-5xl md:text-6xl lg:text-[64px] leading-[1.1] mb-6 text-center"
-          style={{
-            fontFamily: "var(--font-tasa-orbiter)",
-            fontWeight: 400,
-            background: "linear-gradient(180deg, #FF7F1C 0%, #000 55.42%)",
-            backgroundClip: "text",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          {titleLine1}
-          {titleLine2 && <><br />{titleLine2}</>}
-        </h1>
-
-        {/* Subtitle — centered */}
-        <p
-          className="hero-subtitle mb-10"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: 16,
-            fontWeight: 400,
-            lineHeight: "160%",
-            color: "#555",
-            textAlign: "center",
-            margin: "0 auto 40px",
-          }}
-        >
-          {data?.subtitle ?? "DGlide gives you ready-to-run systems for field service, sales, and operations that adapt to how your business actually works."}
-        </p>
-
-        {/* CTAs — centered */}
-        <div className="flex flex-wrap gap-4 mb-14 justify-center">
-          <Link
-            href={data?.cta_primary_href ?? "/demo"}
-            className="dg-btn-fill inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-base transition-opacity hover:opacity-90"
+        <ScrollReveal direction="up" delay={0.08}>
+          <h1
+            className="hero-title text-5xl md:text-6xl lg:text-[64px] leading-[1.1] mb-6 text-center"
             style={{
-              fontFamily: "Sora, sans-serif",
-              background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
+              fontFamily: "var(--font-tasa-orbiter)",
+              fontWeight: 400,
+              background: "linear-gradient(180deg, #FF7F1C 0%, #000 55.42%)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
             }}
           >
-            {data?.cta_primary_label ?? "Book a Demo"}
-            <ArrowRight stroke="white" />
-          </Link>
-          <Link
-            href={data?.cta_secondary_href ?? "#how-it-works"}
-            className="dg-btn-outline inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-[#1C2BFF] text-[#1C2BFF] text-base transition-colors hover:bg-[#1C2BFF]/5"
-            style={{ fontFamily: "Sora, sans-serif", fontWeight: 400 }}
+            {titleLine1}
+            {titleLine2 && <><br />{titleLine2}</>}
+          </h1>
+        </ScrollReveal>
+
+        {/* Subtitle — centered */}
+        <ScrollReveal direction="up" delay={0.16}>
+          <p
+            className="hero-subtitle mb-10"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: 16,
+              fontWeight: 400,
+              lineHeight: "160%",
+              color: "#555",
+              textAlign: "center",
+              margin: "0 auto 40px",
+            }}
           >
-            {data?.cta_secondary_label ?? "See How It Works"}
-            <ArrowRight stroke="#1C2BFF" />
-          </Link>
-        </div>
+            {data?.subtitle ?? "DGlide gives you ready-to-run systems for field service, sales, and operations that adapt to how your business actually works."}
+          </p>
+        </ScrollReveal>
+
+        {/* CTAs — centered */}
+        <ScrollReveal direction="up" delay={0.24}>
+          <div className="flex flex-wrap gap-4 mb-14 justify-center">
+            <Link
+              href={data?.cta_primary_href ?? "/schedule-demo"}
+              className="dg-btn-fill inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-base"
+              style={{
+                fontFamily: "Sora, sans-serif",
+                background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
+              }}
+            >
+              {data?.cta_primary_label ?? "Book a Demo"}
+              <ArrowRight stroke="white" />
+            </Link>
+            <Link
+              href={data?.cta_secondary_href ?? "/schedule-demo"}
+              className="dg-btn-outline inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-[#1C2BFF] text-[#1C2BFF] text-base transition-colors hover:bg-[#1C2BFF]/5"
+              style={{ fontFamily: "Sora, sans-serif", fontWeight: 400 }}
+            >
+              {data?.cta_secondary_label ?? "See How It Works"}
+              <ArrowRight stroke="#1C2BFF" />
+            </Link>
+          </div>
+        </ScrollReveal>
 
         {/* Hero image */}
-        <div className="w-full">
-          <Image
-            src={data?.product_image ?? "/hero-product.png"}
-            alt="DGlide Platform"
-            width={1200}
-            height={680}
-            className="w-full h-auto rounded-t-2xl object-cover"
-            priority
-          />
-        </div>
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="w-full">
+            <Image
+              src={data?.product_image ?? "/hero-product.png"}
+              alt="DGlide Platform"
+              width={1200}
+              height={680}
+              className="w-full h-auto rounded-t-2xl object-cover"
+              priority
+            />
+          </div>
+        </ScrollReveal>
       </div>
 
       {/* Logo carousel strip */}

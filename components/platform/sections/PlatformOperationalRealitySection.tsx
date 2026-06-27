@@ -4,6 +4,7 @@ import { FunctionComponent } from "react";
 import { useRouter } from "next/navigation";
 import { scrollToContact } from "@/lib/scroll-to-contact";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 import {
   platformRealityBannerCta,
   platformRealityBannerEyebrow,
@@ -31,14 +32,18 @@ const PlatformOperationalRealitySection: FunctionComponent = () => {
     >
       <SolutionsContainer>
         <div className="sol-plat-reality-header">
-          <h2 className="sol-plat-reality-heading">Built for Operational Reality</h2>
-          <p className="sol-plat-reality-intro">{platformRealityIntro}</p>
+          <ScrollReveal direction="up">
+            <h2 className="sol-plat-reality-heading">Built for Operational Reality</h2>
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.1}>
+            <p className="sol-plat-reality-intro">{platformRealityIntro}</p>
+          </ScrollReveal>
         </div>
 
-        <div className="sol-plat-reality-grid">
+        <StaggerReveal className="sol-plat-reality-grid">
           {platformRealityCards.map((card) => (
+            <StaggerItem key={card.title}>
             <article
-              key={card.title}
               className={`sol-plat-reality-card${
                 card.offset ? " sol-plat-reality-card--offset" : ""
               }`}
@@ -67,8 +72,9 @@ const PlatformOperationalRealitySection: FunctionComponent = () => {
                 {card.tag}
               </span>
             </article>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerReveal>
 
         <div className="sol-plat-reality-banner">
           <div className="sol-plat-reality-banner-copy">

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 /* Card surface shared by all four feature cards */
 const cardBg = "linear-gradient(180deg, #FFFFFF 0%, #F6F6F6 100%)";
@@ -66,38 +67,43 @@ export default function WDOperationsRunSection() {
     <section className="w-full">
       <div className="max-w-[1200px] mx-auto px-5 md:px-12">
         {/* Heading */}
-        <h2
-          className="[font-family:var(--font-tasa-orbiter)] max-w-[664px] text-[28px] leading-[1.3] md:text-[36px] md:leading-[1.25] lg:text-[48px] lg:leading-[60px]"
-          style={{
-            fontWeight: 400,
-            background: "linear-gradient(90deg, #FF7F1C 0%, #000000 23.69%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
-          Built for How Operations Actually Run
-        </h2>
+        <ScrollReveal direction="up">
+          <h2
+            className="[font-family:var(--font-tasa-orbiter)] max-w-[664px] text-[28px] leading-[1.3] md:text-[36px] md:leading-[1.25] lg:text-[48px] lg:leading-[60px]"
+            style={{
+              fontWeight: 400,
+              background: "linear-gradient(90deg, #FF7F1C 0%, #000000 23.69%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Built for How Operations Actually Run
+          </h2>
+        </ScrollReveal>
 
         {/* Content: image + stacked feature cards */}
         <div className="mt-8 lg:-mt-5 flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-end">
           {/* Left: product visual, bottom-aligned to the card column */}
-          <div
-            className="flex-shrink-0 w-full lg:w-[448px] rounded-2xl overflow-hidden border border-white"
-            style={{ boxShadow: "4px 4px 0 0 #E0E0E0" }}
-          >
-            <Image
-              src="/why-dglide/operations-run/operations-system.png"
-              alt="DGlide live operational system being customized"
-              width={1202}
-              height={1309}
-              className="w-full h-auto lg:w-[448px] lg:h-[488px] object-cover"
-            />
-          </div>
+          <ScrollReveal direction="left" className="flex-shrink-0 w-full lg:w-[448px]">
+            <div
+              className="flex-shrink-0 w-full lg:w-[448px] rounded-2xl overflow-hidden border border-white"
+              style={{ boxShadow: "4px 4px 0 0 #E0E0E0" }}
+            >
+              <Image
+                src="/why-dglide/operations-run/operations-system.png"
+                alt="DGlide live operational system being customized"
+                width={1202}
+                height={1309}
+                className="w-full h-auto lg:w-[448px] lg:h-[488px] object-cover"
+              />
+            </div>
+          </ScrollReveal>
 
           {/* Right: two groups of overlapping cards */}
-          <div className="w-full lg:w-[608px] flex flex-col gap-4">
+          <StaggerReveal className="w-full lg:w-[608px] flex flex-col gap-4">
             {/* Group 1: back card peeks above front card */}
+            <StaggerItem>
             <div className="flex flex-col">
               {/* Back card — Ready Before It Is Customized */}
               <div
@@ -114,8 +120,10 @@ export default function WDOperationsRunSection() {
                 <FeatureContent feature={FEATURES[1]} />
               </div>
             </div>
+            </StaggerItem>
 
             {/* Group 2: back card peeks below front card */}
+            <StaggerItem>
             <div className="flex flex-col">
               {/* Front card — Designed to Change After Go-Live */}
               <div
@@ -132,7 +140,8 @@ export default function WDOperationsRunSection() {
                 <FeatureContent feature={FEATURES[3]} />
               </div>
             </div>
-          </div>
+            </StaggerItem>
+          </StaggerReveal>
         </div>
       </div>
     </section>

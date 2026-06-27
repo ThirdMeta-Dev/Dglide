@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const STEP_DEFAULTS = [
   {
@@ -67,28 +68,33 @@ export default function WDProblemToSystemSection({
         <div className="flex flex-col gap-12 lg:flex-row lg:justify-between lg:gap-16">
           {/* Left column */}
           <div className="flex w-full max-w-[467px] shrink-0 flex-col gap-4 lg:pt-8">
-            <h2
-              className="text-[32px] leading-[1.2] lg:text-[48px] lg:leading-[58px]"
-              style={{
-                fontFamily: "var(--font-tasa-orbiter)",
-                fontWeight: 400,
-                background: "linear-gradient(90deg, #FF7F1C 0%, #000000 45.76%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              {title}
-            </h2>
-            <p
-              className="max-w-[415px] text-base leading-[26px] text-[#6F7276]"
-              style={{ fontFamily: "var(--font-inter)", letterSpacing: "0.2px" }}
-            >
-              {subtitle}
-            </p>
+            <ScrollReveal direction="up">
+              <h2
+                className="text-[32px] leading-[1.2] lg:text-[48px] lg:leading-[58px]"
+                style={{
+                  fontFamily: "var(--font-tasa-orbiter)",
+                  fontWeight: 400,
+                  background: "linear-gradient(90deg, #FF7F1C 0%, #000000 45.76%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {title}
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal direction="left" delay={0.05}>
+              <p
+                className="max-w-[415px] text-base leading-[26px] text-[#6F7276]"
+                style={{ fontFamily: "var(--font-inter)", letterSpacing: "0.2px" }}
+              >
+                {subtitle}
+              </p>
+            </ScrollReveal>
           </div>
 
           {/* Right column — staircase of step cards */}
+          <ScrollReveal direction="right" delay={0.05} className="lg:w-[646px] lg:shrink-0">
           <div className="relative flex w-full flex-col gap-4 lg:block lg:h-[616px] lg:w-[646px] lg:shrink-0">
             {steps.map((step) => (
               <div
@@ -125,6 +131,7 @@ export default function WDProblemToSystemSection({
               </div>
             ))}
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

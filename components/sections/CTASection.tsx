@@ -1,5 +1,7 @@
 "use client";
 
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
+
 const DEFAULTS = {
   badge_text: "Get an All-in-One Platform",
   title:      "Tell us how your operation runs. We will show you where DGlide fits. About 30 minutes.",
@@ -72,6 +74,7 @@ export default function CTASection({ data }: { data?: Record<string, string> }) 
           </svg>
 
           {/* Inner content */}
+          <ScrollReveal direction="up" delay={0.05}>
           <div
             style={{
               position: "relative",
@@ -163,6 +166,7 @@ export default function CTASection({ data }: { data?: Record<string, string> }) 
               </svg>
             </a>
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

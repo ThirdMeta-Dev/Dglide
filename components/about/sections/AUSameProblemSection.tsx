@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const CARDS = [
   {
@@ -42,34 +43,38 @@ export default function AUSameProblemSection() {
         <div className="relative flex flex-col gap-6">
           {/* Heading block */}
           <div className="flex flex-col gap-5">
-            <h2
-              className="bg-clip-text text-[32px] leading-[1.2] text-transparent md:text-[48px] md:leading-[58px]"
-              style={{
-                fontFamily: "var(--font-tasa-orbiter)",
-                fontWeight: 400,
-                backgroundImage:
-                  "linear-gradient(to left, #000000 73%, #FF7F1C 100%)",
-              }}
-            >
-              We Saw the Same Problem Everywhere
-            </h2>
-            <p
-              className="max-w-[587px] text-base leading-[27px] tracking-[0.2px] text-[#6F7276]"
-              style={{ fontFamily: "var(--font-inter), Inter, sans-serif" }}
-            >
-              Businesses were not failing because they lacked software. They
-              were struggling because their software did not fit how their
-              operations actually worked.
-            </p>
+            <ScrollReveal direction="up">
+              <h2
+                className="bg-clip-text text-[32px] leading-[1.2] text-transparent md:text-[48px] md:leading-[58px]"
+                style={{
+                  fontFamily: "var(--font-tasa-orbiter)",
+                  fontWeight: 400,
+                  backgroundImage:
+                    "linear-gradient(to left, #000000 73%, #FF7F1C 100%)",
+                }}
+              >
+                We Saw the Same Problem Everywhere
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.1}>
+              <p
+                className="max-w-[587px] text-base leading-[27px] tracking-[0.2px] text-[#6F7276]"
+                style={{ fontFamily: "var(--font-inter), Inter, sans-serif" }}
+              >
+                Businesses were not failing because they lacked software. They
+                were struggling because their software did not fit how their
+                operations actually worked.
+              </p>
+            </ScrollReveal>
           </div>
 
           {/* Cards + CTA bar — right-aligned 932px block on desktop */}
           <div className="aus-problem-outer flex w-full flex-col items-end gap-4">
             {/* Problem cards */}
-            <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-3 lg:w-[932px] lg:grid-cols-3">
+            <StaggerReveal className="grid w-full grid-cols-1 gap-4 md:grid-cols-3 lg:w-[932px] lg:grid-cols-3">
               {CARDS.map((card) => (
+                <StaggerItem key={card.title}>
                 <div
-                  key={card.title}
                   className="flex flex-col rounded-2xl border border-white lg:h-[388px]"
                   style={{
                     background: "linear-gradient(180deg, #FFF 0%, #F6F6F6 100%)",
@@ -116,8 +121,9 @@ export default function AUSameProblemSection() {
                     </div>
                   </div>
                 </div>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerReveal>
 
             {/* CTA bar */}
             <div

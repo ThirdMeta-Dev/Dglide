@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 /* ------------------------------------------------------------------ */
 /* Data — exact strings from Figma node 1118:1975                      */
@@ -89,6 +90,7 @@ export default function AUHowWeWorkSection() {
     <section className="w-full bg-[#F3F3F3] overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-12 py-10 md:py-20 flex flex-col items-center gap-8 md:gap-12">
         {/* ---------- Heading + subtitle ---------- */}
+        <ScrollReveal direction="up">
         <div className="flex flex-col items-center gap-4">
           <h2
             className="au-how-heading text-center text-[36px] leading-[44px] md:text-[48px] md:leading-[58px]"
@@ -114,6 +116,7 @@ export default function AUHowWeWorkSection() {
             customer.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* ---------- Principle cards ---------- */}
         <div className="relative w-full flex flex-col gap-4">
@@ -136,18 +139,22 @@ export default function AUHowWeWorkSection() {
           />
 
           {/* Row 1 — three cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+          <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
             {TOP_ROW.map((principle) => (
-              <PrincipleCard key={principle.title} principle={principle} />
+              <StaggerItem key={principle.title}>
+                <PrincipleCard principle={principle} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerReveal>
 
           {/* Row 2 — two wide cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+          <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
             {BOTTOM_ROW.map((principle) => (
-              <PrincipleCard key={principle.title} principle={principle} />
+              <StaggerItem key={principle.title}>
+                <PrincipleCard principle={principle} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerReveal>
         </div>
       </div>
     </section>

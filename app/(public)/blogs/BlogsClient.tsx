@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { BlogPost } from '@/lib/blog-db'
 import styles from './BlogsClient.module.css'
+import { StaggerReveal, StaggerItem } from '@/components/animations/MotionPrimitives'
 
 const PAGE_SIZE = 9
 
@@ -203,19 +204,20 @@ function CarouselSection({
         </div>
       </div>
 
-      <div className={styles.cardGrid}>
+      <StaggerReveal className={styles.cardGrid}>
         {visiblePosts.map((post, index) => {
           const postIndex = currentPage * 3 + index
 
           return (
-            <BlogCard
-              key={postRenderKey(title, post, postIndex)}
-              post={post}
-              stat={statForIndex?.(postIndex)}
-            />
+            <StaggerItem key={postRenderKey(title, post, postIndex)}>
+              <BlogCard
+                post={post}
+                stat={statForIndex?.(postIndex)}
+              />
+            </StaggerItem>
           )
         })}
-      </div>
+      </StaggerReveal>
     </section>
   )
 }
@@ -232,16 +234,17 @@ function EditorialSection({ posts }: { posts: BlogPost[] }) {
             <p className={styles.editorialSubtitle}>Hand-picked reads based on what you&apos;re exploring</p>
           </div>
 
-          <div className={styles.editorialGrid}>
+          <StaggerReveal className={styles.editorialGrid}>
             {posts.slice(0, 2).map((post, index) => (
-              <BlogCard
-                key={postRenderKey('editorial', post, index)}
-                post={post}
-                large
-                stat={index === 1 ? "Editor's Pick" : undefined}
-              />
+              <StaggerItem key={postRenderKey('editorial', post, index)}>
+                <BlogCard
+                  post={post}
+                  large
+                  stat={index === 1 ? "Editor's Pick" : undefined}
+                />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerReveal>
         </div>
       </div>
     </section>
@@ -343,19 +346,20 @@ function LibrarySection({
 
         {visiblePosts.length > 0 ? (
           <div className={styles.libraryList}>
-            <div className={styles.cardGrid}>
+            <StaggerReveal className={styles.cardGrid}>
               {visiblePosts.map((post, index) => {
                 const postIndex = (currentPage - 1) * PAGE_SIZE + index
 
                 return (
-                  <BlogCard
-                    key={postRenderKey('library', post, postIndex)}
-                    post={post}
-                    stat={index === 1 || index === 4 ? "Editor's Pick" : undefined}
-                  />
+                  <StaggerItem key={postRenderKey('library', post, postIndex)}>
+                    <BlogCard
+                      post={post}
+                      stat={index === 1 || index === 4 ? "Editor's Pick" : undefined}
+                    />
+                  </StaggerItem>
                 )
               })}
-            </div>
+            </StaggerReveal>
 
             {totalPages > 1 && (
               <nav className={styles.pagination} aria-label="Blog pagination">

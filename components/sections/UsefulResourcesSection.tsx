@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const TABS = ["Case Studies", "Blogs", "Glossary"];
 
@@ -20,6 +21,7 @@ export default function UsefulResourcesSection() {
       <div className="usr-outer" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Heading */}
+        <ScrollReveal direction="up">
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <h2
             style={{
@@ -49,17 +51,18 @@ export default function UsefulResourcesSection() {
             Dig Into Case Studies, Articles, And Operations Terms Explained Simply.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* Content row */}
         <div className="usr-content" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
 
           {/* Left — tab buttons */}
-          <div className="usr-tabs" style={{ display: "flex", flexDirection: "column", gap: 16, width: 244, flexShrink: 0 }}>
+          <StaggerReveal className="usr-tabs" style={{ display: "flex", flexDirection: "column", gap: 16, width: 244, flexShrink: 0 }}>
             {TABS.map((tab) => {
               const isActive = tab === active;
               return (
+                <StaggerItem key={tab}>
                 <button
-                  key={tab}
                   onClick={() => setActive(tab)}
                   style={{
                     width: "100%",
@@ -78,9 +81,10 @@ export default function UsefulResourcesSection() {
                 >
                   {tab}
                 </button>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerReveal>
 
           {/* Right — card */}
           <div

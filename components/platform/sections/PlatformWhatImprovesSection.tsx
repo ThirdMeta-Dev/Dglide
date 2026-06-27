@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const CARDS = [
   {
@@ -44,22 +45,25 @@ const CARDS = [
 const PlatformWhatImprovesSection: FunctionComponent = () => (
   <section className="sol-section sol-plat-what-improves-section">
     <SolutionsContainer>
-      <header className="sol-plat-what-improves-header">
-        <h2 className="sol-plat-what-improves-heading">
-          What the Platform Helps You Improve
-        </h2>
-        <p className="sol-plat-what-improves-desc">
-          Real, daily improvements across how your operation runs, not just another tool to manage.
-        </p>
-      </header>
+      <ScrollReveal direction="up">
+        <header className="sol-plat-what-improves-header">
+          <h2 className="sol-plat-what-improves-heading">
+            What the Platform Helps You Improve
+          </h2>
+          <p className="sol-plat-what-improves-desc">
+            Real, daily improvements across how your operation runs, not just another tool to manage.
+          </p>
+        </header>
+      </ScrollReveal>
 
       <div className="sol-plat-what-improves-grid-wrap">
         {/* Radial gradient glow at the center cross of the 6-card grid */}
         <div className="sol-plat-what-improves-glow" aria-hidden />
 
-        <div className="sol-plat-what-improves-grid">
+        <StaggerReveal className="sol-plat-what-improves-grid">
         {CARDS.map((card) => (
-          <article key={card.title} className="sol-plat-what-improves-card">
+          <StaggerItem key={card.title}>
+          <article className="sol-plat-what-improves-card">
             <Image
               src={card.icon}
               alt=""
@@ -73,8 +77,9 @@ const PlatformWhatImprovesSection: FunctionComponent = () => (
               <p className="sol-plat-what-improves-card-desc">{card.description}</p>
             </div>
           </article>
+          </StaggerItem>
         ))}
-        </div>
+        </StaggerReveal>
       </div>
     </SolutionsContainer>
   </section>

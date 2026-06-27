@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const STATIC_TESTIMONIALS = [
   { quote: "We finally have visibility in our operations. Your system adapts to how you work and the results speak for themselves.", name: "Infrastructure Team",  company: "Scaleops International", image: "" },
@@ -81,6 +82,7 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
       <div className="testi-header" style={{ maxWidth: 1200, margin: "0 auto", padding: "81px 48px 0" }}>
         {/* Desktop: title + nav on one row */}
         <div className="testi-header-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 40 }}>
+          <ScrollReveal direction="up">
           <h2
             className="testi-h2"
             style={{
@@ -103,6 +105,7 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
               </>
             ) : sectionTitle}
           </h2>
+          </ScrollReveal>
           <div className="testi-nav-desktop" style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: 8, flexShrink: 0 }}>
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 300, color: "#6F7276", letterSpacing: "0.5px" }}>
               {current + 1}/{N}
@@ -125,6 +128,7 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
         </div>
       </div>
 
+      <ScrollReveal direction="up" delay={0.1}>
       <div
         className="testi-body"
         style={{
@@ -156,6 +160,7 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
           </div>
         </div>
       </div>
+      </ScrollReveal>
     </section>
   );
 }

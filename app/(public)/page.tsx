@@ -21,7 +21,7 @@ export default async function HomePage() {
   const sections = await getHomepageSections();
 
   return (
-    <AnimatedPublicPage>
+    <AnimatedPublicPage staticFirstCount={1}>
       <HeroSection data={sections.hero} />
       <SoftwareWorksSection data={sections.software_works} />
       <ComparisonSection data={sections.comparison} />

@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 import {
   platformMultiSystemsCards,
   platformMultiSystemsDescription,
@@ -10,29 +11,33 @@ import {
 const PlatformMultiSystemsSection: FunctionComponent = () => (
   <section id="platform-multi-systems" className="sol-section">
     <SolutionsContainer>
-      <header className="sol-plat-multi-systems-header">
-        <h2 className="sol-plat-multi-systems-heading">
-          {platformMultiSystemsHeading}
-        </h2>
-        <p className="sol-plat-multi-systems-description">
-          {platformMultiSystemsDescription}
-        </p>
-      </header>
+      <ScrollReveal direction="up">
+        <header className="sol-plat-multi-systems-header">
+          <h2 className="sol-plat-multi-systems-heading">
+            {platformMultiSystemsHeading}
+          </h2>
+          <p className="sol-plat-multi-systems-description">
+            {platformMultiSystemsDescription}
+          </p>
+        </header>
+      </ScrollReveal>
 
-      <div className="sol-plat-multi-systems-diagram">
-        <Image
-          src="/platform/multi-systems-bg.png"
-          alt=""
-          width={1104}
-          height={742}
-          className="sol-plat-multi-systems-bg"
-          aria-hidden
-          priority
-        />
+      <ScrollReveal direction="up" delay={0.1}>
+        <div className="sol-plat-multi-systems-diagram">
+          <Image
+            src="/platform/multi-systems-bg.png"
+            alt=""
+            width={1104}
+            height={742}
+            className="sol-plat-multi-systems-bg"
+            aria-hidden
+            priority
+          />
 
-        <div className="sol-plat-multi-systems-grid">
-          {platformMultiSystemsCards.map((card) => (
-            <article key={card.title} className="sol-plat-multi-systems-card">
+          <StaggerReveal className="sol-plat-multi-systems-grid">
+            {platformMultiSystemsCards.map((card) => (
+              <StaggerItem key={card.title}>
+              <article className="sol-plat-multi-systems-card">
               <Image
                 src={card.icon}
                 alt=""
@@ -53,10 +58,12 @@ const PlatformMultiSystemsSection: FunctionComponent = () => (
               >
                 {card.link}&nbsp;→
               </a>
-            </article>
-          ))}
+              </article>
+              </StaggerItem>
+            ))}
+          </StaggerReveal>
         </div>
-      </div>
+      </ScrollReveal>
     </SolutionsContainer>
   </section>
 );

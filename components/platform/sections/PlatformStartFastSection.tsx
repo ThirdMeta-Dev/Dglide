@@ -3,6 +3,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const STEPS = [
   {
@@ -40,11 +41,13 @@ const PlatformStartFastSection: FunctionComponent = () => {
   return (
     <section id="platform-start-fast" className="sol-section sol-plat-start-section">
       <SolutionsContainer>
-        <div className="sol-plat-start-heading-wrap">
-          <h2 className="sol-plat-start-heading">
-            Start Fast. Configure Around Reality. Keep Improving.
-          </h2>
-        </div>
+        <ScrollReveal direction="up">
+          <div className="sol-plat-start-heading-wrap">
+            <h2 className="sol-plat-start-heading">
+              Start Fast. Configure Around Reality. Keep Improving.
+            </h2>
+          </div>
+        </ScrollReveal>
 
         <div className="sol-plat-start-timeline">
           {/* connecting line */}
@@ -55,12 +58,12 @@ const PlatformStartFastSection: FunctionComponent = () => {
             />
           </div>
 
-          <div className="sol-plat-start-steps">
+          <StaggerReveal className="sol-plat-start-steps">
             {STEPS.map((step, i) => {
               const isActive = i <= activeStep;
               return (
+                <StaggerItem key={step.title}>
                 <button
-                  key={step.title}
                   type="button"
                   className={`sol-plat-start-step${isActive ? " sol-plat-start-step--active" : ""}`}
                   onClick={() => setActiveStep(i)}
@@ -78,9 +81,10 @@ const PlatformStartFastSection: FunctionComponent = () => {
                   <h3 className="sol-plat-start-step-title">{step.title}</h3>
                   <p className="sol-plat-start-step-desc">{step.desc}</p>
                 </button>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerReveal>
         </div>
       </SolutionsContainer>
     </section>

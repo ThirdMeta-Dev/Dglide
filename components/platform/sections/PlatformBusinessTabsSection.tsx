@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const TABS = [
   {
@@ -167,6 +168,7 @@ export default function PlatformBusinessTabsSection() {
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Title */}
+        <ScrollReveal direction="up">
         <div style={{ position: "relative", marginBottom: 56, textAlign: "center" }}>
           <h2
             style={{
@@ -202,8 +204,10 @@ export default function PlatformBusinessTabsSection() {
             Built for Businesses Like Yours
           </h2>
         </div>
+        </ScrollReveal>
 
         {/* Tab strip with fade overlays */}
+        <ScrollReveal direction="up" delay={0.1}>
         <div style={{ position: "relative", marginBottom: 8, zIndex: 2 }}>
           <div
             style={{
@@ -257,8 +261,10 @@ export default function PlatformBusinessTabsSection() {
             ))}
           </div>
         </div>
+        </ScrollReveal>
 
         {/* Content card */}
+        <ScrollReveal direction="up" delay={0.15}>
         <div
           className="plat-btabs-content-card"
           style={{
@@ -392,6 +398,7 @@ export default function PlatformBusinessTabsSection() {
             />
           </div>
         </div>
+        </ScrollReveal>
 
       </div>
 

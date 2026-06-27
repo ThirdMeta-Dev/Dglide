@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const LEFT_DEFAULTS = [
   { title: "Field Service Management",      desc: "Work Orders, Scheduling, Dispatch, And Field Execution At One Place." },
@@ -33,74 +34,80 @@ export default function OneSystemSection({ data }: { data?: Record<string, strin
         className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 opacity-0 translate-y-8 transition-all duration-700 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0"
       >
         {/* Heading */}
-        <div className="text-center mb-16">
-          <h2
-            className="text-4xl md:text-5xl leading-tight mb-4"
-            style={{
-              fontFamily: "var(--font-tasa-orbiter)",
-              fontWeight: 400,
-              background: "linear-gradient(90deg, #FF7F1C 0%, #000000 55%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            {data?.title ?? "Run Your Whole Operation On One System"}
-          </h2>
-          <p className="text-[#6F7276] text-base max-w-2xl mx-auto" style={{ fontFamily: "Inter, sans-serif" }}>
-            {data?.subtitle ?? "Field Service, Production, Internal Ops, Field Sales. One Backbone, No Disconnected Tools."}
-          </p>
-        </div>
+        <ScrollReveal direction="up">
+          <div className="text-center mb-16">
+            <h2
+              className="text-4xl md:text-5xl leading-tight mb-4"
+              style={{
+                fontFamily: "var(--font-tasa-orbiter)",
+                fontWeight: 400,
+                background: "linear-gradient(90deg, #FF7F1C 0%, #000000 55%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              {data?.title ?? "Run Your Whole Operation On One System"}
+            </h2>
+            <p className="text-[#6F7276] text-base max-w-2xl mx-auto" style={{ fontFamily: "Inter, sans-serif" }}>
+              {data?.subtitle ?? "Field Service, Production, Internal Ops, Field Sales. One Backbone, No Disconnected Tools."}
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* 3-column layout */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_360px_1fr] gap-8 items-center">
 
           {/* LEFT column */}
-          <div className="flex flex-col gap-6">
+          <StaggerReveal className="flex flex-col gap-6">
             {LEFT_DEFAULTS.map((def, i) => (
-              <div
-                key={i}
-                className="p-6"
-                style={{ borderRadius: "16px", background: "linear-gradient(100deg, #FFF 5.48%, rgba(243,243,243,0.00) 68.68%)" }}
-              >
-                <Image src={i === 0 ? "/one-system/icon-tl.png" : "/one-system/icon-bl.png"} alt="" width={81} height={41} className="mb-4 object-contain" />
-                <h3 className="text-base font-semibold text-black mb-2" style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 600 }}>
-                  {data?.[`left_${i + 1}_title`] ?? def.title}
-                </h3>
-                <p className="text-[14px] text-[#545454] leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                  {data?.[`left_${i + 1}_desc`] ?? def.desc}
-                </p>
-              </div>
+              <StaggerItem key={i}>
+                <div
+                  className="p-6"
+                  style={{ borderRadius: "16px", background: "linear-gradient(100deg, #FFF 5.48%, rgba(243,243,243,0.00) 68.68%)" }}
+                >
+                  <Image src={i === 0 ? "/one-system/icon-tl.png" : "/one-system/icon-bl.png"} alt="" width={81} height={41} className="mb-4 object-contain" />
+                  <h3 className="text-base font-semibold text-black mb-2" style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 600 }}>
+                    {data?.[`left_${i + 1}_title`] ?? def.title}
+                  </h3>
+                  <p className="text-[14px] text-[#545454] leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+                    {data?.[`left_${i + 1}_desc`] ?? def.desc}
+                  </p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerReveal>
 
           {/* CENTER — image */}
-          <div className="flex items-center justify-center">
-            <img
-              src={data?.center_image ?? "/onesystem-center.png"}
-              alt="Dglide Platform"
-              className="w-full max-w-[360px] h-auto object-contain"
-            />
-          </div>
+          <ScrollReveal direction="up" delay={0.15}>
+            <div className="flex items-center justify-center">
+              <img
+                src={data?.center_image ?? "/onesystem-center.png"}
+                alt="Dglide Platform"
+                className="w-full max-w-[360px] h-auto object-contain"
+              />
+            </div>
+          </ScrollReveal>
 
           {/* RIGHT column */}
-          <div className="flex flex-col gap-6">
+          <StaggerReveal className="flex flex-col gap-6">
             {RIGHT_DEFAULTS.map((def, i) => (
-              <div
-                key={i}
-                className="p-6"
-                style={{ borderRadius: "16px", background: "linear-gradient(263deg, #FFF 5.57%, rgba(243,243,243,0.00) 63.48%)" }}
-              >
-                <Image src={i === 0 ? "/one-system/icon-tr.png" : "/one-system/icon-br.png"} alt="" width={81} height={41} className="mb-4 ml-auto object-contain" />
-                <h3 className="text-base font-semibold text-black mb-2 text-right" style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 600 }}>
-                  {data?.[`right_${i + 1}_title`] ?? def.title}
-                </h3>
-                <p className="text-[14px] text-[#545454] leading-relaxed text-right" style={{ fontFamily: "Inter, sans-serif" }}>
-                  {data?.[`right_${i + 1}_desc`] ?? def.desc}
-                </p>
-              </div>
+              <StaggerItem key={i}>
+                <div
+                  className="p-6"
+                  style={{ borderRadius: "16px", background: "linear-gradient(263deg, #FFF 5.57%, rgba(243,243,243,0.00) 63.48%)" }}
+                >
+                  <Image src={i === 0 ? "/one-system/icon-tr.png" : "/one-system/icon-br.png"} alt="" width={81} height={41} className="mb-4 ml-auto object-contain" />
+                  <h3 className="text-base font-semibold text-black mb-2 text-right" style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 600 }}>
+                    {data?.[`right_${i + 1}_title`] ?? def.title}
+                  </h3>
+                  <p className="text-[14px] text-[#545454] leading-relaxed text-right" style={{ fontFamily: "Inter, sans-serif" }}>
+                    {data?.[`right_${i + 1}_desc`] ?? def.desc}
+                  </p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerReveal>
 
         </div>
       </div>

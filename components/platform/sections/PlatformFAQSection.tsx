@@ -3,6 +3,7 @@
 import { FunctionComponent, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const FAQ_ITEMS = [
   {
@@ -80,19 +81,24 @@ const PlatformFAQSection: FunctionComponent = () => {
         <div className="sol-plat-faq-inner">
           {/* Left: image + heading */}
           <div className="sol-plat-faq-left">
-            <h2 className="sol-plat-faq-heading">Frequently Asked Questions</h2>
-            <div className="sol-plat-faq-image-wrap">
-              <Image
-                src="/platform/faq-illustration.png"
-                alt="FAQ illustration"
-                width={267}
-                height={379}
-                className="sol-plat-faq-image"
-              />
-            </div>
+            <ScrollReveal direction="left">
+              <h2 className="sol-plat-faq-heading">Frequently Asked Questions</h2>
+            </ScrollReveal>
+            <ScrollReveal direction="left" delay={0.1}>
+              <div className="sol-plat-faq-image-wrap">
+                <Image
+                  src="/platform/faq-illustration.png"
+                  alt="FAQ illustration"
+                  width={267}
+                  height={379}
+                  className="sol-plat-faq-image"
+                />
+              </div>
+            </ScrollReveal>
           </div>
 
           {/* Right: accordion */}
+          <ScrollReveal direction="right">
           <div className="sol-plat-faq-list">
             {FAQ_ITEMS.map((item, index) => {
               const isOpen = openIndex === index;
@@ -119,6 +125,7 @@ const PlatformFAQSection: FunctionComponent = () => {
               );
             })}
           </div>
+          </ScrollReveal>
         </div>
       </SolutionsContainer>
     </section>

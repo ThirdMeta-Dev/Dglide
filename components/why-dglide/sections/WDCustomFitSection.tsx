@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 /**
  * "Why DGlide" page — Custom-Level Fit section.
@@ -62,6 +63,7 @@ export default function WDCustomFitSection() {
         {/* Panel */}
         <div className="relative flex flex-col items-center gap-12 lg:gap-[60px] pt-12 lg:pt-[60px] pb-12 px-5 lg:px-12 lg:pb-12">
           {/* Header — Frame 1618873223 */}
+          <ScrollReveal direction="up">
           <div className="w-full max-w-[1104px] flex flex-col items-center gap-4">
             <h2
               className="max-w-[854px] text-center text-[32px] leading-[1.21] lg:text-[48px] lg:leading-[58px]"
@@ -85,6 +87,7 @@ export default function WDCustomFitSection() {
               evolving after go-live through the Living Service Model.
             </p>
           </div>
+          </ScrollReveal>
 
           {/* Cards + connectors + platform pill — Frame 1618876651 */}
           <div className="relative w-full max-w-[1104px] flex flex-col items-center">
@@ -111,10 +114,18 @@ export default function WDCustomFitSection() {
             </div>
 
             {/* Card row — Frame 1618876520 (middle card raised 52px) */}
-            <div className="w-full flex flex-col lg:flex-row lg:items-end gap-4 lg:h-[343px]">
+            <StaggerReveal className="w-full flex flex-col lg:flex-row lg:items-end gap-4 lg:h-[343px]">
               {CARDS.map((card) => (
-                <div
+                <StaggerItem
                   key={card.title}
+                  className={`flex-1 rounded-[16px] p-px lg:h-[291px] ${
+                    card.raised ? "lg:self-start" : "lg:self-end"
+                  }`}
+                  style={{
+                    background: "linear-gradient(to top, #1C2BFF 0%, #FFFFFF 40%)",
+                  }}
+                >
+                <div
                   className={`flex-1 rounded-[16px] p-px lg:h-[291px] ${
                     card.raised ? "lg:self-start" : "lg:self-end"
                   }`}
@@ -174,23 +185,26 @@ export default function WDCustomFitSection() {
                     </div>
                   </div>
                 </div>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerReveal>
 
             {/* Dglide Platform pill — Frame 1618876633 */}
-            <Link
-              href="/platform"
-              className="dg-btn-fill relative z-10 mt-8 lg:-mt-6 inline-flex items-center justify-center rounded-[156px] px-12 py-6 text-white text-[24px] leading-[31px]"
-              style={{
-                fontFamily: "var(--font-tasa-orbiter)",
-                fontWeight: 600,
-                background: "linear-gradient(180deg, #1C2BFF 0%, #141FB5 100%)",
-                boxShadow:
-                  "0 0 0 10px #F3F3F3, -4px -4px 4px 10px rgba(0, 0, 0, 0.04)",
-              }}
-            >
-              Dglide Platform
-            </Link>
+            <ScrollReveal direction="up" delay={0.2}>
+              <Link
+                href="/platform"
+                className="dg-btn-fill relative z-10 mt-8 lg:-mt-6 inline-flex items-center justify-center rounded-[156px] px-12 py-6 text-white text-[24px] leading-[31px]"
+                style={{
+                  fontFamily: "var(--font-tasa-orbiter)",
+                  fontWeight: 600,
+                  background: "linear-gradient(180deg, #1C2BFF 0%, #141FB5 100%)",
+                  boxShadow:
+                    "0 0 0 10px #F3F3F3, -4px -4px 4px 10px rgba(0, 0, 0, 0.04)",
+                }}
+              >
+                Dglide Platform
+              </Link>
+            </ScrollReveal>
           </div>
         </div>
       </div>

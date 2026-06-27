@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 export type FooterSettings = {
   newsletter_heading?:      string;
@@ -168,97 +169,99 @@ export default function Footer({
   return (
     <footer style={{ width: "100%", marginTop: "auto" }}>
       {/* Newsletter banner */}
-      <div className="footer-nl-outer" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
-        <div
-          className="footer-newsletter"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 24,
-            padding: "8px 8px 8px 48px",
-            borderRadius: 40,
-            background: "linear-gradient(90deg, #F5E7DE 0%, #F3F3F3 100%)",
-          }}
-        >
-          <p
-            className="footer-nl-title"
+      <ScrollReveal direction="up">
+        <div className="footer-nl-outer" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+          <div
+            className="footer-newsletter"
             style={{
-              fontFamily: "var(--font-sora), Sora, sans-serif",
-              fontSize: 20,
-              fontWeight: 400,
-              lineHeight: "28px",
-              color: "#000",
-              margin: 0,
-              flexShrink: 0,
-              whiteSpace: "nowrap",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 24,
+              padding: "8px 8px 8px 48px",
+              borderRadius: 40,
+              background: "linear-gradient(90deg, #F5E7DE 0%, #F3F3F3 100%)",
             }}
           >
-            {newsletterHeading}
-          </p>
-
-          <div className="footer-nl-actions" style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
-            <div
-              className="footer-nl-input"
+            <p
+              className="footer-nl-title"
               style={{
-                width: 370,
-                height: 48,
-                background: "#FFF",
-                borderRadius: 35,
-                padding: "0 28px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <input
-                type="email"
-                placeholder={newsletterPlaceholder}
-                style={{
-                  width: "100%",
-                  background: "transparent",
-                  border: "none",
-                  outline: "none",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: 14,
-                  lineHeight: "21px",
-                  color: "#ABABAB",
-                }}
-              />
-            </div>
-
-            <button
-              className="dg-btn-fill"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                padding: "14px 32px",
-                borderRadius: 40,
-                border: "1.5px solid #141FB5",
-                background: "linear-gradient(180deg, #1C2BFF 0%, #141FB5 100%)",
-                color: "#FFF",
                 fontFamily: "var(--font-sora), Sora, sans-serif",
-                fontSize: 16,
-                fontWeight: 600,
-                cursor: "pointer",
+                fontSize: 20,
+                fontWeight: 400,
+                lineHeight: "28px",
+                color: "#000",
+                margin: 0,
                 flexShrink: 0,
                 whiteSpace: "nowrap",
               }}
             >
-              {newsletterButtonLabel}
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path
-                  d="M3 9H15M15 9L10 4M15 9L10 14"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {newsletterHeading}
+            </p>
+
+            <div className="footer-nl-actions" style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+              <div
+                className="footer-nl-input"
+                style={{
+                  width: 370,
+                  height: 48,
+                  background: "#FFF",
+                  borderRadius: 35,
+                  padding: "0 28px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <input
+                  type="email"
+                  placeholder={newsletterPlaceholder}
+                  style={{
+                    width: "100%",
+                    background: "transparent",
+                    border: "none",
+                    outline: "none",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: 14,
+                    lineHeight: "21px",
+                    color: "#ABABAB",
+                  }}
                 />
-              </svg>
-            </button>
+              </div>
+
+              <button
+                className="dg-btn-fill"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  padding: "14px 32px",
+                  borderRadius: 40,
+                  border: "1.5px solid #141FB5",
+                  background: "linear-gradient(180deg, #1C2BFF 0%, #141FB5 100%)",
+                  color: "#FFF",
+                  fontFamily: "var(--font-sora), Sora, sans-serif",
+                  fontSize: 16,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  flexShrink: 0,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {newsletterButtonLabel}
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path
+                    d="M3 9H15M15 9L10 4M15 9L10 14"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
 
       {/* Footer body */}
       <div style={{ width: "100%", background: "transparent", borderRadius: "30px 30px 0 0" }}>
@@ -267,105 +270,121 @@ export default function Footer({
           <div className="footer-body" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
 
             {/* Brand column */}
-            <div className="footer-brand-col" style={{ width: 272, flexShrink: 0, display: "flex", flexDirection: "column", gap: 26 }}>
-              <div style={{ position: "relative", width: 205, height: 36 }}>
-                <Image
-                  src="/logo.png"
-                  alt="DGlide"
-                  fill
-                  style={{ objectFit: "contain", objectPosition: "left" }}
-                />
-              </div>
+            <ScrollReveal direction="left" delay={0.1}>
+              <div className="footer-brand-col" style={{ width: 272, flexShrink: 0, display: "flex", flexDirection: "column", gap: 26 }}>
+                <div style={{ position: "relative", width: 205, height: 36 }}>
+                  <Image
+                    src="/logo.png"
+                    alt="DGlide"
+                    fill
+                    style={{ objectFit: "contain", objectPosition: "left" }}
+                  />
+                </div>
 
-              <p
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: 15,
-                  fontWeight: 400,
-                  lineHeight: "25px",
-                  letterSpacing: "0.2px",
-                  color: "#545454",
-                  margin: 0,
-                }}
-              >
-                {tagline}
-              </p>
+                <p
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: 15,
+                    fontWeight: 400,
+                    lineHeight: "25px",
+                    letterSpacing: "0.2px",
+                    color: "#545454",
+                    margin: 0,
+                  }}
+                >
+                  {tagline}
+                </p>
 
-              {/* Contact info */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <a href={`mailto:${email}`} className="dg-footer-contact" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
-                  <Image src="/footer/icon-email.png" alt="" width={24} height={24} className="object-contain" style={{ flexShrink: 0 }} />
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, color: "inherit" }}>
-                    {email}
-                  </span>
-                </a>
-                <a href={`tel:${phone}`} className="dg-footer-contact" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
-                  <Image src="/footer/icon-phone.png" alt="" width={24} height={24} className="object-contain" style={{ flexShrink: 0 }} />
-                  <span style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 15, fontWeight: 600, color: "inherit" }}>
-                    {phone}
-                  </span>
-                </a>
-              </div>
+                {/* Contact info */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <a href={`mailto:${email}`} className="dg-footer-contact" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
+                    <Image src="/footer/icon-email.png" alt="" width={24} height={24} className="object-contain" style={{ flexShrink: 0 }} />
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, color: "inherit" }}>
+                      {email}
+                    </span>
+                  </a>
+                  <a href={`tel:${phone}`} className="dg-footer-contact" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
+                    <Image src="/footer/icon-phone.png" alt="" width={24} height={24} className="object-contain" style={{ flexShrink: 0 }} />
+                    <span style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 15, fontWeight: 600, color: "inherit" }}>
+                      {phone}
+                    </span>
+                  </a>
+                </div>
 
-              {/* Social icons */}
-              <style>{`
-                .dg-social-icon {
-                  width: 40px; height: 40px; border-radius: 50%;
-                  border: 1.5px solid #FF7F1C;
-                  display: flex; align-items: center; justify-content: center;
-                  flex-shrink: 0; transition: background 0.2s ease, border-color 0.2s ease;
-                  overflow: hidden;
-                }
-                .dg-social-icon:hover { background: #1C2BFF; border-color: #1C2BFF; }
-                .dg-social-icon:hover img { filter: brightness(0) invert(1); }
-                .dg-footer-link { transition: color 0.18s ease; }
-                .dg-footer-link:hover { color: #1C2BFF !important; }
-                .dg-footer-contact { color: #000; transition: color 0.18s ease; }
-                .dg-footer-contact:hover { color: #1C2BFF !important; }
-              `}</style>
-              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                {[
-                  { href: social.linkedin  || "#", src: "/footer/social-linkedin.png",  label: "LinkedIn"  },
-                  { href: social.twitter   || "#", src: "/footer/social-twitter.png",   label: "Twitter"   },
-                  { href: social.whatsapp  || "#", src: "/footer/social-whatsapp.png",  label: "WhatsApp"  },
-                  { href: social.instagram || "#", src: "/footer/social-instagram.png", label: "Instagram" },
-                ].map(({ href, src, label }) => (
-                  <Link key={label} href={href} aria-label={label} className="dg-social-icon">
-                    <Image src={src} alt="" width={20} height={20} className="object-contain" />
-                  </Link>
-                ))}
+                {/* Social icons */}
+                <style>{`
+                  .dg-social-icon {
+                    width: 40px; height: 40px; border-radius: 50%;
+                    border: 1.5px solid #FF7F1C;
+                    display: flex; align-items: center; justify-content: center;
+                    flex-shrink: 0; transition: background 0.2s ease, border-color 0.2s ease;
+                    overflow: hidden;
+                  }
+                  .dg-social-icon:hover { background: #1C2BFF; border-color: #1C2BFF; }
+                  .dg-social-icon:hover img { filter: brightness(0) invert(1); }
+                  .dg-footer-link { transition: color 0.18s ease; }
+                  .dg-footer-link:hover { color: #1C2BFF !important; }
+                  .dg-footer-contact { color: #000; transition: color 0.18s ease; }
+                  .dg-footer-contact:hover { color: #1C2BFF !important; }
+                `}</style>
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  {[
+                    { href: social.linkedin  || "#", src: "/footer/social-linkedin.png",  label: "LinkedIn"  },
+                    { href: social.twitter   || "#", src: "/footer/social-twitter.png",   label: "Twitter"   },
+                    { href: social.whatsapp  || "#", src: "/footer/social-whatsapp.png",  label: "WhatsApp"  },
+                    { href: social.instagram || "#", src: "/footer/social-instagram.png", label: "Instagram" },
+                  ].map(({ href, src, label }) => (
+                    <Link key={label} href={href} aria-label={label} className="dg-social-icon">
+                      <Image src={src} alt="" width={20} height={20} className="object-contain" />
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Nav grid — 2 rows × 3 columns */}
-            <div className="footer-nav-grid" style={{ flex: 1, display: "flex", flexDirection: "column", gap: 36 }}>
+            <StaggerReveal
+              className="footer-nav-grid"
+              stagger={0.08}
+              style={{ flex: 1, display: "flex", flexDirection: "column", gap: 36 }}
+            >
               <div className="footer-nav-row" style={{ display: "flex", gap: 60 }}>
-                {row1.map((col) => <NavColumn key={col.heading} {...col} />)}
+                {row1.map((col) => (
+                  <StaggerItem key={col.heading} direction="up">
+                    <NavColumn {...col} />
+                  </StaggerItem>
+                ))}
               </div>
               <div className="footer-nav-row" style={{ display: "flex", gap: 60 }}>
-                {row2.map((col) => <NavColumn key={col.heading} {...col} />)}
+                {row2.map((col) => (
+                  <StaggerItem key={col.heading} direction="up">
+                    <NavColumn {...col} />
+                  </StaggerItem>
+                ))}
               </div>
-            </div>
+            </StaggerReveal>
           </div>
 
           {/* Divider */}
           <div style={{ height: 1, background: "linear-gradient(90deg, #FBFBFB 0%, #D5D5D5 100%)", margin: "48px 0 0" }} />
 
           {/* Bottom bar */}
-          <div className="footer-bottom" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 0 32px" }}>
-            <p style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: "22.4px", color: "#545454", margin: 0 }}>
-              {copyright}
-            </p>
-            <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-              <Link href={privacyHref} style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, color: "#545454", textDecoration: "none" }}>
-                {privacyLabel}
-              </Link>
-              <span style={{ color: "#D5D5D5" }}>·</span>
-              <Link href={termsHref} style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, color: "#545454", textDecoration: "none" }}>
-                {termsLabel}
-              </Link>
+          <ScrollReveal direction="up" delay={0.05}>
+            <div className="footer-bottom" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 0 32px" }}>
+              <p style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: "22.4px", color: "#545454", margin: 0 }}>
+                {copyright}
+              </p>
+              <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+                <Link href={privacyHref} style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, color: "#545454", textDecoration: "none" }}>
+                  {privacyLabel}
+                </Link>
+                <span style={{ color: "#D5D5D5" }}>·</span>
+                <Link href={termsHref} style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, color: "#545454", textDecoration: "none" }}>
+                  {termsLabel}
+                </Link>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
       </div>

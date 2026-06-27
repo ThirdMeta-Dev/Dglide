@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { motionEase } from "@/components/animations/MotionPrimitives";
+import { motionEase, ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 /*
  * Why DGlide — Frequently Asked Questions (Figma node 1099:1567)
@@ -82,6 +82,7 @@ export default function WDFAQSection({ data }: { data?: Record<string, string> }
         >
           {/* Left: gradient heading + illustration */}
           <div className="wd-faq-left" style={{ flex: "0 0 360px" }}>
+            <ScrollReveal direction="up">
             <h2
               style={{
                 fontFamily: "var(--font-tasa-orbiter)",
@@ -99,6 +100,7 @@ export default function WDFAQSection({ data }: { data?: Record<string, string> }
             >
               {sectionTitle}
             </h2>
+            </ScrollReveal>
             <Image
               className="wd-faq-illu"
               src="/why-dglide/faq/faq-illustration.png"
@@ -116,6 +118,7 @@ export default function WDFAQSection({ data }: { data?: Record<string, string> }
           </div>
 
           {/* Right: accordion */}
+          <ScrollReveal direction="up" delay={0.1}>
           <div className="wd-faq-accordion" style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
             {faqs.map((faq, i) => {
               const isOpen = openIdx === i;
@@ -189,6 +192,7 @@ export default function WDFAQSection({ data }: { data?: Record<string, string> }
               );
             })}
           </div>
+          </ScrollReveal>
         </div>
       </div>
 

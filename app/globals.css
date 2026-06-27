@@ -321,14 +321,14 @@
 
 /* Dark blue fill button — arrow rotates to ↗ on hover */
 .dg-btn-fill {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 .dg-btn-fill svg,
 .dg-btn-fill .btn-arrow {
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .dg-btn-fill:hover {
-  opacity: 0.93;
+  background: linear-gradient(273deg, #0B148C 4.29%, #141FB5 95.71%) !important;
 }
 .dg-btn-fill:hover svg,
 .dg-btn-fill:hover .btn-arrow {

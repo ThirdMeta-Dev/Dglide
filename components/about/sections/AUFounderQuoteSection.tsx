@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 /* ------------------------------------------------------------------ */
 /* Founder quote — exact strings from Figma node 1118:2036             */
@@ -24,15 +25,18 @@ export default function AUFounderQuoteSection() {
           {/* Content row: photo + quote */}
           <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-end gap-8 lg:gap-16 lg:pr-12 lg:h-[460px]">
             {/* Founder photo */}
-            <Image
-              src="/about/founder-quote/mr-samir.png"
-              alt="Mr Samir"
-              width={736}
-              height={920}
-              className="w-full max-w-[368px] mx-auto lg:mx-0 lg:w-[368px] lg:h-[460px] shrink-0 rounded-[16px] object-cover"
-            />
+            <ScrollReveal direction="left" className="shrink-0">
+              <Image
+                src="/about/founder-quote/mr-samir.png"
+                alt="Mr Samir"
+                width={736}
+                height={920}
+                className="w-full max-w-[368px] mx-auto lg:mx-0 lg:w-[368px] lg:h-[460px] shrink-0 rounded-[16px] object-cover"
+              />
+            </ScrollReveal>
 
             {/* Quote column */}
+            <ScrollReveal direction="right" delay={0.1} className="w-full lg:w-[656px]">
             <div className="flex w-full lg:w-[656px] flex-col items-end gap-9 px-5 pb-8 lg:px-0 lg:py-7">
               {/* Quote paragraphs */}
               <div className="flex w-full flex-col gap-[10px]">
@@ -72,6 +76,7 @@ export default function AUFounderQuoteSection() {
                 </span>
               </div>
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

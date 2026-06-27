@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const LEFT_DEFAULTS  = ["Fast to start. Your business bends to fit the software.", "Cheap to start, expensive in workarounds.", "Fits the category, not your business."];
 const RIGHT_DEFAULTS = ["Fits at first. Becomes a software project you own forever.", "Months to build, years to maintain, yours to fix.", "Custom fit comes with a custom headache."];
@@ -49,33 +50,36 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
       >
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16">
           {/* Heading */}
-          <div className="text-center mb-16">
-            <h2
-              className="text-4xl md:text-5xl leading-tight"
-              style={{
-                fontFamily: "var(--font-tasa-orbiter)",
-                fontWeight: 400,
-                background: "linear-gradient(180deg, #FF7F1C 0%, #000 82.08%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              {titleLine1}
-              {titleLine2 && <><br />{titleLine2}</>}
-            </h2>
-            <p
-              className="text-[#6F7276] text-base max-w-2xl mx-auto mt-5 text-center"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
-              {data?.subtitle ?? "Until now, you had two bad options: software that does not fit, or a custom build that never ends. DGlide is the 3rd: best of all worlds."}
-            </p>
-          </div>
+          <ScrollReveal direction="up">
+            <div className="text-center mb-16">
+              <h2
+                className="text-4xl md:text-5xl leading-tight"
+                style={{
+                  fontFamily: "var(--font-tasa-orbiter)",
+                  fontWeight: 400,
+                  background: "linear-gradient(180deg, #FF7F1C 0%, #000 82.08%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {titleLine1}
+                {titleLine2 && <><br />{titleLine2}</>}
+              </h2>
+              <p
+                className="text-[#6F7276] text-base max-w-2xl mx-auto mt-5 text-center"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                {data?.subtitle ?? "Until now, you had two bad options: software that does not fit, or a custom build that never ends. DGlide is the 3rd: best of all worlds."}
+              </p>
+            </div>
+          </ScrollReveal>
 
           {/* 3-column layout */}
           <div className="grid grid-cols-1 md:grid-cols-[1fr_320px_1fr] gap-10 items-center cmp-grid">
 
             {/* LEFT column */}
+            <ScrollReveal direction="left">
             <div className="flex flex-col gap-6 cmp-left-col">
               <div className="flex flex-col gap-3">
                 <Image src="/comparison/col-left-header.png" alt="" width={86} height={43} className="object-contain" />
@@ -104,6 +108,7 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
                 ))}
               </div>
             </div>
+            </ScrollReveal>
 
             {/* CENTER — blue oval (hidden on mobile) */}
             <div className="hidden md:flex items-center justify-center relative cmp-center-col">
@@ -151,6 +156,7 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
             </div>
 
             {/* RIGHT column (mirrored) */}
+            <ScrollReveal direction="right">
             <div className="flex flex-col gap-6 items-end cmp-right-col-outer">
               <div className="flex flex-col gap-3 items-end">
                 <Image src="/comparison/col-right-header.png" alt="" width={86} height={47} className="object-contain" />
@@ -179,6 +185,7 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
                 ))}
               </div>
             </div>
+            </ScrollReveal>
 
           </div>
         </div>

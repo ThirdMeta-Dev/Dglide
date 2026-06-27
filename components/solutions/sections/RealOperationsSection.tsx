@@ -8,6 +8,7 @@ import {
   realOpsMetricsDescription,
   realOpsSolutionItems,
 } from "@/data/solutionsPageData";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 type RealOperationsSectionProps = {
   heading?: string;
@@ -64,92 +65,98 @@ const RealOperationsSection: FunctionComponent<RealOperationsSectionProps> = ({
     <SolutionsContainer>
       <div className="sol-real-ops-inner">
         <header className="sol-real-ops-header">
-          <h2 className="sol-real-ops-heading">
-            {heading}
-          </h2>
+          <ScrollReveal direction="up">
+            <h2 className="sol-real-ops-heading">
+              {heading}
+            </h2>
+          </ScrollReveal>
         </header>
 
         <div className="sol-real-ops-body">
-          <div className="sol-real-ops-left">
-            <div className="sol-real-ops-panel">
-              <div className="sol-real-ops-block sol-real-ops-block--challenge">
-                <div className="sol-real-ops-block-intro">
-                  <h3 className="sol-real-ops-block-title sol-real-ops-block-title--orange">
-                    The Challenge
-                  </h3>
-                  <blockquote className="sol-real-ops-quote">
-                    &ldquo;{challengeQuote}&rdquo;
-                  </blockquote>
+          <ScrollReveal direction="left" delay={0.1}>
+            <div className="sol-real-ops-left">
+              <div className="sol-real-ops-panel">
+                <div className="sol-real-ops-block sol-real-ops-block--challenge">
+                  <div className="sol-real-ops-block-intro">
+                    <h3 className="sol-real-ops-block-title sol-real-ops-block-title--orange">
+                      The Challenge
+                    </h3>
+                    <blockquote className="sol-real-ops-quote">
+                      &ldquo;{challengeQuote}&rdquo;
+                    </blockquote>
+                  </div>
+
+                  <ul className="sol-real-ops-bullets">
+                    {challengeBullets.map((item) => (
+                      <li key={item} className="sol-real-ops-bullet">
+                        <ListIcon />
+                        <span className="sol-real-ops-bullet-text">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                <ul className="sol-real-ops-bullets">
-                  {challengeBullets.map((item) => (
-                    <li key={item} className="sol-real-ops-bullet">
-                      <ListIcon />
-                      <span className="sol-real-ops-bullet-text">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="sol-real-ops-block sol-real-ops-block--metrics">
+                  <div className="sol-real-ops-block-intro sol-real-ops-block-intro--metrics">
+                    <h3 className="sol-real-ops-block-title sol-real-ops-block-title--blue">
+                      The Success Metrics
+                    </h3>
+                    <p className="sol-real-ops-metrics-description">
+                      {metricsDescription}
+                    </p>
+                  </div>
+
+                  <div className="sol-real-ops-metrics">
+                    {metrics.map((metric) => (
+                      <div key={metric.value} className="sol-real-ops-metric">
+                        <p className="sol-real-ops-metric-value">{metric.value}</p>
+                        <p className="sol-real-ops-metric-label">{metric.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              <div className="sol-real-ops-block sol-real-ops-block--metrics">
-                <div className="sol-real-ops-block-intro sol-real-ops-block-intro--metrics">
-                  <h3 className="sol-real-ops-block-title sol-real-ops-block-title--blue">
-                    The Success Metrics
-                  </h3>
-                  <p className="sol-real-ops-metrics-description">
-                    {metricsDescription}
-                  </p>
-                </div>
-
-                <div className="sol-real-ops-metrics">
-                  {metrics.map((metric) => (
-                    <div key={metric.value} className="sol-real-ops-metric">
-                      <p className="sol-real-ops-metric-value">{metric.value}</p>
-                      <p className="sol-real-ops-metric-label">{metric.label}</p>
-                    </div>
-                  ))}
-                </div>
+              <div className="sol-real-ops-footer-quote">
+                <span className="sol-real-ops-footer-avatar" aria-hidden />
+                <blockquote className="sol-real-ops-footer-text">
+                  {footerQuote}
+                </blockquote>
               </div>
             </div>
+          </ScrollReveal>
 
-            <div className="sol-real-ops-footer-quote">
-              <span className="sol-real-ops-footer-avatar" aria-hidden />
-              <blockquote className="sol-real-ops-footer-text">
-                {footerQuote}
-              </blockquote>
-            </div>
-          </div>
+          <ScrollReveal direction="right" delay={0.1}>
+            <aside className="sol-real-ops-solution-wrap">
+              <article className="sol-real-ops-solution-card">
+                <img
+                  src="/solutions/dglide-logo.svg"
+                  alt="Dglide"
+                  width={160}
+                  height={28}
+                  className="sol-real-ops-solution-logo"
+                />
 
-          <aside className="sol-real-ops-solution-wrap">
-            <article className="sol-real-ops-solution-card">
-              <img
-                src="/solutions/dglide-logo.svg"
-                alt="Dglide"
-                width={160}
-                height={28}
-                className="sol-real-ops-solution-logo"
-              />
+                <div className="sol-real-ops-solution-content">
+                  <div className="sol-real-ops-solution-header">
+                    <h3 className="sol-real-ops-solution-title">Dglide Solution</h3>
+                    <span className="sol-real-ops-solution-divider" aria-hidden />
+                  </div>
 
-              <div className="sol-real-ops-solution-content">
-                <div className="sol-real-ops-solution-header">
-                  <h3 className="sol-real-ops-solution-title">Dglide Solution</h3>
-                  <span className="sol-real-ops-solution-divider" aria-hidden />
+                  <ul className="sol-real-ops-solution-list">
+                    {solutionItems.map((item) => (
+                      <li key={item} className="sol-real-ops-solution-item">
+                        <SolutionListIcon />
+                        <span className="sol-real-ops-solution-item-text">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                <ul className="sol-real-ops-solution-list">
-                  {solutionItems.map((item) => (
-                    <li key={item} className="sol-real-ops-solution-item">
-                      <SolutionListIcon />
-                      <span className="sol-real-ops-solution-item-text">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          </aside>
+              </article>
+            </aside>
+          </ScrollReveal>
         </div>
       </div>
     </SolutionsContainer>

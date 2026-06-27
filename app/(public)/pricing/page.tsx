@@ -30,7 +30,7 @@ export default async function PricingPage() {
   };
 
   return (
-    <AnimatedPublicPage className={styles.page}>
+    <AnimatedPublicPage className={styles.page} staticFirstCount={1}>
       <PricingHeroSection />
       <PlanComparisonSection />
       <PricingPrinciplesSection />

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const HEADING = "Before and After DGlide";
 const SUBTITLE =
@@ -73,6 +74,7 @@ export default function WDBeforeAfterSection() {
       <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         <div className="flex flex-col gap-12 lg:gap-20">
           {/* Heading block */}
+          <ScrollReveal direction="up">
           <div className="flex flex-col gap-3">
             <h2
               className="w-full text-[36px] leading-[44px] md:text-[48px] md:leading-[58px]"
@@ -94,6 +96,7 @@ export default function WDBeforeAfterSection() {
               {SUBTITLE}
             </p>
           </div>
+          </ScrollReveal>
 
           {/* Quote + comparison cards */}
           <div className="flex flex-col gap-10 lg:flex-row lg:gap-12">
@@ -110,6 +113,7 @@ export default function WDBeforeAfterSection() {
             {/* Cards */}
             <div className="flex flex-1 flex-col gap-4 md:flex-row">
               {/* Before card */}
+              <ScrollReveal direction="left" className="flex-1">
               <div
                 className="flex-1 rounded-2xl border border-white px-4 md:px-8 pt-[31px] pb-8"
                 style={{
@@ -158,8 +162,10 @@ export default function WDBeforeAfterSection() {
                   </div>
                 </div>
               </div>
+              </ScrollReveal>
 
               {/* After card */}
+              <ScrollReveal direction="right" className="flex-1">
               <div
                 className="flex-1 rounded-2xl border border-white px-4 md:px-8 pt-[30px] pb-[57px]"
                 style={{
@@ -208,6 +214,7 @@ export default function WDBeforeAfterSection() {
                   </div>
                 </div>
               </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const INTERVAL = 6000;
 
@@ -64,28 +65,32 @@ export default function SoftwareWorksSection({ data }: { data?: Record<string, s
     <section className="w-full py-24">
       {/* Heading */}
       <div className="text-center mb-16 px-4">
-        <h2
-          className="[font-family:var(--font-tasa-orbiter)] sec-h2"
-          style={{
-            fontSize: "48px",
-            fontWeight: 400,
-            lineHeight: "58px",
-            background: "linear-gradient(180deg, #FF7F1C 0%, #000 55.42%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
-          {data?.badge_text ?? "Your Software Works."}
-          <br />
-          {data?.title ?? "Just Not the Way You Do."}
-        </h2>
-        <p
-          className="mt-5 [font-family:var(--font-inter)] max-w-[660px] mx-auto capitalize"
-          style={{ color: "#6F7276", fontSize: "16px", fontWeight: 400, lineHeight: "26px", letterSpacing: "0.2px" }}
-        >
-          {data?.subtitle ?? "Every Tool You Bought Solved One Thing And Ignored How The Rest Of Your Operation Works."}
-        </p>
+        <ScrollReveal direction="up">
+          <h2
+            className="[font-family:var(--font-tasa-orbiter)] sec-h2"
+            style={{
+              fontSize: "48px",
+              fontWeight: 400,
+              lineHeight: "58px",
+              background: "linear-gradient(180deg, #FF7F1C 0%, #000 55.42%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            {data?.badge_text ?? "Your Software Works."}
+            <br />
+            {data?.title ?? "Just Not the Way You Do."}
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal direction="up" delay={0.1}>
+          <p
+            className="mt-5 [font-family:var(--font-inter)] max-w-[660px] mx-auto capitalize"
+            style={{ color: "#6F7276", fontSize: "16px", fontWeight: 400, lineHeight: "26px", letterSpacing: "0.2px" }}
+          >
+            {data?.subtitle ?? "Every Tool You Bought Solved One Thing And Ignored How The Rest Of Your Operation Works."}
+          </p>
+        </ScrollReveal>
       </div>
 
       {/* Two-column layout */}
@@ -113,11 +118,12 @@ export default function SoftwareWorksSection({ data }: { data?: Record<string, s
         </div>
 
         {/* Right: accordion */}
-        <div className="flex-1 flex flex-col">
+        <StaggerReveal className="flex-1 flex flex-col">
           {items.map((item, i) => {
             const isActive = i === active;
             return (
-              <div key={i} className="cursor-pointer" onMouseEnter={() => goTo(i)}>
+              <StaggerItem key={i}>
+              <div className="cursor-pointer" onMouseEnter={() => goTo(i)}>
                 <div className="flex items-start gap-5 py-5">
                   <span
                     className="[font-family:var(--font-tasa-orbiter)] flex-shrink-0 w-6"
@@ -162,9 +168,10 @@ export default function SoftwareWorksSection({ data }: { data?: Record<string, s
                   )}
                 </div>
               </div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

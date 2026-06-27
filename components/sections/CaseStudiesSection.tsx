@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const RIGHT_ITEM_DEFAULTS = [
   "Every tool replaced by one platform",
@@ -43,6 +44,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
       <div className="sec-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         {/* Title */}
+        <ScrollReveal direction="up">
         <div style={{ marginBottom: 56, position: "relative", display: "inline-block" }}>
           <h2
             className="sec-h2"
@@ -78,11 +80,13 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
             {sectionTitle}
           </h2>
         </div>
+        </ScrollReveal>
 
         {/* Two-column */}
-        <div className="css-two-col" style={{ display: "flex", alignItems: "flex-start", isolation: "isolate" }}>
+        <StaggerReveal stagger={0.1} className="css-two-col" style={{ display: "flex", alignItems: "flex-start", isolation: "isolate" }}>
 
           {/* LEFT CARD */}
+          <StaggerItem>
           <div
             className="css-left"
             style={{
@@ -240,8 +244,10 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
               </p>
             </div>
           </div>
+          </StaggerItem>
 
           {/* RIGHT CARD */}
+          <StaggerItem>
           <div
             className="css-right"
             style={{
@@ -327,8 +333,9 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
               </a>
             </div>
           </div>
+          </StaggerItem>
 
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

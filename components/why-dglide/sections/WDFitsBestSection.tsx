@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 /* ------------------------------------------------------------------ */
 /* Data — exact strings from Figma node 1099:636                       */
@@ -155,6 +156,7 @@ export default function WDFitsBestSection() {
         className="max-w-[1152px] mx-auto px-6 opacity-0 translate-y-8 transition-all duration-700 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0"
       >
         {/* ---------- Heading row ---------- */}
+        <ScrollReveal direction="up">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-2 mb-10 lg:mb-14">
           <h2
             className="text-[36px] leading-[44px] md:text-[48px] md:leading-[56px] font-normal"
@@ -176,9 +178,10 @@ export default function WDFitsBestSection() {
             choosing between, across the three things that actually matter.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* ---------- Cards row ---------- */}
-        <div className="relative flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-3">
+        <StaggerReveal className="relative flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-3">
           {/* Decorative radial glow behind the center card (Ellipse 470) */}
           <div
             aria-hidden
@@ -190,6 +193,7 @@ export default function WDFitsBestSection() {
           />
 
           {/* ---- Card 1: Standard Tools ---- */}
+          <StaggerItem className="flex-shrink-0 w-full lg:w-[348px]">
           <div
             className="relative z-10 w-full lg:w-[348px] lg:h-[465px] flex-shrink-0 rounded-2xl border border-white p-8 flex flex-col gap-7"
             style={{
@@ -222,8 +226,10 @@ export default function WDFitsBestSection() {
               </p>
             </div>
           </div>
+          </StaggerItem>
 
           {/* ---- Card 2: DGlide ---- */}
+          <StaggerItem className="flex-shrink-0 w-full lg:w-[384px]">
           <div
             className="relative z-10 w-full lg:w-[384px] lg:h-[500px] flex-shrink-0 rounded-2xl border border-white p-8 flex flex-col gap-7"
             style={{
@@ -256,8 +262,10 @@ export default function WDFitsBestSection() {
               </p>
             </div>
           </div>
+          </StaggerItem>
 
           {/* ---- Card 3: Custom Build ---- */}
+          <StaggerItem className="flex-shrink-0 w-full lg:w-[348px]">
           <div
             className="relative z-10 w-full lg:w-[348px] lg:h-[475px] flex-shrink-0 rounded-2xl border border-white p-8 flex flex-col lg:justify-center gap-7"
             style={{
@@ -290,7 +298,8 @@ export default function WDFitsBestSection() {
               </p>
             </div>
           </div>
-        </div>
+          </StaggerItem>
+        </StaggerReveal>
       </div>
     </section>
   );

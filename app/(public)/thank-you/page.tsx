@@ -25,7 +25,7 @@ export default async function ThankYouPage() {
   };
 
   return (
-    <AnimatedPublicPage className={styles.page}>
+    <AnimatedPublicPage className={styles.page} staticFirstCount={1}>
       {/* 1. Hero / Thank You header + "What happens next?" CTA card */}
       <ThankYouHero />
 
