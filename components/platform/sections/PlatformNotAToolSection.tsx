@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import {
   platformNotAToolCards,
@@ -9,18 +10,22 @@ const PlatformNotAToolSection: FunctionComponent = () => (
   <section className="sol-section">
     <SolutionsContainer>
       <h2 className="sol-plat-not-tool-heading">{platformNotAToolHeading}</h2>
+
       <div className="sol-plat-not-tool-grid">
-        {platformNotAToolCards.map((card, index) => (
-          <article key={`${card.title}-${index}`} className="sol-plat-not-tool-card">
-            <img
-              src="/solutions/orange-bg.svg"
+        {platformNotAToolCards.map((card) => (
+          <article key={card.title} className="sol-plat-not-tool-card">
+            <Image
+              src={card.icon}
               alt=""
-              width={48}
+              width={88}
               height={48}
+              className="sol-plat-not-tool-card-icon"
               aria-hidden
             />
-            <h3 className="sol-problem-card-title">{card.title}</h3>
-            <p className="sol-problem-card-description">{card.description}</p>
+            <div>
+              <h3 className="sol-plat-not-tool-card-title">{card.title}</h3>
+              <p className="sol-plat-not-tool-card-desc">{card.description}</p>
+            </div>
           </article>
         ))}
       </div>

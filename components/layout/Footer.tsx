@@ -100,6 +100,7 @@ function NavColumn({ heading, links }: { heading: string; links: { label: string
           <Link
             key={link.label}
             href={link.href}
+            className="dg-footer-link"
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: 14,
@@ -226,6 +227,7 @@ export default function Footer({
             </div>
 
             <button
+              className="dg-btn-fill"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -291,18 +293,18 @@ export default function Footer({
 
               {/* Contact info */}
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <a href={`mailto:${email}`} className="dg-footer-contact" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
                   <Image src="/footer/icon-email.png" alt="" width={24} height={24} className="object-contain" style={{ flexShrink: 0 }} />
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, color: "#000" }}>
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, color: "inherit" }}>
                     {email}
                   </span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                </a>
+                <a href={`tel:${phone}`} className="dg-footer-contact" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
                   <Image src="/footer/icon-phone.png" alt="" width={24} height={24} className="object-contain" style={{ flexShrink: 0 }} />
-                  <span style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 15, fontWeight: 600, color: "#000" }}>
+                  <span style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 15, fontWeight: 600, color: "inherit" }}>
                     {phone}
                   </span>
-                </div>
+                </a>
               </div>
 
               {/* Social icons */}
@@ -314,13 +316,12 @@ export default function Footer({
                   flex-shrink: 0; transition: background 0.2s ease, border-color 0.2s ease;
                   overflow: hidden;
                 }
-                .dg-social-icon:hover {
-                  background: #1C2BFF;
-                  border-color: #1C2BFF;
-                }
-                .dg-social-icon:hover img {
-                  filter: brightness(0) invert(1);
-                }
+                .dg-social-icon:hover { background: #1C2BFF; border-color: #1C2BFF; }
+                .dg-social-icon:hover img { filter: brightness(0) invert(1); }
+                .dg-footer-link { transition: color 0.18s ease; }
+                .dg-footer-link:hover { color: #1C2BFF !important; }
+                .dg-footer-contact { color: #000; transition: color 0.18s ease; }
+                .dg-footer-contact:hover { color: #1C2BFF !important; }
               `}</style>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 {[

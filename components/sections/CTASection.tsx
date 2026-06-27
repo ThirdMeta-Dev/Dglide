@@ -133,6 +133,7 @@ export default function CTASection({ data }: { data?: Record<string, string> }) 
             {/* Button */}
             <a
               href={ctaHref}
+              className="dg-btn-outline"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

@@ -5,6 +5,7 @@ import {
   platformHeroDescription,
   platformHeroEyebrow,
   platformHeroHeading,
+  platformHeroImage,
   platformHeroPrimaryCta,
   platformHeroSecondaryCta,
 } from "@/data/platformPageData";
@@ -17,6 +18,9 @@ const PlatformHeroSection: FunctionComponent = () => (
     bullets={platformHeroBullets}
     primaryCta={platformHeroPrimaryCta}
     secondaryCta={platformHeroSecondaryCta}
+    imageSrc={platformHeroImage}
+    imageAlt="DGlide — configurable operations platform dashboard"
+    actionsInline
   />
 );
 

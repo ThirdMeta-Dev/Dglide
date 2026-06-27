@@ -20,6 +20,9 @@ type FSMHeroSectionProps = {
   bullets?: string[];
   primaryCta?: string;
   secondaryCta?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  actionsInline?: boolean;
 };
 
 const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
@@ -29,8 +32,28 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
   bullets = DEFAULT_BULLETS,
   primaryCta = "Book a Demo",
   secondaryCta = "ITSM Capabilities",
+  imageSrc = "/solutions/itsm-hero-illustration.png",
+  imageAlt = "DGlide service management dashboard",
+  actionsInline = false,
 }) => {
   const router = useRouter();
+
+  const actionButtons = (
+    <div className="sol-hero-actions">
+      <SolutionsButton
+        variant="book-demo"
+        onClick={() => scrollToContact(router)}
+      >
+        {primaryCta}
+      </SolutionsButton>
+      <SolutionsButton
+        variant="outline"
+        onClick={() => scrollToContact(router)}
+      >
+        {secondaryCta}
+      </SolutionsButton>
+    </div>
+  );
 
   return (
     <section className="relative overflow-x-clip bg-[var(--sol-bg)] pb-0 pt-16 lg:pt-20">
@@ -64,13 +87,15 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
                 </li>
               ))}
             </ul>
+
+            {actionsInline && <div className="pt-2">{actionButtons}</div>}
           </div>
 
           {/* Right column — hero illustration */}
           <div className="flex justify-center lg:justify-end">
             <Image
-              src="/solutions/itsm-hero-illustration.png"
-              alt="DGlide ITSM — service management dashboard"
+              src={imageSrc}
+              alt={imageAlt}
               width={1024}
               height={732}
               className="w-full max-w-[560px] h-auto object-contain"
@@ -80,24 +105,13 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
         </div>
       </SolutionsContainer>
 
-      <div className="relative z-10 mt-10 pb-14 pt-8 lg:mt-14 lg:pb-16">
-        <SolutionsContainer>
-          <div className="sol-hero-actions">
-            <SolutionsButton
-              variant="book-demo"
-              onClick={() => scrollToContact(router)}
-            >
-              {primaryCta}
-            </SolutionsButton>
-            <SolutionsButton
-              variant="outline"
-              onClick={() => scrollToContact(router)}
-            >
-              {secondaryCta}
-            </SolutionsButton>
-          </div>
-        </SolutionsContainer>
-      </div>
+      {!actionsInline && (
+        <div className="relative z-10 mt-10 pb-14 pt-8 lg:mt-14 lg:pb-16">
+          <SolutionsContainer>
+            {actionButtons}
+          </SolutionsContainer>
+        </div>
+      )}
     </section>
   );
 };

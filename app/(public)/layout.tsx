@@ -1,3 +1,4 @@
+import "@/styles/homepage-responsive.css";
 import Header, { type NavItemData, type HeaderSettings } from "@/components/layout/Header";
 import Footer, { type FooterSettings, type FooterLink } from "@/components/layout/Footer";
 import { createClient } from "@/lib/supabase/server";

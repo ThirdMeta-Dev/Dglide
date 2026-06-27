@@ -1,0 +1,436 @@
+/*
+ * HOMEPAGE — MOBILE & TABLET RESPONSIVE
+ * Breakpoints: tablet ≤ 1023px | mobile ≤ 767px
+ * Desktop (≥ 1024px) is NEVER touched here.
+ * !important is used only where inline styles block CSS overrides.
+ *
+ * ═══════════════════════════════════════════════════════
+ * TYPE SCALE STANDARD  (apply this on every new page)
+ *
+ *  Role          Desktop        Tablet ≤1023   Mobile ≤767
+ *  ─────────────────────────────────────────────────────
+ *  Hero h1       60–64px        40px           32px
+ *  Section h2    40–48px        36px           28px   ← .sec-h2
+ *  Card h3       24px           22px           20px
+ *  Body text     16px           16px           14–15px
+ *  Buttons       16px / px-8    15px / px-6    13px / px-4 py-2
+ *  Small labels  14px           13px           12px
+ * ═══════════════════════════════════════════════════════
+ */
+
+/* ─────────────────────────────────────────
+   SHARED HEADING SCALE
+   .sec-h2 is used across most homepage sections
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .sec-h2 {
+    font-size: 36px !important;
+    line-height: 1.25 !important;
+  }
+}
+@media (max-width: 767px) {
+  .sec-h2 {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   1. HERO SECTION
+   hero-logos-row: flex row on desktop →
+   stack on mobile so label sits above marquee
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .hero-logos-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: flex-start !important;
+  }
+  .hero-logos-label {
+    flex-shrink: unset !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   2. SOFTWARE WORKS SECTION
+   Two-column flex (image 55% | accordion flex-1)
+   → stack on tablet and mobile
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .sw-two-col {
+    flex-direction: column !important;
+    gap: 32px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .sw-image-col {
+    width: 100% !important;
+    flex-shrink: unset !important;
+    max-height: 320px;
+  }
+  .sw-image-col img {
+    object-fit: cover;
+    max-height: 320px;
+  }
+}
+
+/* ─────────────────────────────────────────
+   3. FOUR REASONS SECTION
+   Already has sm:grid-cols-2 — just fix top padding
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .four-reasons-outer {
+    padding-top: 40px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   4. LIVING SERVICE SECTION
+   Pixel-coord orbit (lss-right) hides on mobile/tablet.
+   lss-mobile-slide (already in JSX, display:none) reveals.
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .lss-outer {
+    padding: 48px 24px 48px !important;
+  }
+  .lss-nav {
+    position: static !important;
+    display: flex !important;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  .lss-two-col {
+    flex-direction: column !important;
+  }
+  .lss-left {
+    width: 100% !important;
+    flex-shrink: unset !important;
+  }
+  .lss-right {
+    display: none !important;
+  }
+  .lss-mobile-slide {
+    display: block !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   5. BUSINESS TABS SECTION
+   Tab row: 4 tabs × 267px = 1068px min → scrollable row on tablet/mobile
+   Content card: side-by-side → stacked column
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  /* scrollable tab strip */
+  .bts-tab-row {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px !important;
+  }
+  .bts-tab-row::-webkit-scrollbar {
+    display: none;
+  }
+  .bts-tab {
+    flex-shrink: 0 !important;
+    width: auto !important;
+    min-width: 140px;
+    font-size: 14px !important;
+    padding: 14px 16px !important;
+    white-space: nowrap;
+  }
+  /* content card stacks */
+  .bts-content-card {
+    flex-direction: column !important;
+    gap: 24px !important;
+    min-height: unset !important;
+    padding: 24px !important;
+  }
+  .bts-content-left {
+    width: 100% !important;
+  }
+  .bts-img-col {
+    min-height: 220px !important;
+    flex: none !important;
+    width: 100% !important;
+  }
+}
+@media (max-width: 767px) {
+  .bts-tab {
+    min-width: 120px;
+    font-size: 13px !important;
+    padding: 12px 12px !important;
+  }
+  /* reduce CTA margin inside left col */
+  .bts-content-left > div:last-child {
+    margin-top: 28px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   6. CASE STUDIES SECTION
+   Left 699px + right 445px + -40px overlap = 1104px → stack
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .css-two-col {
+    flex-direction: column !important;
+    gap: 24px !important;
+    align-items: stretch !important;
+  }
+  .css-left {
+    width: 100% !important;
+    flex-shrink: unset !important;
+  }
+  .css-right {
+    width: 100% !important;
+    flex-shrink: unset !important;
+    margin-left: 0 !important;
+  }
+}
+@media (max-width: 767px) {
+  .css-metrics {
+    gap: 24px !important;
+  }
+  .css-metric-num {
+    font-size: 36px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   7. COMPETITOR SECTION
+   Left staggered cards + right 432px fixed → stack
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .comp-two-col {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .comp-card {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  .comp-right {
+    width: 100% !important;
+    flex-shrink: unset !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   8. CAPABILITIES SECTION
+   4-item flex row → 2-col grid on tablet → 1-col on mobile
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .cap-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px !important;
+  }
+  .cap-item {
+    flex: none !important;
+  }
+}
+@media (max-width: 767px) {
+  .cap-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   9. TESTIMONIALS SECTION
+   Header: title + desktop-nav side by side → stack on mobile
+   Body: left-col (author list) + carousel → hide left col on mobile
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .testi-header {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .testi-header-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-bottom: 12px !important;
+  }
+  .testi-nav-desktop {
+    display: none !important;
+  }
+  .testi-mobile-subtitle {
+    display: block !important;
+  }
+  .testi-mobile-nav {
+    display: flex !important;
+  }
+  .testi-desktop-br {
+    display: none !important;
+  }
+  .testi-body {
+    padding-left: 24px !important;
+  }
+  .testi-left-col {
+    display: none !important;
+  }
+  .testi-h2 {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   10. LIVE FASTER SECTION
+   3-col staggered flex → stack on mobile/tablet
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .lfs-header {
+    text-align: left !important;
+    padding: 0 24px !important;
+  }
+  .lfs-cards {
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 0 24px !important;
+  }
+  .lfs-card {
+    flex: none !important;
+    margin-top: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   11. USEFUL RESOURCES SECTION
+   Left tab list (244px) + right card → stack
+   Tabs become horizontal scrollable row
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .usr-outer {
+    padding: 0 24px !important;
+  }
+  .usr-content {
+    flex-direction: column !important;
+    gap: 24px !important;
+    align-items: stretch !important;
+  }
+  .usr-tabs {
+    width: 100% !important;
+    flex-shrink: unset !important;
+    flex-direction: row !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px !important;
+    padding-bottom: 4px;
+  }
+  .usr-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .usr-tabs > button {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .usr-card {
+    flex-direction: column !important;
+  }
+  .usr-card-img {
+    width: 100% !important;
+    min-height: 200px;
+  }
+  .usr-card-text {
+    padding: 24px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   12. CTA SECTION
+   Heading fixed at 48px inline → scale down
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .cta-heading {
+    font-size: 36px !important;
+    line-height: 1.25 !important;
+  }
+  .cta-inner-card {
+    padding: 36px 24px !important;
+  }
+}
+@media (max-width: 767px) {
+  .cta-heading {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+  .cta-inner-card {
+    padding: 28px 20px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   GLOBAL SECTION INNER PADDING
+   .sec-inner is used across many homepage sections
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .sec-inner {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+@media (max-width: 767px) {
+  .sec-inner {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   GLOBAL BUTTON SIZES
+   Reduces CTA buttons on mobile/tablet.
+   Target the two common patterns:
+   - Tailwind pill buttons (Hero, Header)
+   - Inline-styled anchor/button CTAs (most sections)
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  /* Hero section CTA buttons */
+  .hero-title ~ div a,
+  .hero-title ~ div button {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+  }
+  /* BusinessTabs CTA */
+  .bts-content-left a[href] {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+  }
+  /* CTA section button */
+  .cta-inner-card a,
+  .cta-inner-card button {
+    font-size: 14px !important;
+    padding: 10px 20px !important;
+  }
+}
+@media (max-width: 767px) {
+  /* Hero CTA buttons — uses Tailwind classes, need override */
+  .hero-title ~ div a,
+  .hero-title ~ div button {
+    padding: 9px 18px !important;
+    font-size: 13px !important;
+  }
+  /* Mobile header CTA */
+  .lg\:hidden a[href*="demo"],
+  .lg\:hidden a[href*="schedule"] {
+    padding: 10px 20px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   BUSINESS TABS — tighter pill sizes on mobile
+   The tab scroll + auto-center is handled in JS.
+   CSS keeps pills compact so more are visible at once.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .bts-tab {
+    min-width: 110px !important;
+    font-size: 12px !important;
+    padding: 10px 10px !important;
+    width: auto !important;
+  }
+}

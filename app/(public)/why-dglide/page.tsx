@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@/styles/why-dglide-responsive.css";
 import WDHeroSection from "@/components/why-dglide/sections/WDHeroSection";
 import WDTradeoffSection from "@/components/why-dglide/sections/WDTradeoffSection";
 import WDCustomFitSection from "@/components/why-dglide/sections/WDCustomFitSection";

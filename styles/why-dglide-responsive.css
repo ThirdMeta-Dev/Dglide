@@ -1,0 +1,135 @@
+/*
+ * WHY DGLIDE PAGE — MOBILE & TABLET RESPONSIVE
+ * Breakpoints: tablet ≤ 1023px | mobile ≤ 767px
+ * Desktop (≥ 1024px) is NEVER touched here.
+ * Inherits type scale standard from homepage-responsive.css.
+ */
+
+/* ─────────────────────────────────────────
+   HERO SECTION
+   Already handles flex-col → lg:flex-row via Tailwind.
+   Just tighten heading on phones (text-[36px] Tailwind).
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .wd-hero-heading {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   TRADEOFF SECTION
+   4-col grid → sm:2-col → 1-col already in Tailwind.
+   Summary bar already flex-col → lg:flex-row.
+   Tighten heading on phones.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .wd-tradeoff-heading {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   CUSTOM FIT SECTION
+   Inner card has pr-[59px] on all viewports — override on mobile.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .wd-custom-inner-card {
+    padding-right: 20px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   FITS BEST SECTION
+   3-card row is lg:flex-row. gap-[32px] md:gap-[52px] handled in JSX.
+   Tighten heading on phones.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .wd-fits-heading {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+  /* Remove excessive padding on small card inner */
+  .wd-fits-card {
+    padding: 20px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   OPERATIONS RUN SECTION
+   h2 fontSize moved to Tailwind (text-[28px] md:text-[36px] lg:text-[48px]).
+   Left/right columns already use w-full → lg:w-[N].
+   Tighten section vertical padding on mobile.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .wd-ops-section {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   RIGHT FIT SECTION
+   Already stacks via lg:flex-row Tailwind. Minor heading fix.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .wd-right-fit-heading {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   ONE PLATFORM SECTION
+   Already has separate xl:hidden mobile layout.
+   Heading text-[32px] md:text-[48px] in Tailwind.
+───────────────────────────────────────── */
+
+/* ─────────────────────────────────────────
+   STUCK BETWEEN SECTION
+   flex-col → lg:flex-row already in Tailwind.
+   Tighten heading.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .wd-stuck-heading {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   PROBLEM TO SYSTEM SECTION
+   Staircase cards already hidden below lg — clean mobile stack.
+   Tighten heading.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .wd-p2s-heading {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   BEFORE / AFTER SECTION
+   px-8 → px-4 md:px-8 handled in JSX.
+   Tighten heading.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .wd-ba-heading {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   FINAL CTA SECTION
+   Heading already text-[32px] lg:text-[48px] in Tailwind — fine.
+   Tighten CTA button on mobile.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .wd-final-cta-btn {
+    padding: 10px 20px !important;
+    font-size: 13px !important;
+  }
+}

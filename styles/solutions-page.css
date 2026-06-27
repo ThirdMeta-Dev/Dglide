@@ -1158,9 +1158,20 @@
   white-space: nowrap;
 }
 
+.solutions-page .sol-btn-primary {
+  transition: opacity 0.2s ease;
+}
+
+.solutions-page .sol-btn-primary svg {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .solutions-page .sol-btn-primary:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
+  opacity: 0.93;
+}
+
+.solutions-page .sol-btn-primary:hover svg {
+  transform: rotate(-45deg);
 }
 
 .solutions-page .sol-btn-outline {
@@ -1179,8 +1190,20 @@
   white-space: nowrap;
 }
 
+.solutions-page .sol-btn-outline {
+  transition: background 0.22s ease;
+}
+
+.solutions-page .sol-btn-outline svg {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .solutions-page .sol-btn-outline:hover {
-  background: rgba(26, 35, 126, 0.04);
+  background: linear-gradient(90deg, #D9DCFF 0%, #E8EAFF 100%);
+}
+
+.solutions-page .sol-btn-outline:hover svg {
+  transform: rotate(-45deg);
 }
 
 .solutions-page .sol-btn-white,
@@ -2011,8 +2034,12 @@
   color: #1c2bff;
 }
 
+.solutions-page .sol-final-cta-button {
+  transition: background 0.22s ease;
+}
+
 .solutions-page .sol-final-cta-button:hover {
-  opacity: 0.92;
+  background: linear-gradient(90deg, #D9DCFF 0%, #E8EAFF 100%);
 }
 
 .solutions-page .sol-final-cta-button-arrow {
@@ -2020,7 +2047,12 @@
   width: 12.86px;
   height: 12.86px;
   flex-shrink: 0;
-  transform: rotate(45deg);
+  transform: rotate(0deg);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.solutions-page .sol-final-cta-button:hover .sol-final-cta-button-arrow {
+  transform: rotate(-45deg);
 }
 
 @media (max-width: 1023px) {
@@ -2620,10 +2652,22 @@
     height: 100%;
   }
 
+  /* Fix: footer bar is position:absolute bottom:-134px on desktop.
+     Reset to static flow on tablet/mobile so it doesn't bleed into the next section. */
   .solutions-page .sol-better-way-footer-bar {
+    position: static;
+    margin-top: 24px;
     flex-direction: column;
     gap: 16px;
     padding: 20px 24px;
+  }
+
+  .solutions-page .sol-better-way-visual {
+    min-height: unset;
+  }
+
+  .solutions-page .sol-better-way-visual-panel {
+    padding: 0 16px;
   }
 }
 
@@ -4129,6 +4173,31 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     font-size: clamp(28px, 7vw, 48px);
     line-height: 1.25;
   }
+
+  /* Stack cards vertically on phones */
+  .solutions-page .sol-go-live-cards {
+    flex-direction: column;
+    height: auto;
+    min-height: unset;
+    overflow-x: visible;
+    overflow-y: visible;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .solutions-page .sol-go-live-card-col {
+    flex: none;
+    width: 100%;
+    min-width: unset;
+    height: auto;
+    padding-top: 0 !important;
+    margin: 0 !important;
+  }
+
+  .solutions-page .sol-go-live-card {
+    height: auto !important;
+    padding: 24px 24px 20px;
+  }
 }
 
 /* Integrations Hub — section (Figma Frame 1618876616) */
@@ -4477,5 +4546,176 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   .solutions-page .sol-faq-heading {
     font-size: clamp(32px, 8vw, 44px);
     line-height: 1.32;
+  }
+}
+
+/* ─────────────────────────────────────────
+   PHASE 2 MOBILE FIXES
+───────────────────────────────────────── */
+
+/* 1. OnePlatform — stack orbit nodes vertically on phones.
+   Desktop uses position:absolute nodes on a relative container;
+   reset them to static flow and hide the center SVG diagram. */
+@media (max-width: 640px) {
+  .solutions-page .sol-platform-orbit {
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 0;
+  }
+  .solutions-page .sol-platform-orbit-diagram {
+    display: none;
+  }
+  .solutions-page .sol-platform-node {
+    position: static !important;
+    transform: none !important;
+  }
+  .solutions-page .sol-platform-node-pill {
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+  .solutions-page .sol-platform-node-pill::before {
+    display: none;
+  }
+}
+
+/* 2. ServiceWorkflow — remove bg image on mobile (text becomes unreadable) */
+@media (max-width: 1023px) {
+  .solutions-page .sol-workflow-bg,
+  .sol-workflow-bg-container-wrapper-left,
+  .sol-workflow-bg-container-wrapper-right {
+    display: none !important;
+  }
+}
+
+/* 3. CoreCapabilities — smaller tab pills on mobile */
+@media (max-width: 640px) {
+  .solutions-page .sol-cap-tab {
+    min-width: 130px !important;
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+  /* "Why it matters" row — stack vertically */
+  .solutions-page .sol-cap-panel-why {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .solutions-page .sol-cap-panel-why-divider {
+    width: 40px;
+    height: 2px;
+    min-height: 0;
+    align-self: flex-start;
+  }
+  /* Panel title size */
+  .solutions-page .sol-cap-panel-title {
+    font-size: clamp(18px, 5vw, 24px) !important;
+    line-height: 1.3;
+  }
+}
+
+/* 4. BetterWay — "Building Your Own" right-side vertical line: move to right edge */
+@media (max-width: 1023px) {
+  .solutions-page .sol-better-way-side--right .sol-better-way-side-line {
+    left: auto !important;
+    right: 0;
+  }
+}
+
+/* 5. BetterWay footer — reduce oversized text on mobile */
+@media (max-width: 640px) {
+  .solutions-page .sol-better-way-footer-text {
+    font-size: 14px;
+    white-space: normal;
+    line-height: 20px;
+    text-align: left;
+  }
+  .solutions-page .sol-better-way-footer-item {
+    gap: 8px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+
+/* 6. WhatImproves — icon on left, text on left, horizontal scroll */
+@media (max-width: 640px) {
+  .solutions-page .sol-what-improves-grid {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 8px;
+    gap: 12px !important;
+    align-items: stretch;
+  }
+  .solutions-page .sol-what-improves-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .solutions-page .sol-what-improves-row {
+    flex-direction: column !important;
+    flex-shrink: 0;
+    width: 85vw;
+    max-width: 300px;
+  }
+  .solutions-page .sol-what-improves-card {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 16px;
+    width: 100% !important;
+    min-height: 0 !important;
+    padding: 16px;
+  }
+  .solutions-page .sol-what-improves-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+  }
+  .solutions-page .sol-what-improves-card-body {
+    flex: 1;
+    min-width: 0;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .solutions-page .sol-what-improves-card-title {
+    font-size: 14px !important;
+    line-height: 1.35;
+    text-align: left !important;
+  }
+  .solutions-page .sol-what-improves-card-description {
+    font-size: 12px !important;
+    text-align: left !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   GLOBAL PHONE OVERRIDES (≤ 640px)
+   Follows the same standard as homepage/about/why-dglide pages.
+   --sol-section-y already drops to 56px at tablet (1023px);
+   reduce further to 40px on phones.
+───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .solutions-page {
+    --sol-section-y: 40px;
+  }
+
+  /* Section nav: tighter gap + smaller pills on phones */
+  .solutions-page .sol-section-nav {
+    gap: 16px;
+    padding: 10px 16px;
+  }
+
+  .solutions-page .sol-section-nav-link {
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+
+  /* Container side padding on very small screens */
+  .solutions-page .sol-container {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }

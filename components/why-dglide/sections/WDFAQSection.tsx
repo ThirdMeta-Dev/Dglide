@@ -116,7 +116,7 @@ export default function WDFAQSection({ data }: { data?: Record<string, string> }
           </div>
 
           {/* Right: accordion */}
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
+          <div className="wd-faq-accordion" style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
             {faqs.map((faq, i) => {
               const isOpen = openIdx === i;
               const isFirst = i === 0;
@@ -209,6 +209,23 @@ export default function WDFAQSection({ data }: { data?: Record<string, string> }
           }
           .wd-faq-illu {
             display: none !important;
+          }
+        }
+        @media (max-width: 767px) {
+          .wd-faq-cols {
+            padding: 24px 16px !important;
+          }
+          .wd-faq-left h2 {
+            font-size: 26px !important;
+            line-height: 36px !important;
+          }
+          .wd-faq-accordion button span {
+            font-size: 14px !important;
+            line-height: 22px !important;
+          }
+          .wd-faq-accordion p {
+            font-size: 13px !important;
+            line-height: 22px !important;
           }
         }
       `}</style>

@@ -111,7 +111,7 @@ export default function WDBeforeAfterSection() {
             <div className="flex flex-1 flex-col gap-4 md:flex-row">
               {/* Before card */}
               <div
-                className="flex-1 rounded-2xl border border-white px-8 pt-[31px] pb-8"
+                className="flex-1 rounded-2xl border border-white px-4 md:px-8 pt-[31px] pb-8"
                 style={{
                   background: "linear-gradient(180deg, #1C2BFF 0%, #141FB5 100%)",
                 }}
@@ -161,7 +161,7 @@ export default function WDBeforeAfterSection() {
 
               {/* After card */}
               <div
-                className="flex-1 rounded-2xl border border-white px-8 pt-[30px] pb-[57px]"
+                className="flex-1 rounded-2xl border border-white px-4 md:px-8 pt-[30px] pb-[57px]"
                 style={{
                   background: "linear-gradient(180deg, #FFFFFF 0%, #F6F6F6 100%)",
                 }}

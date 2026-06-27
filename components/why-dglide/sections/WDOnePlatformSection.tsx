@@ -185,7 +185,7 @@ export default function WDOnePlatformSection({ data }: { data?: Record<string, s
           <div className="flex flex-wrap justify-center gap-6">
             <Link
               href={data?.cta_primary_href ?? "/demo"}
-              className="inline-flex items-center gap-[10px] px-8 py-3.5 rounded-[40px] text-white font-semibold text-base leading-[20.16px] transition-opacity hover:opacity-90"
+              className="dg-btn-fill inline-flex items-center gap-[10px] px-8 py-3.5 rounded-[40px] text-white font-semibold text-base leading-[20.16px] transition-opacity hover:opacity-90"
               style={{
                 fontFamily: "var(--font-sora), Sora, sans-serif",
                 background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
@@ -196,7 +196,7 @@ export default function WDOnePlatformSection({ data }: { data?: Record<string, s
             </Link>
             <Link
               href={data?.cta_secondary_href ?? "/platform"}
-              className="inline-flex items-center gap-[10px] px-8 py-3.5 rounded-[40px] border border-[#1C2BFF] bg-white text-[#141FB5] text-base leading-[20.16px] transition-colors hover:bg-[#1C2BFF]/5"
+              className="dg-btn-outline inline-flex items-center gap-[10px] px-8 py-3.5 rounded-[40px] border border-[#1C2BFF] bg-white text-[#141FB5] text-base leading-[20.16px] transition-colors hover:bg-[#1C2BFF]/5"
               style={{ fontFamily: "var(--font-sora), Sora, sans-serif", fontWeight: 400 }}
             >
               Explore Platform

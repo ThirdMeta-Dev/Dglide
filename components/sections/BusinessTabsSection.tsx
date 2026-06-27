@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const TAB_DEFAULTS = [
   {
@@ -129,6 +129,18 @@ function getTabStyle(i: number, active: number): React.CSSProperties {
 
 export default function BusinessTabsSection({ data }: { data?: Record<string, string> }) {
   const [active, setActive] = useState(1);
+  const tabRowRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  function handleTabClick(i: number) {
+    setActive(i);
+    const btn = tabRefs.current[i];
+    const row = tabRowRef.current;
+    if (btn && row) {
+      const left = btn.offsetLeft - row.offsetWidth / 2 + btn.offsetWidth / 2;
+      row.scrollTo({ left, behavior: "smooth" });
+    }
+  }
 
   const sectionTitle = data?.section_title ?? "Built for Businesses Like Yours";
   const ctaLabel     = data?.cta_label     ?? "Get Started Now";
@@ -199,6 +211,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
 
         {/* Tab row */}
         <div
+          ref={tabRowRef}
           className="bts-tab-row"
           style={{
             display: "flex",
@@ -212,8 +225,9 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
           {tabs.map((t, i) => (
             <button
               key={i}
+              ref={(el) => { tabRefs.current[i] = el; }}
               className="bts-tab"
-              onClick={() => setActive(i)}
+              onClick={() => handleTabClick(i)}
               style={getTabStyle(i, active)}
             >
               {t.label}
@@ -316,6 +330,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
             <div style={{ marginTop: 60 }}>
               <a
                 href={ctaHref}
+                className="dg-btn-fill"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",

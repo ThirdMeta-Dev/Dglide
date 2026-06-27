@@ -9,7 +9,7 @@ const PlatformFinalCTA: FunctionComponent = () => (
   <SolutionsFinalCTA
     eyebrow={platformFinalCtaEyebrow}
     heading={platformFinalCtaHeading}
-    buttonLabel="Get Started Now"
+    buttonLabel="See It Live!"
   />
 );
 

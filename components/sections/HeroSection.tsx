@@ -97,7 +97,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
         <div className="flex flex-wrap gap-4 mb-14 justify-center">
           <Link
             href={data?.cta_primary_href ?? "/demo"}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-base transition-opacity hover:opacity-90"
+            className="dg-btn-fill inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-base transition-opacity hover:opacity-90"
             style={{
               fontFamily: "Sora, sans-serif",
               background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
@@ -108,7 +108,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
           </Link>
           <Link
             href={data?.cta_secondary_href ?? "#how-it-works"}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-[#1C2BFF] text-[#1C2BFF] text-base transition-colors hover:bg-[#1C2BFF]/5"
+            className="dg-btn-outline inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-[#1C2BFF] text-[#1C2BFF] text-base transition-colors hover:bg-[#1C2BFF]/5"
             style={{ fontFamily: "Sora, sans-serif", fontWeight: 400 }}
           >
             {data?.cta_secondary_label ?? "See How It Works"}

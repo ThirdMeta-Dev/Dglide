@@ -5,6 +5,7 @@ import {
   type CSSProperties,
   FunctionComponent,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -69,6 +70,7 @@ const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> =
   const content = items[activeIndex];
 
   const layoutRef = useRef<HTMLDivElement>(null);
+  const tabsStripRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<Partial<Record<number, HTMLButtonElement>>>({});
   const [notchTop, setNotchTop] = useState(0);
 
@@ -100,6 +102,15 @@ const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> =
     };
   }, [syncNotchPosition]);
 
+  // Scroll the active tab into center of the strip on mobile
+  useEffect(() => {
+    const btn = tabRefs.current[activeIndex];
+    const strip = tabsStripRef.current;
+    if (!btn || !strip) return;
+    const left = btn.offsetLeft - strip.offsetWidth / 2 + btn.offsetWidth / 2;
+    strip.scrollTo({ left, behavior: "smooth" });
+  }, [activeIndex]);
+
   return (
     <section id="core-capabilities" className="sol-section sol-capabilities-section">
       <SolutionsContainer>
@@ -108,7 +119,7 @@ const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> =
         </h2>
 
         <div ref={layoutRef} className="sol-capabilities-layout">
-          <div className="sol-capabilities-tabs">
+          <div ref={tabsStripRef} className="sol-capabilities-tabs">
             {items.map((item, index) => {
               const variant = getTabVariant(index, activeIndex);
 

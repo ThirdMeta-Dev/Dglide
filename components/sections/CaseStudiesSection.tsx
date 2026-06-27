@@ -303,6 +303,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
             <div style={{ marginTop: "auto" }}>
               <a
                 href={ctaHref}
+                className="dg-btn-fill"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -322,7 +323,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
                   boxSizing: "border-box",
                 }}
               >
-                {ctaLabel} <span style={{ fontSize: 18 }}>→</span>
+                {ctaLabel} <span className="btn-arrow" style={{ fontSize: 18, display: "inline-block" }}>→</span>
               </a>
             </div>
           </div>

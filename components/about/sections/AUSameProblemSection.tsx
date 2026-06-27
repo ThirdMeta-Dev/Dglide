@@ -64,9 +64,9 @@ export default function AUSameProblemSection() {
           </div>
 
           {/* Cards + CTA bar — right-aligned 932px block on desktop */}
-          <div className="flex w-full flex-col items-end gap-4">
+          <div className="aus-problem-outer flex w-full flex-col items-end gap-4">
             {/* Problem cards */}
-            <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:w-[932px] lg:grid-cols-3">
+            <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-3 lg:w-[932px] lg:grid-cols-3">
               {CARDS.map((card) => (
                 <div
                   key={card.title}

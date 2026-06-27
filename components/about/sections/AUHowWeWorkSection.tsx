@@ -87,11 +87,11 @@ function PrincipleCard({ principle }: { principle: Principle }) {
 export default function AUHowWeWorkSection() {
   return (
     <section className="w-full bg-[#F3F3F3] overflow-hidden">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-12 py-20 flex flex-col items-center gap-12">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-12 py-10 md:py-20 flex flex-col items-center gap-8 md:gap-12">
         {/* ---------- Heading + subtitle ---------- */}
         <div className="flex flex-col items-center gap-4">
           <h2
-            className="text-center text-[36px] leading-[44px] md:text-[48px] md:leading-[58px]"
+            className="au-how-heading text-center text-[36px] leading-[44px] md:text-[48px] md:leading-[58px]"
             style={{
               fontFamily: "var(--font-tasa-orbiter)",
               fontWeight: 400,

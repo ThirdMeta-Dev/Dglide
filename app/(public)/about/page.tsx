@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@/styles/about-responsive.css";
 import AUHeroSection from "@/components/about/sections/AUHeroSection";
 import AUWhatIsSection from "@/components/about/sections/AUWhatIsSection";
 import AUSameProblemSection from "@/components/about/sections/AUSameProblemSection";

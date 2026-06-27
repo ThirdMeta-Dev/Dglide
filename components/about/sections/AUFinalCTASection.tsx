@@ -85,7 +85,7 @@ export default function AUFinalCTASection({
 
               {/* Heading */}
               <h2
-                className="bg-clip-text text-center text-[32px] leading-[1.25] text-transparent lg:text-[48px] lg:leading-[60px]"
+                className="au-final-heading bg-clip-text text-center text-[32px] leading-[1.25] text-transparent lg:text-[48px] lg:leading-[60px]"
                 style={{
                   fontFamily: "var(--font-tasa-orbiter)",
                   fontWeight: 500,
@@ -101,7 +101,7 @@ export default function AUFinalCTASection({
             {/* Button */}
             <Link
               href={ctaHref}
-              className="inline-flex items-center gap-2.5 rounded-[40px] bg-white px-6 py-3.5 text-base text-[#1C2BFF] no-underline"
+              className="au-final-cta-btn inline-flex items-center gap-2.5 rounded-[40px] bg-white px-6 py-3.5 text-base text-[#1C2BFF] no-underline"
               style={{
                 fontFamily: "var(--font-sora), Sora, sans-serif",
                 fontWeight: 400,

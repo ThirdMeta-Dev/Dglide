@@ -805,9 +805,10 @@
     gap: 36px;
   }
 
+  /* Post title: 26px on mobile */
   .heroText h1 {
-    font-size: 34px;
-    line-height: 42px;
+    font-size: 26px;
+    line-height: 34px;
   }
 
   .breadcrumb {
@@ -834,28 +835,40 @@
     gap: 48px;
   }
 
+  /* TOC hidden on mobile; sidebar (with only shareCard visible) moves after article */
+  .tocCard {
+    display: none;
+  }
+
   .sidebar {
     grid-template-columns: 1fr;
+    order: 2;
   }
 
+  .article {
+    order: 1;
+  }
+
+  /* Body copy: 12px */
   .articleContent {
-    font-size: 15px;
-    line-height: 26px;
+    font-size: 12px;
+    line-height: 22px;
   }
 
+  /* H2: 22px, H3: 18px */
   .articleContent h2 {
-    font-size: 28px !important;
-    line-height: 38px !important;
+    font-size: 22px !important;
+    line-height: 30px !important;
   }
 
   .articleContent h3 {
-    font-size: 22px !important;
-    line-height: 32px !important;
+    font-size: 18px !important;
+    line-height: 26px !important;
   }
 
   .articleContent blockquote {
-    font-size: 22px;
-    line-height: 32px;
+    font-size: 18px;
+    line-height: 28px;
   }
 
   .authorBoxTop {

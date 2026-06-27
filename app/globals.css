@@ -316,3 +316,37 @@
   .faq-cols { flex-direction: column !important; gap: 24px !important; padding: 0 20px !important; }
   .faq-left { flex: 0 0 auto !important; width: 100% !important; padding-top: 0 !important; }
 }
+
+/* ── Global button hover styles ── */
+
+/* Dark blue fill button — arrow rotates to ↗ on hover */
+.dg-btn-fill {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.dg-btn-fill svg,
+.dg-btn-fill .btn-arrow {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dg-btn-fill:hover {
+  opacity: 0.93;
+}
+.dg-btn-fill:hover svg,
+.dg-btn-fill:hover .btn-arrow {
+  transform: rotate(-45deg);
+}
+
+/* White / outline button — lavender gradient bg on hover, arrow rotates ↗ */
+.dg-btn-outline {
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+.dg-btn-outline svg,
+.dg-btn-outline .btn-arrow {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dg-btn-outline:hover {
+  background: linear-gradient(90deg, #D9DCFF 0%, #E8EAFF 100%) !important;
+}
+.dg-btn-outline:hover svg,
+.dg-btn-outline:hover .btn-arrow {
+  transform: rotate(-45deg);
+}

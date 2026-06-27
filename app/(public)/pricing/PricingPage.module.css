@@ -769,10 +769,17 @@
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
+    font-size: 14px;
+    line-height: 22px;
   }
 
   .heroStats span {
     white-space: normal;
+  }
+
+  .heroCopy h2 {
+    font-size: 18px;
+    line-height: 26px;
   }
 
   .planGrid {
@@ -889,5 +896,224 @@
 
   .faqSection {
     padding-bottom: 56px;
+  }
+}
+
+/* ─────────────────────────────────────────
+   TABLET MID (≤ 1023px)
+   Fills the gap between the 1100px and 900px breakpoints.
+   Principles 6-col grid crushes cards at tablet widths.
+───────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .heroSection {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .principlesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .principleCard,
+  .principleCardWide {
+    grid-column: span 1;
+  }
+
+  .principlesSection {
+    padding: 0 20px;
+  }
+
+  .faqCard {
+    padding: 40px 28px;
+    gap: 40px;
+  }
+}
+
+/* ─────────────────────────────────────────
+   PHONE (≤ 640px)
+   Type scale: h1 28px, h2 26px, body 13-14px.
+   Matches standard used across Home / About / Why / Solutions.
+───────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Hero */
+  .heroSection {
+    padding: 36px 16px 48px;
+  }
+
+  .heroInner {
+    gap: 32px;
+  }
+
+  .heroCopy {
+    gap: 28px;
+  }
+
+  .heroTitleGroup h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .heroTitleGroup p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  /* "One Platform. Three Ways to Start." — smaller + left-aligned on phones */
+  .heroCopy h2 {
+    font-size: 18px;
+    line-height: 26px;
+    text-align: left;
+    width: 100%;
+  }
+
+  /* Plan cards — button full-width for easy tap target */
+  .planButton {
+    width: 100%;
+    margin-left: 0;
+    font-size: 14px;
+    justify-content: center;
+  }
+
+  /* Advanced card root has no side padding — inset the button so it
+     matches Starter/Enterprise which have 24px card padding on both sides */
+  .planCardAdvanced .planButton {
+    width: calc(100% - 48px);
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  /* Plan grid: full-width cards, uniform gap */
+  .planGrid {
+    gap: 16px;
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+  }
+
+  /* Badge is position:absolute; top:-35px — needs clearance above the card */
+  .planCardAdvanced {
+    margin-top: 44px;
+  }
+
+  /* Comparison section */
+  .compareSection {
+    width: calc(100% - 24px);
+    margin-top: 48px;
+    gap: 20px;
+  }
+
+  .compareSection h2 {
+    font-size: 26px;
+    line-height: 34px;
+    text-align: left;
+  }
+
+  /* Compare table — smaller, cleaner text inside the scrollable table */
+  .featureHeader {
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .planHeaders span {
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .groupToggle span {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .groupToggle:first-of-type span {
+    font-size: 15px;
+  }
+
+  .featureName {
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  .groupToggle {
+    height: auto;
+    min-height: 48px;
+    padding: 14px 60px 14px 20px;
+    gap: 40px;
+  }
+
+  .featureRow {
+    min-height: 44px;
+    padding: 10px 20px;
+    gap: 40px;
+  }
+
+  .compareHeader {
+    min-height: 0;
+    padding: 18px 20px;
+    gap: 40px;
+  }
+
+  /* Principles section */
+  .principlesSection {
+    width: calc(100% - 24px);
+    margin-top: 48px;
+    gap: 24px;
+    padding: 0;
+  }
+
+  .principlesHeader h2 {
+    font-size: 26px;
+    line-height: 34px;
+  }
+
+  /* Principles: single column stack on phones */
+  .principlesGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .principleCard,
+  .principleCardWide {
+    grid-column: span 1;
+    min-height: 0;
+    padding: 18px;
+    gap: 16px;
+  }
+
+  /* FAQ */
+  .faqSection {
+    margin-top: 40px;
+    padding: 0 12px 48px;
+  }
+
+  .faqCard {
+    padding: 24px 16px;
+    gap: 20px;
+  }
+
+  .faqTitleWrap h2 {
+    font-size: 26px;
+    line-height: 34px;
+  }
+
+  /* Reduce open-question font so it doesn't crowd phones */
+  .faqQuestionOpen {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+
+  .faqQuestion {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .faqAnswer {
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  /* Section spacing */
+  .logoBand,
+  .pricingCtaWrap,
+  .testimonialWrap {
+    margin-top: 40px;
   }
 }

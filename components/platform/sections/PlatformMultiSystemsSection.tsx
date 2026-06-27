@@ -1,8 +1,5 @@
-"use client";
-
 import { FunctionComponent } from "react";
-import { useRouter } from "next/navigation";
-import { scrollToContact } from "@/lib/scroll-to-contact";
+import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import {
   platformMultiSystemsCards,
@@ -10,58 +7,58 @@ import {
   platformMultiSystemsHeading,
 } from "@/data/platformPageData";
 
-const ExploreArrow: FunctionComponent = () => (
-  <svg viewBox="0 0 13 13" width={12} height={12} fill="none" aria-hidden>
-    <path d="M1.5 11.5L11.5 1.5" stroke="#1C2BFF" strokeWidth="2" strokeLinecap="round" />
-    <path d="M11.5 1.5H4.5" stroke="#1C2BFF" strokeWidth="2" strokeLinecap="round" />
-    <path d="M11.5 1.5V8.5" stroke="#1C2BFF" strokeWidth="2" strokeLinecap="round" />
-  </svg>
-);
+const PlatformMultiSystemsSection: FunctionComponent = () => (
+  <section id="platform-multi-systems" className="sol-section">
+    <SolutionsContainer>
+      <header className="sol-plat-multi-systems-header">
+        <h2 className="sol-plat-multi-systems-heading">
+          {platformMultiSystemsHeading}
+        </h2>
+        <p className="sol-plat-multi-systems-description">
+          {platformMultiSystemsDescription}
+        </p>
+      </header>
 
-const PlatformMultiSystemsSection: FunctionComponent = () => {
-  const router = useRouter();
-
-  return (
-    <section id="platform-multi-systems" className="sol-section">
-      <SolutionsContainer>
-        <header className="sol-plat-multi-systems-header">
-          <h2 className="sol-plat-multi-systems-heading">
-            {platformMultiSystemsHeading}
-          </h2>
-          <p className="sol-plat-multi-systems-description">
-            {platformMultiSystemsDescription}
-          </p>
-          <div className="sol-plat-multi-systems-hub">
-            <span className="sol-plat-multi-systems-hub-btn">Dglide Platform</span>
-          </div>
-        </header>
+      <div className="sol-plat-multi-systems-diagram">
+        <Image
+          src="/platform/multi-systems-bg.png"
+          alt=""
+          width={1104}
+          height={742}
+          className="sol-plat-multi-systems-bg"
+          aria-hidden
+          priority
+        />
 
         <div className="sol-plat-multi-systems-grid">
           {platformMultiSystemsCards.map((card) => (
             <article key={card.title} className="sol-plat-multi-systems-card">
-              <img
-                src="/solutions/orange-bg.svg"
+              <Image
+                src={card.icon}
                 alt=""
-                width={48}
+                width={88}
                 height={48}
+                className="sol-plat-multi-systems-card-icon"
                 aria-hidden
               />
-              <h3 className="sol-problem-card-title">{card.title}</h3>
-              <p className="sol-problem-card-description">{card.description}</p>
-              <button
-                type="button"
+
+              <div className="sol-plat-multi-systems-card-body">
+                <h3 className="sol-plat-multi-systems-card-title">{card.title}</h3>
+                <p className="sol-plat-multi-systems-card-desc">{card.description}</p>
+              </div>
+
+              <a
+                href={card.href}
                 className="sol-plat-multi-systems-link"
-                onClick={() => scrollToContact(router)}
               >
-                {card.link}
-                <ExploreArrow />
-              </button>
+                {card.link}&nbsp;→
+              </a>
             </article>
           ))}
         </div>
-      </SolutionsContainer>
-    </section>
-  );
-};
+      </div>
+    </SolutionsContainer>
+  </section>
+);
 
 export default PlatformMultiSystemsSection;

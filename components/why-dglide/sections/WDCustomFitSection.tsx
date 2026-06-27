@@ -180,7 +180,7 @@ export default function WDCustomFitSection() {
             {/* Dglide Platform pill — Frame 1618876633 */}
             <Link
               href="/platform"
-              className="relative z-10 mt-8 lg:-mt-6 inline-flex items-center justify-center rounded-[156px] px-12 py-6 text-white text-[24px] leading-[31px] hover:opacity-95 transition-opacity"
+              className="dg-btn-fill relative z-10 mt-8 lg:-mt-6 inline-flex items-center justify-center rounded-[156px] px-12 py-6 text-white text-[24px] leading-[31px]"
               style={{
                 fontFamily: "var(--font-tasa-orbiter)",
                 fontWeight: 600,

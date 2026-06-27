@@ -25,7 +25,7 @@ export default function FourReasonsSection({ data }: { data?: Record<string, str
   }, []);
 
   return (
-    <section className="w-full bg-[#F3F3F3] pt-40 pb-20 overflow-hidden">
+    <section className="four-reasons-outer w-full bg-[#F3F3F3] pt-40 pb-20 overflow-hidden">
       <div
         ref={ref}
         className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 opacity-0 translate-y-8 transition-all duration-700 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0"

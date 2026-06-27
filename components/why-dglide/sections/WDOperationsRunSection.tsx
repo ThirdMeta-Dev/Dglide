@@ -67,11 +67,9 @@ export default function WDOperationsRunSection() {
       <div className="max-w-[1200px] mx-auto px-5 md:px-12">
         {/* Heading */}
         <h2
-          className="[font-family:var(--font-tasa-orbiter)] max-w-[664px]"
+          className="[font-family:var(--font-tasa-orbiter)] max-w-[664px] text-[28px] leading-[1.3] md:text-[36px] md:leading-[1.25] lg:text-[48px] lg:leading-[60px]"
           style={{
-            fontSize: "48px",
             fontWeight: 400,
-            lineHeight: "60px",
             background: "linear-gradient(90deg, #FF7F1C 0%, #000000 23.69%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",

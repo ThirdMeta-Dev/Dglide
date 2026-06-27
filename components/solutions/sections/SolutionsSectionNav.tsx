@@ -10,6 +10,8 @@ const HEADER_HEIGHT = 88;
 export default function SolutionsSectionNav({ items = sectionNavItems }: { items?: typeof sectionNavItems }) {
   const [activeId, setActiveId] = useState<string>(items[0].id);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const navStripRef = useRef<HTMLDivElement>(null);
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
 
   useEffect(() => {
     const ids = items.map((i) => i.id);
@@ -38,6 +40,15 @@ export default function SolutionsSectionNav({ items = sectionNavItems }: { items
     return () => observerRef.current?.disconnect();
   }, []);
 
+  // Scroll active pill into center of the nav strip (mobile)
+  useEffect(() => {
+    const link = linkRefs.current[activeId];
+    const strip = navStripRef.current;
+    if (!link || !strip) return;
+    const left = link.offsetLeft - strip.offsetWidth / 2 + link.offsetWidth / 2;
+    strip.scrollTo({ left, behavior: "smooth" });
+  }, [activeId]);
+
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
     e.preventDefault();
     const el = document.getElementById(id);
@@ -51,10 +62,11 @@ export default function SolutionsSectionNav({ items = sectionNavItems }: { items
   return (
     <nav className="sol-nav-bar" aria-label="Solutions sections">
       <SolutionsContainer className="flex justify-center">
-        <div className="sol-section-nav">
+        <div ref={navStripRef} className="sol-section-nav">
           {items.map((item) => (
             <a
               key={item.id}
+              ref={(el) => { linkRefs.current[item.id] = el; }}
               href={`#${item.id}`}
               onClick={(e) => handleClick(e, item.id)}
               className={`sol-section-nav-link${

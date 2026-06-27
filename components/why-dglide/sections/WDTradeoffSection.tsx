@@ -125,7 +125,7 @@ export default function WDTradeoffSection() {
             </p>
             <Link
               href="/platform"
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full text-white font-semibold text-base leading-[20px] whitespace-nowrap shrink-0 transition-opacity hover:opacity-90"
+              className="dg-btn-fill inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full text-white font-semibold text-base leading-[20px] whitespace-nowrap shrink-0 transition-opacity hover:opacity-90"
               style={{
                 fontFamily: "var(--font-sora), Sora, sans-serif",
                 background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",

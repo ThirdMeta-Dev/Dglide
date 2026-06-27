@@ -3,7 +3,7 @@ import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer
 import { platformSectionNavItems } from "@/data/platformPageData";
 
 const PlatformSectionNav: FunctionComponent = () => (
-  <nav className="sol-nav-bar" aria-label="Platform sections">
+  <nav className="sol-nav-bar" aria-label="Platform sections" style={{ display: "none" }}>
     <SolutionsContainer className="flex justify-center">
       <div className="sol-section-nav">
         {platformSectionNavItems.map((item, index) => (

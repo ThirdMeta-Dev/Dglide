@@ -23,7 +23,6 @@ export type HeaderSettings = {
 };
 
 const DEFAULT_NAV: NavItemData[] = [
-  { label: "Home",      href: "/",          has_dropdown: false },
   {
     label: "About Us",
     href: "/about",
@@ -41,7 +40,12 @@ const DEFAULT_NAV: NavItemData[] = [
   },
   { label: "Platform",  href: "/platform",  has_dropdown: false },
   { label: "Industry",  href: "/industry",  has_dropdown: true  },
-  { label: "Resources", href: "/resources", has_dropdown: true  },
+  {
+    label: "Resources",
+    href: "/resources",
+    has_dropdown: true,
+    children: [{ label: "Blog", href: "/blogs", has_dropdown: false }],
+  },
 ];
 
 const DEFAULT_SETTINGS: HeaderSettings = {
@@ -160,6 +164,7 @@ type Props = {
 export default function Header({ navItems, settings }: Props) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [ctaHovered, setCtaHovered] = useState(false);
 
   const nav = (navItems && navItems.length > 0) ? navItems : DEFAULT_NAV;
@@ -198,13 +203,10 @@ export default function Header({ navItems, settings }: Props) {
           className="flex-shrink-0"
           onHoverStart={() => setCtaHovered(true)}
           onHoverEnd={() => setCtaHovered(false)}
-          whileHover={{ scale: 1.04, y: -2 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ type: "spring", stiffness: 400, damping: 22 }}
         >
           <Link
             href={cfg.cta_href}
-            className="flex items-center gap-2.5 px-8 py-[14px] rounded-[40px] text-white text-base font-semibold [font-family:var(--font-sora)] leading-[20.16px] transition-opacity hover:opacity-90 active:opacity-80"
+            className="dg-btn-fill flex items-center gap-2.5 px-8 py-[14px] rounded-[40px] text-white text-base font-semibold [font-family:var(--font-sora)] leading-[20.16px] transition-opacity hover:opacity-90 active:opacity-80"
             style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
           >
             {cfg.cta_label}
@@ -214,7 +216,7 @@ export default function Header({ navItems, settings }: Props) {
               viewBox="0 0 18 18"
               fill="none"
               className="flex-shrink-0"
-              animate={{ rotate: ctaHovered ? 8 : 0 }}
+              animate={{ rotate: ctaHovered ? -45 : 0 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
             >
               <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -252,35 +254,77 @@ export default function Header({ navItems, settings }: Props) {
           transition={{ duration: 0.18, ease: motionEase }}
         >
           <nav className="flex flex-col gap-1 pt-4">
-            {nav.map((item) => (
-              <div key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={cn(
-                    "flex items-center gap-2 py-2.5 text-sm [font-family:var(--font-sora)]",
-                    isActive(item.href) ? "text-[#1C2BFF] font-medium" : "text-black"
+            {nav.map((item) => {
+              const children = item.children ?? [];
+              const hasChildren = children.length > 0;
+              const isExpanded = mobileExpanded === item.href;
+              const parentActive = isActive(item.href) || children.some((c) => isActive(c.href));
+
+              return (
+                <div key={item.href}>
+                  {hasChildren ? (
+                    <button
+                      onClick={() => setMobileExpanded(isExpanded ? null : item.href)}
+                      className={cn(
+                        "w-full flex items-center justify-between gap-2 py-2.5 text-sm [font-family:var(--font-sora)]",
+                        parentActive ? "text-[#1C2BFF] font-medium" : "text-black"
+                      )}
+                    >
+                      <span className="flex items-center gap-2">
+                        {parentActive && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF] flex-shrink-0" />}
+                        {item.label}
+                      </span>
+                      <motion.span
+                        className="inline-flex flex-shrink-0"
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                      >
+                        <ChevronDown className="w-4 h-4" strokeWidth={1.5} />
+                      </motion.span>
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={cn(
+                        "flex items-center gap-2 py-2.5 text-sm [font-family:var(--font-sora)]",
+                        isActive(item.href) ? "text-[#1C2BFF] font-medium" : "text-black"
+                      )}
+                    >
+                      {isActive(item.href) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
+                      {item.label}
+                    </Link>
                   )}
-                >
-                  {isActive(item.href) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
-                  {item.label}
-                </Link>
-                {(item.children ?? []).map((child) => (
-                  <Link
-                    key={child.href}
-                    href={child.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      "flex items-center gap-2 py-2 pl-5 text-sm [font-family:var(--font-sora)]",
-                      isActive(child.href) ? "text-[#1C2BFF] font-medium" : "text-[#444]"
+
+                  <AnimatePresence initial={false}>
+                    {hasChildren && isExpanded && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.18, ease: "easeOut" }}
+                        className="overflow-hidden"
+                      >
+                        {children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={() => setMobileOpen(false)}
+                            className={cn(
+                              "flex items-center gap-2 py-2 pl-5 text-sm [font-family:var(--font-sora)]",
+                              isActive(child.href) ? "text-[#1C2BFF] font-medium" : "text-[#444]"
+                            )}
+                          >
+                            {isActive(child.href) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
+                            {child.label}
+                          </Link>
+                        ))}
+                      </motion.div>
                     )}
-                  >
-                    {isActive(child.href) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
-                    {child.label}
-                  </Link>
-                ))}
-              </div>
-            ))}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </nav>
           <motion.div
             whileHover={{ scale: 1.04, y: -2 }}
@@ -290,7 +334,7 @@ export default function Header({ navItems, settings }: Props) {
             <Link
               href={cfg.cta_href}
               onClick={() => setMobileOpen(false)}
-              className="mt-4 flex items-center justify-center gap-2 px-6 py-3 rounded-[40px] text-white text-sm font-semibold [font-family:var(--font-sora)]"
+              className="dg-btn-fill mt-4 flex items-center justify-center gap-2 px-6 py-3 rounded-[40px] text-white text-sm font-semibold [font-family:var(--font-sora)]"
               style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
             >
               {cfg.cta_label}

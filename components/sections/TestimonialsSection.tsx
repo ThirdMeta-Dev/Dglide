@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 
 const STATIC_TESTIMONIALS = [
   { quote: "We finally have visibility in our operations. Your system adapts to how you work and the results speak for themselves.", name: "Infrastructure Team",  company: "Scaleops International", image: "" },
@@ -195,25 +195,28 @@ function TestimonialCard({ quote, name, company, image, width }: { quote: string
 }
 
 function NavButton({ dir, onClick, disabled }: { dir: "prev" | "next"; onClick: () => void; disabled?: boolean }) {
+  const [hovered, setHovered] = React.useState(false);
   const isNext = dir === "next";
+  const active = hovered && !disabled;
   return (
     <button
       onClick={onClick}
       disabled={disabled}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         width: 44, height: 44, borderRadius: "50%",
         display: "flex", alignItems: "center", justifyContent: "center",
-        border: isNext ? "none" : "1.5px solid #E4E4E4",
-        background: isNext ? "#FF7F1C" : "#FFFFFF",
+        border: `1.5px solid ${active ? "#FF7F1C" : "#E4E4E4"}`,
+        background: active ? "#FF7F1C" : "transparent",
         cursor: disabled ? "not-allowed" : "pointer",
         opacity: disabled ? 0.35 : 1,
-        transition: "opacity 0.2s",
-        boxShadow: isNext ? "0 2px 8px rgba(255,127,28,0.3)" : "0 1px 4px rgba(0,0,0,0.08)",
+        transition: "background 0.2s ease, border-color 0.2s ease",
         flexShrink: 0,
       }}
     >
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d={isNext ? "M3 8h10M9 5l3 3-3 3" : "M13 8H3M7 5l-3 3 3 3"} stroke={isNext ? "#fff" : "#555"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d={isNext ? "M3 8h10M9 5l3 3-3 3" : "M13 8H3M7 5l-3 3 3 3"} stroke={active ? "#fff" : "#555"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </button>
   );

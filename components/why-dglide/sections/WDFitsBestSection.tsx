@@ -208,7 +208,7 @@ export default function WDFitsBestSection() {
                 background: "linear-gradient(90deg, #EAEAEA 0%, #FFFFFF 100%)",
               }}
             />
-            <div className="flex flex-col gap-[52px]">
+            <div className="flex flex-col gap-[32px] md:gap-[52px]">
               <div className="flex flex-col gap-7">
                 {STANDARD_ROWS.map((row) => (
                   <RowItem key={row.label} row={row} />
@@ -242,7 +242,7 @@ export default function WDFitsBestSection() {
                 background: "linear-gradient(90deg, #1B29EE 0%, #FFFFFF 100%)",
               }}
             />
-            <div className="flex flex-col gap-[52px]">
+            <div className="flex flex-col gap-[32px] md:gap-[52px]">
               <div className="flex flex-col gap-7">
                 {DGLIDE_ROWS.map((row) => (
                   <RowItem key={row.label} row={row} dark />
@@ -276,7 +276,7 @@ export default function WDFitsBestSection() {
                 background: "linear-gradient(90deg, #EAEAEA 0%, #FFFFFF 100%)",
               }}
             />
-            <div className="flex flex-col gap-[52px]">
+            <div className="flex flex-col gap-[32px] md:gap-[52px]">
               <div className="flex flex-col gap-7">
                 {CUSTOM_ROWS.map((row) => (
                   <RowItem key={row.label} row={row} />

@@ -90,7 +90,7 @@ export default function WDHeroSection() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/demo"
-                className="inline-flex h-12 items-center gap-2.5 rounded-full px-8 text-base font-semibold text-white transition-opacity hover:opacity-90"
+                className="dg-btn-fill inline-flex h-12 items-center gap-2.5 rounded-full px-8 text-base font-semibold text-white transition-opacity hover:opacity-90"
                 style={{
                   fontFamily: "var(--font-sora), Sora, sans-serif",
                   background:
@@ -110,7 +110,7 @@ export default function WDHeroSection() {
               </Link>
               <Link
                 href="#capabilities"
-                className="inline-flex h-12 items-center gap-2.5 rounded-full border-[1.5px] border-[#141FB5] px-8 text-base font-normal text-[#141FB5] transition-colors hover:bg-[#141FB5]/5"
+                className="dg-btn-outline inline-flex h-12 items-center gap-2.5 rounded-full border-[1.5px] border-[#141FB5] px-8 text-base font-normal text-[#141FB5] transition-colors hover:bg-[#141FB5]/5"
                 style={{ fontFamily: "var(--font-sora), Sora, sans-serif" }}
               >
                 Explore Capabilities

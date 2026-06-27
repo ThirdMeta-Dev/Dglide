@@ -5,9 +5,7 @@ import PlatformHeroSection from "@/components/platform/sections/PlatformHeroSect
 import PlatformSectionNav from "@/components/platform/sections/PlatformSectionNav";
 import PlatformOperationalRealitySection from "@/components/platform/sections/PlatformOperationalRealitySection";
 import PlatformWhatIsSection from "@/components/platform/sections/PlatformWhatIsSection";
-import PlatformThreePillarsSection from "@/components/platform/sections/PlatformThreePillarsSection";
 import PlatformBackboneSection from "@/components/platform/sections/PlatformBackboneSection";
-import PlatformCapabilitiesIntroSection from "@/components/platform/sections/PlatformCapabilitiesIntroSection";
 import PlatformVerticalCapabilitiesSection from "@/components/platform/sections/PlatformVerticalCapabilitiesSection";
 import PlatformStartFastSection from "@/components/platform/sections/PlatformStartFastSection";
 import PlatformLivingServiceSection from "@/components/platform/sections/PlatformLivingServiceSection";
@@ -32,19 +30,11 @@ export const metadata: Metadata = {
 export default function PlatformPage() {
   return (
     <AnimatedPublicPage className="solutions-page platform-page" staticFirstCount={1}>
-      <img
-        src="/solutions/curve.svg"
-        alt=""
-        aria-hidden
-        className="sol-hero-curve"
-      />
       <PlatformHeroSection />
       <PlatformSectionNav />
       <PlatformOperationalRealitySection />
       <PlatformWhatIsSection />
-      <PlatformThreePillarsSection />
       <PlatformBackboneSection />
-      <PlatformCapabilitiesIntroSection />
       <PlatformVerticalCapabilitiesSection />
       <PlatformStartFastSection />
       <PlatformLivingServiceSection />

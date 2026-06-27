@@ -13,199 +13,210 @@ export const platformHeroBullets = [
   "Continuous fit through the Living Service Model",
 ];
 
-export const platformHeroEyebrow = "Get Started Now";
+export const platformHeroEyebrow = "Configurable Operations Platform";
 export const platformHeroHeading =
-  "One Platform to Run Operations That Don't Fit Standard Systems";
+  "One Platform to Run Operations That Don't Fit Standard Software";
 export const platformHeroDescription =
-  "Dglide gives you ready-to-deploy operational systems built on a configurable backbone, so your workflows start with structure and keep adapting as your business evolves.";
+  "DGlide gives you ready-to-deploy operational systems on one configurable backbone, so your workflows fit from day one and keep fitting as your business changes.";
 export const platformHeroPrimaryCta = "Book a Demo";
 export const platformHeroSecondaryCta = "Explore How It Works";
+export const platformHeroImage = "/platform/hero-illustration.png";
 
 export const platformRealityCards = [
   {
     title: "Category Tools",
-    description:
-      "Easy To Start, But Rigid When Your Workflow Gets Specific. Easy To Start, But Rigid When",
-    tag: "Maintenance Burden",
+    description: "Easy to start, but they turn rigid the moment your workflow gets specific.",
+    tag: "Rigidity",
+    icon: "/platform/reality-category-tools.png",
     offset: false,
   },
   {
     title: "Enterprise Suites",
-    description:
-      "Powerful, But Heavy, Complex, And Built Around Their Ecosystem.",
-    tag: "Logic Constraints",
+    description: "Powerful and broad, but heavy, complex, and built around their own ecosystem.",
+    tag: "Complexity & Weight",
+    icon: "/platform/reality-enterprise-suites.png",
     offset: true,
   },
   {
     title: "Custom Build",
-    description:
-      "Fits Well, But Creates Long Timelines And Ownership Burden.",
-    tag: "Velocity Decay",
+    description: "Fits well at first, but you own the timeline, the upkeep, and the risk forever.",
+    tag: "Ownership Burden",
+    icon: "/platform/reality-custom-build.png",
     offset: false,
   },
   {
     title: "Low-Code Platforms",
-    description:
-      "Flexible, But You Still Have To Design, Build, And Maintain The System. Flexible, But You",
-    tag: "Data Fragmentation",
+    description: "Flexible, but you still have to design, build, and maintain the whole system.",
+    tag: "Build Burden",
+    icon: "/platform/reality-low-code-platforms.png",
     offset: false,
   },
 ];
 
 export const platformRealityBannerEyebrow = "Unified Operational Backbone";
 export const platformRealityBannerHeading =
-  "A Working Operational System That Can Still Adapt To Your Business";
+  "The Working System That Keeps Adapting to How You Run";
 export const platformRealityBannerCta = "Explore Platform";
+export const platformRealityIntro =
+  "Every kind of operations software gets one thing right and forces a tradeoff for it. DGlide is built to start working and keep adapting, without the tradeoff.";
+
+export const platformWhatIsHeading = "What Is the Dglide Platform?";
+export const platformWhatIsDescription =
+  "DGlide is a configurable operations platform that powers multiple business systems from one shared backbone. You start with a ready solution, then adapt it to your workflows.";
 
 export const platformThreePillars = [
   {
     title: "Ready Systems",
-    description:
-      "Start with solutions built for real operations Start with solutions built",
+    description: "Start with solutions built for real operations, not blank templates.",
+    icon: "/platform/what-is/ready-systems.png",
   },
   {
     title: "Configurable Backbone",
-    description:
-      "Shape Workflows, Forms, Approvals, SLAs, Dashboards, And Roles.",
+    description: "Shape workflows, forms, approvals, SLAs, dashboards, and roles.",
+    icon: "/platform/what-is/configurable-backbone.png",
   },
   {
     title: "Continuous Fit",
-    description:
-      "Keep The System Aligned After Go-Live Through Dglide's Living Service Model.",
+    description: "Keep the system aligned after go-live through DGlide's Living Service Model.",
+    icon: "/platform/what-is/continuous-fit.png",
   },
 ];
 
 export const platformBackboneHeading =
-  "Built As One Backbone For Multiple Operational Systems";
+  "Built as One Backbone for Multiple Operational Systems";
 export const platformBackboneDescription =
-  "Dglide Is A Configurable Operations Platform That Powers Multiple Business Systems From One Shared Backbone.";
+  "Every DGlide system runs on the same backbone, so your tools share one data layer, one set of workflows, and one place to manage it all.";
 
-export const platformBackboneCards = [
+export const platformBackboneLayers = [
   {
-    label: "Living Service Model",
-    title: "Living Service Model",
-    description:
-      "Shape workflows, forms, approvals, SLAs, dashboards, and roles.",
-    bullets: [
-      "Workflows",
-      "forms",
-      "approvals",
-      "escalations",
-      "SLA rules",
-    ],
+    layer: "Layer 1",
+    title: "Solution Layer",
+    description: "Pre-built operational systems, ready to configure and run.",
+    icon: "/platform/backbone/solution-layer.png",
+    tags: ["FSM", "Process Management", "ITSM", "Field Sales", "CRM"],
   },
   {
-    label: "Data & Integration Layer",
-    title: "Data & Integration Layer",
-    description:
-      "Connect systems, sync records, and keep operational data unified.",
-    bullets: ["APIs", "webhooks", "integrations"],
-  },
-  {
-    label: "Workflow & Configuration Layer",
+    layer: "Layer 2",
     title: "Workflow & Configuration Layer",
     description:
-      "Configure stages, approvals, automations, and operational rules.",
-    bullets: ["Workflow engine", "approvals", "templates"],
+      "Shape workflows, forms, approvals, SLAs, dashboards, and roles to match how you work.",
+    icon: "/platform/backbone/workflow-config-layer.png",
+    tags: ["Workflows", "forms", "approvals", "escalations", "SLA rules"],
   },
   {
-    label: "Solution Layer",
-    title: "Solution Layer",
+    layer: "Layer 3",
+    title: "Data & Integration Layer",
     description:
-      "Deploy CRM, FSM, ITSM, field sales, and process modules on one backbone.",
-    bullets: ["CRM", "FSM", "ITSM"],
+      "One shared data layer that connects your systems and integrates with the tools you already use.",
+    icon: "/platform/backbone/data-integration-layer.png",
+    tags: ["Workflows", "forms", "approvals", "escalations", "SLA rules"],
+  },
+  {
+    layer: "Layer 4",
+    title: "Living Service Model",
+    description:
+      "Keeps the platform aligned to your operations after go-live, adapting as your workflows change.",
+    icon: "/platform/backbone/living-service-model.png",
+    tags: ["Workflows", "forms", "approvals", "escalations", "SLA rules"],
   },
 ];
 
 export const platformCapabilitiesHeading =
-  "The Core Capabilities Behind Every Dglide Solution";
+  "The Core Capabilities Behind Every DGlide Solution";
 export const platformCapabilitiesDescription =
-  "Lorem Ipsum Is Simply Model Is Not One Product. It Is A Connected Stack";
+  "DGlide is not one product. It is a connected stack of capabilities behind every solution.";
 
 export const platformVerticalCapabilities = [
   {
     id: "01",
     title: "Workflow Engine",
-    panelTitle: "Field Service Teams",
+    image: "/platform/capabilities-83.png",
+    panelTitle: "Move Work Without the Follow-Ups",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "Build the way your operation runs into the system, so every job follows a clear path and moves forward on its own.",
     features: [
       "Create structured operational flows",
       "Assign tasks and ownership",
       "Track progress from start to closure",
     ],
-    quote:
-      "Work moves through a system, not through follow-ups. Lorem Ipsum is simply dummy text of the printing and",
+  },
+  {
+    id: "02",
+    title: "Approvals & Routing",
+    image: "/platform/capabilities-84.png",
+    panelTitle: "Approvals That Never Get Stuck",
+    description:
+      "Route every approval to the right person and escalate automatically when something waits too long.",
+    features: [
+      "Route approvals by rule, not by chasing",
+      "Escalate automatically when work waits",
+      "See what is pending, with whom, and for how long",
+    ],
   },
   {
     id: "03",
     title: "Forms & Templates",
-    panelTitle: "Forms & Templates",
+    image: "/platform/capabilities-85.png",
+    panelTitle: "Capture the Right Data, Every Time",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "Build the forms and templates your work needs, so the right details are captured at every step.",
     features: [
-      "Build reusable forms for every workflow",
-      "Standardize data capture across teams",
-      "Launch faster with prebuilt templates",
+      "Build custom forms without code",
+      "Reuse templates across jobs and teams",
+      "Capture clean, structured data at the source",
     ],
-    quote:
-      "Teams stop rebuilding the same forms in spreadsheets and disconnected tools.",
   },
   {
     id: "04",
     title: "SLA Logic",
-    panelTitle: "SLA Logic",
+    image: "/platform/capabilities-86.png",
+    panelTitle: "Hit Commitments, Not Surprises",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "Set time targets, track them automatically, and escalate before they slip, so commitments are kept.",
     features: [
-      "Define SLA rules and escalation paths",
-      "Track breaches before they become customer issues",
-      "Automate follow-up when deadlines slip",
+      "Set SLA targets per workflow",
+      "Track time automatically against them",
+      "Escalate before a deadline is missed",
     ],
-    quote:
-      "Service commitments become visible and enforceable across every team.",
   },
   {
     id: "05",
     title: "Dashboards & Reports",
-    panelTitle: "Dashboards & Reports",
+    image: "/platform/capabilities-87.png",
+    panelTitle: "See Your Whole Operation, Live",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "Get real-time, role-based views of every job, request, and exception, so you stop chasing status.",
     features: [
-      "Monitor KPIs in real time",
-      "Share executive and team-level views",
-      "Export reporting without manual spreadsheets",
+      "Real-time dashboards by role",
+      "Spot exceptions before they escalate",
+      "Export reports without manual work",
     ],
-    quote:
-      "Leaders get one operational view instead of chasing updates across tools.",
   },
   {
     id: "06",
     title: "Mobile Access",
-    panelTitle: "Mobile Access",
+    image: "/platform/capabilities-88.png",
+    panelTitle: "Run the Work From the Field",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "Field and on-the-go teams update jobs, visits, and approvals from any phone, online or offline.",
     features: [
-      "Execute tasks from the field",
-      "Capture updates, photos, and signatures",
-      "Stay synced with back-office teams",
+      "Update work orders and visits on mobile",
+      "Works offline, syncs when connected",
+      "Capture photos, notes, and sign-offs on site",
     ],
-    quote:
-      "Field teams work from the same system as managers and support staff.",
   },
   {
     id: "07",
     title: "APIs & Integrations",
-    panelTitle: "APIs & Integrations",
+    image: "/platform/capabilities-89.png",
+    panelTitle: "Fits Into the Stack You Already Run",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "Connect DGlide to your CRM, ERP, and other tools through APIs, so data stays in sync.",
     features: [
-      "Connect ERP, CRM, and communication tools",
-      "Sync data through APIs and webhooks",
-      "Extend workflows across your stack",
+      "API-based integration with existing tools",
+      "Keep data in sync across systems",
+      "Extend the platform as you grow",
     ],
-    quote:
-      "Dglide fits into your environment instead of forcing a rip-and-replace.",
   },
 ];
 
@@ -330,71 +341,86 @@ export const platformBusinessTabContent: Record<
 };
 
 export const platformMultiSystemsHeading =
-  "One Platform. Multiple Operational Systems";
+  "One Platform. Multiple Operational Systems.";
 export const platformMultiSystemsDescription =
-  "Run Different Parts Of Your Operations On One Backbone";
+  "Run different parts of your operation on one backbone.";
 
 export const platformMultiSystemsCards = [
   {
     title: "Field Service Management",
     description:
-      "Manage Service Requests, Work Orders, Technicians, And Closure Workflows.",
+      "Manage service requests, work orders, technicians, and closure workflows.",
     link: "Explore FSM",
+    href: "/solutions/fsm",
+    icon: "/platform/multi-systems/fsm-icon.png",
   },
   {
     title: "CRM",
     description:
-      "Connect Customer Data, Relationship Workflows, Tasks, And Follow-Ups.",
-    link: "Explore FSM",
+      "Connect customer data, relationship workflows, tasks, and follow-ups.",
+    link: "Explore CRM",
+    href: "/solutions/crm",
+    icon: "/platform/multi-systems/crm-icon.png",
   },
   {
     title: "Service / ITSM Workflows",
     description:
-      "Run Requests, Tickets, Approvals, SLAs, And Internal Service Flows.",
-    link: "Explore FSM",
+      "Run requests, tickets, approvals, SLAs, and internal service flows.",
+    link: "Explore ITSM",
+    href: "/solutions/itsm",
+    icon: "/platform/multi-systems/itsm-icon.png",
   },
   {
     title: "Field Sales Execution",
     description:
-      "Track Visits, Routes, Orders, Field Activity, And Reporting.",
-    link: "Explore FSM",
+      "Track visits, routes, orders, field activity, and reporting.",
+    link: "Explore Field Sales",
+    href: "/solutions/field-sales",
+    icon: "/platform/multi-systems/sales-icon.png",
   },
   {
     title: "Process Management",
     description:
-      "Structure Multi-Stage Workflows, Task Dependencies, And Operational Visibility.",
-    link: "Explore FSM",
+      "Structure multi-stage workflows, task dependencies, and operational visibility.",
+    link: "Explore Process Management",
+    href: "/solutions/process",
+    icon: "/platform/multi-systems/process-icon.png",
   },
 ];
 
 export const platformNotAToolHeading =
-  "Not A Tool. Not A Suite. Not A Blank Platform.";
+  "Bigger Than a Tool. Lighter Than a Suite. Easier Than a Build.";
 export const platformNotAToolCards = [
   {
     title: "Fixed Tools",
-    description: "Lorem Ipsum Is Simply Model Is Not One Product Lorem Ipsum Is",
+    description: "Fast to start, fixed forever. Your process has to bend to it.",
+    icon: "/platform/not-a-tool/fixed-tools.png",
   },
   {
     title: "Enterprise Suites",
-    description: "Lorem Ipsum Is Simply Model Is Not One Product Lorem Ipsum Is",
+    description: "Built for the largest organizations, and priced and paced for them too.",
+    icon: "/platform/not-a-tool/enterprise-suites.png",
   },
   {
     title: "Low-Code Platforms",
-    description: "Lorem Ipsum Is Simply Model Is Not One Product Lorem Ipsum Is",
+    description: "A toolkit, not a system. The operational design is still your problem.",
+    icon: "/platform/not-a-tool/low-code.png",
   },
   {
-    title: "Dglide",
-    description: "Lorem Ipsum Is Simply Model Is Not One",
+    title: "Custom Build",
+    description: "Built to fit, then yours to maintain forever. You become the software company.",
+    icon: "/platform/not-a-tool/custom-build.png",
   },
   {
-    title: "Dglide",
-    description: "Lorem Ipsum Is Simply Model Is Not One",
+    title: "AI App Builders",
+    description: "Fast to generate, slow to trust. A prototype is not a production system.",
+    icon: "/platform/not-a-tool/ai-builders.png",
   },
 ];
 
 export const platformImproveBannerText =
-  "Dglide Isn't Just Another Layer. It's The Coordinated Foundation Your Operations Have Been Missing.";
-export const platformImproveBannerCta = "See the comparison in detail";
+  "DGlide isn't just another layer. It's the coordinated foundation your operations have been missing.";
+export const platformImproveBannerCta = "See How DGlide Compares";
 
 export type PlatformImprovesAlign = "left" | "center" | "right";
 
@@ -472,42 +498,57 @@ export const platformFeatureGridCards = [
 ];
 
 export const platformIntegrationHeading =
-  "Connect FSM With The Systems You Already Use";
+  "Connect DGlide With the Systems You Already Use";
 export const platformIntegrationDescription =
-  "Dglide Is Designed To Work With Your Existing Business Environment Instead Of Replacing Everything At Once.";
+  "DGlide works with your existing business environment instead of replacing everything at once.";
 export const platformIntegrationNodes = {
   left: [
     { label: "CRM systems", icon: "/solutions/integrations-hub/crm-systems.svg" },
     { label: "ITSM tools", icon: "/solutions/integrations-hub/itsm-tools.svg" },
-    { label: "Accounting and billing tools", icon: "/solutions/integrations-hub/accounting-billing-tools.svg" },
+    { label: "Accounting & finance tools", icon: "/solutions/integrations-hub/accounting-finance.png" },
+    { label: "Inventory & warehouse systems", icon: "/solutions/integrations-hub/inventory-warehouse.png" },
   ],
   right: [
     { label: "ERP systems", icon: "/solutions/integrations-hub/erp-systems.svg" },
     { label: "IoT or device data", icon: "/solutions/integrations-hub/iot-device-data.svg" },
     { label: "Internal business applications", icon: "/solutions/integrations-hub/internal-business-apps.svg" },
+    { label: "Email & communication tools", icon: "/solutions/integrations-hub/email-communication.png" },
   ],
 };
 
 export const platformFaqItems = [
   {
-    question: "Lorem Ipsum is simply dummy text of the printing and",
-    answer: "",
-  },
-  {
-    question: "Disconnected tools create manual friction.",
+    question: "What is the DGlide platform?",
     answer:
-      "Lorem Ipsum Is Simply Dummy Text Of The Printing And Lorem Ipsum Is Simply Dummy Lorem Lorem Ipsum Is Simp",
+      "A configurable operations platform. It gives you ready-to-run systems for field service, sales, and operations on one shared backbone, then adapts them to how you work.",
   },
   {
-    question: "Lorem Ipsum is simply dummy text of the printing and",
-    answer: "",
+    question: "Is DGlide a low-code platform?",
+    answer:
+      "No. You don't get a blank canvas to build. You start on a working system and configure it, without code or a dev team.",
   },
   {
-    question: "Reactive states replace strategic momentum.",
-    answer: "",
+    question: "How long does it take to go live?",
+    answer:
+      "Weeks, not months. You start on a ready system and configure from there, instead of building from scratch.",
+  },
+  {
+    question: "Can DGlide work with the tools we already use?",
+    answer:
+      "Yes. It connects to your CRM, ERP, and other systems through APIs, so you don't replace everything at once.",
+  },
+  {
+    question: "What happens when our processes change?",
+    answer:
+      "The system is reconfigured to match, with no rebuild. That continuous adaptation is the Living Service Model.",
+  },
+  {
+    question: "Do we need a technical team to run it?",
+    answer:
+      "No. DGlide is configured for you and maintained around your operation. You run it, not build it.",
   },
 ];
 
-export const platformFinalCtaEyebrow = "Lorem ipsum is simply";
+export const platformFinalCtaEyebrow = "Let's Map Your Operation";
 export const platformFinalCtaHeading =
-  "Lorem Ipsum is simply dummy text of the printing and typeset";
+  "See DGlide Run Your Operation, Not a Generic Demo";

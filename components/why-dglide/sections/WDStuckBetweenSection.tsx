@@ -133,7 +133,7 @@ export default function WDStuckBetweenSection() {
             </p>
             <Link
               href="/demo"
-              className="inline-flex h-12 w-fit items-center gap-2.5 rounded-full px-8 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90"
+              className="dg-btn-fill inline-flex h-12 w-fit items-center gap-2.5 rounded-full px-8 py-3.5 text-base font-semibold text-white"
               style={{
                 fontFamily: "Sora, sans-serif",
                 background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",

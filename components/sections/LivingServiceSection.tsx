@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const STATIC_TITLE   = "The Living Service Model: Fit That Doesn't Expire";
 const STATIC_BODY    = "With the Living Service Model, your system is adjusted as your operation changes, quarter after quarter.";
@@ -361,17 +361,19 @@ function NavButton({
   spinning: boolean;
   onClick: () => void;
 }) {
+  const [hovered, setHovered] = React.useState(false);
   const isNext = dir === "next";
   return (
     <button
       onClick={onClick}
-      className="relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 overflow-hidden"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
       style={{
-        background: isNext ? "#FF7F1C" : "#FFFFFF",
-        border: isNext ? "none" : "1.5px solid #E4E4E4",
-        boxShadow: isNext
-          ? "0 2px 8px rgba(255,127,28,0.28)"
-          : "0 1px 4px rgba(0,0,0,0.07)",
+        background: hovered ? "#FF7F1C" : "transparent",
+        border: `1.5px solid ${hovered ? "#FF7F1C" : "#E4E4E4"}`,
+        transition: "background 0.2s ease, border-color 0.2s ease",
+        cursor: "pointer",
       }}
     >
       {spinning && (
@@ -379,7 +381,7 @@ function NavButton({
           <circle
             cx="20" cy="20" r="18"
             fill="none"
-            stroke={isNext ? "rgba(255,255,255,0.6)" : "rgba(255,127,28,0.7)"}
+            stroke={hovered ? "rgba(255,255,255,0.6)" : "rgba(255,127,28,0.7)"}
             strokeWidth="2"
             strokeDasharray="113"
             strokeLinecap="round"
@@ -390,7 +392,7 @@ function NavButton({
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="relative z-10">
         <path
           d={isNext ? "M3 8h10M9 5l3 3-3 3" : "M13 8H3M7 5l-3 3 3 3"}
-          stroke={isNext ? "white" : "#555"}
+          stroke={hovered ? "white" : "#555"}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
