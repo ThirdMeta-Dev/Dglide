@@ -35,8 +35,15 @@ const PlatformMultiSystemsSection: FunctionComponent = () => (
           />
 
           <StaggerReveal className="sol-plat-multi-systems-grid">
-            {platformMultiSystemsCards.map((card) => (
-              <StaggerItem key={card.title}>
+            {platformMultiSystemsCards.map((card, i) => (
+              <StaggerItem
+                key={card.title}
+                className={
+                  i === 3 ? "sol-plat-multi-systems-item sol-plat-multi-systems-item--4" :
+                  i === 4 ? "sol-plat-multi-systems-item sol-plat-multi-systems-item--5" :
+                  "sol-plat-multi-systems-item"
+                }
+              >
               <article className="sol-plat-multi-systems-card">
               <Image
                 src={card.icon}

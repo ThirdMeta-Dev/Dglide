@@ -15,9 +15,22 @@ const PlatformNotAToolSection: FunctionComponent = () => (
       </ScrollReveal>
 
       <StaggerReveal className="sol-plat-not-tool-grid">
-        {platformNotAToolCards.map((card) => (
-          <StaggerItem key={card.title}>
-          <article className="sol-plat-not-tool-card">
+        {platformNotAToolCards.map((card, i) => (
+          <StaggerItem
+            key={card.title}
+            className={
+              i === 3 ? "sol-plat-not-tool-item sol-plat-not-tool-item--col4" :
+              i === 4 ? "sol-plat-not-tool-item sol-plat-not-tool-item--col5" :
+              "sol-plat-not-tool-item"
+            }
+          >
+          <article
+            className={
+              i === 0 || i === 3 ? "sol-plat-not-tool-card sol-plat-not-tool-card--right" :
+              i === 2 || i === 4 ? "sol-plat-not-tool-card sol-plat-not-tool-card--left" :
+              "sol-plat-not-tool-card"
+            }
+          >
             <Image
               src={card.icon}
               alt=""

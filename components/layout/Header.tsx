@@ -38,6 +38,7 @@ const DEFAULT_NAV: NavItemData[] = [
       { label: "FSM",  href: "/fsm",  has_dropdown: false },
     ],
   },
+  { label: "Pricing",   href: "/pricing",   has_dropdown: false },
   { label: "Platform",  href: "/platform",  has_dropdown: false },
   { label: "Industry",  href: "/industry",  has_dropdown: true  },
   {

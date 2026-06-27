@@ -313,7 +313,7 @@
 /* Backbone — sticky left + CSS stacking cards right */
 .solutions-page .sol-plat-backbone-section {
   padding-top: 130px;
-  padding-bottom: 80px;
+  padding-bottom: 300px;
 }
 
 .solutions-page .sol-plat-backbone-layout {
@@ -324,8 +324,7 @@
 }
 
 .solutions-page .sol-plat-backbone-left {
-  position: sticky;
-  top: 100px;
+  /* sticky is on the ScrollReveal wrapper (the grid child) */
 }
 
 .solutions-page .sol-plat-backbone-heading {
@@ -352,19 +351,14 @@
 .solutions-page .sol-plat-backbone-cards {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .solutions-page .sol-plat-backbone-card {
-  position: sticky;
   padding: 28px;
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 4px 32px rgba(15, 23, 42, 0.08);
-  margin-bottom: 20px;
-}
-
-.solutions-page .sol-plat-backbone-card:last-child {
-  margin-bottom: 0;
 }
 
 .solutions-page .sol-plat-backbone-card-header {
@@ -931,6 +925,19 @@
   margin-top: -669px;
 }
 
+/* Grid item wrappers — control column placement here since StaggerItem is the actual grid child */
+.solutions-page .sol-plat-multi-systems-item {
+  grid-column: span 2;
+}
+
+.solutions-page .sol-plat-multi-systems-item--4 {
+  grid-column: 2 / span 2;
+}
+
+.solutions-page .sol-plat-multi-systems-item--5 {
+  grid-column: 4 / span 2;
+}
+
 /* Card — exact Figma spec */
 .solutions-page .sol-plat-multi-systems-card {
   display: flex;
@@ -938,21 +945,11 @@
   align-items: flex-start;
   padding: 28px 60px 28px 28px;
   gap: 22px;
-  grid-column: span 2;
   border-radius: 16px;
   border: 1px solid #fff;
   background: linear-gradient(180deg, #fff 0%, #f6f6f6 100%);
   box-shadow: 0 4px 24px rgba(15, 23, 42, 0.07);
   height: 323px;
-}
-
-/* Row 2: 2 cards centered in 6-col grid */
-.solutions-page .sol-plat-multi-systems-card:nth-child(4) {
-  grid-column: 2 / span 2;
-}
-
-.solutions-page .sol-plat-multi-systems-card:nth-child(5) {
-  grid-column: 4 / span 2;
 }
 
 /* Card icon */
@@ -1026,8 +1023,20 @@
   gap: 48px 36px;
 }
 
-.solutions-page .sol-plat-not-tool-card {
+/* Grid item wrappers — StaggerItem motion.div is the actual grid child */
+.solutions-page .sol-plat-not-tool-item {
   grid-column: span 2;
+}
+
+.solutions-page .sol-plat-not-tool-item--col4 {
+  grid-column: 2 / span 2;
+}
+
+.solutions-page .sol-plat-not-tool-item--col5 {
+  grid-column: 4 / span 2;
+}
+
+.solutions-page .sol-plat-not-tool-card {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1035,26 +1044,12 @@
   gap: 20px;
 }
 
-/* Per-card directional alignment */
-.solutions-page .sol-plat-not-tool-card:nth-child(1) {
+.solutions-page .sol-plat-not-tool-card--right {
   align-items: flex-end;
   text-align: right;
 }
 
-.solutions-page .sol-plat-not-tool-card:nth-child(3) {
-  align-items: flex-start;
-  text-align: left;
-}
-
-/* Row 2: 2 cards centered in 6-col grid */
-.solutions-page .sol-plat-not-tool-card:nth-child(4) {
-  grid-column: 2 / span 2;
-  align-items: flex-end;
-  text-align: right;
-}
-
-.solutions-page .sol-plat-not-tool-card:nth-child(5) {
-  grid-column: 4 / span 2;
+.solutions-page .sol-plat-not-tool-card--left {
   align-items: flex-start;
   text-align: left;
 }
@@ -1518,12 +1513,12 @@
     padding-bottom: 48px;
   }
 
-  .solutions-page .sol-plat-multi-systems-card,
-  .solutions-page .sol-plat-multi-systems-card:nth-child(4),
-  .solutions-page .sol-plat-multi-systems-card:nth-child(5),
-  .solutions-page .sol-plat-not-tool-card,
-  .solutions-page .sol-plat-not-tool-card:nth-child(4),
-  .solutions-page .sol-plat-not-tool-card:nth-child(5) {
+  .solutions-page .sol-plat-multi-systems-item,
+  .solutions-page .sol-plat-multi-systems-item--4,
+  .solutions-page .sol-plat-multi-systems-item--5,
+  .solutions-page .sol-plat-not-tool-item,
+  .solutions-page .sol-plat-not-tool-item--col4,
+  .solutions-page .sol-plat-not-tool-item--col5 {
     grid-column: auto;
   }
 
