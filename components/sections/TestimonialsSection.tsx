@@ -212,16 +212,16 @@ function NavButton({ dir, onClick, disabled }: { dir: "prev" | "next"; onClick: 
       style={{
         width: 44, height: 44, borderRadius: "50%",
         display: "flex", alignItems: "center", justifyContent: "center",
-        border: `1.5px solid ${active ? "#FF7F1C" : "#E4E4E4"}`,
-        background: active ? "#FF7F1C" : "transparent",
+        border: "1.5px solid #FF7F1C",
+        background: active ? "transparent" : "#FF7F1C",
         cursor: disabled ? "not-allowed" : "pointer",
         opacity: disabled ? 0.35 : 1,
-        transition: "background 0.2s ease, border-color 0.2s ease",
+        transition: "background 0.2s ease",
         flexShrink: 0,
       }}
     >
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d={isNext ? "M3 8h10M9 5l3 3-3 3" : "M13 8H3M7 5l-3 3 3 3"} stroke={active ? "#fff" : "#555"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d={isNext ? "M3 8h10M9 5l3 3-3 3" : "M13 8H3M7 5l-3 3 3 3"} stroke={active ? "#FF7F1C" : "#fff"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </button>
   );

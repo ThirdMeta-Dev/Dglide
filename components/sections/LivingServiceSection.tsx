@@ -370,9 +370,9 @@ function NavButton({
       onMouseLeave={() => setHovered(false)}
       className="relative w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
       style={{
-        background: hovered ? "#FF7F1C" : "transparent",
-        border: `1.5px solid ${hovered ? "#FF7F1C" : "#E4E4E4"}`,
-        transition: "background 0.2s ease, border-color 0.2s ease",
+        background: hovered ? "transparent" : "#FF7F1C",
+        border: "1.5px solid #FF7F1C",
+        transition: "background 0.2s ease",
         cursor: "pointer",
       }}
     >
@@ -381,7 +381,7 @@ function NavButton({
           <circle
             cx="20" cy="20" r="18"
             fill="none"
-            stroke={hovered ? "rgba(255,255,255,0.6)" : "rgba(255,127,28,0.7)"}
+            stroke={hovered ? "rgba(255,127,28,0.7)" : "rgba(255,255,255,0.6)"}
             strokeWidth="2"
             strokeDasharray="113"
             strokeLinecap="round"
@@ -392,7 +392,7 @@ function NavButton({
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="relative z-10">
         <path
           d={isNext ? "M3 8h10M9 5l3 3-3 3" : "M13 8H3M7 5l-3 3 3 3"}
-          stroke={hovered ? "white" : "#555"}
+          stroke={hovered ? "#FF7F1C" : "#fff"}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
