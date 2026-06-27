@@ -90,7 +90,7 @@ export function ScrollReveal({
   duration = 0.65,
   distance = 32,
   once = true,
-  amount = 0.55,
+  amount = 0.25,
   className,
   style,
 }: ScrollRevealProps) {
@@ -137,7 +137,7 @@ export function StaggerReveal({
   className,
   style,
   once = true,
-  amount = 0.45,
+  amount = 0.2,
 }: StaggerRevealProps) {
   const shouldReduce = useReducedMotion();
 
@@ -237,7 +237,7 @@ export function MotionReveal({
       className={`w-full ${className}`}
       initial={{ opacity: 0, y: shouldReduce ? 0 : y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.5 }}
+      viewport={{ once: true, amount: 0.25 }}
       transition={{ ...revealTransition, delay }}
     >
       {children}
@@ -296,7 +296,7 @@ export function MotionStagger({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.15 }}
     >
       {children}
     </motion.div>

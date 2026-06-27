@@ -328,11 +328,9 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             articleUrl={`${SITE_URL}/blogs/${post.slug}`}
           />
 
-          <ScrollReveal direction="up" delay={0.1}>
-            <article className={styles.article}>
-              <div id="article-start" className={styles.articleContent} dangerouslySetInnerHTML={{ __html: html }} />
-            </article>
-          </ScrollReveal>
+          <article className={styles.article}>
+            <div id="article-start" className={styles.articleContent} dangerouslySetInnerHTML={{ __html: html }} />
+          </article>
         </div>
 
         <ScrollReveal direction="up">
