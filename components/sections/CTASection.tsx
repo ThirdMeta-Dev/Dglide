@@ -15,7 +15,7 @@ export default function CTASection({ data }: { data?: Record<string, string> }) 
   const ctaLabel  = data?.cta_label  ?? DEFAULTS.cta_label;
   const ctaHref   = data?.cta_href   ?? DEFAULTS.cta_href;
   return (
-    <section style={{ width: "100%", padding: "48px 16px 80px" }}>
+    <section style={{ width: "100%", padding: "48px 16px 130px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div
           className="cta-inner-card"

@@ -109,9 +109,9 @@ export default function AUSameProblemSection() {
                     </div>
                     {/* Problem tag */}
                     <div className="inline-flex w-fit items-center gap-2 rounded-[40px]">
-                      <span className="h-[11px] w-0.5 shrink-0 bg-black" />
+                      <span className="h-[11px] w-0.5 shrink-0 bg-red-600" />
                       <span
-                        className="whitespace-nowrap text-[15px] font-light leading-[18.9px] text-black"
+                        className="whitespace-nowrap text-[15px] font-light leading-[18.9px] text-red-600"
                         style={{
                           fontFamily: "var(--font-sora), Sora, sans-serif",
                         }}
@@ -154,7 +154,7 @@ export default function AUSameProblemSection() {
               </div>
               <Link
                 href="/platform"
-                className="inline-flex h-12 w-fit shrink-0 items-center gap-2.5 whitespace-nowrap rounded-full px-8 text-base font-semibold leading-[20px] text-white transition-opacity hover:opacity-90"
+                className="dg-btn-fill inline-flex h-12 w-fit shrink-0 items-center gap-2.5 whitespace-nowrap rounded-full px-8 text-base font-semibold leading-[20px] text-white"
                 style={{
                   fontFamily: "var(--font-sora), Sora, sans-serif",
                   background:

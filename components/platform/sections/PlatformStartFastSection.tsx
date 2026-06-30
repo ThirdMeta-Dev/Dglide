@@ -2,6 +2,7 @@
 
 import { FunctionComponent, useEffect, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
@@ -30,13 +31,23 @@ const STEPS = [
 
 const PlatformStartFastSection: FunctionComponent = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [fillTransition, setFillTransition] = useState({ duration: 0, ease: "linear" as const });
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveStep((s) => (s + 1) % STEPS.length);
+      setActiveStep((s) => {
+        const next = (s + 1) % STEPS.length;
+        setFillTransition({ duration: next === 0 ? 0 : 2.4, ease: "linear" });
+        return next;
+      });
     }, 2500);
     return () => clearInterval(timer);
   }, []);
+
+  const handleStepClick = (i: number) => {
+    setFillTransition({ duration: 0.3, ease: "linear" });
+    setActiveStep(i);
+  };
 
   return (
     <section id="platform-start-fast" className="sol-section sol-plat-start-section">
@@ -52,9 +63,10 @@ const PlatformStartFastSection: FunctionComponent = () => {
         <div className="sol-plat-start-timeline">
           {/* connecting line */}
           <div className="sol-plat-start-line" aria-hidden>
-            <div
+            <motion.div
               className="sol-plat-start-line-fill"
-              style={{ width: `${(activeStep / (STEPS.length - 1)) * 100}%` }}
+              animate={{ width: `${(activeStep / (STEPS.length - 1)) * 100}%` }}
+              transition={fillTransition}
             />
           </div>
 
@@ -66,7 +78,7 @@ const PlatformStartFastSection: FunctionComponent = () => {
                 <button
                   type="button"
                   className={`sol-plat-start-step${isActive ? " sol-plat-start-step--active" : ""}`}
-                  onClick={() => setActiveStep(i)}
+                  onClick={() => handleStepClick(i)}
                 >
                   <div className="sol-plat-start-icon-wrap">
                     <Image

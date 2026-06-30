@@ -6,7 +6,7 @@
 
 .page {
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: #f3f3f3;
   color: #000;
   font-family: var(--font-inter), Inter, sans-serif;
@@ -135,6 +135,21 @@
   cursor: pointer;
   border: none;
   white-space: nowrap;
+  transition: background 0.22s ease;
+}
+
+.heroBtnPrimary:hover {
+  background: linear-gradient(273deg, #0b148c 4.29%, #141fb5 95.71%);
+}
+
+.heroBtnPrimary svg,
+.heroBtnSecondary svg {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.heroBtnPrimary:hover svg,
+.heroBtnSecondary:hover svg {
+  transform: rotate(-45deg);
 }
 
 /*
@@ -158,6 +173,11 @@
   /* Gradient border via border-image trick / box shadow */
   border: 1px solid #1c2bff;
   white-space: nowrap;
+  transition: background 0.22s ease;
+}
+
+.heroBtnSecondary:hover {
+  background: linear-gradient(90deg, #D9DCFF 0%, #E8EAFF 100%);
 }
 
 /* ── "WHAT HAPPENS NEXT?" SECTION ─────────────────────────── */
@@ -414,6 +434,7 @@
 /* ── TESTIMONIALS WRAPPER ─────────────────────────────────── */
 .testimonialsWrap {
   width: 100%;
+  margin-bottom: 80px;
 }
 
 /* ── CTA SECTION WRAPPER ─────────────────────────────────── */
@@ -432,6 +453,8 @@
 .faqSection {
   width: 100%;
   padding: 80px 16px;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
 .faqInner {

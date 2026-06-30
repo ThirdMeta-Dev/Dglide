@@ -11,7 +11,7 @@ import { motionEase } from "@/components/animations/MotionPrimitives";
 
 export type NavItemData = {
   label: string;
-  href: string;
+  href?: string;
   has_dropdown: boolean;
   children?: NavItemData[];
 };
@@ -31,7 +31,6 @@ const DEFAULT_NAV: NavItemData[] = [
   },
   {
     label: "Solutions",
-    href: "/itsm",
     has_dropdown: true,
     children: [
       { label: "ITSM", href: "/itsm", has_dropdown: false },
@@ -65,7 +64,7 @@ function NavItem({
   isChildActive: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  const active = isActive(item.href) || isChildActive;
+  const active = (item.href ? isActive(item.href) : false) || isChildActive;
   const children = item.children ?? [];
 
   return (
@@ -81,39 +80,75 @@ function NavItem({
         }
       }}
     >
-      <Link
-        href={item.href}
-        className={cn(
-          "flex items-center gap-1.5 text-sm leading-[22.4px] transition-colors duration-200 group",
-          "[font-family:var(--font-sora)]",
-          active ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
-        )}
-      >
-        <span
+      {item.href ? (
+        <Link
+          href={item.href}
           className={cn(
-            "w-1.5 h-1.5 rounded-full bg-[#1C2BFF] flex-shrink-0 transition-all duration-200",
-            active
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100"
+            "flex items-center gap-1.5 text-sm leading-[22.4px] transition-colors duration-200 group",
+            "[font-family:var(--font-sora)]",
+            active ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
           )}
-        />
-        <span>{item.label}</span>
-        {item.has_dropdown && (
-          <motion.span
-            className="inline-flex"
-            animate={{ rotate: open ? 180 : 0 }}
-            transition={{ duration: 0.22, ease: "easeOut" }}
-          >
-            <ChevronDown
-              className={cn(
-                "w-4 h-4 transition-colors duration-200",
-                active ? "text-[#1C2BFF]" : "text-black group-hover:text-[#1C2BFF]"
-              )}
-              strokeWidth={1.5}
-            />
-          </motion.span>
-        )}
-      </Link>
+        >
+          <span
+            className={cn(
+              "w-1.5 h-1.5 rounded-full bg-[#1C2BFF] flex-shrink-0 transition-all duration-200",
+              active
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100"
+            )}
+          />
+          <span>{item.label}</span>
+          {item.has_dropdown && (
+            <motion.span
+              className="inline-flex"
+              animate={{ rotate: open ? 180 : 0 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+            >
+              <ChevronDown
+                className={cn(
+                  "w-4 h-4 transition-colors duration-200",
+                  active ? "text-[#1C2BFF]" : "text-black group-hover:text-[#1C2BFF]"
+                )}
+                strokeWidth={1.5}
+              />
+            </motion.span>
+          )}
+        </Link>
+      ) : (
+        <button
+          type="button"
+          className={cn(
+            "flex items-center gap-1.5 text-sm leading-[22.4px] transition-colors duration-200 group bg-transparent border-0 p-0 cursor-pointer",
+            "[font-family:var(--font-sora)]",
+            active ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
+          )}
+        >
+          <span
+            className={cn(
+              "w-1.5 h-1.5 rounded-full bg-[#1C2BFF] flex-shrink-0 transition-all duration-200",
+              active
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100"
+            )}
+          />
+          <span>{item.label}</span>
+          {item.has_dropdown && (
+            <motion.span
+              className="inline-flex"
+              animate={{ rotate: open ? 180 : 0 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+            >
+              <ChevronDown
+                className={cn(
+                  "w-4 h-4 transition-colors duration-200",
+                  active ? "text-[#1C2BFF]" : "text-black group-hover:text-[#1C2BFF]"
+                )}
+                strokeWidth={1.5}
+              />
+            </motion.span>
+          )}
+        </button>
+      )}
 
       <AnimatePresence>
         {children.length > 0 && open && (
@@ -130,18 +165,18 @@ function NavItem({
           >
             {children.map((child) => (
               <Link
-                key={child.href}
-                href={child.href}
+                key={child.href!}
+                href={child.href!}
                 className={cn(
                   "flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm [font-family:var(--font-sora)]",
                   "transition-colors duration-200 group/item hover:bg-white/70",
-                  isActive(child.href) ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
+                  isActive(child.href!) ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
                 )}
               >
                 <span
                   className={cn(
                     "w-1.5 h-1.5 rounded-full bg-[#1C2BFF] flex-shrink-0 transition-all duration-200",
-                    isActive(child.href)
+                    isActive(child.href!)
                       ? "opacity-100 scale-100"
                       : "opacity-0 scale-0 group-hover/item:opacity-100 group-hover/item:scale-100"
                   )}
@@ -191,10 +226,10 @@ export default function Header({ navItems, settings }: Props) {
         <nav className="flex items-center gap-7">
           {nav.map((item) => (
             <NavItem
-              key={item.href}
+              key={item.label}
               item={item}
               isActive={isActive}
-              isChildActive={(item.children ?? []).some((c) => isActive(c.href))}
+              isChildActive={(item.children ?? []).some((c) => isActive(c.href!))}
             />
           ))}
         </nav>
@@ -249,14 +284,14 @@ export default function Header({ navItems, settings }: Props) {
             {nav.map((item) => {
               const children = item.children ?? [];
               const hasChildren = children.length > 0;
-              const isExpanded = mobileExpanded === item.href;
-              const parentActive = isActive(item.href) || children.some((c) => isActive(c.href));
+              const isExpanded = mobileExpanded === item.label;
+              const parentActive = (item.href ? isActive(item.href) : false) || children.some((c) => isActive(c.href!));
 
               return (
-                <div key={item.href}>
+                <div key={item.label}>
                   {hasChildren ? (
                     <button
-                      onClick={() => setMobileExpanded(isExpanded ? null : item.href)}
+                      onClick={() => setMobileExpanded(isExpanded ? null : item.label)}
                       className={cn(
                         "w-full flex items-center justify-between gap-2 py-2.5 text-sm [font-family:var(--font-sora)]",
                         parentActive ? "text-[#1C2BFF] font-medium" : "text-black"
@@ -274,7 +309,7 @@ export default function Header({ navItems, settings }: Props) {
                         <ChevronDown className="w-4 h-4" strokeWidth={1.5} />
                       </motion.span>
                     </button>
-                  ) : (
+                  ) : item.href ? (
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
@@ -286,6 +321,10 @@ export default function Header({ navItems, settings }: Props) {
                       {isActive(item.href) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
                       {item.label}
                     </Link>
+                  ) : (
+                    <span className="flex items-center gap-2 py-2.5 text-sm [font-family:var(--font-sora)] text-black">
+                      {item.label}
+                    </span>
                   )}
 
                   <AnimatePresence initial={false}>
@@ -299,15 +338,15 @@ export default function Header({ navItems, settings }: Props) {
                       >
                         {children.map((child) => (
                           <Link
-                            key={child.href}
-                            href={child.href}
+                            key={child.href!}
+                            href={child.href!}
                             onClick={() => setMobileOpen(false)}
                             className={cn(
                               "flex items-center gap-2 py-2 pl-5 text-sm [font-family:var(--font-sora)]",
-                              isActive(child.href) ? "text-[#1C2BFF] font-medium" : "text-[#444]"
+                              isActive(child.href!) ? "text-[#1C2BFF] font-medium" : "text-[#444]"
                             )}
                           >
-                            {isActive(child.href) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
+                            {isActive(child.href!) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
                             {child.label}
                           </Link>
                         ))}

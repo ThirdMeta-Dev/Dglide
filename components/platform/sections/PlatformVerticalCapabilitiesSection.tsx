@@ -1,7 +1,7 @@
 "use client";
 
 import { FunctionComponent, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { ScrollReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 import {
@@ -61,13 +61,19 @@ const PlatformVerticalCapabilitiesSection: FunctionComponent = () => {
 
         <div className="sol-plat-cap-grid">
           <div className="sol-plat-cap-media-wrap">
-            <img
-              key={active.image}
-              src={active.image}
-              alt=""
-              className="sol-plat-cap-media"
-              aria-hidden
-            />
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={active.image}
+                src={active.image}
+                alt=""
+                className="sol-plat-cap-media"
+                aria-hidden
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </AnimatePresence>
           </div>
 
           <motion.div
@@ -90,24 +96,32 @@ const PlatformVerticalCapabilitiesSection: FunctionComponent = () => {
                     onClick={() => setActiveIndex(index)}
                   >
                     <span className="sol-plat-vertical-cap-trigger-id">{item.id}</span>
-                    <span className="sol-plat-vertical-cap-trigger-sep" aria-hidden>&nbsp;—&nbsp;</span>
-                    {item.title}
+                    {" "}{item.title}
                   </button>
 
-                  {isActive && (
-                    <div className="sol-plat-vertical-cap-panel">
-                      <h3 className="sol-plat-vertical-cap-panel-title">{active.panelTitle}</h3>
-                      <p className="sol-plat-vertical-cap-panel-description">{active.description}</p>
-                      <ul className="sol-plat-vertical-cap-features">
-                        {active.features.map((feature) => (
-                          <li key={feature} className="sol-plat-vertical-cap-feature">
-                            <TickIcon />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                  <AnimatePresence initial={false}>
+                    {isActive && (
+                      <motion.div
+                        className="sol-plat-vertical-cap-panel"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <h3 className="sol-plat-vertical-cap-panel-title">{active.panelTitle}</h3>
+                        <p className="sol-plat-vertical-cap-panel-description">{active.description}</p>
+                        <ul className="sol-plat-vertical-cap-features">
+                          {active.features.map((feature) => (
+                            <li key={feature} className="sol-plat-vertical-cap-feature">
+                              <TickIcon />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   {/* Progress track: grey line with orange fill on active item */}
                   <div className="sol-plat-vertical-cap-track">

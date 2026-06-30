@@ -58,7 +58,7 @@ const ARCHES: Array<[number, number, number, number, string]> = [
 
 export default function AUCoreBeliefSection() {
   return (
-    <section className="w-full">
+    <section className="w-full" style={{ paddingTop: "80px" }}>
       <div className="max-w-[1200px] mx-auto px-5 md:px-12 flex flex-col items-center gap-12">
         {/* ---------- Heading + statement — Frame 1618876717 ---------- */}
         <div className="flex flex-col items-center gap-4 max-w-[624px]">

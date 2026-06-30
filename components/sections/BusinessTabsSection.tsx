@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const TAB_DEFAULTS = [
@@ -258,102 +259,108 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
           {/* LEFT: text content */}
           <div
             className="bts-content-left"
-            style={{
-              width: 423,
-              flexShrink: 0,
-              display: "flex",
-              flexDirection: "column",
-            }}
+            style={{ width: 423, flexShrink: 0, display: "flex", flexDirection: "column" }}
           >
-            <h3
-              style={{
-                color: "#000",
-                fontFamily: "var(--font-tasa-orbiter)",
-                fontSize: 24,
-                fontStyle: "normal",
-                fontWeight: 500,
-                lineHeight: "30px",
-                marginBottom: 18,
-              }}
-            >
-              {tab.title}
-            </h3>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                style={{ display: "flex", flexDirection: "column", flex: 1 }}
+              >
+                <h3
+                  style={{
+                    color: "#000",
+                    fontFamily: "var(--font-tasa-orbiter)",
+                    fontSize: 24,
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "30px",
+                    marginBottom: 18,
+                  }}
+                >
+                  {tab.title}
+                </h3>
 
-            <p
-              style={{
-                color: "#555",
-                fontFamily: "Inter, sans-serif",
-                fontSize: 16,
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "27px",
-                letterSpacing: "0.2px",
-                textTransform: "capitalize",
-                marginBottom: 32,
-              }}
-            >
-              {tab.subtitle}
-            </p>
+                <p
+                  style={{
+                    color: "#555",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: 16,
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    lineHeight: "27px",
+                    letterSpacing: "0.2px",
+                    textTransform: "capitalize",
+                    marginBottom: 32,
+                  }}
+                >
+                  {tab.subtitle}
+                </p>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 16,
-                paddingLeft: 20,
-                flex: 1,
-              }}
-            >
-              {tab.bullets.map((b, i) => (
-                <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-                  <Image
-                    src="/business-tabs/bullet.svg"
-                    alt=""
-                    width={31}
-                    height={18}
-                    className="object-contain flex-shrink-0"
-                    style={{ marginTop: 4 }}
-                  />
-                  <span
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 16,
+                    paddingLeft: 20,
+                    flex: 1,
+                  }}
+                >
+                  {tab.bullets.map((b, i) => (
+                    <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+                      <Image
+                        src="/business-tabs/bullet.svg"
+                        alt=""
+                        width={31}
+                        height={18}
+                        className="object-contain flex-shrink-0"
+                        style={{ marginTop: 4 }}
+                      />
+                      <span
+                        style={{
+                          color: "#000",
+                          fontFamily: "var(--font-tasa-orbiter)",
+                          fontSize: 15,
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          lineHeight: "24px",
+                        }}
+                      >
+                        {b}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <div style={{ marginTop: 60 }}>
+                  <a
+                    href={ctaHref}
+                    className="dg-btn-fill"
                     style={{
-                      color: "#000",
-                      fontFamily: "var(--font-tasa-orbiter)",
-                      fontSize: 15,
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "24px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 12,
+                      padding: "14px 32px",
+                      borderRadius: 40,
+                      background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
+                      color: "#fff",
+                      textDecoration: "none",
+                      fontFamily: "var(--font-sora), Sora, sans-serif",
+                      fontSize: 16,
+                      fontWeight: 600,
+                      lineHeight: "20px",
+                      cursor: "pointer",
                     }}
                   >
-                    {b}
-                  </span>
+                    {ctaLabel} <span style={{ fontSize: 18 }}>→</span>
+                  </a>
                 </div>
-              ))}
-            </div>
-
-            {/* CTA */}
-            <div style={{ marginTop: 60 }}>
-              <a
-                href={ctaHref}
-                className="dg-btn-fill"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 12,
-                  padding: "14px 32px",
-                  borderRadius: 40,
-                  background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
-                  color: "#fff",
-                  textDecoration: "none",
-                  fontFamily: "var(--font-sora), Sora, sans-serif",
-                  fontSize: 16,
-                  fontWeight: 600,
-                  lineHeight: "20px",
-                  cursor: "pointer",
-                }}
-              >
-                {ctaLabel} <span style={{ fontSize: 18 }}>→</span>
-              </a>
-            </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* RIGHT: product image */}
@@ -365,19 +372,27 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
               overflow: "hidden",
               background: "linear-gradient(135deg, #f3f3f3 0%, #f6d9c3 100%)",
               minHeight: 360,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              position: "relative",
             }}
           >
-            <Image
-              key={tab.image}
-              src={tab.image}
-              alt="DGlide dashboard"
-              width={700}
-              height={472}
-              className="w-full h-full object-cover block"
-            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={tab.image}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                style={{ position: "absolute", inset: 0 }}
+              >
+                <Image
+                  src={tab.image}
+                  alt="DGlide dashboard"
+                  width={700}
+                  height={472}
+                  className="w-full h-full object-cover block"
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
 
         </div>

@@ -73,7 +73,7 @@ const PlatformFeatureGridSection: FunctionComponent = () => (
                 style={{ marginBottom: 24 }}
               />
               <h3 className="sol-plat-built-biz-card-title">Cloud-Ready Foundation</h3>
-              <p className="sol-plat-built-biz-card-desc">
+              <p className="sol-plat-built-biz-card-desc" style={{ marginBottom: 34 }}>
                 Built to run real business workflows at scale, with the reliability a live operation depends on.
               </p>
             </div>
@@ -131,7 +131,7 @@ const PlatformFeatureGridSection: FunctionComponent = () => (
                 style={{ marginBottom: 24 }}
               />
               <h3 className="sol-plat-built-biz-card-title">Integration-Ready</h3>
-              <p className="sol-plat-built-biz-card-desc">
+              <p className="sol-plat-built-biz-card-desc" style={{ marginBottom: 45 }}>
                 Connect to the CRM, ERP, and tools you already run, so DGlide extends your stack instead of replacing it.
               </p>
             </div>

@@ -90,9 +90,9 @@ export default function WDCustomFitSection() {
           </ScrollReveal>
 
           {/* Cards + connectors + platform pill — Frame 1618876651 */}
-          <div className="relative w-full max-w-[1104px] flex flex-col items-center">
+          <div className="relative w-full max-w-[1104px] flex flex-col items-center" style={{ isolation: "isolate" }}>
             {/* Connector lines (desktop only) */}
-            <div aria-hidden className="hidden lg:block absolute inset-0 pointer-events-none">
+            <div aria-hidden className="hidden lg:block absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
               {/* vertical line from middle card to pill — Vector 6794 */}
               <img
                 src={`${ASSET}/connector-center.svg`}
@@ -114,7 +114,7 @@ export default function WDCustomFitSection() {
             </div>
 
             {/* Card row — Frame 1618876520 (middle card raised 52px) */}
-            <StaggerReveal className="w-full flex flex-col lg:flex-row lg:items-end gap-4 lg:h-[343px]">
+            <StaggerReveal className="relative w-full flex flex-col lg:flex-row lg:items-end gap-4 lg:h-[343px]" style={{ zIndex: 1 }}>
               {CARDS.map((card) => (
                 <StaggerItem
                   key={card.title}

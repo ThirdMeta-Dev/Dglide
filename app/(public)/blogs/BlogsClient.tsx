@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useCallback, useMemo, useRef, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { BlogPost } from '@/lib/blog-db'
@@ -8,6 +8,35 @@ import styles from './BlogsClient.module.css'
 import { StaggerReveal, StaggerItem } from '@/components/animations/MotionPrimitives'
 
 const PAGE_SIZE = 9
+const BOOKMARKS_KEY = 'dglide_bookmarks'
+
+function useBookmarks() {
+  const [bookmarks, setBookmarks] = useState<Set<string>>(new Set())
+
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(BOOKMARKS_KEY) || '[]')
+      setBookmarks(new Set(stored))
+    } catch {}
+  }, [])
+
+  const toggle = useCallback((slug: string) => {
+    setBookmarks((prev) => {
+      const next = new Set(prev)
+      if (next.has(slug)) {
+        next.delete(slug)
+      } else {
+        next.add(slug)
+      }
+      try {
+        localStorage.setItem(BOOKMARKS_KEY, JSON.stringify([...next]))
+      } catch {}
+      return next
+    })
+  }, [])
+
+  return { bookmarks, toggle }
+}
 
 const POST_TYPES = [
   { value: '', label: 'All Types' },
@@ -71,6 +100,38 @@ function SvgIcon({
   )
 }
 
+function BookmarkIcon({ saved }: { saved: boolean }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="21" viewBox="0 0 14 21" fill="none" aria-hidden>
+      <path
+        d="M1 1H13V19.5L7 15.5L1 19.5V1Z"
+        fill={saved ? '#FF7F1C' : 'none'}
+        stroke={saved ? '#FF7F1C' : '#9CA3AF'}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function ReadArrow({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="19"
+      viewBox="0 0 20 19"
+      fill="none"
+      aria-hidden
+      className={className}
+    >
+      <path d="M1.00003 8.0939C0.447744 8.09392 1.60277e-05 8.54165 5.96046e-08 9.09393C-1.59085e-05 9.64622 0.447686 10.0939 0.999971 10.0939L1 9.0939L1.00003 8.0939ZM15.1442 10.0935C15.6964 10.0935 16.1442 9.64575 16.1442 9.09346C16.1442 8.54118 15.6965 8.09348 15.1442 8.09349L15.1442 9.09349L15.1442 10.0935ZM1 9.0939L0.999971 10.0939L15.1442 10.0935L15.1442 9.09349L15.1442 8.09349L1.00003 8.0939L1 9.0939Z" fill="currentColor"/>
+      <path d="M10.3978 12.4279C10.0072 12.8184 10.0072 13.4516 10.3977 13.8421C10.7882 14.2326 11.4214 14.2326 11.8119 13.842L11.1049 13.1349L10.3978 12.4279ZM15.8533 9.80072C16.2438 9.41018 16.2438 8.77702 15.8533 8.38651C15.4628 7.99599 14.8296 7.99601 14.4391 8.38655L15.1462 9.09363L15.8533 9.80072ZM11.1049 13.1349L11.8119 13.842L15.8533 9.80072L15.1462 9.09363L14.4391 8.38655L10.3978 12.4279L11.1049 13.1349Z" fill="currentColor"/>
+      <path d="M11.8077 4.34185C11.4172 3.95134 10.784 3.95136 10.3935 4.34189C10.003 4.73243 10.0029 5.36559 10.3935 5.75611L11.1006 5.04898L11.8077 4.34185ZM14.4345 9.79719C14.8251 10.1877 15.4582 10.1877 15.8488 9.79715C16.2393 9.40661 16.2393 8.77345 15.8488 8.38293L15.1417 9.09006L14.4345 9.79719ZM11.1006 5.04898L10.3935 5.75611L14.4345 9.79719L15.1417 9.09006L15.8488 8.38293L11.8077 4.34185L11.1006 5.04898Z" fill="currentColor"/>
+    </svg>
+  )
+}
+
 function SearchField({
   value,
   onChange,
@@ -110,13 +171,23 @@ function BlogCard({
   post,
   stat,
   large = false,
+  isBookmarked = false,
+  onBookmark,
 }: {
   post: BlogPost
   stat?: string
   large?: boolean
+  isBookmarked?: boolean
+  onBookmark?: (slug: string) => void
 }) {
   const [imageFailed, setImageFailed] = useState(false)
   const label = typeLabel(post)
+
+  function handleBookmark(e: React.MouseEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+    onBookmark?.(post.slug)
+  }
 
   return (
     <Link href={postHref(post)} className={cx(styles.card, large && styles.cardLarge)}>
@@ -142,14 +213,21 @@ function BlogCard({
         <div className={styles.cardText}>
           <div className={styles.dateRow}>
             <span>{postDate(post)}</span>
-            <SvgIcon src="/blogs/date-bookmark.svg" width={14} height={21} className={styles.dateIcon} />
+            <button
+              type="button"
+              className={styles.bookmarkBtn}
+              onClick={handleBookmark}
+              aria-label={isBookmarked ? 'Remove bookmark' : 'Bookmark this post'}
+            >
+              <BookmarkIcon saved={isBookmarked} />
+            </button>
           </div>
           <h3 className={styles.cardTitle}>{post.title}</h3>
         </div>
 
         <span className={styles.readMore}>
           Read More
-          <SvgIcon src="/blogs/read-arrow.svg" width={11} height={15} />
+          <ReadArrow className={styles.readArrow} />
         </span>
       </div>
     </Link>
@@ -160,10 +238,14 @@ function CarouselSection({
   title,
   posts,
   statForIndex,
+  bookmarks,
+  onBookmark,
 }: {
   title: string
   posts: BlogPost[]
   statForIndex?: (index: number) => string | undefined
+  bookmarks: Set<string>
+  onBookmark: (slug: string) => void
 }) {
   const [page, setPage] = useState(0)
   const totalPages = Math.max(1, Math.ceil(posts.length / 3))
@@ -189,11 +271,11 @@ function CarouselSection({
               onClick={() => setPage((value) => Math.max(0, value - 1))}
               aria-label={`Previous ${title}`}
             >
-              <SvgIcon src="/blogs/carousel-left.svg" width={15} height={12} />
+              <SvgIcon src="/blogs/carousel-left.svg" width={15} height={12} className={styles.invertIcon} />
             </button>
             <button
               type="button"
-              className={cx(styles.carouselButton, styles.carouselButtonActive)}
+              className={styles.carouselButton}
               disabled={currentPage + 1 >= totalPages}
               onClick={() => setPage((value) => Math.min(totalPages - 1, value + 1))}
               aria-label={`Next ${title}`}
@@ -204,7 +286,7 @@ function CarouselSection({
         </div>
       </div>
 
-      <StaggerReveal className={styles.cardGrid}>
+      <StaggerReveal key={currentPage} className={styles.cardGrid}>
         {visiblePosts.map((post, index) => {
           const postIndex = currentPage * 3 + index
 
@@ -213,6 +295,8 @@ function CarouselSection({
               <BlogCard
                 post={post}
                 stat={statForIndex?.(postIndex)}
+                isBookmarked={bookmarks.has(post.slug)}
+                onBookmark={onBookmark}
               />
             </StaggerItem>
           )
@@ -222,7 +306,7 @@ function CarouselSection({
   )
 }
 
-function EditorialSection({ posts }: { posts: BlogPost[] }) {
+function EditorialSection({ posts, bookmarks, onBookmark }: { posts: BlogPost[]; bookmarks: Set<string>; onBookmark: (slug: string) => void }) {
   if (posts.length === 0) return null
 
   return (
@@ -241,6 +325,8 @@ function EditorialSection({ posts }: { posts: BlogPost[] }) {
                   post={post}
                   large
                   stat={index === 1 ? "Editor's Pick" : undefined}
+                  isBookmarked={bookmarks.has(post.slug)}
+                  onBookmark={onBookmark}
                 />
               </StaggerItem>
             ))}
@@ -255,10 +341,14 @@ function LibrarySection({
   posts,
   search,
   onSearchChange,
+  bookmarks,
+  onBookmark,
 }: {
   posts: BlogPost[]
   search: string
   onSearchChange: (value: string) => void
+  bookmarks: Set<string>
+  onBookmark: (slug: string) => void
 }) {
   const [filterType, setFilterType] = useState('')
   const [page, setPage] = useState(1)
@@ -346,7 +436,7 @@ function LibrarySection({
 
         {visiblePosts.length > 0 ? (
           <div className={styles.libraryList}>
-            <StaggerReveal className={styles.cardGrid}>
+            <StaggerReveal key={`${currentPage}-${search}-${filterType}`} className={styles.cardGrid}>
               {visiblePosts.map((post, index) => {
                 const postIndex = (currentPage - 1) * PAGE_SIZE + index
 
@@ -355,6 +445,8 @@ function LibrarySection({
                     <BlogCard
                       post={post}
                       stat={index === 1 || index === 4 ? "Editor's Pick" : undefined}
+                      isBookmarked={bookmarks.has(post.slug)}
+                      onBookmark={onBookmark}
                     />
                   </StaggerItem>
                 )
@@ -412,7 +504,15 @@ function LibrarySection({
 }
 
 function ResourceHubSection({ post }: { post: BlogPost | undefined }) {
+  const [activeTab, setActiveTab] = useState<'blogs' | 'ebooks' | 'case-studies'>('blogs')
+
   if (!post) return null
+
+  const tabs = [
+    { key: 'blogs' as const, label: 'Blogs & Articles' },
+    { key: 'ebooks' as const, label: 'Ebooks' },
+    { key: 'case-studies' as const, label: 'Case Studies' },
+  ]
 
   return (
     <section className={styles.resourceSection}>
@@ -424,46 +524,57 @@ function ResourceHubSection({ post }: { post: BlogPost | undefined }) {
 
         <div className={styles.resourceBody}>
           <nav className={styles.resourceTabs} aria-label="Resource categories">
-            <Link href="/blogs" className={styles.resourceTab}>
-              Blogs &amp; Articles
-            </Link>
-            <Link href="/ebooks" className={cx(styles.resourceTab, styles.resourceTabActive)}>
-              Ebooks
-            </Link>
-            <Link href="/case-studies" className={styles.resourceTab}>
-              Case Studies
-            </Link>
+            {tabs.map(({ key, label }) => (
+              <button
+                key={key}
+                type="button"
+                className={cx(styles.resourceTabBtn, activeTab === key && styles.resourceTabActive)}
+                onClick={() => setActiveTab(key)}
+              >
+                {label}
+              </button>
+            ))}
           </nav>
 
-          <Link href={postHref(post)} className={styles.resourceCard}>
-            <div className={styles.resourceCardInner}>
-              <div className={styles.resourceImage}>
-                {post.featuredImageUrl ? (
-                  <Image
-                    src={post.featuredImageUrl}
-                    alt={post.title}
-                    fill
-                    sizes="364px"
-                    className={styles.cardPhoto}
-                  />
-                ) : (
-                  <div className={styles.cardImageFallback} />
-                )}
-              </div>
-
-              <div className={styles.resourceText}>
-                <div className={styles.resourceCopy}>
-                  <h3 className={styles.resourceCardTitle}>{post.title}</h3>
-                  <p className={styles.resourceExcerpt}>{post.excerpt}</p>
+          {activeTab === 'blogs' ? (
+            <Link href={postHref(post)} className={styles.resourceCard}>
+              <div className={styles.resourceCardInner}>
+                <div className={styles.resourceImage}>
+                  {post.featuredImageUrl ? (
+                    <Image
+                      src={post.featuredImageUrl}
+                      alt={post.title}
+                      fill
+                      sizes="364px"
+                      className={styles.cardPhoto}
+                    />
+                  ) : (
+                    <div className={styles.cardImageFallback} />
+                  )}
                 </div>
-
-                <span className={styles.readMore}>
-                  Read More
-                  <SvgIcon src="/blogs/read-arrow.svg" width={11} height={15} />
-                </span>
+                <div className={styles.resourceText}>
+                  <div className={styles.resourceCopy}>
+                    <h3 className={styles.resourceCardTitle}>{post.title}</h3>
+                    <p className={styles.resourceExcerpt}>{post.excerpt}</p>
+                  </div>
+                  <span className={styles.readMore}>
+                    Read More
+                    <ReadArrow className={styles.readArrow} />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ) : (
+            <div className={styles.comingSoonPanel}>
+              <div className={styles.comingSoonContent}>
+                <span className={styles.comingSoonIcon}>🚀</span>
+                <h3 className={styles.comingSoonTitle}>Coming Soon</h3>
+                <p className={styles.comingSoonDesc}>
+                  We&apos;re working on our {activeTab === 'ebooks' ? 'Ebooks' : 'Case Studies'} library. Check back soon!
+                </p>
               </div>
             </div>
-          </Link>
+          )}
         </div>
       </div>
     </section>
@@ -484,7 +595,7 @@ function DemoCtaSection() {
 
         <Link href="/schedule-demo" className={styles.demoButton}>
           Book A Free Demo
-          <SvgIcon src="/blogs/read-arrow.svg" width={11} height={15} />
+          <ReadArrow />
         </Link>
       </div>
     </section>
@@ -495,6 +606,7 @@ export default function BlogsClient({ posts }: { posts: BlogPost[] }) {
   const [heroSearch, setHeroSearch] = useState('')
   const [librarySearch, setLibrarySearch] = useState('')
   const libraryRef = useRef<HTMLElement>(null)
+  const { bookmarks, toggle: toggleBookmark } = useBookmarks()
 
   const scrollToLibrary = useCallback(() => {
     libraryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -526,7 +638,11 @@ export default function BlogsClient({ posts }: { posts: BlogPost[] }) {
             <h1 className={styles.heroTitle}>The Best Blogs And Articles On DGlide&apos;s Operations Platform</h1>
           </div>
 
-          <SearchField value={heroSearch} onChange={setHeroSearch} onSubmit={submitHeroSearch} />
+          <SearchField
+            value={heroSearch}
+            onChange={(v) => { setHeroSearch(v); setLibrarySearch(v); }}
+            onSubmit={submitHeroSearch}
+          />
         </div>
       </section>
 
@@ -540,19 +656,23 @@ export default function BlogsClient({ posts }: { posts: BlogPost[] }) {
               if (index === 2) return 'Most Shared Blog'
               return undefined
             }}
+            bookmarks={bookmarks}
+            onBookmark={toggleBookmark}
           />
 
           <CarouselSection
             title="Our Latest Articles"
             posts={latestPosts}
             statForIndex={(index) => (index === 1 ? "Editor's Pick" : undefined)}
+            bookmarks={bookmarks}
+            onBookmark={toggleBookmark}
           />
         </div>
 
-        <EditorialSection posts={fallbackEditorialPosts} />
+        <EditorialSection posts={fallbackEditorialPosts} bookmarks={bookmarks} onBookmark={toggleBookmark} />
 
         <section ref={libraryRef} className={styles.libraryAnchor}>
-          <LibrarySection posts={posts} search={librarySearch} onSearchChange={setLibrarySearch} />
+          <LibrarySection posts={posts} search={librarySearch} onSearchChange={setLibrarySearch} bookmarks={bookmarks} onBookmark={toggleBookmark} />
         </section>
 
         <ResourceHubSection post={posts[0]} />

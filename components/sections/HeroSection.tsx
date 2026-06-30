@@ -49,7 +49,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
     : [carouselLabel];
 
   return (
-    <section className="w-full bg-[#F3F3F3] overflow-hidden">
+    <section className="w-full overflow-hidden" style={{ background: "linear-gradient(0deg, #F3F3F3 0%, #FFF 81.7%)" }}>
       <div
         ref={sectionRef}
         className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 pt-20 pb-0 opacity-0 translate-y-8 transition-all duration-700 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0"
@@ -102,7 +102,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
 
         {/* CTAs — centered */}
         <ScrollReveal direction="up" delay={0.24}>
-          <div className="flex flex-wrap gap-4 mb-14 justify-center">
+          <div className="flex flex-wrap gap-4 mb-0 justify-center">
             <Link
               href={data?.cta_primary_href ?? "/schedule-demo"}
               className="dg-btn-fill inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-base"
@@ -127,7 +127,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
 
         {/* Hero image */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="w-full">
+          <div className="w-full" style={{ marginTop: "-80px" }}>
             <Image
               src={data?.product_image ?? "/hero-product.png"}
               alt="DGlide Platform"

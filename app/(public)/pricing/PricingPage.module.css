@@ -1,6 +1,6 @@
 .page {
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: #f3f3f3;
   color: #000;
   font-family: var(--font-inter), Inter, sans-serif;
@@ -152,7 +152,7 @@
   justify-content: flex-end;
   border-radius: 20px 20px 0 0;
   background: linear-gradient(180deg, #1c2bff 0%, #141fb5 100%);
-  padding: 100px 24px 32px;
+  padding: 32px 24px 32px;
 }
 
 .planCardAdvanced .planTop h3,
@@ -180,6 +180,13 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.planIcon {
+  width: 88px;
+  height: 48px;
+  object-fit: contain;
+  margin-bottom: 4px;
 }
 
 .planTop h3 {
@@ -249,16 +256,13 @@
 }
 
 .planCheck {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 14px;
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
   margin-top: 2px;
-  border-radius: 50%;
-  background: rgba(28, 43, 255, 0.1);
-  color: #1c2bff;
 }
 
 .planButton {
@@ -322,6 +326,7 @@
 .compareScroller {
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
   border-radius: 20px;
 }
 
@@ -333,7 +338,7 @@
 }
 
 .compareHeader {
-  min-height: 142px;
+  min-height: 180px;
   display: grid;
   grid-template-columns: 399px 1fr;
   align-items: center;
@@ -345,10 +350,11 @@
 }
 
 .featureHeader {
-  color: #000;
+  color: #FF7F1C;
+  font-family: Inter, sans-serif;
   font-size: 20px;
-  font-weight: 500;
-  line-height: 30px;
+  font-weight: 600;
+  line-height: 28px;
 }
 
 .planHeaders,
@@ -367,6 +373,16 @@
   font-size: 20px;
   font-weight: 400;
   line-height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.planHeaderIcon {
+  width: 88px;
+  height: 48px;
+  object-fit: contain;
 }
 
 .groupToggle {
@@ -379,6 +395,7 @@
   box-sizing: border-box;
   padding: 20px 88px 20px 28px;
   border: 0;
+  border-bottom: 1px solid #F3F3F3;
   background: #fff;
   color: #000;
   cursor: pointer;
@@ -390,7 +407,9 @@
 }
 
 .groupToggle span {
-  font-size: 18px;
+  color: #FF7F1C;
+  font-family: Inter, sans-serif;
+  font-size: 20px;
   font-weight: 600;
   line-height: 28px;
 }
@@ -401,8 +420,8 @@
 
 .groupToggle svg {
   justify-self: end;
-  color: #1c2bff;
-  transition: transform 0.24s ease;
+  color: #FF7F1C;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .groupChevronOpen {
@@ -442,16 +461,6 @@
   line-height: 28px;
 }
 
-.featureName span {
-  width: 18px;
-  height: 18px;
-  display: inline-flex;
-  flex: 0 0 auto;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 50%, #1c2bff 0 3px, transparent 3px),
-    rgba(28, 43, 255, 0.1);
-}
 
 .tableCheck {
   width: 18px;
@@ -459,7 +468,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #0051b6;
+  color: #FF7F1C;
 }
 
 .principlesSection {
@@ -1019,6 +1028,7 @@
   }
 
   .groupToggle span {
+    color: #FF7F1C;
     font-size: 14px;
     line-height: 22px;
   }

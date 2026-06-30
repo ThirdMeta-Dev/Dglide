@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, FunctionComponent, useState } from "react";
+import { Fragment, FunctionComponent, useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
@@ -68,10 +68,44 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
   industryItems = INDUSTRY_ITEMS,
   centerImage = "/solutions/built-for/center-illustration.png",
 }) => {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const visibleRef = useRef(false);
+
+  const stopTimer = useCallback(() => {
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+  }, []);
+
+  const startTimer = useCallback(() => {
+    stopTimer();
+    timerRef.current = setInterval(() => {
+      setActiveIndex((i) => (i + 1) % industryItems.length);
+    }, 6000);
+  }, [industryItems.length, stopTimer]);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) startTimer();
+        else stopTimer();
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => { observer.disconnect(); stopTimer(); };
+  }, [startTimer, stopTimer]);
+
+  const handleSelect = (index: number) => {
+    setActiveIndex(index);
+    if (visibleRef.current) startTimer();
+  };
 
   return (
-    <section id="who-built-for" className="sol-section sol-built-for-section">
+    <section id="who-built-for" className="sol-section sol-built-for-section" ref={sectionRef}>
       <SolutionsContainer>
         <div className="sol-built-for-inner">
           <ScrollReveal direction="up">
@@ -88,7 +122,7 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
           <div className="sol-built-for-panel">
             <div className="sol-built-for-row">
               {/* Left — Best Fit For card */}
-              <ScrollReveal direction="left">
+              <ScrollReveal direction="left" className="sol-built-for-fit-card-wrap">
                 <article className="sol-built-for-fit-card">
                   <div className="sol-built-for-fit-body">
                     <h3 className="sol-built-for-fit-heading">Best Fit For</h3>
@@ -131,7 +165,7 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
                             {index > 0 &&
                               (isExpanded ? (
                                 <div className="sol-built-for-active-bar" aria-hidden>
-                                  <span className="sol-built-for-active-bar-fill" />
+                                  <span key={activeIndex} className="sol-built-for-active-bar-fill" />
                                 </div>
                               ) : (
                                 <hr className="sol-built-for-divider" />
@@ -163,7 +197,7 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
                                 type="button"
                                 className="sol-built-for-industry-trigger"
                                 aria-expanded={false}
-                                onClick={() => setActiveIndex(index)}
+                                onClick={() => handleSelect(index)}
                               >
                                 <img
                                   src={item.icon}

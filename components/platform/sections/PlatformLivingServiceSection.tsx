@@ -229,7 +229,7 @@ const PlatformLivingServiceSection: FunctionComponent = () => {
                 }}>
                   {slide.detail}
                 </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, width: 320 }}>
                   {slide.bullets.map((b) => (
                     <span key={b} style={{
                       fontFamily: "Inter, sans-serif", color: "#555",

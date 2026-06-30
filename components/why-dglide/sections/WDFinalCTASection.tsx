@@ -88,7 +88,7 @@ export default function WDFinalCTASection() {
             <ScrollReveal direction="up" delay={0.2}>
             <a
               href={CTA_HREF}
-              className="inline-flex items-center gap-2.5 rounded-[40px] bg-white px-6 py-3.5 text-base text-[#1C2BFF] no-underline"
+              className="dg-btn-outline inline-flex items-center gap-2.5 rounded-[40px] bg-white px-6 py-3.5 text-base text-[#1C2BFF] no-underline"
               style={{
                 fontFamily: "var(--font-sora), Sora, sans-serif",
                 fontWeight: 400,

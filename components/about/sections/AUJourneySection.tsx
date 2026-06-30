@@ -39,10 +39,10 @@ const MILESTONES: Milestone[] = [
     title: "The Platform Foundation",
     desc: "We built one shared, configurable backbone for operational workflows, instead of one-off tools.",
     icon: "/about/journey/icon-platform-foundation.png",
-    iconX: 310,
+    iconX: 455,
     iconY: 80,
-    cardX: 310,
-    activeX: 262, // Figma active card: x=262 y=152 w=380 h=152
+    cardX: 400,
+    activeX: 241,
     activeY: 152,
   },
   {
@@ -51,8 +51,10 @@ const MILESTONES: Milestone[] = [
     icon: "/about/journey/icon-packaged-solution-systems.png",
     iconX: 804,
     iconY: 152,
-    cardX: 786,
-    activeX: 756,
+    /* cardX=621 ensures this card clears card1's active right edge (241+380=621)
+       and card3 (1001) clears this card's active right edge (621+380=1001). */
+    cardX: 621,
+    activeX: 580,
     activeY: 224,
   },
   {
@@ -61,8 +63,6 @@ const MILESTONES: Milestone[] = [
     icon: "/about/journey/icon-living-service-model.png",
     iconX: 1115,
     iconY: 165,
-    /* Figma x=1115 overflows the 1200px stage (card w=199) — pull flush
-       to the right edge so the label never clips and card 3 stays clear. */
     cardX: 1001,
     activeX: 820,
     activeY: 227,
@@ -80,7 +80,7 @@ const STAGE_H = 385;
 /* Fill passes a milestone's icon center -> that milestone becomes active.
    Icon centers: 60 / 354 / 848 / 1159. (Figma snapshot: fill ends at
    x=733 with milestone 2 active -> 354 <= 733 < 848.) */
-const THRESHOLDS = [354, 848, 1159];
+const THRESHOLDS = [499, 848, 1159]; // icon centers: card1=499, card2=848, card3=1159
 /* Trail is fully filled at 85% of the pinned scroll so the final state
    has room to breathe before the pin releases. */
 const FILL_END = 0.85;
@@ -90,6 +90,23 @@ const ACTIVE_BORDER = "linear-gradient(180deg, #FF7F1C 0%, #F3F3F3 100%)";
 const INACTIVE_BORDER = "linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%)";
 
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
+
+/* Even-spaced inactive positions for each active state.
+   Cards always stay in natural left-to-right order — no swapping.
+   CARD_X[activeIdx][cardIdx]
+
+   State 0 — card0 active (16–396): 804px remaining / 3 cards → ~52px gaps
+   State 1 — card1 active (241–621): card0 centred in 241px left; cards 2+3 evenly in 579px right
+   State 2 — card2 active (621–1001): cards 0+1 evenly in 621px left; card3 flush at 1001
+   State 3 — card3 active (820–1200): cards 0+1+2 evenly in 820px left
+*/
+const CARD_X: Record<number, number[]> = {
+  0: [ 16,  448,  699,  950],
+  1: [ 21,  241,  681,  940],
+  2: [ 61,  321,  580, 1001],
+  3: [ 56,  311,  566,  820],
+};
+
 
 /* ------------------------------------------------------------------ */
 
@@ -217,45 +234,45 @@ export default function AUJourneySection() {
                 </g>
               </svg>
 
-              {/* Milestone icons — static positions along the curve */}
-              {MILESTONES.map((m) => (
-                <Image
-                  key={m.title}
-                  src={m.icon}
-                  alt=""
-                  width={88}
-                  height={48}
-                  className="absolute"
-                  style={{ left: m.iconX, top: m.iconY }}
-                />
-              ))}
+              {/* Milestone icons — follow their card when inactive, stay on curve when active */}
+              {MILESTONES.map((m, i) => {
+                const active = i === activeIdx;
+                const cardLeft = active ? m.activeX : (CARD_X[activeIdx]?.[i] ?? m.cardX);
+                const iconLeft = active ? m.iconX : cardLeft + 55;
+                return (
+                  <Image
+                    key={m.title}
+                    src={m.icon}
+                    alt=""
+                    width={88}
+                    height={48}
+                    className="absolute"
+                    style={{
+                      left: iconLeft,
+                      top: m.iconY,
+                      transition: `left 0.6s ${EASE}`,
+                    }}
+                  />
+                );
+              })}
 
               {/* Milestone cards */}
               {MILESTONES.map((m, i) => {
                 const active = i === activeIdx;
-                /* Wave collision: an inactive card that the active card's
-                   380px footprint overlaps dips away (fade + sink) until
-                   the active state moves on. */
-                const a = MILESTONES[activeIdx];
-                const collided =
-                  !active && !(m.cardX + 199 <= a.activeX || m.cardX >= a.activeX + 380);
                 return (
                   <div
                     key={m.title}
                     className="absolute rounded-2xl p-6"
                     style={{
-                      left: active ? m.activeX : m.cardX,
+                      left: active ? m.activeX : (CARD_X[activeIdx]?.[i] ?? m.cardX),
                       top: active ? m.activeY : 227,
                       width: active ? 380 : 199,
                       zIndex: active ? 20 : 10,
-                      opacity: collided ? 0 : 1,
-                      transform: collided ? "translateY(14px)" : "translateY(0)",
-                      pointerEvents: collided ? "none" : undefined,
                       border: "1px solid transparent",
                       background: `${CARD_FILL} padding-box, ${
                         active ? ACTIVE_BORDER : INACTIVE_BORDER
                       } border-box`,
-                      transition: `left 0.6s ${EASE}, top 0.6s ${EASE}, width 0.6s ${EASE}, opacity 0.4s ease, transform 0.6s ${EASE}`,
+                      transition: `left 0.6s ${EASE}, top 0.6s ${EASE}, width 0.6s ${EASE}`,
                     }}
                   >
                     <h3

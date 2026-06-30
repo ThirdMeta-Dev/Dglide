@@ -1,7 +1,10 @@
 "use client";
 
+"use client";
+
 import { FunctionComponent, CSSProperties } from "react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import { scrollToContact } from "@/lib/scroll-to-contact";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import {
@@ -67,10 +70,9 @@ const GoLiveFasterSection: FunctionComponent<GoLiveFasterSectionProps> = ({
             </ScrollReveal>
           </header>
 
-          <ScrollReveal direction="up" delay={0.1} style={{ width: "100%" }}>
-            <div className="sol-go-live-cards">
+          <div className="sol-go-live-cards" style={{ width: "100%" }}>
               {cards.map((card, index) => (
-                <div
+                <motion.div
                   key={card.step}
                   className="sol-go-live-card-col"
                   style={
@@ -79,6 +81,10 @@ const GoLiveFasterSection: FunctionComponent<GoLiveFasterSectionProps> = ({
                       zIndex: index + 1,
                     } as CSSProperties
                   }
+                  initial={{ y: -60, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <article
                     className={`sol-go-live-card${
@@ -119,10 +125,9 @@ const GoLiveFasterSection: FunctionComponent<GoLiveFasterSectionProps> = ({
                       </button>
                     </div>
                   </article>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </ScrollReveal>
         </div>
       </SolutionsContainer>
     </section>

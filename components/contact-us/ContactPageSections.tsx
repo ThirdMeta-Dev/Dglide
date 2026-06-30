@@ -1,7 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import {
-  MotionButtonShell,
   MotionReveal,
 } from "@/components/animations/MotionPrimitives";
 import ContactDemoForm from "./ContactDemoForm";
@@ -149,12 +151,16 @@ function ArrowIcon({ color = "#1C2BFF" }: { color?: string }) {
 
 function CheckIcon() {
   return (
-    <span className="inline-flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <circle cx="11" cy="11" r="8.4" stroke="#FF7F1C" strokeWidth="1.5" />
-        <path d="m7.4 11.2 2.3 2.3 4.9-5" stroke="#1C2BFF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="14" viewBox="0 0 24 14" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+      <path d="M4.92582 6.82623L9.49212 9.10947L18.6247 4.543L22.2777 6.36959L9.49212 12.7626L1.27279 8.65282L4.92582 6.82623Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+      <path d="M4.92582 6.50299L9.49212 8.78622L18.6247 4.21976L22.2777 6.04634L9.49212 12.4394L1.27279 8.32958L4.92582 6.50299Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+      <path d="M4.92582 6.18072L9.49212 8.46396L18.6247 3.89749L22.2777 5.72408L9.49212 12.1171L1.27279 8.00731L4.92582 6.18072Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+      <path d="M4.92582 5.85846L9.49212 8.14169L18.6247 3.57523L22.2777 5.40181L9.49212 11.7949L1.27279 7.68505L4.92582 5.85846Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+      <path d="M4.92582 5.53522L9.49212 7.81845L18.6247 3.25198L22.2777 5.07857L9.49212 11.4716L1.27279 7.3618L4.92582 5.53522Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+      <path d="M4.92582 5.211L9.49212 7.49423L18.6247 2.92776L22.2777 4.75435L9.49212 11.1474L1.27279 7.03759L4.92582 5.211Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+      <path d="M4.92582 4.88873L9.49212 7.17197L18.6247 2.6055L22.2777 4.43209L9.49212 10.8251L1.27279 6.71532L4.92582 4.88873Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+      <path d="M4.92582 4.56647L9.49212 6.8497L18.6247 2.28323L22.2777 4.10982L9.49212 10.5029L1.27279 6.39305L4.92582 4.56647Z" fill="white" stroke="#FF7F1C" strokeWidth="1.18585" strokeLinecap="round"/>
+    </svg>
   );
 }
 
@@ -211,10 +217,18 @@ function MovingNextConnector() {
         d="M0 1H808"
         stroke="#FF7F1C"
         strokeLinecap="round"
-        strokeDasharray="170 978"
-        strokeDashoffset="978"
+        strokeDasharray="808"
+        strokeDashoffset="808"
       >
-        <animate attributeName="stroke-dashoffset" values="978;-170" dur="3.2s" repeatCount="indefinite" />
+        <animate
+          attributeName="stroke-dashoffset"
+          values="808;0;0;808"
+          keyTimes="0;0.72;0.92;1"
+          dur="5s"
+          repeatCount="indefinite"
+          calcMode="spline"
+          keySplines="0.4 0 0.2 1;0 0 1 1;0 0 1 1"
+        />
       </path>
     </svg>
   );
@@ -257,34 +271,73 @@ function BlueButton({
   children: React.ReactNode;
   invert?: boolean;
 }) {
+  const baseStyle = invert
+    ? {
+        ...fontSora,
+        fontWeight: 400,
+        color: "#1C2BFF",
+        background: "#FFFFFF",
+        border: "1px solid #1420B5",
+        transition: "background 0.2s ease",
+      }
+    : {
+        ...fontSora,
+        fontWeight: 600,
+        color: "#FFFFFF",
+        background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
+        border: "1.5px solid #1C2BFF",
+        transition: "background 0.2s ease",
+      };
+
   return (
-    <MotionButtonShell>
-      <Link
-        href={href}
-        className="inline-flex h-12 w-fit items-center justify-center gap-2.5 rounded-full px-8 text-base transition-opacity hover:opacity-90"
-        style={{
-          ...fontSora,
-          fontWeight: invert ? 400 : 600,
-          color: invert ? "#1C2BFF" : "#FFFFFF",
-          background: invert ? "#FFFFFF" : "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
-          border: invert ? "1px solid #1420B5" : "1.5px solid #1C2BFF",
-        }}
-      >
-        {children}
+    <Link
+      href={href}
+      className="group inline-flex h-12 w-fit items-center justify-center gap-2.5 rounded-full px-8 text-base"
+      style={baseStyle}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.background = invert
+          ? "linear-gradient(90deg, #D9DCFF 0%, #E8EAFF 100%)"
+          : "linear-gradient(273deg, #0b148c 4.29%, #141fb5 95.71%)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.background = invert
+          ? "#FFFFFF"
+          : "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)";
+      }}
+    >
+      {children}
+      <span className="transition-transform duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:-rotate-45">
         <ArrowIcon color={invert ? "#1C2BFF" : "#FFFFFF"} />
-      </Link>
-    </MotionButtonShell>
+      </span>
+    </Link>
   );
 }
 
 function CardLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <MotionButtonShell>
-      <Link href={href} className="inline-flex items-center gap-2.5 text-[15px] text-[#1C2BFF]" style={fontSora}>
-        {children}
-        <ArrowIcon />
-      </Link>
-    </MotionButtonShell>
+    <Link
+      href={href}
+      className="group inline-flex items-center gap-2.5 text-[15px] text-[#1C2BFF] transition-colors duration-200 hover:text-[#FF7F1C]"
+      style={fontSora}
+    >
+      {children}
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        aria-hidden="true"
+        className="transition-transform duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:-rotate-45"
+      >
+        <path
+          d="M3 9h12M10 4l5 5-5 5"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </Link>
   );
 }
 
@@ -390,6 +443,80 @@ function ContactMethodsSection() {
   );
 }
 
+const TESTIMONIALS = [
+  {
+    quote: "We were spending lakhs to generate leads, then losing them because nobody saw the alert in time. DGlide closed that gap.",
+    name: "Mr. Lorem ipsum",
+    company: "Prompt Lasers",
+    avatar: "/contact-us/testimonial-avatar.png",
+  },
+  {
+    quote: "Our field teams went from chasing updates over WhatsApp to having everything tracked in one place. The difference was immediate.",
+    name: "Ms. Priya Sharma",
+    company: "TechOps India",
+    avatar: "/contact-us/testimonial-avatar.png",
+  },
+  {
+    quote: "We went live in under two weeks. DGlide fit our workflow instead of forcing us to change how we operate.",
+    name: "Mr. Rajan Mehta",
+    company: "ServiceFirst Corp",
+    avatar: "/contact-us/testimonial-avatar.png",
+  },
+  {
+    quote: "The configuration flexibility is unmatched. We've adapted the platform three times as our operations evolved.",
+    name: "Ms. Deepa Nair",
+    company: "Operations Co.",
+    avatar: "/contact-us/testimonial-avatar.png",
+  },
+];
+
+function TestimonialCarousel() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((i) => (i + 1) % TESTIMONIALS.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const t = TESTIMONIALS[active];
+
+  return (
+    <div className="relative rounded-3xl p-px" style={{ background: "linear-gradient(122deg, #F6F6F6 0%, #FF7F1C 81%)" }}>
+      <div className="relative flex flex-col gap-5 rounded-3xl bg-[#F4F4F4] px-5 pb-8 pt-9" style={{ minHeight: 140 }}>
+        <p className="m-0 text-sm leading-6 text-[#555555]" style={fontInter}>
+          &quot;{t.quote}&quot;
+        </p>
+        <div className="flex items-center gap-2.5">
+          <Image src={t.avatar} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
+          <span className="h-8 w-[3px] rounded bg-[#FABF5A]" />
+          <p className="m-0 text-sm leading-5 text-[#555555]" style={fontInter}>
+            <span className="font-medium text-black">{t.name}</span>
+            <br />
+            <span className="font-light">{t.company}</span>
+          </p>
+        </div>
+        <div className="absolute bottom-4 right-5 flex gap-[5px] rounded-full bg-[#F4F4F4] px-2">
+          {TESTIMONIALS.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Testimonial ${i + 1}`}
+              onClick={() => setActive(i)}
+              style={{
+                width: 6, height: 6, borderRadius: "50%", padding: 0, border: 0, cursor: "pointer",
+                background: i === active ? "#1C2BFF" : "#DADADA",
+                transition: "background 0.25s ease",
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function DemoSection() {
   return (
     <section id="book-demo" className="mx-auto w-full max-w-[1200px]">
@@ -424,28 +551,7 @@ export function DemoSection() {
                 ))}
               </div>
             </div>
-            <div className="relative rounded-3xl p-px" style={{ background: "linear-gradient(122deg, #F6F6F6 0%, #FF7F1C 81%)" }}>
-              <div className="relative flex flex-col gap-5 rounded-3xl bg-[#F4F4F4] px-5 pb-5 pt-9">
-                <p className="m-0 text-sm leading-6 text-[#555555]" style={fontInter}>
-                  &quot;We were spending lakhs to generate leads, then losing them because nobody saw the alert in time. DGlide closed that gap.&quot;
-                </p>
-                <div className="flex items-center gap-2.5">
-                  <Image src="/contact-us/testimonial-avatar.png" alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
-                  <span className="h-8 w-[3px] rounded bg-[#FABF5A]" />
-                  <p className="m-0 text-sm leading-5 text-[#555555]" style={fontInter}>
-                    <span className="font-medium text-black">Mr. Lorem ipsum</span>
-                    <br />
-                    <span className="font-light">Prompt Lasers, Prompt Lasers</span>
-                  </p>
-                </div>
-                <div className="absolute bottom-5 right-5 flex gap-[5px] rounded-full bg-[#F4F4F4] px-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#DADADA]" />
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#1C2BFF]" />
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#DADADA]" />
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#DADADA]" />
-                </div>
-              </div>
-            </div>
+            <TestimonialCarousel />
             <div className="flex min-w-0 items-center gap-4 md:gap-7">
               <p className="m-0 w-[132px] shrink-0 text-[15px] leading-[22px] text-black md:w-[152px]" style={fontTasa}>
                 Teams That Trust DGlide
@@ -463,9 +569,9 @@ export function DemoSection() {
           </div>
           <div className="w-full min-w-0 max-w-full rounded-2xl bg-white px-5 py-8 shadow-[0_0_12px_rgba(0,0,0,0.1)] lg:w-[571px] lg:px-10">
             <ContactDemoForm />
-            <div className="mt-4 flex min-w-0 flex-wrap items-start justify-center gap-2.5 px-0 sm:flex-nowrap sm:px-4">
-              <Image src="/dglide-icon-orange.png" alt="" width={24} height={24} className="mt-0.5 shrink-0" />
-              <p className="m-0 min-w-0 max-w-full flex-1 basis-[220px] break-words text-center text-sm leading-[22.65px] text-black" style={fontInter}>
+            <div className="mt-4 flex min-w-0 items-center justify-center gap-2">
+              <CheckIcon />
+              <p className="m-0 text-center text-sm leading-[22.65px] text-black" style={fontInter}>
                 Book Now, Only <strong>8 Demo Slots</strong> Left This Week!
               </p>
             </div>
@@ -610,6 +716,16 @@ function PartnershipSection() {
   );
 }
 
+const BUSINESS_HOURS = [
+  { day: "Tuesday",   hours: "12–7 am, 9:30 am–12 am" },
+  { day: "Wednesday", hours: "12–7 am, 9:30 am–12 am" },
+  { day: "Thursday",  hours: "12–7 am, 9:30 am–12 am" },
+  { day: "Friday",    hours: "12–7 am, 9:30 am–12 am" },
+  { day: "Saturday",  hours: "12–7 am" },
+  { day: "Sunday",    hours: "Closed" },
+  { day: "Monday",    hours: "9:30 am–12 am" },
+];
+
 function VisitSection() {
   return (
     <section className="mx-auto w-full max-w-[1104px] px-5 lg:px-0">
@@ -628,29 +744,50 @@ function VisitSection() {
           Visit us
         </h2>
         <div className="flex flex-1 flex-col justify-center gap-12">
-          <div className="flex flex-col items-stretch gap-9 lg:flex-row lg:items-center">
+          <div className="flex flex-col items-stretch gap-9 lg:flex-row lg:items-start">
             <div className="flex flex-1 flex-col justify-center gap-10">
               <div className="flex flex-col gap-7">
                 <Image src="/contact-us/icon-visit-office.svg" alt="" width={88} height={48} className="h-12 w-[88px]" />
                 <div className="flex flex-col gap-2.5">
                   <div className="flex flex-col gap-1.5">
-                    <h3 className="m-0 text-lg font-medium leading-[26px] text-[#FF0000]" style={fontTasa}>
-                      Office Address 1
+                    <h3 className="m-0 text-lg font-medium leading-[26px] text-black" style={fontTasa}>
+                      Office Address
                     </h3>
-                    <p className="m-0 text-[15px] leading-[26px] tracking-[0.0133em] text-[#555555]" style={{ ...fontInter, textTransform: "capitalize" }}>
-                      Your system adapts to how you work Start with a working system, a lorem
+                    <p className="m-0 text-[15px] leading-[26px] tracking-[0.0133em] text-[#555555]" style={fontInter}>
+                      Office No. 337, 3rd Floor, Amanora Chambers,<br />
+                      Hadapsar, Pune 411028, India
                     </p>
                   </div>
-                  <p className="m-0 whitespace-pre-line text-[15px] leading-[26px] tracking-[0.0133em] text-[#555555]" style={{ ...fontInter, textTransform: "capitalize" }}>
-                    {"[City, State, PIN]\nIndia"}
-                  </p>
                 </div>
               </div>
-              <p className="m-0 w-full whitespace-pre-line text-base leading-[26px] text-black lg:w-[332px]" style={fontTasa}>
-                {"Business Hours:\nMonday to Friday\n10:00 AM to 6:00 PM IST"}
-              </p>
+              <div className="flex flex-col gap-2">
+                <p className="m-0 text-base font-medium leading-[26px] text-black" style={fontTasa}>
+                  Business Hours:
+                </p>
+                <table className="border-collapse text-[14px] leading-[24px]" style={fontInter}>
+                  <tbody>
+                    {BUSINESS_HOURS.map(({ day, hours }) => (
+                      <tr key={day}>
+                        <td className="pr-6 text-[#555555]">{day}</td>
+                        <td className="text-black">{hours}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div className="min-h-[340px] rounded-2xl bg-[rgba(186,186,186,0.2)] pb-10 pl-7 pr-10 pt-8 backdrop-blur-[60px] lg:min-h-full lg:w-[426px] lg:shrink-0" />
+            <div className="overflow-hidden rounded-2xl lg:w-[426px] lg:shrink-0" style={{ minHeight: 340 }}>
+              <iframe
+                title="DGlide Office Location"
+                src="https://maps.google.com/maps?q=Amanora+Chambers+Hadapsar+Pune+411028+India&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: 340, display: "block" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </div>
       </div>

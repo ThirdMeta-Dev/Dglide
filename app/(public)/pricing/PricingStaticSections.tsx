@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import styles from "./PricingPage.module.css";
 
 type Plan = {
@@ -10,6 +10,7 @@ type Plan = {
   intro?: string;
   featured?: boolean;
   variant: "starter" | "advanced" | "enterprise";
+  icon: string;
 };
 
 type Principle = {
@@ -29,6 +30,7 @@ const PLANS: Plan[] = [
   {
     name: "Starter",
     variant: "starter",
+    icon: "/pricing/icon-starter.png",
     description: "For small teams that need structure without complexity.",
     items: [
       "Core workflows, forms, and approvals",
@@ -42,6 +44,7 @@ const PLANS: Plan[] = [
     name: "Advanced",
     variant: "advanced",
     featured: true,
+    icon: "/pricing/icon-advanced.png",
     description:
       "For growing operations that need automation,integrations, and custom workflows.",
     intro: "Everything in Starter, plus:",
@@ -55,6 +58,7 @@ const PLANS: Plan[] = [
   {
     name: "Enterprise",
     variant: "enterprise",
+    icon: "/pricing/icon-enterprise.png",
     description:
       "For complex, multi-team operations that need scale, control, and tailored AI.",
     intro: "Everything in Advanced, plus:",
@@ -116,8 +120,14 @@ function PlanCard({ plan }: { plan: Plan }) {
       ) : null}
 
       <div className={styles.planTop}>
+        <Image src={plan.icon} alt="" width={88} height={48} className={styles.planIcon} />
         <h3>{plan.name}</h3>
         <p>{plan.description}</p>
+        {!plan.featured ? (
+          <svg xmlns="http://www.w3.org/2000/svg" width="295" height="1" viewBox="0 0 295 1" fill="none" style={{ width: "100%", flexShrink: 0 }}>
+            <path d="M294.5 0.5H0.499991" stroke="#E8EAFF" strokeLinecap="round"/>
+          </svg>
+        ) : null}
       </div>
 
       <div className={styles.planFeatures}>
@@ -126,7 +136,16 @@ function PlanCard({ plan }: { plan: Plan }) {
           {plan.items.map((item) => (
             <li key={item}>
               <span className={styles.planCheck} aria-hidden>
-                <Check size={14} strokeWidth={2.2} />
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="14" viewBox="0 0 24 14" fill="none">
+                  <path d="M4.92601 6.82587L9.4923 9.1091L18.6249 4.54263L22.2779 6.36922L9.4923 12.7623L1.27297 8.65245L4.92601 6.82587Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 6.50348L9.4923 8.78671L18.6249 4.22024L22.2779 6.04683L9.4923 12.4399L1.27297 8.33007L4.92601 6.50348Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 6.18121L9.4923 8.46445L18.6249 3.89798L22.2779 5.72457L9.4923 12.1176L1.27297 8.0078L4.92601 6.18121Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 5.85895L9.4923 8.14218L18.6249 3.57571L22.2779 5.4023L9.4923 11.7954L1.27297 7.68553L4.92601 5.85895Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 5.53522L9.4923 7.81845L18.6249 3.25198L22.2779 5.07857L9.4923 11.4716L1.27297 7.3618L4.92601 5.53522Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 5.21106L9.4923 7.49429L18.6249 2.92783L22.2779 4.75441L9.4923 11.1475L1.27297 7.03765L4.92601 5.21106Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 4.88873L9.4923 7.17197L18.6249 2.6055L22.2779 4.43209L9.4923 10.8251L1.27297 6.71532L4.92601 4.88873Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 4.56647L9.4923 6.8497L18.6249 2.28323L22.2779 4.10982L9.4923 10.5029L1.27297 6.39305L4.92601 4.56647Z" fill="white" stroke="#FF7F1C" strokeWidth="1.18585" strokeLinecap="round"/>
+                </svg>
               </span>
               <span>{item}</span>
             </li>
@@ -190,7 +209,16 @@ export function PricingHeroSection() {
           <div className={styles.heroStats}>
             {HERO_STATS.map((stat) => (
               <span key={stat}>
-                <Check size={18} strokeWidth={2.2} aria-hidden />
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="14" viewBox="0 0 24 14" fill="none" aria-hidden>
+                  <path d="M4.92601 6.82587L9.4923 9.1091L18.6249 4.54263L22.2779 6.36922L9.4923 12.7623L1.27297 8.65245L4.92601 6.82587Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 6.50348L9.4923 8.78671L18.6249 4.22024L22.2779 6.04683L9.4923 12.4399L1.27297 8.33007L4.92601 6.50348Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 6.18121L9.4923 8.46445L18.6249 3.89798L22.2779 5.72457L9.4923 12.1176L1.27297 8.0078L4.92601 6.18121Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 5.85895L9.4923 8.14218L18.6249 3.57571L22.2779 5.4023L9.4923 11.7954L1.27297 7.68553L4.92601 5.85895Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 5.53522L9.4923 7.81845L18.6249 3.25198L22.2779 5.07857L9.4923 11.4716L1.27297 7.3618L4.92601 5.53522Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 5.21106L9.4923 7.49429L18.6249 2.92783L22.2779 4.75441L9.4923 11.1475L1.27297 7.03765L4.92601 5.21106Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 4.88873L9.4923 7.17197L18.6249 2.6055L22.2779 4.43209L9.4923 10.8251L1.27297 6.71532L4.92601 4.88873Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round"/>
+                  <path d="M4.92601 4.56647L9.4923 6.8497L18.6249 2.28323L22.2779 4.10982L9.4923 10.5029L1.27297 6.39305L4.92601 4.56647Z" fill="white" stroke="#FF7F1C" strokeWidth="1.18585" strokeLinecap="round"/>
+                </svg>
                 {stat}
               </span>
             ))}

@@ -27,7 +27,7 @@ export default function WhyDGlidePage() {
   return (
     <AnimatedPublicPage className="bg-[#F3F3F3]">
       <WDHeroSection />
-      <div className="py-12 lg:py-16">
+      <div className="py-12 lg:py-16" style={{ marginTop: "60px", marginBottom: "60px" }}>
         <WDTradeoffSection />
       </div>
       <WDCustomFitSection />
@@ -68,7 +68,7 @@ export default function WhyDGlidePage() {
         }}
       />
       <WDOnePlatformSection />
-      <div className="py-12 lg:py-16">
+      <div className="py-12 lg:py-16" style={{ marginBottom: "60px" }}>
         <WDStuckBetweenSection />
       </div>
       <WDProblemToSystemSection />

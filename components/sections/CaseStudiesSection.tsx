@@ -1,7 +1,44 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
+
+function useCountUp(end: number, duration: number, active: boolean) {
+  const [count, setCount] = useState(0);
+  const rafRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (!active) return;
+    const startTime = performance.now();
+    function tick(now: number) {
+      const p = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setCount(Math.round(eased * end));
+      if (p < 1) rafRef.current = requestAnimationFrame(tick);
+    }
+    rafRef.current = requestAnimationFrame(tick);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [active, end, duration]);
+  return count;
+}
+
+function MetricCounter({ value }: { value: string }) {
+  const match = value.match(/^(\d+(?:\.\d+)?)(.*)/);
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setStarted(true); obs.disconnect(); } }, { threshold: 0.5 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  const num = match ? parseFloat(match[1]) : 0;
+  const suffix = match ? match[2] : value;
+  const count = useCountUp(num, 1800, started);
+  if (!match) return <span ref={ref}>{value}</span>;
+  return <span ref={ref}>{started ? count : 0}{suffix}</span>;
+}
 
 const RIGHT_ITEM_DEFAULTS = [
   "Every tool replaced by one platform",
@@ -190,7 +227,7 @@ export default function CaseStudiesSection({ data }: { data?: Record<string, str
                         margin: 0,
                       }}
                     >
-                      {m.num}
+                      <MetricCounter value={m.num} />
                     </p>
                     <p
                       style={{

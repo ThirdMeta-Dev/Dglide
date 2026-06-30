@@ -16,9 +16,6 @@ import {
 const PlatformOperationalRealitySection: FunctionComponent = () => {
   const router = useRouter();
 
-  // Split "The Working System..." → highlight first word "The" and "You"
-  const bannerWords = platformRealityBannerHeading.split(" ");
-
   return (
     <section
       id="platform-reality"
@@ -83,14 +80,7 @@ const PlatformOperationalRealitySection: FunctionComponent = () => {
               {platformRealityBannerEyebrow}
             </span>
             <p className="sol-plat-reality-banner-heading">
-              {bannerWords.map((word, i) => {
-                const accent = word === "The" || word === "You";
-                return (
-                  <span key={i} className={accent ? "sol-plat-reality-banner-heading-accent" : undefined}>
-                    {word}{i < bannerWords.length - 1 ? " " : ""}
-                  </span>
-                );
-              })}
+              {platformRealityBannerHeading}
             </p>
           </div>
           <button

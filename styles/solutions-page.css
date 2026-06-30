@@ -333,16 +333,22 @@
   margin: 0 auto;
 }
 
+.solutions-page .sol-built-for-fit-card-wrap {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
 .solutions-page .sol-built-for-fit-card {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  flex: none;
-  align-self: stretch;
+  flex: 1;
   flex-shrink: 0;
   width: 260px;
-  height: 448px;
+  min-height: 448px;
   padding: 40px 24px 24px;
   gap: 22px;
   background: linear-gradient(180deg, #ffffff 0%, #f6f6f6 100%);
@@ -451,7 +457,6 @@
   min-height: 448px;
   padding: 32px 40px 40px 0px;
   border-radius: 16px;
-  backdrop-filter: blur(30px);
 }
 
 /* Industry accordion — Frame 1618876489 */
@@ -475,10 +480,16 @@
 }
 
 .solutions-page .sol-built-for-active-bar-fill {
-  width: 179.33px;
+  width: 0%;
   height: 2px;
   background: #ff7f1c;
   border-radius: 1px;
+  animation: builtForBarFill 6s linear forwards;
+}
+
+@keyframes builtForBarFill {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
 
 .solutions-page .sol-built-for-industry-trigger {
@@ -1086,6 +1097,13 @@
   height: 12.86px;
   flex: none;
   transform: rotate(45deg);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.solutions-page .sol-btn-book-demo:hover .sol-btn-book-demo-arrow,
+.solutions-page .sol-btn-get-started-now:hover .sol-btn-book-demo-arrow,
+.solutions-page .sol-btn-workflow-cta:hover .sol-btn-book-demo-arrow {
+  transform: rotate(0deg);
 }
 
 @media (max-width: 639px) {
@@ -1176,7 +1194,7 @@
   gap: 8px;
   padding: 13px 28px;
   border-radius: var(--sol-pill-radius);
-  border: 2px solid var(--sol-blue-dark);
+  border: 1px solid var(--sol-blue-dark);
   background: var(--sol-white);
   color: var(--sol-blue-dark);
   font-size: 15px;
@@ -1265,6 +1283,7 @@
   background: #ffffff;
   box-shadow: 0 1px 0 0 #e5e5e5;
   padding-top: 10px;
+  overflow: hidden;
 }
 
 /* Section nav — Frame 1618876547 */
@@ -1283,6 +1302,11 @@
   flex: none;
   flex-grow: 0;
   overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.solutions-page .sol-section-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .solutions-page .sol-section-nav-link {
@@ -2102,7 +2126,7 @@
 .solutions-page .sol-technician-inner {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -2155,7 +2179,7 @@
   align-items: flex-start;
   width: 100%;
   max-width: 1200px;
-  padding: 0 48px;
+  padding: 0;
   border-radius: 30px;
 }
 
@@ -2163,10 +2187,17 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   gap: 60px;
   width: 100%;
   max-width: 1104px;
   min-height: 647px;
+}
+
+.solutions-page .sol-technician-features-wrap {
+  flex: 0 0 603px;
+  width: 603px;
+  min-width: 0;
 }
 
 .solutions-page .sol-technician-features {
@@ -2174,8 +2205,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  flex: 1 1 603px;
-  max-width: 603px;
+  width: 100%;
   min-height: 416px;
 }
 
@@ -2294,9 +2324,10 @@
 
 .solutions-page .sol-technician-phone-wrap {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .solutions-page .sol-technician-phone {
@@ -2321,8 +2352,13 @@
     gap: 40px;
   }
 
+  .solutions-page .sol-technician-features-wrap {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
   .solutions-page .sol-technician-features {
-    max-width: 100%;
+    width: 100%;
     min-height: 0;
   }
 }
@@ -2397,7 +2433,7 @@
   gap: 28px;
   width: 100%;
   max-width: 1200px;
-  min-height: 532px;
+  min-height: 420px;
 }
 
 .solutions-page .sol-better-way-visual-bg {
@@ -2430,7 +2466,6 @@
   gap: 24px;
   width: 100%;
   padding: 0 48px;
-  backdrop-filter: blur(40px);
 }
 
 .solutions-page .sol-better-way-diagram {
@@ -2816,27 +2851,27 @@
 }
 button.sol-workflow-change-node.sol-workflow-change-node-0 {
   position: relative;
-  left: 63px;
+  left: 40px;
 }
 button.sol-workflow-change-node.sol-workflow-change-node-1 {
   position: relative;
-  left: 103px;
+  left: 87px;
 }
 button.sol-workflow-change-node.sol-workflow-change-node-2 {
   position: relative;
-  left: 116px;
+  left: 104px;
 }
 button.sol-workflow-change-node.sol-workflow-change-node-3 {
   position: relative;
-  left: 96px;
+  left: 100px;
 }
 button.sol-workflow-change-node.sol-workflow-change-node-4 {
   position: relative;
-  left: 50px;
+  left: 46px;
 }
 button.sol-workflow-change-node.sol-workflow-change-node-5 {
   position: relative;
-  left: -48px;
+  left: -50px;
 }
 .solutions-page .sol-workflow-change-timeline {
   position: relative;
@@ -3396,7 +3431,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
   flex: 1;
   min-width: 0;
@@ -3410,7 +3445,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   font-weight: 400;
   font-size: 40px;
   line-height: 52px;
-  text-align: center;
+  text-align: left;
   color: #000000;
 }
 
@@ -3422,7 +3457,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   font-weight: 400;
   font-size: 15px;
   line-height: 26px;
-  text-align: center;
+  text-align: left;
   letter-spacing: 0.2px;
   text-transform: capitalize;
   color: #555555;

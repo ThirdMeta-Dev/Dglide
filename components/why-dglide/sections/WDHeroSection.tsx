@@ -120,7 +120,7 @@ export default function WDHeroSection() {
                 </Link>
                 <Link
                   href="/schedule-demo"
-                  className="dg-btn-outline inline-flex h-12 items-center gap-2.5 rounded-full border-[1.5px] border-[#141FB5] px-8 text-base font-normal text-[#141FB5] transition-colors hover:bg-[#141FB5]/5"
+                  className="dg-btn-outline inline-flex h-12 items-center gap-2.5 rounded-full border-[1.5px] border-[#141FB5] bg-white px-8 text-base font-normal text-[#141FB5] transition-colors hover:bg-[#141FB5]/5"
                   style={{ fontFamily: "var(--font-sora), Sora, sans-serif" }}
                 >
                   Explore Capabilities

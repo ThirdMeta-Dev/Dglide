@@ -1,4 +1,6 @@
-import { FunctionComponent } from "react";
+"use client";
+
+import { FunctionComponent, useState, useEffect, useRef } from "react";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import {
   realOpsChallengeBullets,
@@ -9,6 +11,50 @@ import {
   realOpsSolutionItems,
 } from "@/data/solutionsPageData";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
+
+function parseMetric(value: string): { prefix: string; num: number; suffix: string } {
+  const match = value.match(/^([^\d]*)(\d+(?:\.\d+)?)(.*)$/);
+  if (!match) return { prefix: "", num: 0, suffix: value };
+  return { prefix: match[1], num: parseFloat(match[2]), suffix: match[3] };
+}
+
+function CounterMetric({ value, label }: { value: string; label: string }) {
+  const { prefix, num, suffix } = parseMetric(value);
+  const [display, setDisplay] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          const duration = 1400;
+          const start = performance.now();
+          const tick = (now: number) => {
+            const t = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            setDisplay(Math.round(eased * num));
+            if (t < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [num]);
+
+  return (
+    <div ref={ref} className="sol-real-ops-metric">
+      <p className="sol-real-ops-metric-value">{prefix}{display}{suffix}</p>
+      <p className="sol-real-ops-metric-label">{label}</p>
+    </div>
+  );
+}
 
 type RealOperationsSectionProps = {
   heading?: string;
@@ -108,10 +154,7 @@ const RealOperationsSection: FunctionComponent<RealOperationsSectionProps> = ({
 
                   <div className="sol-real-ops-metrics">
                     {metrics.map((metric) => (
-                      <div key={metric.value} className="sol-real-ops-metric">
-                        <p className="sol-real-ops-metric-value">{metric.value}</p>
-                        <p className="sol-real-ops-metric-label">{metric.label}</p>
-                      </div>
+                      <CounterMetric key={metric.value} value={metric.value} label={metric.label} />
                     ))}
                   </div>
                 </div>

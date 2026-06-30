@@ -129,7 +129,6 @@ function FeatureRow({
       }`}
     >
       <div className={styles.featureName}>
-        <span aria-hidden />
         {row}
       </div>
       <div className={styles.featureChecks}>
@@ -153,9 +152,18 @@ export function PlanComparisonSection() {
           <div className={styles.compareHeader}>
             <div className={styles.featureHeader}>Feature</div>
             <div className={styles.planHeaders}>
-              <span>Starter</span>
-              <span>Advanced</span>
-              <span>Enterprise</span>
+              <span>
+                <Image src="/pricing/icon-starter.png" alt="" width={88} height={48} className={styles.planHeaderIcon} />
+                Starter
+              </span>
+              <span>
+                <Image src="/pricing/icon-advanced.png" alt="" width={88} height={48} className={styles.planHeaderIcon} />
+                Advanced
+              </span>
+              <span>
+                <Image src="/pricing/icon-enterprise.png" alt="" width={88} height={48} className={styles.planHeaderIcon} />
+                Enterprise
+              </span>
             </div>
           </div>
 
@@ -190,7 +198,7 @@ export function PlanComparisonSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: motionEase }}
+                      transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                     >
                       {group.rows.map((row, rowIndex) => (
                         <FeatureRow

@@ -31,7 +31,7 @@ const CARDS = [
 
 export default function WDTradeoffSection() {
   return (
-    <section className="w-full px-4 md:px-6">
+    <section className="relative w-full px-4 md:px-6" style={{ zIndex: 1 }}>
       <div className="max-w-[1200px] mx-auto flex flex-col items-center gap-10 lg:gap-12">
         {/* Heading block */}
         <ScrollReveal direction="up">

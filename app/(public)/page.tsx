@@ -1,4 +1,5 @@
 import { getHomepageSections } from "@/lib/supabase/sections";
+import { listBlogPosts } from "@/lib/blog-db";
 import HeroSection from "@/components/sections/HeroSection";
 import SoftwareWorksSection from "@/components/sections/SoftwareWorksSection";
 import ComparisonSection from "@/components/sections/ComparisonSection";
@@ -18,7 +19,10 @@ import CTASection from "@/components/sections/CTASection";
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export default async function HomePage() {
-  const sections = await getHomepageSections();
+  const [sections, { docs: blogPosts }] = await Promise.all([
+    getHomepageSections(),
+    listBlogPosts({ publishedOnly: true, limit: 1, sortField: 'publishedAt', sortDir: 'desc' }),
+  ]);
 
   return (
     <AnimatedPublicPage staticFirstCount={1}>
@@ -36,7 +40,7 @@ export default async function HomePage() {
       <LogoCarouselSection data={sections.logo_carousel} />
       <TestimonialsSection data={sections.testimonials} />
       <LiveFasterSection data={sections.live_faster} />
-      <UsefulResourcesSection />
+      <UsefulResourcesSection latestPost={blogPosts[0]} />
       <CTASection data={sections.cta} />
     </AnimatedPublicPage>
   );

@@ -75,7 +75,7 @@ export default function LiveFasterSection({ data }: { data?: Record<string, stri
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
-                gap: 22,
+                gap: 10,
                 padding: "28px 60px 28px 28px",
                 borderRadius: 16,
                 border: "1px solid #FFF",

@@ -272,10 +272,16 @@ function AuthorSection({ post }: { post: BlogPost }) {
         <div className={styles.authorBoxText}>
           <h2>{post.author || 'DGlide Team'}</h2>
           <p>{post.authorTitle || 'Operations Writer'}</p>
-          <div className={styles.authorSocials} aria-hidden="true">
-            <span>in</span>
-            <span>x</span>
-            <span>◎</span>
+          <div className={styles.authorSocials}>
+            {[
+              { src: '/footer/social-linkedin.png', label: 'LinkedIn' },
+              { src: '/footer/social-twitter.png',  label: 'Twitter'  },
+              { src: '/footer/social-instagram.png', label: 'Instagram' },
+            ].map(({ src, label }) => (
+              <span key={label} className={styles.authorSocialIcon} aria-label={label}>
+                <Image src={src} alt={label} width={18} height={18} style={{ objectFit: 'contain' }} />
+              </span>
+            ))}
           </div>
         </div>
       </div>

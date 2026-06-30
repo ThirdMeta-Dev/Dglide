@@ -39,7 +39,7 @@ const FEATURES: Feature[] = [
 
 export default function AUThinkDifferentlySection() {
   return (
-    <section className="w-full">
+    <section className="w-full" style={{ marginTop: "80px" }}>
       <div className="max-w-[1200px] mx-auto px-5 md:px-12 flex flex-col gap-12">
         {/* ---------- Header row: heading left, note right ---------- */}
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:gap-[73px]">
@@ -73,10 +73,11 @@ export default function AUThinkDifferentlySection() {
             style={{
               background:
                 "radial-gradient(50% 50% at 50% 50%, #8ABFFB 0%, #F3F3F3 100%)",
+              zIndex: 0,
             }}
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ position: "relative", zIndex: 1 }}>
             {FEATURES.map((feature) => (
               <div
                 key={feature.title}

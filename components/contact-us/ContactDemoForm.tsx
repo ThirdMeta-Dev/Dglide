@@ -141,17 +141,16 @@ export default function ContactDemoForm() {
         <p className="m-0 max-w-[360px] text-base leading-7 text-[#6F7276]" style={{ fontFamily: "var(--font-inter)" }}>
           We&apos;ll route your message to the right DGlide team and get back with a clear next step.
         </p>
-        <motion.button
+        <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className="rounded-full border border-[#141FB5] px-6 py-3 text-sm text-[#141FB5]"
-          whileHover={{ scale: 1.04, y: -2 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ type: "spring", stiffness: 400, damping: 22 }}
-          style={{ fontFamily: "var(--font-sora)" }}
+          className="rounded-full border border-[#141FB5] px-6 py-3 text-sm text-[#141FB5] cursor-pointer"
+          style={{ fontFamily: "var(--font-sora)", transition: "background 0.22s ease, color 0.22s ease" }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = "#141FB5"; e.currentTarget.style.color = "#fff"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#141FB5"; }}
         >
           Send another message
-        </motion.button>
+        </button>
       </div>
     );
   }
@@ -280,25 +279,34 @@ export default function ContactDemoForm() {
         </p>
       ) : null}
 
-      <motion.button
+      <button
         type="submit"
         disabled={loading}
-        className="inline-flex w-fit self-center items-center justify-center gap-2.5 rounded-full px-8 py-3.5 text-base font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-70"
-        whileHover={{ scale: loading ? 1 : 1.04, y: loading ? 0 : -2 }}
-        whileTap={{ scale: loading ? 1 : 0.97 }}
-        transition={{ type: "spring", stiffness: 400, damping: 22 }}
+        className="group inline-flex w-fit self-center items-center justify-center gap-2.5 rounded-full px-8 py-3.5 text-base font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70"
         style={{
           fontFamily: "var(--font-sora)",
           background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
+          border: "none",
+          cursor: loading ? "not-allowed" : "pointer",
+          transition: "background 0.22s ease",
         }}
+        onMouseEnter={(e) => { if (!loading) (e.currentTarget as HTMLButtonElement).style.background = "linear-gradient(273deg, #0b148c 4.29%, #141fb5 95.71%)"; }}
+        onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)"; }}
       >
         {loading ? "Submitting..." : "Get the full story"}
         {!loading ? (
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            aria-hidden="true"
+            className="transition-transform duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:-rotate-45"
+          >
             <path d="M3 9h12M10 4l5 5-5 5" stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         ) : null}
-      </motion.button>
+      </button>
     </form>
   );
 }

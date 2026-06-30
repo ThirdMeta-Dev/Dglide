@@ -69,7 +69,7 @@ export default function AUFinalCTASection({
             <div className="flex w-full max-w-[796px] flex-col items-center gap-3">
               {/* Eyebrow badge */}
               <ScrollReveal direction="up">
-              <div className="flex items-center justify-center gap-2 rounded-[40px] border border-[#FF7F1C]/20">
+              <div className="flex items-center justify-center gap-2">
                 <span
                   aria-hidden
                   className="h-[11px] w-[2px] shrink-0 bg-white"
@@ -107,7 +107,7 @@ export default function AUFinalCTASection({
             <ScrollReveal direction="up" delay={0.2}>
             <Link
               href={ctaHref}
-              className="au-final-cta-btn inline-flex items-center gap-2.5 rounded-[40px] bg-white px-6 py-3.5 text-base text-[#1C2BFF] no-underline"
+              className="dg-btn-outline au-final-cta-btn inline-flex items-center gap-2.5 rounded-[40px] bg-white px-6 py-3.5 text-base text-[#1C2BFF] no-underline"
               style={{
                 fontFamily: "var(--font-sora), Sora, sans-serif",
                 fontWeight: 400,

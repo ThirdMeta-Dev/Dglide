@@ -211,10 +211,19 @@
   align-items: center;
   justify-content: center;
   padding: 12px;
-  border: 1px solid #ff7f1c;
+  border: 1.5px solid #ff7f1c;
   border-radius: 999px;
-  background: #fff;
+  background: #ff7f1c;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.carouselButton:hover:not(:disabled) {
+  background: transparent;
+}
+
+.carouselButton:hover:not(:disabled) img {
+  filter: invert(55%) sepia(79%) saturate(600%) hue-rotate(355deg) brightness(104%);
 }
 
 .carouselButtonActive {
@@ -345,6 +354,22 @@
   flex: 0 0 auto;
 }
 
+.bookmarkBtn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+
+.bookmarkBtn:hover {
+  transform: scale(1.15);
+}
+
 .cardTitle {
   margin: 0;
   color: #000;
@@ -363,6 +388,22 @@
   font-size: 15px;
   font-weight: 400;
   line-height: 20px;
+  transition: color 0.22s ease;
+}
+
+.readArrow {
+  transition: transform 0.22s ease;
+  flex-shrink: 0;
+}
+
+.card:hover .readMore,
+.resourceCard:hover .readMore {
+  color: #ff7f1c;
+}
+
+.card:hover .readArrow,
+.resourceCard:hover .readArrow {
+  transform: rotate(-45deg);
 }
 
 .cardLarge {
@@ -706,10 +747,75 @@
   text-decoration: none;
 }
 
+.resourceTabBtn {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  border: 1.5px solid #ff7f1c;
+  border-radius: 30px;
+  background: transparent;
+  color: #ff7f1c;
+  font-family: var(--font-sora), Sora, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.resourceTabBtn:hover {
+  background: #ff7f1c;
+  color: #fff;
+}
+
 .resourceTabActive {
   background: #ff7f1c;
   color: #fff;
   font-weight: 600;
+}
+
+.comingSoonPanel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+}
+
+.comingSoonContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px;
+  text-align: center;
+}
+
+.comingSoonIcon {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.comingSoonTitle {
+  margin: 0;
+  font-family: var(--font-tasa-orbiter), sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #000;
+}
+
+.comingSoonDesc {
+  margin: 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 15px;
+  color: #6f7276;
+  line-height: 1.6;
+  max-width: 280px;
 }
 
 .resourceCard {
@@ -782,6 +888,7 @@
   position: relative;
   overflow: hidden;
   padding: 48px 36px;
+  margin-bottom: 130px;
   border: 1px solid #fff;
   border-radius: 30px;
   background: linear-gradient(180deg, #1c2bff 0%, #141fb5 100%);
@@ -861,6 +968,12 @@
   font-size: 16px;
   font-weight: 400;
   text-decoration: none;
+  transition: background 0.22s ease, color 0.22s ease;
+}
+
+.demoButton:hover {
+  background: #f3f4f6;
+  color: #1c2bff;
 }
 
 @media (max-width: 900px) {

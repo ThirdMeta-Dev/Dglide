@@ -18,6 +18,7 @@ export default function AUHeroSection() {
       className="relative w-full overflow-hidden"
       style={{
         background: "linear-gradient(0deg, #F3F3F3 0%, #FFFFFF 81.7%)",
+        marginBottom: "130px",
       }}
     >
       <div className="relative mx-auto flex max-w-[1200px] flex-col gap-12 px-5 pb-16 pt-12 md:px-12 lg:flex-row lg:items-start lg:gap-0 lg:pb-0 lg:pt-[60px]">
@@ -92,7 +93,7 @@ export default function AUHeroSection() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="#capabilities"
-                className="inline-flex h-12 items-center gap-2.5 rounded-full px-8 text-base font-semibold text-white transition-opacity hover:opacity-90"
+                className="dg-btn-fill inline-flex h-12 items-center gap-2.5 rounded-full px-8 text-base font-semibold text-white"
                 style={{
                   fontFamily: "var(--font-sora), Sora, sans-serif",
                   background:
@@ -112,7 +113,7 @@ export default function AUHeroSection() {
               </Link>
               <Link
                 href="/demo"
-                className="inline-flex h-12 items-center gap-2.5 rounded-full border-[1.5px] border-[#141FB5] px-8 text-base font-normal text-[#141FB5] transition-colors hover:bg-[#141FB5]/5"
+                className="dg-btn-outline inline-flex h-12 items-center gap-2.5 rounded-full border-[1.5px] border-[#141FB5] px-8 text-base font-normal text-[#141FB5]"
                 style={{ fontFamily: "var(--font-sora), Sora, sans-serif" }}
               >
                 Book a Demo

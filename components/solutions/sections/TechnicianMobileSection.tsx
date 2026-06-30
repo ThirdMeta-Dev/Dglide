@@ -49,18 +49,14 @@ const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> =
         <div className="sol-technician-inner">
           <ScrollReveal direction="up">
             <header className="sol-technician-header">
-              <h2 className="sol-technician-heading">
-                {heading}
-              </h2>
-              <p className="sol-technician-description">
-                {description}
-              </p>
+              <h2 className="sol-technician-heading">{heading}</h2>
+              <p className="sol-technician-description">{description}</p>
             </header>
           </ScrollReveal>
 
           <div className="sol-technician-panel">
             <div className="sol-technician-row">
-              <ScrollReveal direction="left" delay={0.1}>
+              <ScrollReveal direction="left" delay={0.1} className="sol-technician-features-wrap">
                 <div className="sol-technician-features">
                   <div className="sol-technician-features-list">
                     {features.map((feature, index) => {

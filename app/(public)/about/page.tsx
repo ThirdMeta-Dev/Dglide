@@ -50,7 +50,7 @@ export default function AboutPage() {
           section_title: "Built for Businesses Where Workflows Are Not Simple",
         }}
       />
-      <div className="py-12 lg:py-16">
+      <div className="pt-4 pb-12 lg:pt-6 lg:pb-16">
         <AUHowWeWorkSection />
       </div>
       <AUFounderQuoteSection />

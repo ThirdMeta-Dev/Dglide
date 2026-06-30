@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const INTERVAL = 6000;
@@ -103,18 +104,29 @@ export default function SoftwareWorksSection({ data }: { data?: Record<string, s
             aspectRatio: "4 / 3",
             background: "#E8E8E8",
             boxShadow: "4px 4px 0 0 #E0E0E0",
+            position: "relative",
           }}
         >
-          {activeImage && (
-            <Image
-              key={activeImage}
-              src={activeImage}
-              alt={items[active]?.title}
-              width={608}
-              height={401}
-              className="w-full h-full object-cover"
-            />
-          )}
+          <AnimatePresence mode="wait">
+            {activeImage && (
+              <motion.div
+                key={activeImage}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                style={{ position: "absolute", inset: 0 }}
+              >
+                <Image
+                  src={activeImage}
+                  alt={items[active]?.title}
+                  width={608}
+                  height={401}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Right: accordion */}
@@ -149,14 +161,21 @@ export default function SoftwareWorksSection({ data }: { data?: Record<string, s
                   </span>
                 </div>
 
-                {isActive && item.body && (
-                  <p
-                    className="pl-11 pb-4 [font-family:var(--font-inter)] capitalize"
-                    style={{ color: "#555", fontSize: "15px", fontWeight: 400, lineHeight: "26px", letterSpacing: "0.2px" }}
-                  >
-                    {item.body}
-                  </p>
-                )}
+                <AnimatePresence initial={false}>
+                  {isActive && item.body && (
+                    <motion.p
+                      key="body"
+                      initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+                      animate={{ opacity: 1, height: "auto", marginBottom: 16 }}
+                      exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="pl-11 [font-family:var(--font-inter)] capitalize overflow-hidden"
+                      style={{ color: "#555", fontSize: "15px", fontWeight: 400, lineHeight: "26px", letterSpacing: "0.2px" }}
+                    >
+                      {item.body}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
 
                 <div className="relative h-[2px] w-full bg-[#E5E5E5] overflow-hidden">
                   {isActive && (
