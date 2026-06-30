@@ -102,7 +102,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
 
         {/* CTAs — centered */}
         <ScrollReveal direction="up" delay={0.24}>
-          <div className="flex flex-wrap gap-4 mb-0 justify-center">
+          <div className="relative z-10 flex flex-wrap gap-4 mb-0 justify-center">
             <Link
               href={data?.cta_primary_href ?? "/schedule-demo"}
               className="dg-btn-fill inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-base"
