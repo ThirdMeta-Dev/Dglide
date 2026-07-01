@@ -84,7 +84,7 @@ const DEFAULT_COLS = [
 
 function NavColumn({ heading, links }: { heading: string; links: { label: string; href: string }[] }) {
   return (
-    <div style={{ flex: "1 0 0", display: "flex", flexDirection: "column", gap: 12 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       <span
         style={{
           fontFamily: "Inter, sans-serif",
@@ -166,8 +166,8 @@ export default function Footer({
     };
   });
 
-  const row1 = columns.slice(0, 3);
-  const row2 = columns.slice(3, 6);
+  const row1 = columns.slice(0, 3); // Platform | Solutions | Use Cases
+  const row2 = columns.slice(3, 6); // Why DGlide | Resources | Company
 
   return (
     <footer style={{ width: "100%", marginTop: "auto" }}>
@@ -343,7 +343,7 @@ export default function Footer({
               </div>
             </ScrollReveal>
 
-            {/* Nav grid — 2 rows × 3 columns */}
+            {/* Nav grid — 2 rows × 3 columns, each row uses equal-width flex items */}
             <StaggerReveal
               className="footer-nav-grid"
               stagger={0.08}
@@ -351,16 +351,20 @@ export default function Footer({
             >
               <div className="footer-nav-row" style={{ display: "flex", gap: 60 }}>
                 {row1.map((col) => (
-                  <StaggerItem key={col.heading} direction="up">
-                    <NavColumn {...col} />
-                  </StaggerItem>
+                  <div key={col.heading} style={{ flex: "1 0 0" }}>
+                    <StaggerItem direction="up">
+                      <NavColumn {...col} />
+                    </StaggerItem>
+                  </div>
                 ))}
               </div>
               <div className="footer-nav-row" style={{ display: "flex", gap: 60 }}>
                 {row2.map((col) => (
-                  <StaggerItem key={col.heading} direction="up">
-                    <NavColumn {...col} />
-                  </StaggerItem>
+                  <div key={col.heading} style={{ flex: "1 0 0" }}>
+                    <StaggerItem direction="up">
+                      <NavColumn {...col} />
+                    </StaggerItem>
+                  </div>
                 ))}
               </div>
             </StaggerReveal>
