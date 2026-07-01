@@ -292,7 +292,7 @@ function BlueButton({
   return (
     <Link
       href={href}
-      className="group inline-flex h-12 w-fit items-center justify-center gap-2.5 rounded-full px-8 text-base"
+      className="group inline-flex h-12 w-fit items-center justify-center gap-2.5 rounded-full px-8 text-base whitespace-nowrap"
       style={baseStyle}
       onMouseEnter={(e) => {
         e.currentTarget.style.background = invert

@@ -5,7 +5,13 @@ import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
+const SUPABASE_READY = !!(
+  process.env.NEXT_PUBLIC_SUPABASE_URL &&
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
 async function getHeaderData(): Promise<{ navItems: NavItemData[]; settings: HeaderSettings | undefined }> {
+  if (!SUPABASE_READY) return { navItems: [], settings: undefined };
   try {
     const supabase = await createClient();
     const [{ data: nav }, { data: gs }] = await Promise.all([
@@ -34,6 +40,7 @@ async function getHeaderData(): Promise<{ navItems: NavItemData[]; settings: Hea
 }
 
 async function getFooterData(): Promise<{ settings: FooterSettings | undefined; links: FooterLink[] }> {
+  if (!SUPABASE_READY) return { settings: undefined, links: [] };
   try {
     const supabase = await createClient();
     const [{ data: gs }, { data: fl }] = await Promise.all([
