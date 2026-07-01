@@ -27,11 +27,11 @@ export default function AboutPage() {
   return (
     <AnimatedPublicPage className="bg-[#F3F3F3]">
       <AUHeroSection />
-      <div className="py-12 lg:py-16">
+      <div className="py-[60px] lg:py-16">
         <AUWhatIsSection />
       </div>
       <AUSameProblemSection />
-      <div className="py-12 lg:py-16">
+      <div className="py-[60px] lg:py-16">
         <AUCoreBeliefSection />
       </div>
       <LivingServiceSection
@@ -41,7 +41,7 @@ export default function AboutPage() {
             "Most systems stop evolving after implementation. DGlide does not. Through our Living Service Model, we keep your system aligned with real operations long after go-live, so it never freezes on day one.",
         }}
       />
-      <div className="py-12 lg:py-16">
+      <div className="py-[60px] lg:py-16">
         <AUMultiSystemsSection />
       </div>
       <AUThinkDifferentlySection />
@@ -50,19 +50,19 @@ export default function AboutPage() {
           section_title: "Built for Businesses Where Workflows Are Not Simple",
         }}
       />
-      <div className="pt-4 pb-12 lg:pt-6 lg:pb-16">
+      <div className="py-[60px] lg:py-16">
         <AUHowWeWorkSection />
       </div>
       <AUFounderQuoteSection />
-      <div className="py-12 lg:py-16">
+      <div className="py-[60px] lg:py-16">
         <AUPeopleSection />
       </div>
       <LogoCarouselSection title="" />
-      <div className="py-12 lg:py-16">
+      <div className="py-[60px] lg:py-16">
         <AUJourneySection />
       </div>
       <AUResourcesSection />
-      <div className="pt-12 pb-[130px] lg:pt-16">
+      <div className="pt-[60px] pb-[130px] lg:pt-16">
         <AUFinalCTASection />
       </div>
     </AnimatedPublicPage>

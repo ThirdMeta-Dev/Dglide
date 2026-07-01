@@ -1,6 +1,6 @@
 "use client";
 
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState, useRef } from "react";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import {
   workflowChangeBullets,
@@ -9,6 +9,167 @@ import {
   workflowTimelineItems,
 } from "@/data/solutionsPageData";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
+
+/* ─── Mobile arc carousel ────────────────────────────────────── */
+type ArcPos = { l: number; t: number }; // left % + top px
+
+function MobileArcCarousel({ items }: { items: typeof workflowTimelineItems }) {
+  const N = items.length;
+  const [active, setActive] = useState(0);
+  const [drag,   setDrag]   = useState(0);
+  const [isDown, setIsDown] = useState(false);
+  const startX = useRef(0);
+
+  const prevI     = (active - 1 + N) % N;
+  const nextI     = (active + 1) % N;
+  const farPrevI  = (active - 2 + N) % N;
+  const farNextI  = (active + 2) % N;
+
+  // Positions: l = left %, t = top px (icon center, stage = 240px)
+  // Arc: M -80,-58 Q 180,450 440,-58 → bottom at (180,196), edges cross x=0/360 at y≈72
+  const P: Record<string, ArcPos> = {
+    FL: { l: -20, t: 48  },  // far left  (off-screen)
+    L:  { l:   3, t: 73  },  // left peek — on arc at x≈11px
+    A:  { l:  50, t: 196 },  // active — exact arc bottom
+    R:  { l:  97, t: 73  },  // right peek — on arc at x≈349px
+    FR: { l: 120, t: 48  },  // far right (off-screen)
+  };
+
+  const SNAP = 60;
+  const t = Math.max(-1, Math.min(1, drag / SNAP));
+  const lp = (a: ArcPos, b: ArcPos, u: number): ArcPos =>
+    ({ l: a.l + (b.l - a.l) * u, t: a.t + (b.t - a.t) * u });
+
+  const getPos = (i: number): ArcPos | null => {
+    if (i === active) {
+      if (t > 0) return lp(P.A, P.R, t);
+      if (t < 0) return lp(P.A, P.L, -t);
+      return P.A;
+    }
+    if (i === prevI) {
+      if (t > 0) return lp(P.L, P.A, t);
+      if (t < 0) return lp(P.L, P.FL, -t);
+      return P.L;
+    }
+    if (i === nextI) {
+      if (t < 0) return lp(P.R, P.A, -t);
+      if (t > 0) return lp(P.R, P.FR, t);
+      return P.R;
+    }
+    if (i === farPrevI && t > 0) return lp(P.FL, P.L, t);
+    if (i === farNextI && t < 0) return lp(P.FR, P.R, -t);
+    return null;
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    startX.current = e.touches[0].clientX;
+    setIsDown(true);
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
+    setDrag(e.touches[0].clientX - startX.current);
+  };
+  const onTouchEnd = () => {
+    setIsDown(false);
+    if (t >= 0.5)       setActive(prevI);
+    else if (t <= -0.5) setActive(nextI);
+    setDrag(0);
+  };
+
+  const goPrev = () => { setActive(prevI); setIsDown(false); setDrag(0); };
+  const goNext = () => { setActive(nextI); setIsDown(false); setDrag(0); };
+
+  const TR = isDown
+    ? "none"
+    : "left 0.38s cubic-bezier(0.4,0,0.2,1), top 0.38s cubic-bezier(0.4,0,0.2,1), opacity 0.25s";
+
+  return (
+    <div className="sol-wc-mobile">
+      {/* Arc + icons */}
+      <div
+        className="sol-wc-arc-stage"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        {/* Wide orange bowl arc — very wide bezier, enters stage high up */}
+        <svg
+          className="sol-wc-arc-svg"
+          viewBox="0 0 360 240"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden
+        >
+          {/* P0=(-80,-58) P1=(180,450) P2=(440,-58) → bottom at (180,196), enters at y≈72 */}
+          <path
+            d="M -80,-58 Q 180,450 440,-58"
+            stroke="#FF7F1C"
+            strokeWidth="1.5"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <circle cx="180" cy="196" r="5" fill="#FF7F1C" />
+        </svg>
+
+        {/* Icons: side items show icon only, active shows icon only (text is below) */}
+        {items.map((item, i) => {
+          const pos = getPos(i);
+          if (!pos) return null;
+          const isAct = i === active;
+          return (
+            <div
+              key={item.title}
+              onClick={i === prevI ? goPrev : i === nextI ? goNext : undefined}
+              style={{
+                position: "absolute",
+                left: `${pos.l}%`,
+                top: pos.t,
+                transform: "translate(-50%, -50%)",
+                transition: TR,
+                zIndex: isAct ? 10 : 5,
+                opacity: isAct ? 1 : 0.6,
+                cursor: !isAct ? "pointer" : "default",
+                pointerEvents: !isAct ? "auto" : "none",
+                width: "20vw",
+                height: "auto",
+              }}
+            >
+              <img
+                src={item.icon}
+                alt=""
+                style={{ display: "block", width: "100%", height: "auto", maxWidth: "none" }}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Active title only — centered */}
+      <div className="sol-wc-arc-labels">
+        <span className="sol-wc-arc-label-active">{items[active].title}</span>
+      </div>
+
+      {/* Active description */}
+      <p className="sol-wc-arc-desc">{items[active].description}</p>
+
+      {/* Navigation — outline left, filled right */}
+      <div className="sol-wc-arc-nav">
+        <button onClick={goPrev} className="sol-wc-arc-btn sol-wc-arc-btn--prev" aria-label="Previous">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M11 13.5L6.5 9L11 4.5" stroke="#FF7F1C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+        <button onClick={goNext} className="sol-wc-arc-btn sol-wc-arc-btn--next" aria-label="Next">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M7 4.5L11.5 9L7 13.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+        <span className="sol-wc-arc-counter">{active + 1}/{N}</span>
+      </div>
+    </div>
+  );
+}
+/* ─────────────────────────────────────────────────────────────── */
 
 type WorkflowChangeSectionProps = {
   title?: string;
@@ -74,6 +235,9 @@ const WorkflowChangeSection: FunctionComponent<WorkflowChangeSectionProps> = ({
               </ul>
             </div>
           </ScrollReveal>
+
+          {/* Mobile arc carousel — hidden on desktop via CSS */}
+          <MobileArcCarousel items={timelineItems} />
 
           <ScrollReveal direction="right">
             <div className="sol-workflow-change-track">

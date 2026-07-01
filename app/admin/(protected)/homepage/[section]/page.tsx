@@ -14,7 +14,7 @@ const SECTION_LABELS: Record<string, string> = {
   case_studies:   "Proof, Not Promises",
   competitor:     "DGlide Vs. Everything Else",
   capabilities:   "One Platform. Every Capability",
-  logo_carousel:  "Who's Already Running on DGlide",
+  logo_carousel:  "Trusted by",
   testimonials:   "Hear It From The Teams",
   live_faster:    "From Demo to Live in Weeks",
   cta:            "Tell Us How Your Operation Runs",

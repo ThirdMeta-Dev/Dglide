@@ -179,12 +179,12 @@ const Card: FunctionComponent<{ card: SolutionCard; fixedSize?: boolean }> = ({
 
 const CenterHub: FunctionComponent<{ fixedSize?: boolean }> = ({ fixedSize }) => (
   <Image
-    src="/about/multi-systems/center-platform.png"
-    alt="Dglide Platform — your system adapts to how you work, start with a working"
-    width={944}
+    src="/about/multi-systems/center-platform-v2.png"
+    alt="DGlide Platform hub"
+    width={910}
     height={910}
     className={
-      fixedSize ? "w-[472px] h-[455px]" : "w-full max-w-[420px] h-auto"
+      fixedSize ? "w-[455px] h-[455px]" : "w-full max-w-[420px] h-auto"
     }
   />
 );
@@ -256,8 +256,8 @@ const AUMultiSystemsSection: FunctionComponent = () => {
             )}
           </div>
 
-          {/* "All Connected By" strip */}
-          <div className="relative z-[1] w-full rounded-[40px] bg-[#F3F3F3] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)] px-6 md:px-8 py-3 xl:h-[60px] flex flex-wrap items-center justify-center xl:justify-between gap-x-6 gap-y-2">
+          {/* "All Connected By" strip — hidden until content is ready */}
+          {/* <div className="relative z-[1] w-full rounded-[40px] bg-[#F3F3F3] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)] px-6 md:px-8 py-3 xl:h-[60px] flex flex-wrap items-center justify-center xl:justify-between gap-x-6 gap-y-2">
             <span
               className="text-[#FF7F1C] text-[18px] leading-[26px] font-medium"
               style={{ fontFamily: "var(--font-tasa-orbiter)" }}
@@ -277,7 +277,7 @@ const AUMultiSystemsSection: FunctionComponent = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

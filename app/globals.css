@@ -59,6 +59,102 @@
   100% { transform: translateX(-50%); }
 }
 
+/* ── Global section vertical spacing mobile (≤767px) ── */
+@media (max-width: 767px) {
+  section {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+  /* Hero sections: no section-level padding (inner wrapper controls layout) */
+  section.dg-hero-outer {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  /* Inner wrapper divs that provide their own vertical padding —
+     zeroed on mobile so they don't double-stack with section's 64px */
+  .dg-inner-no-mobile-pad {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+/* ── Global section subtext mobile (≤480px) ── */
+@media (max-width: 480px) {
+  .hero-subtitle {
+    font-size: 13px !important;
+    font-family: var(--font-inter) !important;
+    font-weight: 400 !important;
+    line-height: 21px !important;
+    letter-spacing: 0.2px !important;
+    color: #6F7276 !important;
+  }
+}
+
+/* ── Footer mobile responsive (≤767px) ── */
+@media (max-width: 767px) {
+  .footer-nl-outer {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .footer-newsletter {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 20px !important;
+    border-radius: 20px !important;
+    gap: 16px !important;
+  }
+  .footer-nl-title {
+    white-space: normal !important;
+    font-size: 18px !important;
+    text-align: center !important;
+  }
+  .footer-nl-actions {
+    flex-direction: column !important;
+    flex-shrink: unset !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+  .footer-nl-input {
+    width: 100% !important;
+  }
+  .footer-body-wrapper {
+    padding: 36px 20px 0 !important;
+  }
+  .footer-body {
+    flex-direction: column !important;
+    gap: 28px !important;
+  }
+  .footer-brand-col {
+    width: 100% !important;
+    flex-shrink: unset !important;
+  }
+  .footer-nav-grid {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 24px !important;
+  }
+  .footer-nav-row {
+    flex-wrap: wrap !important;
+    gap: 20px 16px !important;
+    width: 100% !important;
+  }
+  .footer-nav-row > * {
+    min-width: 140px !important;
+    flex: 1 0 140px !important;
+  }
+  .dg-footer-link {
+    font-size: 12px !important;
+    line-height: 18px !important;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 10px !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 20px 0 24px !important;
+  }
+}
+
 @keyframes scrollRight {
   0%   { transform: translateX(-50%); }
   100% { transform: translateX(0); }
@@ -310,11 +406,22 @@
   .sd-logos-row   { flex-direction: column !important; padding: 0 20px !important; gap: 16px !important; }
   .sd-logos-label { flex-shrink: 1 !important; }
 
+  .wdg-inner      { padding-left: 16px !important; padding-right: 16px !important; }
   .wdg-top-row    { flex-direction: column !important; }
   .wdg-bottom-row { flex-direction: column !important; }
+  .wdg-bottom-card { flex-direction: column !important; align-items: flex-start !important; }
 
   .faq-cols { flex-direction: column !important; gap: 24px !important; padding: 0 20px !important; }
   .faq-left { flex: 0 0 auto !important; width: 100% !important; padding-top: 0 !important; }
+
+  /* Contact Us page — 60px sectional spacing on mobile */
+  .ct-page-outer { gap: 60px !important; padding-bottom: 60px !important; }
+  .ct-page-inner { gap: 60px !important; }
+
+  /* Zero out per-section internal py so the 60px flex gap is the only spacing */
+  .ct-hero-body   { padding-top: 24px !important; padding-bottom: 0 !important; }
+  .ct-methods-sec { padding-top: 0 !important; padding-bottom: 0 !important; }
+  .ct-demo-body   { padding-top: 0 !important; padding-bottom: 0 !important; }
 }
 
 /* ── Global button hover styles ── */
@@ -349,4 +456,24 @@
 .dg-btn-outline:hover svg,
 .dg-btn-outline:hover .btn-arrow {
   transform: rotate(-45deg);
+}
+
+/* Footer brand column — center-align on mobile */
+@media (max-width: 767px) {
+  .footer-brand-col {
+    align-items: center !important;
+  }
+  .footer-brand-col p {
+    text-align: center !important;
+  }
+  .footer-contact-group {
+    align-items: center !important;
+    width: 100% !important;
+  }
+  .dg-footer-contact {
+    justify-content: center !important;
+  }
+  .footer-social-row {
+    justify-content: center !important;
+  }
 }

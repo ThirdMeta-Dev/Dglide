@@ -60,7 +60,7 @@ export const platformRealityBannerCta = "Explore Platform";
 export const platformRealityIntro =
   "Every kind of operations software gets one thing right and forces a tradeoff for it. DGlide is built to start working and keep adapting, without the tradeoff.";
 
-export const platformWhatIsHeading = "What Is the Dglide Platform?";
+export const platformWhatIsHeading = "What Is the DGlide Platform?";
 export const platformWhatIsDescription =
   "DGlide is a configurable operations platform that powers multiple business systems from one shared backbone. You start with a ready solution, then adapt it to your workflows.";
 
@@ -101,7 +101,7 @@ export const platformBackboneLayers = [
     description:
       "Shape workflows, forms, approvals, SLAs, dashboards, and roles to match how you work.",
     icon: "/platform/backbone/workflow-config-layer.png",
-    tags: ["Workflows", "forms", "approvals", "escalations", "SLA rules"],
+    tags: ["Workflows", "Forms", "Approvals", "Escalations", "SLA rules"],
   },
   {
     layer: "Layer 3",
@@ -109,7 +109,7 @@ export const platformBackboneLayers = [
     description:
       "One shared data layer that connects your systems and integrates with the tools you already use.",
     icon: "/platform/backbone/data-integration-layer.png",
-    tags: ["Workflows", "forms", "approvals", "escalations", "SLA rules"],
+    tags: ["Workflows", "Forms", "Approvals", "Escalations", "SLA rules"],
   },
   {
     layer: "Layer 4",
@@ -117,7 +117,7 @@ export const platformBackboneLayers = [
     description:
       "Keeps the platform aligned to your operations after go-live, adapting as your workflows change.",
     icon: "/platform/backbone/living-service-model.png",
-    tags: ["Workflows", "forms", "approvals", "escalations", "SLA rules"],
+    tags: ["Workflows", "Forms", "Approvals", "Escalations", "SLA rules"],
   },
 ];
 
@@ -242,7 +242,7 @@ export const platformStartFastSteps = [
   },
   {
     title: "Keep Adapting",
-    description: "As Your Operations Change, Dglide Changes With Them.",
+    description: "As Your Operations Change, DGlide Changes With Them.",
     active: false,
   },
 ];

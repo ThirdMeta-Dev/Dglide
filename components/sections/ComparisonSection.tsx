@@ -157,24 +157,24 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
 
             {/* RIGHT column (mirrored) */}
             <ScrollReveal direction="right">
-            <div className="flex flex-col gap-6 items-end cmp-right-col-outer">
-              <div className="flex flex-col gap-3 items-end">
+            <div className="flex flex-col gap-6 md:items-end cmp-right-col-outer">
+              <div className="flex flex-col gap-3 md:items-end">
                 <Image src="/comparison/col-right-header.png" alt="" width={86} height={47} className="object-contain" />
                 <h3
-                  className="text-xl text-[#FF7F1C] text-right"
+                  className="text-xl text-[#FF7F1C] md:text-right"
                   style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 400 }}
                 >
                   {rightTitle}
                 </h3>
               </div>
-              <div className="relative flex flex-col items-end">
+              <div className="relative flex flex-col md:items-end">
                 {rightItems.map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 pb-6 last:pb-0 flex-row-reverse">
+                  <div key={i} className="flex items-start gap-4 pb-6 last:pb-0 md:flex-row-reverse">
                     <div className="flex-shrink-0 relative z-10 mt-1">
                       <Image src="/comparison/row-bullet.svg" alt="" width={31} height={18} className="object-contain" />
                     </div>
                     <p
-                      className="text-[#0D0D0D] text-[15px] leading-relaxed pt-1.5 text-right"
+                      className="cmp-item-text text-[#0D0D0D] text-[15px] leading-relaxed pt-1.5 md:text-right"
                       style={{ fontFamily: "Inter, sans-serif" }}
                     >
                       {item.split('\n').map((line, j, arr) => (

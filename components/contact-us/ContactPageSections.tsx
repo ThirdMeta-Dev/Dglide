@@ -83,8 +83,8 @@ const directContacts = [
   {
     icon: "/contact-us/icon-direct-phone.svg",
     title: "Phone",
-    value: "+91 XXXXX XXXXX",
-    href: "tel:+91",
+    value: "+91 95884 82557",
+    href: "tel:+919588482557",
     body: "Monday to Friday, 10:00 AM to 6:00 PM IST.\nCall us, Mon-Fri, 10:00 AM to 6:00 PM IST.",
   },
 ];
@@ -347,7 +347,7 @@ function ContactHeroSection() {
       className="w-full overflow-hidden"
       style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F3F3F3 100%)" }}
     >
-      <div className="mx-auto flex max-w-[1104px] flex-col items-center gap-12 px-5 py-14 lg:flex-row lg:gap-[60px] lg:px-0 lg:py-[60px]">
+      <div className="ct-hero-body mx-auto flex max-w-[1104px] flex-col items-center gap-12 px-5 py-14 lg:flex-row lg:gap-[60px] lg:px-0 lg:py-[60px]">
         <div className="flex w-full flex-col gap-12 lg:w-[532px]">
           <div className="flex flex-col gap-9">
             <div className="flex flex-col gap-6">
@@ -397,7 +397,7 @@ function ContactHeroSection() {
 
 function ContactMethodsSection() {
   return (
-    <section className="relative box-border w-full overflow-hidden bg-[#F3F3F3] px-5 py-12 lg:px-0 lg:pb-12 lg:pt-[60px]">
+    <section className="ct-methods-sec relative box-border w-full overflow-hidden bg-[#F3F3F3] px-5 py-12 lg:px-0 lg:pb-12 lg:pt-[60px]">
       <div className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2">
         <Image
           src="/contact-us/contact-methods-bg.png"
@@ -520,7 +520,7 @@ function TestimonialCarousel() {
 export function DemoSection() {
   return (
     <section id="book-demo" className="mx-auto w-full max-w-[1200px]">
-      <div className="relative min-h-[707px] overflow-hidden px-5 py-8 lg:px-0">
+      <div className="ct-demo-body relative min-h-[707px] overflow-hidden px-5 py-8 lg:px-0">
         <div className="relative z-10 mx-auto flex max-w-[1069px] flex-col gap-10 lg:flex-row lg:items-start lg:gap-[49px]">
           <div className="flex w-full flex-col gap-[60px] lg:w-[467px]">
             <div className="flex flex-col gap-6">
@@ -645,7 +645,7 @@ function ExistingCustomerSection() {
               className="text-[38px] leading-[48px] lg:text-[48px] lg:leading-[60px]"
               gradient="linear-gradient(180deg, #FF7F1C 15%, #000000 95%)"
             >
-              Already Using Dglide?
+              Already Using DGlide?
             </GradientTitle>
             <p className="m-0 text-base leading-[160.8%] text-[#555555]" style={fontInter}>
               If you&apos;re an existing customer and need help with your system, workflow, access, configuration, or support request, please contact our support team.
@@ -890,8 +890,8 @@ function FAQSection() {
 
 export default function ContactPageSections() {
   return (
-    <div className="flex max-w-full flex-col items-center gap-[130px] overflow-x-hidden bg-[#F3F3F3] pb-[130px]">
-      <div className="flex w-full flex-col items-center gap-[100px]">
+    <div className="ct-page-outer flex max-w-full flex-col items-center gap-[130px] overflow-x-hidden bg-[#F3F3F3] pb-[130px]">
+      <div className="ct-page-inner flex w-full flex-col items-center gap-[100px]">
         <MotionReveal hero>
           <ContactHeroSection />
         </MotionReveal>

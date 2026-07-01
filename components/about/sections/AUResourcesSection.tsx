@@ -21,7 +21,7 @@ export default function AUResourcesSection() {
   const [active, setActive] = useState("Blogs");
 
   return (
-    <section className="w-full">
+    <section className="w-full md:mt-0">
       <div className="max-w-[1200px] mx-auto px-5 md:px-12 flex flex-col gap-10">
         {/* ---------- Header ---------- */}
         <div className="flex flex-col gap-2">

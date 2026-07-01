@@ -309,7 +309,7 @@
   line-height: 28px;
   text-align: center;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #6f7276;
 }
 
@@ -566,7 +566,7 @@
   font-size: 15px;
   line-height: 26px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #555555;
 }
 
@@ -675,7 +675,7 @@
   font-size: 16px;
   line-height: 28px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #6f7276;
 }
 
@@ -932,8 +932,9 @@
 
   .solutions-page .sol-platform-footer {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 32px;
+    text-align: center;
   }
 }
 
@@ -1544,7 +1545,7 @@
   font-size: 16px;
   line-height: 27px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #555555;
 }
 
@@ -1642,6 +1643,15 @@
   display: block;
 }
 
+/* Mobile/desktop image swap for capability tabs */
+.solutions-page .sol-cap-media-mobile { display: none; }
+
+@media (max-width: 767px) {
+  /* Hide desktop image container, show mobile image container */
+  .solutions-page .sol-cap-media-desktop { display: none; }
+  .solutions-page .sol-cap-media-mobile { display: block; }
+}
+
 @media (max-width: 1023px) {
   .solutions-page .sol-capabilities-layout {
     flex-direction: column;
@@ -1668,6 +1678,14 @@
 
   .solutions-page .sol-cap-panel-notch {
     display: none;
+  }
+
+  .solutions-page .sol-cap-panel {
+    flex: none;       /* release flex-basis: 821px so height = content */
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+    overflow: hidden; /* keep image inside the white card */
   }
 
   .solutions-page .sol-cap-panel-inner {
@@ -1868,7 +1886,7 @@
   line-height: 25px;
   text-align: center;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #555555;
 }
 
@@ -2168,7 +2186,7 @@
   font-size: 16px;
   line-height: 28px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #6f7276;
 }
 
@@ -2318,7 +2336,7 @@
   font-size: 15px;
   line-height: 26px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #555555;
 }
 
@@ -2421,7 +2439,7 @@
   line-height: 28px;
   text-align: center;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #6f7276;
 }
 
@@ -2785,7 +2803,7 @@
   font-size: 15px;
   line-height: 26px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #6f7276;
 }
 
@@ -3040,6 +3058,100 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 }
 
+/* ── WorkflowChange mobile arc carousel ─────────────────────── */
+.sol-wc-mobile { display: none; }
+
+@media (max-width: 767px) {
+  /* Hide desktop track, show mobile carousel */
+  .solutions-page .sol-workflow-change-track { display: none !important; }
+  .sol-wc-mobile { display: block; width: 100%; margin-top: 32px; }
+
+  /* Arc stage: full viewport width, no transform (avoids overflow:hidden clipping bug) */
+  .sol-wc-arc-stage {
+    position: relative;
+    width: 100vw;
+    left: -24px;
+    height: 240px;
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  /* SVG fills the full stage — coordinates match icon positions 1:1 */
+  .sol-wc-arc-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 240px;
+    pointer-events: none;
+  }
+
+  /* Labels row — single centered active title */
+  .sol-wc-arc-labels {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    padding: 0 20px;
+  }
+
+  .sol-wc-arc-label-active {
+    font-family: "TASA Orbiter", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #FF7F1C;
+    text-align: center;
+  }
+
+  /* Description */
+  .sol-wc-arc-desc {
+    margin: 10px 0 0;
+    padding: 0 8px;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    color: #555;
+    text-align: center;
+    line-height: 24px;
+  }
+
+  /* Nav */
+  .sol-wc-arc-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .sol-wc-arc-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .sol-wc-arc-btn--prev {
+    background: transparent;
+    border: 1.5px solid #FF7F1C;
+  }
+
+  .sol-wc-arc-btn--next {
+    background: #FF7F1C;
+    border: none;
+  }
+
+  .sol-wc-arc-counter {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #999;
+    min-width: 32px;
+  }
+}
+/* ──────────────────────────────────────────────────────────────── */
+
 /* What Improves — section (Figma Frame 1618876610) */
 .solutions-page .sol-what-improves-section {
   background: var(--sol-bg);
@@ -3180,7 +3292,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   font-size: 15px;
   line-height: 24px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #555555;
 }
 
@@ -3222,6 +3334,72 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   .solutions-page
     .sol-what-improves-card--right
     .sol-what-improves-card-description {
+    text-align: left;
+  }
+}
+
+@media (max-width: 767px) {
+  /* No horizontal scroll */
+  .solutions-page .sol-what-improves-section {
+    overflow-x: hidden;
+  }
+
+  /* Header left-aligned on mobile */
+  .solutions-page .sol-what-improves-header {
+    align-items: flex-start;
+  }
+
+  .solutions-page .sol-what-improves-heading {
+    text-align: left;
+    font-size: clamp(28px, 7vw, 48px);
+    line-height: 1.21;
+  }
+
+  /* Grid: single flat column */
+  .solutions-page .sol-what-improves-grid {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Row: each row is also a flat column — cards stack within it */
+  .solutions-page .sol-what-improves-row {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Row bottom has no special centering on mobile */
+  .solutions-page .sol-what-improves-row--bottom {
+    justify-content: flex-start;
+  }
+
+  /* Card: full width, left-aligned, icon → title → subtext */
+  .solutions-page .sol-what-improves-card {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .solutions-page .sol-what-improves-card--left,
+  .solutions-page .sol-what-improves-card--center,
+  .solutions-page .sol-what-improves-card--right {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  /* Icon sizing on mobile */
+  .solutions-page .sol-what-improves-icon {
+    width: 64px;
+    height: auto;
+  }
+
+  /* All text left-aligned */
+  .solutions-page .sol-what-improves-card--left .sol-what-improves-card-title,
+  .solutions-page .sol-what-improves-card--left .sol-what-improves-card-description,
+  .solutions-page .sol-what-improves-card--center .sol-what-improves-card-title,
+  .solutions-page .sol-what-improves-card--center .sol-what-improves-card-description,
+  .solutions-page .sol-what-improves-card--right .sol-what-improves-card-title,
+  .solutions-page .sol-what-improves-card--right .sol-what-improves-card-description {
     text-align: left;
   }
 }
@@ -3414,7 +3592,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   font-size: 16px;
   line-height: 28px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #555555;
 }
 
@@ -3459,7 +3637,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   line-height: 26px;
   text-align: left;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #555555;
 }
 
@@ -3548,7 +3726,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   font-weight: 400;
   font-size: 24px;
   line-height: 32px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #000000;
 }
 
@@ -3717,7 +3895,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   font-size: 16px;
   line-height: 28px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #6f7276;
 }
 
@@ -3900,7 +4078,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   font-size: 15px;
   line-height: 26px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #555555;
 }
 
@@ -4037,7 +4215,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   line-height: 28px;
   text-align: right;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #6f7276;
 }
 
@@ -4168,7 +4346,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   font-size: 15px;
   line-height: 25px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #555555;
 }
 
@@ -4458,10 +4636,90 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 }
 
+/* Mobile integrations — hidden by default */
+.sol-integrations-mobile { display: none; }
+
+@media (max-width: 767px) {
+  /* Hide desktop diagram */
+  .solutions-page .sol-integrations-diagram-wrap { display: none !important; }
+
+  /* Show mobile layout */
+  .sol-integrations-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0;
+  }
+
+  /* Pills group */
+  .sol-int-m-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Individual pill: icon left + orange label */
+  .sol-int-m-pill {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 20px 8px 8px;
+    border-radius: 40px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  }
+
+  .sol-int-m-pill-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sol-int-m-pill-icon img {
+    width: 52px !important;
+    height: 52px !important;
+    object-fit: contain;
+    display: block;
+  }
+
+  .sol-int-m-pill-label {
+    font-family: "TASA Orbiter", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+    color: #ff7f1c;
+  }
+
+  /* Center orb — portrait image (680×926), bleeds past edges, overlaps pills */
+  .sol-int-m-orb {
+    position: relative;
+    width: calc(100% + 48px);
+    margin-left: -24px;
+    aspect-ratio: 680 / 926;
+    margin-top: -64px;
+    margin-bottom: -64px;
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
 @media (max-width: 640px) {
   .solutions-page .sol-integrations-heading {
     font-size: clamp(28px, 7vw, 48px);
     line-height: 1.17;
+  }
+
+  .sol-int-m-orb {
+    width: calc(100% + 32px);
+    margin-left: -16px;
   }
 }
 
@@ -4579,7 +4837,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   font-size: 15px;
   line-height: 26px;
   letter-spacing: 0.2px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #555555;
 }
 
@@ -4618,33 +4876,16 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
    PHASE 2 MOBILE FIXES
 ───────────────────────────────────────── */
 
-/* 1. OnePlatform — stack orbit nodes vertically on phones.
-   Desktop uses position:absolute nodes on a relative container;
-   reset them to static flow and hide the center SVG diagram. */
+/* 1. OnePlatform — MobileOrbit (draggable rotating orbit).
+   All rendering is inline in MobileOrbit component; just hide/show here. */
+
+/* Hidden on desktop */
+.sol-mobile-orbit-root { display: none; }
+
 @media (max-width: 640px) {
-  .solutions-page .sol-platform-orbit {
-    height: auto !important;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 12px 0;
-  }
-  .solutions-page .sol-platform-orbit-diagram {
-    display: none;
-  }
-  .solutions-page .sol-platform-node {
-    position: static !important;
-    transform: none !important;
-  }
-  .solutions-page .sol-platform-node-pill {
-    width: 100%;
-    padding: 10px 16px;
-    border-radius: 12px;
-    white-space: nowrap;
-  }
-  .solutions-page .sol-platform-node-pill::before {
-    display: none;
-  }
+  /* Hide static desktop orbit, show draggable mobile orbit */
+  .solutions-page .sol-platform-orbit-wrap { display: none !important; }
+  .sol-mobile-orbit-root { display: block !important; width: 100%; }
 }
 
 /* 2. ServiceWorkflow — remove bg image on mobile (text becomes unreadable) */
@@ -4705,53 +4946,39 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 }
 
-/* 6. WhatImproves — icon on left, text on left, horizontal scroll */
+/* 6. WhatImproves — vertical stack, left-aligned, icon → title → subtext */
 @media (max-width: 640px) {
   .solutions-page .sol-what-improves-grid {
-    flex-direction: row !important;
+    flex-direction: column !important;
     flex-wrap: nowrap !important;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 8px;
-    gap: 12px !important;
-    align-items: stretch;
-  }
-  .solutions-page .sol-what-improves-grid::-webkit-scrollbar {
-    display: none;
+    overflow-x: hidden !important;
+    gap: 32px !important;
   }
   .solutions-page .sol-what-improves-row {
     flex-direction: column !important;
-    flex-shrink: 0;
-    width: 85vw;
-    max-width: 300px;
+    width: 100% !important;
+    gap: 32px !important;
   }
   .solutions-page .sol-what-improves-card {
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 16px;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
     width: 100% !important;
     min-height: 0 !important;
-    padding: 16px;
+    padding: 0 !important;
   }
   .solutions-page .sol-what-improves-icon {
-    flex-shrink: 0;
-    width: 52px;
-    height: 52px;
+    width: 64px !important;
+    height: auto !important;
   }
   .solutions-page .sol-what-improves-card-body {
-    flex: 1;
-    min-width: 0;
-    align-items: flex-start;
-    text-align: left;
+    align-items: flex-start !important;
+    text-align: left !important;
   }
   .solutions-page .sol-what-improves-card-title {
-    font-size: 14px !important;
-    line-height: 1.35;
     text-align: left !important;
   }
   .solutions-page .sol-what-improves-card-description {
-    font-size: 12px !important;
     text-align: left !important;
   }
 }
@@ -4765,6 +4992,11 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
 @media (max-width: 640px) {
   .solutions-page {
     --sol-section-y: 40px;
+  }
+
+  /* Arc stage: tighter container padding on ≤640px */
+  .sol-wc-arc-stage {
+    left: -16px;
   }
 
   /* Section nav: tighter gap + smaller pills on phones */
@@ -4782,5 +5014,170 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   .solutions-page .sol-container {
     padding-left: 16px;
     padding-right: 16px;
+  }
+}
+
+/* ── Solutions page — mobile section headings (≤480px) ── */
+@media (max-width: 480px) {
+  .solutions-page .sol-hero-heading,
+  .solutions-page .sol-problem-heading,
+  .solutions-page .sol-built-for-heading,
+  .solutions-page .sol-platform-heading,
+  .solutions-page .sol-capabilities-heading,
+  .solutions-page .sol-workflow-heading,
+  .solutions-page .sol-final-cta-heading,
+  .solutions-page .sol-technician-heading,
+  .solutions-page .sol-go-live-heading,
+  .solutions-page .sol-integrations-heading,
+  .solutions-page .sol-heading-xl,
+  .solutions-page .sol-heading-lg {
+    font-size: 28px !important;
+    line-height: 36px !important;
+    text-align: center !important;
+    font-family: var(--font-tasa-orbiter, "TASA Orbiter Variable", sans-serif) !important;
+    font-weight: 400 !important;
+  }
+}
+
+/* ── Solutions page — mobile section description text (≤480px) ── */
+@media (max-width: 480px) {
+  .solutions-page .sol-problem-description,
+  .solutions-page .sol-built-for-description,
+  .solutions-page .sol-platform-description,
+  .solutions-page .sol-hero-description,
+  .solutions-page .sol-workflow-description,
+  .solutions-page .sol-technician-description,
+  .solutions-page .sol-final-cta-description {
+    font-size: 13px !important;
+    line-height: 21px !important;
+    letter-spacing: 0.2px !important;
+    color: #6F7276 !important;
+    font-weight: 400 !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   MOBILE BATCH 4 FIXES (≤767px / ≤639px)
+   Mobile-only — zero desktop impact.
+───────────────────────────────────────── */
+
+/* 1. FAQ — flat corners on mobile */
+@media (max-width: 767px) {
+  .solutions-page .sol-faq-panel {
+    border-radius: 0 !important;
+  }
+}
+
+/* 2. FAQ — smaller accordion question font on mobile */
+@media (max-width: 767px) {
+  .solutions-page .sol-faq-question {
+    font-size: 14px !important;
+    line-height: 22px !important;
+  }
+  .solutions-page .sol-faq-question--open {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+}
+
+/* 3. GoLiveFaster — full-width card description + gap before button */
+@media (max-width: 767px) {
+  .solutions-page .sol-go-live-card-main {
+    max-width: 100% !important;
+  }
+  .solutions-page .sol-go-live-card-body {
+    gap: 20px;
+  }
+  .solutions-page .sol-go-live-card-description {
+    margin-bottom: 4px;
+  }
+}
+
+/* 4. WorkflowChange — heading word-wrap + reduce top spacing + pad below bullets */
+@media (max-width: 767px) {
+  .solutions-page .sol-workflow-change-section {
+    margin-top: 60px !important;
+  }
+  .solutions-page .sol-workflow-change-heading {
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+  }
+  .solutions-page .sol-workflow-change-left {
+    padding-bottom: 24px;
+  }
+}
+
+/* 5. BetterWay — col-icon on right of column title + orb between columns +
+      right-column tick icons on LEFT + padding below footer pill + tighter section spacing */
+@media (max-width: 767px) {
+  /* Column header: icon moves to right of title */
+  .solutions-page .sol-better-way-side-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+  .solutions-page .sol-better-way-col-icon {
+    order: 2;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* Orb restored between left and right columns */
+  .solutions-page .sol-better-way-center {
+    order: 0 !important;
+  }
+
+  /* Right column items: tick icon moves to LEFT */
+  .solutions-page .sol-better-way-side--right .sol-better-way-side-item {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+  .solutions-page .sol-better-way-side--right .sol-better-way-side-item-text {
+    text-align: left !important;
+  }
+
+  /* Right column connector line: move from right edge → left (matches tick position) */
+  .solutions-page .sol-better-way-side--right .sol-better-way-side-line {
+    right: auto !important;
+    left: 16px !important;
+  }
+
+  /* Padding below the footer pill (orange tube) */
+  .solutions-page .sol-better-way-footer-bar {
+    margin-bottom: 32px;
+  }
+
+  /* Tighter section padding on mobile */
+  .solutions-page .sol-better-way-section.sol-section {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+  }
+}
+
+/* 6. CoreCapabilities — cut the excess bottom space below the tab image */
+@media (max-width: 767px) {
+  .solutions-page .sol-cap-panel-inner {
+    padding-bottom: 8px !important;
+    gap: 16px;
+  }
+}
+
+/* 7. FSMHero — left-align heading + buttons side-by-side + eyebrow margin on mobile */
+@media (max-width: 767px) {
+  .dg-hero-outer .sol-hero-heading {
+    text-align: left !important;
+  }
+  .dg-hero-outer .sol-hero-eyebrow {
+    margin-top: 34px;
+  }
+}
+@media (max-width: 639px) {
+  .dg-hero-outer .sol-hero-actions {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
   }
 }

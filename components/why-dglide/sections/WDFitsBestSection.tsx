@@ -41,7 +41,7 @@ const DGLIDE_ROWS: Row[] = [
   {
     icon: "/why-dglide/fits-best/icon-dglide-fit.png",
     label: "Fit",
-    desc: "Live in weeks, not quarters.",
+    desc: "Adapts to your processes.",
     descLineHeight: 29,
   },
   {

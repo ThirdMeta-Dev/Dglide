@@ -57,6 +57,7 @@ function TabButton({ label, isActive, onClick }: { label: string; isActive: bool
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className="urs-tab-btn"
       style={{
         ...tabBtnStyle(false),
         background: showFill ? "#FF7F1C" : "transparent",
@@ -74,7 +75,7 @@ export default function UsefulResourcesSection({ latestPost }: { latestPost?: Bl
 
   return (
     <section style={{ width: "100%", background: "#F3F3F3", padding: "40px 0 60px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+      <div className="urs-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
 
         <ScrollReveal direction="up">
           <div style={{ textAlign: "center", marginBottom: 56 }}>
@@ -99,10 +100,10 @@ export default function UsefulResourcesSection({ latestPost }: { latestPost?: Bl
           </div>
         </ScrollReveal>
 
-        <div style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
+        <div className="urs-layout" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
 
           {/* Left tabs */}
-          <StaggerReveal style={{ display: "flex", flexDirection: "column", gap: 16, width: 244, flexShrink: 0 }}>
+          <StaggerReveal className="urs-tabs" style={{ display: "flex", flexDirection: "column", gap: 16, width: 244, flexShrink: 0 }}>
             {TABS.map(({ key, label }) => (
               <StaggerItem key={key}>
                 <TabButton

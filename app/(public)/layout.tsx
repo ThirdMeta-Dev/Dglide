@@ -3,6 +3,8 @@ import Header, { type NavItemData, type HeaderSettings } from "@/components/layo
 import Footer, { type FooterSettings, type FooterLink } from "@/components/layout/Footer";
 import { createClient } from "@/lib/supabase/server";
 
+export const dynamic = "force-dynamic";
+
 async function getHeaderData(): Promise<{ navItems: NavItemData[]; settings: HeaderSettings | undefined }> {
   try {
     const supabase = await createClient();

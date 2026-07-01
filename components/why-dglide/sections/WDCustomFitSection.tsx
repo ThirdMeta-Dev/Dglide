@@ -9,7 +9,7 @@ import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animation
  * White 1200x754 rounded panel on the #F3F3F3 page background with
  * decorative elliptical "lens" arcs above and below, a gradient heading,
  * three pillar cards (middle card raised 52px) connected by gradient
- * lines to a central "Dglide Platform" pill.
+ * lines to a central "DGlide Platform" pill.
  */
 
 const ASSET = "/why-dglide/custom-fit";
@@ -189,7 +189,7 @@ export default function WDCustomFitSection() {
               ))}
             </StaggerReveal>
 
-            {/* Dglide Platform pill — Frame 1618876633 */}
+            {/* DGlide Platform pill — Frame 1618876633 */}
             <ScrollReveal direction="up" delay={0.2}>
               <Link
                 href="/platform"
@@ -202,7 +202,7 @@ export default function WDCustomFitSection() {
                     "0 0 0 10px #F3F3F3, -4px -4px 4px 10px rgba(0, 0, 0, 0.04)",
                 }}
               >
-                Dglide Platform
+                DGlide Platform
               </Link>
             </ScrollReveal>
           </div>

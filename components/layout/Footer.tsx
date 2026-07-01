@@ -35,49 +35,49 @@ const DEFAULT_COLS = [
   {
     heading: "Platform",
     links: [
-      { label: "Overview",                      href: "#" },
-      { label: "Living Service Model (LSM)",    href: "#" },
-      { label: "Architecture & Capabilities",   href: "#" },
+      { label: "Overview",                      href: "/platform" },
+      { label: "Living Service Model (LSM)",    href: "/platform" },
+      { label: "Architecture & Capabilities",   href: "/platform" },
     ],
   },
   {
     heading: "Solutions",
     links: [
-      { label: "Field Service Management",   href: "#" },
-      { label: "Process Management",         href: "#" },
-      { label: "Service / ITSM Workflows",   href: "#" },
-      { label: "Field Sales Execution",      href: "#" },
-      { label: "CRM (Support Layer)",        href: "#" },
+      { label: "Field Service Management",   href: "/fsm"  },
+      { label: "Process Management",         href: "#"     },
+      { label: "Service / ITSM Workflows",   href: "/itsm" },
+      { label: "Field Sales Execution",      href: "#"     },
+      { label: "CRM (Support Layer)",        href: "#"     },
     ],
   },
   {
     heading: "Use Cases",
     links: [
-      { label: "Field Service Businesses",          href: "#" },
+      { label: "Field Service Businesses",           href: "#" },
       { label: "Manufacturing & Process Businesses", href: "#" },
-      { label: "Growing SMB Operations",            href: "#" },
-      { label: "Internal Operations Teams",         href: "#" },
+      { label: "Growing SMB Operations",             href: "#" },
+      { label: "Internal Operations Teams",          href: "#" },
     ],
   },
   {
     heading: "Why DGlide",
     links: [
-      { label: "Compare Alternatives",    href: "#" },
-      { label: "Who It's For / Not For",  href: "#" },
+      { label: "Compare Alternatives",   href: "/why-dglide" },
+      { label: "Who It's For / Not For", href: "/why-dglide" },
     ],
   },
   {
     heading: "Resources",
     links: [
-      { label: "Blog",              href: "https://dglide.com/blog" },
+      { label: "Blog",               href: "https://dglide.com/blog" },
       { label: "Guides / Playbooks", href: "#" },
     ],
   },
   {
     heading: "Company",
     links: [
-      { label: "About DGlide",         href: "#" },
-      { label: "Contact / Book Demo",  href: "#" },
+      { label: "About DGlide",        href: "/about" },
+      { label: "Contact / Book Demo", href: "#"      },
     ],
   },
 ];
@@ -146,14 +146,17 @@ export default function Footer({
   const newsletterPlaceholder = settings?.newsletter_placeholder  ?? "Enter Your Email";
   const newsletterButtonLabel = settings?.newsletter_button_label ?? "Subscribe Now";
   const tagline    = settings?.tagline    ?? "We finally have visibility in our operations. Your system adapts to how you work.";
-  const email      = settings?.email      ?? "Info@loremipsum.com";
-  const phone      = settings?.phone      ?? "+91 6787878787";
+  const email      = settings?.email      ?? "support@dglide.com";
+  const phone      = settings?.phone      ?? "+91 95884 82557";
   const copyright  = settings?.copyright  ?? "Copyright © 2024 Lorem Ipsum All Rights Reserved. Developed by Hexanovate";
   const privacyLabel = settings?.privacy_label ?? "Privacy Policy";
-  const privacyHref  = settings?.privacy_href  ?? "#";
-  const termsLabel   = settings?.terms_label   ?? "Terms";
-  const termsHref    = settings?.terms_href    ?? "#";
-  const social = settings?.social ?? {};
+  const privacyHref  = settings?.privacy_href  ?? "/privacy-policy";
+  const termsLabel   = settings?.terms_label   ?? "Terms & Conditions";
+  const termsHref    = settings?.terms_href    ?? "/terms-conditions";
+  const social = settings?.social ?? {
+    linkedin: "https://www.linkedin.com/company/dglide/posts/?feedView=all",
+    instagram: "https://www.instagram.com/dglide.ai/",
+  };
 
   const columns = DEFAULT_COLS.map((def, i) => {
     const colLinks = (links ?? []).filter((l) => l.column_index === i);
@@ -296,7 +299,7 @@ export default function Footer({
                 </p>
 
                 {/* Contact info */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <div className="footer-contact-group" style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   <a href={`mailto:${email}`} className="dg-footer-contact" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
                     <Image src="/footer/icon-email.png" alt="" width={24} height={24} className="object-contain" style={{ flexShrink: 0 }} />
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, color: "inherit" }}>
@@ -327,11 +330,9 @@ export default function Footer({
                   .dg-footer-contact { color: #000; transition: color 0.18s ease; }
                   .dg-footer-contact:hover { color: #1C2BFF !important; }
                 `}</style>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div className="footer-social-row" style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   {[
                     { href: social.linkedin  || "#", src: "/footer/social-linkedin.png",  label: "LinkedIn"  },
-                    { href: social.twitter   || "#", src: "/footer/social-twitter.png",   label: "Twitter"   },
-                    { href: social.whatsapp  || "#", src: "/footer/social-whatsapp.png",  label: "WhatsApp"  },
                     { href: social.instagram || "#", src: "/footer/social-instagram.png", label: "Instagram" },
                   ].map(({ href, src, label }) => (
                     <Link key={label} href={href} aria-label={label} className="dg-social-icon">

@@ -116,7 +116,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
       />
 
       <div
-        className="max-w-[1280px] mx-auto lss-outer"
+        className="max-w-[1280px] mx-auto lss-outer dg-inner-no-mobile-pad"
         style={{ padding: "80px 64px 80px", position: "relative", zIndex: 1 }}
       >
         {/* Counter + Nav */}
@@ -196,42 +196,96 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
             </div>
 
             {/* Mobile slide — shown only on mobile via CSS */}
-            <div className="lss-mobile-slide" style={{ display: "none", marginTop: 28 }}>
-              <div style={{ background: "#FFF", borderRadius: 20, padding: "24px", display: "flex", flexDirection: "column", gap: 14 }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 500, color: "#FF7F1C" }}>
-                    {tabs[current]}
-                  </span>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ fontFamily: "Sora, sans-serif", fontSize: 13, color: "#6F7276" }}>{slide.counter}</span>
-                    <NavButton dir="prev" spinning={spinDir === "prev"} onClick={() => navigate("prev")} />
-                    <NavButton dir="next" spinning={spinDir === "next"} onClick={() => navigate("next")} />
-                  </div>
-                </div>
-                <p style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 15, fontWeight: 500, color: "#000", lineHeight: "22px", margin: 0 }}>
+            <div className="lss-mobile-slide" style={{ display: "none", marginTop: 32 }}>
+              {/* Horizontal scrollable tab bar */}
+              <div
+                className="lss-mobile-tabs"
+                style={{
+                  display: "flex",
+                  overflowX: "auto",
+                  scrollbarWidth: "none",
+                  borderBottom: "1px solid #E8E8E8",
+                  marginBottom: 24,
+                }}
+              >
+                {tabs.map((label, i) => {
+                  const isActive = i === current;
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => setCurrent(i)}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        padding: "6px 16px 10px 6px",
+                        border: "none",
+                        background: "none",
+                        cursor: "pointer",
+                        flexShrink: 0,
+                        borderBottom: isActive ? "2.5px solid #FF7F1C" : "2.5px solid transparent",
+                        marginBottom: -1,
+                      }}
+                    >
+                      <Image
+                        src={`/living-service/tab-${i + 1}.png`}
+                        alt=""
+                        width={36}
+                        height={18}
+                        className="object-contain"
+                        style={{ opacity: isActive ? 1 : 0.45 }}
+                      />
+                      <span
+                        style={{
+                          fontFamily: "var(--font-tasa-orbiter)",
+                          fontSize: 14,
+                          fontWeight: isActive ? 500 : 400,
+                          color: isActive ? "#FF7F1C" : "#000",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Slide content */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                <p style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 15,
+                  fontWeight: 500,
+                  color: "#000",
+                  lineHeight: "24px",
+                  margin: 0,
+                }}>
                   {slide.detail}
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   {slide.bullets.map((b, idx) => (
-                    <span key={idx} style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#555", lineHeight: "20px" }}>
+                    <span key={idx} style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: 15,
+                      fontWeight: 300,
+                      color: "#545454",
+                      lineHeight: "24px",
+                    }}>
                       › {b}
                     </span>
                   ))}
                 </div>
-                <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
-                  {tabs.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrent(idx)}
-                      style={{
-                        width: idx === current ? 20 : 8, height: 8, borderRadius: 4,
-                        background: idx === current ? "#FF7F1C" : "#E0E0E0",
-                        border: "none", padding: 0, cursor: "pointer",
-                        transition: "width 0.3s ease",
-                      }}
-                    />
-                  ))}
-                </div>
+                <span style={{
+                  fontFamily: "Sora, sans-serif",
+                  fontSize: 12,
+                  fontWeight: 300,
+                  color: "#6F7276",
+                  alignSelf: "flex-end",
+                  marginTop: 4,
+                }}>
+                  {slide.counter}
+                </span>
               </div>
             </div>
           </div>

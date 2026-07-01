@@ -157,3 +157,35 @@
     line-height: 1.3 !important;
   }
 }
+
+/* ── About page — mobile section headings (≤480px) ── */
+@media (max-width: 480px) {
+  .au-how-heading,
+  .au-journey-mobile-heading,
+  .au-final-heading,
+  .au-think-heading {
+    font-size: 28px !important;
+    line-height: 36px !important;
+    text-align: center !important;
+    font-family: var(--font-tasa-orbiter, "TASA Orbiter Variable", sans-serif) !important;
+    font-weight: 400 !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   MOBILE SECTION SPACING — 60px between every section
+   Only affects ≤767px. Desktop inline styles untouched.
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* CoreBelief has inline paddingTop: 80px on the section — zero it,
+     the page wrapper (py-[60px]) provides the gap */
+  .au-core-belief-section { padding-top: 0 !important; }
+
+  /* BusinessTabs has inline padding: 80px 0 96px — no wrapper around it,
+     so give it 60px top (for gap from ThinkDifferently) and zero bottom
+     (HowWeWork wrapper provides the next gap) */
+  .au-biz-tabs-section { padding-top: 60px !important; padding-bottom: 0 !important; }
+
+  /* LogoCarousel has inline padding: 48px 0 24px — wrappers on both sides provide gaps */
+  .dg-logo-carousel-section { padding-top: 0 !important; padding-bottom: 0 !important; }
+}

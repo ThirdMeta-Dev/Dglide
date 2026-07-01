@@ -6,7 +6,7 @@ const PlatformThreePillarsSection: FunctionComponent = () => (
   <section className="sol-section sol-plat-pillars-section">
     <SolutionsContainer>
       <p className="sol-plat-pillars-intro">
-        Dglide Is A Configurable Operations Platform That Powers Multiple Business
+        DGlide Is A Configurable Operations Platform That Powers Multiple Business
         Systems From One Shared Backbone. Start With A Ready Solution, Adapt It To
         Your Workflows.
       </p>

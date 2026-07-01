@@ -11,6 +11,7 @@ const PlatformIntegrationsSection: FunctionComponent = () => (
     heading={platformIntegrationHeading}
     description={platformIntegrationDescription}
     nodes={platformIntegrationNodes}
+    centerImageSrc="/solutions/integrations-hub-center-v2.png"
   />
 );
 

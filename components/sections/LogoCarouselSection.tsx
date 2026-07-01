@@ -21,7 +21,7 @@ export default function LogoCarouselSection({
   data?: Record<string, string>;
   title?: string;
 }) {
-  const heading = title ?? data?.title ?? "Who's Already Running on DGlide";
+  const heading = title ?? data?.title ?? "Trusted by";
 
   const logos = Array.from({ length: LOGO_COUNT }, (_, i) => ({
     src: data?.[`logo_${i + 1}_image`] || LOGO_SRCS[i % LOGO_SRCS.length],
@@ -33,7 +33,7 @@ export default function LogoCarouselSection({
   const trackWidth = displayLogos.length * (212 + 16);
 
   return (
-    <section style={{ width: "100%", background: "transparent", padding: "48px 0 24px", overflow: "hidden" }}>
+    <section className="dg-logo-carousel-section" style={{ width: "100%", background: "transparent", padding: "48px 0 24px", overflow: "hidden" }}>
       {heading && (
         <ScrollReveal direction="up">
           <p

@@ -68,7 +68,7 @@ export default function WhyDGlideSection({ data }: { data?: Record<string, strin
         }}
       />
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px", position: "relative", zIndex: 1 }}>
+      <div className="wdg-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px", position: "relative", zIndex: 1 }}>
 
         {/* Heading */}
         <div style={{ textAlign: "center", marginBottom: 48 }}>
@@ -171,6 +171,7 @@ export default function WhyDGlideSection({ data }: { data?: Record<string, strin
           {bottomCards.map((card, i) => (
             <div
               key={card.title}
+              className="wdg-bottom-card"
               style={{
                 flex: "1 0 0",
                 borderRadius: 16,

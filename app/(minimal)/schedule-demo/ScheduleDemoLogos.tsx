@@ -11,8 +11,8 @@ const LOGO_SRCS = [
 ];
 
 export default function ScheduleDemoLogos({ data }: { data?: Record<string, string> }) {
-  const headingLine1 = data?.heading_line_1 ?? "Who's Already Running";
-  const headingLine2 = data?.heading_line_2 ?? "on DGlide";
+  const headingLine1 = data?.heading_line_1 ?? "Trusted by";
+  const headingLine2 = data?.heading_line_2 ?? "";
 
   const logos = LOGO_SRCS.map((src, i) => ({
     src: data?.[`logo_${i + 1}_image`] || src,

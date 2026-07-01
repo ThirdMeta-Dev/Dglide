@@ -7,9 +7,16 @@ import { Check, ChevronDown } from "lucide-react";
 import { motionEase } from "@/components/animations/MotionPrimitives";
 import styles from "./PricingPage.module.css";
 
+type FeatureRowData = {
+  name: string;
+  starter: string;
+  advanced: string;
+  enterprise: string;
+};
+
 type FeatureGroup = {
   title: string;
-  rows: string[];
+  rows: FeatureRowData[];
 };
 
 type FAQItem = {
@@ -17,48 +24,70 @@ type FAQItem = {
   answer: string;
 };
 
+const Y = "✓";
+const N = "—";
+
 const FEATURE_GROUPS: FeatureGroup[] = [
   {
     title: "Core Platform",
     rows: [
-      "Configurable workflows, forms & approvals",
-      "Role-based access control & teams",
-      "Mobile app (field + manager)",
-      "Dashboards & standard reports",
-      "Self-service portal",
-      "Audit logs & multi-language support",
+      { name: "Configurable workflows, forms & approvals",  starter: Y, advanced: Y, enterprise: Y },
+      { name: "Role-based access control & teams",          starter: Y, advanced: Y, enterprise: Y },
+      { name: "Mobile app (field + manager)",               starter: Y, advanced: Y, enterprise: Y },
+      { name: "Dashboards & standard reports",              starter: Y, advanced: Y, enterprise: Y },
+      { name: "Self-service portal",                        starter: Y, advanced: Y, enterprise: Y },
+      { name: "Audit logs & multi-language support",        starter: Y, advanced: Y, enterprise: Y },
     ],
   },
   {
     title: "CRM & Sales",
     rows: [
-      "Lead and account tracking",
-      "Pipeline stages and activity history",
-      "Quotes, follow-ups, and customer notes",
+      { name: "Lead capture, scoring & assignment rules",          starter: Y, advanced: Y, enterprise: Y },
+      { name: "Contact, account & pipeline management (Kanban)",   starter: Y, advanced: Y, enterprise: Y },
+      { name: "Omnichannel: email, WhatsApp, SMS, social",         starter: Y, advanced: Y, enterprise: Y },
+      { name: "Quote, invoice & PO generation (CPQ)",              starter: N, advanced: Y, enterprise: Y },
+      { name: "Process automation & custom workflows",             starter: N, advanced: Y, enterprise: Y },
+      { name: "Forecast dashboard",                                starter: N, advanced: Y, enterprise: Y },
+      { name: "Territory management",                              starter: N, advanced: N, enterprise: Y },
+      { name: "Journey orchestration",                             starter: N, advanced: N, enterprise: Y },
     ],
   },
   {
     title: "Field Service (FSM)",
     rows: [
-      "Job assignment and dispatch",
-      "Field updates from mobile teams",
-      "Visit history, checklists, and service reports",
+      { name: "Work order creation, tracking & lifecycle",            starter: Y, advanced: Y, enterprise: Y },
+      { name: "Technician assignment & scheduling",                   starter: Y, advanced: Y, enterprise: Y },
+      { name: "Daily planner & real-time task updates",               starter: Y, advanced: Y, enterprise: Y },
+      { name: "Dynamic forms & field data capture",                   starter: Y, advanced: Y, enterprise: Y },
+      { name: "Tool & inventory management",                          starter: N, advanced: Y, enterprise: Y },
+      { name: "Route tracking & distance-based expense",              starter: N, advanced: Y, enterprise: Y },
+      { name: "OTP / customer-verified work order closure",           starter: N, advanced: Y, enterprise: Y },
+      { name: "Photo proof, audit trail & compliance checklists",     starter: N, advanced: Y, enterprise: Y },
+      { name: "Customer portal (tracking & rescheduling)",            starter: N, advanced: N, enterprise: Y },
     ],
   },
   {
     title: "IT & Service Desk (ITSM)",
     rows: [
-      "Ticket intake and status flows",
-      "SLA views and escalation routing",
-      "Internal service dashboards",
+      { name: "Incident & ticket management",                            starter: Y, advanced: Y, enterprise: Y },
+      { name: "Omnichannel ticket intake (email, web, WhatsApp)",        starter: Y, advanced: Y, enterprise: Y },
+      { name: "Email templates & canned responses",                      starter: Y, advanced: Y, enterprise: Y },
+      { name: "SLA tracking & escalation rules",                         starter: Y, advanced: Y, enterprise: Y },
+      { name: "Custom ticket status, fields & layouts",                  starter: Y, advanced: Y, enterprise: Y },
+      { name: "Multilingual knowledge base & portal workspace",          starter: N, advanced: Y, enterprise: Y },
+      { name: "Ticket auto-tagging & guided conversations",              starter: N, advanced: Y, enterprise: Y },
+      { name: "Custom AI/ML models",                                     starter: N, advanced: N, enterprise: Y },
     ],
   },
   {
     title: "Customization & Integrations",
     rows: [
-      "Custom workflow and form configuration",
-      "API access and external app connections",
-      "Marketplace extensions and tailored setup",
+      { name: "Custom fields, tabs & layouts",             starter: Y,   advanced: Y,     enterprise: Y     },
+      { name: "Marketplace extensions",                   starter: "2", advanced: "All", enterprise: "All" },
+      { name: "Integrations & external API",              starter: N,   advanced: Y,     enterprise: Y     },
+      { name: "Unlimited groups & email accounts",        starter: N,   advanced: Y,     enterprise: Y     },
+      { name: "White labeling",                           starter: N,   advanced: N,     enterprise: Y     },
+      { name: "Priority support & tailored onboarding",  starter: N,   advanced: N,     enterprise: Y     },
     ],
   },
 ];
@@ -81,7 +110,7 @@ const FAQ_ITEMS: FAQItem[] = [
   },
   {
     question:
-      "Do CRM, field service, and IT service cost extra, or is it one platform?",
+      "Do CRM, Field Service, and IT service cost extra, or is it one platform?",
     answer:
       "DGlide is one platform. Your plan and scope determine which operating areas are configured first and what gets added later.",
   },
@@ -107,19 +136,25 @@ const FAQ_ITEMS: FAQItem[] = [
   },
 ];
 
-function PlanCheck() {
-  return (
-    <span className={styles.tableCheck} aria-label="Included">
-      <Check size={15} strokeWidth={2.4} />
-    </span>
-  );
+function PlanCell({ value }: { value: string }) {
+  if (value === "✓") {
+    return (
+      <span className={styles.tableCheck} aria-label="Included">
+        <Check size={15} strokeWidth={2.4} />
+      </span>
+    );
+  }
+  if (value === "—") {
+    return <span className={styles.tableDash} aria-label="Not included">—</span>;
+  }
+  return <span className={styles.tableValue}>{value}</span>;
 }
 
 function FeatureRow({
   row,
   index,
 }: {
-  row: string;
+  row: FeatureRowData;
   index: number;
 }) {
   return (
@@ -128,13 +163,11 @@ function FeatureRow({
         index % 2 === 0 ? styles.featureRowLight : styles.featureRowDark
       }`}
     >
-      <div className={styles.featureName}>
-        {row}
-      </div>
+      <div className={styles.featureName}>{row.name}</div>
       <div className={styles.featureChecks}>
-        <PlanCheck />
-        <PlanCheck />
-        <PlanCheck />
+        <PlanCell value={row.starter} />
+        <PlanCell value={row.advanced} />
+        <PlanCell value={row.enterprise} />
       </div>
     </div>
   );
@@ -202,7 +235,7 @@ export function PlanComparisonSection() {
                     >
                       {group.rows.map((row, rowIndex) => (
                         <FeatureRow
-                          key={row}
+                          key={row.name}
                           row={row}
                           index={rowIndex}
                         />

@@ -88,7 +88,7 @@ function PrincipleCard({ principle }: { principle: Principle }) {
 export default function AUHowWeWorkSection() {
   return (
     <section className="w-full bg-[#F3F3F3] overflow-hidden">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-12 py-10 md:py-20 flex flex-col items-center gap-8 md:gap-12">
+      <div className="dg-inner-no-mobile-pad max-w-[1200px] mx-auto px-6 md:px-10 lg:px-12 py-10 md:py-20 flex flex-col items-center gap-8 md:gap-12">
         {/* ---------- Heading + subtitle ---------- */}
         <ScrollReveal direction="up">
         <div className="flex flex-col items-center gap-4">

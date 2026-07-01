@@ -99,7 +99,7 @@ const SolutionListIcon: FunctionComponent = () => (
 );
 
 const RealOperationsSection: FunctionComponent<RealOperationsSectionProps> = ({
-  heading = "How Dglide Works in Real Operations",
+  heading = "How DGlide Works in Real Operations",
   challengeQuote = realOpsChallengeQuote,
   challengeBullets = realOpsChallengeBullets,
   metricsDescription = realOpsMetricsDescription,
@@ -174,7 +174,7 @@ const RealOperationsSection: FunctionComponent<RealOperationsSectionProps> = ({
               <article className="sol-real-ops-solution-card">
                 <img
                   src="/solutions/dglide-logo.svg"
-                  alt="Dglide"
+                  alt="DGlide"
                   width={160}
                   height={28}
                   className="sol-real-ops-solution-logo"
@@ -182,7 +182,7 @@ const RealOperationsSection: FunctionComponent<RealOperationsSectionProps> = ({
 
                 <div className="sol-real-ops-solution-content">
                   <div className="sol-real-ops-solution-header">
-                    <h3 className="sol-real-ops-solution-title">Dglide Solution</h3>
+                    <h3 className="sol-real-ops-solution-title">DGlide Solution</h3>
                     <span className="sol-real-ops-solution-divider" aria-hidden />
                   </div>
 

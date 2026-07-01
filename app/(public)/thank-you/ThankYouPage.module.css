@@ -759,3 +759,92 @@
     line-height: 40px;
   }
 }
+
+/* ── Mobile (≤480px) — Figma node 1729:7248, 360px canvas ── */
+@media (max-width: 480px) {
+  /* Tighten section vertical rhythm */
+  .heroInner {
+    gap: 32px;
+    padding-top: 32px;
+  }
+
+  .heroHeadingGroup {
+    gap: 20px;
+  }
+
+  .heroActionGroup {
+    gap: 16px;
+  }
+
+  /* Hero headings: Figma fs=32 / fs=30 */
+  .heroHeadingLine1 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .heroHeadingLine2 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  /* Hero subtext: Figma fs=12 */
+  .heroSubtext {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  /* CTA buttons: Figma fs=15, full-width stacked */
+  .heroBtnPrimary,
+  .heroBtnSecondary {
+    font-size: 15px;
+    padding: 13px 20px;
+    width: 100%;
+  }
+
+  /* What happens next step cards */
+  .whatNextStepTitle {
+    font-size: 17px;
+    line-height: 24px;
+  }
+
+  .whatNextStepDesc {
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  /* Four Reasons heading: Figma fs=28 */
+  .reasonsHeading {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  /* Reason card title: Figma fs=17 */
+  .reasonTitle {
+    font-size: 17px;
+    line-height: 24px;
+  }
+
+  /* Reason card body: Figma fs=13 */
+  .reasonDesc {
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  /* FAQ heading: Figma fs=30 */
+  .faqHeading {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  /* FAQ answer: Figma fs=13 */
+  .faqAnswer {
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  /* Expanded question stays readable */
+  .faqQuestionTextExpanded {
+    font-size: 17px;
+    line-height: 26px;
+  }
+}

@@ -9,7 +9,7 @@ const QUOTE =
 
 const BEFORE = {
   icon: "/why-dglide/before-after/before-card-icon.svg",
-  title: "Before Dglide",
+  title: "Before DGlide",
   description:
     "Work runs on memory, phone calls, and scattered tools. Nothing connects, and nobody has the full picture.",
   bullet: "/why-dglide/before-after/bullet-arrow-before.svg",

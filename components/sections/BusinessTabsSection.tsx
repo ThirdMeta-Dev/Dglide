@@ -164,6 +164,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
 
   return (
     <section
+      className="au-biz-tabs-section"
       style={{
         width: "100%",
         background: "#F3F3F3",

@@ -234,7 +234,7 @@ export function PricingHeroSection() {
         </div>
 
         <Link href="/platform" className={styles.exploreLink}>
-          Explore Dglide Platform
+          Explore DGlide Platform
           <ArrowRight size={18} strokeWidth={1.7} />
         </Link>
       </div>

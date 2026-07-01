@@ -41,6 +41,7 @@ export type CapabilityTabItem = {
   features: string[];
   whyItMatters: string;
   image: string;
+  mobileImage?: string;
 };
 
 export type CoreCapabilitiesSectionProps = {
@@ -188,7 +189,8 @@ const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> =
                 </div>
               </div>
 
-              <div className="sol-cap-panel-media">
+              {/* Desktop image container (fixed height, object-fit cover) */}
+              <div className={`sol-cap-panel-media${content.mobileImage ? " sol-cap-media-desktop" : ""}`}>
                 <Image
                   key={content.image}
                   src={content.image}
@@ -199,6 +201,22 @@ const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> =
                   aria-hidden
                 />
               </div>
+              {/* Mobile image container — plain img so height is always auto/natural */}
+              {content.mobileImage && (
+                <div
+                  className="sol-cap-media-mobile"
+                  style={{ borderRadius: 16, overflow: "hidden", background: "#e7e7e7", width: "100%" }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    key={content.mobileImage}
+                    src={content.mobileImage}
+                    alt=""
+                    style={{ width: "100%", height: "auto", display: "block" }}
+                    aria-hidden
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

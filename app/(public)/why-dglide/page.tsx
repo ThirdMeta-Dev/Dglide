@@ -76,7 +76,7 @@ export default function WhyDGlidePage() {
         <WDBeforeAfterSection />
       </div>
       <CaseStudiesSection
-        data={{ title: "How Dglide Works in Real Operations" }}
+        data={{ title: "How DGlide Works in Real Operations" }}
       />
       <div className="mb-[130px]">
         <WDFAQSection />

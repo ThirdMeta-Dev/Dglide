@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/solutions-page.css";
 import FSMHeroSection from "@/components/solutions/sections/FSMHeroSection";
 import SolutionsSectionNav from "@/components/solutions/sections/SolutionsSectionNav";
+import { itsmSectionNavItems } from "@/data/solutionsPageData";
 import FieldServiceProblemSection from "@/components/solutions/sections/FieldServiceProblemSection";
 import BuiltForSection from "@/components/solutions/sections/BuiltForSection";
 import OnePlatformSection from "@/components/solutions/sections/OnePlatformSection";
@@ -29,7 +30,7 @@ export default function SolutionsPage() {
   return (
     <AnimatedPublicPage className="solutions-page" staticFirstCount={2}>
       <FSMHeroSection />
-      <SolutionsSectionNav />
+      <SolutionsSectionNav items={itsmSectionNavItems} />
       <FieldServiceProblemSection />
       <BuiltForSection />
       <OnePlatformSection />

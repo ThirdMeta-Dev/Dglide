@@ -1630,6 +1630,7 @@
 
   .solutions-page .sol-plat-reality-card {
     padding: 20px 18px;
+    min-height: auto;
   }
 
   .solutions-page .sol-plat-reality-card-title {
@@ -1787,4 +1788,50 @@
   height: 1px;
   background: #d9d9d9;
   width: 100%;
+}
+
+/* ── Platform page — FAQ mobile (≤767px) ── */
+@media (max-width: 767px) {
+  .solutions-page .sol-plat-faq-inner {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .solutions-page .sol-plat-faq-left {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .solutions-page .sol-plat-faq-heading {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .solutions-page .sol-plat-faq-image-wrap {
+    display: none;
+  }
+
+  .solutions-page .sol-plat-faq-list {
+    width: 100%;
+  }
+}
+
+/* ── Platform page — mobile section headings (≤480px) ── */
+@media (max-width: 480px) {
+  .solutions-page .sol-plat-what-is-heading,
+  .solutions-page .sol-plat-reality-heading,
+  .solutions-page .sol-plat-backbone-heading,
+  .solutions-page .sol-plat-cap-heading,
+  .solutions-page .sol-plat-living-heading,
+  .solutions-page .sol-plat-multi-systems-heading,
+  .solutions-page .sol-plat-not-tool-heading,
+  .solutions-page .sol-plat-what-improves-heading,
+  .solutions-page .sol-plat-built-biz-heading,
+  .solutions-page .sol-plat-start-heading {
+    font-size: 28px !important;
+    line-height: 36px !important;
+    text-align: center !important;
+    font-family: var(--font-tasa-orbiter, "TASA Orbiter Variable", sans-serif) !important;
+    font-weight: 400 !important;
+  }
 }

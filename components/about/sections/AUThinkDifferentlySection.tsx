@@ -39,7 +39,7 @@ const FEATURES: Feature[] = [
 
 export default function AUThinkDifferentlySection() {
   return (
-    <section className="w-full" style={{ marginTop: "80px" }}>
+    <section className="w-full mt-0 md:mt-[80px]">
       <div className="max-w-[1200px] mx-auto px-5 md:px-12 flex flex-col gap-12">
         {/* ---------- Header row: heading left, note right ---------- */}
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:gap-[73px]">

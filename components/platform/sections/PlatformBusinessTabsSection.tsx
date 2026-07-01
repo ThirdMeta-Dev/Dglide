@@ -50,8 +50,8 @@ const TABS = [
     ],
   },
   {
-    label: "Field Sales Teams",
-    title: "Field Sales Teams",
+    label: "TADA Teams",
+    title: "Travel Allowance and Daily Allowance Team",
     subtitle:
       "Field sales teams tracking visits, routes, orders, and territories, where activity is hard to see and harder to manage.",
     image: "/business-tabs/tab-5.png",

@@ -6,8 +6,8 @@ import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 /* ------------------------------------------------------------------ */
 
 const QUOTE_PARAGRAPHS = [
-  "“We built Dglide because we kept seeing businesses struggle with the same problem. Their operations were growing, but their software could not keep up. Standard tools forced compromise.",
-  "Dglide was created to give businesses a practical middle path: systems that start fast, fit real workflows, and continue adapting after go-live.”",
+  "“We built DGlide because we kept seeing businesses struggle with the same problem. Their operations were growing, but their software could not keep up. Standard tools forced compromise.",
+  "DGlide was created to give businesses a practical middle path: systems that start fast, fit real workflows, and continue adapting after go-live.”",
 ];
 
 export default function AUFounderQuoteSection() {
@@ -37,7 +37,7 @@ export default function AUFounderQuoteSection() {
 
             {/* Quote column */}
             <ScrollReveal direction="right" delay={0.1} className="w-full lg:w-[656px]">
-            <div className="flex w-full lg:w-[656px] flex-col items-end gap-9 px-5 pb-8 lg:px-0 lg:py-7">
+            <div className="flex w-full lg:w-[656px] flex-col items-end gap-9 px-5 pb-3 lg:px-0 lg:py-7">
               {/* Quote paragraphs */}
               <div className="flex w-full flex-col gap-[10px]">
                 {QUOTE_PARAGRAPHS.map((para) => (

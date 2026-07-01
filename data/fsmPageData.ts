@@ -23,7 +23,7 @@ export const fsmHeroSecondaryCta = "FSM Capabilities";
 // FSM Problem Section
 export const fsmProblemHeading = "The Problem Isn't Your Tools. It's That They Don't Run the Way Your Service Does.";
 export const fsmProblemDescription = "When your system doesn't match how service runs, the gaps show up everywhere.";
-export const fsmProblemFooterText = "Good people can't outrun a system that was never built to fit your service.";
+export const fsmProblemFooterText = "Expert Teams can't outrun a system that was never built to fit your service.";
 export const fsmProblemCtaLabel = "Explore DGlide For You";
 export const fsmProblemCards = [
   {
@@ -39,7 +39,7 @@ export const fsmProblemCards = [
   {
     icon: "/solutions/problem-icons/manual-approvals.png",
     title: "No Real-Time Field Visibility",
-    description: "Once a tech leaves, you're blind until they call. You can't see status or delays.",
+    description: "Once an engineer leaves, you're blind until they call. You can't see status or delays.",
   },
   {
     icon: "/solutions/problem-icons/sla-gaps.png",
@@ -107,7 +107,7 @@ export const fsmPlatformOrbitItems = [
   {
     id: "work-order",
     label: "Work Order",
-    description: "Turn each request into a structured work order with asset, details, and priority.",
+    description: "Generate structured work orders with customer details, assets, priorities, and service instructions.",
     iconSide: "left" as const,
     icon: "/solutions/orbit-icons/log-categorize.png",
     left: "68%",
@@ -134,7 +134,7 @@ export const fsmPlatformOrbitItems = [
   {
     id: "verify",
     label: "Verify",
-    description: "Confirm completion with proof, customer sign-off, and an automatic SLA check.",
+    description: "Confirm completion with proof, customer sign-off, OTP verification, and an automatic SLA check.",
     iconSide: "right" as const,
     icon: "/solutions/orbit-icons/verify-close.png",
     left: "31%",
@@ -199,6 +199,7 @@ export const fsmCapabilityItems = [
     features: ["Structured jobs with clear ownership", "Asset, customer, and history on every order", "Status visible from open to close"],
     whyItMatters: "When work orders are structured, nothing gets worked twice or dropped between people.",
     image: "/business-tabs/fsm-cap-1.png",
+    mobileImage: "/business-tabs/fsm-cap-mobile-1.webp",
   },
   {
     label: "Scheduling & Dispatch",
@@ -207,6 +208,7 @@ export const fsmCapabilityItems = [
     features: ["Assign by skill, location, and load", "One board for the whole team", "Reschedule without a round of calls"],
     whyItMatters: "Better scheduling cuts drive time and missed slots, so techs finish more jobs a day.",
     image: "/business-tabs/fsm-cap-2.png",
+    mobileImage: "/business-tabs/fsm-cap-mobile-2.webp",
   },
   {
     label: "Technician Mobile App",
@@ -215,6 +217,7 @@ export const fsmCapabilityItems = [
     features: ["Full job detail on any phone", "Works offline, syncs later", "Photos, notes, and sign-off on site"],
     whyItMatters: "With everything on site, techs fix more on the first visit and stop calling the office.",
     image: "/business-tabs/fsm-cap-3.png",
+    mobileImage: "/business-tabs/fsm-cap-mobile-3.webp",
   },
   {
     label: "SLA & Escalations",
@@ -223,6 +226,7 @@ export const fsmCapabilityItems = [
     features: ["SLA timers per customer or contract", "Automatic escalation before a breach", "Breach risk visible in real time"],
     whyItMatters: "Catching a slipping SLA early protects the contracts your service runs on.",
     image: "/business-tabs/fsm-cap-4.png",
+    mobileImage: "/business-tabs/fsm-cap-mobile-4.webp",
   },
   {
     label: "Route, Location & Expense",
@@ -231,6 +235,7 @@ export const fsmCapabilityItems = [
     features: ["Optimized routes for the day", "Live technician location", "Expenses logged against each job"],
     whyItMatters: "Tighter routing and tracked costs make every visit cheaper and easier to bill.",
     image: "/business-tabs/fsm-cap-5.png",
+    mobileImage: "/business-tabs/fsm-cap-mobile-5.webp",
   },
   {
     label: "Reports & Dashboards",
@@ -239,6 +244,7 @@ export const fsmCapabilityItems = [
     features: ["Response, SLA, and productivity in one view", "Trends across teams and regions", "Export-ready for reviews"],
     whyItMatters: "When you can see where service slows down, you fix the pattern, not just one job.",
     image: "/business-tabs/fsm-cap-6.png",
+    mobileImage: "/business-tabs/fsm-cap-mobile-6.webp",
   },
   {
     label: "Integrations",
@@ -247,6 +253,7 @@ export const fsmCapabilityItems = [
     features: ["Sync with CRM, ERP, and accounting", "Customer and asset data stays current", "No double entry between systems"],
     whyItMatters: "When systems share data, your team stops re-keying and your records finally match.",
     image: "/business-tabs/fsm-cap-7.png",
+    mobileImage: "/business-tabs/fsm-cap-mobile-7.webp",
   },
 ];
 

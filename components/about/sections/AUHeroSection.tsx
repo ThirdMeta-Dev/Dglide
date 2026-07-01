@@ -15,13 +15,10 @@ const BULLETS = [
 export default function AUHeroSection() {
   return (
     <section
-      className="relative w-full overflow-hidden"
-      style={{
-        background: "linear-gradient(0deg, #F3F3F3 0%, #FFFFFF 81.7%)",
-        marginBottom: "130px",
-      }}
+      className="relative w-full overflow-hidden mb-0 lg:mb-[130px]"
+      style={{ background: "linear-gradient(0deg, #F3F3F3 0%, #FFFFFF 81.7%)" }}
     >
-      <div className="relative mx-auto flex max-w-[1200px] flex-col gap-12 px-5 pb-16 pt-12 md:px-12 lg:flex-row lg:items-start lg:gap-0 lg:pb-0 lg:pt-[60px]">
+      <div className="relative mx-auto flex max-w-[1200px] flex-col gap-6 px-5 pb-4 pt-12 md:px-12 lg:flex-row lg:items-start lg:gap-0 lg:pb-0 lg:pt-[60px]">
         {/* ---------- Left column ---------- */}
         <div className="relative z-10 flex w-full flex-col gap-5 lg:w-[576px] lg:shrink-0">
           {/* Badge */}
@@ -135,12 +132,22 @@ export default function AUHeroSection() {
         {/* Figma: 620x465 at x=486 within the 1106px content row — overlaps the
             left column by 90px (transparent edges), top offset 19px */}
         <div className="w-full lg:-ml-[90px] lg:mt-[19px] lg:w-[620px] lg:shrink-0">
+          {/* Mobile image (≤1023px) */}
+          <Image
+            src="/about/hero/hero-journey-illustration-mobile.png"
+            alt="Journey from Start Ready through Configure, Adapt, and Optimize to hitting the target with DGlide"
+            width={930}
+            height={1115}
+            className="mx-auto h-auto w-full max-w-[360px] lg:hidden"
+            priority
+          />
+          {/* Desktop image (≥1024px) */}
           <Image
             src="/about/hero/hero-journey-illustration.png"
             alt="Journey from Start Ready through Configure, Adapt, and Optimize to hitting the target with DGlide"
             width={1240}
             height={930}
-            className="mx-auto h-auto w-full max-w-[620px]"
+            className="mx-auto hidden h-auto w-full max-w-[620px] lg:block"
             priority
           />
         </div>

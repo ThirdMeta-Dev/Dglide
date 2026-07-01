@@ -82,8 +82,8 @@ export default function OneSystemSection({ data }: { data?: Record<string, strin
           <ScrollReveal direction="up" delay={0.15}>
             <div className="flex items-center justify-center">
               <img
-                src={data?.center_image ?? "/onesystem-center.png"}
-                alt="Dglide Platform"
+                src={data?.center_image ?? "/solutions/platform-center-v2.png"}
+                alt="DGlide Platform"
                 className="w-full max-w-[360px] h-auto object-contain"
               />
             </div>

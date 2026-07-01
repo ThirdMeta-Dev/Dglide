@@ -13,12 +13,14 @@ type IntegrationsHubSectionProps = {
   heading?: string;
   description?: string;
   nodes?: typeof integrationNodes;
+  centerImageSrc?: string;
 };
 
 const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = ({
   heading = "Connect ITSM With the Systems You Already Use",
   description = integrationSectionDescription,
   nodes = integrationNodes,
+  centerImageSrc = "/solutions/integrations-hub-center.png",
 }) => (
   <section id="integrations" className="sol-section sol-integrations-section">
     <SolutionsContainer>
@@ -32,12 +34,12 @@ const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = (
           </ScrollReveal>
         </header>
 
-        <ScrollReveal direction="up" delay={0.1} style={{ width: "100%" }}>
+        {/* ── Desktop diagram ── */}
+        <ScrollReveal direction="up" delay={0.1} style={{ width: "100%" }} className="sol-integrations-diagram-wrap">
           <div className="sol-integrations-diagram">
-            {/* Center image spans full diagram width, behind the tube columns */}
             <div className="sol-integrations-center-img" aria-hidden>
               <Image
-                src="/solutions/integrations-hub-center.png"
+                src={centerImageSrc}
                 alt=""
                 fill
                 style={{ objectFit: "contain" }}
@@ -48,20 +50,11 @@ const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = (
             <div className="sol-integrations-nodes">
               <div className="sol-integrations-nodes-col sol-integrations-nodes-col--left">
                 {nodes.left.map((tube: IntegrationNode, index: number) => (
-                  <div
-                    key={`left-${tube.label}-${index}`}
-                    className="sol-integrations-node-wrap"
-                  >
+                  <div key={`left-${tube.label}-${index}`} className="sol-integrations-node-wrap">
                     <div className="sol-integrations-pill sol-integrations-pill--left">
                       <span className="sol-integrations-pill-label">{tube.label}</span>
                       <span className="sol-integrations-pill-icon" aria-hidden>
-                        <Image
-                          src={tube.icon}
-                          alt=""
-                          width={88}
-                          height={48}
-                          style={{ objectFit: "contain" }}
-                        />
+                        <Image src={tube.icon} alt="" width={88} height={48} style={{ objectFit: "contain" }} />
                       </span>
                     </div>
                   </div>
@@ -70,19 +63,10 @@ const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = (
 
               <div className="sol-integrations-nodes-col sol-integrations-nodes-col--right">
                 {nodes.right.map((tube: IntegrationNode, index: number) => (
-                  <div
-                    key={`right-${tube.label}-${index}`}
-                    className="sol-integrations-node-wrap"
-                  >
+                  <div key={`right-${tube.label}-${index}`} className="sol-integrations-node-wrap">
                     <div className="sol-integrations-pill sol-integrations-pill--right">
                       <span className="sol-integrations-pill-icon" aria-hidden>
-                        <Image
-                          src={tube.icon}
-                          alt=""
-                          width={88}
-                          height={48}
-                          style={{ objectFit: "contain" }}
-                        />
+                        <Image src={tube.icon} alt="" width={88} height={48} style={{ objectFit: "contain" }} />
                       </span>
                       <span className="sol-integrations-pill-label">{tube.label}</span>
                     </div>
@@ -92,6 +76,44 @@ const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = (
             </div>
           </div>
         </ScrollReveal>
+
+        {/* ── Mobile layout: top pills → orb → bottom pills ── */}
+        <div className="sol-integrations-mobile">
+          {/* Top pills (left group) */}
+          <div className="sol-int-m-pills">
+            {nodes.left.map((node: IntegrationNode, i: number) => (
+              <div key={`m-top-${i}`} className="sol-int-m-pill">
+                <span className="sol-int-m-pill-icon" aria-hidden>
+                  <Image src={node.icon} alt="" width={52} height={52} style={{ objectFit: "contain" }} />
+                </span>
+                <span className="sol-int-m-pill-label">{node.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Center orb */}
+          <div className="sol-int-m-orb" aria-hidden>
+            <Image
+              src="/solutions/integrations-hub-center-mobile.png"
+              alt=""
+              fill
+              style={{ objectFit: "contain" }}
+              priority
+            />
+          </div>
+
+          {/* Bottom pills (right group) */}
+          <div className="sol-int-m-pills">
+            {nodes.right.map((node: IntegrationNode, i: number) => (
+              <div key={`m-bot-${i}`} className="sol-int-m-pill">
+                <span className="sol-int-m-pill-icon" aria-hidden>
+                  <Image src={node.icon} alt="" width={52} height={52} style={{ objectFit: "contain" }} />
+                </span>
+                <span className="sol-int-m-pill-label">{node.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </SolutionsContainer>
   </section>

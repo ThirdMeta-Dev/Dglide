@@ -1,8 +1,17 @@
 export const sectionNavItems = [
   { id: "field-service-problem", label: "Field Service Problem" },
-  { id: "who-built-for", label: "Who Dglide FSM Is Built For" },
-  { id: "what-fsm-does", label: "What Dglide FSM Does" },
+  { id: "who-built-for", label: "Who DGlide FSM Is Built For" },
+  { id: "what-fsm-does", label: "What DGlide FSM Does" },
   { id: "core-capabilities", label: "Core FSM Capabilities" },
+  { id: "benefits-outcomes", label: "Benefits & Outcomes" },
+  { id: "integrations", label: "Integrations" },
+];
+
+export const itsmSectionNavItems = [
+  { id: "field-service-problem", label: "The ITSM Problem" },
+  { id: "who-built-for", label: "Who DGlide ITSM Is Built For" },
+  { id: "what-fsm-does", label: "What DGlide ITSM Does" },
+  { id: "core-capabilities", label: "Core ITSM Capabilities" },
   { id: "benefits-outcomes", label: "Benefits & Outcomes" },
   { id: "integrations", label: "Integrations" },
 ];
@@ -198,6 +207,7 @@ export const capabilityTabContent: Record<
     features: string[];
     whyItMatters: string;
     image: string;
+    mobileImage?: string;
   }
 > = {
   "Incident & Request Management": {
@@ -213,6 +223,7 @@ export const capabilityTabContent: Record<
     whyItMatters:
       "When requests are structured, nothing gets worked twice or dropped between people.",
     image: "/business-tabs/cap-1-incident.png",
+    mobileImage: "/business-tabs/itsm-cap-mobile-1.webp",
   },
   "Service Catalog & Self-Service": {
     title: "Service Catalog & Self-Service",
@@ -227,6 +238,7 @@ export const capabilityTabContent: Record<
     whyItMatters:
       "Good intake means fewer misrouted tickets and faster first responses.",
     image: "/business-tabs/cap-2-catalog.png",
+    mobileImage: "/business-tabs/itsm-cap-mobile-2.webp",
   },
   "Approvals & Workflow Automation": {
     title: "Approvals & Workflow Automation",
@@ -241,6 +253,7 @@ export const capabilityTabContent: Record<
     whyItMatters:
       "Automated routing stops work from stalling in inboxes between people.",
     image: "/business-tabs/cap-3-approvals.png",
+    mobileImage: "/business-tabs/itsm-cap-mobile-3.webp",
   },
   "SLA & Escalations": {
     title: "SLA & Escalations",
@@ -255,6 +268,7 @@ export const capabilityTabContent: Record<
     whyItMatters:
       "Catching a slipping SLA early protects the service experience people judge you on.",
     image: "/business-tabs/cap-4-sla.png",
+    mobileImage: "/business-tabs/itsm-cap-mobile-4.webp",
   },
   "Asset & Change Visibility": {
     title: "Asset & Change Visibility",
@@ -269,6 +283,7 @@ export const capabilityTabContent: Record<
     whyItMatters:
       "When agents see the asset and recent changes, they resolve faster and break less.",
     image: "/business-tabs/cap-5-asset.png",
+    mobileImage: "/business-tabs/itsm-cap-mobile-5.webp",
   },
   "Reports & Dashboards": {
     title: "Reports & Dashboards",
@@ -283,6 +298,7 @@ export const capabilityTabContent: Record<
     whyItMatters:
       "When you can see where service slows down, you fix the pattern, not just one ticket.",
     image: "/business-tabs/cap-6-reports.png",
+    mobileImage: "/business-tabs/itsm-cap-mobile-6.webp",
   },
   Integrations: {
     title: "Integrations",
@@ -297,6 +313,7 @@ export const capabilityTabContent: Record<
     whyItMatters:
       "When systems share data, your team stops re-keying and your records finally match.",
     image: "/business-tabs/cap-7-integrations.png",
+    mobileImage: "/business-tabs/itsm-cap-mobile-7.webp",
   },
 };
 
