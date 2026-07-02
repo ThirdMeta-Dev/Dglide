@@ -188,27 +188,11 @@ export default function Footer({
               background: "linear-gradient(90deg, #F5E7DE 0%, #F3F3F3 100%)",
             }}
           >
-            {/* Decorative blob */}
-            <div style={{
-              position: "absolute",
-              left: -24,
-              top: "50%",
-              transform: "translateY(-50%)",
-              width: 100,
-              height: 100,
-              borderRadius: "50%",
-              background: "radial-gradient(circle, #F2C4A8 0%, #F5D5C0 60%, transparent 100%)",
-              opacity: 0.7,
-              pointerEvents: "none",
-              zIndex: 0,
-            }} />
-            <div style={{ position: "relative", zIndex: 1, display: "flex", width: "100%" }}>
-              <FooterNewsletter
-                heading={newsletterHeading}
-                placeholder={newsletterPlaceholder}
-                buttonLabel={newsletterButtonLabel}
-              />
-            </div>
+            <FooterNewsletter
+              heading={newsletterHeading}
+              placeholder={newsletterPlaceholder}
+              buttonLabel={newsletterButtonLabel}
+            />
           </div>
         </div>
       </ScrollReveal>

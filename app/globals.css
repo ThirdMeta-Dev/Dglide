@@ -180,16 +180,23 @@
     font-size: 17px !important;
     text-align: left !important;
   }
+  .footer-nl-actions {
+    width: 100% !important;
+  }
   .footer-nl-row {
     flex-direction: column !important;
     gap: 10px !important;
+    width: 100% !important;
   }
   .footer-nl-input {
     width: 100% !important;
+    flex: unset !important;
+    box-sizing: border-box !important;
   }
   .footer-nl-btn {
     width: 100% !important;
     justify-content: center !important;
+    box-sizing: border-box !important;
   }
   .footer-body-wrapper {
     padding: 36px 20px 0 !important;
