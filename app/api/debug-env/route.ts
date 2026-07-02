@@ -6,5 +6,6 @@ export async function GET() {
     hasAnon: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     hasService: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
     urlLen: process.env.NEXT_PUBLIC_SUPABASE_URL?.length ?? 0,
+    testServerVar: process.env.TEST_SERVER_VAR ?? null,
   })
 }
