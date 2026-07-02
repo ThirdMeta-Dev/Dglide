@@ -200,12 +200,15 @@ export default function Footer({
               background: "radial-gradient(circle, #F2C4A8 0%, #F5D5C0 60%, transparent 100%)",
               opacity: 0.7,
               pointerEvents: "none",
+              zIndex: 0,
             }} />
-            <FooterNewsletter
-              heading={newsletterHeading}
-              placeholder={newsletterPlaceholder}
-              buttonLabel={newsletterButtonLabel}
-            />
+            <div style={{ position: "relative", zIndex: 1, display: "flex", width: "100%" }}>
+              <FooterNewsletter
+                heading={newsletterHeading}
+                placeholder={newsletterPlaceholder}
+                buttonLabel={newsletterButtonLabel}
+              />
+            </div>
           </div>
         </div>
       </ScrollReveal>
