@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Sora, Inter, Montserrat } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const sora = Sora({
@@ -61,6 +62,18 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[#F3F3F3]">
         {children}
       </body>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-T5K6SG2E0Z"
+        strategy="afterInteractive"
+      />
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-T5K6SG2E0Z');
+        `}
+      </Script>
     </html>
   );
 }
