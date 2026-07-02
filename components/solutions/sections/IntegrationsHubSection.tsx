@@ -20,7 +20,7 @@ const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = (
   heading = "Connect ITSM With the Systems You Already Use",
   description = integrationSectionDescription,
   nodes = integrationNodes,
-  centerImageSrc = "/solutions/integrations-hub-center.png",
+  centerImageSrc = "/solutions/integrations-hub-center-v3.png",
 }) => (
   <section id="integrations" className="sol-section sol-integrations-section">
     <SolutionsContainer>

@@ -139,7 +139,7 @@ function PlatformHub() {
         className="text-white text-[22px] leading-[30px]"
         style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 700 }}
       >
-        Dglide Platform
+        DGlide Platform
       </span>
     </div>
   );

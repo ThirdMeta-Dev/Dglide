@@ -21,8 +21,31 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "DGlide",
-  description: "DGlide — Official Website",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dglide.com'),
+  title: {
+    default: 'DGlide — Operations Platform for Field Service & ITSM',
+    template: '%s | DGlide',
+  },
+  description: 'DGlide is a configurable operations platform for ITSM, field service management, and workflow automation. Purpose-built for mid-market teams.',
+  openGraph: {
+    type: 'website',
+    siteName: 'DGlide',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@dglide',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({

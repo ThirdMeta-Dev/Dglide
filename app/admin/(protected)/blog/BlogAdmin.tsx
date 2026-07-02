@@ -58,16 +58,14 @@ function SortBtn({
   col,
   current,
   dir,
-  onClick,
 }: {
   col: string
   current: string
   dir: 'asc' | 'desc'
-  onClick: () => void
 }) {
   const active = current === col
   return (
-    <button onClick={onClick} className="flex items-center gap-0.5 group">
+    <span className="flex items-center gap-0.5">
       {active ? (
         dir === 'asc' ? (
           <ChevronUp className="w-3 h-3 text-[#1C2BFF]" />
@@ -77,7 +75,7 @@ function SortBtn({
       ) : (
         <ChevronDown className="w-3 h-3 text-[#CCC] group-hover:text-[#888]" />
       )}
-    </button>
+    </span>
   )
 }
 
@@ -126,7 +124,7 @@ function BlogList({
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<'all' | BlogStatus>('all')
   const [postTypeFilter, setPostTypeFilter] = useState('')
-  const [sortField, setSortField] = useState('updatedAt')
+  const [sortField, setSortField] = useState('publishedAt')
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
   const [counts, setCounts] = useState<Counts>({ all: 0, published: 0, draft: 0, trashed: 0 })
   const [loading, setLoading] = useState(false)
@@ -351,6 +349,7 @@ function BlogList({
                 { label: 'Author', col: 'author' },
                 { label: 'Tags', col: null },
                 { label: 'Status', col: 'status' },
+                { label: 'Published', col: 'publishedAt' },
                 { label: 'Updated', col: 'updatedAt' },
                 { label: '', col: null },
               ].map(({ label, col }) => (
@@ -364,7 +363,7 @@ function BlogList({
                       className="flex items-center gap-1 hover:text-[#555] transition-colors"
                     >
                       {label}
-                      <SortBtn col={col} current={sortField} dir={sortDir} onClick={() => {}} />
+                      <SortBtn col={col} current={sortField} dir={sortDir} />
                     </button>
                   ) : (
                     label
@@ -445,6 +444,17 @@ function BlogList({
                       </div>
                     </td>
                     <td className="px-4 py-3">{statusBadge(post.status)}</td>
+                    <td className="px-4 py-3">
+                      <span className="text-xs text-[#AAA] [font-family:var(--font-inter)]">
+                        {post.publishedAt
+                          ? new Date(post.publishedAt).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })
+                          : '—'}
+                      </span>
+                    </td>
                     <td className="px-4 py-3">
                       <span className="text-xs text-[#AAA] [font-family:var(--font-inter)]">
                         {new Date(post.updatedAt).toLocaleDateString('en-US', {

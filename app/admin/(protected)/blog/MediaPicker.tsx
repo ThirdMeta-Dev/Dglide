@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { X, Upload, Search, ChevronLeft, ChevronRight } from 'lucide-react'
 import type { BlogMediaItem } from '@/lib/blog-db'
-import Image from 'next/image'
 
 type Props = {
   open: boolean
@@ -122,11 +121,11 @@ export default function MediaPicker({ open, onClose, onSelect }: Props) {
                       }}
                       className="group relative aspect-square rounded-lg overflow-hidden border border-[#E5E5E5] hover:border-[#1C2BFF] hover:ring-2 hover:ring-[#1C2BFF]/20 transition-all bg-[#F8F8F8]"
                     >
-                      <Image
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
                         src={item.url}
                         alt={item.alt || item.filename}
-                        fill
-                        className="object-cover"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
                       <div className="absolute bottom-0 left-0 right-0 p-1.5 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity">

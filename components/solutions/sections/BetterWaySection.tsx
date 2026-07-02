@@ -1,6 +1,91 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
+
+const CENTER_ITEMS = [
+  "Configurable operations platform",
+  "Fit of a custom build",
+  "Ready-to-run systems",
+];
+
+function CenterOvalIcon() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <rect width="32" height="32" rx="8" fill="#FF7F1C" fillOpacity="0.15" />
+      <path
+        d="M16 8C11.582 8 8 11.582 8 16C8 20.418 11.582 24 16 24C20.418 24 24 20.418 24 16"
+        stroke="#FF7F1C" strokeWidth="2.2" strokeLinecap="round"
+      />
+      <path
+        d="M20 8L24 12L20 16"
+        stroke="#FF7F1C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function BetterWayCenterOval() {
+  return (
+    <div style={{ position: "relative", width: 300, height: 366, flexShrink: 0 }}>
+      {/* Outer glow */}
+      <div style={{
+        position: "absolute", inset: 0, borderRadius: "50%",
+        boxShadow: "0 24px 64px rgba(28,43,255,0.35), 0 8px 24px rgba(0,0,0,0.18)",
+      }} />
+      {/* White border ring */}
+      <div style={{
+        position: "absolute", inset: 0, borderRadius: "50%",
+        background: "linear-gradient(175deg, #F0F0FF 0%, #C8C8E8 100%)",
+      }} />
+      {/* Blue body */}
+      <div style={{
+        position: "absolute", inset: 10, borderRadius: "50%",
+        background: "linear-gradient(160deg, #4B5CFF 0%, #1C2BFF 45%, #141FB5 100%)",
+        overflow: "hidden",
+        display: "flex", flexDirection: "column", alignItems: "center",
+        padding: "36px 28px 36px",
+        gap: 16,
+      }}>
+        {/* Shine highlight */}
+        <div style={{
+          position: "absolute", top: 0, left: "5%", right: "5%", height: "45%",
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse at 50% 10%, rgba(255,255,255,0.22) 0%, transparent 65%)",
+          pointerEvents: "none",
+        }} />
+        {/* Title */}
+        <p style={{
+          fontFamily: "var(--font-tasa-orbiter), sans-serif",
+          fontWeight: 700, fontSize: 34, lineHeight: 1.15,
+          color: "#fff", textAlign: "center", margin: 0, position: "relative", zIndex: 1,
+        }}>
+          DGlide<br />Platform
+        </p>
+        {/* Feature items */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%", position: "relative", zIndex: 1 }}>
+          {CENTER_ITEMS.map((item) => (
+            <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <CenterOvalIcon />
+              <span style={{
+                fontFamily: "Inter, sans-serif", fontWeight: 500,
+                fontSize: 13, lineHeight: "18px", color: "#fff",
+              }}>
+                {item}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Bottom 3D base shadow */}
+      <div style={{
+        position: "absolute", bottom: -6, left: "10%", right: "10%", height: 20,
+        borderRadius: "50%",
+        background: "radial-gradient(ellipse, rgba(20,31,181,0.45) 0%, transparent 70%)",
+        filter: "blur(6px)",
+      }} />
+    </div>
+  );
+}
 import {
   customBuildItems,
   rigidToolsItems,
@@ -90,10 +175,10 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
               {/* Center image — DGlide Platform */}
               <div className="sol-better-way-center">
                 <Image
-                  src="/solutions/better-way-center.png"
+                  src="/solutions/better-way-center-v3.svg"
                   alt="DGlide Platform — the third option between rigid tools and custom builds"
                   width={367}
-                  height={447}
+                  height={456}
                   className="sol-better-way-center-img"
                   priority
                 />

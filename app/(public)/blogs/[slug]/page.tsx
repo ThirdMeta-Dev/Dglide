@@ -168,6 +168,102 @@ function transformFaqSections(value: string): string {
   )
 }
 
+function extractFaqItems(html: string): Array<{ question: string; answer: string }> {
+  const items: Array<{ question: string; answer: string }> = []
+  const sectionRegex = /(<h2\b[^>]*>[\s\S]*?<\/h2>)([\s\S]*?)(?=<h2\b|$)/gi
+
+  for (const sectionMatch of html.matchAll(sectionRegex)) {
+    const heading = sectionMatch[1]
+    const body = sectionMatch[2]
+    if (!isFaqHeading(textFromHtml(heading))) continue
+
+    const headingMatches = Array.from(body.matchAll(/<h([3-4])([^>]*)>([\s\S]*?)<\/h\1>/gi))
+    if (headingMatches.length > 0) {
+      headingMatches.forEach((m, i) => {
+        const question = textFromHtml(m[3] || '')
+        const answerStart = (m.index || 0) + m[0].length
+        const answerEnd = headingMatches[i + 1]?.index ?? body.length
+        const answer = textFromHtml(body.slice(answerStart, answerEnd).trim())
+        if (question && answer) items.push({ question, answer })
+      })
+    } else {
+      const paraMatches = Array.from(body.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi))
+      let currentQuestion = ''
+      let currentAnswerStart = 0
+      paraMatches.forEach((m) => {
+        if (!isFaqQuestionBlock(m[0])) return
+        if (currentQuestion) {
+          const answer = textFromHtml(body.slice(currentAnswerStart, m.index || 0).trim())
+          if (answer) items.push({ question: currentQuestion, answer })
+        }
+        currentQuestion = textFromHtml(m[0])
+        currentAnswerStart = (m.index || 0) + m[0].length
+      })
+      if (currentQuestion) {
+        const answer = textFromHtml(body.slice(currentAnswerStart).trim())
+        if (answer) items.push({ question: currentQuestion, answer })
+      }
+    }
+  }
+
+  return items
+}
+
+function buildArticleSchema(post: BlogPost, siteUrl: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.seoTitle || post.title,
+    description: post.seoDescription || post.excerpt,
+    image: post.featuredImageUrl || undefined,
+    url: `${siteUrl}/blogs/${post.slug}`,
+    datePublished: post.publishedAt || post.createdAt,
+    dateModified: post.updatedAt || post.publishedAt || post.createdAt,
+    author: {
+      '@type': 'Person',
+      name: post.author || 'DGlide Team',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'DGlide',
+      url: siteUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/logo.png`,
+      },
+    },
+    keywords: post.tags.map((t) => t.tag).join(', ') || post.focusKeyword || undefined,
+  }
+}
+
+function buildFaqSchema(items: Array<{ question: string; answer: string }>) {
+  if (items.length === 0) return null
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+}
+
+function buildBreadcrumbSchema(post: BlogPost, siteUrl: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blogs` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${siteUrl}/blogs/${post.slug}` },
+    ],
+  }
+}
+
 function prepareArticleHtml(post: BlogPost): { html: string; toc: TocItem[] } {
   const source = transformFaqSections(cleanArticleHtml(post.contentHtml.trim())) || `<p>${escapeHtml(post.excerpt)}</p>`
   const toc: TocItem[] = []
@@ -290,23 +386,50 @@ function AuthorSection({ post }: { post: BlogPost }) {
   )
 }
 
+export async function generateStaticParams() {
+  const { listBlogPosts } = await import('@/lib/blog-db')
+  const { docs } = await listBlogPosts({ publishedOnly: true, limit: 500 })
+  return docs.map((p) => ({ slug: p.slug }))
+}
+
+export const revalidate = 3600
+
 export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
   const { slug } = await params
   const post = await getBlogPostBySlug(slug)
 
   if (!post) {
-    return {
-      title: 'Blog | DGlide',
-    }
+    return { title: 'Blog Not Found' }
   }
 
+  const title = post.seoTitle || post.title
+  const description = post.seoDescription || post.excerpt
+  const canonicalUrl = `${SITE_URL}/blogs/${post.slug}`
+
   return {
-    title: `${post.seoTitle || post.title} | DGlide`,
-    description: post.seoDescription || post.excerpt,
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
-      title: post.seoTitle || post.title,
-      description: post.seoDescription || post.excerpt,
-      images: post.featuredImageUrl ? [{ url: post.featuredImageUrl }] : undefined,
+      type: 'article',
+      title,
+      description,
+      url: canonicalUrl,
+      images: post.featuredImageUrl
+        ? [{ url: post.featuredImageUrl, width: 1200, height: 630, alt: title }]
+        : undefined,
+      publishedTime: post.publishedAt || undefined,
+      modifiedTime: post.updatedAt || undefined,
+      authors: post.author ? [post.author] : undefined,
+      tags: post.tags.map((t) => t.tag),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: post.featuredImageUrl ? [post.featuredImageUrl] : undefined,
     },
   }
 }
@@ -319,8 +442,28 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 
   const { html, toc } = prepareArticleHtml(post)
 
+  const faqItems = extractFaqItems(cleanArticleHtml(post.contentHtml))
+  const articleSchema = buildArticleSchema(post, SITE_URL)
+  const faqSchema = buildFaqSchema(faqItems)
+  const breadcrumbSchema = buildBreadcrumbSchema(post, SITE_URL)
+
   return (
     <div className={styles.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+
       <ScrollReveal direction="up">
         <HeroSection post={post} />
       </ScrollReveal>

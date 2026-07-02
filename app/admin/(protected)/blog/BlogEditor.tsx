@@ -878,12 +878,6 @@ export default function BlogEditor({ postId, onBack }: Props) {
                 </span>
               </button>
             )}
-            <input
-              value={featuredImageUrl}
-              onChange={(e) => setFeaturedImageUrl(e.target.value)}
-              placeholder="Or paste URL…"
-              className="mt-2 w-full h-7 px-2 rounded-lg border border-[#E5E5E5] text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF]"
-            />
           </div>
 
           {/* Excerpt */}
