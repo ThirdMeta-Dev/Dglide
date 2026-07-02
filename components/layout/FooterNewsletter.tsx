@@ -40,35 +40,15 @@ export default function FooterNewsletter({ heading, placeholder, buttonLabel }: 
 
   return (
     <div className="footer-newsletter">
-      <p
-        style={{
-          fontFamily: "var(--font-tasa-orbiter)",
-          fontSize: 20,
-          fontWeight: 400,
-          lineHeight: "28px",
-          color: "#000",
-          margin: 0,
-          flexShrink: 0,
-          whiteSpace: "nowrap",
-        }}
-      >
+      {/* Heading */}
+      <p className="footer-nl-title">
         {heading}
       </p>
 
-      <div className="footer-nl-actions" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 6, flexShrink: 0 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <div
-            className="footer-nl-input"
-            style={{
-              width: 370,
-              height: 48,
-              background: "#FFF",
-              borderRadius: 35,
-              padding: "0 28px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
+      {/* Input + button row */}
+      <div className="footer-nl-actions">
+        <div className="footer-nl-row">
+          <div className="footer-nl-input">
             <input
               type="email"
               value={email}
@@ -76,40 +56,13 @@ export default function FooterNewsletter({ heading, placeholder, buttonLabel }: 
               onKeyDown={(e) => { if (e.key === "Enter") handleSubscribe(); }}
               placeholder={placeholder}
               disabled={loading}
-              style={{
-                width: "100%",
-                background: "transparent",
-                border: "none",
-                outline: "none",
-                fontFamily: "Inter, sans-serif",
-                fontSize: 14,
-                lineHeight: "21px",
-                color: "#333",
-              }}
             />
           </div>
 
           <button
             onClick={handleSubscribe}
             disabled={loading}
-            className="dg-btn-fill"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-              padding: "14px 32px",
-              borderRadius: 40,
-              border: "1.5px solid #141FB5",
-              background: "linear-gradient(180deg, #1C2BFF 0%, #141FB5 100%)",
-              color: "#FFF",
-              fontFamily: "var(--font-sora), Sora, sans-serif",
-              fontSize: 16,
-              fontWeight: 600,
-              cursor: loading ? "not-allowed" : "pointer",
-              opacity: loading ? 0.7 : 1,
-              flexShrink: 0,
-              whiteSpace: "nowrap",
-            }}
+            className="footer-nl-btn dg-btn-fill"
           >
             {loading ? "Subscribing..." : buttonLabel}
             {!loading && (
@@ -121,7 +74,7 @@ export default function FooterNewsletter({ heading, placeholder, buttonLabel }: 
         </div>
 
         {error && (
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#D92D20", margin: 0 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#D92D20", margin: "6px 0 0" }}>
             {error}
           </p>
         )}

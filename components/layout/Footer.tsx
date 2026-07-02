@@ -176,16 +176,31 @@ export default function Footer({
       <ScrollReveal direction="up">
         <div className="footer-nl-outer" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
           <div
+            className="footer-nl-pill"
             style={{
+              position: "relative",
+              overflow: "hidden",
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
               gap: 24,
               padding: "8px 8px 8px 48px",
               borderRadius: 40,
               background: "linear-gradient(90deg, #F5E7DE 0%, #F3F3F3 100%)",
             }}
           >
+            {/* Decorative blob */}
+            <div style={{
+              position: "absolute",
+              left: -24,
+              top: "50%",
+              transform: "translateY(-50%)",
+              width: 100,
+              height: 100,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, #F2C4A8 0%, #F5D5C0 60%, transparent 100%)",
+              opacity: 0.7,
+              pointerEvents: "none",
+            }} />
             <FooterNewsletter
               heading={newsletterHeading}
               placeholder={newsletterPlaceholder}
