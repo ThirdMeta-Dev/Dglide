@@ -229,13 +229,70 @@ export default function BlogEditor({ postId, onBack }: Props) {
       autoSaveTimer.current = setTimeout(() => triggerAutoSaveRef.current(), 30000)
     },
     editorProps: {
-      // Strip Google Docs / word-processor inline styles while keeping <img src> intact
+      // Convert Google Docs clipboard HTML into clean semantic HTML that TipTap understands.
+      // Google Docs wraps everything in <b style="font-weight:normal" id="docs-internal-guid-...">
+      // and encodes bold/italic as <span style="font-weight:700"> instead of <strong>/<em>.
       transformPastedHTML(html: string) {
-        return html
-          .replace(/\s+style="[^"]*"/gi, '')
-          .replace(/\s+class="[^"]*"/gi, '')
-          .replace(/<meta\b[^>]*>/gi, '')
-          .replace(/<link\b[^>]*>/gi, '')
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(html, 'text/html')
+
+        // Unwrap the Google Docs outer <b id="docs-internal-guid-..."> wrapper.
+        // It has font-weight:normal to cancel itself out — stripping the style would make
+        // everything bold, so we remove the element entirely and keep its children.
+        doc.querySelectorAll('b[id^="docs-internal-guid"]').forEach(wrapper => {
+          const frag = doc.createDocumentFragment()
+          Array.from(wrapper.childNodes).forEach(n => frag.appendChild(n))
+          wrapper.replaceWith(frag)
+        })
+
+        // Remove noise elements
+        doc.querySelectorAll('meta, link, style').forEach(el => el.remove())
+
+        // Convert styled <span> elements to semantic equivalents.
+        // Process innermost spans first (reverse document order) so nested
+        // bold+italic combinations are handled correctly.
+        Array.from(doc.querySelectorAll('span[style]')).reverse().forEach(spanEl => {
+          const span = spanEl as HTMLSpanElement
+          const cs = span.style
+          const bold = cs.fontWeight === 'bold' || Number(cs.fontWeight) >= 600
+          const italic = cs.fontStyle === 'italic'
+          const underline = cs.textDecoration.includes('underline')
+          const strike = cs.textDecoration.includes('line-through')
+
+          // Move children out of the span into a fragment
+          const frag = doc.createDocumentFragment()
+          Array.from(span.childNodes).forEach(n => frag.appendChild(n))
+
+          if (bold || italic || underline || strike) {
+            let node: Node = frag
+            if (strike)    { const e = doc.createElement('s');      e.appendChild(node); node = e }
+            if (underline) { const e = doc.createElement('u');      e.appendChild(node); node = e }
+            if (italic)    { const e = doc.createElement('em');     e.appendChild(node); node = e }
+            if (bold)      { const e = doc.createElement('strong'); e.appendChild(node); node = e }
+            span.replaceWith(node)
+          } else {
+            span.replaceWith(frag)
+          }
+        })
+
+        // Strip style/class/id/dir from all remaining non-img elements
+        doc.querySelectorAll('*:not(img)').forEach(el => {
+          el.removeAttribute('style')
+          el.removeAttribute('class')
+          el.removeAttribute('id')
+          el.removeAttribute('dir')
+        })
+
+        // Normalize <img>: keep only src and alt so TipTap's Image extension can insert it
+        doc.querySelectorAll('img').forEach(img => {
+          const src = img.getAttribute('src') || ''
+          const alt = img.getAttribute('alt') || ''
+          while (img.attributes.length > 0) img.removeAttribute(img.attributes[0].name)
+          if (src) img.setAttribute('src', src)
+          if (alt) img.setAttribute('alt', alt)
+        })
+
+        return doc.body.innerHTML
       },
       // Only intercept pure binary image pastes (screenshots).
       // Google Docs pastes carry HTML and go through transformPastedHTML above.
