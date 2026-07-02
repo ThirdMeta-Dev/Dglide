@@ -50,10 +50,17 @@ function textFromHtml(value: string): string {
 
 function cleanArticleHtml(value: string): string {
   return value
+    // Remove dangerous block tags entirely
     .replace(/<script[\s\S]*?<\/script>/gi, '')
     .replace(/<style[\s\S]*?<\/style>/gi, '')
-    .replace(/\son[a-z]+\s*=\s*(["']).*?\1/gi, '')
-    .replace(/\shref\s*=\s*(["'])\s*javascript:[\s\S]*?\1/gi, ' href="#"')
+    .replace(/<(iframe|object|embed|form|base|meta|link)[\s\S]*?<\/\1>/gi, '')
+    .replace(/<(iframe|object|embed|form|base|meta|link)(\s[^>]*)?\/?>/gi, '')
+    // Strip event handler attributes (quoted, multiline-safe)
+    .replace(/\son[a-z]+\s*=\s*(["'])[\s\S]*?\1/gi, '')
+    // Strip unquoted event handler attributes
+    .replace(/\son[a-z]+\s*=\s*[^\s"'>][^\s>]*/gi, '')
+    // Neutralise javascript: URIs in href/src/action
+    .replace(/\s(href|src|action)\s*=\s*(["'])\s*javascript:[\s\S]*?\2/gi, ' $1="#"')
 }
 
 function anchorId(text: string, index: number): string {

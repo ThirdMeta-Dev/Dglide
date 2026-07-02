@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import { sendNotification } from "@/lib/mailer";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 type ContactRequestBody = {
   name?: unknown;
@@ -36,14 +37,12 @@ function validateContactRequest(body: ContactRequestBody) {
   else if (values.name.length > 100) fieldErrors.name = "Name must be 100 characters or less.";
 
   if (!values.email) fieldErrors.email = "Email ID is required.";
-  else if (values.email.length > 254 || !EMAIL_RE.test(values.email)) {
+  else if (values.email.length > 254 || !EMAIL_RE.test(values.email))
     fieldErrors.email = "Enter a valid email address.";
-  }
 
   if (!values.contact) fieldErrors.contact = "Contact number is required.";
-  else if (!PHONE_CHARS_RE.test(values.contact) || digitCount < 7 || digitCount > 15) {
+  else if (!PHONE_CHARS_RE.test(values.contact) || digitCount < 7 || digitCount > 15)
     fieldErrors.contact = "Enter a valid contact number.";
-  }
 
   if (!values.company) fieldErrors.company = "Company name is required.";
   else if (values.company.length < 2) fieldErrors.company = "Company name must be at least 2 characters.";
@@ -55,8 +54,11 @@ function validateContactRequest(body: ContactRequestBody) {
 }
 
 export async function POST(req: Request) {
-  let body: ContactRequestBody;
+  // 5 submissions per IP per minute
+  if (!checkRateLimit(`contact:${getClientIp(req)}`, { max: 5, windowMs: 60_000 }))
+    return NextResponse.json({ error: "Too many requests. Please wait a moment." }, { status: 429 });
 
+  let body: ContactRequestBody;
   try {
     body = (await req.json()) as ContactRequestBody;
   } catch {
@@ -65,12 +67,11 @@ export async function POST(req: Request) {
 
   const { values, fieldErrors } = validateContactRequest(body);
 
-  if (Object.keys(fieldErrors).length > 0) {
+  if (Object.keys(fieldErrors).length > 0)
     return NextResponse.json(
       { error: "Please correct the highlighted fields.", fieldErrors },
-      { status: 400 },
+      { status: 400 }
     );
-  }
 
   try {
     const supabase = await createClient();
@@ -81,19 +82,15 @@ export async function POST(req: Request) {
       company: values.company,
       message: values.message || null,
     });
-
     if (error) throw error;
 
-    sendNotification(`New Contact Request — ${values.company}`, `
-      <h2>New Contact Request</h2>
-      <table cellpadding="6" cellspacing="0">
-        <tr><td><strong>Name</strong></td><td>${values.name}</td></tr>
-        <tr><td><strong>Email</strong></td><td>${values.email}</td></tr>
-        <tr><td><strong>Phone</strong></td><td>${values.contact || "—"}</td></tr>
-        <tr><td><strong>Company</strong></td><td>${values.company}</td></tr>
-        <tr><td><strong>Message</strong></td><td>${values.message || "—"}</td></tr>
-      </table>
-    `).catch((err: unknown) => console.error("Contact request email error:", err));
+    sendNotification(`New Contact Request — ${values.company}`, {
+      name: values.name,
+      email: values.email,
+      phone: values.contact,
+      company: values.company,
+      message: values.message,
+    }).catch((err: unknown) => console.error("Contact request email error:", err));
 
     return NextResponse.json({ success: true });
   } catch (err) {

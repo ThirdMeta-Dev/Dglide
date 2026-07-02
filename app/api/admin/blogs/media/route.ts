@@ -5,6 +5,15 @@ import { createMediaItem, deleteMediaItem, listMediaItems } from '@/lib/blog-db'
 import { requireAdmin } from '@/lib/admin-auth'
 
 const BUCKET = 'dglide-blog-media'
+const MAX_SIZE = 10 * 1024 * 1024 // 10 MB
+const ALLOWED_MIME = new Set([
+  'image/jpeg',
+  'image/png',
+  'image/gif',
+  'image/webp',
+  'image/avif',
+  'image/svg+xml',
+])
 
 export async function GET(req: Request) {
   if (!(await requireAdmin()))
@@ -27,6 +36,15 @@ export async function POST(req: Request) {
   const formData = await req.formData()
   const file = formData.get('file') as File | null
   if (!file) return NextResponse.json({ error: 'No file' }, { status: 400 })
+
+  if (!ALLOWED_MIME.has(file.type))
+    return NextResponse.json(
+      { error: 'Only image files are allowed (JPEG, PNG, GIF, WebP, AVIF, SVG)' },
+      { status: 400 }
+    )
+
+  if (file.size > MAX_SIZE)
+    return NextResponse.json({ error: 'File must be under 10 MB' }, { status: 400 })
 
   const ext = file.name.split('.').pop() || 'jpg'
   const safeName = file.name

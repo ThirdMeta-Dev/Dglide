@@ -3,21 +3,31 @@ const GEMINI_URL =
 
 export async function callGemini(
   prompt: string,
-  options: { temperature?: number; maxOutputTokens?: number } = {}
+  options: {
+    temperature?: number
+    maxOutputTokens?: number
+    systemInstruction?: string
+  } = {}
 ) {
   const key = process.env.GEMINI_API_KEY
   if (!key) throw new Error('Missing GEMINI_API_KEY')
 
+  const body: Record<string, unknown> = {
+    contents: [{ role: 'user', parts: [{ text: prompt }] }],
+    generationConfig: {
+      temperature: options.temperature ?? 0.7,
+      maxOutputTokens: options.maxOutputTokens ?? 4096,
+    },
+  }
+
+  if (options.systemInstruction) {
+    body.system_instruction = { parts: [{ text: options.systemInstruction }] }
+  }
+
   const res = await fetch(`${GEMINI_URL}?key=${key}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: {
-        temperature: options.temperature ?? 0.7,
-        maxOutputTokens: options.maxOutputTokens ?? 4096,
-      },
-    }),
+    body: JSON.stringify(body),
   })
 
   const data = await res.json()

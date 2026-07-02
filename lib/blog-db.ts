@@ -264,7 +264,9 @@ export async function listBlogPosts(
   let query = supabase.from(T_BLOGS).select('*', { count: 'exact' })
 
   if (options.search) {
-    const q = `%${options.search}%`
+    // Strip PostgREST special characters to prevent filter injection
+    const safe = options.search.replace(/[,()]/g, ' ').trim().slice(0, 200)
+    const q = `%${safe}%`
     query = query.or(`title.ilike.${q},excerpt.ilike.${q},author.ilike.${q}`)
   }
   if (options.publishedOnly) {

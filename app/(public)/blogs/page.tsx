@@ -4,6 +4,8 @@ import BlogsClient from './BlogsClient'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dglide.com'
 
+export const revalidate = 300 // re-fetch from Supabase at most every 5 minutes
+
 export const metadata: Metadata = {
   title: 'Blog',
   description: "The best blogs and articles on DGlide's Operations Platform — ITSM, field service management, workflow automation, and more.",
