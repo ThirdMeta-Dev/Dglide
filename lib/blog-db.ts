@@ -225,8 +225,12 @@ export async function getBlogPost(id: string): Promise<BlogPost | null> {
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
-  const { data } = await supabase.from(T_BLOGS).select('*').eq('slug', slug).maybeSingle()
-  return data ? normalizeBlog(data) : null
+  try {
+    const { data } = await supabase.from(T_BLOGS).select('*').eq('slug', slug).maybeSingle()
+    return data ? normalizeBlog(data) : null
+  } catch {
+    return null
+  }
 }
 
 export async function listBlogPosts(
@@ -284,6 +288,16 @@ export async function listBlogPosts(
     totalPages: Math.max(1, Math.ceil(totalDocs / limit)),
     page,
     limit,
+  }
+}
+
+export async function listBlogPostsSafe(
+  options?: Parameters<typeof listBlogPosts>[0]
+): Promise<Awaited<ReturnType<typeof listBlogPosts>>> {
+  try {
+    return await listBlogPosts(options)
+  } catch {
+    return { docs: [], totalDocs: 0, totalPages: 1, page: 1, limit: 20 }
   }
 }
 

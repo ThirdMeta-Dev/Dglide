@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { listBlogPosts } from '@/lib/blog-db'
+import { listBlogPostsSafe } from '@/lib/blog-db'
 import BlogsClient from './BlogsClient'
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 export default async function BlogsPage() {
-  const { docs: posts } = await listBlogPosts({
+  const { docs: posts } = await listBlogPostsSafe({
     publishedOnly: true,
     limit: 100,
     sortField: 'publishedAt',
