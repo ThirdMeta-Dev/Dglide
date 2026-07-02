@@ -1,13 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
-
-const NOTIFY_EMAILS = [
-  "support@dglide.com",
-  "seo@hexanovate.com",
-  "drushti.gothi@hexanovate.com",
-  "vamshi.vadali@hexanovate.com",
-];
+import { sendNotification } from "@/lib/mailer";
 
 type ContactRequestBody = {
   name?: unknown;
@@ -91,25 +84,16 @@ export async function POST(req: Request) {
 
     if (error) throw error;
 
-    // Send email notification (non-blocking — don't fail the request if email fails)
-    if (process.env.RESEND_API_KEY) {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL || "DGlide <notifications@dglide.com>",
-        to: NOTIFY_EMAILS,
-        subject: `New Contact Request — ${values.company}`,
-        html: `
-          <h2>New Contact Request</h2>
-          <table cellpadding="6" cellspacing="0">
-            <tr><td><strong>Name</strong></td><td>${values.name}</td></tr>
-            <tr><td><strong>Email</strong></td><td>${values.email}</td></tr>
-            <tr><td><strong>Phone</strong></td><td>${values.contact || "—"}</td></tr>
-            <tr><td><strong>Company</strong></td><td>${values.company}</td></tr>
-            <tr><td><strong>Message</strong></td><td>${values.message || "—"}</td></tr>
-          </table>
-        `,
-      }).catch((err: unknown) => console.error("Contact request email error:", err));
-    }
+    sendNotification(`New Contact Request — ${values.company}`, `
+      <h2>New Contact Request</h2>
+      <table cellpadding="6" cellspacing="0">
+        <tr><td><strong>Name</strong></td><td>${values.name}</td></tr>
+        <tr><td><strong>Email</strong></td><td>${values.email}</td></tr>
+        <tr><td><strong>Phone</strong></td><td>${values.contact || "—"}</td></tr>
+        <tr><td><strong>Company</strong></td><td>${values.company}</td></tr>
+        <tr><td><strong>Message</strong></td><td>${values.message || "—"}</td></tr>
+      </table>
+    `).catch((err: unknown) => console.error("Contact request email error:", err));
 
     return NextResponse.json({ success: true });
   } catch (err) {
