@@ -210,7 +210,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
       TextStyle,
       Highlight.configure({ multicolor: false }),
-      Image,
+      Image.configure({ inline: true }),
       Link.configure({ openOnClick: false }),
       Placeholder.configure({ placeholder: 'Start writing your post…' }),
       Table.configure({ resizable: true }),
