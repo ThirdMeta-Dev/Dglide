@@ -198,10 +198,19 @@ export default function BlogEditor({ postId, onBack }: Props) {
   const [docError, setDocError] = useState('')
   const docRef = useRef<HTMLInputElement>(null)
 
+  // AI import gdoc URL
+  const [gdocUrl, setGdocUrl] = useState('')
+  const [gdocLoading, setGdocLoading] = useState(false)
+  const [gdocError, setGdocError] = useState('')
+
+  // Warning banner shown after paste when blob: images were dropped
+  const [pasteImageWarning, setPasteImageWarning] = useState(false)
+
   const autoSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   // Stable refs so closures inside useEditor always call the latest function
   const uploadBinaryImageRef = useRef<(file: File) => Promise<void>>(async () => {})
   const triggerAutoSaveRef = useRef<() => void>(() => {})
+  const googleDocsPasteRef = useRef<(html: string, imageFiles: File[]) => Promise<void>>(async () => {})
 
   const editor = useEditor({
     extensions: [
@@ -294,11 +303,23 @@ export default function BlogEditor({ postId, onBack }: Props) {
 
         return doc.body.innerHTML
       },
-      // Only intercept pure binary image pastes (screenshots).
-      // Google Docs pastes carry HTML and go through transformPastedHTML above.
       handlePaste(_view, event) {
-        const hasHtml = !!event.clipboardData?.getData('text/html')
-        if (!hasHtml) {
+        const html = event.clipboardData?.getData('text/html') || ''
+
+        // Google Docs paste: intercept, capture binary image files synchronously, upload async
+        if (html.includes('docs-internal-guid')) {
+          const items = Array.from(event.clipboardData?.items ?? [])
+          const imageFiles: File[] = items
+            .filter(i => i.type.startsWith('image/') && i.kind === 'file')
+            .map(i => i.getAsFile())
+            .filter((f): f is File => f !== null)
+          event.preventDefault()
+          void googleDocsPasteRef.current(html, imageFiles)
+          return true
+        }
+
+        // Pure binary paste (screenshot, no HTML)
+        if (!html) {
           const items = Array.from(event.clipboardData?.items ?? [])
           const imageItem = items.find(i => i.type.startsWith('image/') && i.kind === 'file')
           if (imageItem) {
@@ -309,6 +330,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
             }
           }
         }
+
         return false
       },
     },
@@ -330,83 +352,133 @@ export default function BlogEditor({ postId, onBack }: Props) {
     }
   }, [editor])
 
-  // After every paste, find Google-hosted <img> nodes and re-host them on Supabase
+  // Handle Google Docs paste: clean HTML + upload images from binary clipboard files
   useEffect(() => {
-    if (!editor) return
-    const dom = editor.view.dom
-
-    async function uploadGoogleImages() {
+    googleDocsPasteRef.current = async (html: string, imageFiles: File[]) => {
       if (!editor) return
 
-      const googleUrls: string[] = []
-      editor.state.doc.descendants((node) => {
-        if (node.type.name === 'image') {
-          const src = node.attrs.src as string
-          if (
-            src &&
-            !googleUrls.includes(src) &&
-            (src.includes('googleusercontent.com') ||
-              src.includes('docs.google.com') ||
-              src.startsWith('blob:'))
-          ) {
-            googleUrls.push(src)
-          }
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(html, 'text/html')
+
+      // Unwrap docs-internal-guid outer wrapper
+      doc.querySelectorAll('b[id^="docs-internal-guid"]').forEach(wrapper => {
+        const frag = doc.createDocumentFragment()
+        Array.from(wrapper.childNodes).forEach(n => frag.appendChild(n))
+        wrapper.replaceWith(frag)
+      })
+
+      doc.querySelectorAll('meta, link, style').forEach(el => el.remove())
+
+      // Convert styled spans to semantic elements (innermost first)
+      Array.from(doc.querySelectorAll('span[style]')).reverse().forEach(spanEl => {
+        const span = spanEl as HTMLSpanElement
+        const cs = span.style
+        const bold = cs.fontWeight === 'bold' || Number(cs.fontWeight) >= 600
+        const italic = cs.fontStyle === 'italic'
+        const underline = cs.textDecoration.includes('underline')
+        const strike = cs.textDecoration.includes('line-through')
+        const frag = doc.createDocumentFragment()
+        Array.from(span.childNodes).forEach(n => frag.appendChild(n))
+        if (bold || italic || underline || strike) {
+          let node: Node = frag
+          if (strike)    { const e = doc.createElement('s');      e.appendChild(node); node = e }
+          if (underline) { const e = doc.createElement('u');      e.appendChild(node); node = e }
+          if (italic)    { const e = doc.createElement('em');     e.appendChild(node); node = e }
+          if (bold)      { const e = doc.createElement('strong'); e.appendChild(node); node = e }
+          span.replaceWith(node)
+        } else {
+          span.replaceWith(frag)
         }
       })
 
-      if (googleUrls.length === 0) return
+      doc.querySelectorAll('*:not(img)').forEach(el => {
+        el.removeAttribute('style')
+        el.removeAttribute('class')
+        el.removeAttribute('id')
+        el.removeAttribute('dir')
+      })
 
-      const urlMap: Record<string, string> = {}
+      doc.querySelectorAll('img').forEach(img => {
+        const src = img.getAttribute('src') || ''
+        const alt = img.getAttribute('alt') || ''
+        while (img.attributes.length > 0) img.removeAttribute(img.attributes[0].name)
+        if (src) img.setAttribute('src', src)
+        if (alt) img.setAttribute('alt', alt)
+      })
 
-      await Promise.all(
-        googleUrls.map(async (googleUrl) => {
-          try {
-            if (googleUrl.startsWith('blob:')) {
-              // Blob URLs are same-origin accessible — fetch client-side
-              const blobRes = await fetch(googleUrl)
-              const blob = await blobRes.blob()
-              const ext = blob.type.split('/')[1] || 'jpg'
-              const file = new File([blob], `paste.${ext}`, { type: blob.type })
+      const allImgs = Array.from(doc.querySelectorAll('img'))
+      const uploads: Promise<void>[] = []
+      let skippedBlobs = 0
+
+      allImgs.forEach((imgEl, idx) => {
+        const src = imgEl.getAttribute('src') || ''
+
+        if (src.startsWith('data:image/')) {
+          // data: URLs are accessible from JS — decode and upload directly
+          uploads.push((async () => {
+            const match = src.match(/^data:([^;]+);base64,(.+)$/)
+            if (!match) return
+            const mimeType = match[1]
+            const binary = atob(match[2])
+            const bytes = new Uint8Array(binary.length)
+            for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i)
+            const blob = new Blob([bytes], { type: mimeType })
+            const ext = mimeType.split('/')[1] || 'png'
+            const file = new File([blob], `paste.${ext}`, { type: mimeType })
+            const fd = new FormData()
+            fd.append('file', file)
+            const res = await fetch('/api/admin/blogs/media', { method: 'POST', body: fd })
+            if (res.ok) {
+              const data = await res.json() as { url: string }
+              imgEl.setAttribute('src', data.url)
+            }
+          })())
+        } else if (src.startsWith('blob:')) {
+          // blob: URLs are cross-origin from docs.google.com — try binary clipboard file first
+          const file = imageFiles[idx]
+          if (file) {
+            uploads.push((async () => {
               const fd = new FormData()
               fd.append('file', file)
               const res = await fetch('/api/admin/blogs/media', { method: 'POST', body: fd })
               if (res.ok) {
                 const data = await res.json() as { url: string }
-                urlMap[googleUrl] = data.url
+                imgEl.setAttribute('src', data.url)
+              } else {
+                imgEl.remove()
+                skippedBlobs++
               }
-            } else {
-              // Google CDN URLs: proxy through server to avoid CORS
-              const res = await fetch('/api/admin/blogs/media/from-url', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url: googleUrl }),
-              })
-              if (res.ok) {
-                const data = await res.json() as { url: string }
-                urlMap[googleUrl] = data.url
-              }
-            }
-          } catch (err) {
-            console.error('[BlogEditor] Image upload from URL failed:', err)
+            })())
+          } else {
+            // No binary file — can't recover this image, remove it
+            imgEl.remove()
+            skippedBlobs++
           }
-        })
-      )
+        } else if (src.includes('googleusercontent.com') || src.includes('docs.google.com')) {
+          // Google CDN URLs — proxy via server
+          uploads.push((async () => {
+            const res = await fetch('/api/admin/blogs/media/from-url', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ url: src }),
+            })
+            if (res.ok) {
+              const data = await res.json() as { url: string }
+              imgEl.setAttribute('src', data.url)
+            }
+          })())
+        }
+      })
 
-      if (Object.keys(urlMap).length === 0) return
+      await Promise.all(uploads)
 
-      let html = editor.getHTML()
-      let changed = false
-      for (const [googleUrl, supabaseUrl] of Object.entries(urlMap)) {
-        const escaped = googleUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-        const next = html.replace(new RegExp(escaped, 'g'), supabaseUrl)
-        if (next !== html) { html = next; changed = true }
+      editor.chain().focus().insertContent(doc.body.innerHTML).run()
+
+      if (skippedBlobs > 0) {
+        setPasteImageWarning(true)
+        setTimeout(() => setPasteImageWarning(false), 8000)
       }
-      if (changed) editor.commands.setContent(html)
     }
-
-    const onPaste = () => setTimeout(uploadGoogleImages, 300)
-    dom.addEventListener('paste', onPaste)
-    return () => dom.removeEventListener('paste', onPaste)
   }, [editor])
 
   const triggerAutoSave = useCallback(async () => {
@@ -668,6 +740,36 @@ export default function BlogEditor({ postId, onBack }: Props) {
       setDocError(e instanceof Error ? e.message : 'Failed')
     } finally {
       setDocLoading(false)
+    }
+  }
+
+  // AI import Google Doc URL
+  async function handleGdocImport() {
+    if (!gdocUrl.trim()) return
+    setGdocLoading(true)
+    setGdocError('')
+    try {
+      const res = await fetch('/api/admin/blogs/ai/import-gdoc', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: gdocUrl.trim() }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error)
+      setTitle(data.title || '')
+      setSlug(data.slug || slugify(data.title || ''))
+      setExcerpt(data.excerpt || '')
+      setSeoTitle(data.metaTitle || '')
+      setSeoDescription(data.metaDescription || '')
+      setFocusKeyword(data.focusKeyword || '')
+      if (data.tags) setTags(data.tags.map((t: string) => ({ tag: t })))
+      editor?.commands.setContent(data.contentHtml || '')
+      setGdocUrl('')
+      setShowAiPanel(false)
+    } catch (e) {
+      setGdocError(e instanceof Error ? e.message : 'Failed')
+    } finally {
+      setGdocLoading(false)
     }
   }
 
@@ -946,6 +1048,18 @@ export default function BlogEditor({ postId, onBack }: Props) {
               </>
             )}
           </div>
+
+          {/* Paste image warning */}
+          {pasteImageWarning && (
+            <div className="mx-4 mt-3 px-4 py-2.5 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-800 [font-family:var(--font-inter)] flex items-start gap-2">
+              <span className="mt-0.5">⚠️</span>
+              <span>
+                <strong>Images skipped:</strong> Google Docs images can&apos;t be pasted directly (browser security restriction).
+                Use <strong>AI → Import → Import from Google Doc</strong> with the doc&apos;s shareable link to include images.
+              </span>
+              <button onClick={() => setPasteImageWarning(false)} className="ml-auto text-amber-500 hover:text-amber-800 shrink-0">✕</button>
+            </div>
+          )}
 
           {/* Editor content */}
           <div className="flex-1 overflow-y-auto p-6">
@@ -1366,6 +1480,28 @@ export default function BlogEditor({ postId, onBack }: Props) {
                   >
                     {docLoading ? 'Importing…' : 'Import Document'}
                   </button>
+
+                  <div className="border-t border-[#F0F0F0] pt-3">
+                    <p className="text-xs text-[#888] [font-family:var(--font-inter)] mb-2">
+                      Or import from a public Google Doc URL
+                    </p>
+                    <input
+                      value={gdocUrl}
+                      onChange={(e) => setGdocUrl(e.target.value)}
+                      placeholder="https://docs.google.com/document/d/…"
+                      className="w-full h-9 px-3 rounded-lg border border-[#E5E5E5] text-sm [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF] mb-2"
+                    />
+                    {gdocError && (
+                      <p className="text-xs text-red-500 [font-family:var(--font-inter)] mb-2">{gdocError}</p>
+                    )}
+                    <button
+                      onClick={handleGdocImport}
+                      disabled={gdocLoading || !gdocUrl.trim()}
+                      className="w-full h-9 rounded-lg bg-[#FF6B00] text-white text-sm font-medium disabled:opacity-50 hover:bg-[#E05E00] transition-colors [font-family:var(--font-inter)]"
+                    >
+                      {gdocLoading ? 'Importing…' : 'Import from Google Doc'}
+                    </button>
+                  </div>
                 </div>
               )}
 

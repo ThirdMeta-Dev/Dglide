@@ -1012,12 +1012,21 @@
   }
 
   .carouselHeader {
-    gap: 20px;
+    gap: 16px;
     padding: 0;
+  }
+
+  .carouselSection {
+    gap: 20px;
   }
 
   .carouselControls {
     justify-content: space-between;
+    align-items: center;
+  }
+
+  .carouselCount {
+    font-size: 15px;
   }
 
   .cardGrid,

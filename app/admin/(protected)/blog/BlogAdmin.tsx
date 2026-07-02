@@ -13,6 +13,8 @@ import {
   RotateCcw,
   X,
   Check,
+  CheckSquare,
+  Square,
 } from 'lucide-react'
 import type { BlogPost, BlogPostType, BlogStatus } from '@/lib/blog-db'
 // blog-db is server-only — only type imports allowed here
@@ -132,6 +134,8 @@ function BlogList({
   const [quickEdit, setQuickEdit] = useState<QuickEdit | null>(null)
   const [openMenuId, setOpenMenuId] = useState<string | null>(null)
   const [creatingNew, setCreatingNew] = useState(false)
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const [bulkLoading, setBulkLoading] = useState(false)
 
   function buildUrl(overrides: Record<string, string | number> = {}) {
     const params = new URLSearchParams({
@@ -140,7 +144,10 @@ function BlogList({
       sortField,
       sortDir,
       limit: '20',
-      ...(statusFilter !== 'all' ? { status: statusFilter } : {}),
+      // "All" tab excludes trashed so they only appear in the Trash tab
+      ...(statusFilter === 'all'
+        ? { excludeStatus: 'trashed' }
+        : { status: statusFilter }),
       ...(postTypeFilter ? { postType: postTypeFilter } : {}),
       ...Object.fromEntries(Object.entries(overrides).map(([k, v]) => [k, String(v)])),
     })
@@ -161,7 +168,7 @@ function BlogList({
 
   async function fetchCounts() {
     const [all, published, draft, trashed] = await Promise.all([
-      fetch('/api/admin/blogs?count=true').then((r) => r.json()),
+      fetch('/api/admin/blogs?count=true&excludeStatus=trashed').then((r) => r.json()),
       fetch('/api/admin/blogs?count=true&status=published').then((r) => r.json()),
       fetch('/api/admin/blogs?count=true&status=draft').then((r) => r.json()),
       fetch('/api/admin/blogs?count=true&status=trashed').then((r) => r.json()),
@@ -175,6 +182,7 @@ function BlogList({
   }
 
   useEffect(() => {
+    setSelectedIds(new Set())
     fetchPosts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, search, statusFilter, postTypeFilter, sortField, sortDir])
@@ -220,6 +228,54 @@ function BlogList({
     fetchPosts()
     fetchCounts()
     setOpenMenuId(null)
+  }
+
+  async function handleBulkTrash() {
+    if (selectedIds.size === 0) return
+    setBulkLoading(true)
+    await Promise.all([...selectedIds].map(id => fetch(`/api/admin/blogs/${id}`, { method: 'DELETE' })))
+    setSelectedIds(new Set())
+    setBulkLoading(false)
+    fetchPosts()
+    fetchCounts()
+  }
+
+  async function handleBulkDelete() {
+    if (selectedIds.size === 0) return
+    if (!confirm(`Permanently delete ${selectedIds.size} post(s)? This cannot be undone.`)) return
+    setBulkLoading(true)
+    await Promise.all([...selectedIds].map(id => fetch(`/api/admin/blogs/${id}?permanent=true`, { method: 'DELETE' })))
+    setSelectedIds(new Set())
+    setBulkLoading(false)
+    fetchPosts()
+    fetchCounts()
+  }
+
+  async function handleBulkRestore() {
+    if (selectedIds.size === 0) return
+    setBulkLoading(true)
+    await Promise.all([...selectedIds].map(id => fetch(`/api/admin/blogs/${id}`, { method: 'PATCH' })))
+    setSelectedIds(new Set())
+    setBulkLoading(false)
+    fetchPosts()
+    fetchCounts()
+  }
+
+  function toggleSelect(id: string) {
+    setSelectedIds(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  function toggleSelectAll() {
+    if (selectedIds.size === posts.length) {
+      setSelectedIds(new Set())
+    } else {
+      setSelectedIds(new Set(posts.map(p => p.id)))
+    }
   }
 
   function openQuickEdit(post: BlogPost) {
@@ -338,11 +394,65 @@ function BlogList({
         </select>
       </div>
 
+      {/* Bulk action bar */}
+      {selectedIds.size > 0 && (
+        <div className="mb-3 flex items-center gap-3 px-4 py-2.5 bg-[#1C2BFF]/5 border border-[#1C2BFF]/20 rounded-xl">
+          <span className="text-sm font-medium text-[#1C2BFF] [font-family:var(--font-inter)]">
+            {selectedIds.size} selected
+          </span>
+          <div className="flex gap-2 ml-auto">
+            {statusFilter === 'trashed' ? (
+              <>
+                <button
+                  onClick={handleBulkRestore}
+                  disabled={bulkLoading}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-600 text-white text-xs font-medium [font-family:var(--font-inter)] hover:bg-green-700 disabled:opacity-50 transition-colors"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  Restore
+                </button>
+                <button
+                  onClick={handleBulkDelete}
+                  disabled={bulkLoading}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500 text-white text-xs font-medium [font-family:var(--font-inter)] hover:bg-red-600 disabled:opacity-50 transition-colors"
+                >
+                  <X className="w-3.5 h-3.5" />
+                  Delete Permanently
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={handleBulkTrash}
+                disabled={bulkLoading}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500 text-white text-xs font-medium [font-family:var(--font-inter)] hover:bg-red-600 disabled:opacity-50 transition-colors"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                {bulkLoading ? 'Moving…' : 'Move to Trash'}
+              </button>
+            )}
+            <button
+              onClick={() => setSelectedIds(new Set())}
+              className="px-3 py-1.5 rounded-lg border border-[#E5E5E5] text-xs text-[#555] [font-family:var(--font-inter)] hover:bg-[#F5F5F5] transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Table */}
       <div className="bg-white rounded-2xl border border-[#F0F0F0] overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="border-b border-[#F0F0F0]">
+              <th className="pl-4 py-3 w-8">
+                <button onClick={toggleSelectAll} className="text-[#AAA] hover:text-[#555] transition-colors">
+                  {selectedIds.size === posts.length && posts.length > 0
+                    ? <CheckSquare className="w-4 h-4 text-[#1C2BFF]" />
+                    : <Square className="w-4 h-4" />
+                  }
+                </button>
+              </th>
               {[
                 { label: 'Title', col: 'title' },
                 { label: 'Type', col: 'postType' },
@@ -376,7 +486,7 @@ function BlogList({
             {loading ? (
               <tr>
                 <td
-                  colSpan={7}
+                  colSpan={9}
                   className="text-center py-12 text-sm text-[#888] [font-family:var(--font-inter)]"
                 >
                   Loading…
@@ -385,7 +495,7 @@ function BlogList({
             ) : posts.length === 0 ? (
               <tr>
                 <td
-                  colSpan={7}
+                  colSpan={9}
                   className="text-center py-12 text-sm text-[#888] [font-family:var(--font-inter)]"
                 >
                   No posts found.
@@ -396,8 +506,16 @@ function BlogList({
                 <>
                   <tr
                     key={post.id}
-                    className="border-b border-[#F8F8F8] hover:bg-[#FAFAFA] transition-colors"
+                    className={`border-b border-[#F8F8F8] hover:bg-[#FAFAFA] transition-colors ${selectedIds.has(post.id) ? 'bg-[#F0F3FF]' : ''}`}
                   >
+                    <td className="pl-4 py-3 w-8">
+                      <button onClick={() => toggleSelect(post.id)} className="text-[#AAA] hover:text-[#1C2BFF] transition-colors">
+                        {selectedIds.has(post.id)
+                          ? <CheckSquare className="w-4 h-4 text-[#1C2BFF]" />
+                          : <Square className="w-4 h-4" />
+                        }
+                      </button>
+                    </td>
                     <td className="px-4 py-3">
                       <div>
                         <button
@@ -537,7 +655,7 @@ function BlogList({
                   {/* Quick Edit row */}
                   {quickEditId === post.id && quickEdit && (
                     <tr key={`qe-${post.id}`} className="bg-[#F8F9FF]">
-                      <td colSpan={7} className="px-4 py-4">
+                      <td colSpan={9} className="px-4 py-4">
                         <div className="grid grid-cols-3 gap-3 mb-3">
                           <div>
                             <label className="text-[10px] text-[#AAA] [font-family:var(--font-inter)] block mb-1">

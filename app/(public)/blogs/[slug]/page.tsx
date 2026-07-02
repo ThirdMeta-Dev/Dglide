@@ -311,7 +311,7 @@ function HeroSection({ post }: { post: BlogPost }) {
           <nav className={styles.breadcrumb} aria-label="Breadcrumb">
             <Link href="/">Home</Link>
             <span aria-hidden="true">/</span>
-            <Link href="/resources">Resources</Link>
+            <Link href="/blogs">Blogs</Link>
             <span aria-hidden="true">/</span>
             <span>{post.title}</span>
           </nav>

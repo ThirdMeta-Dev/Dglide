@@ -248,9 +248,21 @@ function CarouselSection({
   onBookmark: (slug: string) => void
 }) {
   const [page, setPage] = useState(0)
-  const totalPages = Math.max(1, Math.ceil(posts.length / 3))
+  const [cardsPerPage, setCardsPerPage] = useState(3)
+
+  useEffect(() => {
+    const update = () => setCardsPerPage(window.innerWidth <= 900 ? 1 : 3)
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
+  // Reset to first page when cardsPerPage changes (e.g. orientation change)
+  useEffect(() => { setPage(0) }, [cardsPerPage])
+
+  const totalPages = Math.max(1, Math.ceil(posts.length / cardsPerPage))
   const currentPage = Math.min(page, totalPages - 1)
-  const visiblePosts = posts.slice(currentPage * 3, currentPage * 3 + 3)
+  const visiblePosts = posts.slice(currentPage * cardsPerPage, currentPage * cardsPerPage + cardsPerPage)
 
   if (posts.length === 0) return null
 
@@ -288,7 +300,7 @@ function CarouselSection({
 
       <StaggerReveal key={currentPage} className={styles.cardGrid}>
         {visiblePosts.map((post, index) => {
-          const postIndex = currentPage * 3 + index
+          const postIndex = currentPage * cardsPerPage + index
 
           return (
             <StaggerItem key={postRenderKey(title, post, postIndex)}>
@@ -617,9 +629,7 @@ export default function BlogsClient({ posts }: { posts: BlogPost[] }) {
     scrollToLibrary()
   }
 
-  const featuredPosts = posts.filter(p => p.isFeatured).length > 0
-    ? posts.filter(p => p.isFeatured)
-    : posts.slice(0, 3) // fallback to most recent when no posts are marked featured
+  const featuredPosts = posts.filter(p => p.isFeatured)
   const nonFeaturedPosts = posts.filter(p => !p.isFeatured)
   const latestPosts = nonFeaturedPosts.slice(0, 12)
   const editorialPosts = nonFeaturedPosts.slice(12, 14)
@@ -633,9 +643,7 @@ export default function BlogsClient({ posts }: { posts: BlogPost[] }) {
             <nav className={styles.breadcrumb} aria-label="Breadcrumb">
               <Link href="/">Home</Link>
               <span className={styles.breadcrumbChevron}>/</span>
-              <Link href="/resources">Resources</Link>
-              <span className={styles.breadcrumbChevron}>/</span>
-              <span>Blog Listing</span>
+              <Link href="/blogs">Blogs</Link>
             </nav>
 
             <h1 className={styles.heroTitle}>The Best Blogs And Articles On DGlide&apos;s Operations Platform</h1>
