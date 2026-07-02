@@ -44,9 +44,9 @@ const DEFAULT_COLS = [
   {
     heading: "Solutions",
     links: [
-      { label: "Field Service Management",   href: "/fsm"  },
+      { label: "Field Service Management",   href: "/field-service-management-fsm"  },
       { label: "Process Management",         href: "#"     },
-      { label: "Service / ITSM Workflows",   href: "/itsm" },
+      { label: "Service / ITSM Workflows",   href: "/it-service-management-itsm" },
       { label: "Field Sales Execution",      href: "#"     },
       { label: "CRM (Support Layer)",        href: "#"     },
     ],

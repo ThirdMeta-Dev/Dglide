@@ -33,8 +33,8 @@ const DEFAULT_NAV: NavItemData[] = [
     label: "Solutions",
     has_dropdown: true,
     children: [
-      { label: "ITSM", href: "/itsm", has_dropdown: false },
-      { label: "FSM",  href: "/fsm",  has_dropdown: false },
+      { label: "ITSM", href: "/it-service-management-itsm", has_dropdown: false },
+      { label: "FSM",  href: "/field-service-management-fsm",  has_dropdown: false },
     ],
   },
   { label: "Pricing",   href: "/pricing",   has_dropdown: false },

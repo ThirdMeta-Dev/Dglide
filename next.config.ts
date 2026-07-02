@@ -1,16 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  async redirects() {
-    return [
-      { source: '/it-service-management-itsm', destination: '/itsm', permanent: true },
-      { source: '/it-service-management-itsm/', destination: '/itsm', permanent: true },
-      { source: '/field-service-management-fsm', destination: '/fsm', permanent: true },
-      { source: '/field-service-management-fsm/', destination: '/fsm', permanent: true },
-      { source: '/support', destination: '/contact-us', permanent: true },
-      { source: '/support/', destination: '/contact-us', permanent: true },
-    ]
-  },
   images: {
     remotePatterns: [
       {
