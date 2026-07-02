@@ -617,9 +617,12 @@ export default function BlogsClient({ posts }: { posts: BlogPost[] }) {
     scrollToLibrary()
   }
 
-  const featuredPosts = posts.slice(0, 12)
-  const latestPosts = posts.slice(12, 24)
-  const editorialPosts = posts.slice(24, 26)
+  const featuredPosts = posts.filter(p => p.isFeatured).length > 0
+    ? posts.filter(p => p.isFeatured)
+    : posts.slice(0, 3) // fallback to most recent when no posts are marked featured
+  const nonFeaturedPosts = posts.filter(p => !p.isFeatured)
+  const latestPosts = nonFeaturedPosts.slice(0, 12)
+  const editorialPosts = nonFeaturedPosts.slice(12, 14)
   const fallbackEditorialPosts = editorialPosts.length > 0 ? editorialPosts : posts.slice(0, 2)
 
   return (

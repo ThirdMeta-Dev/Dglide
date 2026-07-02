@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import { sendNotification } from "@/lib/mailer";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { appendLeadToSheet } from "@/lib/sheets";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_CHARS_RE = /^[+\d\s().-]+$/;
@@ -54,6 +55,8 @@ export async function POST(req: Request) {
 
     sendNotification(`New Demo Request — ${company}`, { name, email, phone: contact, company, message })
       .catch((err: unknown) => console.error("Demo request email error:", err));
+
+    appendLeadToSheet('Demo Request', { name, email, phone: contact, company, message }).catch(() => {});
 
     return NextResponse.json({ success: true });
   } catch (err) {

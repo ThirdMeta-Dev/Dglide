@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
+import FooterNewsletter from "./FooterNewsletter";
 
 export type FooterSettings = {
   newsletter_heading?:      string;
@@ -175,7 +176,6 @@ export default function Footer({
       <ScrollReveal direction="up">
         <div className="footer-nl-outer" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
           <div
-            className="footer-newsletter"
             style={{
               display: "flex",
               alignItems: "center",
@@ -186,82 +186,11 @@ export default function Footer({
               background: "linear-gradient(90deg, #F5E7DE 0%, #F3F3F3 100%)",
             }}
           >
-            <p
-              className="footer-nl-title"
-              style={{
-                fontFamily: "var(--font-sora), Sora, sans-serif",
-                fontSize: 20,
-                fontWeight: 400,
-                lineHeight: "28px",
-                color: "#000",
-                margin: 0,
-                flexShrink: 0,
-                whiteSpace: "nowrap",
-              }}
-            >
-              {newsletterHeading}
-            </p>
-
-            <div className="footer-nl-actions" style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
-              <div
-                className="footer-nl-input"
-                style={{
-                  width: 370,
-                  height: 48,
-                  background: "#FFF",
-                  borderRadius: 35,
-                  padding: "0 28px",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <input
-                  type="email"
-                  placeholder={newsletterPlaceholder}
-                  style={{
-                    width: "100%",
-                    background: "transparent",
-                    border: "none",
-                    outline: "none",
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: 14,
-                    lineHeight: "21px",
-                    color: "#ABABAB",
-                  }}
-                />
-              </div>
-
-              <button
-                className="dg-btn-fill"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  padding: "14px 32px",
-                  borderRadius: 40,
-                  border: "1.5px solid #141FB5",
-                  background: "linear-gradient(180deg, #1C2BFF 0%, #141FB5 100%)",
-                  color: "#FFF",
-                  fontFamily: "var(--font-sora), Sora, sans-serif",
-                  fontSize: 16,
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  flexShrink: 0,
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {newsletterButtonLabel}
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path
-                    d="M3 9H15M15 9L10 4M15 9L10 14"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
+            <FooterNewsletter
+              heading={newsletterHeading}
+              placeholder={newsletterPlaceholder}
+              buttonLabel={newsletterButtonLabel}
+            />
           </div>
         </div>
       </ScrollReveal>

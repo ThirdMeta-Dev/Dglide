@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -43,6 +44,7 @@ const inputStyle: React.CSSProperties = {
 };
 
 export default function ScheduleDemoHero({ data }: { data?: Record<string, string> }) {
+  const router = useRouter();
   const [form, setForm] = useState({ name: "", email: "", contact: "", company: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -87,6 +89,7 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
       });
       if (!res.ok) throw new Error("Failed");
       setSubmitted(true);
+      router.push("/thank-you");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {

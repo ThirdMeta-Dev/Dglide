@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 type FieldName = "name" | "email" | "contact" | "company" | "message";
@@ -71,6 +72,7 @@ function FieldError({ error }: { error?: string }) {
 }
 
 export default function ContactDemoForm() {
+  const router = useRouter();
   const [form, setForm] = useState<FormState>(initialForm);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [statusError, setStatusError] = useState("");
@@ -117,6 +119,7 @@ export default function ContactDemoForm() {
 
       setSubmitted(true);
       setForm(initialForm);
+      router.push("/thank-you");
     } catch (err) {
       setStatusError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {

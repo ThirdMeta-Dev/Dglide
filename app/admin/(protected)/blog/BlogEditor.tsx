@@ -199,6 +199,9 @@ export default function BlogEditor({ postId, onBack }: Props) {
   const docRef = useRef<HTMLInputElement>(null)
 
   const autoSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  // Stable refs so closures inside useEditor always call the latest function
+  const uploadBinaryImageRef = useRef<(file: File) => Promise<void>>(async () => {})
+  const triggerAutoSaveRef = useRef<() => void>(() => {})
 
   const editor = useEditor({
     extensions: [
@@ -223,32 +226,131 @@ export default function BlogEditor({ postId, onBack }: Props) {
       setReadingTime(calcReadingTime(html))
       setSaveStatus('unsaved')
       if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current)
-      autoSaveTimer.current = setTimeout(() => triggerAutoSave(), 30000)
+      autoSaveTimer.current = setTimeout(() => triggerAutoSaveRef.current(), 30000)
     },
     editorProps: {
-      handlePaste(view, event) {
-        const html = event.clipboardData?.getData('text/html') || ''
-        if (html && (html.includes('docs.google.com') || html.includes('font-family'))) {
-          const cleaned = html
-            .replace(/<span[^>]*style="[^"]*"[^>]*>(.*?)<\/span>/gi, '$1')
-            .replace(/\s*style="[^"]*"/gi, '')
-          const parser = new DOMParser()
-          const doc = parser.parseFromString(cleaned, 'text/html')
-          view.dispatch(
-            view.state.tr.replaceSelectionWith(
-              view.state.schema.nodeFromJSON(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                (view as any).someProp('transformPastedHTML')?.(cleaned) ||
-                  view.state.schema.text(doc.body.textContent || '')
-              )
-            )
-          )
-          return true
+      // Strip Google Docs / word-processor inline styles while keeping <img src> intact
+      transformPastedHTML(html: string) {
+        return html
+          .replace(/\s+style="[^"]*"/gi, '')
+          .replace(/\s+class="[^"]*"/gi, '')
+          .replace(/<meta\b[^>]*>/gi, '')
+          .replace(/<link\b[^>]*>/gi, '')
+      },
+      // Only intercept pure binary image pastes (screenshots).
+      // Google Docs pastes carry HTML and go through transformPastedHTML above.
+      handlePaste(_view, event) {
+        const hasHtml = !!event.clipboardData?.getData('text/html')
+        if (!hasHtml) {
+          const items = Array.from(event.clipboardData?.items ?? [])
+          const imageItem = items.find(i => i.type.startsWith('image/') && i.kind === 'file')
+          if (imageItem) {
+            const file = imageItem.getAsFile()
+            if (file) {
+              void uploadBinaryImageRef.current(file)
+              return true
+            }
+          }
         }
         return false
       },
     },
   })
+
+  // Keep uploadBinaryImageRef.current pointing at the latest editor instance
+  useEffect(() => {
+    uploadBinaryImageRef.current = async (file: File) => {
+      const fd = new FormData()
+      fd.append('file', file)
+      try {
+        const res = await fetch('/api/admin/blogs/media', { method: 'POST', body: fd })
+        if (!res.ok) return
+        const data = await res.json() as { url: string }
+        editor?.chain().focus().setImage({ src: data.url }).run()
+      } catch (err) {
+        console.error('[BlogEditor] Binary image upload failed:', err)
+      }
+    }
+  }, [editor])
+
+  // After every paste, find Google-hosted <img> nodes and re-host them on Supabase
+  useEffect(() => {
+    if (!editor) return
+    const dom = editor.view.dom
+
+    async function uploadGoogleImages() {
+      if (!editor) return
+
+      const googleUrls: string[] = []
+      editor.state.doc.descendants((node) => {
+        if (node.type.name === 'image') {
+          const src = node.attrs.src as string
+          if (
+            src &&
+            !googleUrls.includes(src) &&
+            (src.includes('googleusercontent.com') ||
+              src.includes('docs.google.com') ||
+              src.startsWith('blob:'))
+          ) {
+            googleUrls.push(src)
+          }
+        }
+      })
+
+      if (googleUrls.length === 0) return
+
+      const urlMap: Record<string, string> = {}
+
+      await Promise.all(
+        googleUrls.map(async (googleUrl) => {
+          try {
+            if (googleUrl.startsWith('blob:')) {
+              // Blob URLs are same-origin accessible — fetch client-side
+              const blobRes = await fetch(googleUrl)
+              const blob = await blobRes.blob()
+              const ext = blob.type.split('/')[1] || 'jpg'
+              const file = new File([blob], `paste.${ext}`, { type: blob.type })
+              const fd = new FormData()
+              fd.append('file', file)
+              const res = await fetch('/api/admin/blogs/media', { method: 'POST', body: fd })
+              if (res.ok) {
+                const data = await res.json() as { url: string }
+                urlMap[googleUrl] = data.url
+              }
+            } else {
+              // Google CDN URLs: proxy through server to avoid CORS
+              const res = await fetch('/api/admin/blogs/media/from-url', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: googleUrl }),
+              })
+              if (res.ok) {
+                const data = await res.json() as { url: string }
+                urlMap[googleUrl] = data.url
+              }
+            }
+          } catch (err) {
+            console.error('[BlogEditor] Image upload from URL failed:', err)
+          }
+        })
+      )
+
+      if (Object.keys(urlMap).length === 0) return
+
+      let html = editor.getHTML()
+      let changed = false
+      for (const [googleUrl, supabaseUrl] of Object.entries(urlMap)) {
+        const escaped = googleUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        const next = html.replace(new RegExp(escaped, 'g'), supabaseUrl)
+        if (next !== html) { html = next; changed = true }
+      }
+      if (changed) editor.commands.setContent(html)
+    }
+
+    const onPaste = () => setTimeout(uploadGoogleImages, 300)
+    dom.addEventListener('paste', onPaste)
+    return () => dom.removeEventListener('paste', onPaste)
+  }, [editor])
 
   const triggerAutoSave = useCallback(async () => {
     if (!currentId || !editor) return
@@ -256,11 +358,16 @@ export default function BlogEditor({ postId, onBack }: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentId, editor])
 
-  async function saveDraft(overrides: Partial<BlogPost> = {}) {
-    if (!currentId || !editor) return
+  // Keep triggerAutoSaveRef current so the stale onUpdate closure always calls the latest version
+  useEffect(() => {
+    triggerAutoSaveRef.current = triggerAutoSave
+  }, [triggerAutoSave])
+
+  async function saveDraft(overrides: Partial<BlogPost> = {}): Promise<boolean> {
+    if (!currentId || !editor) return false
     setSaveStatus('saving')
     try {
-      await fetch(`/api/admin/blogs/${currentId}`, {
+      const res = await fetch(`/api/admin/blogs/${currentId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -285,22 +392,27 @@ export default function BlogEditor({ postId, onBack }: Props) {
           ...overrides,
         }),
       })
+      if (!res.ok) throw new Error(`Save failed: ${res.status}`)
       setSaveStatus('saved')
       setTimeout(() => setSaveStatus(''), 2500)
+      return true
     } catch {
       setSaveStatus('unsaved')
+      return false
     }
   }
 
   async function handlePublish() {
     const now = publishedAt || new Date().toISOString()
-    await saveDraft({ status: 'published', publishedAt: now })
+    const ok = await saveDraft({ status: 'published', publishedAt: now })
+    if (!ok) return
     setStatus('published')
     await fetch('/api/admin/blogs/revalidate', { method: 'POST' })
   }
 
   async function handleUnpublish() {
-    await saveDraft({ status: 'draft' })
+    const ok = await saveDraft({ status: 'draft' })
+    if (!ok) return
     setStatus('draft')
   }
 
@@ -309,6 +421,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
     async function init() {
       if (postId) {
         const res = await fetch(`/api/admin/blogs/${postId}`)
+        if (!res.ok) { setLoading(false); return }
         const data: BlogPost = await res.json()
         setPost(data)
         populatePost(data)
@@ -318,6 +431,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ title: 'Untitled', status: 'draft' }),
         })
+        if (!res.ok) { setLoading(false); return }
         const data: BlogPost = await res.json()
         setCurrentId(data.id)
         setPost(data)
@@ -336,6 +450,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
   function populatePost(data: BlogPost) {
     setTitle(data.title === 'Untitled' ? '' : data.title)
     setSlug(data.slug)
+    if (data.slug) setSlugManual(true) // prevent auto-slug from overwriting saved slug
     setExcerpt(data.excerpt)
     setStatus(data.status === 'published' ? 'published' : 'draft')
     setPostType(data.postType)

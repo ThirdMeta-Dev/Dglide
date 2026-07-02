@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import { sendNotification } from "@/lib/mailer";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { appendLeadToSheet } from "@/lib/sheets";
 
 type ContactRequestBody = {
   name?: unknown;
@@ -91,6 +92,14 @@ export async function POST(req: Request) {
       company: values.company,
       message: values.message,
     }).catch((err: unknown) => console.error("Contact request email error:", err));
+
+    appendLeadToSheet('Contact Us', {
+      name: values.name,
+      email: values.email,
+      phone: values.contact,
+      company: values.company,
+      message: values.message,
+    }).catch(() => {});
 
     return NextResponse.json({ success: true });
   } catch (err) {
