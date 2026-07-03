@@ -161,19 +161,7 @@ function NavItem({
             className="min-w-[210px] rounded-2xl p-2 border border-white/60 bg-white/55 backdrop-blur-2xl"
             style={{ boxShadow: "0 8px 32px 0 rgba(28, 43, 255, 0.14), inset 0 1px 0 0 rgba(255,255,255,0.7)" }}
           >
-            {children.map((child) => {
-              const isPlaceholder = !child.href || child.href === '#';
-              if (isPlaceholder) {
-                return (
-                  <span
-                    key={child.label}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm [font-family:var(--font-sora)] text-black/50 cursor-default select-none"
-                  >
-                    {child.label}
-                  </span>
-                );
-              }
-              return (
+            {children.map((child) => (
               <Link
                 key={child.href!}
                 href={child.href!}
@@ -193,8 +181,6 @@ function NavItem({
                 />
                 {child.label}
               </Link>
-              );
-            }}
             ))}
           </div>
         </motion.div>
