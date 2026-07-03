@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
       { source: '/blog', destination: '/blogs', permanent: true },
       { source: '/blog/', destination: '/blogs', permanent: true },
       { source: '/blog/:slug', destination: '/blogs/:slug', permanent: true },
+      { source: '/itsm', destination: '/it-service-management-itsm', permanent: true },
+      { source: '/itsm/', destination: '/it-service-management-itsm', permanent: true },
+      { source: '/fsm', destination: '/field-service-management-fsm', permanent: true },
+      { source: '/fsm/', destination: '/field-service-management-fsm', permanent: true },
     ]
   },
   images: {
