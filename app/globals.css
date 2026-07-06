@@ -290,7 +290,9 @@
 .tiptap-editor .ProseMirror p { margin: 0 0 0.8em; }
 .tiptap-editor .ProseMirror ul,
 .tiptap-editor .ProseMirror ol { padding-left: 1.5em; margin: 0.5em 0 0.8em; }
-.tiptap-editor .ProseMirror li { margin-bottom: 0.25em; }
+.tiptap-editor .ProseMirror ul { list-style: disc outside !important; }
+.tiptap-editor .ProseMirror ol { list-style: decimal outside !important; }
+.tiptap-editor .ProseMirror li { margin-bottom: 0.25em; list-style: inherit !important; }
 .tiptap-editor .ProseMirror blockquote {
   border-left: 4px solid #1C2BFF;
   margin: 1em 0;

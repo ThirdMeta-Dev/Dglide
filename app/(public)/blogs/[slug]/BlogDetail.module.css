@@ -537,8 +537,17 @@
   padding-left: 22px;
 }
 
+.articleContent ul {
+  list-style: disc outside !important;
+}
+
+.articleContent ol {
+  list-style: decimal outside !important;
+}
+
 .articleContent li {
   margin: 0 0 10px;
+  list-style: inherit !important;
 }
 
 .articleContent blockquote {

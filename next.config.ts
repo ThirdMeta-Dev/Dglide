@@ -15,10 +15,16 @@ const nextConfig: NextConfig = {
     ]
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
         hostname: "aovvrjsdsbzjlpbodasb.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
+      {
+        protocol: "https",
+        hostname: "yytdzxrryboagezbjiqa.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
       {

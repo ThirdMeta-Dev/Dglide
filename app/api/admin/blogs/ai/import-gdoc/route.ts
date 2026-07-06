@@ -138,9 +138,15 @@ export async function POST(req: Request) {
       contentHtml = contentHtml.split(original).join(hosted)
     }
 
-    // Extract H1 as title
-    const h1Match = contentHtml.match(/<h1[^>]*>(?:<[^>]+>)*([^<]+)/i)
-    const title = h1Match?.[1]?.trim() || ''
+    // Extract H1 as title — strip all inner tags, decode entities
+    const h1Match = contentHtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)
+    const title = h1Match
+      ? h1Match[1]
+          .replace(/<[^>]+>/g, '')
+          .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+          .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
+          .trim()
+      : ''
 
     // Use Groq to extract excerpt and tags
     const plainText = contentHtml
