@@ -474,7 +474,7 @@
   /* ── Schedule Demo Page ── */
   .sd-page-root  { overflow-x: hidden !important; }
   .sd-hero-wrap  { padding: 24px 20px 0 !important; }
-  .sd-hero-cols  { flex-direction: column !important; gap: 32px !important; }
+  .sd-hero-cols  { display: flex !important; flex-direction: column !important; gap: 32px !important; }
   .sd-hero-left  { flex: 0 0 auto !important; width: 100% !important; }
   .sd-hero-right { flex: 0 0 auto !important; width: 100% !important; padding: 24px 20px !important; }
 

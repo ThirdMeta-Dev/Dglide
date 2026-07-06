@@ -5,22 +5,12 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-const TESTIMONIALS_DEFAULT = [
-  {
-    quote: "We were spending lakhs to generate leads, then losing them because nobody saw the alert in time. DGlide closed that gap.",
-    name: "Mr. Lorem ipsum",
-    role: "Prompt Lasers, Prompt Lasers",
-  },
-  {
-    quote: "Our field team went from WhatsApp chaos to a single dashboard. Coordination that used to take hours now happens automatically.",
-    name: "Ms. Priya Sharma",
-    role: "Operations Head, NexGen Services",
-  },
-  {
-    quote: "We configured DGlide in two weeks. No dev cycles, no delays. It just mapped to how we actually work.",
-    name: "Mr. Arjun Mehta",
-    role: "Director, FastTrack Logistics",
-  },
+const LOGO_SRCS = [
+  "/logos/logo-1.png",
+  "/logos/logo-2.png",
+  "/logos/logo-3.png",
+  "/logos/logo-4.png",
+  "/logos/logo-5.png",
 ];
 
 const BULLETS_DEFAULT = [
@@ -43,22 +33,25 @@ const inputStyle: React.CSSProperties = {
   boxSizing: "border-box",
 };
 
-export default function ScheduleDemoHero({ data }: { data?: Record<string, string> }) {
+export default function ScheduleDemoHero({
+  data,
+  logoData,
+}: {
+  data?: Record<string, string>;
+  logoData?: Record<string, string>;
+}) {
   const router = useRouter();
   const [form, setForm] = useState({ name: "", email: "", contact: "", company: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
-  const [tIdx, setTIdx] = useState(0);
-
-  const testimonials = [1, 2, 3].map((n) => ({
-    quote:  data?.[`testimonial_${n}_quote`]  ?? TESTIMONIALS_DEFAULT[n - 1].quote,
-    name:   data?.[`testimonial_${n}_name`]   ?? TESTIMONIALS_DEFAULT[n - 1].name,
-    role:   data?.[`testimonial_${n}_role`]   ?? TESTIMONIALS_DEFAULT[n - 1].role,
-    avatar: data?.[`testimonial_${n}_avatar`] ?? "/demo/author-1.png",
-  }));
 
   const bullets = [1, 2, 3].map((n) => data?.[`bullet_${n}`] ?? BULLETS_DEFAULT[n - 1]);
+  const logos = LOGO_SRCS.map((src, i) => ({
+    src: logoData?.[`logo_${i + 1}_image`] || src,
+    alt: logoData?.[`logo_${i + 1}_alt`] || "Client Logo",
+  }));
+  const doubledLogos = [...logos, ...logos, ...logos];
 
   const label = data?.label ?? "Book a Live DGlide Walkthrough";
   const titleRaw = data?.title ?? "One System To Run\nYour Whole Operation";
@@ -70,8 +63,6 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
   const formPrivacyText = data?.form_privacy_text ?? "All your data stays private and secure with us.";
   const successHeading = data?.success_heading ?? "Demo Booked!";
   const successBody = data?.success_body ?? "We'll reach out within 1 business day to confirm your walkthrough slot.";
-
-  const t = testimonials[tIdx];
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -141,14 +132,14 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
 
       {/* ── Main two-column section ── */}
       <div className="sd-hero-wrap" style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 48px 0", position: "relative", zIndex: 1 }}>
-        <div className="sd-hero-cols" style={{ display: "flex", gap: 68, alignItems: "flex-start" }}>
+        <div className="sd-hero-cols" style={{ display: "grid", gridTemplateColumns: "minmax(0, 530px) minmax(420px, 1fr)", gap: 68, alignItems: "flex-start" }}>
 
           {/* ── LEFT column ── */}
-          <div className="sd-hero-left" style={{ flex: "0 0 530px", display: "flex", flexDirection: "column", gap: 38 }}>
+          <div className="sd-hero-left" style={{ minWidth: 0, display: "flex", flexDirection: "column", gap: 38 }}>
 
             {/* Logo */}
             <Link href="/" style={{ display: "inline-block" }}>
-              <div style={{ position: "relative", width: 160, height: 28 }}>
+              <div style={{ position: "relative", width: 136, height: 24 }}>
                 <Image src="/logo.png" alt="DGlide" fill style={{ objectFit: "contain", objectPosition: "left" }} />
               </div>
             </Link>
@@ -208,47 +199,29 @@ export default function ScheduleDemoHero({ data }: { data?: Record<string, strin
               <path d="M0.5 0.500031L467.676 0.49999" stroke="white" strokeLinecap="round"/>
             </svg>
 
-            {/* Testimonial card — gradient border + matches Figma 374:5883 */}
-            <div style={{ borderRadius: 21, padding: 1, background: "linear-gradient(180deg, #F6F6F6 7%, #FF7F1C 100%)", position: "relative" }}>
-              {/* Decorative quote icon — top-left, sits on the border */}
-              <div style={{ position: "absolute", top: 14, left: 18, pointerEvents: "none", zIndex: 2 }}>
-                <Image src="/demo/quote-icon.png" alt="" width={49} height={29} className="object-contain" />
-              </div>
-            <div style={{ position: "relative", borderRadius: 20, background: "#F4F4F4", padding: "52px 20px 20px" }}>
-
-              {/* Quote text */}
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: "24px", color: "#545454", margin: "0 0 20px" }}>
-                {t.quote}
-              </p>
-
-              {/* Person row */}
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                <div style={{ width: 40, height: 40, borderRadius: "50%", overflow: "hidden", position: "relative", flexShrink: 0 }}>
-                  <Image src={t.avatar} alt={t.name} fill className="object-cover" />
-                </div>
-                <div style={{ width: 3, height: 32, background: "#FABF5A", borderRadius: 2, flexShrink: 0 }} />
-                <div>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: "#545454", margin: 0, lineHeight: "20px" }}>{t.name}</p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 400, color: "#888", margin: 0, lineHeight: "18px" }}>{t.role}</p>
+            {/* Logo strip moved into the former testimonial slot. */}
+            <div className="sd-hero-logo-strip" style={{ width: "100%", borderRadius: 20, background: "#F3F3F3", padding: "24px 0", overflow: "hidden", boxSizing: "border-box" }}>
+              <style>{`
+                @keyframes sd-hero-logo-marquee { from { transform: translateX(0); } to { transform: translateX(calc(-${logos.length * (150 + 16)}px)); } }
+                .sd-hero-logo-track:hover { animation-play-state: paused !important; }
+              `}</style>
+              <div style={{ overflow: "hidden" }}>
+                <div
+                  className="sd-hero-logo-track"
+                  style={{ display: "flex", alignItems: "center", gap: 16, width: "max-content", animation: "sd-hero-logo-marquee 28s linear infinite" }}
+                >
+                  {doubledLogos.map((logo, i) => (
+                    <div key={i} style={{ width: 150, height: 48, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <Image src={logo.src} alt={logo.alt} width={150} height={48} className="object-contain" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+                    </div>
+                  ))}
                 </div>
               </div>
-
-              {/* Dots */}
-              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 6 }}>
-                {testimonials.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setTIdx(i)}
-                    style={{ width: 6, height: 6, borderRadius: 3, background: i === tIdx ? "#1C2BFF" : "#E1E8EF", border: "none", cursor: "pointer", padding: 0, transition: "background 0.2s", flexShrink: 0 }}
-                  />
-                ))}
-              </div>
-            </div>
             </div>
           </div>
 
           {/* ── RIGHT column: Form card ── */}
-          <div className="sd-hero-right" style={{ flex: 1, background: "#FFF", borderRadius: 16, padding: "32px 40px", boxShadow: "0 4px 32px rgba(0,0,0,0.08)", display: "flex", flexDirection: "column", gap: 24 }}>
+          <div className="sd-hero-right" style={{ minWidth: 0, width: "100%", boxSizing: "border-box", background: "#FFF", borderRadius: 16, padding: "32px 40px", boxShadow: "0 4px 32px rgba(0,0,0,0.08)", display: "flex", flexDirection: "column", gap: 24 }}>
 
             {submitted ? (
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 480, gap: 20, textAlign: "center" }}>
