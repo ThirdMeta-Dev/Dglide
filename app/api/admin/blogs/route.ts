@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { createBlogPost, listBlogPosts } from '@/lib/blog-db'
 import { requireAdmin } from '@/lib/admin-auth'
 
@@ -30,5 +31,7 @@ export async function POST(req: Request) {
 
   const body = await req.json()
   const created = await createBlogPost(body)
+  revalidatePath('/blogs')
+  if (created?.slug) revalidatePath(`/blogs/${created.slug}`)
   return NextResponse.json(created, { status: 201 })
 }

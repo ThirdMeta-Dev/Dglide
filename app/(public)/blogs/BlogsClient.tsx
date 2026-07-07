@@ -631,7 +631,7 @@ export default function BlogsClient({ posts }: { posts: BlogPost[] }) {
 
   const featuredPosts = posts.filter(p => p.isFeatured)
   const nonFeaturedPosts = posts.filter(p => !p.isFeatured)
-  const latestPosts = nonFeaturedPosts.slice(0, 12)
+  const latestPosts = posts.slice(0, 12)
   const editorialPosts = nonFeaturedPosts.slice(12, 14)
   const fallbackEditorialPosts = editorialPosts.length > 0 ? editorialPosts : posts.slice(0, 2)
 

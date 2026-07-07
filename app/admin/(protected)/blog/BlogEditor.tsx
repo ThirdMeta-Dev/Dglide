@@ -536,13 +536,23 @@ export default function BlogEditor({ postId, onBack }: Props) {
     const ok = await saveDraft({ status: 'published', publishedAt: now })
     if (!ok) return
     setStatus('published')
-    await fetch('/api/admin/blogs/revalidate', { method: 'POST' })
+    setPublishedAt(now.slice(0, 16))
+    await fetch('/api/admin/blogs/revalidate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug }),
+    })
   }
 
   async function handleUnpublish() {
     const ok = await saveDraft({ status: 'draft' })
     if (!ok) return
     setStatus('draft')
+    await fetch('/api/admin/blogs/revalidate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug }),
+    })
   }
 
   // Load or create post on mount

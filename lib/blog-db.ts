@@ -278,9 +278,12 @@ export async function listBlogPosts(
   }
   if (options.postType) query = query.eq('post_type', options.postType)
 
-  const { data, count, error } = await query
-    .order(sortCol, { ascending })
-    .range(offset, offset + limit - 1)
+  const orderedQuery = query.order(sortCol, { ascending, nullsFirst: false })
+  if (sortCol !== 'created_at') {
+    orderedQuery.order('created_at', { ascending: false, nullsFirst: false })
+  }
+
+  const { data, count, error } = await orderedQuery.range(offset, offset + limit - 1)
 
   if (error) throw error
   const totalDocs = count ?? 0
@@ -311,13 +314,15 @@ export async function createBlogPost(input: Partial<BlogPost>): Promise<BlogPost
     input.slug || slugify(title) || `draft-${Date.now()}`
   )
   const now = new Date().toISOString()
+  const status = input.status || 'draft'
+  const publishedAt = input.publishedAt || (status === 'published' ? now : null)
   const { error } = await supabase.from(T_BLOGS).insert({
     id,
     title,
     slug,
     excerpt: input.excerpt || '',
     content_html: contentHtml,
-    status: input.status || 'draft',
+    status,
     post_type: input.postType || 'blog',
     author: input.author || '',
     author_bio: input.authorBio || '',
@@ -327,7 +332,7 @@ export async function createBlogPost(input: Partial<BlogPost>): Promise<BlogPost
     seo_title: input.seoTitle || '',
     seo_description: input.seoDescription || '',
     focus_keyword: input.focusKeyword || '',
-    published_at: input.publishedAt || null,
+    published_at: publishedAt,
     is_featured: input.isFeatured ?? false,
     reading_time: calcReadingTime(contentHtml),
     tags: input.tags || [],
@@ -350,6 +355,13 @@ export async function updateBlogPost(
   if (!current) return null
   const now = new Date().toISOString()
   const contentHtml = input.contentHtml ?? current.contentHtml
+  const nextStatus = input.status ?? current.status
+  const nextPublishedAt =
+    input.publishedAt !== undefined
+      ? input.publishedAt
+      : nextStatus === 'published'
+        ? current.publishedAt || now
+        : current.publishedAt
   const revisions = saveRevision
     ? [
         {
@@ -369,7 +381,7 @@ export async function updateBlogPost(
       slug: newSlug,
       excerpt: input.excerpt ?? current.excerpt,
       content_html: contentHtml,
-      status: input.status ?? current.status,
+      status: nextStatus,
       post_type: input.postType ?? current.postType,
       author: input.author ?? current.author,
       author_bio: input.authorBio ?? current.authorBio,
@@ -379,8 +391,7 @@ export async function updateBlogPost(
       seo_title: input.seoTitle ?? current.seoTitle,
       seo_description: input.seoDescription ?? current.seoDescription,
       focus_keyword: input.focusKeyword ?? current.focusKeyword,
-      published_at:
-        input.publishedAt !== undefined ? input.publishedAt : current.publishedAt,
+      published_at: nextPublishedAt,
       is_featured: input.isFeatured ?? current.isFeatured,
       reading_time: calcReadingTime(contentHtml),
       tags: input.tags ?? current.tags,

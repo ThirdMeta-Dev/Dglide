@@ -399,7 +399,8 @@ export async function generateStaticParams() {
   return docs.map((p) => ({ slug: p.slug }))
 }
 
-export const revalidate = 3600
+export const dynamicParams = true
+export const revalidate = 300
 
 export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
   const { slug } = await params
