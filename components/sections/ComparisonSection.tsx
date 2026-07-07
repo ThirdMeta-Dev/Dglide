@@ -6,7 +6,6 @@ import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const LEFT_DEFAULTS  = ["Fast to start. Your business bends to fit the software.", "Cheap to start, expensive in workarounds.", "Fits the category, not your business."];
 const RIGHT_DEFAULTS = ["Fits at first. Becomes a software project you own forever.", "Months to build, years to maintain, yours to fix.", "Custom fit comes with a custom headache."];
-const FEATURE_DEFAULTS = ["Speed and fit, together", "Low cost, no dev team", "No maintenance, no upkeeps", "Fully customized to your needs"];
 const BOTTOM_DEFAULTS  = ["Ready to Run", "Configured to Your Process", "Adapts as You Change"];
 
 export default function ComparisonSection({ data }: { data?: Record<string, string> }) {
@@ -25,11 +24,9 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
 
   const leftItems    = LEFT_DEFAULTS.map((d, i)    => data?.[`left_item_${i + 1}`]    ?? d);
   const rightItems   = RIGHT_DEFAULTS.map((d, i)   => data?.[`right_item_${i + 1}`]   ?? d);
-  const dglideFeatures = FEATURE_DEFAULTS.map((d, i) => data?.[`center_feature_${i + 1}`] ?? d);
   const bottomBar    = BOTTOM_DEFAULTS.map((d, i)   => data?.[`bottom_${i + 1}`]       ?? d);
   const leftTitle    = data?.left_title    ?? "Fixed-Category Tools";
   const rightTitle   = data?.right_title   ?? "Custom Builds";
-  const centerTitle  = data?.center_title  ?? "With\nDGlide";
 
   const fullTitle = data?.title ?? "Stuck Between Rigid Tools And Building Your Own?";
   const andMatch = fullTitle.match(/ [Aa]nd /);
@@ -110,49 +107,23 @@ export default function ComparisonSection({ data }: { data?: Record<string, stri
             </div>
             </ScrollReveal>
 
-            {/* CENTER — blue oval (hidden on mobile) */}
+            {/* CENTER — DGlide Platform oval (hidden on mobile) */}
             <div className="hidden md:flex items-center justify-center relative cmp-center-col">
               <div
                 className="absolute border border-[#1C2BFF]/20"
-                style={{ width: "395px", height: "446px", borderRadius: "220px", animation: "subtlePulse 3.5s ease-in-out infinite" }}
+                style={{ width: "400px", height: "486px", borderRadius: "240px", animation: "subtlePulse 3.5s ease-in-out infinite" }}
               />
               <div
                 className="absolute border border-[#1C2BFF]/15"
-                style={{ width: "365px", height: "416px", borderRadius: "200px", animation: "subtlePulse 3.5s ease-in-out infinite 0.8s" }}
+                style={{ width: "372px", height: "458px", borderRadius: "220px", animation: "subtlePulse 3.5s ease-in-out infinite 0.8s" }}
               />
-              <div
-                className="relative flex flex-col items-center z-10"
-                style={{
-                  width: "335px", height: "386px", borderRadius: "180px",
-                  background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
-                  paddingLeft: "48px", paddingRight: "48px", paddingTop: "40px", paddingBottom: "80px",
-                }}
-              >
-                <p
-                  className="text-white text-center mb-5"
-                  style={{ fontFamily: "var(--font-tasa-orbiter)", fontWeight: 600, fontSize: "32px", lineHeight: 1.2 }}
-                >
-                  {centerTitle.split('\n').map((line, i, arr) => (
-                    <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
-                  ))}
-                </p>
-                <div className="flex flex-col gap-3 w-full">
-                  {dglideFeatures.map((f, i) => (
-                    <div key={i} className="flex items-center gap-2.5">
-                      <Image
-                        src="/comparison/dglide-feat-bullet.svg"
-                        alt=""
-                        width={20}
-                        height={12}
-                        className="object-contain flex-shrink-0"
-                      />
-                      <span className="text-white text-base leading-snug" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>
-                        {f}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <Image
+                src="/comparison/dglide-platform-oval.png"
+                alt="DGlide Platform — speed and fit together, low cost, no maintenance, fully customized"
+                width={382}
+                height={481}
+                className="relative z-10 object-contain w-[340px] h-auto"
+              />
             </div>
 
             {/* RIGHT column (mirrored) */}
