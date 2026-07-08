@@ -62,7 +62,8 @@ function NavItem({
   isChildActive: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  const active = (item.href ? isActive(item.href) : false) || isChildActive;
+  const href = item.label === "Resources" ? undefined : item.href;
+  const active = (href ? isActive(href) : false) || isChildActive;
   const children = item.children ?? [];
 
   return (
@@ -78,9 +79,9 @@ function NavItem({
         }
       }}
     >
-      {item.href ? (
+      {href ? (
         <Link
-          href={item.href}
+          href={href}
           className={cn(
             "flex items-center gap-1.5 text-sm leading-[22.4px] transition-colors duration-200 group",
             "[font-family:var(--font-sora)]",

@@ -1,10 +1,11 @@
 import nodemailer from "nodemailer";
 
 export const NOTIFY_EMAILS = [
-  "support@dglide.com",
   "seo@hexanovate.com",
   "drushti.gothi@hexanovate.com",
   "vamshi.vadali@hexanovate.com",
+  "samir@dglide.com",
+  "letstalk@dglide.com",
 ];
 
 function escapeHtml(str: string): string {
