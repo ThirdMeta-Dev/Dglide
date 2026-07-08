@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { sendNotification } from "@/lib/mailer";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { appendLeadToSheet } from "@/lib/sheets";
+import { appendLeadSourceToMessage, readLeadSource } from "@/lib/lead-source";
 
 type ContactRequestBody = {
   name?: unknown;
@@ -10,6 +11,8 @@ type ContactRequestBody = {
   contact?: unknown;
   company?: unknown;
   message?: unknown;
+  sourcePath?: unknown;
+  sourceUrl?: unknown;
 };
 
 type FieldErrors = Partial<Record<"name" | "email" | "contact" | "company" | "message", string>>;
@@ -76,12 +79,16 @@ export async function POST(req: Request) {
 
   try {
     const supabase = await createClient();
+    const source = readLeadSource(body as Record<string, unknown>, "Contact Form", req.headers.get("referer"));
+    if (source.sourcePath?.startsWith("/blogs/")) source.formType = "Blog Detail Form";
+
+    const storedMessage = appendLeadSourceToMessage(values.message, source);
     const { error } = await supabase.from("dglide_demo_requests").insert({
       name: values.name,
       email: values.email,
       contact: values.contact,
       company: values.company,
-      message: values.message || null,
+      message: storedMessage || null,
     });
     if (error) throw error;
 
@@ -91,6 +98,7 @@ export async function POST(req: Request) {
       phone: values.contact,
       company: values.company,
       message: values.message,
+      ...source,
     }).catch((err: unknown) => console.error("Contact request email error:", err));
 
     appendLeadToSheet('Contact Us', {
@@ -99,6 +107,7 @@ export async function POST(req: Request) {
       phone: values.contact,
       company: values.company,
       message: values.message,
+      ...source,
     }).catch(() => {});
 
     return NextResponse.json({ success: true });

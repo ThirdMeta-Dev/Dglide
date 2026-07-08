@@ -31,6 +31,7 @@ export default async function BlogsPage() {
     limit: 100,
     sortField: 'publishedAt',
     sortDir: 'desc',
+    fields: 'list',
   })
 
   return <BlogsClient posts={posts} />

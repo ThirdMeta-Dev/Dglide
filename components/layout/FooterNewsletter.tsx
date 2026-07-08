@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { getBrowserLeadSource } from "@/lib/lead-source";
 
 interface Props {
   heading: string;
@@ -24,7 +25,7 @@ export default function FooterNewsletter({ heading, placeholder, buttonLabel }: 
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed }),
+        body: JSON.stringify({ email: trimmed, ...getBrowserLeadSource() }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));

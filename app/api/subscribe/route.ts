@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { appendLeadToSheet } from '@/lib/sheets'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { sendNotification } from '@/lib/mailer'
+import { readLeadSource } from '@/lib/lead-source'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -17,16 +18,18 @@ export async function POST(req: Request) {
   }
 
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : ''
+  const source = readLeadSource(body, 'Newsletter Subscribe', req.headers.get('referer'))
 
   if (!email || email.length > 254 || !EMAIL_RE.test(email))
     return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 })
 
-  appendLeadToSheet('Newsletter Subscribe', { email }).catch(() => {})
+  appendLeadToSheet('Newsletter Subscribe', { email, ...source }).catch(() => {})
   sendNotification('New Newsletter Subscribe', {
     name: 'Newsletter Subscriber',
     email,
     company: 'Newsletter',
     message: 'Subscribed from the website newsletter form.',
+    ...source,
   }).catch((err: unknown) => console.error('Newsletter subscribe email error:', err))
 
   return NextResponse.json({ success: true })

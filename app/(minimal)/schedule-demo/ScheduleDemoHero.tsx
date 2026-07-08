@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { getBrowserLeadSource } from "@/lib/lead-source";
 
 const LOGO_SRCS = [
   "/logos/logo-1.png",
@@ -76,7 +77,7 @@ export default function ScheduleDemoHero({
       const res = await fetch("/api/demo-requests", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ...getBrowserLeadSource() }),
       });
       if (!res.ok) throw new Error("Failed");
       setSubmitted(true);

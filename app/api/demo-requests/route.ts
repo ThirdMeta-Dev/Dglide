@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { sendNotification } from "@/lib/mailer";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { appendLeadToSheet } from "@/lib/sheets";
+import { appendLeadSourceToMessage, readLeadSource } from "@/lib/lead-source";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_CHARS_RE = /^[+\d\s().-]+$/;
@@ -28,6 +29,7 @@ export async function POST(req: Request) {
   const contact = readString(body.contact);
   const company = readString(body.company);
   const message = readString(body.message);
+  const source = readLeadSource(body, "Schedule Demo", req.headers.get("referer"));
 
   const errors: Record<string, string> = {};
   const digitCount = contact.replace(/\D/g, "").length;
@@ -48,15 +50,16 @@ export async function POST(req: Request) {
 
   try {
     const supabase = await createClient();
+    const storedMessage = appendLeadSourceToMessage(message, source);
     const { error } = await supabase.from("dglide_demo_requests").insert({
-      name, email, contact: contact || null, company, message: message || null,
+      name, email, contact: contact || null, company, message: storedMessage || null,
     });
     if (error) throw error;
 
-    sendNotification(`New Demo Request — ${company}`, { name, email, phone: contact, company, message })
+    sendNotification(`New Demo Request — ${company}`, { name, email, phone: contact, company, message, ...source })
       .catch((err: unknown) => console.error("Demo request email error:", err));
 
-    appendLeadToSheet('Demo Request', { name, email, phone: contact, company, message }).catch(() => {});
+    appendLeadToSheet('Demo Request', { name, email, phone: contact, company, message, ...source }).catch(() => {});
 
     return NextResponse.json({ success: true });
   } catch (err) {

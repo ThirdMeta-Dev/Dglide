@@ -21,7 +21,7 @@ import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 export default async function HomePage() {
   const [sections, { docs: blogPosts }] = await Promise.all([
     getHomepageSections(),
-    listBlogPosts({ publishedOnly: true, limit: 1, sortField: 'publishedAt', sortDir: 'desc' }),
+    listBlogPosts({ publishedOnly: true, limit: 1, sortField: 'publishedAt', sortDir: 'desc', fields: 'list' }),
   ]);
 
   return (

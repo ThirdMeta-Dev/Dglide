@@ -396,7 +396,7 @@ function AuthorSection({ post }: { post: BlogPost }) {
 
 export async function generateStaticParams() {
   const { listBlogPosts } = await import('@/lib/blog-db')
-  const { docs } = await listBlogPosts({ publishedOnly: true, limit: 500 })
+  const { docs } = await listBlogPosts({ publishedOnly: true, limit: 500, fields: 'list' })
   return docs.map((p) => ({ slug: p.slug }))
 }
 

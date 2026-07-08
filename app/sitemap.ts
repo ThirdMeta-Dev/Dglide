@@ -26,6 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     limit: 500,
     sortField: 'publishedAt',
     sortDir: 'desc',
+    fields: 'list',
   })
 
   const blogEntries: MetadataRoute.Sitemap = posts.map((post) => ({

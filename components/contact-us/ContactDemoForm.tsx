@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { getBrowserLeadSource } from "@/lib/lead-source";
 
 type FieldName = "name" | "email" | "contact" | "company" | "message";
 type FormState = Record<FieldName, string>;
@@ -105,7 +105,7 @@ export default function ContactDemoForm() {
       const response = await fetch("/api/contact-requests", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ...getBrowserLeadSource() }),
       });
       const result = (await response.json().catch(() => ({}))) as {
         error?: string;

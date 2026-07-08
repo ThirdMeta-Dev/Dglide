@@ -203,6 +203,49 @@ const T_AUTHORS = 'dglide_blog_authors'
 const T_SETTINGS = 'dglide_blog_settings'
 const STORAGE_BUCKET = 'dglide-blog-media'
 
+const BLOG_LIST_FIELDS = [
+  'id',
+  'title',
+  'slug',
+  'excerpt',
+  'status',
+  'post_type',
+  'author',
+  'featured_image_url',
+  'published_at',
+  'is_featured',
+  'tags',
+  'categories',
+  'created_at',
+  'updated_at',
+].join(',')
+
+const BLOG_PUBLIC_DETAIL_FIELDS = [
+  'id',
+  'title',
+  'slug',
+  'excerpt',
+  'content_html',
+  'status',
+  'post_type',
+  'author',
+  'author_bio',
+  'author_title',
+  'author_avatar_url',
+  'featured_image_url',
+  'seo_title',
+  'seo_description',
+  'focus_keyword',
+  'published_at',
+  'is_featured',
+  'reading_time',
+  'tags',
+  'categories',
+  'detail_settings',
+  'created_at',
+  'updated_at',
+].join(',')
+
 async function uniqueSlug(baseSlug: string, currentId?: string): Promise<string> {
   const base = slugify(baseSlug || 'untitled') || 'untitled'
   let slug = base
@@ -226,7 +269,7 @@ export async function getBlogPost(id: string): Promise<BlogPost | null> {
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
-    const { data } = await supabase.from(T_BLOGS).select('*').eq('slug', slug).maybeSingle()
+    const { data } = await supabase.from(T_BLOGS).select(BLOG_PUBLIC_DETAIL_FIELDS).eq('slug', slug).maybeSingle()
     return data ? normalizeBlog(data) : null
   } catch {
     return null
@@ -244,6 +287,7 @@ export async function listBlogPosts(
     sortField?: string
     sortDir?: 'asc' | 'desc'
     publishedOnly?: boolean
+    fields?: 'full' | 'list'
   } = {}
 ) {
   const page = Math.max(1, options.page || 1)
@@ -261,7 +305,8 @@ export async function listBlogPosts(
   const sortCol = sortMap[options.sortField || ''] || 'updated_at'
   const ascending = options.sortDir === 'asc'
 
-  let query = supabase.from(T_BLOGS).select('*', { count: 'exact' })
+  const selectFields = options.fields === 'list' ? BLOG_LIST_FIELDS : '*'
+  let query = supabase.from(T_BLOGS).select(selectFields, { count: 'exact' })
 
   if (options.search) {
     // Strip PostgREST special characters to prevent filter injection
