@@ -207,6 +207,9 @@ export default function BlogEditor({ postId, onBack }: Props) {
   const [pasteImageWarning, setPasteImageWarning] = useState(false)
 
   const autoSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  // True once the loaded post has been written into the form fields —
+  // field changes before hydration must not mark the post as edited
+  const hydratedRef = useRef(false)
   // Stable refs so closures inside useEditor always call the latest function
   const uploadBinaryImageRef = useRef<(file: File) => Promise<void>>(async () => {})
   const triggerAutoSaveRef = useRef<() => void>(() => {})
@@ -494,6 +497,9 @@ export default function BlogEditor({ postId, onBack }: Props) {
 
   async function saveDraft(overrides: Partial<BlogPost> = {}): Promise<boolean> {
     if (!currentId || !editor) return false
+    // Never save before the post has loaded — a premature save would overwrite
+    // the row with this component's empty initial state (blank title/slug, status 'draft')
+    if (!post) return false
     setSaveStatus('saving')
     try {
       const res = await fetch(`/api/admin/blogs/${currentId}`, {
@@ -537,6 +543,17 @@ export default function BlogEditor({ postId, onBack }: Props) {
     if (!ok) return
     setStatus('published')
     setPublishedAt(now.slice(0, 16))
+    await fetch('/api/admin/blogs/revalidate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug }),
+    })
+  }
+
+  // Save edits to an already-published post without touching its status
+  async function handleUpdate() {
+    const ok = await saveDraft({ status: 'published' })
+    if (!ok) return
     await fetch('/api/admin/blogs/revalidate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -607,6 +624,19 @@ export default function BlogEditor({ postId, onBack }: Props) {
     setReadingTime(data.readingTime)
     setWordCount(countWords(data.contentHtml))
   }
+
+  // Any metadata edit after hydration marks the post as unsaved so the
+  // Update / Publish button lights up (content edits are handled in onUpdate)
+  useEffect(() => {
+    if (!hydratedRef.current) return
+    setSaveStatus('unsaved')
+  }, [title, slug, excerpt, author, authorTitle, authorBio, authorAvatarUrl, featuredImageUrl, seoTitle, seoDescription, focusKeyword, tags, isFeatured, postType, publishedAt])
+
+  // Runs after the effect above on the render where populatePost filled the fields,
+  // so the initial hydration itself never counts as an edit
+  useEffect(() => {
+    if (post) hydratedRef.current = true
+  }, [post])
 
   // Set editor content after editor + post are ready
   useEffect(() => {
@@ -835,26 +865,46 @@ export default function BlogEditor({ postId, onBack }: Props) {
             <Sparkles className="w-3.5 h-3.5" />
             AI
           </button>
-          <button
-            onClick={() => saveDraft()}
-            className="px-3 py-1.5 rounded-lg bg-[#F0F0F0] text-[#333] text-xs font-medium hover:bg-[#E5E5E5] transition-colors [font-family:var(--font-inter)]"
-          >
-            Save Draft
-          </button>
           {status === 'published' ? (
-            <button
-              onClick={handleUnpublish}
-              className="px-3 py-1.5 rounded-lg bg-orange-500 text-white text-xs font-medium hover:bg-orange-600 transition-colors [font-family:var(--font-inter)]"
-            >
-              Unpublish
-            </button>
+            <>
+              <button
+                onClick={handleUnpublish}
+                disabled={!post}
+                className="px-3 py-1.5 rounded-lg bg-[#F0F0F0] text-[#555] text-xs font-medium hover:bg-orange-100 hover:text-orange-600 transition-colors disabled:opacity-40 [font-family:var(--font-inter)]"
+              >
+                Unpublish
+              </button>
+              <button
+                onClick={handleUpdate}
+                disabled={!post}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors disabled:opacity-40 [font-family:var(--font-inter)] ${
+                  saveStatus === 'unsaved'
+                    ? 'bg-[#1C2BFF] text-white hover:bg-[#141FB5] ring-2 ring-[#1C2BFF]/30'
+                    : 'bg-[#1C2BFF]/15 text-[#1C2BFF] hover:bg-[#1C2BFF]/25'
+                }`}
+              >
+                Update
+              </button>
+            </>
           ) : (
-            <button
-              onClick={handlePublish}
-              className="px-3 py-1.5 rounded-lg bg-[#1C2BFF] text-white text-xs font-medium hover:bg-[#141FB5] transition-colors [font-family:var(--font-inter)]"
-            >
-              Publish
-            </button>
+            <>
+              <button
+                onClick={() => saveDraft()}
+                disabled={!post}
+                className="px-3 py-1.5 rounded-lg bg-[#F0F0F0] text-[#333] text-xs font-medium hover:bg-[#E5E5E5] transition-colors disabled:opacity-40 [font-family:var(--font-inter)]"
+              >
+                Save Draft
+              </button>
+              <button
+                onClick={handlePublish}
+                disabled={!post}
+                className={`px-3 py-1.5 rounded-lg bg-[#1C2BFF] text-white text-xs font-medium hover:bg-[#141FB5] transition-colors disabled:opacity-40 [font-family:var(--font-inter)] ${
+                  saveStatus === 'unsaved' ? 'ring-2 ring-[#1C2BFF]/30' : ''
+                }`}
+              >
+                Publish
+              </button>
+            </>
           )}
         </div>
       </div>

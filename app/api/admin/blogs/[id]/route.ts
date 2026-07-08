@@ -36,6 +36,17 @@ export async function PUT(req: Request, ctx: Ctx) {
   const { id } = await ctx.params
   const body = await req.json()
   const before = await getBlogPost(id)
+  // Safety net: an editor instance that saves before its data has loaded sends
+  // its empty initial state (blank title/slug, status 'draft'). Never let such
+  // a request blank an existing title/slug or silently unpublish the post.
+  if (before && body && typeof body === 'object') {
+    const blankingTitle = body.title === '' && before.title !== ''
+    if (blankingTitle) {
+      delete body.title
+      if (body.status === 'draft' && before.status === 'published') delete body.status
+    }
+    if (body.slug === '' && before.slug !== '') delete body.slug
+  }
   const updated = await updateBlogPost(id, body)
   if (!updated) return NextResponse.json({ error: 'Post not found' }, { status: 404 })
   revalidateBlogPaths(before?.slug, updated.slug)
