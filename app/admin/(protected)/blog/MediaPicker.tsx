@@ -7,7 +7,7 @@ import type { BlogMediaItem } from '@/lib/blog-db'
 type Props = {
   open: boolean
   onClose: () => void
-  onSelect: (url: string) => void
+  onSelect: (url: string, alt?: string) => void
 }
 
 export default function MediaPicker({ open, onClose, onSelect }: Props) {
@@ -41,7 +41,7 @@ export default function MediaPicker({ open, onClose, onSelect }: Props) {
       const res = await fetch('/api/admin/blogs/media', { method: 'POST', body: fd })
       const data = await res.json()
       if (data.url) {
-        onSelect(data.url)
+        onSelect(data.url, data.alt || '')
         onClose()
       }
     } finally {
@@ -116,7 +116,7 @@ export default function MediaPicker({ open, onClose, onSelect }: Props) {
                     <button
                       key={item.id}
                       onClick={() => {
-                        onSelect(item.url)
+                        onSelect(item.url, item.alt || '')
                         onClose()
                       }}
                       className="group relative aspect-square rounded-lg overflow-hidden border border-[#E5E5E5] hover:border-[#1C2BFF] hover:ring-2 hover:ring-[#1C2BFF]/20 transition-all bg-[#F8F8F8]"

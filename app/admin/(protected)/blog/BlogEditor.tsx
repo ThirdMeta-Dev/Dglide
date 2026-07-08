@@ -174,6 +174,8 @@ export default function BlogEditor({ postId, onBack }: Props) {
   const [showAiPanel, setShowAiPanel] = useState(false)
   const [aiTab, setAiTab] = useState<AiTab>('write')
   const [mediaTarget, setMediaTarget] = useState<'featured' | 'editor' | null>(null)
+  const [showAltPopover, setShowAltPopover] = useState(false)
+  const [altDraft, setAltDraft] = useState('')
 
   // AI write
   const [aiTopic, setAiTopic] = useState('')
@@ -674,8 +676,13 @@ export default function BlogEditor({ postId, onBack }: Props) {
     }
   }
 
-  function insertImage(url: string) {
-    editor?.chain().focus().setImage({ src: url }).run()
+  function insertImage(url: string, alt?: string) {
+    editor?.chain().focus().setImage({ src: url, alt: alt || '' }).run()
+  }
+
+  function applyImageAlt() {
+    editor?.chain().focus().updateAttributes('image', { alt: altDraft.trim() }).run()
+    setShowAltPopover(false)
   }
 
   // AI write
@@ -1069,6 +1076,40 @@ export default function BlogEditor({ postId, onBack }: Props) {
             >
               <ImageIcon className="w-4 h-4" />
             </ToolbarBtn>
+            <div className="relative">
+              <ToolbarBtn
+                active={Boolean(editor?.isActive('image') && editor?.getAttributes('image').alt)}
+                disabled={!editor?.isActive('image')}
+                onClick={() => {
+                  setAltDraft((editor?.getAttributes('image').alt as string) || '')
+                  setShowAltPopover((p) => !p)
+                }}
+                title="Image alt text — click an image in the post first"
+              >
+                <span className="text-[10px] font-bold leading-none [font-family:var(--font-inter)]">ALT</span>
+              </ToolbarBtn>
+              {showAltPopover && editor?.isActive('image') && (
+                <div className="absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg border border-[#E5E5E5] p-2 z-20 w-80 flex items-center gap-2">
+                  <input
+                    autoFocus
+                    value={altDraft}
+                    onChange={(e) => setAltDraft(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') applyImageAlt()
+                      if (e.key === 'Escape') setShowAltPopover(false)
+                    }}
+                    placeholder="Describe this image (alt text)…"
+                    className="flex-1 text-xs px-2 py-1.5 rounded-md border border-[#E5E5E5] focus:outline-none focus:border-[#1C2BFF] [font-family:var(--font-inter)]"
+                  />
+                  <button
+                    onClick={applyImageAlt}
+                    className="px-2.5 py-1.5 rounded-md bg-[#1C2BFF] text-white text-xs font-medium hover:bg-[#141FB5] transition-colors [font-family:var(--font-inter)]"
+                  >
+                    Save
+                  </button>
+                </div>
+              )}
+            </div>
 
             <div className="w-px h-5 bg-[#E5E5E5] mx-1" />
 
@@ -1654,9 +1695,9 @@ export default function BlogEditor({ postId, onBack }: Props) {
       <MediaPicker
         open={mediaTarget !== null}
         onClose={() => setMediaTarget(null)}
-        onSelect={(url) => {
+        onSelect={(url, alt) => {
           if (mediaTarget === 'featured') setFeaturedImageUrl(url)
-          else if (mediaTarget === 'editor') insertImage(url)
+          else if (mediaTarget === 'editor') insertImage(url, alt)
           setMediaTarget(null)
         }}
       />
