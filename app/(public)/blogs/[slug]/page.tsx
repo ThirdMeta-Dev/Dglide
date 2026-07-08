@@ -347,7 +347,8 @@ function HeroSection({ post }: { post: BlogPost }) {
             <Image
               src={post.featuredImageUrl}
               alt={post.title}
-              fill
+              width={1200}
+              height={630}
               priority
               sizes="(max-width: 900px) 100vw, 480px"
               className={styles.heroImage}
