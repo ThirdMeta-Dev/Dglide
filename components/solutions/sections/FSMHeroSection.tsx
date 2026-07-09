@@ -21,6 +21,8 @@ type FSMHeroSectionProps = {
   bullets?: string[];
   primaryCta?: string;
   secondaryCta?: string;
+  /* When set, the secondary button scrolls to this element id instead of the contact form */
+  secondaryScrollTargetId?: string;
   imageSrc?: string;
   imageAlt?: string;
   actionsInline?: boolean;
@@ -33,6 +35,7 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
   bullets = DEFAULT_BULLETS,
   primaryCta = "Book a Demo",
   secondaryCta = "ITSM Capabilities",
+  secondaryScrollTargetId,
   imageSrc = "/solutions/itsm-hero-illustration.png",
   imageAlt = "DGlide service management dashboard",
   actionsInline = false,
@@ -49,7 +52,13 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
       </SolutionsButton>
       <SolutionsButton
         variant="outline"
-        onClick={() => scrollToContact(router)}
+        onClick={() => {
+          if (secondaryScrollTargetId) {
+            document.getElementById(secondaryScrollTargetId)?.scrollIntoView({ behavior: "smooth" });
+          } else {
+            scrollToContact(router);
+          }
+        }}
       >
         {secondaryCta}
       </SolutionsButton>

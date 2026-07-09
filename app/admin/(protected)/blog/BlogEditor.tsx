@@ -1342,41 +1342,66 @@ export default function BlogEditor({ postId, onBack }: Props) {
             <div className="space-y-2">
               <div className="relative">
                 <label className="text-[10px] text-[#AAA] [font-family:var(--font-inter)] block mb-1">
+                  Saved Authors
+                </label>
+                <button
+                  onClick={() => setShowAuthorSugg((p) => !p)}
+                  onBlur={() => setTimeout(() => setShowAuthorSugg(false), 200)}
+                  className="w-full h-8 px-2 rounded-lg border border-[#E5E5E5] text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF] flex items-center justify-between gap-2 bg-white text-left"
+                >
+                  <span className={author ? 'text-[#333]' : 'text-[#BBB]'}>
+                    {author || 'Select an author…'}
+                  </span>
+                  <ChevronDown className="w-3 h-3 text-[#888] flex-shrink-0" />
+                </button>
+                {showAuthorSugg && authorSuggestions.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 bg-white border border-[#E5E5E5] rounded-lg shadow-lg mt-1 z-10 max-h-48 overflow-y-auto">
+                    {authorSuggestions.map((a) => (
+                      <button
+                        key={a.id}
+                        onClick={() => {
+                          setAuthor(a.name)
+                          setAuthorTitle(a.title)
+                          setAuthorBio(a.bio)
+                          setAuthorAvatarUrl(a.avatarUrl)
+                          setShowAuthorSugg(false)
+                        }}
+                        className={`w-full flex items-center gap-2 text-left px-3 py-2 text-xs hover:bg-[#F5F5F5] [font-family:var(--font-inter)] ${
+                          a.name === author ? 'bg-[#1C2BFF]/5 text-[#1C2BFF]' : 'text-[#333]'
+                        }`}
+                      >
+                        {a.avatarUrl ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={a.avatarUrl}
+                            alt={a.name}
+                            className="w-6 h-6 rounded-full object-cover flex-shrink-0 border border-[#E5E5E5]"
+                          />
+                        ) : (
+                          <span className="w-6 h-6 rounded-full bg-[#1C2BFF]/10 text-[#1C2BFF] text-[10px] font-semibold flex items-center justify-center flex-shrink-0">
+                            {a.name.slice(0, 1).toUpperCase()}
+                          </span>
+                        )}
+                        <span className="flex-1 min-w-0">
+                          <span className="block truncate font-medium">{a.name}</span>
+                          {a.bio && (
+                            <span className="block truncate text-[10px] text-[#999]">{a.bio}</span>
+                          )}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div>
+                <label className="text-[10px] text-[#AAA] [font-family:var(--font-inter)] block mb-1">
                   Name
                 </label>
                 <input
                   value={author}
-                  onChange={(e) => {
-                    setAuthor(e.target.value)
-                    setShowAuthorSugg(true)
-                  }}
-                  onBlur={() => setTimeout(() => setShowAuthorSugg(false), 200)}
+                  onChange={(e) => setAuthor(e.target.value)}
                   className="w-full h-8 px-2 rounded-lg border border-[#E5E5E5] text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF]"
                 />
-                {showAuthorSugg &&
-                  authorSuggestions.filter((a) =>
-                    a.name.toLowerCase().includes(author.toLowerCase())
-                  ).length > 0 && (
-                    <div className="absolute top-full left-0 right-0 bg-white border border-[#E5E5E5] rounded-lg shadow-lg mt-1 z-10 max-h-32 overflow-y-auto">
-                      {authorSuggestions
-                        .filter((a) => a.name.toLowerCase().includes(author.toLowerCase()))
-                        .map((a) => (
-                          <button
-                            key={a.id}
-                            onClick={() => {
-                              setAuthor(a.name)
-                              setAuthorTitle(a.title)
-                              setAuthorBio(a.bio)
-                              setAuthorAvatarUrl(a.avatarUrl)
-                              setShowAuthorSugg(false)
-                            }}
-                            className="w-full text-left px-3 py-1.5 text-xs text-[#333] hover:bg-[#F5F5F5] [font-family:var(--font-inter)]"
-                          >
-                            {a.name}
-                          </button>
-                        ))}
-                    </div>
-                  )}
               </div>
               <div>
                 <label className="text-[10px] text-[#AAA] [font-family:var(--font-inter)] block mb-1">

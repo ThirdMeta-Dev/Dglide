@@ -869,10 +869,10 @@
     order: 1;
   }
 
-  /* Body copy: 12px */
+  /* Body copy: 14px */
   .articleContent {
-    font-size: 12px;
-    line-height: 22px;
+    font-size: 14px;
+    line-height: 24px;
   }
 
   /* H2: 22px, H3: 18px */
@@ -891,11 +891,20 @@
     line-height: 28px;
   }
 
+  /* Keep avatar and author text side by side on mobile */
   .authorBoxTop {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
   }
 
   .contactDemoWrap {
-    padding: 64px 0 80px;
+    padding: 0 0 80px;
+  }
+
+  /* Kill the global mobile section padding inside the demo wrap too —
+     it stacks with the wrapper's own padding */
+  .contactDemoWrap section {
+    padding-top: 0 !important;
   }
 }

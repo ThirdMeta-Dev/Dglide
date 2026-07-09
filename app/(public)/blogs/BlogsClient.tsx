@@ -365,6 +365,16 @@ function LibrarySection({
   const [filterType, setFilterType] = useState('')
   const [page, setPage] = useState(1)
   const [showFilter, setShowFilter] = useState(false)
+  // On mobile the staggered reveal makes cards appear late — render them plainly
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase()
@@ -448,22 +458,40 @@ function LibrarySection({
 
         {visiblePosts.length > 0 ? (
           <div className={styles.libraryList}>
-            <StaggerReveal key={`${currentPage}-${search}-${filterType}`} className={styles.cardGrid}>
-              {visiblePosts.map((post, index) => {
-                const postIndex = (currentPage - 1) * PAGE_SIZE + index
+            {isMobile ? (
+              <div className={styles.cardGrid}>
+                {visiblePosts.map((post, index) => {
+                  const postIndex = (currentPage - 1) * PAGE_SIZE + index
 
-                return (
-                  <StaggerItem key={postRenderKey('library', post, postIndex)}>
+                  return (
                     <BlogCard
+                      key={postRenderKey('library', post, postIndex)}
                       post={post}
                       stat={index === 1 || index === 4 ? "Editor's Pick" : undefined}
                       isBookmarked={bookmarks.has(post.slug)}
                       onBookmark={onBookmark}
                     />
-                  </StaggerItem>
-                )
-              })}
-            </StaggerReveal>
+                  )
+                })}
+              </div>
+            ) : (
+              <StaggerReveal key={`${currentPage}-${search}-${filterType}`} className={styles.cardGrid}>
+                {visiblePosts.map((post, index) => {
+                  const postIndex = (currentPage - 1) * PAGE_SIZE + index
+
+                  return (
+                    <StaggerItem key={postRenderKey('library', post, postIndex)}>
+                      <BlogCard
+                        post={post}
+                        stat={index === 1 || index === 4 ? "Editor's Pick" : undefined}
+                        isBookmarked={bookmarks.has(post.slug)}
+                        onBookmark={onBookmark}
+                      />
+                    </StaggerItem>
+                  )
+                })}
+              </StaggerReveal>
+            )}
 
             {totalPages > 1 && (
               <nav className={styles.pagination} aria-label="Blog pagination">
@@ -567,7 +595,6 @@ function ResourceHubSection({ post }: { post: BlogPost | undefined }) {
                 <div className={styles.resourceText}>
                   <div className={styles.resourceCopy}>
                     <h3 className={styles.resourceCardTitle}>{post.title}</h3>
-                    <p className={styles.resourceExcerpt}>{post.excerpt}</p>
                   </div>
                   <span className={styles.readMore}>
                     Read More

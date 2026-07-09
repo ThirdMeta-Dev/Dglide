@@ -162,7 +162,7 @@ export default function ContactDemoForm() {
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
       <div className="flex flex-col items-center gap-4">
         <div className="relative h-20 w-[78px] overflow-hidden rounded-full border border-[#F3F3F3]">
-          <Image src="/contact-us/demo-guide.png" alt="DGlide guide" fill sizes="78px" className="object-cover object-top" />
+          <Image src="/demo/avatar.png" alt="Vinayak from DGlide" fill sizes="78px" className="object-cover object-top" />
         </div>
         <div className="relative w-full rounded-xl bg-[#F3F3F3] px-7 py-4 text-center">
           <span className="absolute -top-3 left-1/2 h-6 w-6 -translate-x-1/2 rotate-45 rounded-sm bg-[#F3F3F3]" />

@@ -522,7 +522,7 @@ export function DemoSection() {
     <section id="book-demo" className="mx-auto w-full max-w-[1200px]">
       <div className="ct-demo-body relative min-h-[707px] overflow-hidden px-5 py-8 lg:px-0">
         <div className="relative z-10 mx-auto flex max-w-[1069px] flex-col gap-10 lg:flex-row lg:items-start lg:gap-[49px]">
-          <div className="flex w-full flex-col gap-[60px] lg:w-[467px]">
+          <div className="flex w-full flex-col gap-6 lg:w-[467px] lg:gap-[60px]">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-2">
                 <div className="inline-flex items-center gap-2 text-sm text-[#FF7F1C]" style={fontSora}>

@@ -103,6 +103,16 @@ export type BlogAuthor = {
   updatedAt: string
 }
 
+export type UserRole = 'administrator' | 'editor' | 'author' | 'contributor'
+
+export const USER_ROLES: UserRole[] = ['administrator', 'editor', 'author', 'contributor']
+
+export type AdminUser = BlogAuthor & {
+  email: string
+  role: UserRole
+  postCount: number
+}
+
 
 function normalizeDetailSettings(value: unknown): BlogDetailSettings {
   const data =
@@ -514,6 +524,167 @@ export async function listAuthors(): Promise<BlogAuthor[]> {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }))
+}
+
+// ─── User management (WordPress-style) ────────────────────────────────────────
+// Users are author rows in T_AUTHORS. Role + email live in a JSON map inside
+// T_SETTINGS (key 'users_meta') because the authors table has no such columns.
+
+const USERS_META_KEY = 'users_meta'
+
+type UserMeta = { role?: string; email?: string }
+type UsersMetaMap = Record<string, UserMeta>
+
+function normalizeRole(value: unknown): UserRole {
+  return USER_ROLES.includes(value as UserRole) ? (value as UserRole) : 'author'
+}
+
+async function getUsersMeta(): Promise<UsersMetaMap> {
+  const { data } = await supabase
+    .from(T_SETTINGS)
+    .select('value')
+    .eq('key', USERS_META_KEY)
+    .maybeSingle()
+  return data?.value && typeof data.value === 'object' ? (data.value as UsersMetaMap) : {}
+}
+
+async function setUsersMeta(meta: UsersMetaMap): Promise<void> {
+  const { error } = await supabase
+    .from(T_SETTINGS)
+    .upsert(
+      { key: USERS_META_KEY, value: meta, updated_at: new Date().toISOString() },
+      { onConflict: 'key' }
+    )
+  if (error) throw error
+}
+
+async function countPostsByAuthor(): Promise<Record<string, number>> {
+  const { data } = await supabase
+    .from(T_BLOGS)
+    .select('author')
+    .neq('status', 'trashed')
+    .neq('author', '')
+  const counts: Record<string, number> = {}
+  for (const row of data || []) counts[row.author] = (counts[row.author] || 0) + 1
+  return counts
+}
+
+export async function listUsers(): Promise<AdminUser[]> {
+  const [authors, meta, counts] = await Promise.all([
+    listAuthors(),
+    getUsersMeta(),
+    countPostsByAuthor(),
+  ])
+  return authors.map((a) => ({
+    ...a,
+    email: meta[a.id]?.email || '',
+    role: normalizeRole(meta[a.id]?.role),
+    postCount: counts[a.name] || 0,
+  }))
+}
+
+export type UserInput = {
+  name?: string
+  title?: string
+  bio?: string
+  avatarUrl?: string
+  linkedin?: string
+  twitter?: string
+  email?: string
+  role?: string
+}
+
+export async function createUser(input: UserInput): Promise<AdminUser> {
+  const name = (input.name || '').trim()
+  if (!name) throw new Error('Name is required')
+  const id = randomUUID()
+  const now = new Date().toISOString()
+  const { data, error } = await supabase
+    .from(T_AUTHORS)
+    .insert({
+      id,
+      name,
+      title: input.title || '',
+      bio: input.bio || '',
+      avatar_url: input.avatarUrl || '',
+      linkedin: input.linkedin || '',
+      twitter: input.twitter || '',
+      created_at: now,
+      updated_at: now,
+    })
+    .select()
+    .single()
+  if (error) throw error
+  const meta = await getUsersMeta()
+  meta[id] = { role: normalizeRole(input.role), email: input.email || '' }
+  await setUsersMeta(meta)
+  return { ...normalizeAuthor(data), email: meta[id].email || '', role: normalizeRole(meta[id].role), postCount: 0 }
+}
+
+export async function updateUser(id: string, input: UserInput): Promise<AdminUser | null> {
+  const { data: current } = await supabase.from(T_AUTHORS).select('*').eq('id', id).maybeSingle()
+  if (!current) return null
+  const now = new Date().toISOString()
+  const nextName = input.name !== undefined ? input.name.trim() : current.name
+  if (!nextName) throw new Error('Name is required')
+  const { data, error } = await supabase
+    .from(T_AUTHORS)
+    .update({
+      name: nextName,
+      title: input.title ?? current.title ?? '',
+      bio: input.bio ?? current.bio ?? '',
+      avatar_url: input.avatarUrl ?? current.avatar_url ?? '',
+      linkedin: input.linkedin ?? current.linkedin ?? '',
+      twitter: input.twitter ?? current.twitter ?? '',
+      updated_at: now,
+    })
+    .eq('id', id)
+    .select()
+    .single()
+  if (error) throw error
+
+  const meta = await getUsersMeta()
+  meta[id] = {
+    role: normalizeRole(input.role ?? meta[id]?.role),
+    email: input.email ?? meta[id]?.email ?? '',
+  }
+  await setUsersMeta(meta)
+
+  // Keep the author byline on existing posts in sync when the profile changes
+  if (
+    current.name &&
+    (nextName !== current.name ||
+      input.bio !== undefined ||
+      input.title !== undefined ||
+      input.avatarUrl !== undefined)
+  ) {
+    await supabase
+      .from(T_BLOGS)
+      .update({
+        author: nextName,
+        author_bio: input.bio ?? current.bio ?? '',
+        author_title: input.title ?? current.title ?? '',
+        author_avatar_url: input.avatarUrl ?? current.avatar_url ?? '',
+      })
+      .eq('author', current.name)
+  }
+
+  const counts = await countPostsByAuthor()
+  return {
+    ...normalizeAuthor(data),
+    email: meta[id].email || '',
+    role: normalizeRole(meta[id].role),
+    postCount: counts[nextName] || 0,
+  }
+}
+
+export async function deleteUser(id: string): Promise<void> {
+  await supabase.from(T_AUTHORS).delete().eq('id', id)
+  const meta = await getUsersMeta()
+  if (meta[id]) {
+    delete meta[id]
+    await setUsersMeta(meta)
+  }
 }
 
 export async function listMediaItems(

@@ -13,6 +13,7 @@ import {
   LogOut,
   CalendarCheck,
   BookOpen,
+  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
@@ -20,6 +21,7 @@ import { createClient } from "@/lib/supabase/client";
 const navItems = [
   { label: "Dashboard",    href: "/admin",               icon: LayoutDashboard },
   { label: "Blog",         href: "/admin/blog",           icon: BookOpen },
+  { label: "Users",        href: "/admin/users",          icon: Users },
   { label: "Pages",        href: "/admin/pages",          icon: FileText },
   { label: "Demo Requests",href: "/admin/demo-requests",  icon: CalendarCheck },
   { label: "Header / Nav", href: "/admin/header",         icon: Navigation },

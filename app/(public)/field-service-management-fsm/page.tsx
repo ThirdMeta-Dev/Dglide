@@ -104,6 +104,7 @@ export default function FSMPage() {
         footerItems={fsmBetterWayFooterItems}
       />
       <WorkflowChangeSection
+        sectionId="core-fsm-capabilities"
         title={fsmWorkflowChangeTitle}
         subtitle={fsmWorkflowChangeSubtitle}
         bullets={fsmWorkflowChangeBullets}

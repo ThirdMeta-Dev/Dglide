@@ -133,7 +133,16 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
               alt="DGlide Platform"
               width={1200}
               height={680}
-              className="w-full h-auto rounded-t-2xl object-cover"
+              className="hidden md:block w-full h-auto rounded-t-2xl object-cover"
+              priority
+            />
+            {/* Portrait variant for mobile — desktop image is too wide to read small */}
+            <Image
+              src="/hero-product-mobile.png"
+              alt="DGlide Platform"
+              width={1066}
+              height={1600}
+              className="md:hidden w-full h-auto"
               priority
             />
           </div>

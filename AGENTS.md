@@ -1,77 +1,76 @@
 <claude-mem-context>
 # Memory Context
 
-# [Dglide] recent context, 2026-07-07 12:43am GMT+5:30
+# [Dglide] recent context, 2026-07-08 6:15pm GMT+5:30
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (19,821t read) | 2,193,599t work | 99% savings
+Stats: 50 obs (18,979t read) | 471,017t work | 96% savings
 
-### Jun 26, 2026
-5303 4:13p 🔄 DGlide Solutions — ServiceWorkflowSection Animation Upgraded from setInterval to requestAnimationFrame for Smooth Continuous Progress
-5305 4:18p 🔵 DGlide About Us — BusinessTabsSection.tsx Current Structure Inspected Before Overhaul
-5306 " ⚖️ DGlide About Us — "Built for Businesses" Section Rebranded as ITSM Capability Showcase
-5307 " ✅ DGlide About Us — 7 Capability Tab Images Copied to public/business-tabs/
-5308 4:19p 🟣 DGlide About Us — BusinessTabsSection Fully Rebuilt as 7-Tab ITSM Capability Showcase
-5309 4:21p 🔵 DGlide — User Reported Stale Content After Recent Section Updates
-5310 4:22p 🔵 DGlide Solutions — CoreCapabilitiesSection Architecture Confirmed
-5311 " 🔵 DGlide Solutions — CoreCapabilities All 7 Tabs Still Contain Lorem Ipsum Placeholder Content
-5312 4:23p ✅ DGlide Solutions — CoreCapabilities Tab Names + Content Fully Replaced with Real ITSM Copy
-5314 " 🟣 DGlide Solutions — CoreCapabilitiesSection Updated with Real Images, New TickIcon, and Heading Rewrite
-5315 " ✅ DGlide Solutions CSS — Feature Icon Style Updated from Flat Image to Styled Wrap Container
-5316 4:25p ⚖️ DGlide CoreCapabilitiesSection — Left Tab Pills Width Increase + Active White Overlay Z-Index Fix Scoped
-5317 " 🔵 DGlide Solutions — CoreCapabilitiesSection Tab CSS Architecture Confirmed in solutions-page.css
-5319 4:26p 🔴 DGlide Solutions — CoreCapabilitiesSection Tab Pills Widened + Active White Overlay Z-Index Fixed
-S4863 DGlide Solutions — CoreCapabilitiesSection Layout Gap Between Tabs and Panel Is 16px (Jun 26 at 4:26 PM)
-5320 4:28p ⚖️ DGlide Solutions — CoreCapabilitiesSection Notch Inset Adjustment Scoped
-5321 " 🔵 DGlide Solutions — CoreCapabilitiesSection Layout Gap Between Tabs and Panel Is 16px
-S4866 DGlide Solutions — CoreCapabilitiesSection white notch moved inward to stop overlapping active tab pills (Jun 26 at 4:28 PM)
-S4868 DGlide Solutions — CoreCapabilitiesSection Panel CSS Structure Located (Jun 26 at 4:28 PM)
-5323 4:30p ⚖️ DGlide Solutions — CoreCapabilitiesSection Panel Border: Gradient Orange Stroke Scoped
-5325 4:31p 🔵 DGlide Solutions — CoreCapabilitiesSection Panel CSS Structure Located
-S4869 DGlide Solutions — CoreCapabilitiesSection Content Panel Gradient Orange Border + Notch Border Integration (Jun 26 at 4:31 PM)
-S4880 DGlide TechnicianMobileSection — Full "Stop Running Service Out of an Inbox" Section Implemented (Jun 26 at 4:32 PM)
-5326 4:34p 🔵 Figma API Node Fetch Failed — Missing 'nodes' Key in Response
-5327 " ⚖️ DGlide — Accordion Section "Stop Running Service Out of an Inbox" Full Content + Image + Icons Update Scoped
-5329 4:36p 🔵 DGlide Solutions Page — Accordion Section Not Found in solutions/page.tsx via grep
-5331 " 🔵 DGlide Solutions — Target Accordion Section Identified as TechnicianMobileSection
-5332 " 🔵 DGlide TechnicianMobileSection — Full Component Structure Mapped
-5333 " 🔵 DGlide TechnicianMobileSection — Existing Data Structure and CSS Classes Mapped
-5334 4:37p ⚖️ DGlide TechnicianMobileSection — Full Update Plan Finalized Before Implementation
-5335 4:38p ✅ DGlide — Image #25 Copied to public/solutions/agent-workspace.png
-5336 " 🔵 DGlide Figma API — FIGMA_OAUTH_TOKEN Confirmed Invalid/Expired for File 3llVZUXUn7Ozs0e9784LCF
-5338 " 🔵 DGlide TechnicianMobileSection — Progress Bar Fill Is Static Width, No Animation
-5339 " 🔵 DGlide TechnicianMobileSection — Icon CSS Confirmed at 36×36px, Feature Title Uses TASA Orbiter Font
-5340 4:39p ⚖️ DGlide TechnicianMobileSection — Investigation Complete, Implementation Ready to Begin
-5342 " 🟣 DGlide TechnicianMobileSection — Full "Stop Running Service Out of an Inbox" Section Implemented
-S4883 DGlide Solutions Page — 7-Section Multi-Agent Pixel-Perfect Update: icons, visuals, copy across BetterWaySection, WorkflowChangeSection, WhatImprovesSection, RealOperationsSection, ConfigurablePlatformSection, GoLiveFasterSection, IntegrationsHubSection (Jun 26 at 4:39 PM)
-5343 4:58p ⚖️ DGlide Solutions Page — 7-Section Multi-Agent Pixel-Perfect Update Scoped
-5344 4:59p 🔵 DGlide Solutions — 7-Section Component File Names Confirmed + Image Assets Staged
-5346 5:00p 🔵 DGlide Figma API — X-Figma-Token Header Required, Authorization: Bearer Returns 403
-5347 " 🔵 DGlide GoLiveFasterSection + RealOperationsSection — Figma Content Extracted
-5348 " 🔵 DGlide solutionsPageData.ts — Current Data State for 7 Sections Before Update
-S4951 DGlide Platform Page — "Built as One Backbone" Section Sticky Stack Effect Regression Reported (Jun 26 at 5:00 PM)
-5349 5:02p 🔵 DGlide BetterWaySection — Figma Content Extracted: Title and Column Content Differ from Expected
-5350 " 🟣 DGlide Solutions Page — SVG Icon Assets Downloaded from Figma for 3 Sections
-5351 " 🔵 DGlide RealOperationsSection — Figma Solution Items Extracted (Currently Has Wrong Data)
-5352 " 🔵 DGlide Project Memory — Stored Figma Token Is Outdated, Current Token Differs
-5354 5:06p 🟣 DGlide ConfigurablePlatformSection — Tick Icon + ITSM Content Fully Applied
-5355 " 🟣 DGlide GoLiveFasterSection — Title, Description, Icons, and Card Content Updated
-5356 " 🟣 DGlide WhatImprovesSection — improvesFeatures Data Fully Updated: ITSM Titles, Descriptions, and Icon Paths
-5357 " 🔵 DGlide RealOperationsSection — Figma Left Panel Content Extracted (Challenge, Metrics, Quote)
-5358 " 🔵 DGlide BetterWaySection — SVG Icons Downloaded; Component Still Uses Placeholder section-1-icon.svg
-### Jun 27, 2026
-5427 9:57p 🔵 DGlide Platform Page — "Built as One Backbone" Section Sticky Stack Effect Regression Reported
-S4954 DGlide Platform Page — "Built as One Backbone" Sticky Card Stack Fix + "Pricing" Added to Navigation (Jun 27 at 9:57 PM)
-S4963 DGlide Platform Page — OnePlatformSection Sticky Stack Effect + Card Gap Regression Identified (Jun 27 at 9:58 PM)
-5433 10:02p 🔵 DGlide Platform Page — OnePlatformSection Sticky Stack Effect + Card Gap Regression Identified
-### Jun 28, 2026
-5443 12:25a 🔴 DGlide Platform Page — PlatformBackboneSection Sticky Stack Effect Restored + 300px Scroll Dwell Added
-5444 " 🔴 DGlide — Footer Link Label Updated: "Contact / Book Demo" → "Contact Us" in Supabase
-5445 " ✅ DGlide — Platform Page Fixes Deployed to ThirdMeta-Dev/main and Samirrx/staging (commit bf7e14e)
-S4979 DGlide Platform Page — "Built as One Backbone" Section Sticky Stack Effect Restored + Card Gap Fixed (Jun 28 at 12:25 AM)
+### Jul 7, 2026
+6195 12:43p ✅ Dglide Hero Image — Compressed File Visually Verified, Ready to Replace public/hero-product.png
+6197 12:47p ✅ Dglide Hero Image Replaced with Compressed New Asset
+6198 " 🔵 Dglide CMS Hero Image Resolves to Single Static File
+6200 12:50p ⚖️ Dglide Hero Section — Image #1 Replacement Requested with Compression
+S5475 Dglide ComparisonSection — Verify subtlePulse keyframes exist in globals.css and confirm pulse rings render on localhost:4747 after re-adding them around the Figma oval badge image (Jul 7 at 12:51 PM)
+S5479 Dglide OneSystemSection — Replace center platform image with new Figma export (node 1932:102) (Jul 7 at 12:52 PM)
+S5485 Dglide Homepage Refresh — Commit and Push All Figma Image Assets to All Remotes (Jul 7 at 12:55 PM)
+6201 12:56p 🔵 Dglide Git Repository — Branch and Remote Structure Confirmed
+6202 12:57p 🔵 Dglide — samir/main and samir/staging Both Diverged from origin/main
+6203 " 🔵 Dglide — samir/main and origin/main Have Parallel Histories (Same Messages, Different SHAs)
+6204 12:58p ✅ Dglide Homepage Refresh — All Figma Image Assets Committed (14bb771)
+6205 " ✅ Dglide Homepage Refresh — Pushed to ThirdMeta-Dev/Dglide origin/main
+S5506 Next.js Dev Server on Port 4747 Stopped (Jul 7 at 12:59 PM)
+6229 3:21p ✅ Next.js Dev Server on Port 4747 Stopped
+S5507 Next.js dev server on port 4747 stopped — user notified, no action taken (Jul 7 at 3:21 PM)
+S5685 Dglide Project Memory — Supabase Dual-Project Reference Clarified in project_dglide.md (Jul 7 at 3:21 PM)
+### Jul 8, 2026
+6472 3:26p 🔵 KlearStack Blog — Published Posts Reverted to Draft After Edit
+6473 3:27p 🔵 Dglide Blog CMS — Architecture and Database Layer Confirmed
+6474 3:29p 🔵 DGlide Blog DB State — Multiple Untitled Draft Records Found After Yesterday's Edits
+6475 3:30p 🔵 KlearStack CMS — Blog Posts Reverted to Draft After Publish
+6476 3:32p 🔵 Dglide Blog — Draft Status Bug: Two Supabase Projects Identified, Draft Blogs Have Metadata Missing
+6477 3:33p 🔵 Blog Posts Reverted to Draft Unexpectedly After Publishing
+6478 3:34p 🔵 Dglide Blog — 10 Affected Blog Posts Identified and Backed Up Before Revert
+6480 " 🔵 Dglide — Two Supabase Projects in Use; Featured Images Confirmed on New Project
+6481 " 🔴 Dglide Blog — 10 Draft-Reverted Blog Posts Restored to Published Status
+6482 3:35p 🔴 Dglide Blog — 11th Affected Post (id 2822) Had Title and Slug Restored
+6483 " 🔵 Dglide Blog Admin API — Route Structure Confirmed
+6485 3:36p 🔵 Dglide BlogEditor — Root Cause of Draft Reversion Bug Identified
+6486 3:37p 🔵 Dglide Blog Draft Revert — Root Cause: Dual Supabase Projects with Stale Image URLs
+6487 " 🔴 Dglide Blog — 10 Draft-Reverted Posts Restored to Published via Supabase REST API
+6488 3:39p 🔵 Dglide Blog — Draft Revert Root Cause: Dual Supabase Projects with Stale Image URLs
+6489 " 🔴 Dglide Blog — 10 Draft-Reverted Posts Restored to Published via Supabase REST API
+6490 3:40p 🔵 Dglide Blog — Draft Revert Root Cause: Dual Supabase Projects + Status Field Bug
+6491 " 🔴 Dglide Blog — 10 Draft-Reverted Posts Restored to Published via Supabase REST API
+6492 3:41p 🔵 Dglide Blog — Draft Revert Root Cause: PATCH Handler Silently Overwrites Status
+6493 " 🔴 Dglide Blog — 10 Draft-Reverted Posts Restored to Published via Supabase REST API
+6494 " 🔵 Dglide Blog — Draft Revert Root Cause: Dual Supabase Projects + PATCH Route Bug
+6495 " 🔴 Dglide Blog — 10 Draft-Reverted Blog Posts Restored to Published via Supabase REST API
+6496 3:43p 🔵 Dglide Blog — Draft Revert Root Cause: Dual Supabase Projects with Stale Image URLs
+6497 " 🔴 Dglide Blog — 10 Draft-Reverted Blog Posts Restored to Published via Supabase REST API
+6498 " ✅ Dglide Project Memory — Supabase Dual-Project Reference Clarified in project_dglide.md
+S5686 Dglide Blog — Published Posts Reverted to Draft After Edit: Root Cause Found, Posts Restored, Code Fixed (Jul 8 at 3:43 PM)
+S5694 Dglide Git — samir/staging Has 12-File Blog Infrastructure Ahead of main; samir/main is 2 Commits Behind (Jul 8 at 3:44 PM)
+6501 3:45p 🔵 Dglide Blog — Production URL Check: One Restored Post Still Returns 404
+6502 3:46p 🔵 Dglide Blog — Published Status Confirmed Live on Frontend for All Restored Posts
+6503 " 🔴 Dglide Blog Editor Fix — Committed to main (03a2552)
+6504 " 🔵 Dglide Git — Two GitHub Accounts Configured; Active Push Account is Hasankw Not ThirdMeta-Dev
+6505 3:47p ✅ Dglide Blog Editor Fix — Pushed to GitHub (ThirdMeta-Dev/Dglide main)
+6506 3:48p 🔵 Dglide Git — samir/staging Has 12-File Blog Infrastructure Ahead of main; samir/main is 2 Commits Behind
+S5700 Dglide Blog Alt Text Feature — Production Build Passes After Full Implementation (Jul 8 at 3:48 PM)
+6507 3:53p ⚖️ Dglide Blog — Alt Text Support Requested for All Blog Images
+6509 3:54p 🔵 Dglide Blog Editor — Image Insertion Architecture Confirmed: No Alt Text Support
+6510 3:55p 🔵 Dglide Blog — MediaPicker Full Architecture: Alt Data Stored but Never Surfaced to Editor
+6511 " 🟣 Dglide Blog — MediaPicker onSelect Callback Extended to Pass Alt Text
+6512 " 🟣 Dglide Blog Editor — Alt Text State + applyImageAlt Function Added to BlogEditor
+6514 3:56p 🟣 Dglide Blog Editor — ALT Text Toolbar Button + Inline Popover Added to Editor Toolbar
+6515 " 🟣 Dglide Blog — Alt Text Feature Complete: MediaPicker Alt Wired to insertImage in BlogEditor
+6516 3:58p 🟣 Dglide Blog Alt Text Feature — Production Build Passes After Full Implementation
+S5703 Dglide Blog — Add Alt Text Support to All Blog Images (Internal + Any Image) (Jul 8 at 3:59 PM)
+6518 5:05p 🔴 Dglide Blog Detail — Featured Image Cropping Fixed with object-fit: contain
 
-Access 2194k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 471k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

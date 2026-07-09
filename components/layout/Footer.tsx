@@ -147,7 +147,7 @@ export default function Footer({
   const newsletterPlaceholder = settings?.newsletter_placeholder  ?? "Enter Your Email";
   const newsletterButtonLabel = settings?.newsletter_button_label ?? "Subscribe Now";
   const tagline    = settings?.tagline    ?? "We finally have visibility in our operations. Your system adapts to how you work.";
-  const email      = settings?.email      ?? "support@dglide.com";
+  const email      = settings?.email      ?? "letstalk@dglide.com";
   const phone      = settings?.phone      ?? "+91 95884 82557";
   const copyright  = settings?.copyright  ?? "Copyright © 2024 Lorem Ipsum All Rights Reserved. Developed by Hexanovate";
   const privacyLabel = settings?.privacy_label ?? "Privacy Policy";

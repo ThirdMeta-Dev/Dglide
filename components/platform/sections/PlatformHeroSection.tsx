@@ -18,6 +18,7 @@ const PlatformHeroSection: FunctionComponent = () => (
     bullets={platformHeroBullets}
     primaryCta={platformHeroPrimaryCta}
     secondaryCta={platformHeroSecondaryCta}
+    secondaryScrollTargetId="platform-backbone"
     imageSrc={platformHeroImage}
     imageAlt="DGlide — configurable operations platform dashboard"
     actionsInline

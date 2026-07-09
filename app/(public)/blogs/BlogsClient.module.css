@@ -247,8 +247,17 @@
   align-items: stretch;
 }
 
+/* StaggerItem animation wrappers are the actual grid children —
+   stretch them and the card inside so every card in a row is equal height */
+.cardGrid > *,
+.editorialGrid > * {
+  height: 100%;
+  min-width: 0;
+}
+
 .card {
   min-width: 0;
+  height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -286,7 +295,7 @@
 .categoryBadge {
   position: absolute;
   top: 16px;
-  left: 16px;
+  right: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -377,6 +386,12 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;
+  /* Always reserve 3 lines so 2-line and 3-line titles produce identical card heights */
+  min-height: 78px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .readMore {
@@ -418,7 +433,7 @@
 
 .cardLarge .categoryBadge {
   top: 18px;
-  left: 18px;
+  right: 18px;
   font-size: 14px;
 }
 
@@ -435,13 +450,14 @@
 
 .editorialBand {
   width: 100vw;
-  min-height: 495px;
+  min-height: 700px;
   position: relative;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
   margin-inline: calc(50% - 50vw);
   padding-top: 30px;
+  padding-bottom: 180px;
   overflow: hidden;
   background-image: url("/blogs/editorial-bg.png");
   background-position: center top;
@@ -971,9 +987,18 @@
   transition: background 0.22s ease, color 0.22s ease;
 }
 
+.demoButton svg {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Same hover as the why-dglide hero white button (.dg-btn-outline) */
 .demoButton:hover {
-  background: #f3f4f6;
+  background: linear-gradient(90deg, #d9dcff 0%, #e8eaff 100%);
   color: #1c2bff;
+}
+
+.demoButton:hover svg {
+  transform: rotate(-45deg);
 }
 
 @media (max-width: 900px) {
@@ -1035,8 +1060,16 @@
   }
 
   .editorialSection {
-    width: calc(100% - 32px);
-    padding: 32px 20px;
+    width: 100%;
+    padding: 32px 14px;
+  }
+
+  /* Mobile: no wave image — plain white rounded panel */
+  .editorialBand {
+    background-image: none;
+    background-color: #fff;
+    min-height: 0;
+    border-radius: 16px;
   }
 
   .libraryToolbar {
@@ -1073,6 +1106,28 @@
 
   .pagination {
     flex-wrap: wrap;
+  }
+}
+
+/* Mobile: kill the global 64px section padding on the reading library —
+   it's double-wrapped in <section>s so the padding stacks twice */
+@media (max-width: 767px) {
+  .libraryAnchor,
+  .librarySection {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Carousel sections (Our Latest Articles, etc.): the 72px main gap is
+     enough separation — drop the global 64px section bottom padding */
+  .carouselSection {
+    padding-bottom: 0 !important;
+  }
+
+  /* Blue demo CTA (last section): breathing room above the footer.
+     !important needed — globals.css zeroes section margins on mobile */
+  .demoCta {
+    margin-bottom: 80px !important;
   }
 }
 

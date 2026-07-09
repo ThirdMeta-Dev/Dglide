@@ -176,6 +176,7 @@ type WorkflowChangeSectionProps = {
   subtitle?: string;
   bullets?: string[];
   timelineItems?: typeof workflowTimelineItems;
+  sectionId?: string;
 };
 
 const TickIcon = () => (
@@ -205,11 +206,12 @@ const WorkflowChangeSection: FunctionComponent<WorkflowChangeSectionProps> = ({
   subtitle = workflowChangeSubtitle,
   bullets = workflowChangeBullets,
   timelineItems = workflowTimelineItems,
+  sectionId,
 }) => {
   const [activeIndex, setActiveIndex] = useState(1);
 
   return (
-    <section className="sol-section sol-workflow-change-section">
+    <section id={sectionId} className="sol-section sol-workflow-change-section">
       <SolutionsContainer>
         <div className="sol-workflow-change-inner">
           <ScrollReveal direction="left">
