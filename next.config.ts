@@ -15,13 +15,8 @@ const nextConfig: NextConfig = {
     ]
   },
   images: {
-    unoptimized: true,
+    minimumCacheTTL: 31536000,
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "yytdzxrryboagezbjiqa.supabase.co",
-        pathname: "/storage/v1/object/public/**",
-      },
       {
         protocol: "https",
         hostname: "yytdzxrryboagezbjiqa.supabase.co",

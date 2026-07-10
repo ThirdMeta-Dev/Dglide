@@ -59,6 +59,7 @@ export async function POST(req: Request) {
     .from(BUCKET)
     .upload(storagePath, buffer, {
       contentType: file.type || `image/${ext}`,
+      cacheControl: '31536000',
       upsert: false,
     })
   if (uploadError)

@@ -21,7 +21,7 @@ async function uploadBuffer(buffer: Buffer, mimeType: string): Promise<string | 
     const storagePath = `uploads/${filename}`
     const { error } = await supabase.storage
       .from(BUCKET)
-      .upload(storagePath, buffer, { contentType: mimeType, upsert: false })
+      .upload(storagePath, buffer, { contentType: mimeType, cacheControl: '31536000', upsert: false })
     if (error) return null
     const { data: { publicUrl } } = supabase.storage.from(BUCKET).getPublicUrl(storagePath)
     await createMediaItem({ url: publicUrl, filename, alt: 'Imported image', mimeType, size: buffer.length, storagePath })

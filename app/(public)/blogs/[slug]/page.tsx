@@ -19,6 +19,8 @@ type TocItem = {
 }
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dglide.com'
+const SUPABASE_STORAGE_IMAGE_PREFIX =
+  'https://yytdzxrryboagezbjiqa.supabase.co/storage/v1/object/public/dglide-blog-media/'
 
 function formatDate(iso: string | null): string {
   if (!iso) return ''
@@ -61,6 +63,25 @@ function cleanArticleHtml(value: string): string {
     .replace(/\son[a-z]+\s*=\s*[^\s"'>][^\s>]*/gi, '')
     // Neutralise javascript: URIs in href/src/action
     .replace(/\s(href|src|action)\s*=\s*(["'])\s*javascript:[\s\S]*?\2/gi, ' $1="#"')
+}
+
+function nextOptimizedImageUrl(src: string): string {
+  if (!src.startsWith(SUPABASE_STORAGE_IMAGE_PREFIX)) return src
+  return `/_next/image?url=${encodeURIComponent(src)}&w=1200&q=75`
+}
+
+function absoluteNextOptimizedImageUrl(src: string, siteUrl: string): string {
+  const optimized = nextOptimizedImageUrl(src)
+  if (/^https?:\/\//i.test(optimized)) return optimized
+  return `${siteUrl.replace(/\/$/, '')}${optimized}`
+}
+
+function optimizeArticleImages(value: string): string {
+  return value.replace(
+    /(\ssrc\s*=\s*)(["'])(https:\/\/yytdzxrryboagezbjiqa\.supabase\.co\/storage\/v1\/object\/public\/dglide-blog-media\/[\s\S]*?)\2/gi,
+    (_match, prefix: string, quote: string, src: string) =>
+      `${prefix}${quote}${nextOptimizedImageUrl(src)}${quote}`
+  )
 }
 
 function anchorId(text: string, index: number): string {
@@ -222,7 +243,7 @@ function buildArticleSchema(post: BlogPost, siteUrl: string) {
     '@type': 'Article',
     headline: post.seoTitle || post.title,
     description: post.seoDescription || post.excerpt,
-    image: post.featuredImageUrl || undefined,
+    image: post.featuredImageUrl ? absoluteNextOptimizedImageUrl(post.featuredImageUrl, siteUrl) : undefined,
     url: `${siteUrl}/blogs/${post.slug}`,
     datePublished: post.publishedAt || post.createdAt,
     dateModified: post.updatedAt || post.publishedAt || post.createdAt,
@@ -290,7 +311,7 @@ function prepareArticleHtml(post: BlogPost): { html: string; toc: TocItem[] } {
     }
   )
 
-  return { html, toc }
+  return { html: optimizeArticleImages(html), toc }
 }
 
 function postDate(post: BlogPost) {
@@ -414,6 +435,9 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
   const title = post.seoTitle || post.title
   const description = post.seoDescription || post.excerpt
   const canonicalUrl = `${SITE_URL}/blogs/${post.slug}`
+  const metadataImage = post.featuredImageUrl
+    ? absoluteNextOptimizedImageUrl(post.featuredImageUrl, SITE_URL)
+    : undefined
 
   return {
     title,
@@ -426,8 +450,8 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       title,
       description,
       url: canonicalUrl,
-      images: post.featuredImageUrl
-        ? [{ url: post.featuredImageUrl, width: 1200, height: 630, alt: title }]
+      images: metadataImage
+        ? [{ url: metadataImage, width: 1200, height: 630, alt: title }]
         : undefined,
       publishedTime: post.publishedAt || undefined,
       modifiedTime: post.updatedAt || undefined,
@@ -438,7 +462,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       card: 'summary_large_image',
       title,
       description,
-      images: post.featuredImageUrl ? [post.featuredImageUrl] : undefined,
+      images: metadataImage ? [metadataImage] : undefined,
     },
   }
 }
