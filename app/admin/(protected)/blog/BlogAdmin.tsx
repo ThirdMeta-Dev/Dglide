@@ -136,6 +136,8 @@ function BlogList({
   const [creatingNew, setCreatingNew] = useState(false)
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [bulkLoading, setBulkLoading] = useState(false)
+  const [clearingCache, setClearingCache] = useState(false)
+  const [cacheStatus, setCacheStatus] = useState('')
 
   function buildUrl(overrides: Record<string, string | number> = {}) {
     const params = new URLSearchParams({
@@ -206,6 +208,25 @@ function BlogList({
     setCreatingNew(true)
     onCreate()
     setCreatingNew(false)
+  }
+
+  async function handleClearCache() {
+    setClearingCache(true)
+    setCacheStatus('')
+    try {
+      const res = await fetch('/api/admin/blogs/revalidate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      })
+      if (!res.ok) throw new Error(`Cache clear failed: ${res.status}`)
+      setCacheStatus('Cache cleared')
+      setTimeout(() => setCacheStatus(''), 2500)
+    } catch {
+      setCacheStatus('Cache clear failed')
+    } finally {
+      setClearingCache(false)
+    }
   }
 
   async function handleTrash(id: string) {
@@ -335,14 +356,33 @@ function BlogList({
             Create and manage your blog content
           </p>
         </div>
-        <button
-          onClick={handleNewPost}
-          disabled={creatingNew}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#1C2BFF] text-white text-sm font-medium [font-family:var(--font-inter)] hover:bg-[#141FB5] transition-colors disabled:opacity-60"
-        >
-          <Plus className="w-4 h-4" />
-          New Post
-        </button>
+        <div className="flex items-center gap-3">
+          {cacheStatus && (
+            <span
+              className={`text-xs [font-family:var(--font-inter)] ${
+                cacheStatus.includes('failed') ? 'text-red-500' : 'text-green-600'
+              }`}
+            >
+              {cacheStatus}
+            </span>
+          )}
+          <button
+            onClick={handleClearCache}
+            disabled={clearingCache}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#E5E5E5] bg-white text-[#333] text-sm font-medium [font-family:var(--font-inter)] hover:bg-[#F7F7F7] transition-colors disabled:opacity-60"
+          >
+            <RotateCcw className={`w-4 h-4 ${clearingCache ? 'animate-spin' : ''}`} />
+            {clearingCache ? 'Clearing...' : 'Clear Cache'}
+          </button>
+          <button
+            onClick={handleNewPost}
+            disabled={creatingNew}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#1C2BFF] text-white text-sm font-medium [font-family:var(--font-inter)] hover:bg-[#141FB5] transition-colors disabled:opacity-60"
+          >
+            <Plus className="w-4 h-4" />
+            New Post
+          </button>
+        </div>
       </div>
 
       {/* Status tabs */}

@@ -14,8 +14,16 @@ export async function POST(req: Request) {
     slug = ''
   }
 
+  const revalidatedPaths = ['/', '/blogs', '/sitemap.xml']
+  revalidatePath('/')
   revalidatePath('/blogs')
-  if (slug) revalidatePath(`/blogs/${slug}`)
+  revalidatePath('/sitemap.xml')
+  if (slug) {
+    const postPath = `/blogs/${slug}`
+    revalidatePath(postPath)
+    revalidatedPaths.push(postPath)
+  }
   revalidatePath('/blogs/[slug]', 'page')
-  return NextResponse.json({ revalidated: true })
+  revalidatedPaths.push('/blogs/[slug]')
+  return NextResponse.json({ revalidated: true, paths: revalidatedPaths })
 }
