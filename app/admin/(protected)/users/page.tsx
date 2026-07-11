@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { UserPlus, Pencil, Trash2, X } from "lucide-react";
+import { Image as ImageIcon, UserPlus, Pencil, Trash2, X } from "lucide-react";
+import MediaPicker from "../blog/MediaPicker";
 
 const ROLES = ["administrator", "editor", "author", "contributor"] as const;
 type Role = (typeof ROLES)[number];
@@ -61,6 +62,7 @@ export default function UsersAdminPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [deleting, setDeleting] = useState<AdminUser | null>(null);
+  const [mediaOpen, setMediaOpen] = useState(false);
 
   const load = useCallback(async () => {
     const res = await fetch("/api/admin/users");
@@ -105,6 +107,7 @@ export default function UsersAdminPage() {
     setCreating(false);
     setEditing(null);
     setError("");
+    setMediaOpen(false);
   }
 
   async function handleSave() {
@@ -316,24 +319,45 @@ export default function UsersAdminPage() {
                 />
               )}
               {field(
-                "Avatar URL",
-                <div className="flex items-center gap-3">
-                  {form.avatarUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={form.avatarUrl}
-                      alt="Avatar preview"
-                      className="w-10 h-10 rounded-full object-cover border border-[#EEE] flex-shrink-0"
+                "Avatar",
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    {form.avatarUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={form.avatarUrl}
+                        alt="Avatar preview"
+                        className="w-10 h-10 rounded-full object-cover border border-[#EEE] flex-shrink-0"
+                      />
+                    ) : (
+                      <span className="w-10 h-10 rounded-full bg-[#F0F0F0] flex-shrink-0" />
+                    )}
+                    <input
+                      value={form.avatarUrl}
+                      onChange={(e) => setForm({ ...form, avatarUrl: e.target.value })}
+                      className={inputCls}
+                      placeholder="https://…"
                     />
-                  ) : (
-                    <span className="w-10 h-10 rounded-full bg-[#F0F0F0] flex-shrink-0" />
-                  )}
-                  <input
-                    value={form.avatarUrl}
-                    onChange={(e) => setForm({ ...form, avatarUrl: e.target.value })}
-                    className={inputCls}
-                    placeholder="https://…"
-                  />
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setMediaOpen(true)}
+                      className="flex items-center justify-center gap-2 h-9 flex-1 rounded-[10px] border border-[#E5E5E5] bg-white text-xs font-medium text-[#555] [font-family:var(--font-inter)] hover:border-[#1C2BFF] hover:text-[#1C2BFF] transition-colors"
+                    >
+                      <ImageIcon className="w-3.5 h-3.5" />
+                      Choose from Media
+                    </button>
+                    {form.avatarUrl && (
+                      <button
+                        type="button"
+                        onClick={() => setForm({ ...form, avatarUrl: "" })}
+                        className="h-9 px-3 rounded-[10px] border border-[#E5E5E5] text-xs text-red-500 [font-family:var(--font-inter)] hover:bg-red-50 transition-colors"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
               {field(
@@ -427,6 +451,15 @@ export default function UsersAdminPage() {
           </div>
         </div>
       )}
+
+      <MediaPicker
+        open={mediaOpen}
+        onClose={() => setMediaOpen(false)}
+        onSelect={(url) => {
+          setForm((current) => ({ ...current, avatarUrl: url }));
+          setMediaOpen(false);
+        }}
+      />
     </div>
   );
 }

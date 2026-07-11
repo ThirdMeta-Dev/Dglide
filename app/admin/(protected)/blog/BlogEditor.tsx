@@ -173,7 +173,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
   const [readingTime, setReadingTime] = useState(1)
   const [showAiPanel, setShowAiPanel] = useState(false)
   const [aiTab, setAiTab] = useState<AiTab>('write')
-  const [mediaTarget, setMediaTarget] = useState<'featured' | 'editor' | null>(null)
+  const [mediaTarget, setMediaTarget] = useState<'featured' | 'editor' | 'author' | null>(null)
   const [showAltPopover, setShowAltPopover] = useState(false)
   const [altDraft, setAltDraft] = useState('')
 
@@ -1415,13 +1415,44 @@ export default function BlogEditor({ postId, onBack }: Props) {
               </div>
               <div>
                 <label className="text-[10px] text-[#AAA] [font-family:var(--font-inter)] block mb-1">
-                  Avatar URL
+                  Avatar
                 </label>
-                <input
-                  value={authorAvatarUrl}
-                  onChange={(e) => setAuthorAvatarUrl(e.target.value)}
-                  className="w-full h-8 px-2 rounded-lg border border-[#E5E5E5] text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF]"
-                />
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    {authorAvatarUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={authorAvatarUrl}
+                        alt="Author avatar preview"
+                        className="w-8 h-8 rounded-full object-cover border border-[#E5E5E5] flex-shrink-0"
+                      />
+                    ) : (
+                      <span className="w-8 h-8 rounded-full bg-[#F0F0F0] flex-shrink-0" />
+                    )}
+                    <input
+                      value={authorAvatarUrl}
+                      onChange={(e) => setAuthorAvatarUrl(e.target.value)}
+                      className="w-full h-8 px-2 rounded-lg border border-[#E5E5E5] text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF]"
+                      placeholder="https://…"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setMediaTarget('author')}
+                      className="flex-1 h-7 rounded-lg border border-[#E5E5E5] text-xs text-[#555] hover:border-[#1C2BFF] hover:text-[#1C2BFF] transition-colors [font-family:var(--font-inter)]"
+                    >
+                      Choose from Media
+                    </button>
+                    {authorAvatarUrl && (
+                      <button
+                        onClick={() => setAuthorAvatarUrl('')}
+                        className="h-7 px-2 rounded-lg border border-[#E5E5E5] text-xs text-red-400 hover:border-red-300 hover:bg-red-50 transition-colors"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
               <div>
                 <label className="text-[10px] text-[#AAA] [font-family:var(--font-inter)] block mb-1">
@@ -1723,6 +1754,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
         onSelect={(url, alt) => {
           if (mediaTarget === 'featured') setFeaturedImageUrl(url)
           else if (mediaTarget === 'editor') insertImage(url, alt)
+          else if (mediaTarget === 'author') setAuthorAvatarUrl(url)
           setMediaTarget(null)
         }}
       />
