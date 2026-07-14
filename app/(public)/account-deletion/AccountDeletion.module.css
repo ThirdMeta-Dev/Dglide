@@ -1,0 +1,283 @@
+.page {
+  min-height: 100vh;
+  padding: 64px 0 80px;
+  background: #f3f3f3;
+}
+
+.container {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 48px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #ff7f1c;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.title {
+  margin: 0 0 16px;
+  background: linear-gradient(90deg, #ff7f1c 0%, #000 45%);
+  background-clip: text;
+  color: transparent;
+  font-family: var(--font-tasa-orbiter), sans-serif;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 54px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.intro {
+  max-width: 960px;
+  margin: 0;
+  color: #555;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 64px;
+}
+
+.toc {
+  position: sticky;
+  top: 90px;
+  width: 260px;
+  max-height: calc(100vh - 120px);
+  flex-shrink: 0;
+  align-self: flex-start;
+  overflow-y: auto;
+}
+
+.tocTitle {
+  margin: 0 0 16px;
+  color: #000;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.tocNav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tocLink {
+  color: #1c2bff;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.tocLink:hover {
+  text-decoration: underline;
+}
+
+.content {
+  min-width: 0;
+  flex: 1;
+}
+
+.divider {
+  height: 1px;
+  margin-bottom: 40px;
+  background: #e0e0e0;
+}
+
+.section {
+  margin-bottom: 40px;
+  scroll-margin-top: 90px;
+}
+
+.sectionTitle {
+  margin: 0 0 10px;
+  color: #000;
+  font-family: var(--font-tasa-orbiter), sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.sectionBody {
+  color: #555;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  line-height: 26px;
+}
+
+.sectionBody p {
+  margin: 0 0 12px;
+}
+
+.sectionBody p:last-child {
+  margin-bottom: 0;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 20px 0 32px;
+}
+
+.stepTab {
+  min-height: 108px;
+  padding: 18px;
+  border: 1px solid #e0e0e0;
+  border-radius: 14px;
+  background: #fff;
+  color: #1c2bff;
+  font-family: var(--font-inter), sans-serif;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.stepTab:hover {
+  border-color: #1c2bff;
+  box-shadow: 0 8px 24px rgb(28 43 255 / 8%);
+  transform: translateY(-2px);
+}
+
+.stepNumber {
+  display: block;
+  margin-bottom: 10px;
+  color: #ff7f1c;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.stepLabel {
+  display: block;
+  color: #000;
+  font-family: var(--font-tasa-orbiter), sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.notice {
+  padding: 18px 20px;
+  border-left: 3px solid #ff7f1c;
+  border-radius: 0 12px 12px 0;
+  background: #fff;
+}
+
+.notice strong {
+  color: #000;
+}
+
+.supportCard {
+  padding: 28px;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.supportLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 6px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: #1c2bff;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 160ms ease;
+}
+
+.supportLink:hover {
+  opacity: 0.88;
+}
+
+.supportLink:focus-visible,
+.stepTab:focus-visible,
+.tocLink:focus-visible {
+  outline: 2px solid #1c2bff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 800px) {
+  .page {
+    padding: 48px 0 64px;
+  }
+
+  .container {
+    width: min(100% - 32px, 1200px);
+  }
+
+  .header {
+    margin-bottom: 32px;
+  }
+
+  .title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .layout {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .toc {
+    position: static;
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .tocNav {
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+  }
+
+  .tocLink {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 999px;
+    background: #fff;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .stepTab {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .intro {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .supportCard {
+    padding: 22px;
+  }
+}

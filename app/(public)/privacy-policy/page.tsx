@@ -200,7 +200,7 @@ export default function PrivacyPolicyPage() {
           </ul>
           <p style={{ margin: 0 }}>
             To exercise these rights, please contact your organization&apos;s administrator or visit
-            our Account Deletion page.
+            our <a href="/account-deletion" style={{ color: "#1C2BFF", textDecoration: "none" }}>Account Deletion page</a>.
           </p>
         </Section>
 
@@ -222,7 +222,8 @@ export default function PrivacyPolicyPage() {
             </a>
           </p>
           <p style={{ margin: 0 }}>
-            For information on how to delete your account, please visit our Account Deletion page.
+            For information on how to delete your account, please visit our{" "}
+            <a href="/account-deletion" style={{ color: "#1C2BFF", textDecoration: "none" }}>Account Deletion page</a>.
           </p>
         </Section>
 
