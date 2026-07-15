@@ -2108,6 +2108,12 @@
   transform: rotate(45deg);
 }
 
+@media (min-width: 1024px) {
+  .crm-solutions-page .crm-hero-image {
+    transform: translateY(48px);
+  }
+}
+
 .solutions-page .sol-final-cta-button:hover .sol-final-cta-button-arrow {
   transform: rotate(-45deg);
 }

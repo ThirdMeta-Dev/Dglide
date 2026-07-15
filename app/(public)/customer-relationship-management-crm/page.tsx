@@ -69,6 +69,7 @@ export default function CRMPage() {
         secondaryScrollTargetId="core-capabilities"
         imageSrc="/solutions/crm/hero.webp"
         imageAlt="DGlide CRM customer relationship dashboard"
+        imageClassName="crm-hero-image"
       />
       <SolutionsSectionNav items={crmNavItems} />
       <FieldServiceProblemSection

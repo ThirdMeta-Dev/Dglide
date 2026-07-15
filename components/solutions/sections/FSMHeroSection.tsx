@@ -25,6 +25,7 @@ type FSMHeroSectionProps = {
   secondaryScrollTargetId?: string;
   imageSrc?: string;
   imageAlt?: string;
+  imageClassName?: string;
   actionsInline?: boolean;
 };
 
@@ -38,6 +39,7 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
   secondaryScrollTargetId,
   imageSrc = "/solutions/itsm-hero-illustration.png",
   imageAlt = "DGlide service management dashboard",
+  imageClassName = "",
   actionsInline = false,
 }) => {
   const router = useRouter();
@@ -120,7 +122,7 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
               alt={imageAlt}
               width={1024}
               height={732}
-              className="w-full max-w-[560px] h-auto object-contain"
+              className={`w-full max-w-[560px] h-auto object-contain${imageClassName ? ` ${imageClassName}` : ""}`}
               priority
             />
           </ScrollReveal>
