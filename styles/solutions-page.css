@@ -87,6 +87,21 @@
   color: transparent;
 }
 
+@media (min-width: 1024px) {
+  .solutions-page .sol-problem-section--crm .sol-problem-heading {
+    position: relative;
+    left: 50%;
+    width: min(1200px, calc(100vw - 48px));
+    max-width: none;
+    transform: translateX(-50%);
+  }
+
+  .solutions-page #core-crm-capabilities .sol-workflow-change-heading {
+    width: calc(100% + 14px);
+    max-width: calc(100% + 17px);
+  }
+}
+
 @media (max-width: 640px) {
   .solutions-page .sol-problem-heading {
     font-size: clamp(28px, 7vw, 48px);
@@ -2089,8 +2104,16 @@
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.crm-solutions-page .sol-final-cta-button-arrow {
+  transform: rotate(45deg);
+}
+
 .solutions-page .sol-final-cta-button:hover .sol-final-cta-button-arrow {
   transform: rotate(-45deg);
+}
+
+.solutions-page.crm-solutions-page .sol-final-cta-button:hover .sol-final-cta-button-arrow {
+  transform: rotate(0deg);
 }
 
 @media (max-width: 1023px) {
@@ -2353,6 +2376,25 @@
   width: 100%;
   max-width: 441px;
   height: auto;
+}
+
+@media (min-width: 1024px) {
+  .solutions-page .sol-technician-section--crm .sol-technician-row {
+    gap: 24px;
+  }
+
+  .solutions-page .sol-technician-section--crm .sol-technician-features-wrap {
+    flex-basis: 540px;
+    width: 540px;
+  }
+
+  .solutions-page .sol-technician-section--crm .sol-technician-phone-wrap {
+    width: 520px;
+  }
+
+  .solutions-page .sol-technician-section--crm .sol-technician-phone {
+    max-width: 520px;
+  }
 }
 
 @media (max-width: 1023px) {

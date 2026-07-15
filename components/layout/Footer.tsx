@@ -48,7 +48,7 @@ const DEFAULT_COLS = [
       { label: "Process Management",         href: "#"     },
       { label: "Service / ITSM Workflows",   href: "/it-service-management-itsm" },
       { label: "Field Sales Execution",      href: "#"     },
-      { label: "CRM (Support Layer)",        href: "#"     },
+      { label: "CRM", href: "/customer-relationship-management-crm" },
     ],
   },
   {
@@ -161,9 +161,17 @@ export default function Footer({
 
   const columns = DEFAULT_COLS.map((def, i) => {
     const colLinks = (links ?? []).filter((l) => l.column_index === i);
+    const resolvedLinks = (colLinks.length > 0
+      ? colLinks.map((l) => ({ label: l.label, href: l.href }))
+      : def.links).map((link) =>
+        def.heading === "Solutions" && link.label.trim().toLowerCase() === "crm"
+          ? { ...link, href: "/customer-relationship-management-crm" }
+          : link
+      );
+
     return {
       heading: colLinks.find((l) => l.column_heading)?.column_heading ?? def.heading,
-      links:   colLinks.length > 0 ? colLinks.map((l) => ({ label: l.label, href: l.href })) : def.links,
+      links: resolvedLinks,
     };
   });
 

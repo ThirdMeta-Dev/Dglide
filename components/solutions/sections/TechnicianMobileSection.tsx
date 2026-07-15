@@ -12,12 +12,18 @@ type TechnicianMobileSectionProps = {
   heading?: string;
   description?: string;
   features?: typeof technicianFeatures;
+  imageSrc?: string;
+  imageAlt?: string;
+  sectionClassName?: string;
 };
 
 const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> = ({
   heading = "Stop Running Service Out of an Inbox",
   description = "Agents shouldn't dig through email and chat to know what's next. DGlide gives every agent one clear workspace for daily service execution.",
   features = technicianFeatures,
+  imageSrc = "/solutions/agent-workspace.png",
+  imageAlt = "DGlide agent workspace",
+  sectionClassName = "",
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [fillProgress, setFillProgress] = useState(0);
@@ -44,7 +50,7 @@ const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> =
   }, [activeIndex, features]);
 
   return (
-    <section className="sol-section sol-technician-section">
+    <section className={`sol-section sol-technician-section${sectionClassName ? ` ${sectionClassName}` : ""}`}>
       <SolutionsContainer>
         <div className="sol-technician-inner">
           <ScrollReveal direction="up">
@@ -128,8 +134,8 @@ const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> =
 
               <ScrollReveal direction="right" delay={0.1} className="sol-technician-phone-wrap">
                 <Image
-                  src="/solutions/agent-workspace.png"
-                  alt="DGlide agent workspace"
+                  src={imageSrc}
+                  alt={imageAlt}
                   width={441}
                   height={647}
                   className="sol-technician-phone"

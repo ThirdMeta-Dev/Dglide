@@ -33,6 +33,7 @@ const DEFAULT_NAV: NavItemData[] = [
     label: "Solutions",
     has_dropdown: true,
     children: [
+      { label: "Customer Relationship Management", href: "/customer-relationship-management-crm", has_dropdown: false },
     ],
   },
   { label: "Pricing",   href: "/pricing",   has_dropdown: false },
@@ -159,7 +160,7 @@ function NavItem({
           transition={{ duration: 0.18, ease: "easeOut" }}
         >
           <div
-            className="min-w-[210px] rounded-2xl p-2 border border-white/60 bg-white/55 backdrop-blur-2xl"
+            className="min-w-[350px] rounded-2xl p-2 border border-white/60 bg-white/55 backdrop-blur-2xl"
             style={{ boxShadow: "0 8px 32px 0 rgba(28, 43, 255, 0.14), inset 0 1px 0 0 rgba(255,255,255,0.7)" }}
           >
             {children.map((child) => (
@@ -167,7 +168,7 @@ function NavItem({
                 key={child.href!}
                 href={child.href!}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm [font-family:var(--font-sora)]",
+                  "flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm whitespace-nowrap [font-family:var(--font-sora)]",
                   "transition-colors duration-200 group/item hover:bg-white/70",
                   isActive(child.href!) ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
                 )}
@@ -180,7 +181,23 @@ function NavItem({
                       : "opacity-0 scale-0 group-hover/item:opacity-100 group-hover/item:scale-100"
                   )}
                 />
-                {child.label}
+                <span>{child.label}</span>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  className="ml-auto flex-shrink-0 transition-transform duration-200 group-hover/item:-rotate-45"
+                  aria-hidden
+                >
+                  <path
+                    d="M2.5 8H13.5M13.5 8L9.5 4M13.5 8L9.5 12"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </Link>
             ))}
           </div>
@@ -201,7 +218,29 @@ export default function Header({ navItems, settings }: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
-  const nav = (navItems && navItems.length > 0) ? navItems : DEFAULT_NAV;
+  const sourceNav = (navItems && navItems.length > 0) ? navItems : DEFAULT_NAV;
+  const nav = sourceNav.map((item) => {
+    if (item.label.toLowerCase() !== "solutions") return item;
+
+    const children = item.children ?? [];
+    const hasCrmLink = children.some(
+      (child) => child.href === "/customer-relationship-management-crm"
+    );
+
+    return {
+      ...item,
+      children: hasCrmLink
+        ? children
+        : [
+            ...children,
+            {
+              label: "Customer Relationship Management",
+              href: "/customer-relationship-management-crm",
+              has_dropdown: false,
+            },
+          ],
+    };
+  });
   const cfg = settings ?? DEFAULT_SETTINGS;
 
   function isActive(href: string) {

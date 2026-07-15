@@ -10,6 +10,7 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: `${SITE_URL}/platform`,              priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/it-service-management-itsm`, priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/field-service-management-fsm`, priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
+  { url: `${SITE_URL}/customer-relationship-management-crm`, priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/why-dglide`,            priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/about`,                 priority: 0.7, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/pricing`,               priority: 0.8, changeFrequency: 'weekly',  lastModified: new Date() },

@@ -32,6 +32,8 @@ const ProblemCard: FunctionComponent<{
 );
 
 type FieldServiceProblemSectionProps = {
+  sectionId?: string;
+  sectionClassName?: string;
   heading?: string;
   description?: string;
   cards?: typeof problemCards;
@@ -40,6 +42,8 @@ type FieldServiceProblemSectionProps = {
 };
 
 const FieldServiceProblemSection: FunctionComponent<FieldServiceProblemSectionProps> = ({
+  sectionId = "field-service-problem",
+  sectionClassName = "",
   heading = "Your Ticketing Tool Stops Where Your Real Work Begins",
   description = "When your system only handles tickets, everything around them falls back into email and guesswork.",
   cards = problemCards,
@@ -49,7 +53,7 @@ const FieldServiceProblemSection: FunctionComponent<FieldServiceProblemSectionPr
   const router = useRouter();
 
   return (
-    <section id="field-service-problem" className="sol-section sol-problem-section">
+    <section id={sectionId} className={`sol-section sol-problem-section${sectionClassName ? ` ${sectionClassName}` : ""}`}>
       <SolutionsContainer>
         <ScrollReveal direction="up">
           <h2 className="sol-problem-heading">
