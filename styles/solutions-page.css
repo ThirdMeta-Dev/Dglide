@@ -96,7 +96,8 @@
     transform: translateX(-50%);
   }
 
-  .solutions-page #core-crm-capabilities .sol-workflow-change-heading {
+  .solutions-page #core-crm-capabilities .sol-workflow-change-heading,
+  .solutions-page #core-manufacturing-capabilities .sol-workflow-change-heading {
     width: calc(100% + 14px);
     max-width: calc(100% + 17px);
   }
@@ -1234,6 +1235,12 @@
 
 .solutions-page .sol-btn-outline:hover svg {
   transform: rotate(-45deg);
+}
+
+.manufacturing-solutions-page .sol-hero-actions .sol-btn-outline {
+  width: 236px;
+  height: 48px;
+  justify-content: center;
 }
 
 .solutions-page .sol-btn-white,

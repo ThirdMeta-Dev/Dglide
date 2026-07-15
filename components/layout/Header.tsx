@@ -34,6 +34,7 @@ const DEFAULT_NAV: NavItemData[] = [
     has_dropdown: true,
     children: [
       { label: "Customer Relationship Management", href: "/customer-relationship-management-crm", has_dropdown: false },
+      { label: "Manufacturing Process Management", href: "/manufacturing-management-software", has_dropdown: false },
     ],
   },
   { label: "Pricing",   href: "/pricing",   has_dropdown: false },
@@ -223,22 +224,25 @@ export default function Header({ navItems, settings }: Props) {
     if (item.label.toLowerCase() !== "solutions") return item;
 
     const children = item.children ?? [];
-    const hasCrmLink = children.some(
-      (child) => child.href === "/customer-relationship-management-crm"
+    const requiredSolutionLinks: NavItemData[] = [
+      {
+        label: "Customer Relationship Management",
+        href: "/customer-relationship-management-crm",
+        has_dropdown: false,
+      },
+      {
+        label: "Manufacturing Process Management",
+        href: "/manufacturing-management-software",
+        has_dropdown: false,
+      },
+    ];
+    const missingSolutionLinks = requiredSolutionLinks.filter(
+      (required) => !children.some((child) => child.href === required.href)
     );
 
     return {
       ...item,
-      children: hasCrmLink
-        ? children
-        : [
-            ...children,
-            {
-              label: "Customer Relationship Management",
-              href: "/customer-relationship-management-crm",
-              has_dropdown: false,
-            },
-          ],
+      children: [...children, ...missingSolutionLinks],
     };
   });
   const cfg = settings ?? DEFAULT_SETTINGS;

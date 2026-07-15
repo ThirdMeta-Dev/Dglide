@@ -45,7 +45,7 @@ const DEFAULT_COLS = [
     heading: "Solutions",
     links: [
       { label: "Field Service Management",   href: "/field-service-management-fsm"  },
-      { label: "Process Management",         href: "#"     },
+      { label: "Process Management",         href: "/manufacturing-management-software" },
       { label: "Service / ITSM Workflows",   href: "/it-service-management-itsm" },
       { label: "Field Sales Execution",      href: "#"     },
       { label: "CRM", href: "/customer-relationship-management-crm" },
@@ -163,11 +163,18 @@ export default function Footer({
     const colLinks = (links ?? []).filter((l) => l.column_index === i);
     const resolvedLinks = (colLinks.length > 0
       ? colLinks.map((l) => ({ label: l.label, href: l.href }))
-      : def.links).map((link) =>
-        def.heading === "Solutions" && link.label.trim().toLowerCase() === "crm"
-          ? { ...link, href: "/customer-relationship-management-crm" }
-          : link
-      );
+      : def.links).map((link) => {
+        if (def.heading !== "Solutions") return link;
+
+        const label = link.label.trim().toLowerCase();
+        if (label === "crm") {
+          return { ...link, href: "/customer-relationship-management-crm" };
+        }
+        if (label === "process management") {
+          return { ...link, href: "/manufacturing-management-software" };
+        }
+        return link;
+      });
 
     return {
       heading: colLinks.find((l) => l.column_heading)?.column_heading ?? def.heading,
