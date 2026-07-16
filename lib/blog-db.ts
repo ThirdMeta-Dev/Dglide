@@ -17,8 +17,9 @@ export type BlogDetailLayout = 'sidebar-left' | 'sidebar-right' | 'three-column'
 
 export type BlogDetailSettings = {
   detailLayout: BlogDetailLayout
-  hideSidebarCta: boolean
+  sidebarCtaEnabled: boolean
   sidebarCtaEyebrow: string
+  sidebarCtaImageUrl: string
   sidebarCtaTitle: string
   sidebarCtaText: string
   sidebarCtaButtonLabel: string
@@ -35,8 +36,9 @@ export type BlogDetailSettings = {
 
 export const DEFAULT_BLOG_DETAIL_SETTINGS: BlogDetailSettings = {
   detailLayout: 'sidebar-left',
-  hideSidebarCta: false,
+  sidebarCtaEnabled: false,
   sidebarCtaEyebrow: 'DGlide Insights',
+  sidebarCtaImageUrl: '',
   sidebarCtaTitle: 'Scale Your Operations',
   sidebarCtaText: 'No more guesswork. Get measurable results.',
   sidebarCtaButtonLabel: 'Get a FREE Demo',
@@ -127,7 +129,7 @@ function normalizeDetailSettings(value: unknown): BlogDetailSettings {
     ...DEFAULT_BLOG_DETAIL_SETTINGS,
     ...data,
     detailLayout: layout,
-    hideSidebarCta: Boolean(data.hideSidebarCta),
+    sidebarCtaEnabled: data.sidebarCtaEnabled === true,
     inlineCtaEnabled: data.inlineCtaEnabled !== false,
   }
 }

@@ -43,7 +43,7 @@ import {
   Upload,
   ChevronRight,
 } from 'lucide-react'
-import type { BlogAuthor, BlogPost, BlogTag } from '@/lib/blog-db'
+import { DEFAULT_BLOG_DETAIL_SETTINGS, type BlogAuthor, type BlogDetailSettings, type BlogPost, type BlogTag } from '@/lib/blog-db'
 import { slugify, countWords, calcReadingTime } from '@/lib/blog-utils'
 import MediaPicker from './MediaPicker'
 
@@ -157,6 +157,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
 
   // Featured image
   const [featuredImageUrl, setFeaturedImageUrl] = useState('')
+  const [detailSettings, setDetailSettings] = useState<BlogDetailSettings>(DEFAULT_BLOG_DETAIL_SETTINGS)
 
   // SEO
   const [seoTitle, setSeoTitle] = useState('')
@@ -173,7 +174,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
   const [readingTime, setReadingTime] = useState(1)
   const [showAiPanel, setShowAiPanel] = useState(false)
   const [aiTab, setAiTab] = useState<AiTab>('write')
-  const [mediaTarget, setMediaTarget] = useState<'featured' | 'editor' | 'author' | null>(null)
+  const [mediaTarget, setMediaTarget] = useState<'featured' | 'editor' | 'author' | 'sidebar-cta' | null>(null)
   const [showAltPopover, setShowAltPopover] = useState(false)
   const [altDraft, setAltDraft] = useState('')
 
@@ -525,6 +526,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
           focusKeyword,
           publishedAt: overrides.publishedAt ?? (publishedAt || null),
           tags,
+          detailSettings,
           readingTime,
           ...overrides,
         }),
@@ -619,6 +621,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
     setAuthorBio(data.authorBio)
     setAuthorAvatarUrl(data.authorAvatarUrl)
     setFeaturedImageUrl(data.featuredImageUrl)
+    setDetailSettings(data.detailSettings || DEFAULT_BLOG_DETAIL_SETTINGS)
     setSeoTitle(data.seoTitle)
     setSeoDescription(data.seoDescription)
     setFocusKeyword(data.focusKeyword)
@@ -632,7 +635,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
   useEffect(() => {
     if (!hydratedRef.current) return
     setSaveStatus('unsaved')
-  }, [title, slug, excerpt, author, authorTitle, authorBio, authorAvatarUrl, featuredImageUrl, seoTitle, seoDescription, focusKeyword, tags, isFeatured, postType, publishedAt])
+  }, [title, slug, excerpt, author, authorTitle, authorBio, authorAvatarUrl, featuredImageUrl, detailSettings, seoTitle, seoDescription, focusKeyword, tags, isFeatured, postType, publishedAt])
 
   // Runs after the effect above on the render where populatePost filled the fields,
   // so the initial hydration itself never counts as an edit
@@ -1282,6 +1285,23 @@ export default function BlogEditor({ postId, onBack }: Props) {
           </div>
 
           {/* SEO */}
+          <Collapsible label="Blog CTA">
+            <div className="space-y-2">
+              <label className="flex items-center gap-2 text-xs text-[#555] [font-family:var(--font-inter)]">
+                <input type="checkbox" checked={detailSettings.sidebarCtaEnabled} onChange={(e) => setDetailSettings((value) => ({ ...value, sidebarCtaEnabled: e.target.checked }))} />
+                Show CTA in the left sidebar
+              </label>
+              <input value={detailSettings.sidebarCtaEyebrow} onChange={(e) => setDetailSettings((value) => ({ ...value, sidebarCtaEyebrow: e.target.value }))} placeholder="Eyebrow" className="w-full h-8 px-2 rounded-lg border border-[#E5E5E5] text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF]" />
+              <input value={detailSettings.sidebarCtaTitle} onChange={(e) => setDetailSettings((value) => ({ ...value, sidebarCtaTitle: e.target.value }))} placeholder="CTA title" className="w-full h-8 px-2 rounded-lg border border-[#E5E5E5] text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF]" />
+              <textarea value={detailSettings.sidebarCtaText} onChange={(e) => setDetailSettings((value) => ({ ...value, sidebarCtaText: e.target.value }))} placeholder="CTA supporting text" rows={3} className="w-full rounded-lg border border-[#E5E5E5] p-2 text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF] resize-none" />
+              <input value={detailSettings.sidebarCtaButtonLabel} onChange={(e) => setDetailSettings((value) => ({ ...value, sidebarCtaButtonLabel: e.target.value }))} placeholder="Button label" className="w-full h-8 px-2 rounded-lg border border-[#E5E5E5] text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF]" />
+              <input value={detailSettings.sidebarCtaButtonHref} onChange={(e) => setDetailSettings((value) => ({ ...value, sidebarCtaButtonHref: e.target.value }))} placeholder="Button link" className="w-full h-8 px-2 rounded-lg border border-[#E5E5E5] text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF]" />
+              <input value={detailSettings.sidebarCtaImageUrl} onChange={(e) => setDetailSettings((value) => ({ ...value, sidebarCtaImageUrl: e.target.value }))} placeholder="CTA image URL (optional)" className="w-full h-8 px-2 rounded-lg border border-[#E5E5E5] text-xs [font-family:var(--font-inter)] focus:outline-none focus:border-[#1C2BFF]" />
+              <button onClick={() => setMediaTarget('sidebar-cta')} className="w-full h-8 rounded-lg border border-[#E5E5E5] text-xs text-[#555] hover:border-[#1C2BFF] hover:text-[#1C2BFF] transition-colors [font-family:var(--font-inter)]">Choose CTA Image from Media</button>
+            </div>
+          </Collapsible>
+
+          {/* SEO */}
           <Collapsible label="SEO">
             <div className="space-y-2">
               <div>
@@ -1755,6 +1775,7 @@ export default function BlogEditor({ postId, onBack }: Props) {
           if (mediaTarget === 'featured') setFeaturedImageUrl(url)
           else if (mediaTarget === 'editor') insertImage(url, alt)
           else if (mediaTarget === 'author') setAuthorAvatarUrl(url)
+          else if (mediaTarget === 'sidebar-cta') setDetailSettings((value) => ({ ...value, sidebarCtaImageUrl: url }))
           setMediaTarget(null)
         }}
       />

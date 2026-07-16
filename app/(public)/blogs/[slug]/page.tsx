@@ -508,6 +508,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             title={post.title}
             slug={post.slug}
             articleUrl={`${SITE_URL}/blogs/${post.slug}`}
+            settings={post.detailSettings}
           />
 
           <article className={styles.article}>

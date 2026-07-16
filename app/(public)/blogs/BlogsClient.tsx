@@ -38,13 +38,6 @@ function useBookmarks() {
   return { bookmarks, toggle }
 }
 
-const POST_TYPES = [
-  { value: '', label: 'All Types' },
-  { value: 'blog', label: 'Blog' },
-  { value: 'tutorial', label: 'Tutorial' },
-  { value: 'glossary', label: 'Glossary' },
-]
-
 function cx(...classes: Array<string | false | undefined>) {
   return classes.filter(Boolean).join(' ')
 }
@@ -65,6 +58,11 @@ function postDate(post: BlogPost) {
 
 function typeLabel(post: BlogPost) {
   return post.postType === 'blog' ? 'Blog' : 'Article'
+}
+
+function categoryLabels(post: BlogPost) {
+  const labels = post.categories.map(({ category }) => category.trim()).filter(Boolean)
+  return labels.length ? labels : [typeLabel(post)]
 }
 
 function postHref(post: BlogPost) {
@@ -362,9 +360,10 @@ function LibrarySection({
   bookmarks: Set<string>
   onBookmark: (slug: string) => void
 }) {
-  const [filterType, setFilterType] = useState('')
+  const [filterCategory, setFilterCategory] = useState('')
   const [page, setPage] = useState(1)
   const [showFilter, setShowFilter] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
   // On mobile the staggered reveal makes cards appear late — render them plainly
   const [isMobile, setIsMobile] = useState(false)
 
@@ -385,17 +384,18 @@ function LibrarySection({
         post.title.toLowerCase().includes(query) ||
         post.excerpt.toLowerCase().includes(query) ||
         post.tags.some(({ tag }) => tag.toLowerCase().includes(query)) ||
-        post.categories.some(({ category }) => category.toLowerCase().includes(query))
-      const matchesType = !filterType || post.postType === filterType
+        categoryLabels(post).some((category) => category.toLowerCase().includes(query))
+      const matchesCategory = !filterCategory || categoryLabels(post).includes(filterCategory)
 
-      return matchesSearch && matchesType
+      return matchesSearch && matchesCategory
     })
-  }, [filterType, posts, search])
+  }, [filterCategory, posts, search])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
   const currentPage = Math.min(page, totalPages)
   const visiblePosts = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
-  const activeFilterLabel = POST_TYPES.find((type) => type.value === filterType)?.label ?? 'All Types'
+  const categoryOptions = useMemo(() => Array.from(new Set(posts.flatMap(categoryLabels))).sort(), [posts])
+  const activeFilterLabel = filterCategory || 'All Categories'
 
   function handleSearchChange(value: string) {
     onSearchChange(value)
@@ -404,6 +404,7 @@ function LibrarySection({
 
   function goToPage(nextPage: number) {
     setPage(Math.min(totalPages, Math.max(1, nextPage)))
+    window.requestAnimationFrame(() => sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
   }
 
   const visiblePageNumbers = (() => {
@@ -414,7 +415,7 @@ function LibrarySection({
   })()
 
   return (
-    <section className={styles.librarySection} aria-label="Reading library">
+    <section ref={sectionRef} className={styles.librarySection} aria-label="Reading library">
       <header className={styles.libraryHeader}>
         <h2 className={styles.libraryTitle}>Our Entire Reading Library</h2>
       </header>
@@ -424,7 +425,7 @@ function LibrarySection({
           <SearchField value={search} onChange={handleSearchChange} variant="library" />
 
           <div className={styles.filterWrap}>
-            <span className={styles.filterLabel}>Filter by Type :</span>
+            <span className={styles.filterLabel}>Filter by Category :</span>
             <button
               type="button"
               className={styles.filterButton}
@@ -437,13 +438,13 @@ function LibrarySection({
 
             {showFilter && (
               <div className={styles.filterMenu}>
-                {POST_TYPES.map((type) => (
+                {[{ value: '', label: 'All Categories' }, ...categoryOptions.map((value) => ({ value, label: value }))].map((type) => (
                   <button
                     key={type.value || 'all'}
                     type="button"
-                    className={cx(styles.filterMenuItem, filterType === type.value && styles.filterMenuItemActive)}
+                    className={cx(styles.filterMenuItem, filterCategory === type.value && styles.filterMenuItemActive)}
                     onClick={() => {
-                      setFilterType(type.value)
+                      setFilterCategory(type.value)
                       setPage(1)
                       setShowFilter(false)
                     }}
@@ -475,7 +476,7 @@ function LibrarySection({
                 })}
               </div>
             ) : (
-              <StaggerReveal key={`${currentPage}-${search}-${filterType}`} className={styles.cardGrid}>
+              <StaggerReveal key={`${currentPage}-${search}-${filterCategory}`} className={styles.cardGrid}>
                 {visiblePosts.map((post, index) => {
                   const postIndex = (currentPage - 1) * PAGE_SIZE + index
 
@@ -642,19 +643,8 @@ function DemoCtaSection() {
 }
 
 export default function BlogsClient({ posts }: { posts: BlogPost[] }) {
-  const [heroSearch, setHeroSearch] = useState('')
   const [librarySearch, setLibrarySearch] = useState('')
-  const libraryRef = useRef<HTMLElement>(null)
   const { bookmarks, toggle: toggleBookmark } = useBookmarks()
-
-  const scrollToLibrary = useCallback(() => {
-    libraryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }, [])
-
-  function submitHeroSearch() {
-    setLibrarySearch(heroSearch)
-    scrollToLibrary()
-  }
 
   const featuredPosts = posts.filter(p => p.isFeatured)
   const nonFeaturedPosts = posts.filter(p => !p.isFeatured)
@@ -674,13 +664,8 @@ export default function BlogsClient({ posts }: { posts: BlogPost[] }) {
             </nav>
 
             <h1 className={styles.heroTitle}>The Best Blogs And Articles On DGlide&apos;s Operations Platform</h1>
+            <p className={styles.heroSubtitle}>Practical ideas for building clearer workflows, connected teams, and operations that keep improving.</p>
           </div>
-
-          <SearchField
-            value={heroSearch}
-            onChange={(v) => { setHeroSearch(v); setLibrarySearch(v); }}
-            onSubmit={submitHeroSearch}
-          />
         </div>
       </section>
 
@@ -709,7 +694,7 @@ export default function BlogsClient({ posts }: { posts: BlogPost[] }) {
 
         <EditorialSection posts={fallbackEditorialPosts} bookmarks={bookmarks} onBookmark={toggleBookmark} />
 
-        <section ref={libraryRef} className={styles.libraryAnchor}>
+        <section className={styles.libraryAnchor}>
           <LibrarySection posts={posts} search={librarySearch} onSearchChange={setLibrarySearch} bookmarks={bookmarks} onBookmark={toggleBookmark} />
         </section>
 
