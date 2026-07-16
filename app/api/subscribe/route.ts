@@ -3,6 +3,7 @@ import { appendLeadToSheet } from '@/lib/sheets'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { sendNotification } from '@/lib/mailer'
 import { readLeadSource } from '@/lib/lead-source'
+import { supabaseService } from '@/lib/supabase-service'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -22,6 +23,20 @@ export async function POST(req: Request) {
 
   if (!email || email.length > 254 || !EMAIL_RE.test(email))
     return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 })
+
+  const { error: storageError } = await supabaseService
+    .from('dglide_newsletter_subscribers')
+    .upsert({
+      email,
+      source_path: source.sourcePath || null,
+      source_url: source.sourceUrl || null,
+      updated_at: new Date().toISOString(),
+    }, { onConflict: 'email' })
+
+  if (storageError) {
+    console.error('Newsletter subscribe storage error:', storageError)
+    return NextResponse.json({ error: 'We could not save your subscription. Please try again in a moment.' }, { status: 500 })
+  }
 
   appendLeadToSheet('Newsletter Subscribe', { email, ...source }).catch(() => {})
   sendNotification('New Newsletter Subscribe', {

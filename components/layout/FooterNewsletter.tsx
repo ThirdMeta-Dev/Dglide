@@ -18,7 +18,14 @@ export default function FooterNewsletter({ heading, placeholder, buttonLabel }: 
 
   async function handleSubscribe() {
     const trimmed = email.trim();
-    if (!trimmed) return;
+    if (!trimmed) {
+      setError("Enter your email address.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setError("Enter a valid email address.");
+      return;
+    }
     setLoading(true);
     setError("");
     try {
@@ -47,21 +54,23 @@ export default function FooterNewsletter({ heading, placeholder, buttonLabel }: 
       </p>
 
       {/* Input + button row */}
-      <div className="footer-nl-actions">
+      <form className="footer-nl-actions" onSubmit={(event) => { event.preventDefault(); handleSubscribe(); }} noValidate>
         <div className="footer-nl-row">
           <div className="footer-nl-input">
             <input
               type="email"
               value={email}
               onChange={(e) => { setEmail(e.target.value); setError(""); }}
-              onKeyDown={(e) => { if (e.key === "Enter") handleSubscribe(); }}
               placeholder={placeholder}
               disabled={loading}
+              required
+              aria-invalid={Boolean(error)}
+              aria-describedby={error ? "footer-newsletter-error" : undefined}
             />
           </div>
 
           <button
-            onClick={handleSubscribe}
+            type="submit"
             disabled={loading}
             className="footer-nl-btn dg-btn-fill"
           >
@@ -75,11 +84,11 @@ export default function FooterNewsletter({ heading, placeholder, buttonLabel }: 
         </div>
 
         {error && (
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#D92D20", margin: "6px 0 0" }}>
+          <p id="footer-newsletter-error" role="alert" style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#D92D20", margin: "6px 0 0" }}>
             {error}
           </p>
         )}
-      </div>
+      </form>
     </div>
   );
 }
