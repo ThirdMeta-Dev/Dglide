@@ -445,28 +445,29 @@ function ContactMethodsSection() {
 
 const TESTIMONIALS = [
   {
-    quote: "We were spending lakhs to generate leads, then losing them because nobody saw the alert in time. DGlide closed that gap.",
-    name: "Mr. Lorem ipsum",
-    company: "Prompt Lasers",
-    avatar: "/contact-us/testimonial-avatar.png",
+    quote: "We were running everything through email and a shared Excel sheet. Now the crew gets pinged the second an SLA's at risk.",
+    name: "Ananya Krishnan",
+    company: "Ops Lead",
   },
   {
-    quote: "Our field teams went from chasing updates over WhatsApp to having everything tracked in one place. The difference was immediate.",
-    name: "Ms. Priya Sharma",
-    company: "TechOps India",
-    avatar: "/contact-us/testimonial-avatar.png",
+    quote: "Technicians used to just disappear into a site. We'd find out something went wrong when the client called. Now I can see where everyone is.",
+    name: "David Ruiz",
+    company: "COO",
   },
   {
-    quote: "We went live in under two weeks. DGlide fit our workflow instead of forcing us to change how we operate.",
-    name: "Mr. Rajan Mehta",
-    company: "ServiceFirst Corp",
-    avatar: "/contact-us/testimonial-avatar.png",
+    quote: "We had Zoho for CRM and Jira for tickets, and neither one talked to the other. It's just one place now.",
+    name: "Marco Rossi",
+    company: "Operations Manager",
   },
   {
-    quote: "The configuration flexibility is unmatched. We've adapted the platform three times as our operations evolved.",
-    name: "Ms. Deepa Nair",
-    company: "Operations Co.",
-    avatar: "/contact-us/testimonial-avatar.png",
+    quote: "It just works the way we already work. That's really it.",
+    name: "Vikram Desai",
+    company: "Founder",
+  },
+  {
+    quote: "We'd tried Freshservice before this and it still needed IT to build every workflow. With DGlide our ops team built it themselves.",
+    name: "James Whitfield",
+    company: "IT Manager",
   },
 ];
 
@@ -489,7 +490,6 @@ function TestimonialCarousel() {
           &quot;{t.quote}&quot;
         </p>
         <div className="flex items-center gap-2.5">
-          <Image src={t.avatar} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
           <span className="h-8 w-[3px] rounded bg-[#FABF5A]" />
           <p className="m-0 text-sm leading-5 text-[#555555]" style={fontInter}>
             <span className="font-medium text-black">{t.name}</span>

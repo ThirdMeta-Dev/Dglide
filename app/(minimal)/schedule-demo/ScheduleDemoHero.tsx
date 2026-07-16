@@ -219,7 +219,7 @@ export default function ScheduleDemoHero({
               <path d="M0.5 0.500031L467.676 0.49999" stroke="white" strokeLinecap="round"/>
             </svg>
 
-            {/* Logo strip moved into the former testimonial slot. */}
+            {/* Logo strip */}
             <div className="sd-hero-logo-strip" style={{ width: "100%", borderRadius: 20, background: "#F3F3F3", padding: "24px 0", overflow: "hidden", boxSizing: "border-box" }}>
               <style>{`
                 @keyframes sd-hero-logo-marquee { from { transform: translateX(0); } to { transform: translateX(calc(-${logos.length * (150 + 16)}px)); } }
