@@ -47,17 +47,17 @@ const DEFAULT_COLS = [
       { label: "Field Service Management",   href: "/field-service-management-fsm"  },
       { label: "Process Management",         href: "/manufacturing-management-software" },
       { label: "Service / ITSM Workflows",   href: "/it-service-management-itsm" },
-      { label: "Field Sales Execution",      href: "#"     },
+      { label: "Field Sales Execution",      href: "/coming-soon" },
       { label: "CRM", href: "/customer-relationship-management-crm" },
     ],
   },
   {
     heading: "Use Cases",
     links: [
-      { label: "Field Service Businesses",           href: "#" },
-      { label: "Manufacturing & Process Businesses", href: "#" },
-      { label: "Growing SMB Operations",             href: "#" },
-      { label: "Internal Operations Teams",          href: "#" },
+      { label: "Field Service Businesses",           href: "/coming-soon" },
+      { label: "Manufacturing & Process Businesses", href: "/coming-soon" },
+      { label: "Growing SMB Operations",             href: "/coming-soon" },
+      { label: "Internal Operations Teams",          href: "/coming-soon" },
     ],
   },
   {
@@ -71,14 +71,14 @@ const DEFAULT_COLS = [
     heading: "Resources",
     links: [
       { label: "Blog",               href: "https://dglide.com/blog" },
-      { label: "Guides / Playbooks", href: "#" },
+      { label: "Guides / Playbooks", href: "/coming-soon" },
     ],
   },
   {
     heading: "Company",
     links: [
       { label: "About DGlide",        href: "/about" },
-      { label: "Contact / Book Demo", href: "#"      },
+      { label: "Contact / Book Demo", href: "/schedule-demo" },
     ],
   },
 ];
@@ -162,8 +162,10 @@ export default function Footer({
   const columns = DEFAULT_COLS.map((def, i) => {
     const colLinks = (links ?? []).filter((l) => l.column_index === i);
     const resolvedLinks = (colLinks.length > 0
-      ? colLinks.map((l) => ({ label: l.label, href: l.href }))
-      : def.links).map((link) => {
+      ? colLinks.map((l) => ({ label: l.label, href: l.href === "#" ? "/coming-soon" : l.href }))
+      : def.links)
+      .filter((link) => link.href !== "/case-studies" && link.label.trim().toLowerCase() !== "case studies")
+      .map((link) => {
         if (def.heading !== "Solutions") return link;
 
         const label = link.label.trim().toLowerCase();
@@ -281,7 +283,7 @@ export default function Footer({
                     { href: social.linkedin  || "#", src: "/footer/social-linkedin.png",  label: "LinkedIn"  },
                     { href: social.instagram || "#", src: "/footer/social-instagram.png", label: "Instagram" },
                   ].map(({ href, src, label }) => (
-                    <Link key={label} href={href} aria-label={label} className="dg-social-icon">
+                    <Link key={label} href={href} aria-label={label} className="dg-social-icon" target="_blank" rel="noopener noreferrer">
                       <Image src={src} alt="" width={20} height={20} className="object-contain" />
                     </Link>
                   ))}

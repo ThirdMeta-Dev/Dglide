@@ -23,23 +23,18 @@ export type HeaderSettings = {
 };
 
 const DEFAULT_NAV: NavItemData[] = [
+  { label: "Platform", href: "/platform", has_dropdown: false },
   {
-    label: "About Us",
-    href: "/about",
-    has_dropdown: true,
-    children: [{ label: "Why Us", href: "/why-dglide", has_dropdown: false }],
-  },
-  {
-    label: "Solutions",
+    label: "Solution",
     has_dropdown: true,
     children: [
       { label: "Customer Relationship Management", href: "/customer-relationship-management-crm", has_dropdown: false },
       { label: "Manufacturing Process Management", href: "/manufacturing-management-software", has_dropdown: false },
     ],
   },
-  { label: "Pricing",   href: "/pricing",   has_dropdown: false },
-  { label: "Platform",  href: "/platform",  has_dropdown: false },
-  { label: "Industry",  href: "/industry",  has_dropdown: true  },
+  { label: "Pricing", href: "/pricing", has_dropdown: false },
+  { label: "Why DGlide?", href: "/why-dglide", has_dropdown: false },
+  { label: "Company", href: "/about", has_dropdown: false },
   {
     label: "Resources",
     href: "/resources",
@@ -85,7 +80,7 @@ function NavItem({
         <Link
           href={href}
           className={cn(
-            "flex items-center gap-1.5 text-sm leading-[22.4px] transition-colors duration-200 group",
+            "flex items-center gap-1.5 whitespace-nowrap text-sm leading-[22.4px] transition-colors duration-200 group",
             "[font-family:var(--font-sora)]",
             active ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
           )}
@@ -119,7 +114,7 @@ function NavItem({
         <button
           type="button"
           className={cn(
-            "flex items-center gap-1.5 text-sm leading-[22.4px] transition-colors duration-200 group bg-transparent border-0 p-0 cursor-pointer",
+            "flex items-center gap-1.5 whitespace-nowrap text-sm leading-[22.4px] transition-colors duration-200 group bg-transparent border-0 p-0 cursor-pointer",
             "[font-family:var(--font-sora)]",
             active ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
           )}
@@ -161,7 +156,10 @@ function NavItem({
           transition={{ duration: 0.18, ease: "easeOut" }}
         >
           <div
-            className="min-w-[350px] rounded-2xl p-2 border border-white/60 bg-white/55 backdrop-blur-2xl"
+            className={cn(
+              "rounded-2xl p-2 border border-white/60 bg-white/55 backdrop-blur-2xl",
+              item.label === "Resources" ? "min-w-[190px]" : "min-w-[350px]"
+            )}
             style={{ boxShadow: "0 8px 32px 0 rgba(28, 43, 255, 0.14), inset 0 1px 0 0 rgba(255,255,255,0.7)" }}
           >
             {children.map((child) => (
@@ -220,31 +218,35 @@ export default function Header({ navItems, settings }: Props) {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
   const sourceNav = (navItems && navItems.length > 0) ? navItems : DEFAULT_NAV;
-  const nav = sourceNav.map((item) => {
-    if (item.label.toLowerCase() !== "solutions") return item;
-
-    const children = item.children ?? [];
-    const requiredSolutionLinks: NavItemData[] = [
-      {
-        label: "Customer Relationship Management",
-        href: "/customer-relationship-management-crm",
-        has_dropdown: false,
-      },
-      {
-        label: "Manufacturing Process Management",
-        href: "/manufacturing-management-software",
-        has_dropdown: false,
-      },
-    ];
-    const missingSolutionLinks = requiredSolutionLinks.filter(
-      (required) => !children.some((child) => child.href === required.href)
-    );
-
-    return {
-      ...item,
-      children: [...children, ...missingSolutionLinks],
-    };
+  const findNav = (...labels: string[]) => sourceNav.find((item) =>
+    labels.includes(item.label.trim().toLowerCase())
+  );
+  const sourceSolutions = findNav("solutions", "solution");
+  const sourceResources = findNav("resources");
+  const requiredSolutionLinks: NavItemData[] = [
+    { label: "Field Service Management", href: "/field-service-management-fsm", has_dropdown: false },
+    { label: "IT Service Management", href: "/it-service-management-itsm", has_dropdown: false },
+    { label: "Customer Relationship Management", href: "/customer-relationship-management-crm", has_dropdown: false },
+    { label: "Manufacturing Process Management", href: "/manufacturing-management-software", has_dropdown: false },
+  ];
+  const solutionChildren = [...(sourceSolutions?.children ?? [])];
+  requiredSolutionLinks.forEach((required) => {
+    if (!solutionChildren.some((child) => child.href === required.href)) solutionChildren.push(required);
   });
+  const resourceChildren = [...(sourceResources?.children ?? [])].filter(
+    (child) => child.href !== "/case-studies" && child.label.trim().toLowerCase() !== "case studies"
+  );
+  if (!resourceChildren.some((child) => child.href === "/blogs")) {
+    resourceChildren.push({ label: "Blog", href: "/blogs", has_dropdown: false });
+  }
+  const nav: NavItemData[] = [
+    { label: "Platform", href: "/platform", has_dropdown: false },
+    { label: "Solution", has_dropdown: true, children: solutionChildren },
+    { label: "Pricing", href: "/pricing", has_dropdown: false },
+    { label: "Why DGlide?", href: "/why-dglide", has_dropdown: false },
+    { label: "Company", href: "/about", has_dropdown: false },
+    { label: "Resources", has_dropdown: true, children: resourceChildren },
+  ];
   const cfg = settings ?? DEFAULT_SETTINGS;
 
   function isActive(href: string) {
@@ -258,7 +260,7 @@ export default function Header({ navItems, settings }: Props) {
       style={{ borderRadius: "0 0 25px 25px", background: "#FFF", boxShadow: "0 4px 10px 0 rgba(0,0,0,0.08)" }}
     >
       {/* Desktop */}
-      <div className="hidden lg:flex items-center justify-between h-[88px] px-8 max-w-[1200px] mx-auto gap-[60px]">
+      <div className="hidden lg:flex items-center justify-between h-[88px] px-8 max-w-[1280px] mx-auto gap-[52px]">
         <Link href="/" className="flex-shrink-0">
           <div className="w-[160px] h-[28px] relative">
             <Image src="/logo.png" alt="DGlide" fill className="object-contain object-left" priority />
