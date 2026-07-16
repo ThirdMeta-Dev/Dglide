@@ -333,7 +333,7 @@
 .compareTable {
   width: 100%;
   min-width: 860px;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 20px;
 }
 
@@ -347,6 +347,29 @@
   padding: 24px 28px;
   border-radius: 20px 20px 0 0;
   background: #fff;
+  position: sticky;
+  top: 88px;
+  z-index: 8;
+  box-shadow: 0 8px 18px rgba(19, 35, 51, 0.06);
+}
+
+.compareTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.expandAllButton {
+  flex-shrink: 0;
+  border: 1px solid #1c2bff;
+  border-radius: 999px;
+  background: #fff;
+  color: #1c2bff;
+  padding: 10px 22px;
+  font-family: var(--font-sora), Sora, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .featureHeader {
@@ -370,7 +393,7 @@
 .planHeaders span {
   color: #000;
   font-family: var(--font-tasa-orbiter), "TASA Orbiter", sans-serif;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 400;
   line-height: 30px;
   display: flex;
@@ -380,8 +403,8 @@
 }
 
 .planHeaderIcon {
-  width: 88px;
-  height: 48px;
+  width: 64px;
+  height: 36px;
   object-fit: contain;
 }
 

@@ -46,6 +46,7 @@ export default function ScheduleDemoHero({
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const bullets = [1, 2, 3].map((n) => data?.[`bullet_${n}`] ?? BULLETS_DEFAULT[n - 1]);
   const logos = LOGO_SRCS.map((src, i) => ({
@@ -59,7 +60,7 @@ export default function ScheduleDemoHero({
   const titleLines = titleRaw.split("\n");
   const description = data?.description ?? "No long forms. Tell us how you run things in 30 seconds, and we will show you DGlide built around it.";
   const formIntroText = data?.form_intro_text ?? "Hi, I'm Vinayak from DGlide. Answer a couple of quick questions, and I'll tailor your demo.";
-  const formSubmitLabel = data?.form_submit_label ?? "Get the full story";
+  const formSubmitLabel = "Book My Demo";
   const formSlotsText = data?.form_slots_text ?? "Book Now, Only 8 Demo Slots Left This Week!";
   const formPrivacyText = data?.form_privacy_text ?? "All your data stays private and secure with us.";
   const successHeading = data?.success_heading ?? "Demo Booked!";
@@ -67,23 +68,41 @@ export default function ScheduleDemoHero({
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
+    setFieldErrors((previous) => ({ ...previous, [e.target.name]: "" }));
+    setError("");
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const clientErrors: Record<string, string> = {};
+    if (form.name.trim().length < 2) clientErrors.name = "Enter your full name.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) clientErrors.email = "Enter a valid work email address.";
+    const phoneDigits = form.contact.replace(/\D/g, "").length;
+    if (phoneDigits < 7 || phoneDigits > 15) clientErrors.contact = "Enter a valid contact number with 7–15 digits.";
+    if (form.company.trim().length < 2) clientErrors.company = "Enter your company name.";
+    if (Object.keys(clientErrors).length) {
+      setFieldErrors(clientErrors);
+      setError("Please correct the highlighted fields.");
+      return;
+    }
     setLoading(true);
     setError("");
+    setFieldErrors({});
     try {
       const res = await fetch("/api/demo-requests", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, ...getBrowserLeadSource() }),
       });
-      if (!res.ok) throw new Error("Failed");
+      const response = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (response.fieldErrors && typeof response.fieldErrors === "object") setFieldErrors(response.fieldErrors);
+        throw new Error(response.error || "We could not submit your request. Please try again.");
+      }
       setSubmitted(true);
       router.push("/thank-you");
-    } catch {
-      setError("Something went wrong. Please try again.");
+    } catch (submissionError) {
+      setError(submissionError instanceof Error ? submissionError.message : "We could not submit your request. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -250,16 +269,24 @@ export default function ScheduleDemoHero({
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                  <input name="name" value={form.name} onChange={handleChange} placeholder="Name *" required style={inputStyle} />
+                <form noValidate onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <input name="name" value={form.name} onChange={handleChange} placeholder="Name *" required aria-invalid={Boolean(fieldErrors.name)} aria-describedby={fieldErrors.name ? "demo-name-error" : undefined} style={{ ...inputStyle, border: fieldErrors.name ? "1px solid #D92D20" : "none" }} />
+                  {fieldErrors.name && <p id="demo-name-error" style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#D92D20", margin: "-6px 4px 0" }}>{fieldErrors.name}</p>}
                   <div style={{ display: "flex", gap: 12 }}>
-                    <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email ID *" required style={{ ...inputStyle, flex: 1 }} />
-                    <input type="tel" name="contact" value={form.contact} onChange={handleChange} placeholder="Contact No. *" style={{ ...inputStyle, flex: 1 }} />
+                    <div style={{ flex: 1 }}>
+                      <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email ID *" required aria-invalid={Boolean(fieldErrors.email)} aria-describedby={fieldErrors.email ? "demo-email-error" : undefined} style={{ ...inputStyle, border: fieldErrors.email ? "1px solid #D92D20" : "none" }} />
+                      {fieldErrors.email && <p id="demo-email-error" style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#D92D20", margin: "6px 4px 0" }}>{fieldErrors.email}</p>}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <input type="tel" name="contact" value={form.contact} onChange={handleChange} placeholder="Contact No. *" required aria-invalid={Boolean(fieldErrors.contact)} aria-describedby={fieldErrors.contact ? "demo-contact-error" : undefined} style={{ ...inputStyle, border: fieldErrors.contact ? "1px solid #D92D20" : "none" }} />
+                      {fieldErrors.contact && <p id="demo-contact-error" style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#D92D20", margin: "6px 4px 0" }}>{fieldErrors.contact}</p>}
+                    </div>
                   </div>
-                  <input name="company" value={form.company} onChange={handleChange} placeholder="Your company name *" required style={inputStyle} />
+                  <input name="company" value={form.company} onChange={handleChange} placeholder="Your company name *" required aria-invalid={Boolean(fieldErrors.company)} aria-describedby={fieldErrors.company ? "demo-company-error" : undefined} style={{ ...inputStyle, border: fieldErrors.company ? "1px solid #D92D20" : "none" }} />
+                  {fieldErrors.company && <p id="demo-company-error" style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#D92D20", margin: "-6px 4px 0" }}>{fieldErrors.company}</p>}
                   <textarea name="message" value={form.message} onChange={handleChange} placeholder="Tell us how we can help" rows={4} style={{ ...inputStyle, height: "auto", resize: "none", paddingTop: 14, paddingBottom: 14 }} />
 
-                  {error && <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#E53E3E", margin: 0 }}>{error}</p>}
+                  {error && <p role="alert" style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#E53E3E", margin: 0 }}>{error}</p>}
 
                   <button
                     type="submit"

@@ -174,11 +174,26 @@ function FeatureRow({
 }
 
 export function PlanComparisonSection() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndexes, setOpenIndexes] = useState<Set<number>>(() => new Set([0]));
+  const allOpen = openIndexes.size === FEATURE_GROUPS.length;
+
+  function toggleGroup(groupIndex: number) {
+    setOpenIndexes((current) => {
+      const next = new Set(current);
+      if (next.has(groupIndex)) next.delete(groupIndex);
+      else next.add(groupIndex);
+      return next;
+    });
+  }
 
   return (
     <section className={styles.compareSection}>
-      <h2>Compare What&apos;s in Each Plan</h2>
+      <div className={styles.compareTitleRow}>
+        <h2>Compare What&apos;s in Each Plan</h2>
+        <button type="button" className={styles.expandAllButton} onClick={() => setOpenIndexes(allOpen ? new Set() : new Set(FEATURE_GROUPS.map((_, index) => index)))}>
+          {allOpen ? "Close All" : "Open All"}
+        </button>
+      </div>
 
       <div className={styles.compareScroller}>
         <div className={styles.compareTable}>
@@ -201,7 +216,7 @@ export function PlanComparisonSection() {
           </div>
 
           {FEATURE_GROUPS.map((group, groupIndex) => {
-            const isOpen = openIndex === groupIndex;
+            const isOpen = openIndexes.has(groupIndex);
 
             return (
               <div key={group.title}>
@@ -212,7 +227,7 @@ export function PlanComparisonSection() {
                       ? styles.groupToggleLast
                       : ""
                   }`}
-                  onClick={() => setOpenIndex(groupIndex)}
+                  onClick={() => toggleGroup(groupIndex)}
                   aria-expanded={isOpen}
                 >
                   <span>{group.title}</span>

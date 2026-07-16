@@ -64,6 +64,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Demo request error:", err);
-    return NextResponse.json({ error: "Failed to submit" }, { status: 500 });
+    return NextResponse.json({ error: "We could not submit your request right now. Please try again in a moment." }, { status: 500 });
   }
 }
