@@ -225,6 +225,8 @@ export default function BlogDetailSidebar({
         <section className={styles.sidebarCta} aria-label={settings.sidebarCtaTitle}>
           {settings.sidebarCtaImageUrl && (
             <div className={styles.sidebarCtaImage}>
+              {/* External CTA images intentionally bypass Next.js host allowlisting. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={settings.sidebarCtaImageUrl} alt="" loading="lazy" />
             </div>
           )}
