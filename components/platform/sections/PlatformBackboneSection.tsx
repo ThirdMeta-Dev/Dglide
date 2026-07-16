@@ -1,4 +1,6 @@
-import { FunctionComponent } from "react";
+"use client";
+
+import { FunctionComponent, useEffect, useState } from "react";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 import {
@@ -10,7 +12,18 @@ import {
 const STACK_TOP_BASE = 100;
 const STACK_TOP_STEP = 24;
 
-const PlatformBackboneSection: FunctionComponent = () => (
+const PlatformBackboneSection: FunctionComponent = () => {
+  const [activeLayer, setActiveLayer] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const interval = window.setInterval(() => {
+      setActiveLayer((value) => (value + 1) % platformBackboneLayers.length);
+    }, 3500);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  return (
   <section id="platform-backbone" className="sol-plat-backbone-section">
     <SolutionsContainer>
       <div className="sol-plat-backbone-layout">
@@ -34,7 +47,10 @@ const PlatformBackboneSection: FunctionComponent = () => (
                 zIndex: i + 1,
               }}
             >
-            <article className="sol-plat-backbone-card">
+            <article
+              className={`sol-plat-backbone-card${activeLayer === i ? " sol-plat-backbone-card--active" : ""}`}
+              onMouseEnter={() => setActiveLayer(i)}
+            >
               <div className="sol-plat-backbone-card-header">
                 <img
                   src={layer.icon}
@@ -62,6 +78,7 @@ const PlatformBackboneSection: FunctionComponent = () => (
       </div>
     </SolutionsContainer>
   </section>
-);
+  );
+};
 
 export default PlatformBackboneSection;

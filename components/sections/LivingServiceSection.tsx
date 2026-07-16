@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const STATIC_TITLE   = "The Living Service Model: Fit That Doesn't Expire";
 const STATIC_BODY    = "With the Living Service Model, your system is adjusted as your operation changes, quarter after quarter.";
@@ -71,6 +71,22 @@ function tabPos(i: number, current: number): { x: number; y: number } {
 export default function LivingServiceSection({ data }: { data?: Record<string, string> }) {
   const [current, setCurrent] = useState(0);
   const [spinDir, setSpinDir] = useState<"prev" | "next" | null>(null);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let transitionTimer: ReturnType<typeof setTimeout> | undefined;
+    const interval = window.setInterval(() => {
+      setSpinDir("next");
+      transitionTimer = setTimeout(() => {
+        setCurrent((value) => (value + 1) % N);
+        setSpinDir(null);
+      }, 650);
+    }, 5000);
+    return () => {
+      window.clearInterval(interval);
+      if (transitionTimer) clearTimeout(transitionTimer);
+    };
+  }, []);
 
   const title    = data?.left_title   ?? STATIC_TITLE;
   const body     = data?.left_body    ?? STATIC_BODY;
@@ -263,7 +279,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
                 }}>
                   {slide.detail}
                 </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6, width: "164%" }}>
                   {slide.bullets.map((b, idx) => (
                     <span key={idx} style={{
                       fontFamily: "Inter, sans-serif",
@@ -304,8 +320,6 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
                 const { x, y } = tabPos(i, current);
                 const offset   = arcOffset(i, current);
                 const isActive = offset === 0;
-                const dist     = Math.abs(offset);
-                const opacity  = dist === 0 ? 1 : dist === 1 ? 0.72 : 0.45;
                 return (
                   <div
                     key={i}
@@ -316,7 +330,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
                       top: y,
                       transform: "translate(-50%, -50%)",
                       transition: "left 0.65s cubic-bezier(0.4,0,0.2,1), top 0.65s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease",
-                      opacity,
+                      opacity: 1,
                       zIndex: isActive ? 10 : 6,
                       cursor: "pointer",
                     }}
@@ -328,10 +342,10 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
                         gap: 10,
                         padding: "10px 20px 10px 14px",
                         borderRadius: 40,
-                        border: `1.5px solid ${isActive ? "#FF7F1C" : "#E4E4E4"}`,
-                        background: isActive ? "#FFF" : "rgba(255,255,255,0.85)",
-                        backdropFilter: "blur(10px)",
-                        WebkitBackdropFilter: "blur(10px)",
+                        border: `1px solid ${isActive ? "#FF7F1C" : "#E4E4E4"}`,
+                        background: isActive ? "#FFF" : "rgba(255, 255, 255, 0.50)",
+                        backdropFilter: isActive ? "none" : "blur(50px)",
+                        WebkitBackdropFilter: isActive ? "none" : "blur(50px)",
                         whiteSpace: "nowrap",
                         fontFamily: "Inter, sans-serif",
                         fontSize: 13,
@@ -378,7 +392,7 @@ export default function LivingServiceSection({ data }: { data?: Record<string, s
                     {slide.body}
                   </p>
                 )}
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6, width: "164%" }}>
                   {slide.bullets.map((b, i) => (
                     <span
                       key={i}

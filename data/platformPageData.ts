@@ -351,7 +351,7 @@ export const platformMultiSystemsCards = [
     description:
       "Manage service requests, work orders, technicians, and closure workflows.",
     link: "Explore FSM",
-    href: "/solutions/fsm",
+    href: "/field-service-management-fsm",
     icon: "/platform/multi-systems/fsm-icon.png",
   },
   {
@@ -359,7 +359,7 @@ export const platformMultiSystemsCards = [
     description:
       "Connect customer data, relationship workflows, tasks, and follow-ups.",
     link: "Explore CRM",
-    href: "/solutions/crm",
+    href: "/customer-relationship-management-crm",
     icon: "/platform/multi-systems/crm-icon.png",
   },
   {
@@ -367,7 +367,7 @@ export const platformMultiSystemsCards = [
     description:
       "Run requests, tickets, approvals, SLAs, and internal service flows.",
     link: "Explore ITSM",
-    href: "/solutions/itsm",
+    href: "/it-service-management-itsm",
     icon: "/platform/multi-systems/itsm-icon.png",
   },
   {
@@ -375,7 +375,7 @@ export const platformMultiSystemsCards = [
     description:
       "Track visits, routes, orders, field activity, and reporting.",
     link: "Explore Field Sales",
-    href: "/solutions/field-sales",
+    href: "/coming-soon",
     icon: "/platform/multi-systems/sales-icon.png",
   },
   {
@@ -383,7 +383,7 @@ export const platformMultiSystemsCards = [
     description:
       "Structure multi-stage workflows, task dependencies, and operational visibility.",
     link: "Explore Process Management",
-    href: "/solutions/process",
+    href: "/manufacturing-management-software",
     icon: "/platform/multi-systems/process-icon.png",
   },
 ];

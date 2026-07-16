@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import Image from "next/image";
 
 const TITLE = "Your Software Should Be Compatible, Even After Go-Live";
@@ -107,6 +107,22 @@ const PlatformLivingServiceSection: FunctionComponent = () => {
   const [current, setCurrent] = useState(0);
   const [spinDir, setSpinDir] = useState<"prev" | "next" | null>(null);
 
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let transitionTimer: ReturnType<typeof setTimeout> | undefined;
+    const interval = window.setInterval(() => {
+      setSpinDir("next");
+      transitionTimer = setTimeout(() => {
+        setCurrent((value) => (value + 1) % N);
+        setSpinDir(null);
+      }, 650);
+    }, 5000);
+    return () => {
+      window.clearInterval(interval);
+      if (transitionTimer) clearTimeout(transitionTimer);
+    };
+  }, []);
+
   const navigate = (dir: "prev" | "next") => {
     if (spinDir) return;
     setSpinDir(dir);
@@ -187,8 +203,6 @@ const PlatformLivingServiceSection: FunctionComponent = () => {
                 const { x, y } = tabPos(i, current);
                 const offset   = arcOffset(i, current);
                 const isActive = offset === 0;
-                const dist     = Math.abs(offset);
-                const opacity  = dist === 0 ? 1 : dist === 1 ? 0.72 : 0.45;
                 return (
                   <div
                     key={label}
@@ -197,15 +211,16 @@ const PlatformLivingServiceSection: FunctionComponent = () => {
                       position: "absolute", left: x, top: y,
                       transform: "translate(-50%, -50%)",
                       transition: "left 0.65s cubic-bezier(0.4,0,0.2,1), top 0.65s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease",
-                      opacity, zIndex: isActive ? 10 : 6, cursor: "pointer",
+                      opacity: 1, zIndex: isActive ? 10 : 6, cursor: "pointer",
                     }}
                   >
                     <div style={{
                       display: "inline-flex", alignItems: "center", gap: 10,
                       padding: "10px 20px 10px 14px", borderRadius: 40,
-                      border: `1.5px solid ${isActive ? "#FF7F1C" : "#E4E4E4"}`,
-                      background: isActive ? "#FFF" : "rgba(255,255,255,0.85)",
-                      backdropFilter: "blur(10px)",
+                      border: `1px solid ${isActive ? "#FF7F1C" : "#E4E4E4"}`,
+                      background: isActive ? "#FFF" : "rgba(255, 255, 255, 0.50)",
+                      backdropFilter: isActive ? "none" : "blur(50px)",
+                      WebkitBackdropFilter: isActive ? "none" : "blur(50px)",
                       whiteSpace: "nowrap", fontFamily: "Inter, sans-serif",
                       fontSize: 13, fontWeight: isActive ? 500 : 400,
                       color: isActive ? "#FF7F1C" : "#6F7276",
@@ -229,7 +244,7 @@ const PlatformLivingServiceSection: FunctionComponent = () => {
                 }}>
                   {slide.detail}
                 </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8, width: 320 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, width: "164%" }}>
                   {slide.bullets.map((b) => (
                     <span key={b} style={{
                       fontFamily: "Inter, sans-serif", color: "#555",
