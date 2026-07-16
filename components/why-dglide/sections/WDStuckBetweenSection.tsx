@@ -139,7 +139,7 @@ export default function WDStuckBetweenSection() {
               Your team isn&apos;t failing. The system underneath them is missing.
             </p>
             <Link
-              href="/demo"
+              href="/schedule-demo"
               className="dg-btn-fill inline-flex h-12 w-fit items-center gap-2.5 rounded-full px-8 py-3.5 text-base font-semibold text-white"
               style={{
                 fontFamily: "Sora, sans-serif",

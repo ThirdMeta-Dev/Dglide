@@ -53,6 +53,7 @@ export default function FSMPage() {
         bullets={fsmHeroBullets}
         primaryCta={fsmHeroPrimaryCta}
         secondaryCta={fsmHeroSecondaryCta}
+        secondaryScrollTargetId="core-capabilities"
         imageSrc="/solutions/fsm-hero-illustration.png"
         imageAlt="DGlide FSM — field service management dashboard"
       />

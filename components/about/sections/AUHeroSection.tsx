@@ -89,7 +89,7 @@ export default function AUHeroSection() {
             {/* CTAs */}
             <div className="flex flex-wrap gap-4">
               <Link
-                href="#capabilities"
+                href="/platform#platform-capabilities"
                 className="dg-btn-fill inline-flex h-12 items-center gap-2.5 rounded-full px-8 text-base font-semibold text-white"
                 style={{
                   fontFamily: "var(--font-sora), Sora, sans-serif",
@@ -109,7 +109,7 @@ export default function AUHeroSection() {
                 </svg>
               </Link>
               <Link
-                href="/demo"
+                href="/schedule-demo"
                 className="dg-btn-outline inline-flex h-12 items-center gap-2.5 rounded-full border-[1.5px] border-[#141FB5] px-8 text-base font-normal text-[#141FB5]"
                 style={{ fontFamily: "var(--font-sora), Sora, sans-serif" }}
               >

@@ -129,7 +129,7 @@ export default function WDTradeoffSection() {
               coordinated foundation your operations have been missing.
             </p>
             <Link
-              href="/platform"
+              href="/platform#platform-capabilities"
               className="dg-btn-fill inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full text-white font-semibold text-base leading-[20px] whitespace-nowrap shrink-0"
               style={{
                 fontFamily: "var(--font-sora), Sora, sans-serif",

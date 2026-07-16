@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 export default function SolutionsPage() {
   return (
     <AnimatedPublicPage className="solutions-page" staticFirstCount={2}>
-      <FSMHeroSection />
+      <FSMHeroSection secondaryScrollTargetId="core-capabilities" />
       <SolutionsSectionNav items={itsmSectionNavItems} />
       <FieldServiceProblemSection />
       <BuiltForSection />

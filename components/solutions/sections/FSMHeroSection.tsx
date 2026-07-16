@@ -27,6 +27,7 @@ type FSMHeroSectionProps = {
   imageAlt?: string;
   imageClassName?: string;
   actionsInline?: boolean;
+  compactTop?: boolean;
 };
 
 const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
@@ -41,6 +42,7 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
   imageAlt = "DGlide service management dashboard",
   imageClassName = "",
   actionsInline = false,
+  compactTop = false,
 }) => {
   const router = useRouter();
 
@@ -68,7 +70,7 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
   );
 
   return (
-    <section className="dg-hero-outer relative overflow-x-clip bg-[var(--sol-bg)] pb-0 pt-28 lg:pt-20">
+    <section className={`dg-hero-outer relative overflow-x-clip bg-[var(--sol-bg)] pb-0 ${compactTop ? "pt-12 lg:pt-10" : "pt-28 lg:pt-20"}`}>
       <SolutionsContainer className="relative z-10">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Left column */}

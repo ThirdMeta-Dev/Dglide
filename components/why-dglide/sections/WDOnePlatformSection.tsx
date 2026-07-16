@@ -264,7 +264,7 @@ export default function WDOnePlatformSection({ data }: { data?: Record<string, s
                 <ArrowRight stroke="#FFFFFF" />
               </Link>
               <Link
-                href={data?.cta_secondary_href ?? "/schedule-demo"}
+                href={data?.cta_secondary_href ?? "/platform"}
                 className="dg-btn-outline inline-flex items-center gap-[10px] px-8 py-3.5 rounded-[40px] border border-[#1C2BFF] bg-white text-[#141FB5] text-base leading-[20.16px] transition-colors hover:bg-[#1C2BFF]/5"
                 style={{ fontFamily: "var(--font-sora), Sora, sans-serif", fontWeight: 400 }}
               >

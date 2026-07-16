@@ -104,7 +104,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
         <ScrollReveal direction="up" delay={0.24}>
           <div className="dg-hero-ctas relative z-10 flex flex-wrap gap-4 mb-0 justify-center">
             <Link
-              href={data?.cta_primary_href ?? "/schedule-demo"}
+              href="/schedule-demo"
               className="dg-btn-fill inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-base"
               style={{
                 fontFamily: "Sora, sans-serif",
@@ -115,7 +115,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
               <ArrowRight stroke="white" />
             </Link>
             <Link
-              href={data?.cta_secondary_href ?? "/schedule-demo"}
+              href="/platform#platform-backbone"
               className="dg-btn-outline inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-[#1C2BFF] text-[#1C2BFF] text-base transition-colors hover:bg-[#1C2BFF]/5"
               style={{ fontFamily: "Sora, sans-serif", fontWeight: 400 }}
             >

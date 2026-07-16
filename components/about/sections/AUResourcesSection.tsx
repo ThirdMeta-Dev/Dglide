@@ -8,13 +8,13 @@ import { useState } from "react";
  * Figma node 1118:2233 (1200x392 desktop frame, 1104px content)
  */
 
-const TABS = ["Ebooks", "Blogs", "Case Studiesz"];
+const TABS = ["Ebooks", "Blogs", "Case Studies"];
 
 const FEATURED = {
   image: "/about/resources/featured-article.png",
   title: "Why Standard Software Fails Real Operations",
   body: "We finally have visibility in our lorem is operations Your system adapts to how you work Start with working",
-  href: "#",
+  href: "/blogs",
 };
 
 export default function AUResourcesSection() {
@@ -70,7 +70,7 @@ export default function AUResourcesSection() {
           </div>
 
           {/* Featured article card */}
-          <div
+          {active === "Blogs" ? <div
             className="flex-1 rounded-2xl border border-white pl-2 pt-2 pb-2 pr-2 md:pr-7"
             style={{
               background: "linear-gradient(180deg, #FFFFFF 0%, #F6F6F6 100%)",
@@ -140,7 +140,13 @@ export default function AUResourcesSection() {
                 </a>
               </div>
             </div>
-          </div>
+          </div> : (
+            <div className="flex min-h-[260px] flex-1 flex-col items-center justify-center rounded-2xl border border-white bg-white px-8 text-center">
+              <h3 className="text-[30px] leading-10 text-black" style={{ fontFamily: "var(--font-tasa-orbiter)" }}>Coming Soon</h3>
+              <p className="mt-2 max-w-[460px] text-[15px] leading-6 text-[#555]">We&apos;re preparing the DGlide {active} library. Check back soon for practical operations resources.</p>
+              <a href="/coming-soon" className="mt-6 rounded-full border border-[#1C2BFF] px-6 py-3 text-sm text-[#1C2BFF]">View Coming Soon</a>
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -22,6 +22,7 @@ const PlatformHeroSection: FunctionComponent = () => (
     imageSrc={platformHeroImage}
     imageAlt="DGlide — configurable operations platform dashboard"
     actionsInline
+    compactTop
   />
 );
 

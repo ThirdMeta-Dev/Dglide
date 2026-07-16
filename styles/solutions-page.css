@@ -26,6 +26,12 @@
   background: #F3F3F3;
 }
 
+.solutions-page #core-capabilities,
+.solutions-page #core-fsm-capabilities,
+.solutions-page #core-manufacturing-capabilities {
+  scroll-margin-top: 110px;
+}
+
 .solutions-page .sol-container {
   width: 100%;
   max-width: var(--sol-container);

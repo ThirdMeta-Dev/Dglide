@@ -2,7 +2,6 @@
 
 import { FunctionComponent } from "react";
 import { useRouter } from "next/navigation";
-import { scrollToContact } from "@/lib/scroll-to-contact";
 import SolutionsButton from "@/components/solutions/shared/SolutionsButton";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import {
@@ -20,7 +19,7 @@ const PlatformImproveBannerSection: FunctionComponent = () => {
           <p className="sol-plat-improve-banner-text">{platformImproveBannerText}</p>
           <SolutionsButton
             variant="book-demo"
-            onClick={() => scrollToContact(router)}
+            onClick={() => router.push("/coming-soon")}
           >
             {platformImproveBannerCta}
           </SolutionsButton>
