@@ -21,9 +21,9 @@ import SolutionsFAQSection from "@/components/solutions/sections/SolutionsFAQSec
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export const metadata: Metadata = {
-  title: "ITSM | DGlide",
+  title: { absolute: "ITSM That Adapts to Your Workflow | DGlide" },
   description:
-    "DGlide ITSM helps service, IT, and internal teams run requests, approvals, SLAs, and resolution in one configurable system.",
+    "Stop reshaping your process to fit rigid ITSM tools. DGlide adapts to how your team already handles requests, approvals, and SLAs, no 6-month rollout.",
 };
 
 export default function SolutionsPage() {

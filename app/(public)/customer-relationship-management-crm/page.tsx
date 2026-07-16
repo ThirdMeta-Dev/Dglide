@@ -38,20 +38,20 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.dglide.com";
 const PAGE_URL = `${SITE_URL}/customer-relationship-management-crm`;
 
 export const metadata: Metadata = {
-  title: "Customer Relationship Management (CRM)",
-  description: "DGlide CRM connects sales, service, field visits, account history, renewals, and lifecycle stages in one configurable customer record.",
+  title: { absolute: "One CRM for Sales, Service & Field Visits | DGlide" },
+  description: "DGlide CRM connects sales, service, field visits, and account history in one record, so nothing lives in a separate, disconnected tool.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: "Customer Relationship Management (CRM) | DGlide",
-    description: "One customer record for sales, service, field visits, renewals, and account history.",
+    title: "One CRM for Sales, Service & Field Visits | DGlide",
+    description: "DGlide CRM connects sales, service, field visits, and account history in one record, so nothing lives in a separate, disconnected tool.",
     url: PAGE_URL,
     type: "website",
     images: [{ url: `${SITE_URL}/solutions/crm/hero.webp`, width: 1200, height: 839, alt: "DGlide CRM customer relationship dashboard" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Customer Relationship Management (CRM) | DGlide",
-    description: "One customer record for sales, service, field visits, renewals, and account history.",
+    title: "One CRM for Sales, Service & Field Visits | DGlide",
+    description: "DGlide CRM connects sales, service, field visits, and account history in one record, so nothing lives in a separate, disconnected tool.",
     images: [`${SITE_URL}/solutions/crm/hero.webp`],
   },
 };

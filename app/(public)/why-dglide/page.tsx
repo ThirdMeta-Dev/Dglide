@@ -18,9 +18,9 @@ import WDFinalCTASection from "@/components/why-dglide/sections/WDFinalCTASectio
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export const metadata: Metadata = {
-  title: "Why DGlide | DGlide",
+  title: { absolute: "Why Teams Choose DGlide Over Rigid ITSM Tools" },
   description:
-    "Your operations need software that fits. Not software you fit into. See why teams choose DGlide over rigid tools and custom builds.",
+    "Your operations need software that fits, not software you fit into. See why ops and IT teams choose DGlide over rigid tools and custom builds.",
 };
 
 export default function WhyDGlidePage() {

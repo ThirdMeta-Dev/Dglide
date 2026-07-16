@@ -7,21 +7,21 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dglide.com'
 export const revalidate = 300 // re-fetch from Supabase at most every 5 minutes
 
 export const metadata: Metadata = {
-  title: 'Blog',
-  description: "The best blogs and articles on DGlide's Operations Platform — ITSM, field service management, workflow automation, and more.",
+  title: { absolute: 'ITSM & Field Service Blog | DGlide' },
+  description: 'Insights on ITSM, field service management, and workflow automation for operations and IT teams running field-heavy businesses.',
   alternates: {
     canonical: `${SITE_URL}/blogs`,
   },
   openGraph: {
-    title: "Blog | DGlide",
-    description: "The best blogs and articles on DGlide's Operations Platform — ITSM, field service management, workflow automation, and more.",
+    title: 'ITSM & Field Service Blog | DGlide',
+    description: 'Insights on ITSM, field service management, and workflow automation for operations and IT teams running field-heavy businesses.',
     url: `${SITE_URL}/blogs`,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Blog | DGlide",
-    description: "The best blogs and articles on DGlide's Operations Platform — ITSM, field service management, workflow automation, and more.",
+    title: 'ITSM & Field Service Blog | DGlide',
+    description: 'Insights on ITSM, field service management, and workflow automation for operations and IT teams running field-heavy businesses.',
   },
 }
 

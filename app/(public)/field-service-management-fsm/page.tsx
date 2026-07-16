@@ -39,8 +39,8 @@ import {
 import { integrationNodes } from "@/data/solutionsPageData";
 
 export const metadata: Metadata = {
-  title: "Field Service Management | DGlide",
-  description: "DGlide FSM helps service-heavy teams run requests, work orders, scheduling, and field execution in one place.",
+  title: { absolute: "ITSM That Adapts to Your Workflow | DGlide" },
+  description: "Stop coordinating field teams over WhatsApp and Excel. DGlide gives real-time visibility on visits, work orders, and scheduling.",
 };
 
 export default function FSMPage() {

@@ -18,9 +18,9 @@ import AUFinalCTASection from "@/components/about/sections/AUFinalCTASection";
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export const metadata: Metadata = {
-  title: "About Us | DGlide",
+  title: { absolute: "Meet the Team Behind the Platform | About DGlide" },
   description:
-    "Why DGlide exists — software should adapt to you, not the other way around. Meet the team and the philosophy behind the platform.",
+    "DGlide exists because software should adapt to you, not the other way around. Meet the Pune-based team, backed by 20+ years in field ops and ITSM.",
 };
 
 export default function AboutPage() {

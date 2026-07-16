@@ -22,9 +22,9 @@ import PlatformFAQSection from "@/components/platform/sections/PlatformFAQSectio
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export const metadata: Metadata = {
-  title: "Platform | DGlide",
+  title: { absolute: "One Configurable Platform, Every Ops Module | DGlide" },
   description:
-    "The DGlide platform — one operational backbone for field service, workflows, integrations, and enterprise scale.",
+    "DGlide is one no-code operational backbone for field service, workflows, integrations, and enterprise scale, not five bolted-together tools.",
 };
 
 export default function PlatformPage() {

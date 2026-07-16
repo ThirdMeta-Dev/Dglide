@@ -15,9 +15,9 @@ import {
 import styles from "./PricingPage.module.css";
 
 export const metadata: Metadata = {
-  title: "Pricing | DGlide",
+  title: { absolute: "Pricing Plans: Starter, Advanced & Enterprise | DGlide" },
   description:
-    "Explore DGlide pricing plans for Starter, Advanced, and Enterprise teams.",
+    "Compare DGlide's Starter, Advanced, and Enterprise plans for ITSM and field service management. See what's included before you talk to sales.",
 };
 
 export default async function PricingPage() {

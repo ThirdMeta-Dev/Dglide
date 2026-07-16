@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getHomepageSections } from "@/lib/supabase/sections";
 import { listBlogPosts } from "@/lib/blog-db";
 import HeroSection from "@/components/sections/HeroSection";
@@ -17,6 +18,12 @@ import LiveFasterSection from "@/components/sections/LiveFasterSection";
 import UsefulResourcesSection from "@/components/sections/UsefulResourcesSection";
 import CTASection from "@/components/sections/CTASection";
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
+
+export const metadata: Metadata = {
+  title: { absolute: "No-Code ITSM & Field Service Platform | DGlide" },
+  description:
+    "One no-code platform for ITSM, field service, and CRM. Replaces ManageEngine, Zoho, and WhatsApp-run ops. Live in weeks, not months.",
+};
 
 export default async function HomePage() {
   const [sections, { docs: blogPosts }] = await Promise.all([

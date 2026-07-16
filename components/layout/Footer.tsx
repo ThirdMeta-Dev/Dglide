@@ -147,9 +147,22 @@ export default function Footer({
   const newsletterPlaceholder = settings?.newsletter_placeholder  ?? "Enter Your Email";
   const newsletterButtonLabel = settings?.newsletter_button_label ?? "Subscribe Now";
   const tagline    = settings?.tagline    ?? "We finally have visibility in our operations. Your system adapts to how you work.";
-  const email      = settings?.email      ?? "letstalk@dglide.com";
-  const phone      = settings?.phone      ?? "+91 95884 82557";
-  const copyright  = settings?.copyright  ?? "Copyright © 2024 Lorem Ipsum All Rights Reserved. Developed by Hexanovate";
+  const configuredEmail = settings?.email?.trim();
+  const configuredPhone = settings?.phone?.trim();
+  const email = !configuredEmail || configuredEmail === "letstalk@dglide.com"
+    ? "info@dglide.com"
+    : configuredEmail;
+  const phone = !configuredPhone || ["+91 95884 82557", "+91 6787878787"].includes(configuredPhone)
+    ? "+91 80808 16087"
+    : configuredPhone;
+  const configuredCopyright = settings?.copyright?.trim();
+  const copyright = !configuredCopyright
+    || configuredCopyright.includes("Lorem Ipsum")
+    || configuredCopyright.startsWith("Copyright © 2025 DGlide")
+    ? "Copyright © 2026 DGlide. All Rights Reserved. Developed by Hexanovate"
+    : configuredCopyright;
+  const developerName = "Hexanovate";
+  const developerNameIndex = copyright.indexOf(developerName);
   const privacyLabel = settings?.privacy_label ?? "Privacy Policy";
   const privacyHref  = settings?.privacy_href  ?? "/privacy-policy";
   const termsLabel   = settings?.terms_label   ?? "Terms & Conditions";
@@ -325,7 +338,20 @@ export default function Footer({
           <ScrollReveal direction="up" delay={0.05}>
             <div className="footer-bottom" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 0 32px" }}>
               <p style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: "22.4px", color: "#545454", margin: 0 }}>
-                {copyright}
+                {developerNameIndex >= 0 ? (
+                  <>
+                    {copyright.slice(0, developerNameIndex)}
+                    <a
+                      href="https://hexanovate.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "inherit", textDecoration: "underline", textUnderlineOffset: 3 }}
+                    >
+                      {developerName}
+                    </a>
+                    {copyright.slice(developerNameIndex + developerName.length)}
+                  </>
+                ) : copyright}
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
                 <Link href={privacyHref} style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, color: "#545454", textDecoration: "none" }}>
