@@ -175,7 +175,6 @@ function FeatureRow({
 
 export function PlanComparisonSection() {
   const [openIndexes, setOpenIndexes] = useState<Set<number>>(() => new Set([0]));
-  const allOpen = openIndexes.size === FEATURE_GROUPS.length;
 
   function toggleGroup(groupIndex: number) {
     setOpenIndexes((current) => {
@@ -190,9 +189,6 @@ export function PlanComparisonSection() {
     <section className={styles.compareSection}>
       <div className={styles.compareTitleRow}>
         <h2>Compare What&apos;s in Each Plan</h2>
-        <button type="button" className={styles.expandAllButton} onClick={() => setOpenIndexes(allOpen ? new Set() : new Set(FEATURE_GROUPS.map((_, index) => index)))}>
-          {allOpen ? "Close All" : "Open All"}
-        </button>
       </div>
 
       <div className={styles.compareScroller}>
