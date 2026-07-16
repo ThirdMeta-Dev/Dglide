@@ -325,8 +325,7 @@
 
 .compareScroller {
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: visible;
   border-radius: 20px;
 }
 
@@ -958,6 +957,11 @@
    Principles 6-col grid crushes cards at tablet widths.
 ───────────────────────────────────────── */
 @media (max-width: 1023px) {
+  .compareScroller {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
   .heroSection {
     padding-right: 24px;
     padding-left: 24px;

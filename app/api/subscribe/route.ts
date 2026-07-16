@@ -35,7 +35,6 @@ export async function POST(req: Request) {
 
   if (storageError) {
     console.error('Newsletter subscribe storage error:', storageError)
-    return NextResponse.json({ error: 'We could not save your subscription. Please try again in a moment.' }, { status: 500 })
   }
 
   appendLeadToSheet('Newsletter Subscribe', { email, ...source }).catch(() => {})

@@ -109,27 +109,23 @@ const PlatformLivingServiceSection: FunctionComponent = () => {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let transitionTimer: ReturnType<typeof setTimeout> | undefined;
-    const interval = window.setInterval(() => {
-      setSpinDir("next");
-      transitionTimer = setTimeout(() => {
-        setCurrent((value) => (value + 1) % N);
-        setSpinDir(null);
-      }, 650);
-    }, 5000);
-    return () => {
-      window.clearInterval(interval);
-      if (transitionTimer) clearTimeout(transitionTimer);
-    };
-  }, []);
+    if (spinDir) return;
+    const autoTimer = window.setTimeout(() => setSpinDir("next"), 5000);
+    return () => window.clearTimeout(autoTimer);
+  }, [current, spinDir]);
+
+  useEffect(() => {
+    if (!spinDir) return;
+    const transitionTimer = window.setTimeout(() => {
+      setCurrent((value) => spinDir === "next" ? (value + 1) % N : (value - 1 + N) % N);
+      setSpinDir(null);
+    }, 650);
+    return () => window.clearTimeout(transitionTimer);
+  }, [spinDir]);
 
   const navigate = (dir: "prev" | "next") => {
     if (spinDir) return;
     setSpinDir(dir);
-    setTimeout(() => {
-      setCurrent((c) => (dir === "next" ? (c + 1) % N : (c - 1 + N) % N));
-      setSpinDir(null);
-    }, 650);
   };
 
   const slide = SLIDES[current];

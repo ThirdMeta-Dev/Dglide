@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Bookmark, Check, Copy, Heart } from 'lucide-react'
+import Link from 'next/link'
+import type { BlogDetailSettings } from '@/lib/blog-db'
 import styles from './BlogDetail.module.css'
 
 type TocItem = {
@@ -14,6 +16,7 @@ type BlogDetailSidebarProps = {
   title: string
   slug: string
   articleUrl: string
+  settings: BlogDetailSettings
 }
 
 const VISIBLE_TOC_ITEMS = 3
@@ -36,6 +39,7 @@ export default function BlogDetailSidebar({
   title,
   slug,
   articleUrl,
+  settings,
 }: BlogDetailSidebarProps) {
   const [expanded, setExpanded] = useState(false)
   const [activeId, setActiveId] = useState(toc[0]?.id || '')
@@ -215,6 +219,22 @@ export default function BlogDetailSidebar({
             )}
           </div>
         </nav>
+      )}
+
+      {settings.sidebarCtaEnabled && (
+        <section className={styles.sidebarCta} aria-label={settings.sidebarCtaTitle}>
+          {settings.sidebarCtaImageUrl && (
+            <div className={styles.sidebarCtaImage}>
+              <img src={settings.sidebarCtaImageUrl} alt="" loading="lazy" />
+            </div>
+          )}
+          <span>{settings.sidebarCtaEyebrow}</span>
+          <h2>{settings.sidebarCtaTitle}</h2>
+          <p>{settings.sidebarCtaText}</p>
+          <Link href={settings.sidebarCtaButtonHref || '/schedule-demo'}>
+            {settings.sidebarCtaButtonLabel}<b aria-hidden>→</b>
+          </Link>
+        </section>
       )}
 
       <section className={styles.shareCard} aria-label="Share this post">
