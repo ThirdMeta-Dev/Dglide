@@ -233,11 +233,12 @@ export default function Header({ navItems, settings }: Props) {
   requiredSolutionLinks.forEach((required) => {
     if (!solutionChildren.some((child) => child.href === required.href)) solutionChildren.push(required);
   });
-  const resourceChildren = [...(sourceResources?.children ?? [])].filter(
-    (child) => child.href !== "/case-studies" && child.label.trim().toLowerCase() !== "case studies"
-  );
+  const resourceChildren = [...(sourceResources?.children ?? [])];
   if (!resourceChildren.some((child) => child.href === "/blogs")) {
     resourceChildren.push({ label: "Blog", href: "/blogs", has_dropdown: false });
+  }
+  if (!resourceChildren.some((child) => child.href === "/case-studies")) {
+    resourceChildren.push({ label: "Case Studies", href: "/case-studies", has_dropdown: false });
   }
   const nav: NavItemData[] = [
     { label: "Platform", href: "/platform", has_dropdown: false },

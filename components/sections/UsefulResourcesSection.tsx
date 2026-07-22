@@ -5,10 +5,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 import type { BlogPost } from "@/lib/blog-db";
+import type { CaseStudy } from "@/lib/case-studies-db";
+import CaseStudyDownloadModal from "@/components/case-studies/CaseStudyDownloadModal";
 
 const TABS = [
   { key: "blogs", label: "Blogs", comingSoon: false },
-  { key: "case-studies", label: "Case Studies", comingSoon: true },
+  { key: "case-studies", label: "Case Studies", comingSoon: false },
   { key: "glossary", label: "Glossary", comingSoon: true },
 ] as const;
 
@@ -31,15 +33,25 @@ const tabBtnStyle = (isActive: boolean): React.CSSProperties => ({
   boxSizing: "border-box" as const,
 });
 
-function ReadMoreLink({ href }: { href: string }) {
+function ReadMoreLink({
+  href,
+  label = "Read More",
+  onClick,
+}: {
+  href: string;
+  label?: string;
+  onClick?: (e: React.MouseEvent) => void;
+}) {
   const [hovered, setHovered] = useState(false);
   return (
     <span
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={onClick}
+      role={onClick ? "button" : undefined}
       style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Sora, sans-serif", fontSize: 15, fontWeight: 400, color: hovered ? "#FF7F1C" : "#1C2BFF", transition: "color 0.22s ease" }}
     >
-      Read More
+      {label}
       <svg width="20" height="19" viewBox="0 0 20 19" fill="none" aria-hidden style={{ transition: "transform 0.22s ease", transform: hovered ? "rotate(-45deg)" : "none", flexShrink: 0 }}>
         <path d="M1.00003 8.0939C0.447744 8.09392 1.60277e-05 8.54165 5.96046e-08 9.09393C-1.59085e-05 9.64622 0.447686 10.0939 0.999971 10.0939L1 9.0939L1.00003 8.0939ZM15.1442 10.0935C15.6964 10.0935 16.1442 9.64575 16.1442 9.09346C16.1442 8.54118 15.6965 8.09348 15.1442 8.09349L15.1442 9.09349L15.1442 10.0935ZM1 9.0939L0.999971 10.0939L15.1442 10.0935L15.1442 9.09349L15.1442 8.09349L1.00003 8.0939L1 9.0939Z" fill="currentColor"/>
         <path d="M10.3978 12.4279C10.0072 12.8184 10.0072 13.4516 10.3977 13.8421C10.7882 14.2326 11.4214 14.2326 11.8119 13.842L11.1049 13.1349L10.3978 12.4279ZM15.8533 9.80072C16.2438 9.41018 16.2438 8.77702 15.8533 8.38651C15.4628 7.99599 14.8296 7.99601 14.4391 8.38655L15.1462 9.09363L15.8533 9.80072ZM11.1049 13.1349L11.8119 13.842L15.8533 9.80072L15.1462 9.09363L14.4391 8.38655L10.3978 12.4279L11.1049 13.1349Z" fill="currentColor"/>
@@ -70,8 +82,15 @@ function TabButton({ label, isActive, onClick }: { label: string; isActive: bool
   );
 }
 
-export default function UsefulResourcesSection({ latestPost }: { latestPost?: BlogPost }) {
+export default function UsefulResourcesSection({
+  latestPost,
+  latestCaseStudy,
+}: {
+  latestPost?: BlogPost;
+  latestCaseStudy?: CaseStudy;
+}) {
   const [activeTab, setActiveTab] = useState<TabKey>("blogs");
+  const [downloadStudy, setDownloadStudy] = useState<CaseStudy | null>(null);
 
   return (
     <section style={{ width: "100%", background: "#F3F3F3", padding: "40px 0 60px" }}>
@@ -147,6 +166,58 @@ export default function UsefulResourcesSection({ latestPost }: { latestPost?: Bl
                 <ReadMoreLink href={`/blogs/${latestPost.slug}`} />
               </div>
             </Link>
+          ) : activeTab === "case-studies" && latestCaseStudy ? (
+            <Link
+              href="/case-studies"
+              style={{
+                flex: 1,
+                display: "flex",
+                alignItems: "stretch",
+                borderRadius: 20,
+                background: "#FFF",
+                overflow: "hidden",
+                boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
+                textDecoration: "none",
+              }}
+            >
+              <div style={{ width: "48%", flexShrink: 0, minHeight: 240, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24, background: "linear-gradient(140deg, #FFF, #F6F6F6)", padding: 32 }}>
+                {latestCaseStudy.logoUrl ? (
+                  <Image src={latestCaseStudy.logoUrl} alt={latestCaseStudy.company} width={220} height={54} style={{ objectFit: "contain", maxWidth: "80%", height: "auto" }} />
+                ) : (
+                  <span style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 24, color: "#132333" }}>{latestCaseStudy.company}</span>
+                )}
+                <div style={{ display: "flex", gap: 36 }}>
+                  {[
+                    [latestCaseStudy.metricOneValue, latestCaseStudy.metricOneLabel],
+                    [latestCaseStudy.metricTwoValue, latestCaseStudy.metricTwoLabel],
+                  ]
+                    .filter(([v]) => v)
+                    .map(([value, label]) => (
+                      <div key={label} style={{ textAlign: "center" }}>
+                        <div style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 32, fontWeight: 400, color: "#000", lineHeight: 1.2 }}>{value}</div>
+                        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#555", maxWidth: 140 }}>{label}</div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+              <div style={{ flex: 1, padding: "32px 36px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16 }}>
+                <h3 style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 18, fontWeight: 500, lineHeight: "28px", color: "#000", margin: 0 }}>
+                  {latestCaseStudy.title}
+                </h3>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 400, lineHeight: "26px", color: "#545454", margin: 0, display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 3, overflow: "hidden" }}>
+                  {latestCaseStudy.excerpt}
+                </p>
+                <ReadMoreLink
+                  href="/case-studies"
+                  label="Download Case study"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setDownloadStudy(latestCaseStudy);
+                  }}
+                />
+              </div>
+            </Link>
           ) : (
             <div
               style={{
@@ -174,6 +245,9 @@ export default function UsefulResourcesSection({ latestPost }: { latestPost?: Bl
 
         </div>
       </div>
+      {downloadStudy && (
+        <CaseStudyDownloadModal study={downloadStudy} onClose={() => setDownloadStudy(null)} />
+      )}
     </section>
   );
 }

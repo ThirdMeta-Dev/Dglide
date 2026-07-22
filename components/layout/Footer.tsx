@@ -177,7 +177,6 @@ export default function Footer({
     const resolvedLinks = (colLinks.length > 0
       ? colLinks.map((l) => ({ label: l.label, href: l.href === "#" ? "/coming-soon" : l.href }))
       : def.links)
-      .filter((link) => link.href !== "/case-studies" && link.label.trim().toLowerCase() !== "case studies")
       .map((link) => {
         if (def.heading !== "Solutions") return link;
 
@@ -190,6 +189,13 @@ export default function Footer({
         }
         return link;
       });
+
+    if (
+      def.heading === "Resources" &&
+      !resolvedLinks.some((link) => link.href === "/case-studies")
+    ) {
+      resolvedLinks.push({ label: "Case Studies", href: "/case-studies" });
+    }
 
     return {
       heading: colLinks.find((l) => l.column_heading)?.column_heading ?? def.heading,

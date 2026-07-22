@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getHomepageSections } from "@/lib/supabase/sections";
 import { listBlogPosts } from "@/lib/blog-db";
+import { listPublishedCaseStudies } from "@/lib/case-studies-db";
 import HeroSection from "@/components/sections/HeroSection";
 import SoftwareWorksSection from "@/components/sections/SoftwareWorksSection";
 import ComparisonSection from "@/components/sections/ComparisonSection";
@@ -26,9 +27,10 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [sections, { docs: blogPosts }] = await Promise.all([
+  const [sections, { docs: blogPosts }, caseStudies] = await Promise.all([
     getHomepageSections(),
     listBlogPosts({ publishedOnly: true, limit: 1, sortField: 'publishedAt', sortDir: 'desc', fields: 'list' }),
+    listPublishedCaseStudies(),
   ]);
 
   return (
@@ -47,7 +49,7 @@ export default async function HomePage() {
       <LogoCarouselSection data={sections.logo_carousel} />
       <TestimonialsSection data={sections.testimonials} />
       <LiveFasterSection data={sections.live_faster} />
-      <UsefulResourcesSection latestPost={blogPosts[0]} />
+      <UsefulResourcesSection latestPost={blogPosts[0]} latestCaseStudy={caseStudies[0]} />
       <CTASection data={sections.cta} />
     </AnimatedPublicPage>
   );
