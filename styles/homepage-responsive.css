@@ -587,4 +587,16 @@
   .urs-inner {
     padding: 0 20px !important;
   }
+
+  /* Resource card: image/media on top, text below */
+  .urs-card {
+    flex-direction: column !important;
+  }
+  .urs-card-media {
+    width: 100% !important;
+    min-height: 210px !important;
+  }
+  .urs-card-body {
+    padding: 24px 22px 28px !important;
+  }
 }

@@ -138,6 +138,7 @@ export default function UsefulResourcesSection({
           {activeTab === "blogs" && latestPost ? (
             <Link
               href={`/blogs/${latestPost.slug}`}
+              className="urs-card"
               style={{
                 flex: 1,
                 display: "flex",
@@ -149,14 +150,14 @@ export default function UsefulResourcesSection({
                 textDecoration: "none",
               }}
             >
-              <div style={{ width: "48%", flexShrink: 0, minHeight: 240, position: "relative" }}>
+              <div className="urs-card-media" style={{ width: "48%", flexShrink: 0, minHeight: 240, position: "relative" }}>
                 {latestPost.featuredImageUrl ? (
                   <Image src={latestPost.featuredImageUrl} alt={latestPost.title} fill style={{ objectFit: "cover" }} />
                 ) : (
                   <div style={{ width: "100%", height: "100%", background: "#f3f3f3" }} />
                 )}
               </div>
-              <div style={{ flex: 1, padding: "32px 36px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16 }}>
+              <div className="urs-card-body" style={{ flex: 1, padding: "32px 36px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16 }}>
                 <h3 style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 18, fontWeight: 500, lineHeight: "28px", color: "#000", margin: 0 }}>
                   {latestPost.title}
                 </h3>
@@ -169,6 +170,7 @@ export default function UsefulResourcesSection({
           ) : activeTab === "case-studies" && latestCaseStudy ? (
             <Link
               href="/case-studies"
+              className="urs-card"
               style={{
                 flex: 1,
                 display: "flex",
@@ -180,7 +182,7 @@ export default function UsefulResourcesSection({
                 textDecoration: "none",
               }}
             >
-              <div style={{ width: "48%", flexShrink: 0, minHeight: 240, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24, background: "linear-gradient(140deg, #FFF, #F6F6F6)", padding: 32 }}>
+              <div className="urs-card-media" style={{ width: "48%", flexShrink: 0, minHeight: 240, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24, background: "linear-gradient(140deg, #FFF, #F6F6F6)", padding: 32 }}>
                 {latestCaseStudy.logoUrl ? (
                   <Image src={latestCaseStudy.logoUrl} alt={latestCaseStudy.company} width={220} height={54} style={{ objectFit: "contain", maxWidth: "80%", height: "auto" }} />
                 ) : (
@@ -200,7 +202,7 @@ export default function UsefulResourcesSection({
                     ))}
                 </div>
               </div>
-              <div style={{ flex: 1, padding: "32px 36px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16 }}>
+              <div className="urs-card-body" style={{ flex: 1, padding: "32px 36px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16 }}>
                 <h3 style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 18, fontWeight: 500, lineHeight: "28px", color: "#000", margin: 0 }}>
                   {latestCaseStudy.title}
                 </h3>

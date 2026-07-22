@@ -94,11 +94,13 @@ function LibraryCard({ study, onDownload }: { study: CaseStudy; onDownload: (s: 
   );
 }
 
+const PAGE_SIZE = 5;
+
 export default function CaseStudiesClient({ studies }: { studies: CaseStudy[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("featured");
-  const [slide, setSlide] = useState(0);
+  const [page, setPage] = useState(1);
   const [downloadStudy, setDownloadStudy] = useState<CaseStudy | null>(null);
   const libraryRef = useRef<HTMLElement>(null);
 
@@ -119,13 +121,13 @@ export default function CaseStudiesClient({ studies }: { studies: CaseStudy[] })
       : matches;
   }, [studies, category, query, sort]);
 
-  const total = filtered.length;
-  const current = Math.min(slide, Math.max(0, total - 1));
-  const study = filtered[current];
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageStudies = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
-  function go(delta: number) {
-    if (!total) return;
-    setSlide((current + delta + total) % total);
+  function goToPage(next: number) {
+    setPage(Math.min(Math.max(1, next), totalPages));
+    libraryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   return (
@@ -138,7 +140,7 @@ export default function CaseStudiesClient({ studies }: { studies: CaseStudy[] })
         <div className={styles.toolbar}>
           <label className={styles.search}>
             <span className="sr-only">Search case studies</span>
-            <input value={query} onChange={(e) => { setQuery(e.target.value); setSlide(0); }} placeholder="Search articles and topics" />
+            <input value={query} onChange={(e) => { setQuery(e.target.value); setPage(1); }} placeholder="Search articles and topics" />
             <span aria-hidden>⌕</span>
           </label>
           <label className={styles.sort}>
@@ -160,7 +162,7 @@ export default function CaseStudiesClient({ studies }: { studies: CaseStudy[] })
                 key={item}
                 type="button"
                 className={category === item ? styles.categoryActive : ""}
-                onClick={() => { setCategory(category === item ? "" : item); setSlide(0); }}
+                onClick={() => { setCategory(category === item ? "" : item); setPage(1); }}
               >
                 {item}
               </button>
@@ -178,22 +180,39 @@ export default function CaseStudiesClient({ studies }: { studies: CaseStudy[] })
       >
         <div className={styles.libraryHead}>
           <h2>The Full Casestudy Library</h2>
-          {total > 0 && (
-            <div className={styles.carouselNav}>
-              <span>{current + 1}/{total}</span>
-              <button type="button" onClick={() => go(-1)} disabled={total < 2} aria-label="Previous case study">←</button>
-              <button type="button" className={styles.carouselNext} onClick={() => go(1)} disabled={total < 2} aria-label="Next case study">→</button>
-            </div>
-          )}
         </div>
-        {study ? (
-          <LibraryCard study={study} onDownload={setDownloadStudy} />
+        {pageStudies.length > 0 ? (
+          <div className={styles.libStack}>
+            {pageStudies.map((study) => (
+              <LibraryCard key={study.id || study.title} study={study} onDownload={setDownloadStudy} />
+            ))}
+          </div>
         ) : (
           <p className={styles.empty}>
             {studies.length === 0
               ? "Case studies are on the way. Check back soon."
               : "No case studies match this search and category."}
           </p>
+        )}
+        {filtered.length > PAGE_SIZE && (
+          <nav className={styles.pagination} aria-label="Case study pagination">
+            <button type="button" disabled={currentPage === 1} onClick={() => goToPage(currentPage - 1)}>
+              Previous
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+              <button
+                key={p}
+                type="button"
+                className={p === currentPage ? styles.current : ""}
+                onClick={() => goToPage(p)}
+              >
+                {p}
+              </button>
+            ))}
+            <button type="button" disabled={currentPage === totalPages} onClick={() => goToPage(currentPage + 1)}>
+              Next
+            </button>
+          </nav>
         )}
       </section>
 
