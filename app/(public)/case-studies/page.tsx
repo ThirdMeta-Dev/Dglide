@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { listPublishedCaseStudies, type CaseStudy } from "@/lib/case-studies-db";
+import { listPublishedCaseStudiesFresh, type CaseStudy } from "@/lib/case-studies-db";
 import { listBlogPostsSafe } from "@/lib/blog-db";
 import UsefulResourcesSection from "@/components/sections/UsefulResourcesSection";
 import CaseStudiesClient from "./CaseStudiesClient";
@@ -30,7 +30,8 @@ const FALLBACK_STUDIES: CaseStudy[] = [
   },
 ];
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Case Studies | DGlide",
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
 
 export default async function CaseStudiesPage() {
   const [studies, blogResult] = await Promise.all([
-    listPublishedCaseStudies(),
+    listPublishedCaseStudiesFresh(),
     listBlogPostsSafe({ limit: 1, publishedOnly: true, sortField: "publishedAt", sortDir: "desc", fields: "list" }),
   ]);
 

@@ -104,6 +104,17 @@ export async function listPublishedCaseStudies(): Promise<CaseStudy[]> {
   return data.map(normalizeStudy)
 }
 
+export async function listPublishedCaseStudiesFresh(): Promise<CaseStudy[]> {
+  const { data, error } = await supabase
+    .from(T_STUDIES)
+    .select('*')
+    .eq('status', 'published')
+    .order('order_index', { ascending: true })
+    .order('created_at', { ascending: false })
+  if (error || !data) return []
+  return data.map(normalizeStudy)
+}
+
 export async function listAllCaseStudies(): Promise<CaseStudy[]> {
   const { data, error } = await supabase
     .from(T_STUDIES)
