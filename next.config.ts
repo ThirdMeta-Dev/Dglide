@@ -23,6 +23,28 @@ const nextConfig: NextConfig = {
       { source: '/itsm/', destination: '/it-service-management-itsm', permanent: true },
       { source: '/fsm', destination: '/field-service-management-fsm', permanent: true },
       { source: '/fsm/', destination: '/field-service-management-fsm', permanent: true },
+      {
+        source: '/ticket-management',
+        destination: '/blogs/ticket-management-software-for-operations-teams',
+        permanent: true,
+      },
+      {
+        source: '/ticket-management/',
+        destination: '/blogs/ticket-management-software-for-operations-teams',
+        permanent: true,
+      },
+      {
+        source: '/no-code-low-code-future-business-applications',
+        destination: '/blogs/no-code-low-code-future-business-applications',
+        permanent: true,
+      },
+      {
+        source: '/no-code-low-code-future-business-applications/',
+        destination: '/blogs/no-code-low-code-future-business-applications',
+        permanent: true,
+      },
+      { source: '/customer-stories', destination: '/case-studies', permanent: true },
+      { source: '/customer-stories/', destination: '/case-studies', permanent: true },
     ]
   },
   images: {

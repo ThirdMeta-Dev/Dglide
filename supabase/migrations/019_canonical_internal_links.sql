@@ -4,13 +4,30 @@
 update dglide_footer_links
 set href = case href
   when '/fsm' then '/field-service-management-fsm'
+  when '/fsm/' then '/field-service-management-fsm'
   when '/itsm' then '/it-service-management-itsm'
+  when '/itsm/' then '/it-service-management-itsm'
   when '/blog' then '/blogs'
+  when '/blog/' then '/blogs'
   when 'https://dglide.com/blog' then '/blogs'
+  when 'https://dglide.com/blog/' then '/blogs'
+  when 'https://www.dglide.com/blog' then '/blogs'
+  when 'https://www.dglide.com/blog/' then '/blogs'
   else href
 end,
 updated_at = now()
-where href in ('/fsm', '/itsm', '/blog', 'https://dglide.com/blog');
+where href in (
+  '/fsm',
+  '/fsm/',
+  '/itsm',
+  '/itsm/',
+  '/blog',
+  '/blog/',
+  'https://dglide.com/blog',
+  'https://dglide.com/blog/',
+  'https://www.dglide.com/blog',
+  'https://www.dglide.com/blog/'
+);
 
 update dglide_blogs
 set content_html = replace(
