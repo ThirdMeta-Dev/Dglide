@@ -70,7 +70,7 @@ const DEFAULT_COLS = [
   {
     heading: "Resources",
     links: [
-      { label: "Blog",               href: "https://dglide.com/blog" },
+      { label: "Blog",               href: "/blogs" },
       { label: "Guides / Playbooks", href: "/coming-soon" },
     ],
   },
@@ -82,6 +82,23 @@ const DEFAULT_COLS = [
     ],
   },
 ];
+
+const LEGACY_INTERNAL_HREFS: Record<string, string> = {
+  "/fsm": "/field-service-management-fsm",
+  "/fsm/": "/field-service-management-fsm",
+  "/itsm": "/it-service-management-itsm",
+  "/itsm/": "/it-service-management-itsm",
+  "/blog": "/blogs",
+  "/blog/": "/blogs",
+  "https://dglide.com/blog": "/blogs",
+  "https://dglide.com/blog/": "/blogs",
+  "https://www.dglide.com/blog": "/blogs",
+  "https://www.dglide.com/blog/": "/blogs",
+};
+
+function canonicalizeInternalHref(href: string) {
+  return LEGACY_INTERNAL_HREFS[href] ?? href;
+}
 
 function NavColumn({ heading, links }: { heading: string; links: { label: string; href: string }[] }) {
   return (
@@ -177,6 +194,7 @@ export default function Footer({
     const resolvedLinks = (colLinks.length > 0
       ? colLinks.map((l) => ({ label: l.label, href: l.href === "#" ? "/coming-soon" : l.href }))
       : def.links)
+      .map((link) => ({ ...link, href: canonicalizeInternalHref(link.href) }))
       .map((link) => {
         if (def.heading !== "Solutions") return link;
 

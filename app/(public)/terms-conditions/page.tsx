@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions | DGlide",
@@ -133,7 +134,7 @@ export default function TermsConditionsPage() {
                 a company registered in India at Office No. 337, 3rd Floor, Amanora Chambers, Hadapsar, Pune 411028, India.
               </p>
               <p style={p}>
-                We operate the website <a href="https://dglide.com" style={{ color: "#1C2BFF" }}>https://dglide.com</a> (the &ldquo;Site&rdquo;) and
+                We operate the website <Link href="/" style={{ color: "#1C2BFF" }}>https://www.dglide.com</Link> (the &ldquo;Site&rdquo;) and
                 the DGlide mobile application (the &ldquo;App&rdquo;), as well as any other related products and services that refer or
                 link to these legal terms (collectively, the &ldquo;Services&rdquo;).
               </p>
