@@ -95,11 +95,14 @@ import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 type BetterWaySectionProps = {
   heading?: string;
+  mobileHeading?: string;
   description?: string;
   leftTitle?: string;
   rightTitle?: string;
   leftItems?: string[];
   rightItems?: string[];
+  mobileLeftItems?: string[];
+  mobileRightItems?: string[];
   footerItems?: string[];
 };
 
@@ -116,11 +119,14 @@ const TickIcon: FunctionComponent = () => (
 
 const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
   heading = "Stuck Between Rigid Tools and Building Your Own?",
+  mobileHeading,
   description = "Until now, you had two bad options: software that does not fit, or a custom build that never ends. DGlide is the 3rd: Best of All Worlds.",
   leftTitle = "Fixed-Category Tools",
   rightTitle = "Building Your Own",
   leftItems = rigidToolsItems,
   rightItems = customBuildItems,
+  mobileLeftItems,
+  mobileRightItems,
   footerItems = betterWayFooterItems,
 }) => (
   <section className="sol-section sol-better-way-section">
@@ -129,7 +135,8 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
         <ScrollReveal direction="up">
           <header className="sol-better-way-header">
             <h2 className="sol-better-way-heading">
-              {heading}
+              <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+              {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
             </h2>
             <p className="sol-better-way-description">
               {description}
@@ -160,11 +167,14 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
                   </div>
                   <div className="sol-better-way-side-list">
                     <div className="sol-better-way-side-line" aria-hidden />
-                    {leftItems.map((item) => (
+                    {leftItems.map((item, index) => (
                       <div key={item} className="sol-better-way-side-item">
                         <TickIcon />
                         <span className="sol-better-way-side-item-text">
-                          {item}
+                          <span className={mobileLeftItems ? "sol-copy-desktop" : ""}>{item}</span>
+                          {mobileLeftItems ? (
+                            <span className="sol-copy-mobile">{mobileLeftItems[index] ?? item}</span>
+                          ) : null}
                         </span>
                       </div>
                     ))}
@@ -182,6 +192,24 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
                   className="sol-better-way-center-img"
                   priority
                 />
+              </div>
+
+              <div className="sol-better-way-mobile-core">
+                <Image
+                  src="/competitor/dglide-logo-white.png"
+                  alt="DGlide"
+                  width={132}
+                  height={32}
+                  className="sol-better-way-mobile-logo"
+                />
+                <div className="sol-better-way-mobile-core-list">
+                  {CENTER_ITEMS.map((item) => (
+                    <div key={item} className="sol-better-way-mobile-core-item">
+                      <TickIcon />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Right column — Building Your Own */}
@@ -202,10 +230,13 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
                   </div>
                   <div className="sol-better-way-side-list">
                     <div className="sol-better-way-side-line" aria-hidden />
-                    {rightItems.map((item) => (
+                    {rightItems.map((item, index) => (
                       <div key={item} className="sol-better-way-side-item">
                         <span className="sol-better-way-side-item-text">
-                          {item}
+                          <span className={mobileRightItems ? "sol-copy-desktop" : ""}>{item}</span>
+                          {mobileRightItems ? (
+                            <span className="sol-copy-mobile">{mobileRightItems[index] ?? item}</span>
+                          ) : null}
                         </span>
                         <TickIcon />
                       </div>

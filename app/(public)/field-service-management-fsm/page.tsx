@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 
 export default function FSMPage() {
   return (
-    <AnimatedPublicPage className="solutions-page" staticFirstCount={2}>
+    <AnimatedPublicPage className="solutions-page solutions-page--fsm" staticFirstCount={2}>
       <FSMHeroSection
         eyebrow={fsmHeroEyebrow}
         heading={fsmHeroHeading}
@@ -53,6 +53,8 @@ export default function FSMPage() {
         bullets={fsmHeroBullets}
         primaryCta={fsmHeroPrimaryCta}
         secondaryCta={fsmHeroSecondaryCta}
+        mobilePrimaryCta="Pick your demo time"
+        mobileSecondaryCta="Explore The Platform"
         secondaryScrollTargetId="core-capabilities"
         imageSrc="/solutions/fsm-hero-illustration.png"
         imageAlt="DGlide FSM — field service management dashboard"
@@ -60,6 +62,7 @@ export default function FSMPage() {
       <SolutionsSectionNav items={fsmNavItems} />
       <FieldServiceProblemSection
         heading={fsmProblemHeading}
+        mobileHeading="Software That Fits the Way Your Service Works"
         description={fsmProblemDescription}
         cards={fsmProblemCards}
         footerText={fsmProblemFooterText}
@@ -83,6 +86,13 @@ export default function FSMPage() {
       <ServiceWorkflowSection
         heading={fsmWorkflowHeading}
         steps={fsmWorkflowSteps}
+        mobileStepDescriptions={[
+          "Create service requests from teams, users or customers.",
+          "Convert requests into structured jobs with clear ownership.",
+          "Allocate work by priority, availability, location, or expertise.",
+          "Technicians update status, notes, and service details from the field.",
+          "Confirm completion with customer validation, and reporting.",
+        ]}
         ctaLabel={fsmWorkflowCtaLabel}
         sectionId="what-fsm-does"
       />
@@ -97,23 +107,44 @@ export default function FSMPage() {
       />
       <BetterWaySection
         heading={fsmBetterWayHeading}
+        mobileHeading="Configurable Software That Scales With Your Business"
         description={fsmBetterWayDescription}
         leftTitle={fsmBetterWayLeftTitle}
         rightTitle={fsmBetterWayRightTitle}
         leftItems={fsmRigidToolsItems}
         rightItems={fsmCustomBuildItems}
+        mobileLeftItems={[
+          "Fast to start. But difficult to adapt",
+          "Cheap at start, expensive later",
+          "Fits the category, not your business.",
+        ]}
+        mobileRightItems={[
+          "Fits at first then becomes a burden",
+          "Months to build, years to maintain.",
+          "Custom fit comes with a headache.",
+        ]}
         footerItems={fsmBetterWayFooterItems}
       />
       <WorkflowChangeSection
         sectionId="core-fsm-capabilities"
         title={fsmWorkflowChangeTitle}
+        mobileTitle="An FSM That Evolves With Your Service Workflow"
         subtitle={fsmWorkflowChangeSubtitle}
         bullets={fsmWorkflowChangeBullets}
         timelineItems={fsmWorkflowTimelineItems}
+        mobileInitialIndex={1}
       />
       <WhatImprovesSection
         heading={fsmImprovesHeading}
         features={fsmImprovesFeatures}
+        mobileDescriptions={[
+          "Requests reach the right technician fast.",
+          "Field teams know what to do, so they finish more jobs a day.",
+          "See every job's status as it happens, so nothing stalls unseen.",
+          "Track every deadline automatically and escalate before a breach.",
+          "Faster, more reliable service builds the trust that scales renewals.",
+          "Work moves itself between stages, reducing a chase of updates and approvals.",
+        ]}
         sectionId="benefits-outcomes"
       />
       <RealOperationsSection

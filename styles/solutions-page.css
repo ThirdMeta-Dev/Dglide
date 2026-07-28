@@ -26,6 +26,487 @@
   background: #F3F3F3;
 }
 
+/* FSM phone parity pass, sourced from the 2329 mobile frames.
+   Kept below the shared rules so tablet and desktop remain untouched. */
+@media (max-width: 767px) {
+  .solutions-page--fsm .sol-hero-actions-mobile .sol-hero-actions {
+    width: 254px;
+  }
+
+  .solutions-page--fsm .sol-hero-actions-mobile .sol-btn-book-demo,
+  .solutions-page--fsm .sol-hero-actions-mobile .sol-btn-outline {
+    width: 254px;
+    min-width: 254px;
+    font-size: 15px;
+  }
+
+  .solutions-page--fsm .sol-problem-card-title {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .solutions-page--fsm .sol-problem-card-description {
+    font-size: 13px;
+    line-height: 21px;
+    letter-spacing: 0.2px;
+  }
+
+  .solutions-page--fsm .sol-built-for-industry-title,
+  .solutions-page--fsm .sol-built-for-industry-title--active {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .solutions-page--fsm .sol-built-for-fit-heading {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .solutions-page--fsm .sol-built-for-industry-description,
+  .solutions-page--fsm .sol-built-for-fit-text {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  /* Figma 2329:2022: curved white field, vertical progress rail and 59x32 icons. */
+  .solutions-page--fsm .sol-workflow-bg {
+    display: block !important;
+    top: 0;
+    width: 1200px;
+    max-width: none;
+    height: 100%;
+    object-fit: fill;
+  }
+
+  .solutions-page--fsm .sol-workflow-bg-container-wrapper-left,
+  .solutions-page--fsm .sol-workflow-bg-container-wrapper-right {
+    display: none !important;
+  }
+
+  .solutions-page--fsm .sol-workflow-steps-wrap {
+    position: relative;
+  }
+
+  .solutions-page--fsm .sol-workflow-progress {
+    display: block;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 451px;
+    max-width: none;
+    transform: none;
+  }
+
+  .solutions-page--fsm .sol-workflow-progress-track {
+    width: 1px;
+    height: 100%;
+    background: #e4e4e4;
+  }
+
+  .solutions-page--fsm .sol-workflow-progress-active {
+    width: 1px !important;
+    height: 159px;
+    background: #ff7f1c;
+  }
+
+  .solutions-page--fsm .sol-workflow-steps {
+    gap: 25px;
+    padding-left: 20px;
+  }
+
+  .solutions-page--fsm .sol-workflow-step {
+    gap: 16px;
+  }
+
+  .solutions-page--fsm .sol-workflow-step-icon {
+    width: 59px;
+    height: 32px;
+  }
+
+  .solutions-page--fsm .sol-workflow-step-text {
+    gap: 6px;
+  }
+
+  .solutions-page--fsm .sol-workflow-step-title {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .solutions-page--fsm .sol-workflow-step-description {
+    font-size: 13px;
+    line-height: 19px;
+    letter-spacing: 0.2px;
+  }
+
+  /* Figma 2329:2548: centred 214x32 active tab and 320px panel artwork. */
+  .solutions-page--fsm .sol-capabilities-tabs {
+    justify-content: flex-start;
+    padding: 0 53px;
+    scrollbar-width: none;
+  }
+
+  .solutions-page--fsm .sol-capabilities-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .solutions-page--fsm .sol-cap-tab {
+    min-height: 32px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .solutions-page--fsm .sol-cap-tab--active {
+    width: 214px;
+    min-width: 214px !important;
+    height: 32px;
+    min-height: 32px;
+    padding: 6px 16px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .solutions-page--fsm .sol-cap-panel {
+    min-height: 638px;
+    height: 638px;
+    border-radius: 20px;
+  }
+
+  .solutions-page--fsm .sol-cap-panel-inner {
+    min-height: 595px;
+    gap: 16px;
+    padding: 30px 8px 0 !important;
+  }
+
+  .solutions-page--fsm .sol-cap-panel-description {
+    display: none;
+  }
+
+  .solutions-page--fsm .sol-cap-panel-title {
+    font-size: 16px !important;
+    line-height: 23px !important;
+  }
+
+  .solutions-page--fsm .sol-cap-panel-features {
+    gap: 6px;
+  }
+
+  .solutions-page--fsm .sol-cap-panel-feature {
+    gap: 10px;
+  }
+
+  .solutions-page--fsm .sol-cap-panel-feature-icon-wrap {
+    width: 16px;
+    height: 10px;
+  }
+
+  .solutions-page--fsm .sol-cap-panel-feature-text,
+  .solutions-page--fsm .sol-cap-panel-why-label,
+  .solutions-page--fsm .sol-cap-panel-why-quote {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .solutions-page--fsm .sol-cap-panel-why {
+    gap: 6px;
+  }
+
+  .solutions-page--fsm .sol-cap-panel-why-divider {
+    width: 1px;
+    height: 51px;
+    min-height: 51px;
+    align-self: stretch;
+  }
+
+  .solutions-page--fsm .sol-cap-media-mobile {
+    height: 320px;
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+
+  .solutions-page--fsm .sol-cap-media-mobile img {
+    width: 320px !important;
+    height: 320px !important;
+    object-fit: cover;
+  }
+
+  /* Figma 2329:3112: the comparison ticks sit on 24px pale tiles. */
+  .solutions-page--fsm .sol-better-way-side-item .sol-better-way-tick-icon,
+  .solutions-page--fsm .sol-better-way-mobile-core-item .sol-better-way-tick-icon {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 24px;
+    border-radius: 6px;
+    background: #fff1e7;
+  }
+
+  .solutions-page--fsm .sol-better-way-mobile-core-item .sol-better-way-tick-icon {
+    background: #ffffff;
+  }
+
+  .solutions-page--fsm .sol-better-way-tick-icon svg {
+    width: 16px;
+    height: 10px;
+  }
+
+  .solutions-page--fsm .sol-better-way-side-item,
+  .solutions-page--fsm .sol-better-way-side--right .sol-better-way-side-item {
+    min-height: 24px;
+    gap: 8px;
+  }
+
+  .solutions-page--fsm .sol-better-way-side-item-text {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .solutions-page--fsm .sol-better-way-mobile-core-item {
+    min-height: 24px;
+    gap: 8px;
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  /* Figma 2329:3768: shallow semi-arc with a centred active item and 32px controls. */
+  .solutions-page--fsm .sol-wc-mobile {
+    height: 200px;
+    margin-top: -40px;
+    overflow: visible;
+  }
+
+  .solutions-page--fsm .sol-wc-arc-stage {
+    height: 80px;
+  }
+
+  .solutions-page--fsm .sol-wc-arc-svg {
+    height: 80px;
+  }
+
+  .solutions-page--fsm .sol-wc-arc-labels {
+    margin-top: 4px;
+  }
+
+  .solutions-page--fsm .sol-wc-arc-label-active {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
+  }
+
+  .solutions-page--fsm .sol-wc-arc-desc {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page--fsm .sol-wc-arc-nav {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .solutions-page--fsm .sol-wc-arc-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .solutions-page--fsm .sol-wc-arc-counter {
+    min-width: 30px;
+    font-size: 13px;
+  }
+
+  /* Figma 2329:4036 and 2329:4548. */
+  .solutions-page--fsm .sol-what-improves-grid,
+  .solutions-page--fsm .sol-what-improves-row {
+    gap: 28px !important;
+  }
+
+  .solutions-page--fsm .sol-what-improves-card {
+    gap: 16px !important;
+  }
+
+  .solutions-page--fsm .sol-what-improves-card-title {
+    font-size: 15px;
+    line-height: 21px;
+  }
+
+  .solutions-page--fsm .sol-what-improves-card-description {
+    font-size: 15px;
+    line-height: 21px;
+    letter-spacing: 0.2px;
+  }
+
+  .solutions-page--fsm .sol-real-ops-quote,
+  .solutions-page--fsm .sol-real-ops-bullet-text,
+  .solutions-page--fsm .sol-real-ops-metrics-description,
+  .solutions-page--fsm .sol-real-ops-solution-item-text,
+  .solutions-page--fsm .sol-real-ops-footer-text {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page--fsm .sol-real-ops-block-title,
+  .solutions-page--fsm .sol-real-ops-solution-title {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .solutions-page--fsm .sol-real-ops-metric-value {
+    font-size: 36px;
+    line-height: 38px;
+  }
+
+  .solutions-page--fsm .sol-real-ops-metric-label {
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  /* Figma 2329:4870. */
+  .solutions-page--fsm .sol-configurable-feature-text {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .solutions-page--fsm .sol-configurable-card {
+    padding: 20px;
+  }
+
+  .solutions-page--fsm .sol-configurable-card-label-text {
+    font-size: 13px;
+    line-height: 16px;
+  }
+
+  .solutions-page--fsm .sol-configurable-card-title {
+    font-size: 16px;
+    line-height: 23px;
+  }
+
+  .solutions-page--fsm .sol-configurable-card-description,
+  .solutions-page--fsm .sol-configurable-card-bullet-text {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  /* Figma 2329:6410: the blue CTA itself is the full 360x359 section. */
+  .solutions-page--fsm .sol-final-cta-section {
+    padding: 0 !important;
+  }
+
+  .solutions-page--fsm .sol-final-cta-section > .sol-container {
+    padding: 0;
+  }
+
+  .solutions-page--fsm .sol-final-cta-banner {
+    width: 360px;
+    min-height: 359px;
+    padding: 60px 20px;
+    border-radius: 30px;
+  }
+
+  .solutions-page--fsm .sol-final-cta-content {
+    gap: 48px;
+  }
+
+  .solutions-page--fsm .sol-final-cta-eyebrow-text {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .solutions-page--fsm .sol-final-cta-heading {
+    font-size: 32px !important;
+    line-height: 37px !important;
+  }
+
+  .solutions-page--fsm .sol-final-cta-button {
+    min-height: 44px;
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  /* Figma 2329:6448. The list remains fluid so opened answers never clip. */
+  .solutions-page--fsm .sol-faq-question {
+    min-height: 38px;
+    padding: 6px 30px 6px 0;
+    font-size: 16px !important;
+    line-height: 26px !important;
+  }
+
+  .solutions-page--fsm .sol-faq-question--open {
+    font-size: 16px !important;
+    line-height: 23px !important;
+    font-weight: 500;
+  }
+
+  .solutions-page--fsm .sol-faq-answer {
+    padding: 0 0 6px;
+    font-size: 13px;
+    line-height: 21px;
+    letter-spacing: 0.2px;
+  }
+
+  .solutions-page--fsm .sol-faq-list {
+    gap: 12px;
+  }
+
+  /* Figma 2329:6489 footer typography. */
+  body:has(.solutions-page--fsm) footer h2,
+  body:has(.solutions-page--fsm) footer h3,
+  body:has(.solutions-page--fsm) footer h4 {
+    font-size: 15px !important;
+    line-height: 24px !important;
+  }
+
+  body:has(.solutions-page--fsm) footer a,
+  body:has(.solutions-page--fsm) footer li,
+  body:has(.solutions-page--fsm) footer p {
+    font-size: 12px;
+    line-height: 19px;
+  }
+}
+
+@media (max-width: 767px) {
+  body:has(.solutions-page) .footer-nav-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 21px 20px !important;
+  }
+
+  body:has(.solutions-page) .footer-nav-row {
+    display: contents !important;
+  }
+
+  body:has(.solutions-page) .footer-nav-row > div {
+    min-width: 0 !important;
+    width: auto !important;
+    flex: none !important;
+  }
+
+  body:has(.solutions-page) .footer-nav-row:first-child > div:nth-child(3) { order: 1; }
+  body:has(.solutions-page) .footer-nav-row:first-child > div:nth-child(2) { order: 2; }
+  body:has(.solutions-page) .footer-nav-row:first-child > div:nth-child(1) { order: 3; }
+  body:has(.solutions-page) .footer-nav-row:nth-child(2) > div:nth-child(1) { order: 4; }
+  body:has(.solutions-page) .footer-nav-row:nth-child(2) > div:nth-child(2) { order: 5; }
+  body:has(.solutions-page) .footer-nav-row:nth-child(2) > div:nth-child(3) { order: 6; }
+
+  body:has(.solutions-page) .footer-body-wrapper > div[style*="height: 1px"] {
+    margin-top: 33px !important;
+  }
+
+  body:has(.solutions-page) .footer-bottom {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  body:has(.solutions-page--fsm) > footer {
+    padding-bottom: 11px;
+  }
+
+  body:has(.solutions-page--itsm) > footer {
+    padding-bottom: 116px;
+  }
+}
+
 .solutions-page #core-capabilities,
 .solutions-page #core-fsm-capabilities,
 .solutions-page #core-manufacturing-capabilities {
@@ -5240,5 +5721,1581 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
+  }
+}
+
+/* ─────────────────────────────────────────
+   2026 SOLUTION MOBILE FRAMES
+   Shared phone structure for FSM, ITSM, CRM and manufacturing.
+   Page-specific selectors only control content that the supplied frames omit.
+   Desktop and tablet layouts remain unchanged.
+───────────────────────────────────────── */
+.solutions-page .sol-hero-actions-mobile,
+.solutions-page .sol-better-way-mobile-core,
+.solutions-page .sol-copy-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .solutions-page {
+    overflow-x: clip;
+  }
+
+  .solutions-page .sol-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+
+  .solutions-page .sol-copy-desktop {
+    display: none;
+  }
+
+  .solutions-page .sol-copy-mobile {
+    display: block;
+    white-space: pre-line;
+  }
+
+  .solutions-page--crm .sol-hero-heading,
+  .solutions-page--crm .sol-built-for-heading,
+  .solutions-page--crm .sol-workflow-heading,
+  .solutions-page--crm .sol-technician-heading {
+    font-size: 23px !important;
+    line-height: 36px !important;
+  }
+
+  .solutions-page--crm .dg-hero-outer {
+    padding-bottom: 72px !important;
+  }
+
+  .solutions-page .sol-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .solutions-page .sol-hero-heading,
+  .solutions-page .sol-problem-heading,
+  .solutions-page .sol-built-for-heading,
+  .solutions-page .sol-platform-heading,
+  .solutions-page .sol-workflow-heading,
+  .solutions-page .sol-capabilities-heading,
+  .solutions-page .sol-technician-heading,
+  .solutions-page .sol-better-way-heading,
+  .solutions-page .sol-workflow-change-heading,
+  .solutions-page .sol-what-improves-heading,
+  .solutions-page .sol-real-ops-heading,
+  .solutions-page .sol-configurable-heading,
+  .solutions-page .sol-go-live-heading,
+  .solutions-page .sol-integrations-heading,
+  .solutions-page .sol-final-cta-heading,
+  .solutions-page .sol-faq-heading {
+    font-size: 28px !important;
+    line-height: 36px !important;
+  }
+
+  /* Hero: copy → CTAs → product image, matching the 360px frames. */
+  .solutions-page .dg-hero-outer {
+    padding-top: 16px !important;
+  }
+
+  .solutions-page .dg-hero-outer .sol-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .solutions-page .dg-hero-outer .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .solutions-page .dg-hero-outer .space-y-6 {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .solutions-page .dg-hero-outer .space-y-6 > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .solutions-page .dg-hero-outer .sol-hero-eyebrow {
+    justify-content: center;
+    margin-top: 0 !important;
+  }
+
+  .solutions-page .dg-hero-outer .sol-hero-heading,
+  .solutions-page .dg-hero-outer .sol-hero-description {
+    width: 100%;
+    text-align: center !important;
+  }
+
+  .solutions-page .dg-hero-outer .sol-hero-description {
+    font-size: 13px !important;
+    line-height: 21px !important;
+  }
+
+  .solutions-page .dg-hero-outer ul {
+    margin-top: 0 !important;
+  }
+
+  .solutions-page .dg-hero-outer ul li {
+    gap: 8px;
+  }
+
+  .solutions-page .dg-hero-outer ul li + li {
+    margin-top: 8px;
+  }
+
+  .solutions-page .dg-hero-outer ul li span {
+    font-size: 13px !important;
+    line-height: 21px !important;
+  }
+
+  .solutions-page .sol-hero-actions-mobile {
+    display: block;
+    padding-top: 2px;
+  }
+
+  .solutions-page .sol-hero-actions-mobile .sol-hero-actions {
+    width: 250px;
+    margin: 0 auto;
+    flex-direction: column !important;
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .solutions-page .sol-hero-actions-mobile .sol-btn-book-demo,
+  .solutions-page .sol-hero-actions-mobile .sol-btn-outline {
+    width: 250px;
+    min-width: 250px;
+    height: 44px;
+    padding: 12px 32px;
+    font-size: 14px;
+  }
+
+  .solutions-page .sol-hero-actions-desktop {
+    display: none;
+  }
+
+  .solutions-page .dg-hero-outer img[class*="max-w-[560px]"] {
+    width: 320px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* Sticky section navigation. */
+  .solutions-page .sol-nav-bar {
+    min-height: 34px;
+  }
+
+  .solutions-page .sol-section-nav {
+    min-height: 34px;
+    padding: 7px 16px;
+    gap: 20px;
+  }
+
+  .solutions-page .sol-section-nav-link {
+    padding: 0;
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  /* Problem cards: five compact 190px cards. */
+  .solutions-page .sol-problem-heading {
+    margin-bottom: 32px;
+  }
+
+  .solutions-page .sol-problem-description {
+    display: none;
+  }
+
+  .solutions-page .sol-problem-body {
+    min-height: 0;
+    background: none;
+  }
+
+  .solutions-page .sol-problem-grid,
+  .solutions-page .sol-problem-grid-row {
+    gap: 12px;
+  }
+
+  .solutions-page .sol-problem-card {
+    min-height: 190px;
+    height: 190px;
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .solutions-page .sol-problem-card-inner {
+    min-height: 0;
+    gap: 20px;
+  }
+
+  .solutions-page .sol-problem-card-icon {
+    width: 80px;
+    height: 40px;
+  }
+
+  .solutions-page .sol-problem-card-title {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .solutions-page .sol-problem-card-description {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page .sol-problem-footer {
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .solutions-page .sol-problem-footer-text {
+    width: 100%;
+    max-width: none;
+    font-size: 17px;
+    line-height: 26px;
+    text-align: center;
+  }
+
+  .solutions-page .sol-problem-footer .sol-btn-get-started-now {
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .solutions-page--fsm .sol-problem-footer {
+    display: none;
+  }
+
+  /* Audience section: accordion first, Best Fit card second, no decorative media. */
+  .solutions-page .sol-built-for-inner {
+    gap: 32px;
+  }
+
+  .solutions-page .sol-built-for-description,
+  .solutions-page .sol-built-for-media {
+    display: none;
+  }
+
+  .solutions-page .sol-built-for-panel {
+    padding: 0;
+  }
+
+  .solutions-page .sol-built-for-row {
+    gap: 24px;
+  }
+
+  .solutions-page .sol-built-for-fit-card-wrap {
+    order: 2;
+  }
+
+  .solutions-page .sol-built-for-columns {
+    order: 1;
+    display: block;
+  }
+
+  .solutions-page .sol-built-for-industries {
+    min-height: 0;
+    height: 314px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .solutions-page .sol-built-for-industries-list {
+    min-height: 0;
+    max-width: none;
+    gap: 16px;
+  }
+
+  .solutions-page .sol-built-for-industry-trigger,
+  .solutions-page .sol-built-for-industry-row {
+    min-height: 40px;
+    gap: 16px;
+  }
+
+  .solutions-page .sol-built-for-industry-title,
+  .solutions-page .sol-built-for-industry-title--active {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .solutions-page .sol-built-for-industry-description {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page .sol-built-for-fit-card {
+    width: 100%;
+    min-height: 250px;
+    padding: 24px 20px;
+  }
+
+  .solutions-page--crm .sol-built-for-industries {
+    height: 330px;
+  }
+
+  .solutions-page--crm .sol-built-for-fit-card {
+    min-height: 271px;
+  }
+
+  .solutions-page .sol-built-for-fit-body {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .solutions-page .sol-built-for-fit-list {
+    gap: 8px;
+  }
+
+  .solutions-page .sol-built-for-fit-text {
+    max-width: none;
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  /* One platform mobile orbit. */
+  .solutions-page .sol-platform-inner,
+  .solutions-page .sol-platform-content {
+    gap: 16px;
+  }
+
+  .solutions-page .sol-platform-header {
+    gap: 12px;
+  }
+
+  .solutions-page .sol-platform-description {
+    display: none;
+  }
+
+  .solutions-page .sol-platform-body {
+    gap: 12px;
+  }
+
+  .solutions-page .sol-platform-features {
+    gap: 8px;
+  }
+
+  .solutions-page .sol-platform-feature {
+    gap: 12px;
+  }
+
+  .solutions-page .sol-platform-feature-icon-wrap {
+    width: 20px;
+    height: 16px;
+    padding: 0;
+    background: transparent;
+  }
+
+  .solutions-page .sol-platform-feature-text {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .solutions-page .sol-mobile-orbit-root > div:first-child {
+    height: 419px !important;
+  }
+
+  .solutions-page--itsm .sol-mobile-orbit-root > div:first-child {
+    height: 405px !important;
+  }
+
+  .solutions-page--crm .sol-mobile-orbit-root > div:first-child {
+    height: 391px !important;
+  }
+
+  .solutions-page .sol-platform-footer {
+    gap: 20px;
+  }
+
+  .solutions-page .sol-platform-footer-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .solutions-page .sol-platform-footer .sol-btn-get-started-now {
+    min-width: 203px;
+    height: 44px;
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  /* Workflow timeline: compact horizontal rows. */
+  .solutions-page .sol-workflow-inner {
+    min-height: 0;
+    padding: 0 20px;
+  }
+
+  .solutions-page .sol-workflow-content {
+    gap: 36px;
+  }
+
+  .solutions-page .sol-workflow-steps {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .solutions-page .sol-workflow-step {
+    max-width: none;
+    width: 100%;
+    flex: none;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .solutions-page .sol-workflow-step-icon {
+    width: 73px;
+    height: 40px;
+  }
+
+  .solutions-page .sol-workflow-step-text {
+    align-items: flex-start;
+    gap: 4px;
+    text-align: left;
+  }
+
+  .solutions-page .sol-workflow-step-title,
+  .solutions-page .sol-workflow-step-description {
+    text-align: left;
+  }
+
+  .solutions-page .sol-workflow-step-title {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .solutions-page .sol-workflow-step-description {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page .sol-workflow-cta .sol-btn-workflow-cta {
+    min-width: 280px;
+    height: 44px;
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  /* Active capability only, with a compact horizontal tab rail. */
+  .solutions-page .sol-capabilities-heading {
+    margin-bottom: 36px;
+  }
+
+  .solutions-page .sol-capabilities-layout {
+    gap: 8px;
+  }
+
+  .solutions-page .sol-capabilities-tabs {
+    gap: 8px;
+    padding-bottom: 0;
+  }
+
+  .solutions-page .sol-cap-tab {
+    min-width: max-content !important;
+    height: 32px;
+    padding: 6px 16px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .solutions-page .sol-cap-panel-inner {
+    gap: 16px;
+    padding: 16px 8px 0 !important;
+  }
+
+  .solutions-page .sol-cap-panel-copy {
+    gap: 16px;
+  }
+
+  .solutions-page .sol-cap-panel-features {
+    gap: 6px;
+    padding-left: 0;
+  }
+
+  .solutions-page .sol-cap-panel-feature-icon-wrap {
+    width: 21px;
+    height: 14px;
+    padding: 0;
+    background: transparent;
+  }
+
+  .solutions-page .sol-cap-panel-title {
+    font-size: 17px !important;
+    line-height: 23px !important;
+  }
+
+  .solutions-page .sol-cap-panel-description,
+  .solutions-page .sol-cap-panel-feature-text,
+  .solutions-page .sol-cap-panel-why-quote {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page .sol-cap-panel-media {
+    height: 279px;
+  }
+
+  .solutions-page .sol-cap-media-mobile {
+    height: 279px;
+  }
+
+  .solutions-page .sol-cap-media-mobile img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+
+  .solutions-page--itsm .sol-cap-media-mobile {
+    height: 299px;
+  }
+
+  .solutions-page--crm .sol-cap-media-mobile {
+    height: 428px;
+  }
+
+  .solutions-page--crm .sol-cap-panel-media {
+    height: 428px;
+  }
+
+  /* Mobile field/agent workspace section. */
+  .solutions-page .sol-technician-header {
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .solutions-page .sol-technician-description {
+    display: none;
+  }
+
+  .solutions-page .sol-technician-row {
+    gap: 24px;
+  }
+
+  .solutions-page .sol-technician-features-list {
+    gap: 16px;
+  }
+
+  .solutions-page .sol-technician-feature-trigger,
+  .solutions-page .sol-technician-feature-row {
+    gap: 12px;
+  }
+
+  .solutions-page .sol-technician-feature-title,
+  .solutions-page .sol-technician-feature-title--active {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .solutions-page .sol-technician-feature-description {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page .sol-technician-phone-wrap {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .solutions-page .sol-technician-phone {
+    width: 280px;
+    max-width: 280px;
+  }
+
+  .solutions-page--itsm .sol-technician-phone {
+    width: 271px;
+    max-width: 271px;
+  }
+
+  .solutions-page--crm .sol-technician-phone {
+    width: 300px;
+    max-width: 300px;
+  }
+
+  /* Three-card comparison from the revised mobile frames. */
+  .solutions-page .sol-better-way-section.sol-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+
+  .solutions-page .sol-better-way-inner {
+    gap: 32px;
+  }
+
+  .solutions-page--itsm .sol-better-way-inner {
+    gap: 45px;
+  }
+
+  .solutions-page--crm .sol-better-way-inner {
+    gap: 50px;
+  }
+
+  .solutions-page .sol-better-way-description,
+  .solutions-page .sol-better-way-visual-bg,
+  .solutions-page .sol-better-way-center,
+  .solutions-page .sol-better-way-footer-bar {
+    display: none;
+  }
+
+  .solutions-page .sol-better-way-visual,
+  .solutions-page .sol-better-way-visual-panel {
+    width: 100%;
+    min-height: 0;
+  }
+
+  .solutions-page .sol-better-way-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .solutions-page .sol-better-way-diagram > * {
+    width: 100%;
+  }
+
+  .solutions-page .sol-better-way-side {
+    width: 100%;
+    min-height: 0;
+    padding: 12px;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffffff 0%, #f6f6f6 100%);
+  }
+
+  .solutions-page .sol-better-way-side-header {
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .solutions-page .sol-better-way-side-title {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .solutions-page .sol-better-way-col-icon {
+    width: 73px;
+    height: 40px;
+  }
+
+  .solutions-page .sol-better-way-side-list {
+    gap: 4px;
+  }
+
+  .solutions-page .sol-better-way-side-line {
+    display: none;
+  }
+
+  .solutions-page .sol-better-way-side-item,
+  .solutions-page .sol-better-way-side--right .sol-better-way-side-item {
+    min-height: 20px;
+    gap: 6px;
+    flex-direction: row;
+  }
+
+  .solutions-page .sol-better-way-side-item-text {
+    font-size: 11px;
+    line-height: 17px;
+    text-align: left !important;
+  }
+
+  .solutions-page .sol-better-way-tick-icon {
+    width: 18px;
+    height: 12px;
+  }
+
+  .solutions-page .sol-better-way-mobile-core {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    min-height: 130px;
+    padding: 16px;
+    color: #ffffff;
+    background: linear-gradient(180deg, #1c2bff 0%, #141fb5 100%);
+    border-radius: 8px;
+  }
+
+  .solutions-page .sol-better-way-mobile-logo {
+    width: 118px;
+    height: 29px;
+    object-fit: contain;
+  }
+
+  .solutions-page .sol-better-way-mobile-core-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .solutions-page .sol-better-way-mobile-core-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  /* Workflow-change arc carousel. */
+  .solutions-page .sol-workflow-change-section {
+    margin-top: 0 !important;
+  }
+
+  .solutions-page .sol-workflow-change-inner {
+    gap: 20px;
+  }
+
+  .solutions-page .sol-workflow-change-left {
+    padding-bottom: 0;
+    gap: 20px;
+  }
+
+  .solutions-page .sol-workflow-change-intro {
+    gap: 10px;
+  }
+
+  .solutions-page .sol-workflow-change-subtitle {
+    display: none;
+  }
+
+  .solutions-page .sol-workflow-change-bullets {
+    gap: 8px;
+  }
+
+  .solutions-page .sol-workflow-change-bullet-text {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page .sol-wc-mobile {
+    margin-top: 0;
+    height: 160px;
+    overflow: hidden;
+  }
+
+  .solutions-page--itsm .sol-wc-mobile {
+    height: 172px;
+  }
+
+  .solutions-page--crm .sol-wc-mobile {
+    height: 192px;
+  }
+
+  .solutions-page .sol-wc-arc-stage {
+    height: 90px;
+  }
+
+  /* Outcomes: six compact icon/copy rows. */
+  .solutions-page .sol-what-improves-inner {
+    gap: 36px;
+  }
+
+  .solutions-page .sol-what-improves-grid,
+  .solutions-page .sol-what-improves-row {
+    gap: 20px !important;
+  }
+
+  .solutions-page .sol-what-improves-card {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .solutions-page .sol-what-improves-icon {
+    width: 73px !important;
+    height: 40px !important;
+    object-fit: contain;
+  }
+
+  .solutions-page .sol-what-improves-card-body {
+    gap: 4px;
+  }
+
+  .solutions-page .sol-what-improves-card-title {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .solutions-page .sol-what-improves-card-description {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page--itsm .sol-what-improves-grid,
+  .solutions-page--itsm .sol-what-improves-row {
+    gap: 10px !important;
+  }
+
+  .solutions-page--itsm .sol-what-improves-card-description {
+    font-size: 11px;
+    line-height: 17px;
+  }
+
+  .solutions-page--itsm .sol-what-improves-inner {
+    gap: 30px;
+  }
+
+  .solutions-page--itsm .sol-real-ops-inner,
+  .solutions-page--crm .sol-real-ops-inner {
+    gap: 17px;
+  }
+
+  /* Real-operations proof, tighter typography and cards. */
+  .solutions-page .sol-real-ops-inner {
+    gap: 32px;
+  }
+
+  .solutions-page .sol-real-ops-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .solutions-page .sol-real-ops-body > *,
+  .solutions-page .sol-real-ops-left,
+  .solutions-page .sol-real-ops-panel,
+  .solutions-page .sol-real-ops-solution-wrap {
+    display: contents;
+  }
+
+  .solutions-page .sol-real-ops-block--challenge {
+    order: 1;
+  }
+
+  .solutions-page .sol-real-ops-solution-card {
+    order: 2;
+  }
+
+  .solutions-page .sol-real-ops-block--metrics {
+    order: 3;
+  }
+
+  .solutions-page .sol-real-ops-footer-quote {
+    order: 4;
+  }
+
+  .solutions-page .sol-real-ops-block--challenge,
+  .solutions-page .sol-real-ops-solution-card {
+    padding: 0 0 0 14px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .solutions-page .sol-real-ops-block--metrics {
+    padding: 16px;
+    background: #ffffff;
+    border-radius: 16px;
+  }
+
+  .solutions-page .sol-real-ops-solution-logo {
+    display: none;
+  }
+
+  .solutions-page .sol-real-ops-solution-card {
+    gap: 10px;
+  }
+
+  .solutions-page .sol-real-ops-block {
+    gap: 12px;
+  }
+
+  .solutions-page .sol-real-ops-quote,
+  .solutions-page .sol-real-ops-bullet-text,
+  .solutions-page .sol-real-ops-metrics-description,
+  .solutions-page .sol-real-ops-solution-item-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .solutions-page .sol-real-ops-footer-quote {
+    margin-top: 12px;
+    gap: 12px;
+    max-height: 80px;
+    overflow: hidden;
+  }
+
+  .solutions-page .sol-real-ops-footer-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .solutions-page .sol-real-ops-footer-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .solutions-page .sol-real-ops-solution-list {
+    gap: 2px;
+  }
+
+  .solutions-page .sol-real-ops-solution-card {
+    max-height: 250px;
+    overflow: hidden;
+  }
+
+  /* Configurable platform cards. */
+  .solutions-page .sol-configurable-inner {
+    gap: 32px;
+  }
+
+  .solutions-page .sol-configurable-description {
+    display: none;
+  }
+
+  .solutions-page .sol-configurable-body {
+    gap: 12px;
+  }
+
+  .solutions-page .sol-configurable-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    max-height: 100px;
+    overflow: hidden;
+  }
+
+  .solutions-page--itsm .sol-configurable-features {
+    max-height: 119px;
+  }
+
+  .solutions-page .sol-configurable-feature {
+    gap: 5px;
+  }
+
+  .solutions-page .sol-configurable-feature-text {
+    font-size: 11px;
+    line-height: 17px;
+  }
+
+  .solutions-page .sol-configurable-card {
+    margin-bottom: 8px;
+    padding: 16px;
+  }
+
+  .solutions-page .sol-configurable-card-body,
+  .solutions-page .sol-configurable-card-content {
+    gap: 10px;
+  }
+
+  .solutions-page .sol-configurable-card-title {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .solutions-page .sol-configurable-card-description,
+  .solutions-page .sol-configurable-card-bullet-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  /* Five compact implementation cards, one CTA at the end. */
+  .solutions-page .sol-go-live-inner {
+    gap: 36px;
+  }
+
+  .solutions-page .sol-go-live-header {
+    align-items: center;
+    gap: 8px;
+  }
+
+  .solutions-page .sol-go-live-heading,
+  .solutions-page .sol-go-live-description {
+    text-align: center;
+  }
+
+  .solutions-page .sol-go-live-description {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page .sol-go-live-card {
+    min-height: 126px;
+    padding: 20px;
+  }
+
+  .solutions-page--itsm .sol-go-live-card {
+    min-height: 138px;
+  }
+
+  .solutions-page .sol-go-live-card-body {
+    gap: 0;
+  }
+
+  .solutions-page .sol-go-live-card-main {
+    gap: 12px;
+  }
+
+  .solutions-page .sol-go-live-card-icon {
+    width: 73px;
+    height: 40px;
+  }
+
+  .solutions-page .sol-go-live-card-title {
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .solutions-page .sol-go-live-card-description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .solutions-page .sol-go-live-link {
+    display: none;
+  }
+
+  .solutions-page .sol-go-live-card-col:last-child .sol-go-live-link {
+    display: flex;
+    position: absolute;
+    left: 0;
+    bottom: -34px;
+  }
+
+  .solutions-page .sol-go-live-cards {
+    padding-bottom: 34px;
+  }
+
+  /* Integration hub: six small pills and the existing mobile orb. */
+  .solutions-page .sol-integrations-inner {
+    gap: 24px;
+  }
+
+  .solutions-page .sol-integrations-header {
+    gap: 8px;
+  }
+
+  .solutions-page .sol-integrations-description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .solutions-page .sol-int-m-pills {
+    gap: 6px;
+  }
+
+  .solutions-page .sol-int-m-pill {
+    min-height: 34px;
+    gap: 8px;
+    padding: 3px 14px 3px 6px;
+  }
+
+  .solutions-page .sol-int-m-pill-icon,
+  .solutions-page .sol-int-m-pill-icon img {
+    width: 36px !important;
+    height: 28px !important;
+  }
+
+  .solutions-page .sol-int-m-pill-label {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .solutions-page .sol-int-m-orb {
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    margin-top: -48px;
+    margin-bottom: -48px;
+    height: 413px;
+    aspect-ratio: auto;
+  }
+
+  .solutions-page--itsm .sol-int-m-orb {
+    height: 433px;
+  }
+
+  /* CTA and FAQ. */
+  .solutions-page .sol-final-cta-banner {
+    min-height: 359px;
+    padding: 60px 20px;
+    border-radius: 0;
+  }
+
+  .solutions-page .sol-final-cta-content {
+    gap: 48px;
+  }
+
+  .solutions-page .sol-final-cta-heading {
+    max-width: 320px;
+  }
+
+  .solutions-page .sol-faq-inner {
+    gap: 36px;
+  }
+
+  .solutions-page .sol-faq-panel {
+    padding: 0;
+  }
+
+  .solutions-page .sol-faq-heading {
+    text-align: left !important;
+  }
+
+  .solutions-page .sol-faq-list {
+    gap: 0;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .solutions-page--itsm .sol-faq-list,
+  .solutions-page--crm .sol-faq-list {
+    min-height: 519px;
+    max-height: none;
+  }
+
+  .solutions-page--crm .sol-workflow-steps {
+    gap: 10px;
+  }
+
+  .solutions-page .sol-faq-question {
+    min-height: 38px;
+    padding: 8px 28px 8px 0;
+    font-size: 13px !important;
+    line-height: 20px !important;
+  }
+
+  .solutions-page .sol-faq-question--open {
+    font-size: 13px !important;
+    line-height: 20px !important;
+  }
+
+  .solutions-page .sol-faq-answer {
+    padding: 0 0 10px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .solutions-page--crm .sol-hero-heading,
+  .solutions-page--crm .sol-built-for-heading,
+  .solutions-page--crm .sol-workflow-heading,
+  .solutions-page--crm .sol-technician-heading {
+    font-size: 23px !important;
+    line-height: 36px !important;
+  }
+}
+
+/* Final cascade seal for the FSM 360px Figma frames. */
+@media (max-width: 767px) {
+  .solutions-page.solutions-page--fsm .dg-hero-outer .sol-hero-eyebrow {
+    margin-top: 20px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-hero-actions-mobile .sol-hero-actions {
+    width: 254px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-hero-actions-mobile .sol-btn-book-demo,
+  .solutions-page.solutions-page--fsm .sol-hero-actions-mobile .sol-btn-outline {
+    width: 254px;
+    min-width: 254px;
+    font-size: 15px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-problem-card-title {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-problem-card-description {
+    font-size: 13px !important;
+    line-height: 21px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-built-for-industry-title,
+  .solutions-page.solutions-page--fsm .sol-built-for-industry-title--active {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-built-for-fit-heading {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-bg {
+    display: block !important;
+    width: 1200px;
+    max-width: none;
+    height: 100%;
+    object-fit: fill;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-section {
+    height: 758px;
+    overflow: hidden;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-progress {
+    display: block;
+    top: 0;
+    left: 0;
+    width: 1px;
+    max-width: none;
+    height: 451px;
+    transform: none;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-progress-track {
+    width: 1px;
+    height: 100%;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-progress-active {
+    width: 1px !important;
+    height: 159px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-steps {
+    gap: 25px;
+    padding-left: 20px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-step {
+    gap: 16px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-step-icon {
+    width: 59px;
+    height: 32px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-step-title {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-step-description {
+    font-size: 13px;
+    line-height: 19px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-steps > :nth-child(-n + 2) .sol-workflow-step-title {
+    color: #ff7f1c;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-steps > :nth-child(n + 3) .sol-workflow-step-title {
+    color: #000000;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-capabilities-tabs {
+    justify-content: flex-start;
+    padding-right: 53px;
+    padding-left: 53px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-cap-tab {
+    min-height: 32px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-cap-tab--active {
+    width: 214px;
+    min-width: 214px !important;
+    height: 32px;
+    min-height: 32px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-cap-panel-inner {
+    min-height: 595px;
+    padding: 30px 8px 0 !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-cap-panel {
+    box-shadow: inset 0 0 0 1px #ff7f1c;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-cap-panel-title {
+    font-size: 16px !important;
+    line-height: 23px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-cap-panel-feature-text,
+  .solutions-page.solutions-page--fsm .sol-cap-panel-why-label,
+  .solutions-page.solutions-page--fsm .sol-cap-panel-why-quote {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-cap-media-mobile {
+    width: 100% !important;
+    height: 320px;
+    margin-left: -8px;
+    width: 320px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-cap-media-mobile img {
+    width: 320px !important;
+    height: 320px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-better-way-side-item-text {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-better-way-side-header {
+    flex-direction: row !important;
+    justify-content: flex-start;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-better-way-side--left .sol-better-way-side-header,
+  .solutions-page.solutions-page--fsm .sol-better-way-side--right .sol-better-way-side-header {
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-better-way-side-header .sol-better-way-col-icon {
+    order: -1 !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-better-way-side--right .sol-better-way-tick-icon {
+    order: -1;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-better-way-side--right .sol-better-way-side-item {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-better-way-mobile-core-item {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-wc-mobile {
+    width: 320px;
+    min-width: 0;
+    height: 200px;
+    margin-top: -40px;
+    overflow: visible;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-wc-arc-stage,
+  .solutions-page.solutions-page--fsm .sol-wc-arc-svg {
+    height: 80px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-wc-arc-label-active {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-wc-arc-desc {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-wc-arc-nav {
+    margin-top: 10px;
+    gap: 8px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-wc-arc-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-change-tick-icon-wrap {
+    width: 20px;
+    height: 13px;
+    padding: 0;
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-what-improves-grid,
+  .solutions-page.solutions-page--fsm .sol-what-improves-row {
+    gap: 28px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-what-improves-card {
+    gap: 16px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-what-improves-card-title {
+    font-size: 15px !important;
+    line-height: 21px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-what-improves-card-description {
+    font-size: 15px !important;
+    line-height: 21px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-what-improves-section {
+    height: 814px;
+    overflow: hidden;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-real-ops-quote,
+  .solutions-page.solutions-page--fsm .sol-real-ops-bullet-text,
+  .solutions-page.solutions-page--fsm .sol-real-ops-metrics-description,
+  .solutions-page.solutions-page--fsm .sol-real-ops-solution-item-text,
+  .solutions-page.solutions-page--fsm .sol-real-ops-footer-text {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-configurable-feature-text {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-configurable-feature:nth-child(1) { order: 1; }
+  .solutions-page.solutions-page--fsm .sol-configurable-feature:nth-child(3) { order: 2; }
+  .solutions-page.solutions-page--fsm .sol-configurable-feature:nth-child(6) { order: 3; }
+  .solutions-page.solutions-page--fsm .sol-configurable-feature:nth-child(7) { order: 4; }
+  .solutions-page.solutions-page--fsm .sol-configurable-feature:nth-child(2) { order: 5; }
+  .solutions-page.solutions-page--fsm .sol-configurable-feature:nth-child(5) { order: 6; }
+  .solutions-page.solutions-page--fsm .sol-configurable-feature:nth-child(4) { order: 7; }
+
+  .solutions-page.solutions-page--fsm .sol-configurable-card {
+    padding: 20px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-configurable-card-title {
+    font-size: 16px;
+    line-height: 23px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-configurable-card-description,
+  .solutions-page.solutions-page--fsm .sol-configurable-card-bullet-text {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-final-cta-section {
+    padding: 0 !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-final-cta-section > .sol-container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-final-cta-banner {
+    height: 359px;
+    min-height: 359px;
+    border-radius: 30px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-final-cta-heading {
+    font-size: 32px !important;
+    line-height: 37px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-faq-question,
+  .solutions-page.solutions-page--fsm .sol-faq-question--open {
+    font-size: 16px !important;
+    line-height: 26px !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-faq-answer {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-faq-list {
+    gap: 12px;
+  }
+
+  /* FSM mobile refinements from Figma nodes 2329:6503 and 2429:866. */
+  .solutions-page.solutions-page--fsm .sol-problem-card {
+    height: auto;
+    min-height: 190px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-problem-card-inner {
+    height: auto;
+    min-height: 0;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-problem-grid {
+    box-sizing: border-box;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    overflow: visible;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-built-for-industries {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    border-radius: 0;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-built-for-industries-list {
+    height: auto;
+    min-height: 0;
+    justify-content: flex-start;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-bg {
+    display: none !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-section {
+    height: 795px;
+    background-image: url("/solutions/fsm-service-workflow-mobile-bg.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100% 795px;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-progress-active {
+    height: var(--sol-workflow-progress) !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-step-title {
+    color: #000000 !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-step-title--active {
+    color: #ff7f1c !important;
+  }
+
+  .solutions-page.solutions-page--fsm .sol-workflow-change-bullets {
+    margin-bottom: 40px;
+  }
+
+  body:has(.solutions-page--fsm) .footer-body-wrapper > div[style*="height: 1px"] {
+    margin-top: 28px !important;
+  }
+
+  body:has(.solutions-page--fsm) .footer-bottom {
+    align-items: center !important;
+    gap: 13px !important;
+    padding: 28px 0 10px !important;
+    text-align: center !important;
+  }
+
+  body:has(.solutions-page--fsm) .footer-bottom > p,
+  body:has(.solutions-page--fsm) .footer-bottom a {
+    font-size: 11px !important;
+    line-height: 17.6px !important;
+  }
+
+  body:has(.solutions-page--fsm) .footer-bottom > div {
+    gap: 7px !important;
+  }
+
+  body:has(.solutions-page--fsm) .footer-bottom > div > span {
+    display: none;
+  }
+
+  body:has(.solutions-page--fsm) .footer-bottom > div a {
+    color: #1c2bff !important;
   }
 }

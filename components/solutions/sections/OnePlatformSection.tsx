@@ -232,6 +232,7 @@ function MobileOrbit({ items }: { items: OrbitItem[] }) {
 
 type OnePlatformSectionProps = {
   heading?: string;
+  mobileHeading?: string;
   description?: string;
   features?: string[];
   orbitItems?: typeof platformOrbitItems;
@@ -241,6 +242,7 @@ type OnePlatformSectionProps = {
 
 const OnePlatformSection: FunctionComponent<OnePlatformSectionProps> = ({
   heading = "One Platform. Your Whole Service Workflow.",
+  mobileHeading,
   description = "DGlide ITSM connects every step of a request, from the moment it arrives to the moment it's resolved, in one flow.",
   features = platformWorkflowFeatures,
   orbitItems = platformOrbitItems,
@@ -270,7 +272,8 @@ const OnePlatformSection: FunctionComponent<OnePlatformSectionProps> = ({
               <header className="sol-platform-header">
                 <ScrollReveal direction="up">
                   <h2 className="sol-platform-heading">
-                    {heading}
+                    <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+                    {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
                   </h2>
                 </ScrollReveal>
                 <ScrollReveal direction="up" delay={0.1}>

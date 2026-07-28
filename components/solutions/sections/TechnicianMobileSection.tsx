@@ -10,6 +10,7 @@ const DURATION = 7000;
 
 type TechnicianMobileSectionProps = {
   heading?: string;
+  mobileHeading?: string;
   description?: string;
   features?: typeof technicianFeatures;
   imageSrc?: string;
@@ -19,6 +20,7 @@ type TechnicianMobileSectionProps = {
 
 const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> = ({
   heading = "Stop Running Service Out of an Inbox",
+  mobileHeading,
   description = "Agents shouldn't dig through email and chat to know what's next. DGlide gives every agent one clear workspace for daily service execution.",
   features = technicianFeatures,
   imageSrc = "/solutions/agent-workspace.png",
@@ -55,7 +57,10 @@ const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> =
         <div className="sol-technician-inner">
           <ScrollReveal direction="up">
             <header className="sol-technician-header">
-              <h2 className="sol-technician-heading">{heading}</h2>
+              <h2 className="sol-technician-heading">
+                <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+                {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
+              </h2>
               <p className="sol-technician-description">{description}</p>
             </header>
           </ScrollReveal>

@@ -18,9 +18,14 @@ type FSMHeroSectionProps = {
   eyebrow?: string;
   heading?: string;
   description?: string;
+  mobileHeading?: string;
+  mobileDescription?: string;
   bullets?: string[];
+  mobileBullets?: string[];
   primaryCta?: string;
   secondaryCta?: string;
+  mobilePrimaryCta?: string;
+  mobileSecondaryCta?: string;
   /* When set, the secondary button scrolls to this element id instead of the contact form */
   secondaryScrollTargetId?: string;
   imageSrc?: string;
@@ -34,9 +39,14 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
   eyebrow = "IT & Service Management",
   heading = "Service Management That Fits Your Workflows, Not Just Your Tickets",
   description = "DGlide ITSM helps service, IT, and internal teams run requests, approvals, SLAs, and resolution in one configurable system.",
+  mobileHeading,
+  mobileDescription,
   bullets = DEFAULT_BULLETS,
+  mobileBullets,
   primaryCta = "Book a Demo",
   secondaryCta = "ITSM Capabilities",
+  mobilePrimaryCta,
+  mobileSecondaryCta,
   secondaryScrollTargetId,
   imageSrc = "/solutions/itsm-hero-illustration.png",
   imageAlt = "DGlide service management dashboard",
@@ -46,13 +56,13 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
 }) => {
   const router = useRouter();
 
-  const actionButtons = (
+  const renderActionButtons = (primaryLabel = primaryCta, secondaryLabel = secondaryCta) => (
     <div className="sol-hero-actions">
       <SolutionsButton
         variant="book-demo"
         onClick={() => scrollToContact(router)}
       >
-        {primaryCta}
+        {primaryLabel}
       </SolutionsButton>
       <SolutionsButton
         variant="outline"
@@ -64,9 +74,29 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
           }
         }}
       >
-        {secondaryCta}
+        {secondaryLabel}
       </SolutionsButton>
     </div>
+  );
+
+  const renderBullets = (items: string[], className = "") => (
+    <ul className={`sol-hero-bullets mt-6 space-y-3.5${className ? ` ${className}` : ""}`}>
+      {items.map((item) => (
+        <li key={item} className="flex items-start gap-3">
+          <img
+            src="/solutions/hero-tick.svg"
+            alt=""
+            width={24}
+            height={14}
+            className="mt-1 shrink-0"
+            loading="lazy"
+          />
+          <span className="text-[15px] leading-snug text-[var(--sol-text-body)]">
+            {item}
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 
   return (
@@ -83,37 +113,37 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.08}>
-              <h1 className="sol-hero-heading">{heading}</h1>
+              <h1 className="sol-hero-heading">
+                <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+                {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
+              </h1>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.16}>
-              <p className="sol-hero-description">{description}</p>
+              <p className="sol-hero-description">
+                <span className={mobileDescription ? "sol-copy-desktop" : ""}>{description}</span>
+                {mobileDescription ? <span className="sol-copy-mobile">{mobileDescription}</span> : null}
+              </p>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
-              <ul className="mt-6 space-y-3.5">
-                {bullets.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <img
-                      src="/solutions/hero-tick.svg"
-                      alt=""
-                      width={24}
-                      height={14}
-                      className="mt-1 shrink-0"
-                      loading="lazy"
-                    />
-                    <span className="text-[15px] leading-snug text-[var(--sol-text-body)]">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              {renderBullets(bullets, mobileBullets ? "sol-copy-desktop" : "")}
+              {mobileBullets ? renderBullets(mobileBullets, "sol-copy-mobile") : null}
             </ScrollReveal>
 
             {actionsInline && (
               <ScrollReveal direction="up" delay={0.24}>
-                <div className="pt-2">{actionButtons}</div>
+                <div className="pt-2">{renderActionButtons()}</div>
               </ScrollReveal>
+            )}
+
+            {!actionsInline && (
+              <div className="sol-hero-actions-mobile">
+                {renderActionButtons(
+                  mobilePrimaryCta ?? primaryCta,
+                  mobileSecondaryCta ?? secondaryCta,
+                )}
+              </div>
             )}
           </div>
 
@@ -132,10 +162,10 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
       </SolutionsContainer>
 
       {!actionsInline && (
-        <div className="relative z-10 mt-10 pb-14 pt-8 lg:mt-14 lg:pb-16">
+        <div className="sol-hero-actions-desktop relative z-10 mt-10 pb-14 pt-8 lg:mt-14 lg:pb-16">
           <SolutionsContainer>
             <ScrollReveal direction="up" delay={0.24}>
-              {actionButtons}
+              {renderActionButtons()}
             </ScrollReveal>
           </SolutionsContainer>
         </div>

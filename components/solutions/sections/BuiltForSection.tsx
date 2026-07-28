@@ -55,6 +55,7 @@ const INDUSTRY_ITEMS = [
 
 type BuiltForSectionProps = {
   heading?: string;
+  mobileHeading?: string;
   description?: string;
   fitItems?: { label: string }[];
   industryItems?: { icon: string; title: string; description: string }[];
@@ -63,6 +64,7 @@ type BuiltForSectionProps = {
 
 const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
   heading = "Service Breaks When Workflows Outgrow the Ticketing Tool",
+  mobileHeading,
   description = "DGlide ITSM fits service and internal teams that have outgrown rigid ticketing and manual approvals.",
   fitItems = FIT_ITEMS,
   industryItems = INDUSTRY_ITEMS,
@@ -111,7 +113,8 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
           <ScrollReveal direction="up">
             <header className="sol-built-for-header">
               <h2 className="sol-built-for-heading">
-                {heading}
+                <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+                {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
               </h2>
               <p className="sol-built-for-description">
                 {description}

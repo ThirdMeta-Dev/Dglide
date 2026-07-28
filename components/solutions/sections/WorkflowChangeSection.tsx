@@ -13,9 +13,16 @@ import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 /* ─── Mobile arc carousel ────────────────────────────────────── */
 type ArcPos = { l: number; t: number }; // left % + top px
 
-function MobileArcCarousel({ items }: { items: typeof workflowTimelineItems }) {
+function MobileArcCarousel({
+  items,
+  initialIndex = 0,
+}: {
+  items: typeof workflowTimelineItems;
+  initialIndex?: number;
+}) {
   const N = items.length;
-  const [active, setActive] = useState(0);
+  const safeInitialIndex = ((initialIndex % N) + N) % N;
+  const [active, setActive] = useState(safeInitialIndex);
   const [drag,   setDrag]   = useState(0);
   const [isDown, setIsDown] = useState(false);
   const startX = useRef(0);
@@ -28,11 +35,11 @@ function MobileArcCarousel({ items }: { items: typeof workflowTimelineItems }) {
   // Positions: l = left %, t = top px (icon center, stage = 240px)
   // Arc: M -80,-58 Q 180,450 440,-58 → bottom at (180,196), edges cross x=0/360 at y≈72
   const P: Record<string, ArcPos> = {
-    FL: { l: -20, t: 48  },  // far left  (off-screen)
-    L:  { l:   3, t: 73  },  // left peek — on arc at x≈11px
-    A:  { l:  50, t: 196 },  // active — exact arc bottom
-    R:  { l:  97, t: 73  },  // right peek — on arc at x≈349px
-    FR: { l: 120, t: 48  },  // far right (off-screen)
+    FL: { l: -20, t: -4 },
+    L:  { l:   3, t: 14 },
+    A:  { l:  50, t: 65 },
+    R:  { l:  97, t: 14 },
+    FR: { l: 120, t: -4 },
   };
 
   const SNAP = 60;
@@ -95,20 +102,20 @@ function MobileArcCarousel({ items }: { items: typeof workflowTimelineItems }) {
         {/* Wide orange bowl arc — very wide bezier, enters stage high up */}
         <svg
           className="sol-wc-arc-svg"
-          viewBox="0 0 360 240"
+          viewBox="0 0 360 80"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden
         >
           {/* P0=(-80,-58) P1=(180,450) P2=(440,-58) → bottom at (180,196), enters at y≈72 */}
           <path
-            d="M -80,-58 Q 180,450 440,-58"
+            d="M -80,-45 Q 180,175 440,-45"
             stroke="#FF7F1C"
             strokeWidth="1.5"
             fill="none"
             strokeLinecap="round"
           />
-          <circle cx="180" cy="196" r="5" fill="#FF7F1C" />
+          <circle cx="180" cy="65" r="4" fill="#FF7F1C" />
         </svg>
 
         {/* Icons: side items show icon only, active shows icon only (text is below) */}
@@ -164,7 +171,9 @@ function MobileArcCarousel({ items }: { items: typeof workflowTimelineItems }) {
             <path d="M7 4.5L11.5 9L7 13.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
-        <span className="sol-wc-arc-counter">{active + 1}/{N}</span>
+        <span className="sol-wc-arc-counter">
+          {((active - safeInitialIndex + N) % N) + 1}/{N}
+        </span>
       </div>
     </div>
   );
@@ -173,10 +182,12 @@ function MobileArcCarousel({ items }: { items: typeof workflowTimelineItems }) {
 
 type WorkflowChangeSectionProps = {
   title?: string;
+  mobileTitle?: string;
   subtitle?: string;
   bullets?: string[];
   timelineItems?: typeof workflowTimelineItems;
   sectionId?: string;
+  mobileInitialIndex?: number;
 };
 
 const TickIcon = () => (
@@ -203,10 +214,12 @@ const TickIcon = () => (
 
 const WorkflowChangeSection: FunctionComponent<WorkflowChangeSectionProps> = ({
   title = workflowChangeTitle,
+  mobileTitle,
   subtitle = workflowChangeSubtitle,
   bullets = workflowChangeBullets,
   timelineItems = workflowTimelineItems,
   sectionId,
+  mobileInitialIndex = 0,
 }) => {
   const [activeIndex, setActiveIndex] = useState(1);
 
@@ -218,7 +231,8 @@ const WorkflowChangeSection: FunctionComponent<WorkflowChangeSectionProps> = ({
             <div className="sol-workflow-change-left">
               <div className="sol-workflow-change-intro">
                 <h2 className="sol-workflow-change-heading">
-                  {title}
+                  <span className={mobileTitle ? "sol-copy-desktop" : ""}>{title}</span>
+                  {mobileTitle ? <span className="sol-copy-mobile">{mobileTitle}</span> : null}
                 </h2>
                 <p className="sol-workflow-change-subtitle">
                   {subtitle}
@@ -239,7 +253,7 @@ const WorkflowChangeSection: FunctionComponent<WorkflowChangeSectionProps> = ({
           </ScrollReveal>
 
           {/* Mobile arc carousel — hidden on desktop via CSS */}
-          <MobileArcCarousel items={timelineItems} />
+          <MobileArcCarousel items={timelineItems} initialIndex={mobileInitialIndex} />
 
           <ScrollReveal direction="right">
             <div className="sol-workflow-change-track">

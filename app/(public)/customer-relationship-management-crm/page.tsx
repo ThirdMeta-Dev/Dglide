@@ -58,12 +58,19 @@ export const metadata: Metadata = {
 
 export default function CRMPage() {
   return (
-    <AnimatedPublicPage className="solutions-page crm-solutions-page" staticFirstCount={2}>
+    <AnimatedPublicPage className="solutions-page solutions-page--crm crm-solutions-page" staticFirstCount={2}>
       <FSMHeroSection
         eyebrow={crmHero.eyebrow}
         heading={crmHero.heading}
         description={crmHero.description}
+        mobileHeading={"One Customer Record.\nNot Five Different Stories."}
+        mobileDescription="DGlide CRM keeps every customer record tied to what's actually happening."
         bullets={crmHero.bullets}
+        mobileBullets={[
+          "Every data tied to every account",
+          "No re-entering data between teams",
+          "Configurable pipelines and lifecycle stages.",
+        ]}
         primaryCta={crmHero.primaryCta}
         secondaryCta={crmHero.secondaryCta}
         secondaryScrollTargetId="core-capabilities"
@@ -76,6 +83,7 @@ export default function CRMPage() {
         sectionId="crm-problem"
         sectionClassName="sol-problem-section--crm"
         heading={crmProblem.heading}
+        mobileHeading="Track Customers Beyond the Sale"
         description={crmProblem.description}
         cards={crmProblem.cards}
         footerText={crmProblem.footerText}
@@ -83,6 +91,7 @@ export default function CRMPage() {
       />
       <BuiltForSection
         heading={crmBuiltFor.heading}
+        mobileHeading={"One Customer. Every\nTeam. Complete Visibility."}
         description={crmBuiltFor.description}
         centerImage="/solutions/crm/audience-v2.webp"
         fitItems={crmBuiltFor.fitItems}
@@ -90,6 +99,7 @@ export default function CRMPage() {
       />
       <OnePlatformSection
         heading={crmPlatform.heading}
+        mobileHeading={"One CRM For The Entire\nCustomer Journey"}
         description={crmPlatform.description}
         features={crmPlatform.features}
         orbitItems={crmPlatform.orbitItems}
@@ -98,6 +108,7 @@ export default function CRMPage() {
       />
       <ServiceWorkflowSection
         heading={crmWorkflow.heading}
+        mobileHeading={"Here's How Your Workflow\nLooks With DGlide CRM"}
         steps={crmWorkflow.steps}
         ctaLabel={crmWorkflow.ctaLabel}
         sectionId="what-crm-does"
@@ -105,16 +116,21 @@ export default function CRMPage() {
       <CoreCapabilitiesSection heading={crmCapabilitiesHeading} items={crmCapabilityItems} />
       <TechnicianMobileSection
         heading={crmTechnician.heading}
+        mobileHeading={"Every Visit Begins With\nComplete Customer Insight"}
         description={crmTechnician.description}
         features={crmTechnician.features}
         imageSrc="/solutions/crm/mobile.webp"
         imageAlt="DGlide CRM mobile account and visit workflow"
         sectionClassName="sol-technician-section--crm"
       />
-      <BetterWaySection {...crmBetterWay} />
+      <BetterWaySection
+        {...crmBetterWay}
+        mobileHeading="Configurable Software That Scales With Your Business"
+      />
       <WorkflowChangeSection
         sectionId="core-crm-capabilities"
         title={crmWorkflowChange.title}
+        mobileTitle="A CRM That Adapts As Your Business Changes"
         subtitle={crmWorkflowChange.subtitle}
         bullets={crmWorkflowChange.bullets}
         timelineItems={crmWorkflowChange.timelineItems}

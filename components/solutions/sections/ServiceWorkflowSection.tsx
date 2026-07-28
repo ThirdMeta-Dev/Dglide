@@ -1,6 +1,6 @@
 "use client";
 
-import { FunctionComponent, useEffect, useState } from "react";
+import { type CSSProperties, FunctionComponent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { scrollToContact } from "@/lib/scroll-to-contact";
 import SolutionsButton from "@/components/solutions/shared/SolutionsButton";
@@ -17,7 +17,9 @@ type WorkflowStep = {
 
 type ServiceWorkflowSectionProps = {
   heading?: string;
+  mobileHeading?: string;
   steps?: WorkflowStep[];
+  mobileStepDescriptions?: string[];
   ctaLabel?: string;
   showCta?: boolean;
   sectionId?: string;
@@ -36,7 +38,9 @@ const WorkflowStepIcon: FunctionComponent<{ icon?: string; active: boolean }> = 
 
 const ServiceWorkflowSection: FunctionComponent<ServiceWorkflowSectionProps> = ({
   heading = "From Service Request to Closure, Without Losing Control",
+  mobileHeading,
   steps = defaultWorkflowSteps,
+  mobileStepDescriptions,
   ctaLabel = "See this workflow in action",
   showCta = true,
   sectionId,
@@ -83,14 +87,23 @@ const ServiceWorkflowSection: FunctionComponent<ServiceWorkflowSectionProps> = (
           <div className="sol-workflow-content">
             <header className="sol-workflow-header">
               <ScrollReveal direction="up">
-                <h2 className="sol-workflow-heading">{heading}</h2>
+                <h2 className="sol-workflow-heading">
+                  <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+                  {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
+                </h2>
               </ScrollReveal>
             </header>
 
             <div className="sol-workflow-steps-wrap">
               <div className="sol-workflow-progress" aria-hidden>
                 <div className="sol-workflow-progress-track" />
-                <div className="sol-workflow-progress-active" style={{ width: progressWidth }} />
+                <div
+                  className="sol-workflow-progress-active"
+                  style={{
+                    width: progressWidth,
+                    "--sol-workflow-progress": progressWidth,
+                  } as CSSProperties}
+                />
               </div>
 
               <StaggerReveal className="sol-workflow-steps">
@@ -107,7 +120,14 @@ const ServiceWorkflowSection: FunctionComponent<ServiceWorkflowSectionProps> = (
                           {step.title}
                         </h3>
                         <p className="sol-workflow-step-description">
-                          {step.description}
+                          <span className={mobileStepDescriptions ? "sol-copy-desktop" : ""}>
+                            {step.description}
+                          </span>
+                          {mobileStepDescriptions ? (
+                            <span className="sol-copy-mobile">
+                              {mobileStepDescriptions[index] ?? step.description}
+                            </span>
+                          ) : null}
                         </p>
                       </div>
                     </article>

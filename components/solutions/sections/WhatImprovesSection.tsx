@@ -7,6 +7,7 @@ type WhatImprovesSectionProps = {
   heading?: string;
   description?: string;
   features?: typeof improvesFeatures;
+  mobileDescriptions?: string[];
   sectionId?: string;
 };
 
@@ -14,6 +15,7 @@ const WhatImprovesSection: FunctionComponent<WhatImprovesSectionProps> = ({
   heading = "What Improves With DGlide ITSM",
   description,
   features = improvesFeatures,
+  mobileDescriptions,
   sectionId = "benefits-outcomes",
 }) => {
   const improvesRows = [
@@ -44,7 +46,9 @@ const WhatImprovesSection: FunctionComponent<WhatImprovesSectionProps> = ({
                 rowIndex === 1 ? " sol-what-improves-row--bottom" : ""
               }`}
             >
-              {row.map((feature) => (
+              {row.map((feature, featureIndex) => {
+                const absoluteIndex = rowIndex * 3 + featureIndex;
+                return (
                 <StaggerItem key={feature.title}>
                   <article
                     className={`sol-what-improves-card sol-what-improves-card--${feature.align}`}
@@ -62,12 +66,20 @@ const WhatImprovesSection: FunctionComponent<WhatImprovesSectionProps> = ({
                         {feature.title}
                       </h3>
                       <p className="sol-what-improves-card-description">
-                        {feature.description}
+                        <span className={mobileDescriptions ? "sol-copy-desktop" : ""}>
+                          {feature.description}
+                        </span>
+                        {mobileDescriptions ? (
+                          <span className="sol-copy-mobile">
+                            {mobileDescriptions[absoluteIndex] ?? feature.description}
+                          </span>
+                        ) : null}
                       </p>
                     </div>
                   </article>
                 </StaggerItem>
-              ))}
+                );
+              })}
             </div>
           ))}
         </StaggerReveal>

@@ -35,6 +35,7 @@ type FieldServiceProblemSectionProps = {
   sectionId?: string;
   sectionClassName?: string;
   heading?: string;
+  mobileHeading?: string;
   description?: string;
   cards?: typeof problemCards;
   footerText?: string;
@@ -45,6 +46,7 @@ const FieldServiceProblemSection: FunctionComponent<FieldServiceProblemSectionPr
   sectionId = "field-service-problem",
   sectionClassName = "",
   heading = "Your Ticketing Tool Stops Where Your Real Work Begins",
+  mobileHeading,
   description = "When your system only handles tickets, everything around them falls back into email and guesswork.",
   cards = problemCards,
   footerText = "Your team isn't slow. Your tool just stops where your real workflows begin.",
@@ -57,7 +59,8 @@ const FieldServiceProblemSection: FunctionComponent<FieldServiceProblemSectionPr
       <SolutionsContainer>
         <ScrollReveal direction="up">
           <h2 className="sol-problem-heading">
-            {heading}
+            <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+            {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
           </h2>
         </ScrollReveal>
         <ScrollReveal direction="up" delay={0.1}>

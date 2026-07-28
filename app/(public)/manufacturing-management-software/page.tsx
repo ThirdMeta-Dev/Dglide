@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 
 export default function ManufacturingManagementSoftwarePage() {
   return (
-    <AnimatedPublicPage className="solutions-page crm-solutions-page manufacturing-solutions-page" staticFirstCount={2}>
+    <AnimatedPublicPage className="solutions-page solutions-page--manufacturing crm-solutions-page manufacturing-solutions-page" staticFirstCount={2}>
       <FSMHeroSection
         eyebrow={manufacturingHero.eyebrow}
         heading={manufacturingHero.heading}

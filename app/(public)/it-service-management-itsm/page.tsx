@@ -28,17 +28,26 @@ export const metadata: Metadata = {
 
 export default function SolutionsPage() {
   return (
-    <AnimatedPublicPage className="solutions-page" staticFirstCount={2}>
-      <FSMHeroSection secondaryScrollTargetId="core-capabilities" />
+    <AnimatedPublicPage className="solutions-page solutions-page--itsm" staticFirstCount={2}>
+      <FSMHeroSection
+        mobileHeading="Service Management That Fits Your Workflows"
+        mobileDescription="DGlide ITSM helps service, IT, and teams run everything in one configurable system."
+        mobileBullets={[
+          "Tickets, approvals, and SLAs in one flow",
+          "Built for IT, support, and internal ops teams",
+          "Configurable workflows at one place",
+        ]}
+        secondaryScrollTargetId="core-capabilities"
+      />
       <SolutionsSectionNav items={itsmSectionNavItems} />
-      <FieldServiceProblemSection />
-      <BuiltForSection />
-      <OnePlatformSection />
+      <FieldServiceProblemSection mobileHeading="Where Ticketing Stops, DGlide Takes Over" />
+      <BuiltForSection mobileHeading="Outgrown Ticketing? Upgrade to Smarter Service Management." />
+      <OnePlatformSection mobileHeading="One Platform For Your Entire Service Workflow" />
       <ServiceWorkflowSection />
       <CoreCapabilitiesSection />
-      <TechnicianMobileSection />
-      <BetterWaySection />
-      <WorkflowChangeSection />
+      <TechnicianMobileSection mobileHeading="Move Service Beyond The Inbox, Into One Workspace" />
+      <BetterWaySection mobileHeading="Configurable Software That Scales With Your Business" />
+      <WorkflowChangeSection mobileTitle="Software That Evolves With Your Workflows" />
       <WhatImprovesSection />
       <RealOperationsSection />
       <ConfigurablePlatformSection />
