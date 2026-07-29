@@ -1,6 +1,6 @@
 "use client";
 
-import { FunctionComponent, useState, useRef } from "react";
+import { FunctionComponent, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { scrollToContact } from "@/lib/scroll-to-contact";
 import SolutionsButton from "@/components/solutions/shared/SolutionsButton";
@@ -38,13 +38,15 @@ type OrbitItem = {
 
 function MobileOrbit({ items, initialIndex = 1 }: { items: OrbitItem[]; initialIndex?: number }) {
   const N = items.length;
+  const [orbitWidth, setOrbitWidth] = useState(360);
 
-  // Fixed pill center positions
+  // Keep the original 360px layout proportions while centering them in the
+  // actual available width on narrower phones.
   const SFL = { x: -180, y: 148 }; // far-left  (off screen)
   const SL  = { x:   20, y: 148 }; // left peek
-  const SA  = { x:  180, y: 270 }; // active — bottom center
-  const SR  = { x:  340, y: 148 }; // right peek
-  const SFR = { x:  540, y: 148 }; // far-right (off screen)
+  const SA  = { x:  orbitWidth / 2, y: 270 }; // active — bottom center
+  const SR  = { x:  orbitWidth - 20, y: 148 }; // right peek
+  const SFR = { x:  orbitWidth + 180, y: 148 }; // far-right (off screen)
 
   const lerp = (a: {x:number;y:number}, b: {x:number;y:number}, u: number) =>
     ({ x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u });
@@ -52,7 +54,25 @@ function MobileOrbit({ items, initialIndex = 1 }: { items: OrbitItem[]; initialI
   const [active, setActive] = useState(Math.min(Math.max(initialIndex, 0), Math.max(N - 1, 0)));
   const [drag,   setDrag]   = useState(0);
   const [isDown, setIsDown] = useState(false);
+  const orbitRef = useRef<HTMLDivElement>(null);
   const startX = useRef(0);
+  const startY = useRef(0);
+  const gestureAxis = useRef<"pending" | "horizontal" | "vertical">("pending");
+
+  useEffect(() => {
+    const orbit = orbitRef.current;
+    if (!orbit) return;
+
+    const updateWidth = () => {
+      if (orbit.clientWidth > 0) setOrbitWidth(orbit.clientWidth);
+    };
+
+    updateWidth();
+    const observer = new ResizeObserver(updateWidth);
+    observer.observe(orbit);
+
+    return () => observer.disconnect();
+  }, []);
 
   const rightI    = (active + 1) % N;
   const leftI     = (active - 1 + N) % N;
@@ -92,17 +112,42 @@ function MobileOrbit({ items, initialIndex = 1 }: { items: OrbitItem[]; initialI
 
   const onTouchStart = (e: React.TouchEvent) => {
     startX.current = e.touches[0].clientX;
-    setIsDown(true);
+    startY.current = e.touches[0].clientY;
+    gestureAxis.current = "pending";
+    setDrag(0);
+    setIsDown(false);
   };
   const onTouchMove = (e: React.TouchEvent) => {
-    e.preventDefault();
-    setDrag(e.touches[0].clientX - startX.current);
+    const deltaX = e.touches[0].clientX - startX.current;
+    const deltaY = e.touches[0].clientY - startY.current;
+
+    if (gestureAxis.current === "pending") {
+      if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < 6) return;
+      gestureAxis.current =
+        Math.abs(deltaX) > Math.abs(deltaY) ? "horizontal" : "vertical";
+    }
+
+    if (gestureAxis.current === "vertical") return;
+
+    setIsDown(true);
+    setDrag(deltaX);
   };
   const onTouchEnd = () => {
+    const wasHorizontal = gestureAxis.current === "horizontal";
+    gestureAxis.current = "pending";
     setIsDown(false);
+    if (!wasHorizontal) {
+      setDrag(0);
+      return;
+    }
     if (t <= -0.5) goNext();
     else if (t >= 0.5) goPrev();
     else setDrag(0);
+  };
+  const onTouchCancel = () => {
+    gestureAxis.current = "pending";
+    setIsDown(false);
+    setDrag(0);
   };
 
   const activeItem = items[active];
@@ -114,17 +159,19 @@ function MobileOrbit({ items, initialIndex = 1 }: { items: OrbitItem[]; initialI
     <div className="sol-mobile-orbit-root">
       {/* Orbit + pills + active card (all in one container) */}
       <div
-        style={{ position: "relative", width: "100%", height: 456, overflow: "hidden", touchAction: "none" }}
+        ref={orbitRef}
+        style={{ position: "relative", width: "100%", height: 456, overflow: "hidden", touchAction: "pan-y" }}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
+        onTouchCancel={onTouchCancel}
       >
         {/* Platform circle image */}
         <img
           src="/solutions/platform-center-v2.png"
           alt=""
           style={{
-            position: "absolute", left: 180, top: 148,
+            position: "absolute", left: "50%", top: 148,
             width: 248, height: 248,
             transform: "translate(-50%, -50%)",
             pointerEvents: "none", zIndex: 1,
