@@ -9,6 +9,12 @@ import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
 const WAVE_RING_COUNT = 15;
 
+type ConfigurablePlatformCard = (typeof platformCards)[number] & {
+  mobileLabel?: string;
+};
+
+const defaultPlatformCards: ConfigurablePlatformCard[] = platformCards;
+
 const TickIcon: FunctionComponent = () => (
   <span className="sol-configurable-tick-icon-wrap" aria-hidden>
     <svg
@@ -38,8 +44,8 @@ type ConfigurablePlatformSectionProps = {
   mobileDescription?: string;
   features?: string[];
   mobileFeatures?: string[];
-  cards?: ((typeof platformCards)[number] & { mobileLabel?: string })[];
-  mobileCards?: ((typeof platformCards)[number] & { mobileLabel?: string })[];
+  cards?: ConfigurablePlatformCard[];
+  mobileCards?: ConfigurablePlatformCard[];
 };
 
 const ConfigurablePlatformSection: FunctionComponent<ConfigurablePlatformSectionProps> = ({
@@ -49,7 +55,7 @@ const ConfigurablePlatformSection: FunctionComponent<ConfigurablePlatformSection
   mobileDescription,
   features = platformFeatures,
   mobileFeatures,
-  cards = platformCards,
+  cards = defaultPlatformCards,
   mobileCards,
 }) => (
   <section className="sol-section sol-configurable-section">
