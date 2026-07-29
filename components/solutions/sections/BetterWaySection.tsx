@@ -97,22 +97,35 @@ type BetterWaySectionProps = {
   heading?: string;
   mobileHeading?: string;
   description?: string;
+  mobileDescription?: string;
   leftTitle?: string;
+  mobileLeftTitle?: string;
   rightTitle?: string;
+  mobileRightTitle?: string;
   leftItems?: string[];
   rightItems?: string[];
   mobileLeftItems?: string[];
   mobileRightItems?: string[];
   footerItems?: string[];
+  mobileFooterItems?: string[];
 };
 
-const TickIcon: FunctionComponent = () => (
+const TickIcon: FunctionComponent<{ variant?: "light" | "blue" }> = ({ variant = "light" }) => (
   <span className="sol-better-way-tick-icon" aria-hidden>
     <img
       src="/solutions/better-way/icon-tick.svg"
       alt=""
       width={32}
       height={32}
+      className="sol-copy-desktop"
+    />
+    {/* Mobile (Figma 2329:3222): tile comes from the span bg; chevron colors differ per card */}
+    <img
+      src={`/solutions/better-way/tick-chevron-${variant}.svg`}
+      alt=""
+      width={22}
+      height={22}
+      className="sol-copy-mobile"
     />
   </span>
 );
@@ -121,13 +134,17 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
   heading = "Stuck Between Rigid Tools and Building Your Own?",
   mobileHeading,
   description = "Until now, you had two bad options: software that does not fit, or a custom build that never ends. DGlide is the 3rd: Best of All Worlds.",
+  mobileDescription,
   leftTitle = "Fixed-Category Tools",
+  mobileLeftTitle,
   rightTitle = "Building Your Own",
+  mobileRightTitle,
   leftItems = rigidToolsItems,
   rightItems = customBuildItems,
   mobileLeftItems,
   mobileRightItems,
   footerItems = betterWayFooterItems,
+  mobileFooterItems,
 }) => (
   <section className="sol-section sol-better-way-section">
     <SolutionsContainer>
@@ -139,7 +156,8 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
               {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
             </h2>
             <p className="sol-better-way-description">
-              {description}
+              <span className={mobileDescription ? "sol-copy-desktop" : ""}>{description}</span>
+              {mobileDescription ? <span className="sol-copy-mobile">{mobileDescription}</span> : null}
             </p>
           </header>
         </ScrollReveal>
@@ -162,7 +180,8 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
                       aria-hidden
                     />
                     <h3 className="sol-better-way-side-title">
-                      {leftTitle}
+                      <span className={mobileLeftTitle ? "sol-copy-desktop" : ""}>{leftTitle}</span>
+                      {mobileLeftTitle ? <span className="sol-copy-mobile">{mobileLeftTitle}</span> : null}
                     </h3>
                   </div>
                   <div className="sol-better-way-side-list">
@@ -196,16 +215,16 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
 
               <div className="sol-better-way-mobile-core">
                 <Image
-                  src="/competitor/dglide-logo-white.png"
+                  src="/solutions/better-way/dglide-logo-white-figma.png"
                   alt="DGlide"
-                  width={132}
-                  height={32}
+                  width={119}
+                  height={21}
                   className="sol-better-way-mobile-logo"
                 />
                 <div className="sol-better-way-mobile-core-list">
-                  {CENTER_ITEMS.map((item) => (
+                  {(mobileFooterItems ?? CENTER_ITEMS).map((item) => (
                     <div key={item} className="sol-better-way-mobile-core-item">
-                      <TickIcon />
+                      <TickIcon variant="blue" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -225,7 +244,8 @@ const BetterWaySection: FunctionComponent<BetterWaySectionProps> = ({
                       aria-hidden
                     />
                     <h3 className="sol-better-way-side-title">
-                      {rightTitle}
+                      <span className={mobileRightTitle ? "sol-copy-desktop" : ""}>{rightTitle}</span>
+                      {mobileRightTitle ? <span className="sol-copy-mobile">{mobileRightTitle}</span> : null}
                     </h3>
                   </div>
                   <div className="sol-better-way-side-list">

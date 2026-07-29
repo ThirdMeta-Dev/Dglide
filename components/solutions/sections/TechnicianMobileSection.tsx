@@ -12,7 +12,10 @@ type TechnicianMobileSectionProps = {
   heading?: string;
   mobileHeading?: string;
   description?: string;
+  mobileDescription?: string;
   features?: typeof technicianFeatures;
+  mobileFeatures?: typeof technicianFeatures;
+  mobileInitialIndex?: number;
   imageSrc?: string;
   imageAlt?: string;
   sectionClassName?: string;
@@ -22,13 +25,25 @@ const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> =
   heading = "Stop Running Service Out of an Inbox",
   mobileHeading,
   description = "Agents shouldn't dig through email and chat to know what's next. DGlide gives every agent one clear workspace for daily service execution.",
+  mobileDescription,
   features = technicianFeatures,
+  mobileFeatures,
+  mobileInitialIndex,
   imageSrc = "/solutions/agent-workspace.png",
   imageAlt = "DGlide agent workspace",
   sectionClassName = "",
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [fillProgress, setFillProgress] = useState(0);
+
+  useEffect(() => {
+    if (
+      mobileInitialIndex !== undefined &&
+      window.matchMedia("(max-width: 767px)").matches
+    ) {
+      setActiveIndex(mobileInitialIndex);
+    }
+  }, [mobileInitialIndex]);
 
   useEffect(() => {
     let startTime: number | null = null;
@@ -61,7 +76,10 @@ const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> =
                 <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
                 {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
               </h2>
-              <p className="sol-technician-description">{description}</p>
+              <p className="sol-technician-description">
+                <span className={mobileDescription ? "sol-copy-desktop" : ""}>{description}</span>
+                {mobileDescription ? <span className="sol-copy-mobile">{mobileDescription}</span> : null}
+              </p>
             </header>
           </ScrollReveal>
 
@@ -100,12 +118,18 @@ const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> =
                                     aria-hidden
                                   />
                                   <h3 className="sol-technician-feature-title sol-technician-feature-title--active">
-                                    {feature.title}
+                                    <span className={mobileFeatures ? "sol-copy-desktop" : ""}>{feature.title}</span>
+                                    {mobileFeatures ? (
+                                      <span className="sol-copy-mobile">{mobileFeatures[index]?.title ?? feature.title}</span>
+                                    ) : null}
                                   </h3>
                                 </div>
                                 {feature.description && (
                                   <p className="sol-technician-feature-description">
-                                    {feature.description}
+                                    <span className={mobileFeatures ? "sol-copy-desktop" : ""}>{feature.description}</span>
+                                    {mobileFeatures ? (
+                                      <span className="sol-copy-mobile">{mobileFeatures[index]?.description ?? feature.description}</span>
+                                    ) : null}
                                   </p>
                                 )}
                               </div>
@@ -126,7 +150,10 @@ const TechnicianMobileSection: FunctionComponent<TechnicianMobileSectionProps> =
                                 aria-hidden
                               />
                               <span className="sol-technician-feature-title">
-                                {feature.title}
+                                <span className={mobileFeatures ? "sol-copy-desktop" : ""}>{feature.title}</span>
+                                {mobileFeatures ? (
+                                  <span className="sol-copy-mobile">{mobileFeatures[index]?.title ?? feature.title}</span>
+                                ) : null}
                               </span>
                             </button>
                           )}

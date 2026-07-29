@@ -30,7 +30,7 @@ import {
   fsmWorkflowChangeTitle, fsmWorkflowChangeSubtitle, fsmWorkflowChangeBullets, fsmWorkflowTimelineItems,
   fsmImprovesHeading, fsmImprovesFeatures,
   fsmRealOpsHeading, fsmRealOpsChallengeQuote, fsmRealOpsChallengeBullets, fsmRealOpsMetricsDescription, fsmRealOpsMetrics, fsmRealOpsFooterQuote, fsmRealOpsSolutionItems,
-  fsmConfigurableHeading, fsmConfigurableDescription, fsmConfigurableFeatures, fsmConfigurableCards,
+  fsmConfigurableHeading, fsmConfigurableDescription, fsmConfigurableFeatures, fsmConfigurableMobileFeatures, fsmConfigurableCards,
   fsmGoLiveHeading, fsmGoLiveDescription, fsmGoLiveCards,
   fsmIntegrationsHeading, fsmIntegrationsDescription,
   fsmFinalCtaEyebrow, fsmFinalCtaHeading, fsmFinalCtaButton,
@@ -45,18 +45,26 @@ export const metadata: Metadata = {
 
 export default function FSMPage() {
   return (
-    <AnimatedPublicPage className="solutions-page solutions-page--fsm" staticFirstCount={2}>
+    <AnimatedPublicPage className="solutions-page solutions-page--fsm solutions-page--shared-mobile-ui" staticFirstCount={2}>
       <FSMHeroSection
         eyebrow={fsmHeroEyebrow}
         heading={fsmHeroHeading}
         description={fsmHeroDescription}
+        mobileHeading="Field Service That Fits Your Real Operations"
+        mobileDescription="DGlide FSM helps service-heavy teams run entire workflow in one place."
         bullets={fsmHeroBullets}
+        mobileBullets={[
+          "Work orders, scheduling, and field tracking",
+          "Built for machinery and service-heavy teams",
+          "Configurable workflows without custom build",
+        ]}
         primaryCta={fsmHeroPrimaryCta}
         secondaryCta={fsmHeroSecondaryCta}
         mobilePrimaryCta="Pick your demo time"
         mobileSecondaryCta="Explore The Platform"
         secondaryScrollTargetId="core-capabilities"
         imageSrc="/solutions/fsm-hero-illustration.png"
+        mobileImageSrc="/solutions/fsm-hero-mobile.png"
         imageAlt="DGlide FSM — field service management dashboard"
       />
       <SolutionsSectionNav items={fsmNavItems} />
@@ -102,6 +110,7 @@ export default function FSMPage() {
       />
       <TechnicianMobileSection
         heading={fsmTechnicianHeading}
+        mobileHeading="Give Technicians a Mobile Workflow, Not Phone Calls"
         description={fsmTechnicianDescription}
         features={fsmTechnicianFeatures}
       />
@@ -115,7 +124,7 @@ export default function FSMPage() {
         rightItems={fsmCustomBuildItems}
         mobileLeftItems={[
           "Fast to start. But difficult to adapt",
-          "Cheap at start, expensive later",
+          "Cheap at start, Expensive later",
           "Fits the category, not your business.",
         ]}
         mobileRightItems={[
@@ -154,12 +163,15 @@ export default function FSMPage() {
         metricsDescription={fsmRealOpsMetricsDescription}
         metrics={fsmRealOpsMetrics}
         footerQuote={fsmRealOpsFooterQuote}
+        mobileFooterQuote={'"Now I open my phone and see everything in one place. That changed how I run the company."'}
+        mobileFooterAttribution="- Director, Prompt Lasers"
         solutionItems={fsmRealOpsSolutionItems}
       />
       <ConfigurablePlatformSection
         heading={fsmConfigurableHeading}
         description={fsmConfigurableDescription}
         features={fsmConfigurableFeatures}
+        mobileFeatures={fsmConfigurableMobileFeatures}
         cards={fsmConfigurableCards}
       />
       <GoLiveFasterSection
@@ -170,6 +182,7 @@ export default function FSMPage() {
       <IntegrationsHubSection
         heading={fsmIntegrationsHeading}
         description={fsmIntegrationsDescription}
+        mobileDescription="DGlide is designed to work with your existing business environment."
         nodes={integrationNodes}
       />
       <SolutionsFinalCTA

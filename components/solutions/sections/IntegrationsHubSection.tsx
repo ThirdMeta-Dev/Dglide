@@ -11,26 +11,45 @@ type IntegrationNode = { label: string; icon: string };
 
 type IntegrationsHubSectionProps = {
   heading?: string;
+  mobileHeading?: string;
   description?: string;
+  mobileDescription?: string;
   nodes?: typeof integrationNodes;
+  mobileNodes?: typeof integrationNodes;
   centerImageSrc?: string;
 };
 
 const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = ({
   heading = "Connect ITSM With the Systems You Already Use",
+  mobileHeading,
   description = integrationSectionDescription,
+  mobileDescription,
   nodes = integrationNodes,
+  mobileNodes,
   centerImageSrc = "/solutions/integrations-hub-center-v3.png",
-}) => (
+}) => {
+  const resolvedMobileNodes = mobileNodes ?? nodes;
+
+  return (
   <section id="integrations" className="sol-section sol-integrations-section">
     <SolutionsContainer>
       <div className="sol-integrations-inner">
         <header className="sol-integrations-header">
           <ScrollReveal direction="up" style={{ width: "100%" }}>
-            <h2 className="sol-integrations-heading">{heading}</h2>
+            <h2 className="sol-integrations-heading">
+              <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+              {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
+            </h2>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.1} style={{ width: "100%" }}>
-            <p className="sol-integrations-description">{description}</p>
+            <p className="sol-integrations-description">
+              <span className={mobileDescription ? "sol-copy-desktop" : ""}>
+                {description}
+              </span>
+              {mobileDescription ? (
+                <span className="sol-copy-mobile">{mobileDescription}</span>
+              ) : null}
+            </p>
           </ScrollReveal>
         </header>
 
@@ -81,7 +100,7 @@ const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = (
         <div className="sol-integrations-mobile">
           {/* Top pills (left group) */}
           <div className="sol-int-m-pills">
-            {nodes.left.map((node: IntegrationNode, i: number) => (
+            {resolvedMobileNodes.left.map((node: IntegrationNode, i: number) => (
               <div key={`m-top-${i}`} className="sol-int-m-pill">
                 <span className="sol-int-m-pill-icon" aria-hidden>
                   <Image src={node.icon} alt="" width={52} height={52} style={{ objectFit: "contain" }} />
@@ -104,7 +123,7 @@ const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = (
 
           {/* Bottom pills (right group) */}
           <div className="sol-int-m-pills">
-            {nodes.right.map((node: IntegrationNode, i: number) => (
+            {resolvedMobileNodes.right.map((node: IntegrationNode, i: number) => (
               <div key={`m-bot-${i}`} className="sol-int-m-pill">
                 <span className="sol-int-m-pill-icon" aria-hidden>
                   <Image src={node.icon} alt="" width={52} height={52} style={{ objectFit: "contain" }} />
@@ -117,6 +136,7 @@ const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = (
       </div>
     </SolutionsContainer>
   </section>
-);
+  );
+};
 
 export default IntegrationsHubSection;

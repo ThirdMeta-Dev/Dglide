@@ -12,7 +12,8 @@ const ProblemCard: FunctionComponent<{
   icon: string;
   title: string;
   description: string;
-}> = ({ icon, title, description }) => (
+  mobileDescription?: string;
+}> = ({ icon, title, description, mobileDescription }) => (
   <article className="sol-problem-card">
     <div className="sol-problem-card-inner">
       <img
@@ -25,7 +26,10 @@ const ProblemCard: FunctionComponent<{
       />
       <div className="sol-problem-card-text">
         <h3 className="sol-problem-card-title">{title}</h3>
-        <p className="sol-problem-card-description">{description}</p>
+        <p className="sol-problem-card-description">
+          <span className={mobileDescription ? "sol-copy-desktop" : ""}>{description}</span>
+          {mobileDescription ? <span className="sol-copy-mobile">{mobileDescription}</span> : null}
+        </p>
       </div>
     </div>
   </article>
@@ -37,9 +41,11 @@ type FieldServiceProblemSectionProps = {
   heading?: string;
   mobileHeading?: string;
   description?: string;
-  cards?: typeof problemCards;
+  cards?: ((typeof problemCards)[number] & { mobileDescription?: string })[];
   footerText?: string;
+  mobileFooterText?: string;
   ctaLabel?: string;
+  mobileCtaLabel?: string;
 };
 
 const FieldServiceProblemSection: FunctionComponent<FieldServiceProblemSectionProps> = ({
@@ -50,7 +56,9 @@ const FieldServiceProblemSection: FunctionComponent<FieldServiceProblemSectionPr
   description = "When your system only handles tickets, everything around them falls back into email and guesswork.",
   cards = problemCards,
   footerText = "Your team isn't slow. Your tool just stops where your real workflows begin.",
+  mobileFooterText,
   ctaLabel = "Explore DGlide For You",
+  mobileCtaLabel,
 }) => {
   const router = useRouter();
 
@@ -89,13 +97,15 @@ const FieldServiceProblemSection: FunctionComponent<FieldServiceProblemSectionPr
 
           <div className="sol-problem-footer">
             <p className="sol-problem-footer-text">
-              {footerText}
+              <span className={mobileFooterText ? "sol-copy-desktop" : ""}>{footerText}</span>
+              {mobileFooterText ? <span className="sol-copy-mobile">{mobileFooterText}</span> : null}
             </p>
             <SolutionsButton
               variant="get-started-now"
               onClick={() => scrollToContact(router)}
             >
-              {ctaLabel}
+              <span className={mobileCtaLabel ? "sol-copy-desktop" : ""}>{ctaLabel}</span>
+              {mobileCtaLabel ? <span className="sol-copy-mobile">{mobileCtaLabel}</span> : null}
             </SolutionsButton>
           </div>
         </div>

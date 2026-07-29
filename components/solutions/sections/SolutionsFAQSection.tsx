@@ -1,6 +1,6 @@
 "use client";
 
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { faqItems } from "@/data/solutionsPageData";
@@ -14,16 +14,36 @@ type FaqItem = {
 
 type SolutionsFAQSectionProps = {
   items?: FaqItem[];
+  mobileItems?: FaqItem[];
   defaultOpenIndex?: number;
+  mobileDefaultOpenIndex?: number;
   heading?: string;
+  mobileHeading?: string;
 };
 
 const SolutionsFAQSection: FunctionComponent<SolutionsFAQSectionProps> = ({
   items = faqItems,
+  mobileItems,
   defaultOpenIndex = 1,
+  mobileDefaultOpenIndex,
   heading = "Frequently Asked questions",
+  mobileHeading,
 }) => {
   const [openIndex, setOpenIndex] = useState(defaultOpenIndex);
+  const [isMobile, setIsMobile] = useState(false);
+  const resolvedItems = isMobile && mobileItems ? mobileItems : items;
+
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 767px)");
+    const syncViewport = () => setIsMobile(query.matches);
+    syncViewport();
+    query.addEventListener("change", syncViewport);
+    return () => query.removeEventListener("change", syncViewport);
+  }, []);
+
+  useEffect(() => {
+    setOpenIndex(isMobile ? (mobileDefaultOpenIndex ?? defaultOpenIndex) : defaultOpenIndex);
+  }, [defaultOpenIndex, isMobile, mobileDefaultOpenIndex]);
 
   return (
     <section className="sol-section sol-faq-section">
@@ -33,12 +53,15 @@ const SolutionsFAQSection: FunctionComponent<SolutionsFAQSectionProps> = ({
 
           <div className="sol-faq-inner">
             <ScrollReveal direction="up">
-              <h2 className="sol-faq-heading">{heading}</h2>
+              <h2 className="sol-faq-heading">
+                <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+                {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
+              </h2>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.1}>
             <div className="sol-faq-list">
-              {items.map((item, index) => {
+              {resolvedItems.map((item, index) => {
                 const isOpen = openIndex === index;
 
                 return (
@@ -75,7 +98,7 @@ const SolutionsFAQSection: FunctionComponent<SolutionsFAQSectionProps> = ({
                       ) : null}
                     </AnimatePresence>
 
-                    {index < items.length - 1 && (
+                    {index < resolvedItems.length - 1 && (
                       <span className="sol-faq-divider" aria-hidden />
                     )}
                   </motion.div>

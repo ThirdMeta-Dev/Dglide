@@ -40,14 +40,20 @@ const FinalCtaArrow: FunctionComponent = () => (
 
 type SolutionsFinalCTAProps = {
   eyebrow?: string;
+  mobileEyebrow?: string;
   heading?: string;
+  mobileHeading?: string;
   buttonLabel?: string;
+  mobileButtonLabel?: string;
 };
 
 const SolutionsFinalCTA: FunctionComponent<SolutionsFinalCTAProps> = ({
   eyebrow = finalCtaEyebrow,
+  mobileEyebrow,
   heading = finalCtaHeading,
+  mobileHeading,
   buttonLabel = "Get A Free Demo!",
+  mobileButtonLabel,
 }) => {
   const router = useRouter();
 
@@ -71,13 +77,17 @@ const SolutionsFinalCTA: FunctionComponent<SolutionsFinalCTAProps> = ({
                 <div className="sol-final-cta-eyebrow">
                   <span className="sol-final-cta-eyebrow-bar" aria-hidden />
                   <span className="sol-final-cta-eyebrow-text">
-                    {eyebrow}
+                    <span className={mobileEyebrow ? "sol-copy-desktop" : ""}>{eyebrow}</span>
+                    {mobileEyebrow ? <span className="sol-copy-mobile">{mobileEyebrow}</span> : null}
                   </span>
                 </div>
               </ScrollReveal>
 
               <ScrollReveal direction="up" delay={0.1}>
-                <h2 className="sol-final-cta-heading">{heading}</h2>
+                <h2 className="sol-final-cta-heading">
+                  <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+                  {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
+                </h2>
               </ScrollReveal>
             </div>
 
@@ -87,7 +97,10 @@ const SolutionsFinalCTA: FunctionComponent<SolutionsFinalCTAProps> = ({
                 onClick={() => scrollToContact(router)}
                 className="sol-final-cta-button"
               >
-                <span>{buttonLabel}</span>
+                <span>
+                  <span className={mobileButtonLabel ? "sol-copy-desktop" : ""}>{buttonLabel}</span>
+                  {mobileButtonLabel ? <span className="sol-copy-mobile">{mobileButtonLabel}</span> : null}
+                </span>
                 <FinalCtaArrow />
               </button>
             </ScrollReveal>

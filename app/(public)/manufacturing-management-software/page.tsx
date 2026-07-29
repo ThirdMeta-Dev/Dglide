@@ -20,11 +20,15 @@ import {
   manufacturingBetterWay,
   manufacturingBuiltFor,
   manufacturingCapabilitiesHeading,
+  manufacturingCapabilitiesMobileHeading,
   manufacturingCapabilityItems,
+  manufacturingCapabilityMobileItems,
   manufacturingFaqItems,
   manufacturingGoLive,
   manufacturingHero,
   manufacturingIntegrationNodes,
+  manufacturingMobileFaqItems,
+  manufacturingMobileIntegrationNodes,
   manufacturingNavItems,
   manufacturingOperator,
   manufacturingPlatform,
@@ -58,16 +62,21 @@ export const metadata: Metadata = {
 
 export default function ManufacturingManagementSoftwarePage() {
   return (
-    <AnimatedPublicPage className="solutions-page solutions-page--manufacturing crm-solutions-page manufacturing-solutions-page" staticFirstCount={2}>
+    <AnimatedPublicPage className="solutions-page solutions-page--manufacturing solutions-page--shared-mobile-ui crm-solutions-page manufacturing-solutions-page" staticFirstCount={2}>
       <FSMHeroSection
         eyebrow={manufacturingHero.eyebrow}
+        mobileEyebrow={manufacturingHero.mobileEyebrow}
         heading={manufacturingHero.heading}
+        mobileHeading={manufacturingHero.mobileHeading}
         description={manufacturingHero.description}
+        mobileDescription={manufacturingHero.mobileDescription}
         bullets={manufacturingHero.bullets}
+        mobileBullets={manufacturingHero.mobileBullets}
         primaryCta={manufacturingHero.primaryCta}
         secondaryCta={manufacturingHero.secondaryCta}
         secondaryScrollTargetId="core-capabilities"
         imageSrc="/solutions/manufacturing/hero.webp"
+        mobileImageSrc="/solutions/manufacturing/hero-mobile.png"
         imageAlt="DGlide manufacturing process management dashboard"
         imageClassName="manufacturing-hero-image"
       />
@@ -76,37 +85,59 @@ export default function ManufacturingManagementSoftwarePage() {
         sectionId="manufacturing-problem"
         sectionClassName="sol-problem-section--crm"
         heading={manufacturingProblem.heading}
+        mobileHeading={manufacturingProblem.mobileHeading}
         description={manufacturingProblem.description}
         cards={manufacturingProblem.cards}
         footerText={manufacturingProblem.footerText}
+        mobileFooterText={manufacturingProblem.mobileFooterText}
         ctaLabel={manufacturingProblem.ctaLabel}
+        mobileCtaLabel={manufacturingProblem.mobileCtaLabel}
       />
       <BuiltForSection
         heading={manufacturingBuiltFor.heading}
+        mobileHeading={manufacturingBuiltFor.mobileHeading}
         description={manufacturingBuiltFor.description}
         centerImage="/solutions/manufacturing/audience.webp"
         fitItems={manufacturingBuiltFor.fitItems}
+        mobileFitItems={manufacturingBuiltFor.mobileFitItems}
         industryItems={manufacturingBuiltFor.industryItems}
+        mobileIndustryItems={manufacturingBuiltFor.mobileIndustryItems}
+        mobileInitialIndex={manufacturingBuiltFor.mobileInitialIndex}
       />
       <OnePlatformSection
         heading={manufacturingPlatform.heading}
+        mobileHeading={manufacturingPlatform.mobileHeading}
         description={manufacturingPlatform.description}
         features={manufacturingPlatform.features}
+        mobileFeatures={manufacturingPlatform.mobileFeatures}
         orbitItems={manufacturingPlatform.orbitItems}
+        mobileOrbitItems={manufacturingPlatform.mobileOrbitItems}
+        mobileInitialId={manufacturingPlatform.mobileInitialId}
         footerText={manufacturingPlatform.footerText}
+        mobileFooterText={manufacturingPlatform.mobileFooterText}
         ctaLabel={manufacturingPlatform.ctaLabel}
       />
       <ServiceWorkflowSection
         heading={manufacturingWorkflow.heading}
         steps={manufacturingWorkflow.steps}
+        mobileStepDescriptions={manufacturingWorkflow.mobileStepDescriptions}
         ctaLabel={manufacturingWorkflow.ctaLabel}
         sectionId="what-process-management-does"
       />
-      <CoreCapabilitiesSection heading={manufacturingCapabilitiesHeading} items={manufacturingCapabilityItems} />
+      <CoreCapabilitiesSection
+        heading={manufacturingCapabilitiesHeading}
+        mobileHeading={manufacturingCapabilitiesMobileHeading}
+        items={manufacturingCapabilityItems}
+        mobileItems={manufacturingCapabilityMobileItems}
+        mobileInitialIndex={1}
+      />
       <TechnicianMobileSection
         heading={manufacturingOperator.heading}
+        mobileHeading={manufacturingOperator.mobileHeading}
         description={manufacturingOperator.description}
         features={manufacturingOperator.features}
+        mobileFeatures={manufacturingOperator.mobileFeatures}
+        mobileInitialIndex={manufacturingOperator.mobileInitialIndex}
         imageSrc="/solutions/manufacturing/operator.webp"
         imageAlt="DGlide operator workorder and production task workflow"
         sectionClassName="sol-technician-section--crm"
@@ -115,23 +146,41 @@ export default function ManufacturingManagementSoftwarePage() {
       <WorkflowChangeSection
         sectionId="core-manufacturing-capabilities"
         title={manufacturingWorkflowChange.title}
+        mobileTitle={manufacturingWorkflowChange.mobileTitle}
         subtitle={manufacturingWorkflowChange.subtitle}
         bullets={manufacturingWorkflowChange.bullets}
+        mobileBullets={manufacturingWorkflowChange.bullets}
         timelineItems={manufacturingWorkflowChange.timelineItems}
+        mobileTimelineItems={manufacturingWorkflowChange.timelineItems}
+        mobileInitialIndex={manufacturingWorkflowChange.mobileInitialIndex}
       />
       <RealOperationsSection {...manufacturingRealOperations} />
-      <GoLiveFasterSection heading={manufacturingGoLive.heading} description={manufacturingGoLive.description} cards={manufacturingGoLive.cards} />
+      <GoLiveFasterSection
+        heading={manufacturingGoLive.heading}
+        mobileHeading={manufacturingGoLive.mobileHeading}
+        description={manufacturingGoLive.description}
+        cards={manufacturingGoLive.cards}
+        mobileCards={manufacturingGoLive.mobileCards}
+      />
       <IntegrationsHubSection
         heading="Connect Process Management With the Systems You Already Use"
+        mobileHeading="Connect Process Management to Your Existing Systems"
         description="DGlide integrates with your existing business environment from the start."
+        mobileDescription="DGlide integrates with your existing business environment from the scratch."
         nodes={manufacturingIntegrationNodes}
+        mobileNodes={manufacturingMobileIntegrationNodes}
       />
       <SolutionsFinalCTA
         eyebrow="See It on Your Workflow"
         heading="See DGlide Manufacturing Process Management Live On Your Production"
+        mobileHeading="DGlide Manufacturing Process Management Live "
         buttonLabel="Get A Free Demo!"
       />
-      <SolutionsFAQSection items={manufacturingFaqItems} />
+      <SolutionsFAQSection
+        items={manufacturingFaqItems}
+        mobileItems={manufacturingMobileFaqItems}
+        mobileDefaultOpenIndex={1}
+      />
     </AnimatedPublicPage>
   );
 }

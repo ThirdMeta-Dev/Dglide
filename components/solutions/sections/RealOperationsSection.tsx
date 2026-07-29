@@ -63,6 +63,8 @@ type RealOperationsSectionProps = {
   metricsDescription?: string;
   metrics?: { value: string; label: string }[];
   footerQuote?: string;
+  mobileFooterQuote?: string;
+  mobileFooterAttribution?: string;
   solutionItems?: string[];
 };
 
@@ -105,6 +107,8 @@ const RealOperationsSection: FunctionComponent<RealOperationsSectionProps> = ({
   metricsDescription = realOpsMetricsDescription,
   metrics = realOpsMetrics,
   footerQuote = realOpsFooterQuote,
+  mobileFooterQuote,
+  mobileFooterAttribution,
   solutionItems = realOpsSolutionItems,
 }) => (
   <section className="sol-section sol-real-ops-section">
@@ -163,7 +167,17 @@ const RealOperationsSection: FunctionComponent<RealOperationsSectionProps> = ({
               <div className="sol-real-ops-footer-quote">
                 <span className="sol-real-ops-footer-avatar" aria-hidden />
                 <blockquote className="sol-real-ops-footer-text">
-                  {footerQuote}
+                  <span className={mobileFooterQuote ? "sol-copy-desktop" : ""}>{footerQuote}</span>
+                  {mobileFooterQuote ? (
+                    <span className="sol-copy-mobile">
+                      {mobileFooterQuote}
+                      {mobileFooterAttribution ? (
+                        <span className="sol-real-ops-footer-attribution">
+                          {mobileFooterAttribution}
+                        </span>
+                      ) : null}
+                    </span>
+                  ) : null}
                 </blockquote>
               </div>
             </div>

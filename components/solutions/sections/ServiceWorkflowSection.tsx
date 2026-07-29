@@ -21,6 +21,7 @@ type ServiceWorkflowSectionProps = {
   steps?: WorkflowStep[];
   mobileStepDescriptions?: string[];
   ctaLabel?: string;
+  mobileCtaLabel?: string;
   showCta?: boolean;
   sectionId?: string;
 };
@@ -42,6 +43,7 @@ const ServiceWorkflowSection: FunctionComponent<ServiceWorkflowSectionProps> = (
   steps = defaultWorkflowSteps,
   mobileStepDescriptions,
   ctaLabel = "See this workflow in action",
+  mobileCtaLabel,
   showCta = true,
   sectionId,
 }) => {
@@ -142,7 +144,8 @@ const ServiceWorkflowSection: FunctionComponent<ServiceWorkflowSectionProps> = (
                   variant="workflow-cta"
                   onClick={() => scrollToContact(router)}
                 >
-                  {ctaLabel}
+                  <span className={mobileCtaLabel ? "sol-copy-desktop" : ""}>{ctaLabel}</span>
+                  {mobileCtaLabel ? <span className="sol-copy-mobile">{mobileCtaLabel}</span> : null}
                 </SolutionsButton>
               </div>
             )}

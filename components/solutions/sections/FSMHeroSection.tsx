@@ -16,6 +16,7 @@ const DEFAULT_BULLETS = [
 
 type FSMHeroSectionProps = {
   eyebrow?: string;
+  mobileEyebrow?: string;
   heading?: string;
   description?: string;
   mobileHeading?: string;
@@ -29,6 +30,7 @@ type FSMHeroSectionProps = {
   /* When set, the secondary button scrolls to this element id instead of the contact form */
   secondaryScrollTargetId?: string;
   imageSrc?: string;
+  mobileImageSrc?: string;
   imageAlt?: string;
   imageClassName?: string;
   actionsInline?: boolean;
@@ -37,6 +39,7 @@ type FSMHeroSectionProps = {
 
 const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
   eyebrow = "IT & Service Management",
+  mobileEyebrow,
   heading = "Service Management That Fits Your Workflows, Not Just Your Tickets",
   description = "DGlide ITSM helps service, IT, and internal teams run requests, approvals, SLAs, and resolution in one configurable system.",
   mobileHeading,
@@ -49,6 +52,7 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
   mobileSecondaryCta,
   secondaryScrollTargetId,
   imageSrc = "/solutions/itsm-hero-illustration.png",
+  mobileImageSrc,
   imageAlt = "DGlide service management dashboard",
   imageClassName = "",
   actionsInline = false,
@@ -108,7 +112,10 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
             <ScrollReveal direction="up" delay={0}>
               <div className="sol-hero-eyebrow">
                 <span className="sol-hero-eyebrow-bar" aria-hidden />
-                <span className="sol-hero-eyebrow-text">{eyebrow}</span>
+                <span className="sol-hero-eyebrow-text">
+                  <span className={mobileEyebrow ? "sol-copy-desktop" : ""}>{eyebrow}</span>
+                  {mobileEyebrow ? <span className="sol-copy-mobile">{mobileEyebrow}</span> : null}
+                </span>
               </div>
             </ScrollReveal>
 
@@ -154,9 +161,19 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
               alt={imageAlt}
               width={1024}
               height={732}
-              className={`w-full max-w-[560px] h-auto object-contain${imageClassName ? ` ${imageClassName}` : ""}`}
+              className={`sol-hero-image${mobileImageSrc ? " sol-hero-image--desktop" : ""} w-full max-w-[560px] h-auto object-contain${imageClassName ? ` ${imageClassName}` : ""}`}
               priority
             />
+            {mobileImageSrc ? (
+              <Image
+                src={mobileImageSrc}
+                alt={imageAlt}
+                width={1448}
+                height={1086}
+                className={`sol-hero-image sol-hero-image--mobile w-full h-auto object-cover${imageClassName ? ` ${imageClassName}` : ""}`}
+                priority
+              />
+            ) : null}
           </ScrollReveal>
         </div>
       </SolutionsContainer>

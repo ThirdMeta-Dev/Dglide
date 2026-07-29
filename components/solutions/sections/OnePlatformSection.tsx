@@ -36,7 +36,7 @@ type OrbitItem = {
   id: string; label: string; icon: string; description: string;
 };
 
-function MobileOrbit({ items }: { items: OrbitItem[] }) {
+function MobileOrbit({ items, initialIndex = 1 }: { items: OrbitItem[]; initialIndex?: number }) {
   const N = items.length;
 
   // Fixed pill center positions
@@ -49,7 +49,7 @@ function MobileOrbit({ items }: { items: OrbitItem[] }) {
   const lerp = (a: {x:number;y:number}, b: {x:number;y:number}, u: number) =>
     ({ x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u });
 
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(Math.min(Math.max(initialIndex, 0), Math.max(N - 1, 0)));
   const [drag,   setDrag]   = useState(0);
   const [isDown, setIsDown] = useState(false);
   const startX = useRef(0);
@@ -234,20 +234,32 @@ type OnePlatformSectionProps = {
   heading?: string;
   mobileHeading?: string;
   description?: string;
+  mobileDescription?: string;
   features?: string[];
+  mobileFeatures?: string[];
   orbitItems?: typeof platformOrbitItems;
+  mobileOrbitItems?: OrbitItem[];
+  mobileInitialId?: string;
   footerText?: string;
+  mobileFooterText?: string;
   ctaLabel?: string;
+  mobileCtaLabel?: string;
 };
 
 const OnePlatformSection: FunctionComponent<OnePlatformSectionProps> = ({
   heading = "One Platform. Your Whole Service Workflow.",
   mobileHeading,
   description = "DGlide ITSM connects every step of a request, from the moment it arrives to the moment it's resolved, in one flow.",
+  mobileDescription,
   features = platformWorkflowFeatures,
+  mobileFeatures,
   orbitItems = platformOrbitItems,
+  mobileOrbitItems,
+  mobileInitialId,
   footerText = "Every workflow can be configured around how your service team actually operates.",
+  mobileFooterText,
   ctaLabel = "Book A Demo",
+  mobileCtaLabel,
 }) => {
   const router = useRouter();
   const [activeNodeId, setActiveNodeId] = useState<string | null>(null);
@@ -255,6 +267,10 @@ const OnePlatformSection: FunctionComponent<OnePlatformSectionProps> = ({
   const [mobileActiveId, setMobileActiveId] = useState<string>(orbitItems[1]?.id ?? orbitItems[0]?.id);
 
   const openNodeId = pinnedNodeId ?? activeNodeId;
+  const resolvedMobileOrbitItems = mobileOrbitItems ?? orbitItems;
+  const mobileOrbitInitialIndex = mobileInitialId
+    ? Math.max(0, resolvedMobileOrbitItems.findIndex((item) => item.id === mobileInitialId))
+    : 1;
 
   const handleNodeClick = (id: string) => {
     setPinnedNodeId((current) => (current === id ? null : id));
@@ -278,7 +294,8 @@ const OnePlatformSection: FunctionComponent<OnePlatformSectionProps> = ({
                 </ScrollReveal>
                 <ScrollReveal direction="up" delay={0.1}>
                   <p className="sol-platform-description">
-                    {description}
+                    <span className={mobileDescription ? "sol-copy-desktop" : ""}>{description}</span>
+                    {mobileDescription ? <span className="sol-copy-mobile">{mobileDescription}</span> : null}
                   </p>
                 </ScrollReveal>
               </header>
@@ -289,14 +306,19 @@ const OnePlatformSection: FunctionComponent<OnePlatformSectionProps> = ({
                     {features.map((label, index) => (
                       <li key={`${label}-${index}`} className="sol-platform-feature">
                         <FeatureIcon />
-                        <span className="sol-platform-feature-text">{label}</span>
+                        <span className="sol-platform-feature-text">
+                          <span className={mobileFeatures ? "sol-copy-desktop" : ""}>{label}</span>
+                          {mobileFeatures ? (
+                            <span className="sol-copy-mobile">{mobileFeatures[index] ?? label}</span>
+                          ) : null}
+                        </span>
                       </li>
                     ))}
                   </ul>
                 </ScrollReveal>
 
                 {/* Mobile draggable orbit — hidden on desktop via CSS */}
-                <MobileOrbit items={orbitItems} />
+                <MobileOrbit items={resolvedMobileOrbitItems} initialIndex={mobileOrbitInitialIndex} />
 
                 <div className="sol-platform-orbit-wrap" style={{ position: "relative" }}>
                   <div
@@ -397,13 +419,15 @@ const OnePlatformSection: FunctionComponent<OnePlatformSectionProps> = ({
 
           <footer className="sol-platform-footer">
             <p className="sol-platform-footer-text">
-              {footerText}
+              <span className={mobileFooterText ? "sol-copy-desktop" : ""}>{footerText}</span>
+              {mobileFooterText ? <span className="sol-copy-mobile">{mobileFooterText}</span> : null}
             </p>
             <SolutionsButton
               variant="get-started-now"
               onClick={() => scrollToContact(router)}
             >
-              {ctaLabel}
+              <span className={mobileCtaLabel ? "sol-copy-desktop" : ""}>{ctaLabel}</span>
+              {mobileCtaLabel ? <span className="sol-copy-mobile">{mobileCtaLabel}</span> : null}
             </SolutionsButton>
           </footer>
         </div>

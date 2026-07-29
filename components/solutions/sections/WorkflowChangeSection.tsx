@@ -151,9 +151,15 @@ function MobileArcCarousel({
         })}
       </div>
 
-      {/* Active title only — centered */}
+      {/* Active title centered; neighbour titles peek in from the edges (Figma 2329:3972) */}
       <div className="sol-wc-arc-labels">
+        <span className="sol-wc-arc-label-side sol-wc-arc-label-side--prev" onClick={goPrev}>
+          {items[prevI].title}
+        </span>
         <span className="sol-wc-arc-label-active">{items[active].title}</span>
+        <span className="sol-wc-arc-label-side sol-wc-arc-label-side--next" onClick={goNext}>
+          {items[nextI].title}
+        </span>
       </div>
 
       {/* Active description */}
@@ -162,13 +168,15 @@ function MobileArcCarousel({
       {/* Navigation — outline left, filled right */}
       <div className="sol-wc-arc-nav">
         <button onClick={goPrev} className="sol-wc-arc-btn sol-wc-arc-btn--prev" aria-label="Previous">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M11 13.5L6.5 9L11 4.5" stroke="#FF7F1C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg width="11.2" height="9" viewBox="0 0 12 10" fill="none">
+            <path d="M11 5H1" stroke="#FF7F1C" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M5 1L1 5L5 9" stroke="#FF7F1C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
         <button onClick={goNext} className="sol-wc-arc-btn sol-wc-arc-btn--next" aria-label="Next">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M7 4.5L11.5 9L7 13.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg width="11.2" height="9" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5H11" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M7 1L11 5L7 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
         <span className="sol-wc-arc-counter">
@@ -184,8 +192,11 @@ type WorkflowChangeSectionProps = {
   title?: string;
   mobileTitle?: string;
   subtitle?: string;
+  mobileSubtitle?: string;
   bullets?: string[];
+  mobileBullets?: string[];
   timelineItems?: typeof workflowTimelineItems;
+  mobileTimelineItems?: typeof workflowTimelineItems;
   sectionId?: string;
   mobileInitialIndex?: number;
 };
@@ -216,8 +227,11 @@ const WorkflowChangeSection: FunctionComponent<WorkflowChangeSectionProps> = ({
   title = workflowChangeTitle,
   mobileTitle,
   subtitle = workflowChangeSubtitle,
+  mobileSubtitle,
   bullets = workflowChangeBullets,
+  mobileBullets,
   timelineItems = workflowTimelineItems,
+  mobileTimelineItems,
   sectionId,
   mobileInitialIndex = 0,
 }) => {
@@ -235,16 +249,20 @@ const WorkflowChangeSection: FunctionComponent<WorkflowChangeSectionProps> = ({
                   {mobileTitle ? <span className="sol-copy-mobile">{mobileTitle}</span> : null}
                 </h2>
                 <p className="sol-workflow-change-subtitle">
-                  {subtitle}
+                  <span className={mobileSubtitle ? "sol-copy-desktop" : ""}>{subtitle}</span>
+                  {mobileSubtitle ? <span className="sol-copy-mobile">{mobileSubtitle}</span> : null}
                 </p>
               </div>
 
               <ul className="sol-workflow-change-bullets">
-                {bullets.map((bullet) => (
+                {bullets.map((bullet, index) => (
                   <li key={bullet} className="sol-workflow-change-bullet">
                     <TickIcon />
                     <span className="sol-workflow-change-bullet-text">
-                      {bullet}
+                      <span className={mobileBullets ? "sol-copy-desktop" : ""}>{bullet}</span>
+                      {mobileBullets ? (
+                        <span className="sol-copy-mobile">{mobileBullets[index] ?? bullet}</span>
+                      ) : null}
                     </span>
                   </li>
                 ))}
@@ -253,7 +271,7 @@ const WorkflowChangeSection: FunctionComponent<WorkflowChangeSectionProps> = ({
           </ScrollReveal>
 
           {/* Mobile arc carousel — hidden on desktop via CSS */}
-          <MobileArcCarousel items={timelineItems} initialIndex={mobileInitialIndex} />
+          <MobileArcCarousel items={mobileTimelineItems ?? timelineItems} initialIndex={mobileInitialIndex} />
 
           <ScrollReveal direction="right">
             <div className="sol-workflow-change-track">

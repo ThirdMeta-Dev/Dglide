@@ -33,16 +33,24 @@ const TickIcon: FunctionComponent = () => (
 
 type ConfigurablePlatformSectionProps = {
   heading?: string;
+  mobileHeading?: string;
   description?: string;
+  mobileDescription?: string;
   features?: string[];
-  cards?: typeof platformCards;
+  mobileFeatures?: string[];
+  cards?: ((typeof platformCards)[number] & { mobileLabel?: string })[];
+  mobileCards?: ((typeof platformCards)[number] & { mobileLabel?: string })[];
 };
 
 const ConfigurablePlatformSection: FunctionComponent<ConfigurablePlatformSectionProps> = ({
   heading = "ITSM Powered by DGlide's Configurable Operations Platform",
+  mobileHeading,
   description = platformSectionDescription,
+  mobileDescription,
   features = platformFeatures,
+  mobileFeatures,
   cards = platformCards,
+  mobileCards,
 }) => (
   <section className="sol-section sol-configurable-section">
     <SolutionsContainer>
@@ -59,12 +67,14 @@ const ConfigurablePlatformSection: FunctionComponent<ConfigurablePlatformSection
         <header className="sol-configurable-header">
           <ScrollReveal direction="up">
             <h2 className="sol-configurable-heading">
-              {heading}
+              <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+              {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
             </h2>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.1}>
             <p className="sol-configurable-description">
-              {description}
+              <span className={mobileDescription ? "sol-copy-desktop" : ""}>{description}</span>
+              {mobileDescription ? <span className="sol-copy-mobile">{mobileDescription}</span> : null}
             </p>
           </ScrollReveal>
         </header>
@@ -80,8 +90,17 @@ const ConfigurablePlatformSection: FunctionComponent<ConfigurablePlatformSection
             ))}
           </div>
 
-          <ul className="sol-configurable-features">
+          <ul className="sol-configurable-features sol-copy-desktop">
             {features.map((feature) => (
+              <li key={feature} className="sol-configurable-feature">
+                <TickIcon />
+                <span className="sol-configurable-feature-text">{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <ul className="sol-configurable-features sol-copy-mobile">
+            {(mobileFeatures ?? features).map((feature) => (
               <li key={feature} className="sol-configurable-feature">
                 <TickIcon />
                 <span className="sol-configurable-feature-text">{feature}</span>
@@ -99,24 +118,40 @@ const ConfigurablePlatformSection: FunctionComponent<ConfigurablePlatformSection
                 <div className="sol-configurable-card-label">
                   <span className="sol-configurable-card-label-bar" aria-hidden />
                   <span className="sol-configurable-card-label-text">
-                    {card.label}
+                    <span className={(mobileCards?.[i]?.mobileLabel ?? card.mobileLabel) ? "sol-copy-desktop" : ""}>
+                      {card.label}
+                    </span>
+                    {(mobileCards?.[i]?.mobileLabel ?? card.mobileLabel) ? (
+                      <span className="sol-copy-mobile">{mobileCards?.[i]?.mobileLabel ?? card.mobileLabel}</span>
+                    ) : null}
                   </span>
                 </div>
 
                 <div className="sol-configurable-card-body">
-                  <h3 className="sol-configurable-card-title">{card.title}</h3>
+                  <h3 className="sol-configurable-card-title">
+                    <span className={mobileCards ? "sol-copy-desktop" : ""}>{card.title}</span>
+                    {mobileCards ? <span className="sol-copy-mobile">{mobileCards[i]?.title ?? card.title}</span> : null}
+                  </h3>
 
                   <div className="sol-configurable-card-content">
                     <p className="sol-configurable-card-description">
-                      {card.description}
+                      <span className={mobileCards ? "sol-copy-desktop" : ""}>{card.description}</span>
+                      {mobileCards ? (
+                        <span className="sol-copy-mobile">{mobileCards[i]?.description ?? card.description}</span>
+                      ) : null}
                     </p>
 
                     <ul className="sol-configurable-card-bullets">
-                      {card.bullets.map((bullet) => (
+                      {card.bullets.map((bullet, bulletIndex) => (
                         <li key={bullet} className="sol-configurable-card-bullet">
                           <TickIcon />
                           <span className="sol-configurable-card-bullet-text">
-                            {bullet}
+                            <span className={mobileCards ? "sol-copy-desktop" : ""}>{bullet}</span>
+                            {mobileCards ? (
+                              <span className="sol-copy-mobile">
+                                {mobileCards[i]?.bullets[bulletIndex] ?? bullet}
+                              </span>
+                            ) : null}
                           </span>
                         </li>
                       ))}

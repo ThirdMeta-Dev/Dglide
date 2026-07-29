@@ -44,14 +44,22 @@ const GoLiveLinkArrow: FunctionComponent = () => (
 
 type GoLiveFasterSectionProps = {
   heading?: string;
+  mobileHeading?: string;
   description?: string;
+  mobileDescription?: string;
   cards?: typeof goLiveCards;
+  mobileCards?: typeof goLiveCards;
+  mobileCtaLabel?: string;
 };
 
 const GoLiveFasterSection: FunctionComponent<GoLiveFasterSectionProps> = ({
   heading = "Go Live Faster, Without a Heavy Build",
+  mobileHeading,
   description = goLiveSectionDescription,
+  mobileDescription,
   cards = goLiveCards,
+  mobileCards,
+  mobileCtaLabel,
 }) => {
   const router = useRouter();
 
@@ -62,11 +70,15 @@ const GoLiveFasterSection: FunctionComponent<GoLiveFasterSectionProps> = ({
           <header className="sol-go-live-header">
             <ScrollReveal direction="up" style={{ width: "100%" }}>
               <h2 className="sol-go-live-heading">
-                {heading}
+                <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+                {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
               </h2>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={0.1} style={{ width: "100%" }}>
-              <p className="sol-go-live-description">{description}</p>
+              <p className="sol-go-live-description">
+                <span className={mobileDescription ? "sol-copy-desktop" : ""}>{description}</span>
+                {mobileDescription ? <span className="sol-copy-mobile">{mobileDescription}</span> : null}
+              </p>
             </ScrollReveal>
           </header>
 
@@ -108,9 +120,15 @@ const GoLiveFasterSection: FunctionComponent<GoLiveFasterSectionProps> = ({
                         />
 
                         <div className="sol-go-live-card-copy">
-                          <h3 className="sol-go-live-card-title">{card.title}</h3>
+                          <h3 className="sol-go-live-card-title">
+                            <span className={mobileCards ? "sol-copy-desktop" : ""}>{card.title}</span>
+                            {mobileCards ? <span className="sol-copy-mobile">{mobileCards[index]?.title ?? card.title}</span> : null}
+                          </h3>
                           <p className="sol-go-live-card-description">
-                            {card.description}
+                            <span className={mobileCards ? "sol-copy-desktop" : ""}>{card.description}</span>
+                            {mobileCards ? (
+                              <span className="sol-copy-mobile">{mobileCards[index]?.description ?? card.description}</span>
+                            ) : null}
                           </p>
                         </div>
                       </div>
@@ -120,7 +138,10 @@ const GoLiveFasterSection: FunctionComponent<GoLiveFasterSectionProps> = ({
                         onClick={() => scrollToContact(router)}
                         className="sol-go-live-link"
                       >
-                        <span>Get Started Now</span>
+                        <span>
+                          <span className={mobileCtaLabel ? "sol-copy-desktop" : ""}>Get Started Now</span>
+                          {mobileCtaLabel ? <span className="sol-copy-mobile">{mobileCtaLabel}</span> : null}
+                        </span>
                         <GoLiveLinkArrow />
                       </button>
                     </div>

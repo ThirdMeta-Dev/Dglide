@@ -39,6 +39,7 @@ export type CapabilityTabItem = {
   title: string;
   paragraphs: string[];
   features: string[];
+  mobileFeatures?: string[];
   whyItMatters: string;
   image: string;
   mobileImage?: string;
@@ -46,7 +47,10 @@ export type CapabilityTabItem = {
 
 export type CoreCapabilitiesSectionProps = {
   heading?: string;
+  mobileHeading?: string;
   items?: CapabilityTabItem[];
+  mobileItems?: CapabilityTabItem[];
+  mobileInitialIndex?: number;
 };
 
 const DEFAULT_ITEMS: CapabilityTabItem[] = capabilityTabs.map((tab) => ({
@@ -66,15 +70,36 @@ const getTabVariant = (
 
 const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> = ({
   heading = "The Capabilities Behind Every Resolved Request",
+  mobileHeading,
   items = DEFAULT_ITEMS,
+  mobileItems,
+  mobileInitialIndex,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const content = items[activeIndex];
+  const [isMobile, setIsMobile] = useState(false);
+  const resolvedItems = isMobile && mobileItems ? mobileItems : items;
+  const content = resolvedItems[activeIndex] ?? resolvedItems[0];
 
   const layoutRef = useRef<HTMLDivElement>(null);
   const tabsStripRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<Partial<Record<number, HTMLButtonElement>>>({});
   const [notchTop, setNotchTop] = useState(0);
+
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 767px)");
+    const syncViewport = () => setIsMobile(query.matches);
+    syncViewport();
+    query.addEventListener("change", syncViewport);
+    return () => query.removeEventListener("change", syncViewport);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile && mobileInitialIndex !== undefined) {
+      setActiveIndex(mobileInitialIndex);
+    } else if (!isMobile) {
+      setActiveIndex(0);
+    }
+  }, [isMobile, mobileInitialIndex]);
 
   const syncNotchPosition = useCallback(() => {
     const layout = layoutRef.current;
@@ -118,13 +143,14 @@ const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> =
       <SolutionsContainer>
         <ScrollReveal direction="up">
           <h2 className="sol-capabilities-heading">
-            {heading}
+            <span className={mobileHeading ? "sol-copy-desktop" : ""}>{heading}</span>
+            {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
           </h2>
         </ScrollReveal>
 
         <div ref={layoutRef} className="sol-capabilities-layout">
           <div ref={tabsStripRef} className="sol-capabilities-tabs">
-            {items.map((item, index) => {
+            {resolvedItems.map((item, index) => {
               const variant = getTabVariant(index, activeIndex);
 
               return (
@@ -165,7 +191,7 @@ const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> =
                   </p>
                 </div>
 
-                <ul className="sol-cap-panel-features">
+                <ul className={`sol-cap-panel-features${content.mobileFeatures ? " sol-copy-desktop" : ""}`}>
                   {content.features.map((feature) => (
                     <li key={feature} className="sol-cap-panel-feature">
                       <span className="sol-cap-panel-feature-icon-wrap">
@@ -177,6 +203,20 @@ const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> =
                     </li>
                   ))}
                 </ul>
+                {content.mobileFeatures && (
+                  <ul className="sol-cap-panel-features sol-copy-mobile">
+                    {content.mobileFeatures.map((feature) => (
+                      <li key={feature} className="sol-cap-panel-feature">
+                        <span className="sol-cap-panel-feature-icon-wrap">
+                          <TickIcon />
+                        </span>
+                        <span className="sol-cap-panel-feature-text">
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
 
                 <div className="sol-cap-panel-why">
                   <span className="sol-cap-panel-why-label">
@@ -204,8 +244,8 @@ const CoreCapabilitiesSection: FunctionComponent<CoreCapabilitiesSectionProps> =
               {/* Mobile image container — plain img so height is always auto/natural */}
               {content.mobileImage && (
                 <div
-                  className="sol-cap-media-mobile"
-                  style={{ borderRadius: 16, overflow: "hidden", background: "#e7e7e7", width: "100%" }}
+                  className={`sol-cap-media-mobile sol-cap-media-mobile--${activeIndex + 1}`}
+                  style={{ borderRadius: 16, overflow: "hidden", width: "100%" }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img

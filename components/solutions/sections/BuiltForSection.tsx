@@ -57,8 +57,12 @@ type BuiltForSectionProps = {
   heading?: string;
   mobileHeading?: string;
   description?: string;
+  mobileDescription?: string;
   fitItems?: { label: string }[];
+  mobileFitItems?: { label: string }[];
   industryItems?: { icon: string; title: string; description: string }[];
+  mobileIndustryItems?: { icon?: string; title: string; description: string }[];
+  mobileInitialIndex?: number;
   centerImage?: string;
 };
 
@@ -66,14 +70,27 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
   heading = "Service Breaks When Workflows Outgrow the Ticketing Tool",
   mobileHeading,
   description = "DGlide ITSM fits service and internal teams that have outgrown rigid ticketing and manual approvals.",
+  mobileDescription,
   fitItems = FIT_ITEMS,
+  mobileFitItems,
   industryItems = INDUSTRY_ITEMS,
+  mobileIndustryItems,
+  mobileInitialIndex,
   centerImage = "/solutions/built-for/center-illustration.png",
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const visibleRef = useRef(false);
+
+  useEffect(() => {
+    if (
+      mobileInitialIndex !== undefined &&
+      window.matchMedia("(max-width: 767px)").matches
+    ) {
+      setActiveIndex(mobileInitialIndex);
+    }
+  }, [mobileInitialIndex]);
 
   const stopTimer = useCallback(() => {
     if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
@@ -117,7 +134,8 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
                 {mobileHeading ? <span className="sol-copy-mobile">{mobileHeading}</span> : null}
               </h2>
               <p className="sol-built-for-description">
-                {description}
+                <span className={mobileDescription ? "sol-copy-desktop" : ""}>{description}</span>
+                {mobileDescription ? <span className="sol-copy-mobile">{mobileDescription}</span> : null}
               </p>
             </header>
           </ScrollReveal>
@@ -130,12 +148,22 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
                   <div className="sol-built-for-fit-body">
                     <h3 className="sol-built-for-fit-heading">Best Fit For</h3>
                     <ul className="sol-built-for-fit-list">
-                      {fitItems.map((item) => (
-                        <li key={item.label} className="sol-built-for-fit-item">
+                      {fitItems.map((item, index) => (
+                        <li
+                          key={item.label}
+                          className={`sol-built-for-fit-item${
+                            mobileFitItems && index >= mobileFitItems.length ? " sol-copy-desktop" : ""
+                          }`}
+                        >
                           <span className="sol-built-for-fit-icon-wrap">
                             <TickIcon />
                           </span>
-                          <span className="sol-built-for-fit-text">{item.label}</span>
+                          <span className="sol-built-for-fit-text">
+                            <span className={mobileFitItems ? "sol-copy-desktop" : ""}>{item.label}</span>
+                            {mobileFitItems ? (
+                              <span className="sol-copy-mobile">{mobileFitItems[index]?.label ?? item.label}</span>
+                            ) : null}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -187,11 +215,17 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
                                       aria-hidden
                                     />
                                     <h4 className="sol-built-for-industry-title sol-built-for-industry-title--active">
-                                      {item.title}
+                                      <span className={mobileIndustryItems ? "sol-copy-desktop" : ""}>{item.title}</span>
+                                      {mobileIndustryItems ? (
+                                        <span className="sol-copy-mobile">{mobileIndustryItems[index]?.title ?? item.title}</span>
+                                      ) : null}
                                     </h4>
                                   </div>
                                   <p className="sol-built-for-industry-description">
-                                    {item.description}
+                                    <span className={mobileIndustryItems ? "sol-copy-desktop" : ""}>{item.description}</span>
+                                    {mobileIndustryItems ? (
+                                      <span className="sol-copy-mobile">{mobileIndustryItems[index]?.description ?? item.description}</span>
+                                    ) : null}
                                   </p>
                                 </div>
                               </div>
@@ -211,7 +245,10 @@ const BuiltForSection: FunctionComponent<BuiltForSectionProps> = ({
                                   aria-hidden
                                 />
                                 <span className="sol-built-for-industry-title">
-                                  {item.title}
+                                  <span className={mobileIndustryItems ? "sol-copy-desktop" : ""}>{item.title}</span>
+                                  {mobileIndustryItems ? (
+                                    <span className="sol-copy-mobile">{mobileIndustryItems[index]?.title ?? item.title}</span>
+                                  ) : null}
                                 </span>
                               </button>
                             )}

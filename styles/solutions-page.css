@@ -26,50 +26,51 @@
   background: #F3F3F3;
 }
 
-/* FSM phone parity pass, sourced from the 2329 mobile frames.
-   Kept below the shared rules so tablet and desktop remain untouched. */
+/* Shared solution-page phone parity, sourced from the approved FSM 2329 frames.
+   The wrapper class is used by FSM, CRM, ITSM and manufacturing; tablet and
+   desktop remain untouched. */
 @media (max-width: 767px) {
-  .solutions-page--fsm .sol-hero-actions-mobile .sol-hero-actions {
-    width: 254px;
+  .solutions-page--shared-mobile-ui .sol-hero-actions-mobile .sol-hero-actions {
+    width: 250px;
   }
 
-  .solutions-page--fsm .sol-hero-actions-mobile .sol-btn-book-demo,
-  .solutions-page--fsm .sol-hero-actions-mobile .sol-btn-outline {
-    width: 254px;
-    min-width: 254px;
+  .solutions-page--shared-mobile-ui .sol-hero-actions-mobile .sol-btn-book-demo,
+  .solutions-page--shared-mobile-ui .sol-hero-actions-mobile .sol-btn-outline {
+    width: 250px;
+    min-width: 250px;
     font-size: 15px;
   }
 
-  .solutions-page--fsm .sol-problem-card-title {
+  .solutions-page--shared-mobile-ui .sol-problem-card-title {
     font-size: 16px;
     line-height: 24px;
   }
 
-  .solutions-page--fsm .sol-problem-card-description {
+  .solutions-page--shared-mobile-ui .sol-problem-card-description {
     font-size: 13px;
     line-height: 21px;
     letter-spacing: 0.2px;
   }
 
-  .solutions-page--fsm .sol-built-for-industry-title,
-  .solutions-page--fsm .sol-built-for-industry-title--active {
+  .solutions-page--shared-mobile-ui .sol-built-for-industry-title,
+  .solutions-page--shared-mobile-ui .sol-built-for-industry-title--active {
     font-size: 16px;
     line-height: 22px;
   }
 
-  .solutions-page--fsm .sol-built-for-fit-heading {
+  .solutions-page--shared-mobile-ui .sol-built-for-fit-heading {
     font-size: 18px;
     line-height: 28px;
   }
 
-  .solutions-page--fsm .sol-built-for-industry-description,
-  .solutions-page--fsm .sol-built-for-fit-text {
+  .solutions-page--shared-mobile-ui .sol-built-for-industry-description,
+  .solutions-page--shared-mobile-ui .sol-built-for-fit-text {
     font-size: 13px;
     line-height: 21px;
   }
 
   /* Figma 2329:2022: curved white field, vertical progress rail and 59x32 icons. */
-  .solutions-page--fsm .sol-workflow-bg {
+  .solutions-page--shared-mobile-ui .sol-workflow-bg {
     display: block !important;
     top: 0;
     width: 1200px;
@@ -78,16 +79,16 @@
     object-fit: fill;
   }
 
-  .solutions-page--fsm .sol-workflow-bg-container-wrapper-left,
-  .solutions-page--fsm .sol-workflow-bg-container-wrapper-right {
+  .solutions-page--shared-mobile-ui .sol-workflow-bg-container-wrapper-left,
+  .solutions-page--shared-mobile-ui .sol-workflow-bg-container-wrapper-right {
     display: none !important;
   }
 
-  .solutions-page--fsm .sol-workflow-steps-wrap {
+  .solutions-page--shared-mobile-ui .sol-workflow-steps-wrap {
     position: relative;
   }
 
-  .solutions-page--fsm .sol-workflow-progress {
+  .solutions-page--shared-mobile-ui .sol-workflow-progress {
     display: block;
     top: 0;
     left: 0;
@@ -97,65 +98,65 @@
     transform: none;
   }
 
-  .solutions-page--fsm .sol-workflow-progress-track {
+  .solutions-page--shared-mobile-ui .sol-workflow-progress-track {
     width: 1px;
     height: 100%;
     background: #e4e4e4;
   }
 
-  .solutions-page--fsm .sol-workflow-progress-active {
+  .solutions-page--shared-mobile-ui .sol-workflow-progress-active {
     width: 1px !important;
     height: 159px;
     background: #ff7f1c;
   }
 
-  .solutions-page--fsm .sol-workflow-steps {
+  .solutions-page--shared-mobile-ui .sol-workflow-steps {
     gap: 25px;
     padding-left: 20px;
   }
 
-  .solutions-page--fsm .sol-workflow-step {
+  .solutions-page--shared-mobile-ui .sol-workflow-step {
     gap: 16px;
   }
 
-  .solutions-page--fsm .sol-workflow-step-icon {
+  .solutions-page--shared-mobile-ui .sol-workflow-step-icon {
     width: 59px;
     height: 32px;
   }
 
-  .solutions-page--fsm .sol-workflow-step-text {
+  .solutions-page--shared-mobile-ui .sol-workflow-step-text {
     gap: 6px;
   }
 
-  .solutions-page--fsm .sol-workflow-step-title {
+  .solutions-page--shared-mobile-ui .sol-workflow-step-title {
     font-size: 16px;
     line-height: 22px;
   }
 
-  .solutions-page--fsm .sol-workflow-step-description {
+  .solutions-page--shared-mobile-ui .sol-workflow-step-description {
     font-size: 13px;
     line-height: 19px;
     letter-spacing: 0.2px;
   }
 
   /* Figma 2329:2548: centred 214x32 active tab and 320px panel artwork. */
-  .solutions-page--fsm .sol-capabilities-tabs {
+  .solutions-page--shared-mobile-ui .sol-capabilities-tabs {
     justify-content: flex-start;
     padding: 0 53px;
     scrollbar-width: none;
   }
 
-  .solutions-page--fsm .sol-capabilities-tabs::-webkit-scrollbar {
+  .solutions-page--shared-mobile-ui .sol-capabilities-tabs::-webkit-scrollbar {
     display: none;
   }
 
-  .solutions-page--fsm .sol-cap-tab {
+  .solutions-page--shared-mobile-ui .sol-cap-tab {
     min-height: 32px;
     font-size: 14px;
     line-height: 20px;
   }
 
-  .solutions-page--fsm .sol-cap-tab--active {
+  .solutions-page--shared-mobile-ui .sol-cap-tab--active {
     width: 214px;
     min-width: 214px !important;
     height: 32px;
@@ -165,73 +166,80 @@
     line-height: 20px;
   }
 
-  .solutions-page--fsm .sol-cap-panel {
+  .solutions-page--shared-mobile-ui .sol-cap-panel {
     min-height: 638px;
     height: 638px;
     border-radius: 20px;
   }
 
-  .solutions-page--fsm .sol-cap-panel-inner {
+  .solutions-page--shared-mobile-ui .sol-cap-panel-inner {
     min-height: 595px;
     gap: 16px;
     padding: 30px 8px 0 !important;
   }
 
-  .solutions-page--fsm .sol-cap-panel-description {
+  .solutions-page--shared-mobile-ui .sol-cap-panel-description {
     display: none;
   }
 
-  .solutions-page--fsm .sol-cap-panel-title {
+  .solutions-page--shared-mobile-ui .sol-cap-panel-title {
     font-size: 16px !important;
     line-height: 23px !important;
   }
 
-  .solutions-page--fsm .sol-cap-panel-features {
+  .solutions-page--shared-mobile-ui .sol-cap-panel-features {
     gap: 6px;
   }
 
-  .solutions-page--fsm .sol-cap-panel-feature {
+  .solutions-page--shared-mobile-ui .sol-cap-panel-feature {
     gap: 10px;
   }
 
-  .solutions-page--fsm .sol-cap-panel-feature-icon-wrap {
+  .solutions-page--shared-mobile-ui .sol-cap-panel-feature-icon-wrap {
     width: 16px;
     height: 10px;
   }
 
-  .solutions-page--fsm .sol-cap-panel-feature-text,
-  .solutions-page--fsm .sol-cap-panel-why-label,
-  .solutions-page--fsm .sol-cap-panel-why-quote {
-    font-size: 15px;
+  .solutions-page--shared-mobile-ui .sol-cap-panel-feature-text,
+  .solutions-page--shared-mobile-ui .sol-cap-panel-why-label,
+  .solutions-page--shared-mobile-ui .sol-cap-panel-why-quote {
+    font-size: 14px;
     line-height: 22px;
   }
 
-  .solutions-page--fsm .sol-cap-panel-why {
+  .solutions-page--shared-mobile-ui .sol-cap-panel-why {
     gap: 6px;
   }
 
-  .solutions-page--fsm .sol-cap-panel-why-divider {
+  .solutions-page--shared-mobile-ui .sol-cap-panel-why-divider {
     width: 1px;
     height: 51px;
     min-height: 51px;
     align-self: stretch;
   }
 
-  .solutions-page--fsm .sol-cap-media-mobile {
+  .solutions-page--shared-mobile-ui .sol-cap-media-mobile {
     height: 320px;
     border-radius: 0 !important;
     background: transparent !important;
   }
 
-  .solutions-page--fsm .sol-cap-media-mobile img {
+  .solutions-page--shared-mobile-ui .sol-cap-media-mobile img {
     width: 320px !important;
     height: 320px !important;
     object-fit: cover;
   }
 
+  /* Card 3's Figma asset is natively 280x280 — render it centered at true size. */
+  .solutions-page--shared-mobile-ui .sol-cap-media-mobile--3 img {
+    width: 280px !important;
+    height: 280px !important;
+    margin: 0 auto;
+  }
+
   /* Figma 2329:3112: the comparison ticks sit on 24px pale tiles. */
-  .solutions-page--fsm .sol-better-way-side-item .sol-better-way-tick-icon,
-  .solutions-page--fsm .sol-better-way-mobile-core-item .sol-better-way-tick-icon {
+  .solutions-page--shared-mobile-ui .sol-better-way-side-item .sol-better-way-tick-icon,
+  .solutions-page--shared-mobile-ui .sol-better-way-mobile-core-item .sol-better-way-tick-icon {
     display: inline-flex;
     width: 24px;
     height: 24px;
@@ -239,226 +247,248 @@
     justify-content: center;
     flex: 0 0 24px;
     border-radius: 6px;
-    background: #fff1e7;
+    background: #fff0e5;
   }
 
-  .solutions-page--fsm .sol-better-way-mobile-core-item .sol-better-way-tick-icon {
+  .solutions-page--shared-mobile-ui .sol-better-way-mobile-core-item .sol-better-way-tick-icon {
     background: #ffffff;
   }
 
-  .solutions-page--fsm .sol-better-way-tick-icon svg {
-    width: 16px;
-    height: 10px;
+  /* 22px box of the 32-viewBox chevron SVG renders the glyph at Figma's 14.4x8.8 */
+  .solutions-page--shared-mobile-ui .sol-better-way-tick-icon svg,
+  .solutions-page--shared-mobile-ui .sol-better-way-tick-icon img {
+    width: 22px;
+    height: 22px;
   }
 
-  .solutions-page--fsm .sol-better-way-side-item,
-  .solutions-page--fsm .sol-better-way-side--right .sol-better-way-side-item {
+  .solutions-page--shared-mobile-ui .sol-better-way-side-item,
+  .solutions-page--shared-mobile-ui .sol-better-way-side--right .sol-better-way-side-item {
     min-height: 24px;
-    gap: 8px;
+    gap: 12px;
   }
 
-  .solutions-page--fsm .sol-better-way-side-item-text {
+  .solutions-page--shared-mobile-ui .sol-better-way-side-item-text {
     font-size: 13px;
-    line-height: 18px;
+    line-height: 22px;
   }
 
-  .solutions-page--fsm .sol-better-way-mobile-core-item {
+  .solutions-page--shared-mobile-ui .sol-better-way-mobile-core-item {
     min-height: 24px;
-    gap: 8px;
-    font-size: 15px;
+    gap: 12px;
+    font-size: 14px;
     line-height: 22px;
   }
 
   /* Figma 2329:3768: shallow semi-arc with a centred active item and 32px controls. */
-  .solutions-page--fsm .sol-wc-mobile {
+  .solutions-page--shared-mobile-ui .sol-wc-mobile {
     height: 200px;
     margin-top: -40px;
     overflow: visible;
   }
 
-  .solutions-page--fsm .sol-wc-arc-stage {
+  .solutions-page--shared-mobile-ui .sol-wc-arc-stage {
     height: 80px;
   }
 
-  .solutions-page--fsm .sol-wc-arc-svg {
+  .solutions-page--shared-mobile-ui .sol-wc-arc-svg {
     height: 80px;
   }
 
-  .solutions-page--fsm .sol-wc-arc-labels {
+  .solutions-page--shared-mobile-ui .sol-wc-arc-labels {
     margin-top: 4px;
   }
 
-  .solutions-page--fsm .sol-wc-arc-label-active {
-    font-size: 14px;
+  .solutions-page--shared-mobile-ui .sol-wc-arc-label-active {
+    font-size: 15px;
     line-height: 22px;
     font-weight: 500;
   }
 
-  .solutions-page--fsm .sol-wc-arc-desc {
+  .solutions-page--shared-mobile-ui .sol-wc-arc-desc {
     margin-top: 4px;
-    font-size: 13px;
-    line-height: 21px;
+    font-size: 14px;
+    line-height: 22px;
   }
 
-  .solutions-page--fsm .sol-wc-arc-nav {
+  .solutions-page--shared-mobile-ui .sol-wc-arc-nav {
     gap: 8px;
     margin-top: 10px;
   }
 
-  .solutions-page--fsm .sol-wc-arc-btn {
+  .solutions-page--shared-mobile-ui .sol-wc-arc-btn {
     width: 32px;
     height: 32px;
   }
 
-  .solutions-page--fsm .sol-wc-arc-counter {
+  .solutions-page--shared-mobile-ui .sol-wc-arc-counter {
     min-width: 30px;
     font-size: 13px;
   }
 
   /* Figma 2329:4036 and 2329:4548. */
-  .solutions-page--fsm .sol-what-improves-grid,
-  .solutions-page--fsm .sol-what-improves-row {
+  .solutions-page--shared-mobile-ui .sol-what-improves-grid,
+  .solutions-page--shared-mobile-ui .sol-what-improves-row {
     gap: 28px !important;
   }
 
-  .solutions-page--fsm .sol-what-improves-card {
+  .solutions-page--shared-mobile-ui .sol-what-improves-card {
     gap: 16px !important;
   }
 
-  .solutions-page--fsm .sol-what-improves-card-title {
+  .solutions-page--shared-mobile-ui .sol-what-improves-card-title {
+    color: #000000;
+    font-family: "TASA Orbiter", sans-serif;
     font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
     line-height: 21px;
   }
 
-  .solutions-page--fsm .sol-what-improves-card-description {
-    font-size: 15px;
+  .solutions-page--shared-mobile-ui .sol-what-improves-card-description {
+    color: #555555;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
     line-height: 21px;
     letter-spacing: 0.2px;
   }
 
-  .solutions-page--fsm .sol-real-ops-quote,
-  .solutions-page--fsm .sol-real-ops-bullet-text,
-  .solutions-page--fsm .sol-real-ops-metrics-description,
-  .solutions-page--fsm .sol-real-ops-solution-item-text,
-  .solutions-page--fsm .sol-real-ops-footer-text {
+  /* Figma 2329:4037 — 4px title-to-text gap, 73x40 icons. */
+  .solutions-page--shared-mobile-ui .sol-what-improves-card-body {
+    gap: 4px;
+  }
+
+  .solutions-page--shared-mobile-ui .sol-what-improves-icon {
+    width: 73px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .solutions-page--shared-mobile-ui .sol-real-ops-quote,
+  .solutions-page--shared-mobile-ui .sol-real-ops-bullet-text,
+  .solutions-page--shared-mobile-ui .sol-real-ops-metrics-description,
+  .solutions-page--shared-mobile-ui .sol-real-ops-solution-item-text,
+  .solutions-page--shared-mobile-ui .sol-real-ops-footer-text {
     font-size: 13px;
     line-height: 21px;
   }
 
-  .solutions-page--fsm .sol-real-ops-block-title,
-  .solutions-page--fsm .sol-real-ops-solution-title {
+  .solutions-page--shared-mobile-ui .sol-real-ops-block-title,
+  .solutions-page--shared-mobile-ui .sol-real-ops-solution-title {
     font-size: 16px;
     line-height: 26px;
   }
 
-  .solutions-page--fsm .sol-real-ops-metric-value {
+  .solutions-page--shared-mobile-ui .sol-real-ops-metric-value {
     font-size: 36px;
     line-height: 38px;
   }
 
-  .solutions-page--fsm .sol-real-ops-metric-label {
+  .solutions-page--shared-mobile-ui .sol-real-ops-metric-label {
     font-size: 13px;
     line-height: 20px;
   }
 
   /* Figma 2329:4870. */
-  .solutions-page--fsm .sol-configurable-feature-text {
+  .solutions-page--shared-mobile-ui .sol-configurable-feature-text {
     font-size: 13px;
     line-height: 18px;
   }
 
-  .solutions-page--fsm .sol-configurable-card {
+  .solutions-page--shared-mobile-ui .sol-configurable-card {
     padding: 20px;
   }
 
-  .solutions-page--fsm .sol-configurable-card-label-text {
+  .solutions-page--shared-mobile-ui .sol-configurable-card-label-text {
     font-size: 13px;
     line-height: 16px;
   }
 
-  .solutions-page--fsm .sol-configurable-card-title {
+  .solutions-page--shared-mobile-ui .sol-configurable-card-title {
     font-size: 16px;
     line-height: 23px;
   }
 
-  .solutions-page--fsm .sol-configurable-card-description,
-  .solutions-page--fsm .sol-configurable-card-bullet-text {
+  .solutions-page--shared-mobile-ui .sol-configurable-card-description,
+  .solutions-page--shared-mobile-ui .sol-configurable-card-bullet-text {
     font-size: 15px;
     line-height: 22px;
   }
 
   /* Figma 2329:6410: the blue CTA itself is the full 360x359 section. */
-  .solutions-page--fsm .sol-final-cta-section {
-    padding: 0 !important;
+  .solutions-page--shared-mobile-ui .sol-final-cta-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
   }
 
-  .solutions-page--fsm .sol-final-cta-section > .sol-container {
+  .solutions-page--shared-mobile-ui .sol-final-cta-section > .sol-container {
     padding: 0;
   }
 
-  .solutions-page--fsm .sol-final-cta-banner {
+  .solutions-page--shared-mobile-ui .sol-final-cta-banner {
     width: 360px;
     min-height: 359px;
     padding: 60px 20px;
     border-radius: 30px;
   }
 
-  .solutions-page--fsm .sol-final-cta-content {
+  .solutions-page--shared-mobile-ui .sol-final-cta-content {
     gap: 48px;
   }
 
-  .solutions-page--fsm .sol-final-cta-eyebrow-text {
+  .solutions-page--shared-mobile-ui .sol-final-cta-eyebrow-text {
     font-size: 14px;
     line-height: 24px;
   }
 
-  .solutions-page--fsm .sol-final-cta-heading {
+  .solutions-page--shared-mobile-ui .sol-final-cta-heading {
     font-size: 32px !important;
     line-height: 37px !important;
   }
 
-  .solutions-page--fsm .sol-final-cta-button {
+  .solutions-page--shared-mobile-ui .sol-final-cta-button {
     min-height: 44px;
     padding: 12px 24px;
     font-size: 16px;
   }
 
   /* Figma 2329:6448. The list remains fluid so opened answers never clip. */
-  .solutions-page--fsm .sol-faq-question {
+  .solutions-page--shared-mobile-ui .sol-faq-question {
     min-height: 38px;
     padding: 6px 30px 6px 0;
     font-size: 16px !important;
     line-height: 26px !important;
   }
 
-  .solutions-page--fsm .sol-faq-question--open {
+  .solutions-page--shared-mobile-ui .sol-faq-question--open {
     font-size: 16px !important;
     line-height: 23px !important;
     font-weight: 500;
   }
 
-  .solutions-page--fsm .sol-faq-answer {
+  .solutions-page--shared-mobile-ui .sol-faq-answer {
     padding: 0 0 6px;
     font-size: 13px;
     line-height: 21px;
     letter-spacing: 0.2px;
   }
 
-  .solutions-page--fsm .sol-faq-list {
+  .solutions-page--shared-mobile-ui .sol-faq-list {
     gap: 12px;
   }
 
   /* Figma 2329:6489 footer typography. */
-  body:has(.solutions-page--fsm) footer h2,
-  body:has(.solutions-page--fsm) footer h3,
-  body:has(.solutions-page--fsm) footer h4 {
+  body:has(.solutions-page--shared-mobile-ui) footer h2,
+  body:has(.solutions-page--shared-mobile-ui) footer h3,
+  body:has(.solutions-page--shared-mobile-ui) footer h4 {
     font-size: 15px !important;
     line-height: 24px !important;
   }
 
-  body:has(.solutions-page--fsm) footer a,
-  body:has(.solutions-page--fsm) footer li,
-  body:has(.solutions-page--fsm) footer p {
+  body:has(.solutions-page--shared-mobile-ui) footer a,
+  body:has(.solutions-page--shared-mobile-ui) footer li,
+  body:has(.solutions-page--shared-mobile-ui) footer p {
     font-size: 12px;
     line-height: 19px;
   }
@@ -498,7 +528,7 @@
     padding-bottom: 0 !important;
   }
 
-  body:has(.solutions-page--fsm) > footer {
+  body:has(.solutions-page--shared-mobile-ui) > footer {
     padding-bottom: 11px;
   }
 
@@ -5559,6 +5589,37 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 }
 
+/* Shared mobile sticky navigation — Figma 2329:464 (360 × 34). */
+@media (max-width: 767px) {
+  .solutions-page.solutions-page--shared-mobile-ui:not(.platform-page) .sol-nav-bar {
+    box-sizing: border-box;
+    height: 34px;
+    min-height: 34px;
+    padding-top: 0;
+  }
+
+  .solutions-page.solutions-page--shared-mobile-ui:not(.platform-page) .sol-section-nav {
+    justify-content: flex-start;
+    width: 100%;
+    height: 34px;
+    min-height: 34px;
+    padding: 7px 16px;
+    gap: 20px;
+  }
+
+  .solutions-page.solutions-page--shared-mobile-ui:not(.platform-page) .sol-section-nav-link {
+    padding: 0;
+    font-family: "TASA Orbiter", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+
+  .solutions-page.solutions-page--shared-mobile-ui:not(.platform-page) .sol-section-nav-link:last-child {
+    line-height: 20px;
+  }
+}
+
 /* ── Solutions page — mobile section headings (≤480px) ── */
 @media (max-width: 480px) {
   .solutions-page .sol-hero-heading,
@@ -5736,6 +5797,10 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   display: none;
 }
 
+.solutions-page:not(.platform-page) .sol-hero-image--mobile {
+  display: none;
+}
+
 @media (max-width: 767px) {
   .solutions-page:not(.platform-page) {
     overflow-x: clip;
@@ -5790,6 +5855,17 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   .solutions-page:not(.platform-page) .sol-faq-heading {
     font-size: 28px !important;
     line-height: 36px !important;
+    /* The legacy ≤480px block forces "TASA Orbiter Variable" (no @font-face exists)
+       at weight 400 !important — restore the real family and Figma weight here. */
+    font-family: "TASA Orbiter", sans-serif !important;
+    font-weight: 500 !important;
+  }
+
+  /* Figma 2329:2690 — technician heading is left-aligned at 25px on phones. */
+  .solutions-page:not(.platform-page) .sol-technician-heading {
+    font-size: 25px !important;
+    line-height: 36px !important;
+    text-align: left !important;
   }
 
   /* Hero: copy → CTAs → product image, matching the 360px frames. */
@@ -5805,13 +5881,13 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   .solutions-page:not(.platform-page) .dg-hero-outer .grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
+    gap: 12px;
   }
 
   .solutions-page:not(.platform-page) .dg-hero-outer .space-y-6 {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 0;
   }
 
   .solutions-page:not(.platform-page) .dg-hero-outer .space-y-6 > * {
@@ -5819,9 +5895,32 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     margin-bottom: 0 !important;
   }
 
+  .solutions-page:not(.platform-page) .dg-hero-outer .space-y-6 > :nth-child(2) {
+    margin-top: 16px !important;
+  }
+
+  .solutions-page:not(.platform-page) .dg-hero-outer .space-y-6 > :nth-child(3) {
+    margin-top: 10px !important;
+  }
+
+  .solutions-page:not(.platform-page) .dg-hero-outer .space-y-6 > :nth-child(4) {
+    margin-top: 24px !important;
+  }
+
   .solutions-page:not(.platform-page) .dg-hero-outer .sol-hero-eyebrow {
     justify-content: center;
-    margin-top: 0 !important;
+    margin-top: 20px !important;
+  }
+
+  .solutions-page:not(.platform-page) .dg-hero-outer .sol-hero-eyebrow-bar {
+    width: 2px;
+    height: 11px;
+  }
+
+  .solutions-page:not(.platform-page) .dg-hero-outer .sol-hero-eyebrow-text {
+    font-family: "Sora", sans-serif;
+    font-size: 13px;
+    line-height: normal;
   }
 
   .solutions-page:not(.platform-page) .dg-hero-outer .sol-hero-heading,
@@ -5830,9 +5929,27 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     text-align: center !important;
   }
 
+  .solutions-page:not(.platform-page) .dg-hero-outer .sol-hero-heading {
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "TASA Orbiter", sans-serif;
+    font-weight: 600 !important;
+    background: linear-gradient(180deg, #ff7f1c 0%, #000000 202.78%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
   .solutions-page:not(.platform-page) .dg-hero-outer .sol-hero-description {
-    font-size: 13px !important;
-    line-height: 21px !important;
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 1.6 !important;
+    color: #545454 !important;
   }
 
   .solutions-page:not(.platform-page) .dg-hero-outer ul {
@@ -5840,21 +5957,32 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 
   .solutions-page:not(.platform-page) .dg-hero-outer ul li {
-    gap: 8px;
+    align-items: center;
+    gap: 12px;
   }
 
   .solutions-page:not(.platform-page) .dg-hero-outer ul li + li {
     margin-top: 8px;
   }
 
-  .solutions-page:not(.platform-page) .dg-hero-outer ul li span {
-    font-size: 13px !important;
-    line-height: 21px !important;
+  .solutions-page:not(.platform-page) .dg-hero-outer ul li > img {
+    width: 21.005px;
+    height: 10.503px;
+    margin-top: 0;
   }
 
-  .solutions-page:not(.platform-page) .sol-hero-actions-mobile {
+  .solutions-page:not(.platform-page) .dg-hero-outer ul li span {
+    font-family: "Inter", sans-serif;
+    font-size: 13px !important;
+    font-weight: 400;
+    line-height: 1.6 !important;
+    color: #545454;
+  }
+
+  .solutions-page:not(.platform-page) .dg-hero-outer .space-y-6 > .sol-hero-actions-mobile {
     display: block;
-    padding-top: 2px;
+    margin-top: 32px !important;
+    padding-top: 0;
   }
 
   .solutions-page:not(.platform-page) .sol-hero-actions-mobile .sol-hero-actions {
@@ -5871,22 +5999,63 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     min-width: 250px;
     height: 44px;
     padding: 12px 32px;
-    font-size: 14px;
+    gap: 10px;
+    border: 1.5px solid #141fb5;
+    font-family: "Sora", sans-serif;
+    font-size: 15px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-hero-actions-mobile .sol-btn-book-demo {
+    font-weight: 600;
+    background: linear-gradient(285.2deg, #1c2bff 4.29%, #141fb5 95.71%);
+  }
+
+  .solutions-page:not(.platform-page) .sol-hero-actions-mobile .sol-btn-outline {
+    font-weight: 400;
+  }
+
+  /* Lucide arrow (outline button): glyph fills ~58% of its box, so a 24px box
+     yields the same ~14px visible arrow as the Figma spec. */
+  .solutions-page:not(.platform-page) .sol-hero-actions-mobile .sol-hero-actions svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Figma diagonal arrow (primary button): 12.86px box rotated 45° = 14.1px line. */
+  .solutions-page:not(.platform-page) .sol-hero-actions-mobile .sol-hero-actions .sol-btn-book-demo-arrow {
+    width: 12.86px;
+    height: 12.86px;
   }
 
   .solutions-page:not(.platform-page) .sol-hero-actions-desktop {
     display: none;
   }
 
-  .solutions-page:not(.platform-page) .dg-hero-outer img[class*="max-w-[560px]"] {
-    width: 320px;
-    max-width: 320px;
-    margin: 0 auto;
+  /* Figma 2329:333 — hero collage bleeds edge-to-edge (360x240 on the 360px frame) */
+  .solutions-page:not(.platform-page) .dg-hero-outer .sol-hero-image {
+    width: 100vw;
+    max-width: 100vw;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    object-fit: cover;
   }
 
-  /* Sticky section navigation. */
+  .solutions-page:not(.platform-page) .dg-hero-outer .sol-hero-image--desktop {
+    display: none;
+  }
+
+  .solutions-page:not(.platform-page) .dg-hero-outer .sol-hero-image--mobile {
+    display: block;
+    aspect-ratio: auto;
+  }
+
+  /* Sticky section navigation — white strip gets 48px above / 32px below on phones. */
   .solutions-page:not(.platform-page) .sol-nav-bar {
     min-height: 34px;
+    margin-top: 48px;
+    margin-bottom: 32px;
   }
 
   .solutions-page:not(.platform-page) .sol-section-nav {
@@ -5904,6 +6073,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   /* Problem cards: five compact 190px cards. */
   .solutions-page:not(.platform-page) .sol-problem-heading {
     margin-bottom: 32px;
+    font-weight: 500;
   }
 
   .solutions-page:not(.platform-page) .sol-problem-description {
@@ -5920,21 +6090,31 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     gap: 12px;
   }
 
+  /* Figma: icon and text sit top-aligned with a fixed 24px gap; spare card
+     height stays at the bottom (base rules stretch it between icon and text). */
   .solutions-page:not(.platform-page) .sol-problem-card {
     min-height: 190px;
     height: 190px;
-    padding: 20px;
+    padding: 32px 20px 24px;
     border-radius: 16px;
+    justify-content: flex-start;
   }
 
   .solutions-page:not(.platform-page) .sol-problem-card-inner {
     min-height: 0;
-    gap: 20px;
+    gap: 24px;
+    justify-content: flex-start;
   }
 
+  .solutions-page:not(.platform-page) .sol-problem-card-text {
+    gap: 4px;
+  }
+
+  /* Icon PNGs are 88x48-ratio canvases; height:auto keeps the glyph a full
+     80px wide like the Figma group instead of letterboxing inside 80x40. */
   .solutions-page:not(.platform-page) .sol-problem-card-icon {
     width: 80px;
-    height: 40px;
+    height: auto;
   }
 
   .solutions-page:not(.platform-page) .sol-problem-card-title {
@@ -5945,6 +6125,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   .solutions-page:not(.platform-page) .sol-problem-card-description {
     font-size: 13px;
     line-height: 21px;
+    color: #545454;
   }
 
   .solutions-page:not(.platform-page) .sol-problem-footer {
@@ -5968,7 +6149,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     font-size: 14px;
   }
 
-  .solutions-page--fsm .sol-problem-footer {
+  .solutions-page--shared-mobile-ui .sol-problem-footer {
     display: none;
   }
 
@@ -6220,10 +6401,21 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 
   .solutions-page:not(.platform-page) .sol-cap-panel-feature-icon-wrap {
-    width: 21px;
-    height: 14px;
+    width: 16px;
+    height: 10px;
     padding: 0;
     background: transparent;
+  }
+
+  /* Figma tick is 16x9.7 in the capability cards; the svg carries an inline 21px width. */
+  .solutions-page:not(.platform-page) .sol-cap-panel-feature-icon-wrap svg {
+    width: 16px !important;
+    height: 9.7px !important;
+  }
+
+  /* Mobile-only feature list must keep flex layout despite .sol-copy-mobile's display:block. */
+  .solutions-page:not(.platform-page) ul.sol-cap-panel-features.sol-copy-mobile {
+    display: flex;
   }
 
   .solutions-page:not(.platform-page) .sol-cap-panel-title {
@@ -6231,11 +6423,26 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     line-height: 23px !important;
   }
 
-  .solutions-page:not(.platform-page) .sol-cap-panel-description,
-  .solutions-page:not(.platform-page) .sol-cap-panel-feature-text,
-  .solutions-page:not(.platform-page) .sol-cap-panel-why-quote {
+  .solutions-page:not(.platform-page) .sol-cap-panel-description {
     font-size: 13px;
     line-height: 21px;
+  }
+
+  /* Figma 2447:317 — Inter 400 14/22.4 features, why-label Inter 500 14 */
+  .solutions-page:not(.platform-page) .sol-cap-panel-feature-text,
+  .solutions-page:not(.platform-page) .sol-cap-panel-why-quote {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-cap-panel-feature-text {
+    color: #545454;
+  }
+
+  .solutions-page:not(.platform-page) .sol-cap-panel-why-label {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
   }
 
   .solutions-page:not(.platform-page) .sol-cap-panel-media {
@@ -6325,7 +6532,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-inner {
-    gap: 32px;
+    gap: 36px;
   }
 
   .solutions-page--itsm .sol-better-way-inner {
@@ -6347,12 +6554,13 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   .solutions-page:not(.platform-page) .sol-better-way-visual-panel {
     width: 100%;
     min-height: 0;
+    padding: 0;
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-diagram {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -6361,23 +6569,36 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     width: 100%;
   }
 
+  /* Figma 2348:1528 / 2350:2512 — 16px padding & radius; card 1's gradient border
+     is strongest at the BOTTOM, card 3's at the TOP. */
   .solutions-page:not(.platform-page) .sol-better-way-side {
     width: 100%;
     min-height: 0;
-    padding: 12px;
-    border: 1px solid #ffffff;
-    border-radius: 8px;
-    background: linear-gradient(180deg, #ffffff 0%, #f6f6f6 100%);
+    padding: 16px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    background:
+      linear-gradient(0deg, #ffffff 0%, #f6f6f6 100%) padding-box,
+      linear-gradient(0deg, #1c2bfe 0%, #f3f3f3 100%) border-box;
+  }
+
+  .solutions-page:not(.platform-page) .sol-better-way-side--right {
+    background:
+      linear-gradient(180deg, #ffffff 0%, #f6f6f6 100%) padding-box,
+      linear-gradient(0deg, #ffffff 0%, #141fb6 100%) border-box;
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-side-header {
-    gap: 12px;
-    margin-bottom: 6px;
+    gap: 14px;
+    margin-bottom: 12px;
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-side-title {
-    font-size: 15px;
-    line-height: 22px;
+    font-family: "TASA Orbiter", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #ff7f1c;
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-col-icon {
@@ -6386,61 +6607,93 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-side-list {
-    gap: 4px;
+    gap: 6px;
+    position: relative;
   }
 
+  /* Figma: 1px orange line running vertically behind the tick tiles. */
   .solutions-page:not(.platform-page) .sol-better-way-side-line {
-    display: none;
+    display: block;
+    position: absolute;
+    left: 11.5px;
+    top: 12px;
+    bottom: 12px;
+    width: 1px;
+    height: auto;
+    transform: none;
+    background: #ff7f1c;
+    z-index: 0;
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-side-item,
   .solutions-page:not(.platform-page) .sol-better-way-side--right .sol-better-way-side-item {
-    min-height: 20px;
-    gap: 6px;
+    min-height: 24px;
+    gap: 12px;
     flex-direction: row;
+    position: relative;
+    z-index: 1;
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-side-item-text {
-    font-size: 11px;
-    line-height: 17px;
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
     text-align: left !important;
+    color: #000000;
   }
 
+  /* Figma tick tile is 24x24 — this later rule must not shrink it back to 18x12. */
   .solutions-page:not(.platform-page) .sol-better-way-tick-icon {
-    width: 18px;
-    height: 12px;
+    width: 24px;
+    height: 24px;
   }
 
+  /* Figma 2329:3112 — blue DGlide card: 24/20 padding, 16px radius, 24px gap. */
   .solutions-page:not(.platform-page) .sol-better-way-mobile-core {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 24px;
     min-height: 130px;
-    padding: 16px;
+    padding: 24px 20px;
     color: #ffffff;
     background: linear-gradient(180deg, #1c2bff 0%, #141fb5 100%);
-    border-radius: 8px;
+    border-radius: 16px;
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-mobile-logo {
-    width: 118px;
-    height: 29px;
+    width: 119px;
+    height: 21px;
     object-fit: contain;
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-mobile-core-list {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
+    position: relative;
+  }
+
+  .solutions-page:not(.platform-page) .sol-better-way-mobile-core-list::before {
+    content: "";
+    position: absolute;
+    left: 11.5px;
+    top: 12px;
+    bottom: 12px;
+    width: 1px;
+    background: #ff7f1c;
   }
 
   .solutions-page:not(.platform-page) .sol-better-way-mobile-core-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    line-height: 18px;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    position: relative;
   }
 
   /* Workflow-change arc carousel. */
@@ -6465,13 +6718,75 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     display: none;
   }
 
+  /* Figma 2329:3768 — bullet rows: 10px list gap, 12px icon-text gap, Inter 13/20.8 */
   .solutions-page:not(.platform-page) .sol-workflow-change-bullets {
-    gap: 8px;
+    gap: 10px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-workflow-change-bullet {
+    gap: 12px;
   }
 
   .solutions-page:not(.platform-page) .sol-workflow-change-bullet-text {
     font-size: 13px;
-    line-height: 21px;
+    line-height: 20.8px;
+    color: #545454;
+  }
+
+  .solutions-page:not(.platform-page) .sol-workflow-change-tick-icon-wrap svg {
+    width: 19.8px;
+    height: 12px;
+  }
+
+  /* Figma icons are 73px wide on the arc — 20vw inline width drifts on wider phones. */
+  .solutions-page:not(.platform-page) .sol-wc-arc-stage > div {
+    width: 73px !important;
+  }
+
+  /* Figma 2329:3972 — neighbour titles peek 28px in from each SCREEN edge, 12px black.
+     The row bleeds to the full viewport so the side titles clip at the screen, not at
+     the padded container. */
+  .solutions-page:not(.platform-page) .sol-wc-arc-labels {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    /* Figma: 20px gap between the arc icon and the title */
+    margin-top: 20px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-wc-arc-label-side {
+    position: absolute;
+    top: 50%;
+    font-family: "TASA Orbiter", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    color: #000000;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .solutions-page:not(.platform-page) .sol-wc-arc-label-side--prev {
+    left: 28px;
+    transform: translate(-100%, -50%);
+  }
+
+  .solutions-page:not(.platform-page) .sol-wc-arc-label-side--next {
+    left: calc(100% - 28px);
+    transform: translateY(-50%);
+  }
+
+  /* Counter sits to the right of the buttons; this offset keeps the button pair
+     optically centered under the text (Figma balances it with leading padding). */
+  .solutions-page:not(.platform-page) .sol-wc-arc-nav {
+    padding-left: 32px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-wc-arc-btn--prev {
+    border-width: 1px;
   }
 
   .solutions-page:not(.platform-page) .sol-wc-mobile {
@@ -6583,16 +6898,62 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
 
   .solutions-page:not(.platform-page) .sol-real-ops-block--challenge,
   .solutions-page:not(.platform-page) .sol-real-ops-solution-card {
+    position: relative;
     padding: 0 0 0 14px;
     background: transparent;
     border: 0;
     box-shadow: none;
   }
 
+  /* Figma 2329:4548 — titles sit flush left; a 1px orange guide line runs
+     beside the quote/bullet content, starting below the title. */
+  .solutions-page:not(.platform-page) .sol-real-ops-block--challenge .sol-real-ops-block-title,
+  .solutions-page:not(.platform-page) .sol-real-ops-solution-header {
+    margin-left: -14px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-block--challenge::before,
+  .solutions-page:not(.platform-page) .sol-real-ops-solution-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 38px;
+    bottom: 0;
+    width: 1px;
+    background: #ff7f1c;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-solution-divider {
+    display: none;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-heading {
+    text-align: left !important;
+  }
+
+  /* Metrics card: Figma 24/20/20 padding, white gradient, 16 radius. */
   .solutions-page:not(.platform-page) .sol-real-ops-block--metrics {
-    padding: 16px;
-    background: #ffffff;
+    gap: 20px;
+    padding: 24px 20px 20px;
+    background: linear-gradient(180deg, #ffffff 0%, #f6f6f6 100%);
+    border: 1px solid #ffffff;
     border-radius: 16px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-block-intro--metrics {
+    gap: 8px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-metrics {
+    gap: 16px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-metric {
+    gap: 4px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-metric-label {
+    color: #545454;
   }
 
   .solutions-page:not(.platform-page) .sol-real-ops-solution-logo {
@@ -6608,37 +6969,84 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 
   .solutions-page:not(.platform-page) .sol-real-ops-quote,
-  .solutions-page:not(.platform-page) .sol-real-ops-bullet-text,
-  .solutions-page:not(.platform-page) .sol-real-ops-metrics-description,
-  .solutions-page:not(.platform-page) .sol-real-ops-solution-item-text {
-    font-size: 12px;
-    line-height: 18px;
+  .solutions-page:not(.platform-page) .sol-real-ops-metrics-description {
+    font-size: 13px;
+    line-height: 21px;
+    font-style: normal;
+    color: #545454;
   }
 
+  .solutions-page:not(.platform-page) .sol-real-ops-bullets {
+    gap: 4px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-bullet {
+    gap: 8px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-bullet-text {
+    font-size: 13px;
+    line-height: 20.8px;
+    color: #000000;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-solution-item {
+    gap: 10px;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-solution-item-text {
+    font-size: 13px;
+    line-height: 22px;
+    font-weight: 500;
+    color: #000000;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-list-icon svg,
+  .solutions-page:not(.platform-page) .sol-real-ops-solution-list-icon svg {
+    width: 16px;
+    height: 9.7px;
+  }
+
+  /* Footer quote: 40px avatar, 20px gap, orange italic quote + gray attribution. */
   .solutions-page:not(.platform-page) .sol-real-ops-footer-quote {
-    margin-top: 12px;
-    gap: 12px;
-    max-height: 80px;
-    overflow: hidden;
+    margin-top: 0;
+    gap: 20px;
+    max-height: none;
+    overflow: visible;
+    align-items: flex-start;
   }
 
   .solutions-page:not(.platform-page) .sol-real-ops-footer-text {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    font-style: italic;
+    color: #ff7f1c;
+  }
+
+  .solutions-page:not(.platform-page) .sol-real-ops-footer-attribution {
+    display: block;
+    margin-top: 6px;
     font-size: 12px;
-    line-height: 18px;
+    line-height: 20px;
+    font-style: italic;
+    color: #545454;
   }
 
   .solutions-page:not(.platform-page) .sol-real-ops-footer-avatar {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border: 2px solid #ffffff;
   }
 
   .solutions-page:not(.platform-page) .sol-real-ops-solution-list {
-    gap: 2px;
+    gap: 6px;
   }
 
   .solutions-page:not(.platform-page) .sol-real-ops-solution-card {
-    max-height: 250px;
-    overflow: hidden;
+    max-height: none;
+    overflow: visible;
   }
 
   /* Configurable platform cards. */
@@ -6881,45 +7289,69 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 }
 
-/* Final cascade seal for the FSM 360px Figma frames. */
+/* Final cascade seal for the shared 360px solution-page structure. */
 @media (max-width: 767px) {
-  .solutions-page:not(.platform-page).solutions-page--fsm .dg-hero-outer .sol-hero-eyebrow {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .dg-hero-outer {
+    padding-bottom: 0 !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-hero-heading,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-built-for-heading,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-heading {
+    font-size: 28px !important;
+    line-height: 36px !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-technician-heading {
+    font-size: 25px !important;
+    line-height: 36px !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .dg-hero-outer .sol-hero-eyebrow {
     margin-top: 20px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-hero-actions-mobile .sol-hero-actions {
-    width: 254px;
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-hero-actions-mobile .sol-hero-actions {
+    width: 250px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-hero-actions-mobile .sol-btn-book-demo,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-hero-actions-mobile .sol-btn-outline {
-    width: 254px;
-    min-width: 254px;
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-hero-actions-mobile .sol-btn-book-demo,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-hero-actions-mobile .sol-btn-outline {
+    width: 250px;
+    min-width: 250px;
     font-size: 15px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-problem-card-title {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-problem-card-title {
     font-size: 16px !important;
     line-height: 24px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-problem-card-description {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-problem-card-description {
     font-size: 13px !important;
     line-height: 21px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-built-for-industry-title,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-built-for-industry-title--active {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-built-for-industry-title,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-built-for-industry-title--active {
     font-size: 16px;
     line-height: 22px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-built-for-fit-heading {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-built-for-fit-heading {
     font-size: 18px;
     line-height: 28px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-bg {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-built-for-fit-card {
+    min-height: 250px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-mobile-orbit-root > div:first-child {
+    height: 419px !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-bg {
     display: block !important;
     width: 1200px;
     max-width: none;
@@ -6927,12 +7359,12 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     object-fit: fill;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-section {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-section {
     height: 758px;
     overflow: hidden;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-progress {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-progress {
     display: block;
     top: 0;
     left: 0;
@@ -6942,61 +7374,61 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     transform: none;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-progress-track {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-progress-track {
     width: 1px;
     height: 100%;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-progress-active {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-progress-active {
     width: 1px !important;
     height: 159px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-steps {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-steps {
     gap: 25px;
     padding-left: 20px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-step {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-step {
     gap: 16px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-step-icon {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-step-icon {
     width: 59px;
     height: 32px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-step-title {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-step-title {
     font-size: 16px;
     line-height: 22px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-step-description {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-step-description {
     font-size: 13px;
     line-height: 19px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-steps > :nth-child(-n + 2) .sol-workflow-step-title {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-steps > :nth-child(-n + 2) .sol-workflow-step-title {
     color: #ff7f1c;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-steps > :nth-child(n + 3) .sol-workflow-step-title {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-steps > :nth-child(n + 3) .sol-workflow-step-title {
     color: #000000;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-capabilities-tabs {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-capabilities-tabs {
     justify-content: flex-start;
     padding-right: 53px;
     padding-left: 53px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-cap-tab {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-tab {
     min-height: 32px;
     font-size: 14px;
     line-height: 20px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-cap-tab--active {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-tab--active {
     width: 214px;
     min-width: 214px !important;
     height: 32px;
@@ -7005,74 +7437,152 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     line-height: 20px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-cap-panel-inner {
+  /* CRM, ITSM and manufacturing use longer capability labels than FSM.
+     Size every mobile pill from its own text so the active label stays inside
+     the orange background instead of overflowing the FSM-specific 214px tube. */
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui:not(.solutions-page--fsm) .sol-cap-tab {
+    flex: 0 0 auto;
+    width: max-content;
+    min-width: max-content !important;
+    max-width: none;
+    padding-right: 20px;
+    padding-left: 20px;
+    white-space: nowrap;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-panel-inner {
     min-height: 595px;
     padding: 30px 8px 0 !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-cap-panel {
-    box-shadow: inset 0 0 0 1px #ff7f1c;
+  /* Figma 2447:317 — copy block is inset 8px from the card's inner edge. */
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-panel-copy {
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-cap-panel-title {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-panel {
+    /* No base color: the frame PNG's interior is opaque white and its corners are
+       transparent, so a white base would poke out around the rounded frame. */
+    background:
+      url("/solutions/fsm-capability-card-frame-1618877201.png")
+      center top / 100% 100%
+      no-repeat;
+    box-shadow: none;
+    border-radius: 20px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-panel::before {
+    display: none;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-panel-title {
     font-size: 16px !important;
     line-height: 23px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-cap-panel-feature-text,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-cap-panel-why-label,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-cap-panel-why-quote {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-panel-feature-text,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-panel-why-label,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-panel-why-quote {
     font-size: 15px;
     line-height: 22px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-cap-media-mobile {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-media-mobile {
     width: 100% !important;
     height: 320px;
     margin-left: -8px;
     width: 320px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-cap-media-mobile img {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-panel-media {
+    height: 320px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-media-mobile img {
     width: 320px !important;
     height: 320px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-better-way-side-item-text {
-    font-size: 13px;
-    line-height: 18px;
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-media-mobile--3 {
+    width: 280px !important;
+    height: 280px;
+    margin-left: 12px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-better-way-side-header {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-media-mobile--3 img {
+    width: 280px !important;
+    height: 280px !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-media-mobile--7 {
+    height: 324px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-media-mobile--7 img {
+    height: 324px !important;
+  }
+
+  .solutions-page--itsm.solutions-page--shared-mobile-ui .sol-cap-media-mobile,
+  .solutions-page--crm.solutions-page--shared-mobile-ui .sol-cap-media-mobile,
+  .solutions-page--manufacturing.solutions-page--shared-mobile-ui .sol-cap-media-mobile {
+    width: 320px !important;
+    height: auto;
+    margin-left: -8px;
+  }
+
+  .solutions-page--itsm.solutions-page--shared-mobile-ui .sol-cap-media-mobile img,
+  .solutions-page--crm.solutions-page--shared-mobile-ui .sol-cap-media-mobile img,
+  .solutions-page--manufacturing.solutions-page--shared-mobile-ui .sol-cap-media-mobile img {
+    width: 320px !important;
+    height: auto !important;
+    object-fit: contain;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-better-way-side-item-text {
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-technician-phone {
+    width: 280px;
+    max-width: 280px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-better-way-inner {
+    gap: 36px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-better-way-side-header {
     flex-direction: row !important;
     justify-content: flex-start;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-better-way-side--left .sol-better-way-side-header,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-better-way-side--right .sol-better-way-side-header {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-better-way-side--left .sol-better-way-side-header,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-better-way-side--right .sol-better-way-side-header {
     flex-direction: row !important;
     justify-content: flex-start !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-better-way-side-header .sol-better-way-col-icon {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-better-way-side-header .sol-better-way-col-icon {
     order: -1 !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-better-way-side--right .sol-better-way-tick-icon {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-better-way-side--right .sol-better-way-tick-icon {
     order: -1;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-better-way-side--right .sol-better-way-side-item {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-better-way-side--right .sol-better-way-side-item {
     justify-content: flex-start;
     text-align: left;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-better-way-mobile-core-item {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-better-way-mobile-core-item {
     font-size: 15px;
     line-height: 22px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-wc-mobile {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-wc-mobile {
     width: 320px;
     min-width: 0;
     height: 200px;
@@ -7080,34 +7590,43 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     overflow: visible;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-wc-arc-stage,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-wc-arc-svg {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-wc-arc-stage,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-wc-arc-svg {
     height: 80px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-wc-arc-label-active {
-    font-size: 14px;
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-wc-arc-label-active {
+    font-size: 15px;
     line-height: 22px;
     font-weight: 500;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-wc-arc-desc {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-wc-arc-desc {
     margin-top: 4px;
-    font-size: 13px;
-    line-height: 21px;
+    font-size: 14px;
+    line-height: 22px;
+    color: #545454;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-wc-arc-nav {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-wc-arc-counter {
+    font-family: "Sora", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 28px;
+    color: #6f7276;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-wc-arc-nav {
     margin-top: 10px;
     gap: 8px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-wc-arc-btn {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-wc-arc-btn {
     width: 32px;
     height: 32px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-change-tick-icon-wrap {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-change-tick-icon-wrap {
     width: 20px;
     height: 13px;
     padding: 0;
@@ -7115,187 +7634,667 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     border-radius: 0 !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-what-improves-grid,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-what-improves-row {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-what-improves-grid,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-what-improves-row {
     gap: 28px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-what-improves-card {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-what-improves-card {
     gap: 16px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-what-improves-card-title {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-what-improves-card-title {
     font-size: 15px !important;
     line-height: 21px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-what-improves-card-description {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-what-improves-card-description {
     font-size: 15px !important;
     line-height: 21px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-what-improves-section {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-what-improves-section {
     height: 814px;
     overflow: hidden;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-real-ops-quote,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-real-ops-bullet-text,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-real-ops-metrics-description,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-real-ops-solution-item-text,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-real-ops-footer-text {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-what-improves-inner {
+    gap: 36px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-quote,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-bullet-text,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-metrics-description {
     font-size: 13px;
     line-height: 21px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-feature-text {
+  /* Figma 2350:3066 / mobile FSM: keep copy and metrics on the card's 20px
+     inset; desktop's nested 16px list padding must not shift them again. */
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-quote,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-bullets,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-metrics {
+    padding-left: 0;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-block--metrics {
+    box-sizing: border-box;
+    height: 238px;
+    min-height: 238px;
+    gap: 20px;
+    padding: 24px 20px 20px;
+    border: 0;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #f6f6f6 100%);
+    box-shadow:
+      inset 0 0 0 1px #ffffff,
+      -6px -6px 5px rgba(0, 0, 0, 0.06);
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-block--metrics .sol-real-ops-block-title {
+    width: 100%;
+    margin: 0;
+    font-family: "TASA Orbiter", sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: 21px !important;
+    color: #1c2bff !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-block-intro--metrics {
+    gap: 8px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-metrics-description {
+    width: 100%;
+    margin: 0;
+    font-family: "Inter", sans-serif !important;
+    font-size: 13px !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    line-height: 21px !important;
+    letter-spacing: 0.2px;
+    color: #555555 !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-metric {
+    width: 100%;
+    min-width: 0;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-metric-value {
+    width: 100%;
+    margin: 0;
+    font-family: "TASA Orbiter", sans-serif !important;
+    font-size: 36px !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    line-height: 38px !important;
+    text-align: left;
+    color: #000000 !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-metric-label {
+    width: 100%;
+    margin: 0;
+    font-family: "Inter", sans-serif !important;
+    font-size: 13px !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+    letter-spacing: 0.2px;
+    text-align: left;
+    color: #555555 !important;
+  }
+
+  /* Mobile Figma uses the tick glyph itself, without the desktop white tile. */
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-list-icon,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-solution-list-icon {
+    width: 16px;
+    height: 10px;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  /* Figma 2329:4548: solution rows are Inter 500 13/22; footer quote 13/20. */
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-solution-item-text {
     font-size: 13px;
-    line-height: 18px;
-  }
-
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-feature:nth-child(1) { order: 1; }
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-feature:nth-child(3) { order: 2; }
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-feature:nth-child(6) { order: 3; }
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-feature:nth-child(7) { order: 4; }
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-feature:nth-child(2) { order: 5; }
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-feature:nth-child(5) { order: 6; }
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-feature:nth-child(4) { order: 7; }
-
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-card {
-    padding: 20px;
-  }
-
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-card-title {
-    font-size: 16px;
-    line-height: 23px;
-  }
-
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-card-description,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-configurable-card-bullet-text {
-    font-size: 15px;
     line-height: 22px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-final-cta-section {
-    padding: 0 !important;
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-real-ops-footer-text {
+    font-size: 13px;
+    line-height: 20px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-final-cta-section > .sol-container {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature-text {
+    font-family: "Inter", sans-serif;
+    font-size: 13px !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px !important;
+    color: #555555;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature:nth-child(1) { order: 1; }
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature:nth-child(3) { order: 2; }
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature:nth-child(6) { order: 3; }
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature:nth-child(7) { order: 4; }
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature:nth-child(2) { order: 5; }
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature:nth-child(5) { order: 6; }
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature:nth-child(4) { order: 7; }
+
+  /* Figma 2329:4871 — complete FSM mobile configurable-platform frame. */
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-inner {
+    width: 100%;
+    max-width: 320px;
+    gap: 32px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-header {
+    width: 320px;
+    align-items: center;
+    gap: 0;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-heading {
+    width: 320px;
+    max-width: 320px;
+    margin: 0;
+    font-family: "TASA Orbiter", sans-serif !important;
+    font-size: 28px !important;
+    font-style: normal;
+    font-weight: 500 !important;
+    line-height: 36px !important;
+    text-align: center;
+    text-transform: capitalize;
+    background: linear-gradient(0deg, #000000 0%, #ff7f1c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 320px;
+    gap: 20px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui ul.sol-configurable-features.sol-copy-desktop {
+    display: none !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui ul.sol-configurable-features.sol-copy-mobile {
+    position: static;
+    display: grid !important;
+    grid-template-columns: 144px 170px;
+    grid-auto-rows: 18px;
+    column-gap: 6px;
+    row-gap: 6px;
+    width: 320px;
+    height: 90px;
+    max-height: 90px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature {
+    width: 100%;
+    min-height: 18px;
+    gap: 8px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature-text {
+    white-space: nowrap;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature > .sol-configurable-tick-icon-wrap {
+    width: 16.005px;
+    height: 9.725px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-feature > .sol-configurable-tick-icon-wrap svg {
+    width: 16.005px;
+    height: 9.725px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-cards {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    gap: 10px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card {
+    position: static;
+    box-sizing: border-box;
+    width: 320px;
+    height: 241px;
+    min-height: 241px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0;
+    padding: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 16px;
+    background: linear-gradient(270deg, #ffffff 0%, #f6f6f6 100%);
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-label {
+    height: 16px;
+    gap: 8px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-label-bar {
+    width: 2px;
+    height: 11px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-label-text {
+    font-family: "Sora", sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    color: #ff7f1c;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-body {
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-title {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    font-family: "TASA Orbiter", sans-serif;
+    font-size: 17px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 23px !important;
+    color: #000000;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-content {
+    width: 100%;
+    gap: 16px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-description {
+    width: 100%;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px !important;
+    letter-spacing: 0.2px;
+    color: #555555;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-bullets {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-bullet {
+    min-height: 22px;
+    gap: 12px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-bullet .sol-configurable-tick-icon-wrap {
+    width: 21.005px;
+    height: 12.763px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-bullet .sol-configurable-tick-icon-wrap svg {
+    width: 21.005px;
+    height: 12.763px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-configurable-card-bullet-text {
+    font-family: "Inter", sans-serif;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.4px !important;
+    color: #555555;
+  }
+
+  /* Figma 2329:5884 — exact FSM mobile integrations composition. */
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-integrations-inner {
+    width: 100%;
+    max-width: 320px;
+    gap: 36px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-integrations-header {
+    width: 320px;
+    height: 124px;
+    gap: 8px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-integrations-heading {
+    width: 320px;
+    max-width: 320px;
+    margin: 0;
+    font-family: "TASA Orbiter", sans-serif !important;
+    font-size: 26px !important;
+    font-style: normal;
+    font-weight: 500 !important;
+    line-height: 36px !important;
+    text-align: center;
+    text-transform: capitalize;
+    background: linear-gradient(0deg, #000000 0%, #ff7f1c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-integrations-description {
+    width: 320px;
+    max-width: 320px;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px !important;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color: #555555;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-integrations-mobile {
+    position: relative;
+    display: block;
+    width: 340px;
+    height: 585px;
+    margin-left: -10px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-orb {
+    position: absolute;
+    z-index: 1;
+    top: 55px;
+    left: 0;
+    width: 340px;
+    height: 463px;
+    margin: 0;
+    aspect-ratio: auto;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills {
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    height: 160px;
+    gap: 8px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:first-child {
+    top: 0;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:last-child {
+    top: 425px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pill {
+    box-sizing: border-box;
+    flex: 0 0 48px;
+    height: 48px;
+    min-height: 48px;
+    gap: 16px;
+    padding: 4px 16px 4px 10px;
+    border: 1px solid #ffffff;
+    border-radius: 50px;
+    background: linear-gradient(180deg, #ffffff 0%, #f3f3f3 100%);
+    box-shadow: none;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pill-label {
+    flex: 0 0 auto;
+    font-family: "TASA Orbiter", sans-serif;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px !important;
+    white-space: nowrap;
+    color: #ff7f1c;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pill-icon,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pill-icon img {
+    flex: 0 0 auto;
+    height: 40px !important;
+    object-fit: contain;
+  }
+
+  /* Top tubes: Accounting, CRM, ITSM. DOM order is adjusted without changing desktop. */
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:first-child .sol-int-m-pill:nth-child(3) {
+    order: 1;
+    width: 296px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:first-child .sol-int-m-pill:nth-child(1) {
+    order: 2;
+    width: 232px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:first-child .sol-int-m-pill:nth-child(2) {
+    order: 3;
+    width: 188px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:first-child .sol-int-m-pill:nth-child(1) .sol-int-m-pill-icon,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:first-child .sol-int-m-pill:nth-child(1) .sol-int-m-pill-icon img,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:first-child .sol-int-m-pill:nth-child(3) .sol-int-m-pill-icon,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:first-child .sol-int-m-pill:nth-child(3) .sol-int-m-pill-icon img {
+    width: 74px !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:first-child .sol-int-m-pill:nth-child(2) .sol-int-m-pill-icon,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:first-child .sol-int-m-pill:nth-child(2) .sol-int-m-pill-icon img {
+    width: 73px !important;
+  }
+
+  /* Bottom tubes: ERP, IoT/device data, internal applications. */
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:last-child .sol-int-m-pill:nth-child(1) {
+    width: 203px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:last-child .sol-int-m-pill:nth-child(2) {
+    width: 232px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:last-child .sol-int-m-pill:nth-child(3) {
+    width: 307px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:last-child .sol-int-m-pill-icon,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-int-m-pills:last-child .sol-int-m-pill-icon img {
+    width: 73px !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-final-cta-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-final-cta-section > .sol-container {
     padding-right: 0;
     padding-left: 0;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-final-cta-banner {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-final-cta-banner {
     height: 359px;
     min-height: 359px;
     border-radius: 30px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-final-cta-heading {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-final-cta-heading {
     font-size: 32px !important;
     line-height: 37px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-faq-question,
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-faq-question--open {
+  .solutions-page:not(.platform-page).solutions-page--manufacturing .sol-final-cta-heading {
+    text-align: center;
+    font-family: "TASA Orbiter", sans-serif;
+    font-size: 31px !important;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 37px !important;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-faq-question,
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-faq-question--open {
     font-size: 16px !important;
     line-height: 26px !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-faq-answer {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-faq-answer {
     font-size: 13px;
     line-height: 21px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-faq-list {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-faq-list {
     gap: 12px;
+    min-height: 0;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-go-live-card {
+    min-height: 126px;
   }
 
   /* FSM mobile refinements from Figma nodes 2329:6503 and 2429:866. */
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-problem-card {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-problem-card {
     height: auto;
     min-height: 190px;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-problem-card-inner {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-problem-card-inner {
     height: auto;
     min-height: 0;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-problem-grid {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-problem-grid {
     box-sizing: border-box;
     padding-top: 12px;
     padding-bottom: 12px;
     overflow: visible;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-built-for-industries {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-built-for-industries {
     height: auto;
     min-height: 0;
     overflow: visible;
     border-radius: 0;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-built-for-industries-list {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-built-for-industries-list {
     height: auto;
     min-height: 0;
     justify-content: flex-start;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-bg {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-bg {
     display: none !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-section {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-section {
     height: 795px;
-    background-image: url("/solutions/fsm-service-workflow-mobile-bg.png");
+    background-image: url("/solutions/fsm-service-workflow-frame-1618877250.png");
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: 100% 795px;
+    /* Draw the blob taller than the box so its soft bottom fade is clipped —
+       otherwise the white glow floats above the next section's heading. */
+    background-size: 100% calc(100% + 64px);
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-progress-active {
+  /* Manufacturing descriptions wrap onto more lines than the FSM content.
+     Keep the shared frame as the minimum, but let the section grow so the CTA
+     and its bottom spacing remain inside the section instead of being clipped. */
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui.solutions-page--manufacturing .sol-workflow-section {
+    height: auto;
+    min-height: 795px;
+  }
+
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-progress-active {
     height: var(--sol-workflow-progress) !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-step-title {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-step-title {
     color: #000000 !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-step-title--active {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-step-title--active {
     color: #ff7f1c !important;
   }
 
-  .solutions-page:not(.platform-page).solutions-page--fsm .sol-workflow-change-bullets {
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-workflow-change-bullets {
     margin-bottom: 40px;
   }
 
-  body:has(.solutions-page--fsm) .footer-body-wrapper > div[style*="height: 1px"] {
+  body:has(.solutions-page--shared-mobile-ui) .footer-body-wrapper > div[style*="height: 1px"] {
     margin-top: 28px !important;
   }
 
-  body:has(.solutions-page--fsm) .footer-bottom {
+  body:has(.solutions-page--shared-mobile-ui) > footer {
+    padding-bottom: 11px;
+  }
+
+  body:has(.solutions-page--shared-mobile-ui) .footer-bottom {
     align-items: center !important;
     gap: 13px !important;
     padding: 28px 0 10px !important;
     text-align: center !important;
   }
 
-  body:has(.solutions-page--fsm) .footer-bottom > p,
-  body:has(.solutions-page--fsm) .footer-bottom a {
+  body:has(.solutions-page--shared-mobile-ui) .footer-bottom > p,
+  body:has(.solutions-page--shared-mobile-ui) .footer-bottom a {
     font-size: 11px !important;
     line-height: 17.6px !important;
   }
 
-  body:has(.solutions-page--fsm) .footer-bottom > div {
+  body:has(.solutions-page--shared-mobile-ui) .footer-bottom > div {
     gap: 7px !important;
   }
 
-  body:has(.solutions-page--fsm) .footer-bottom > div > span {
+  body:has(.solutions-page--shared-mobile-ui) .footer-bottom > div > span {
     display: none;
   }
 
-  body:has(.solutions-page--fsm) .footer-bottom > div a {
+  body:has(.solutions-page--shared-mobile-ui) .footer-bottom > div a {
     color: #1c2bff !important;
   }
 }
