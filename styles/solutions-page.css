@@ -7311,6 +7311,14 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
     margin-top: 20px !important;
   }
 
+  .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .dg-hero-outer .sol-hero-bullets {
+    width: 100%;
+    max-width: 311px;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    padding-left: 0;
+  }
+
   .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-hero-actions-mobile .sol-hero-actions {
     width: 250px;
   }
@@ -7489,10 +7497,11 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   }
 
   .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-media-mobile {
-    width: 100% !important;
+    align-self: center;
     height: 320px;
-    margin-left: -8px;
     width: 320px !important;
+    margin-right: 0;
+    margin-left: 0;
   }
 
   .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-panel-media {
@@ -7502,12 +7511,15 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-media-mobile img {
     width: 320px !important;
     height: 320px !important;
+    margin-right: auto;
+    margin-left: auto;
+    object-position: center;
   }
 
   .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-media-mobile--3 {
     width: 280px !important;
     height: 280px;
-    margin-left: 12px;
+    margin-left: 0;
   }
 
   .solutions-page:not(.platform-page).solutions-page--shared-mobile-ui .sol-cap-media-mobile--3 img {
@@ -7528,7 +7540,7 @@ button.sol-workflow-change-node.sol-workflow-change-node-5 {
   .solutions-page--manufacturing.solutions-page--shared-mobile-ui .sol-cap-media-mobile {
     width: 320px !important;
     height: auto;
-    margin-left: -8px;
+    margin-left: 0;
   }
 
   .solutions-page--itsm.solutions-page--shared-mobile-ui .sol-cap-media-mobile img,
