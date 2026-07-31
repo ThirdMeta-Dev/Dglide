@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Cap how long CDNs may serve stale ISR pages (stale-while-revalidate window).
+  // Blog pages revalidate every 300s; this bounds worst-case staleness to ~10 min
+  // instead of the Next.js default of one year. Origin regeneration cadence (and
+  // therefore Supabase query/egress volume) is unchanged.
+  expireTime: 600,
   async redirects() {
     return [
       {
