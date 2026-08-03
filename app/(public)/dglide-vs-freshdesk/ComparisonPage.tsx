@@ -8,6 +8,8 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 import WDFAQSection from "@/components/why-dglide/sections/WDFAQSection";
 import CTASection from "@/components/sections/CTASection";
+import { fsmIntegrationsDescription, fsmIntegrationsHeading } from "@/data/fsmPageData";
+import { integrationNodes } from "@/data/solutionsPageData";
 import ComparisonMatrix from "./ComparisonMatrix";
 import {
   caseStudyData,
@@ -25,19 +27,6 @@ const LOGOS = [
   { src: "/logos/logo-4.png", alt: "Clarion" },
   { src: "/logos/logo-5.png", alt: "Indo Tech" },
 ];
-
-const integrationNodes = {
-  left: [
-    { label: "CRM systems", icon: "/solutions/integrations-hub/crm-systems.svg" },
-    { label: "ITSM tools", icon: "/solutions/integrations-hub/itsm-tools.svg" },
-    { label: "Accounting and billing tools", icon: "/solutions/integrations-hub/accounting-billing-tools.svg" },
-  ],
-  right: [
-    { label: "ERP systems", icon: "/solutions/integrations-hub/erp-systems.svg" },
-    { label: "IoT or device data", icon: "/solutions/integrations-hub/iot-device-data.svg" },
-    { label: "Internal business applications", icon: "/solutions/integrations-hub/internal-business-apps.svg" },
-  ],
-};
 
 const howItWorksData = {
   title: "How DGlide Works",
@@ -287,12 +276,12 @@ export default function ComparisonPage({ homepageSections }: { homepageSections:
         <WinsSection />
         <FullComparison />
 
-        <div className={`solutions-page ${styles.integrationsShell}`}>
+        <div className="solutions-page solutions-page--fsm solutions-page--shared-mobile-ui">
           <IntegrationsHubSection
-            heading="Connect DGlide With the Systems You Already Use"
-            description="DGlide is designed to work with your existing business environment instead of replacing everything at once."
+            heading={fsmIntegrationsHeading}
+            description={fsmIntegrationsDescription}
+            mobileDescription="DGlide is designed to work with your existing business environment."
             nodes={integrationNodes}
-            mobileNodes={integrationNodes}
           />
         </div>
 

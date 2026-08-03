@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { comparisonGroups } from "./comparison-data";
+import { calculateAccordionScrollTarget } from "./accordion-scroll";
 import styles from "./ComparisonPage.module.css";
 
 function Value({ value, product }: { value: string; product: "dglide" | "freshdesk" }) {
@@ -30,8 +32,6 @@ function FeatureTick() {
 export default function ComparisonMatrix() {
   const [openIndex, setOpenIndex] = useState(0);
   const matrixRef = useRef<HTMLDivElement>(null);
-  const pendingAlignmentRef = useRef<number | null>(null);
-  const alignmentTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     const matrix = matrixRef.current;
@@ -57,40 +57,52 @@ export default function ComparisonMatrix() {
     return () => {
       resizeObserver.disconnect();
       window.removeEventListener("resize", updateStickyTop);
-      if (alignmentTimerRef.current !== null) {
-        window.clearTimeout(alignmentTimerRef.current);
-      }
     };
   }, []);
 
-  const alignOpenedGroup = (groupIndex: number) => {
-    if (pendingAlignmentRef.current !== groupIndex) return;
-
-    if (alignmentTimerRef.current !== null) {
-      window.clearTimeout(alignmentTimerRef.current);
+  const toggleGroup = (groupIndex: number, isOpen: boolean) => {
+    if (isOpen) {
+      setOpenIndex(-1);
+      return;
     }
 
-    alignmentTimerRef.current = window.setTimeout(() => {
-      const matrix = matrixRef.current;
-      const group = matrix?.querySelector<HTMLElement>(
-        `[data-comparison-group="${groupIndex}"]`
-      );
-      if (!matrix || !group || pendingAlignmentRef.current !== groupIndex) return;
+    const matrix = matrixRef.current;
+    const targetGroup = matrix?.querySelector<HTMLElement>(
+      `[data-comparison-group="${groupIndex}"]`
+    );
+    if (!matrix || !targetGroup) {
+      setOpenIndex(groupIndex);
+      return;
+    }
 
-      const stickyTop = Number.parseFloat(
-        matrix.style.getPropertyValue("--matrix-group-sticky-top")
-      ) || 0;
-      const targetTop = window.scrollY + group.getBoundingClientRect().top - stickyTop;
+    const previousGroup = openIndex >= 0
+      ? matrix.querySelector<HTMLElement>(`[data-comparison-group="${openIndex}"]`)
+      : null;
+    const previousButton = previousGroup?.querySelector<HTMLElement>("button");
+    const collapsingContentHeight = previousGroup && previousButton && openIndex < groupIndex
+      ? previousGroup.getBoundingClientRect().height - previousButton.getBoundingClientRect().height
+      : 0;
+    const stickyTop = Number.parseFloat(
+      matrix.style.getPropertyValue("--matrix-group-sticky-top")
+    ) || 0;
+    const precedingGroup = targetGroup.previousElementSibling as HTMLElement | null;
+    const precedingButton = precedingGroup?.querySelector<HTMLElement>("button");
+    const precedingTriggerHeight = precedingButton
+      ? precedingButton.getBoundingClientRect().height
+        + (Number.parseFloat(window.getComputedStyle(targetGroup).marginTop) || 0)
+      : 0;
 
-      window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });
-      pendingAlignmentRef.current = null;
-      alignmentTimerRef.current = null;
-    }, 80);
-  };
-
-  const toggleGroup = (groupIndex: number, isOpen: boolean) => {
-    pendingAlignmentRef.current = isOpen ? null : groupIndex;
-    setOpenIndex(isOpen ? -1 : groupIndex);
+    window.scrollTo({
+      top: calculateAccordionScrollTarget({
+        currentScrollY: window.scrollY,
+        targetGroupTop: targetGroup.getBoundingClientRect().top,
+        stickyTop,
+        collapsingContentHeight,
+        precedingTriggerHeight,
+      }),
+      behavior: "auto",
+    });
+    setOpenIndex(groupIndex);
   };
 
   return (
@@ -122,24 +134,54 @@ export default function ComparisonMatrix() {
               {isOpen ? (
                 <motion.div
                   id={`comparison-group-${groupIndex}`}
-                  className={styles.matrixRows}
+                  className={styles.matrixRowsMotion}
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-                  onAnimationComplete={() => alignOpenedGroup(groupIndex)}
                 >
-                  {group.rows.map((row) => (
-                    <div className={styles.matrixRow} key={row.feature}>
-                      <div className={styles.matrixFeature}><FeatureTick /><span>{row.feature}</span></div>
-                      <div className={styles.matrixValue} data-label="DGlide">
-                        <Value value={row.dglide} product="dglide" />
+                  <div
+                    className={styles.matrixRowsViewport}
+                    role="region"
+                    tabIndex={0}
+                    aria-label={`${group.title} comparison table. Scroll horizontally to see all columns.`}
+                  >
+                    <div className={styles.matrixRows}>
+                      <div className={styles.matrixMobileColumnHeader} aria-hidden>
+                        <span>Capability</span>
+                        <span className={styles.matrixMobileBrand}>
+                          <Image
+                            className={styles.matrixMobileDglideLogo}
+                            src="/logo.png"
+                            alt=""
+                            width={320}
+                            height={56}
+                          />
+                        </span>
+                        <span className={styles.matrixMobileBrand}>
+                          <Image
+                            className={styles.matrixMobileFreshdeskLogo}
+                            src="/comparison/freshdesk-logo.png"
+                            alt=""
+                            width={47}
+                            height={49}
+                          />
+                          <span className={styles.matrixMobileFreshworksText}>freshworks</span>
+                        </span>
                       </div>
-                      <div className={styles.matrixValue} data-label="Freshdesk">
-                        <Value value={row.freshdesk} product="freshdesk" />
-                      </div>
+                      {group.rows.map((row) => (
+                        <div className={styles.matrixRow} key={row.feature}>
+                          <div className={styles.matrixFeature}><FeatureTick /><span>{row.feature}</span></div>
+                          <div className={styles.matrixValue} data-label="DGlide">
+                            <Value value={row.dglide} product="dglide" />
+                          </div>
+                          <div className={styles.matrixValue} data-label="Freshdesk">
+                            <Value value={row.freshdesk} product="freshdesk" />
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </motion.div>
               ) : null}
             </AnimatePresence>

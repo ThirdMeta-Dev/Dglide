@@ -511,8 +511,7 @@
 }
 
 .matrixGroupButton {
-  position: sticky;
-  top: var(--matrix-group-sticky-top, 269px);
+  position: relative;
   z-index: 7;
   scroll-margin-top: var(--matrix-group-sticky-top, 269px);
   width: 100%;
@@ -538,20 +537,29 @@
 }
 
 .matrixGroupOpen .matrixGroupButton {
+  position: sticky;
+  top: var(--matrix-group-sticky-top, 269px);
   border-radius: 16px 16px 0 0;
-  box-shadow: 0 -14px 0 14px #f3f3f3;
+  box-shadow: 0 -3px 0 3px #f3f3f3;
 }
 
 .matrixGroupOpen .matrixGroupButton svg {
   transform: rotate(180deg);
 }
 
-.matrixRows {
+.matrixRowsMotion {
   margin-top: 2px;
-  padding: 36px;
   border-radius: 0 0 12px 12px;
   background: #fff;
   overflow: hidden;
+}
+
+.matrixRows {
+  padding: 36px;
+}
+
+.matrixMobileColumnHeader {
+  display: none;
 }
 
 .matrixRow {
@@ -611,26 +619,6 @@
   text-align: center;
   font: 400 15px/24px var(--font-inter), sans-serif;
   color: #6f7276;
-}
-
-.integrationsShell {
-  background: #f3f3f3;
-}
-
-.integrationsShell :global(.sol-integrations-section) {
-  padding-top: 80px;
-  padding-bottom: 48px;
-}
-
-.integrationsShell :global(.sol-integrations-heading) {
-  background: linear-gradient(90deg, var(--comparison-orange), #000 80%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.integrationsShell :global(.sol-int-m-orb) {
-  position: relative;
 }
 
 .valueCardsSection {
@@ -981,47 +969,122 @@
   }
 
   .matrixGroupButton {
-    top: var(--matrix-group-sticky-top, 250px);
     min-height: 60px;
-    padding-inline: 20px;
-    font-size: 16px;
+    padding: 12px 16px;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .matrixGroupButton svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .matrixRowsViewport {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #b8b8b8 #eeeeee;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .matrixRowsViewport::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .matrixRowsViewport::-webkit-scrollbar-track {
+    background: #eeeeee;
+  }
+
+  .matrixRowsViewport::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #b8b8b8;
   }
 
   .matrixRows {
-    padding: 24px 20px;
+    min-width: 560px;
+    padding: 18px 18px 20px;
+  }
+
+  .matrixMobileColumnHeader {
+    padding: 0 0 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #dedede;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 20% 30%;
+    align-items: center;
+    font: 600 11px/16px var(--font-sora), sans-serif;
+    color: #777b80;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .matrixMobileBrand {
+    min-height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .matrixMobileDglideLogo {
+    width: 54px;
+    height: auto;
+  }
+
+  .matrixMobileFreshdeskLogo {
+    width: 18px;
+    height: 19px;
+    object-fit: contain;
+  }
+
+  .matrixMobileFreshworksText {
+    margin-left: 5px;
+    font: 600 12px/16px var(--font-inter), sans-serif;
+    color: #262525;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    white-space: nowrap;
   }
 
   .matrixRow {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: minmax(0, 1fr) 20% 30%;
+    gap: 0;
     padding: 0;
-    font-size: 14px;
-    line-height: 21px;
+    font-size: 13px;
+    line-height: 18px;
   }
 
   .matrixFeature {
-    grid-column: 1 / -1;
-    font-weight: 500;
+    grid-column: auto;
+    gap: 10px;
+    padding-right: 18px;
+    font-weight: 400;
+  }
+
+  .matrixFeatureTick {
+    width: 18px;
+    height: 12px;
+    flex-basis: 18px;
+  }
+
+  .matrixRow + .matrixRow {
+    margin-top: 24px;
+  }
+
+  .matrixRow + .matrixRow::before {
+    top: -12px;
   }
 
   .matrixValue::before {
-    content: attr(data-label);
-    display: block;
-    margin-bottom: 5px;
-    font: 500 11px/16px var(--font-sora), sans-serif;
-    color: #8a8a8a;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    content: none;
   }
 
   .comparisonFootnote {
     font-size: 12px;
     line-height: 19px;
-  }
-
-  .integrationsShell :global(.sol-integrations-section) {
-    padding-top: 64px !important;
-    padding-bottom: 64px !important;
   }
 
   .valueCards {
