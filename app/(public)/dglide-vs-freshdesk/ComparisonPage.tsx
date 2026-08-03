@@ -307,12 +307,18 @@ export default function ComparisonPage({ homepageSections }: { homepageSections:
           />
         </div>
 
-        <HowItWorksSection data={howItWorksData} />
+        <div className={styles.howItWorksNoBackground}>
+          <HowItWorksSection data={howItWorksData} smoothProgress />
+        </div>
         <TestimonialsSection data={homepageSections.testimonials} />
         <CaseStudiesSection data={caseStudyData} />
         <ValueCards />
-        <WDFAQSection data={comparisonFaqData} />
-        <CTASection data={ctaData} />
+        <div className={styles.sectionSpacing130}>
+          <WDFAQSection data={comparisonFaqData} />
+        </div>
+        <div className={styles.sectionSpacing130}>
+          <CTASection data={ctaData} />
+        </div>
       </div>
     </AnimatedPublicPage>
   );

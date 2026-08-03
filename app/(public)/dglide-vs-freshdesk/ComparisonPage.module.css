@@ -9,6 +9,14 @@
   overflow: clip;
 }
 
+.sectionSpacing130 > section {
+  padding-top: 130px !important;
+}
+
+.howItWorksNoBackground > section {
+  background-image: none !important;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
