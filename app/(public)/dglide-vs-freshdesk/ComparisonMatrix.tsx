@@ -182,7 +182,7 @@ export default function ComparisonMatrix() {
                           <div className={styles.matrixValue} data-label="DGlide">
                             <Value value={row.dglide} product="dglide" />
                           </div>
-                          <div className={styles.matrixValue} data-label="Freshdesk">
+                          <div className={`${styles.matrixValue} ${styles.matrixValueFreshdesk}`} data-label="Freshdesk">
                             <Value value={row.freshdesk} product="freshdesk" />
                           </div>
                         </div>

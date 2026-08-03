@@ -605,6 +605,10 @@
   min-width: 0;
 }
 
+.matrixValueFreshdesk {
+  padding-left: 30px;
+}
+
 .value {
   display: inline;
   font-weight: 600;
