@@ -23,8 +23,15 @@ function Value({ value, product }: { value: string; product: "dglide" | "freshde
 
 function FeatureTick() {
   return (
-    <svg className={styles.matrixFeatureTick} viewBox="0 0 22 14" aria-hidden>
-      <path d="M2 7.2 7.4 10 20 3.5 16.7 2 7.4 6.8 5 5.6Z" fill="currentColor" />
+    <svg xmlns="http://www.w3.org/2000/svg" className={styles.matrixFeatureTick} width="24" height="14" viewBox="0 0 24 14" fill="none" aria-hidden>
+      <path d="M4.92601 6.82581L9.4923 9.10904L18.6249 4.54257L22.2779 6.36916L9.4923 12.7622L1.27297 8.65239L4.92601 6.82581Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 6.50354L9.4923 8.78677L18.6249 4.22031L22.2779 6.04689L9.4923 12.4399L1.27297 8.33013L4.92601 6.50354Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 6.18121L9.4923 8.46445L18.6249 3.89798L22.2779 5.72457L9.4923 12.1176L1.27297 8.0078L4.92601 6.18121Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 5.85895L9.4923 8.14218L18.6249 3.57571L22.2779 5.4023L9.4923 11.7954L1.27297 7.68553L4.92601 5.85895Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 5.53528L9.4923 7.81851L18.6249 3.25204L22.2779 5.07863L9.4923 11.4717L1.27297 7.36187L4.92601 5.53528Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 5.211L9.4923 7.49423L18.6249 2.92776L22.2779 4.75435L9.4923 11.1474L1.27297 7.03759L4.92601 5.211Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 4.88879L9.4923 7.17203L18.6249 2.60556L22.2779 4.43215L9.4923 10.8252L1.27297 6.71538L4.92601 4.88879Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 4.56647L9.4923 6.8497L18.6249 2.28323L22.2779 4.10982L9.4923 10.5029L1.27297 6.39305L4.92601 4.56647Z" fill="white" stroke="#FF7F1C" strokeWidth="1.18585" strokeLinecap="round" />
     </svg>
   );
 }

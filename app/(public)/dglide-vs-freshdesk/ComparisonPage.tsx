@@ -54,10 +54,32 @@ function Arrow() {
   );
 }
 
-function Tick() {
+function Tick({ variant }: { variant: "dglide" | "freshdesk" }) {
+  if (variant === "dglide") {
+    return (
+      <svg className={styles.fitCardTickDglide} xmlns="http://www.w3.org/2000/svg" width="22" height="13" viewBox="0 0 22 13" fill="none" aria-hidden>
+        <path d="M4.64021 6.29141L8.8494 8.39579L17.2678 4.18703L20.6351 5.87053L8.8494 11.7628L1.27285 7.97492L4.64021 6.29141Z" fill="#030D8F" stroke="#030D8F" strokeWidth="1.42302" strokeLinecap="round" />
+        <path d="M4.64021 5.99679L8.8494 8.10118L17.2678 3.89241L20.6351 5.57592L8.8494 11.4682L1.27285 7.6803L4.64021 5.99679Z" fill="#030D8F" stroke="#030D8F" strokeWidth="1.42302" strokeLinecap="round" />
+        <path d="M4.64021 5.69803L8.8494 7.80241L17.2678 3.59364L20.6351 5.27715L8.8494 11.1694L1.27285 7.38153L4.64021 5.69803Z" fill="#030D8F" stroke="#030D8F" strokeWidth="1.42302" strokeLinecap="round" />
+        <path d="M4.64802 5.39981L8.85721 7.50419L17.2756 3.29542L20.643 4.97893L8.85721 10.8712L1.28066 7.08332L4.64802 5.39981Z" fill="#030D8F" stroke="#030D8F" strokeWidth="1.42302" strokeLinecap="round" />
+        <path d="M4.64802 5.10238L8.85721 7.20677L17.2756 2.998L20.643 4.68151L8.85721 10.5738L1.28066 6.78589L4.64802 5.10238Z" fill="#030D8F" stroke="#030D8F" strokeWidth="1.42302" strokeLinecap="round" />
+        <path d="M4.64021 4.80356L8.8494 6.90794L17.2678 2.69917L20.6351 4.38268L8.8494 10.275L1.27285 6.48706L4.64021 4.80356Z" fill="#030D8F" stroke="#030D8F" strokeWidth="1.42302" strokeLinecap="round" />
+        <path d="M4.64802 4.50619L8.85721 6.61058L17.2756 2.40181L20.643 4.08532L8.85721 9.97759L1.28066 6.1897L4.64802 4.50619Z" fill="#030D8F" stroke="#030D8F" strokeWidth="1.42302" strokeLinecap="round" />
+        <path d="M4.64802 4.20877L8.85721 6.31315L17.2756 2.10438L20.643 3.78789L8.85721 9.68017L1.28066 5.89228L4.64802 4.20877Z" fill="white" stroke="#FF7F1C" strokeWidth="1.18585" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
   return (
-    <svg viewBox="0 0 22 14" aria-hidden>
-      <path d="M2 7.2 7.4 10 20 3.5 16.7 2 7.4 6.8 5 5.6Z" fill="currentColor" />
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="14" viewBox="0 0 24 14" fill="none" aria-hidden>
+      <path d="M4.92601 6.82581L9.4923 9.10904L18.6249 4.54257L22.2779 6.36916L9.4923 12.7622L1.27297 8.65239L4.92601 6.82581Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 6.50354L9.4923 8.78677L18.6249 4.22031L22.2779 6.04689L9.4923 12.4399L1.27297 8.33013L4.92601 6.50354Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 6.18121L9.4923 8.46445L18.6249 3.89798L22.2779 5.72457L9.4923 12.1176L1.27297 8.0078L4.92601 6.18121Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 5.85895L9.4923 8.14218L18.6249 3.57571L22.2779 5.4023L9.4923 11.7954L1.27297 7.68553L4.92601 5.85895Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 5.53528L9.4923 7.81851L18.6249 3.25204L22.2779 5.07863L9.4923 11.4717L1.27297 7.36187L4.92601 5.53528Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 5.211L9.4923 7.49423L18.6249 2.92776L22.2779 4.75435L9.4923 11.1474L1.27297 7.03759L4.92601 5.211Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 4.88879L9.4923 7.17203L18.6249 2.60556L22.2779 4.43215L9.4923 10.8252L1.27297 6.71538L4.92601 4.88879Z" fill="#FFF0E5" stroke="#FFF0E5" strokeWidth="1.42302" strokeLinecap="round" />
+      <path d="M4.92601 4.56647L9.4923 6.8497L18.6249 2.28323L22.2779 4.10982L9.4923 10.5029L1.27297 6.39305L4.92601 4.56647Z" fill="white" stroke="#FF7F1C" strokeWidth="1.18585" strokeLinecap="round" />
     </svg>
   );
 }
@@ -170,7 +192,7 @@ function FitSection() {
                 <p>{card.description}</p>
                 <ul>
                   {card.bullets.map((bullet) => (
-                    <li key={bullet}><Tick /><span>{bullet}</span></li>
+                    <li key={bullet}><Tick variant={card.kind} /><span>{bullet}</span></li>
                   ))}
                 </ul>
               </article>
