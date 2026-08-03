@@ -66,19 +66,19 @@ export const winRows = [
     title: "From Ticket to Verified Field Close",
     description:
       "A customer reports a fault on WhatsApp. DGlide logs the ticket, raises the work order, dispatches the technician, and closes only after an on-site OTP. Freshdesk needs a separate module before that chain even starts.",
-    image: "/comparison/how-win-field.png",
+    image: "/comparison/how-win-field-v2.png",
   },
   {
     title: "Your Process Moves. The System Follows.",
     description:
       "Add an approval step, a new contract type, or a different escalation path by configuration. Your operations lead ships the change in days. In a helpdesk, bigger changes wait on higher tiers and product limits.",
-    image: "/comparison/how-win-workflow.png",
+    image: "/comparison/how-win-workflow-v2.png",
   },
   {
     title: "One Platform Instead of a Stack",
     description:
       "Freshdesk pricing grows per agent, then again for Omni channels, then again for AI add-ons. DGlide covers servicedesk, field service, ITSM, and CRM on one platform, for 30% lower pricing.",
-    image: "/comparison/how-win-stack.png",
+    image: "/comparison/how-win-stack-v2.png",
   },
 ] as const;
 
