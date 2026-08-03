@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { comparisonGroups } from "./comparison-data";
 import styles from "./ComparisonPage.module.css";
@@ -29,18 +29,86 @@ function FeatureTick() {
 
 export default function ComparisonMatrix() {
   const [openIndex, setOpenIndex] = useState(0);
+  const matrixRef = useRef<HTMLDivElement>(null);
+  const pendingAlignmentRef = useRef<number | null>(null);
+  const alignmentTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const matrix = matrixRef.current;
+    const stickyHeader = matrix
+      ?.closest("section")
+      ?.querySelector<HTMLElement>("[data-comparison-sticky-header]");
+
+    if (!matrix || !stickyHeader) return;
+
+    const updateStickyTop = () => {
+      const headerTop = Number.parseFloat(window.getComputedStyle(stickyHeader).top) || 0;
+      matrix.style.setProperty(
+        "--matrix-group-sticky-top",
+        `${Math.ceil(headerTop + stickyHeader.getBoundingClientRect().height)}px`
+      );
+    };
+
+    updateStickyTop();
+    const resizeObserver = new ResizeObserver(updateStickyTop);
+    resizeObserver.observe(stickyHeader);
+    window.addEventListener("resize", updateStickyTop);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateStickyTop);
+      if (alignmentTimerRef.current !== null) {
+        window.clearTimeout(alignmentTimerRef.current);
+      }
+    };
+  }, []);
+
+  const alignOpenedGroup = (groupIndex: number) => {
+    if (pendingAlignmentRef.current !== groupIndex) return;
+
+    if (alignmentTimerRef.current !== null) {
+      window.clearTimeout(alignmentTimerRef.current);
+    }
+
+    alignmentTimerRef.current = window.setTimeout(() => {
+      const matrix = matrixRef.current;
+      const group = matrix?.querySelector<HTMLElement>(
+        `[data-comparison-group="${groupIndex}"]`
+      );
+      if (!matrix || !group || pendingAlignmentRef.current !== groupIndex) return;
+
+      const stickyTop = Number.parseFloat(
+        matrix.style.getPropertyValue("--matrix-group-sticky-top")
+      ) || 0;
+      const targetTop = window.scrollY + group.getBoundingClientRect().top - stickyTop;
+
+      window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });
+      pendingAlignmentRef.current = null;
+      alignmentTimerRef.current = null;
+    }, 80);
+  };
+
+  const toggleGroup = (groupIndex: number, isOpen: boolean) => {
+    pendingAlignmentRef.current = isOpen ? null : groupIndex;
+    setOpenIndex(isOpen ? -1 : groupIndex);
+  };
 
   return (
-    <div className={styles.matrix}>
+    <div className={styles.matrix} ref={matrixRef}>
       {comparisonGroups.map((group, groupIndex) => {
         const isOpen = openIndex === groupIndex;
 
         return (
-          <div className={`${styles.matrixGroup} ${isOpen ? styles.matrixGroupOpen : ""}`} key={group.title}>
+          <div
+            className={`${styles.matrixGroup} ${isOpen ? styles.matrixGroupOpen : ""}`}
+            data-comparison-group={groupIndex}
+            key={group.title}
+          >
             <button
               type="button"
               className={styles.matrixGroupButton}
-              onClick={() => setOpenIndex(isOpen ? -1 : groupIndex)}
+              onClick={() => toggleGroup(groupIndex, isOpen)}
+              data-comparison-group-trigger={groupIndex}
               aria-expanded={isOpen}
               aria-controls={`comparison-group-${groupIndex}`}
             >
@@ -59,6 +127,7 @@ export default function ComparisonMatrix() {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                  onAnimationComplete={() => alignOpenedGroup(groupIndex)}
                 >
                   {group.rows.map((row) => (
                     <div className={styles.matrixRow} key={row.feature}>

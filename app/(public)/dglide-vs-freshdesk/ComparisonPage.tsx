@@ -228,7 +228,7 @@ function FullComparison() {
   return (
     <section id="full-comparison" className={styles.comparisonSection}>
       <div className={styles.container}>
-        <div className={styles.comparisonStickyHeader}>
+        <div className={styles.comparisonStickyHeader} data-comparison-sticky-header>
           <div className={styles.comparisonHeading}>
             <ScrollReveal direction="up">
               <h2 className={styles.sectionTitle}>DGlide vs Freshdesk Full Comparison</h2>

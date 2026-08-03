@@ -1,5 +1,5 @@
 import { permanentRedirect } from "next/navigation";
 
-export default function DGlideVsFreshdeskRedirect() {
+export default function FreshdeskAlternativeBlogRedirect() {
   permanentRedirect("/freshdesk-alternative");
 }

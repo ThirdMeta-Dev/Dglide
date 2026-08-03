@@ -58,7 +58,7 @@
   max-width: 1064px;
   margin: 0;
   font-family: var(--font-tasa-orbiter), sans-serif;
-  font-size: clamp(46px, 5vw, 60px);
+  font-size: clamp(46px, 5vw, 56px);
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -1.3px;
@@ -486,6 +486,7 @@
 
 .matrix {
   margin-top: 0;
+  overflow-anchor: none;
 }
 
 .matrixProductHeader {
@@ -510,6 +511,10 @@
 }
 
 .matrixGroupButton {
+  position: sticky;
+  top: var(--matrix-group-sticky-top, 269px);
+  z-index: 7;
+  scroll-margin-top: var(--matrix-group-sticky-top, 269px);
   width: 100%;
   min-height: 60px;
   padding: 16px 36px;
@@ -534,6 +539,7 @@
 
 .matrixGroupOpen .matrixGroupButton {
   border-radius: 16px 16px 0 0;
+  box-shadow: 0 -14px 0 14px #f3f3f3;
 }
 
 .matrixGroupOpen .matrixGroupButton svg {
@@ -975,6 +981,7 @@
   }
 
   .matrixGroupButton {
+    top: var(--matrix-group-sticky-top, 250px);
     min-height: 60px;
     padding-inline: 20px;
     font-size: 16px;

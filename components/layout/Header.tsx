@@ -233,12 +233,19 @@ export default function Header({ navItems, settings }: Props) {
   requiredSolutionLinks.forEach((required) => {
     if (!solutionChildren.some((child) => child.href === required.href)) solutionChildren.push(required);
   });
-  const resourceChildren = [...(sourceResources?.children ?? [])];
+  const resourceChildren = (sourceResources?.children ?? []).map((child) =>
+    child.href === "/dglide-vs-freshdesk"
+      ? { ...child, label: "Comparison", href: "/freshdesk-alternative" }
+      : child
+  );
   if (!resourceChildren.some((child) => child.href === "/blogs")) {
     resourceChildren.push({ label: "Blog", href: "/blogs", has_dropdown: false });
   }
   if (!resourceChildren.some((child) => child.href === "/case-studies")) {
     resourceChildren.push({ label: "Case Studies", href: "/case-studies", has_dropdown: false });
+  }
+  if (!resourceChildren.some((child) => child.href === "/freshdesk-alternative")) {
+    resourceChildren.push({ label: "Comparison", href: "/freshdesk-alternative", has_dropdown: false });
   }
   const nav: NavItemData[] = [
     { label: "Platform", href: "/platform", has_dropdown: false },
