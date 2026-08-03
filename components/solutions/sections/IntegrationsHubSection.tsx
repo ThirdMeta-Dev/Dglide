@@ -61,6 +61,7 @@ const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = (
                 src={centerImageSrc}
                 alt=""
                 fill
+                sizes="358px"
                 style={{ objectFit: "contain" }}
                 priority
               />
@@ -116,6 +117,7 @@ const IntegrationsHubSection: FunctionComponent<IntegrationsHubSectionProps> = (
               src="/solutions/integrations-hub-center-mobile.png"
               alt=""
               fill
+              sizes="280px"
               style={{ objectFit: "contain" }}
               priority
             />
