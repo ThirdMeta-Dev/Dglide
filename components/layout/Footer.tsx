@@ -94,6 +94,8 @@ const LEGACY_INTERNAL_HREFS: Record<string, string> = {
   "https://dglide.com/blog/": "/blogs",
   "https://www.dglide.com/blog": "/blogs",
   "https://www.dglide.com/blog/": "/blogs",
+  "/dglide-vs-freshdesk": "/freshdesk-vs-dglide",
+  "/freshdesk-alternative": "/freshdesk-vs-dglide",
 };
 
 function canonicalizeInternalHref(href: string) {
@@ -213,6 +215,13 @@ export default function Footer({
       !resolvedLinks.some((link) => link.href === "/case-studies")
     ) {
       resolvedLinks.push({ label: "Case Studies", href: "/case-studies" });
+    }
+
+    if (
+      def.heading === "Resources" &&
+      !resolvedLinks.some((link) => link.href === "/freshdesk-vs-dglide")
+    ) {
+      resolvedLinks.push({ label: "DGlide vs Freshdesk", href: "/freshdesk-vs-dglide" });
     }
 
     return {

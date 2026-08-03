@@ -15,7 +15,7 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: `${SITE_URL}/why-dglide`,            priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/about`,                 priority: 0.7, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/pricing`,               priority: 0.8, changeFrequency: 'weekly',  lastModified: new Date() },
-  { url: `${SITE_URL}/freshdesk-alternative`, priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
+  { url: `${SITE_URL}/freshdesk-vs-dglide`, priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/blogs`,                 priority: 0.8, changeFrequency: 'daily',   lastModified: new Date() },
   { url: `${SITE_URL}/contact-us`,            priority: 0.6, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/schedule-demo`,         priority: 0.7, changeFrequency: 'monthly', lastModified: new Date() },
@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   const blogEntries: MetadataRoute.Sitemap = posts
-    .filter((post) => post.slug !== 'freshdesk-alternative')
+    .filter((post) => !['freshdesk-alternative', 'freshdesk-vs-dglide'].includes(post.slug))
     .map((post) => ({
       url: `${SITE_URL}/blogs/${post.slug}`,
       lastModified: new Date(post.updatedAt || post.publishedAt || new Date()),
