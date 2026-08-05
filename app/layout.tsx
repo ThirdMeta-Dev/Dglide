@@ -21,6 +21,13 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700"],
 });
 
+const socialPreviewImage = {
+  url: '/social/dglide-homepage-hero.png',
+  width: 1754,
+  height: 1400,
+  alt: 'DGlide configurable operations platform homepage hero',
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dglide.com'),
   title: {
@@ -32,10 +39,12 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'DGlide',
     locale: 'en_US',
+    images: [socialPreviewImage],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@dglide',
+    images: [socialPreviewImage],
   },
   robots: {
     index: true,
