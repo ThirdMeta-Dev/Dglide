@@ -89,7 +89,7 @@ export async function POST(req: Request) {
     )
   }
 
-  sendNotification(`Case Study Download — ${study.title}`, {
+  await sendNotification(`Case Study Download — ${study.title}`, {
     name,
     email,
     phone,
@@ -99,7 +99,7 @@ export async function POST(req: Request) {
     ...source,
   }).catch((err: unknown) => console.error('Case study notification error:', err))
 
-  appendLeadToSheet('Case Study Download', {
+  await appendLeadToSheet('Case Study Download', {
     name,
     email,
     phone,

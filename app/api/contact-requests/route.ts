@@ -92,7 +92,7 @@ export async function POST(req: Request) {
     });
     if (error) throw error;
 
-    sendNotification(`New Contact Request — ${values.company}`, {
+    await sendNotification(`New Contact Request — ${values.company}`, {
       name: values.name,
       email: values.email,
       phone: values.contact,
@@ -101,7 +101,7 @@ export async function POST(req: Request) {
       ...source,
     }).catch((err: unknown) => console.error("Contact request email error:", err));
 
-    appendLeadToSheet('Contact Us', {
+    await appendLeadToSheet('Contact Us', {
       name: values.name,
       email: values.email,
       phone: values.contact,

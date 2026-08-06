@@ -56,10 +56,10 @@ export async function POST(req: Request) {
     });
     if (error) throw error;
 
-    sendNotification(`New Demo Request — ${company}`, { name, email, phone: contact, company, message, ...source })
+    await sendNotification(`New Demo Request — ${company}`, { name, email, phone: contact, company, message, ...source })
       .catch((err: unknown) => console.error("Demo request email error:", err));
 
-    appendLeadToSheet('Demo Request', { name, email, phone: contact, company, message, ...source }).catch(() => {});
+    await appendLeadToSheet('Demo Request', { name, email, phone: contact, company, message, ...source }).catch(() => {});
 
     return NextResponse.json({ success: true });
   } catch (err) {
