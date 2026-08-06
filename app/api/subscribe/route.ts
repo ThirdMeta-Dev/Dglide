@@ -37,8 +37,8 @@ export async function POST(req: Request) {
     console.error('Newsletter subscribe storage error:', storageError)
   }
 
-  appendLeadToSheet('Newsletter Subscribe', { email, ...source }).catch(() => {})
-  sendNotification('New Newsletter Subscribe', {
+  await appendLeadToSheet('Newsletter Subscribe', { email, ...source }).catch(() => {})
+  await sendNotification('New Newsletter Subscribe', {
     name: 'Newsletter Subscriber',
     email,
     company: 'Newsletter',
