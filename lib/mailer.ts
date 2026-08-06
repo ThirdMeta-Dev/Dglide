@@ -1,10 +1,14 @@
 import nodemailer from "nodemailer";
+import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
+
+const FROM_EMAIL = "no-reply@dglide.com";
+const sesConfigured = Boolean(process.env.SES_ACCESS_KEY_ID && process.env.SES_SECRET_ACCESS_KEY);
 
 export const NOTIFY_EMAILS = [
-  "drushti.gothi@hexanovate.com",
-  "vamshi.vadali@hexanovate.com",
-  "samir@dglide.com",
-  "letstalk@dglide.com",
+  "prathamesh@dglide.com",
+  "keerthi@dglide.com",
+  "arnav@dglide.com",
+  "anjan@dglide.com",
 ];
 
 function escapeHtml(str: string): string {
@@ -16,14 +20,18 @@ function escapeHtml(str: string): string {
     .replace(/'/g, "&#39;");
 }
 
+const sesClient = new SESv2Client({
+  region: process.env.SES_REGION || "ap-south-1",
+  credentials: sesConfigured
+    ? {
+        accessKeyId: process.env.SES_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.SES_SECRET_ACCESS_KEY!,
+      }
+    : undefined,
+});
+
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
+  SES: { sesClient, SendEmailCommand },
 });
 
 export type NotificationFields = {
@@ -48,8 +56,7 @@ export async function sendCaseStudyPdf(input: {
   company: string;
   pdfUrl: string;
 }) {
-  if (!process.env.SMTP_USER || !process.env.SMTP_PASS)
-    throw new Error("SMTP is not configured");
+  if (!sesConfigured) throw new Error("SES is not configured");
   const { to, name, title, company, pdfUrl } = input;
   const safeTitle = escapeHtml(title);
   const safeUrl = escapeHtml(pdfUrl);
@@ -81,7 +88,7 @@ export async function sendCaseStudyPdf(input: {
       .replace(/^-+|-+$/g, "")
       .slice(0, 80) || "case-study";
   await transporter.sendMail({
-    from: `DGlide <${process.env.SMTP_USER}>`,
+    from: `DGlide <${FROM_EMAIL}>`,
     to,
     subject: `Your DGlide case study: ${title}`,
     html,
@@ -95,7 +102,7 @@ export async function sendNotification(
   subject: string,
   fields: NotificationFields
 ) {
-  if (!process.env.SMTP_USER || !process.env.SMTP_PASS) return;
+  if (!sesConfigured) return;
   const { name, email, phone, company, message, formType, sourcePath, sourceUrl } = fields;
   const sourceLabel = sourcePath || sourceUrl || "";
   const html = `
@@ -112,7 +119,7 @@ export async function sendNotification(
     </table>
   `;
   await transporter.sendMail({
-    from: `DGlide <${process.env.SMTP_USER}>`,
+    from: `DGlide <${FROM_EMAIL}>`,
     to: NOTIFY_EMAILS,
     subject,
     html,
