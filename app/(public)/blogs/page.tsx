@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
-import { listBlogPostsSafe } from '@/lib/blog-db'
+import { listBlogPostsFreshSafe } from '@/lib/blog-db'
 import BlogsClient from './BlogsClient'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dglide.com'
 
-export const revalidate = 300 // re-fetch from Supabase at most every 5 minutes
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export const metadata: Metadata = {
   title: { absolute: 'ITSM & Field Service Blog | DGlide' },
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 }
 
 export default async function BlogsPage() {
-  const { docs: posts } = await listBlogPostsSafe({
+  const { docs: posts } = await listBlogPostsFreshSafe({
     publishedOnly: true,
     limit: 100,
     sortField: 'publishedAt',

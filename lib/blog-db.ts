@@ -1,5 +1,8 @@
 import { randomUUID } from 'node:crypto'
-import { supabaseService as supabase } from './supabase-service'
+import {
+  supabaseService as supabase,
+  supabaseServiceUncached as supabaseUncached,
+} from './supabase-service'
 import { slugify, countWords, calcReadingTime } from './blog-utils'
 
 export { slugify, countWords, calcReadingTime }
@@ -288,19 +291,22 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   }
 }
 
-export async function listBlogPosts(
-  options: {
-    page?: number
-    limit?: number
-    search?: string
-    status?: string
-    excludeStatus?: string
-    postType?: string
-    sortField?: string
-    sortDir?: 'asc' | 'desc'
-    publishedOnly?: boolean
-    fields?: 'full' | 'list'
-  } = {}
+type ListBlogPostsOptions = {
+  page?: number
+  limit?: number
+  search?: string
+  status?: string
+  excludeStatus?: string
+  postType?: string
+  sortField?: string
+  sortDir?: 'asc' | 'desc'
+  publishedOnly?: boolean
+  fields?: 'full' | 'list'
+}
+
+async function listBlogPostsWithClient(
+  client: typeof supabase,
+  options: ListBlogPostsOptions = {}
 ) {
   const page = Math.max(1, options.page || 1)
   const limit = Math.min(100, Math.max(1, options.limit || 20))
@@ -318,7 +324,7 @@ export async function listBlogPosts(
   const ascending = options.sortDir === 'asc'
 
   const selectFields = options.fields === 'list' ? BLOG_LIST_FIELDS : '*'
-  let query = supabase.from(T_BLOGS).select(selectFields, { count: 'exact' })
+  let query = client.from(T_BLOGS).select(selectFields, { count: 'exact' })
 
   if (options.search) {
     // Strip PostgREST special characters to prevent filter injection
@@ -353,11 +359,25 @@ export async function listBlogPosts(
   }
 }
 
+export async function listBlogPosts(options: ListBlogPostsOptions = {}) {
+  return listBlogPostsWithClient(supabase, options)
+}
+
 export async function listBlogPostsSafe(
   options?: Parameters<typeof listBlogPosts>[0]
 ): Promise<Awaited<ReturnType<typeof listBlogPosts>>> {
   try {
     return await listBlogPosts(options)
+  } catch {
+    return { docs: [], totalDocs: 0, totalPages: 1, page: 1, limit: 20 }
+  }
+}
+
+export async function listBlogPostsFreshSafe(
+  options?: Parameters<typeof listBlogPosts>[0]
+): Promise<Awaited<ReturnType<typeof listBlogPosts>>> {
+  try {
+    return await listBlogPostsWithClient(supabaseUncached, options)
   } catch {
     return { docs: [], totalDocs: 0, totalPages: 1, page: 1, limit: 20 }
   }
