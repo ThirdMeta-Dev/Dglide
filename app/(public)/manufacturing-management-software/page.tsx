@@ -42,12 +42,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.dglide.com";
 const PAGE_URL = `${SITE_URL}/manufacturing-management-software`;
 
 export const metadata: Metadata = {
-  title: "Manufacturing Process Management Software",
-  description: "DGlide Manufacturing Process Management connects BOMs, component workorders, inventory validation, assembly, QC, dependencies, and reporting in one configurable platform.",
+  title: { absolute: "Manufacturing Process Management Software | DGlide" },
+  description: "DGlide connects BOMs, work orders, inventory validation, assembly, and QC in one configurable platform, no more disconnected spreadsheets.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "Manufacturing Process Management Software | DGlide",
-    description: "Track every component workorder, material dependency, assembly task, and QC step in one production system.",
+    description: "DGlide connects BOMs, work orders, inventory validation, assembly, and QC in one configurable platform, no more disconnected spreadsheets.",
     url: PAGE_URL,
     type: "website",
     images: [{ url: `${SITE_URL}/solutions/manufacturing/hero.webp`, width: 1200, height: 900, alt: "DGlide manufacturing process management dashboard" }],
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Manufacturing Process Management Software | DGlide",
-    description: "Track every component workorder, material dependency, assembly task, and QC step in one production system.",
+    description: "DGlide connects BOMs, work orders, inventory validation, assembly, and QC in one configurable platform, no more disconnected spreadsheets.",
     images: [`${SITE_URL}/solutions/manufacturing/hero.webp`],
   },
 };
