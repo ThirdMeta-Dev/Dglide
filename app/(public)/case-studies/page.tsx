@@ -34,8 +34,8 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "Case Studies | DGlide",
-  description: "Practical stories and measurable outcomes from operations powered by DGlide.",
+  title: { absolute: "Case Studies: Real Teams, Real Results | DGlide" },
+  description: "See how manufacturing, facility management, and logistics teams replaced broken tools with DGlide, and what changed in SLAs, cost, and field visibility.",
 };
 
 export default async function CaseStudiesPage() {

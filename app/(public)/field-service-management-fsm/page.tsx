@@ -39,7 +39,7 @@ import {
 import { integrationNodes } from "@/data/solutionsPageData";
 
 export const metadata: Metadata = {
-  title: { absolute: "ITSM That Adapts to Your Workflow | DGlide" },
+  title: { absolute: "Field Service Software That Adapts to Your Crew | DGlide" },
   description: "Stop coordinating field teams over WhatsApp and Excel. DGlide gives real-time visibility on visits, work orders, and scheduling.",
 };
 
