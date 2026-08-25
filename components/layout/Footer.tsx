@@ -175,13 +175,16 @@ export default function Footer({
     ? "+91 80808 16087"
     : configuredPhone;
   const configuredCopyright = settings?.copyright?.trim();
-  const copyright = !configuredCopyright
+  const rawCopyright = !configuredCopyright
     || configuredCopyright.includes("Lorem Ipsum")
     || configuredCopyright.startsWith("Copyright © 2025 DGlide")
     ? "Copyright © 2026 DGlide. All Rights Reserved. Developed by Hexanovate"
     : configuredCopyright;
   const developerName = "Hexanovate";
-  const developerNameIndex = copyright.indexOf(developerName);
+  const developerNameIndex = rawCopyright.indexOf(developerName);
+  const copyright = developerNameIndex >= 0
+    ? rawCopyright.slice(0, developerNameIndex).replace(/\s*Developed by\s*$/i, "").trim()
+    : rawCopyright;
   const privacyLabel = settings?.privacy_label ?? "Privacy Policy";
   const privacyHref  = settings?.privacy_href  ?? "/privacy-policy";
   const termsLabel   = settings?.terms_label   ?? "Terms & Conditions";
@@ -371,20 +374,7 @@ export default function Footer({
           <ScrollReveal direction="up" delay={0.05}>
             <div className="footer-bottom" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 0 32px" }}>
               <p style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: "22.4px", color: "#545454", margin: 0 }}>
-                {developerNameIndex >= 0 ? (
-                  <>
-                    {copyright.slice(0, developerNameIndex)}
-                    <a
-                      href="https://hexanovate.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ color: "inherit", textDecoration: "underline", textUnderlineOffset: 3 }}
-                    >
-                      {developerName}
-                    </a>
-                    {copyright.slice(developerNameIndex + developerName.length)}
-                  </>
-                ) : copyright}
+                {copyright}
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
                 <Link href={privacyHref} style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif", fontSize: 14, fontWeight: 400, color: "#545454", textDecoration: "none" }}>

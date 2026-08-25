@@ -134,11 +134,10 @@ const trustedLogos = [
   "/logos/logo-3.png",
   "/logos/logo-4.png",
   "/logos/logo-5.png",
-  "/logos/logo-1.png",
-  "/logos/logo-2.png",
-  "/logos/logo-3.png",
-  "/logos/logo-4.png",
-  "/logos/logo-5.png",
+  "/logos/client-jsw.svg",
+  "/logos/client-rolcon.svg",
+  "/logos/client-sharplaser.svg",
+  "/logos/client-tgt.svg",
 ];
 
 function ArrowIcon({ color = "#1C2BFF" }: { color?: string }) {
@@ -560,7 +559,12 @@ export function DemoSection() {
                 <div className="flex w-max gap-3" style={{ animation: "scrollLeft 24s linear infinite" }}>
                   {trustedLogos.map((src, index) => (
                     <div key={`${src}-${index}`} className="flex h-12 w-[160px] shrink-0 items-center justify-center rounded-full bg-white">
-                      <Image src={src} alt="Client logo" width={160} height={48} className="h-12 w-[160px] object-contain" />
+                      {src.endsWith(".svg") ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={src} alt="Client logo" width={160} height={48} className="h-12 w-[160px] object-contain" />
+                      ) : (
+                        <Image src={src} alt="Client logo" width={160} height={48} className="h-12 w-[160px] object-contain" />
+                      )}
                     </div>
                   ))}
                 </div>

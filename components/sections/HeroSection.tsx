@@ -5,23 +5,18 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
-const LOGOS = [
+const BASE_LOGOS = [
   "/logos/logo-1.png",
   "/logos/logo-2.png",
   "/logos/logo-3.png",
   "/logos/logo-4.png",
   "/logos/logo-5.png",
-  "/logos/logo-1.png",
-  "/logos/logo-2.png",
-  "/logos/logo-3.png",
-  "/logos/logo-4.png",
-  "/logos/logo-5.png",
-  "/logos/logo-1.png",
-  "/logos/logo-2.png",
-  "/logos/logo-3.png",
-  "/logos/logo-4.png",
-  "/logos/logo-5.png",
+  "/logos/client-jsw.svg",
+  "/logos/client-rolcon.svg",
+  "/logos/client-sharplaser.svg",
+  "/logos/client-tgt.svg",
 ];
+const LOGOS = [...BASE_LOGOS, ...BASE_LOGOS, ...BASE_LOGOS];
 
 export default function HeroSection({ data }: { data?: Record<string, string> }) {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -173,13 +168,18 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
             >
               {LOGOS.map((src, i) => (
                 <div key={i} className="flex-shrink-0">
-                  <Image
-                    src={src}
-                    alt="Client logo"
-                    width={160}
-                    height={48}
-                    className="object-contain"
-                  />
+                  {src.endsWith(".svg") ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={src} alt="Client logo" width={160} height={48} className="object-contain" />
+                  ) : (
+                    <Image
+                      src={src}
+                      alt="Client logo"
+                      width={160}
+                      height={48}
+                      className="object-contain"
+                    />
+                  )}
                 </div>
               ))}
             </div>

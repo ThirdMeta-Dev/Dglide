@@ -12,6 +12,10 @@ const LOGO_SRCS = [
   "/logos/logo-3.png",
   "/logos/logo-4.png",
   "/logos/logo-5.png",
+  "/logos/client-jsw.svg",
+  "/logos/client-rolcon.svg",
+  "/logos/client-sharplaser.svg",
+  "/logos/client-tgt.svg",
 ];
 
 const BULLETS_DEFAULT = [
@@ -232,7 +236,12 @@ export default function ScheduleDemoHero({
                 >
                   {doubledLogos.map((logo, i) => (
                     <div key={i} style={{ width: 150, height: 48, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <Image src={logo.src} alt={logo.alt} width={150} height={48} className="object-contain" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+                      {logo.src.endsWith(".svg") ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={logo.src} alt={logo.alt} width={150} height={48} className="object-contain" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+                      ) : (
+                        <Image src={logo.src} alt={logo.alt} width={150} height={48} className="object-contain" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+                      )}
                     </div>
                   ))}
                 </div>

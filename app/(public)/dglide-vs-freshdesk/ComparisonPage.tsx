@@ -26,6 +26,10 @@ const LOGOS = [
   { src: "/logos/logo-3.png", alt: "Lead Controls" },
   { src: "/logos/logo-4.png", alt: "Clarion" },
   { src: "/logos/logo-5.png", alt: "Indo Tech" },
+  { src: "/logos/client-jsw.svg", alt: "JSW" },
+  { src: "/logos/client-rolcon.svg", alt: "Rolcon" },
+  { src: "/logos/client-sharplaser.svg", alt: "Sharp Laser Component" },
+  { src: "/logos/client-tgt.svg", alt: "TGT" },
 ];
 
 const howItWorksData = {
@@ -129,7 +133,12 @@ function Hero() {
         <div className={styles.logoTrack}>
           {marqueeLogos.map((logo, index) => (
             <div className={styles.logoPill} key={`${logo.src}-${index}`}>
-              <Image src={logo.src} alt={index < LOGOS.length ? logo.alt : ""} width={212} height={68} />
+              {logo.src.endsWith(".svg") ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={logo.src} alt={index < LOGOS.length ? logo.alt : ""} width={212} height={68} />
+              ) : (
+                <Image src={logo.src} alt={index < LOGOS.length ? logo.alt : ""} width={212} height={68} />
+              )}
             </div>
           ))}
         </div>

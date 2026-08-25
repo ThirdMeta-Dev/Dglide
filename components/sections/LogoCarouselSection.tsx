@@ -3,13 +3,25 @@
 import Image from "next/image";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
-const LOGO_COUNT = 5;
-const LOGO_SRCS = ["/logos/logo-1.png", "/logos/logo-2.png", "/logos/logo-3.png", "/logos/logo-4.png", "/logos/logo-5.png"];
+const LOGO_COUNT = 9;
+const LOGO_SRCS = [
+  "/logos/logo-1.png", "/logos/logo-2.png", "/logos/logo-3.png", "/logos/logo-4.png", "/logos/logo-5.png",
+  "/logos/client-jsw.svg", "/logos/client-rolcon.svg", "/logos/client-sharplaser.svg", "/logos/client-tgt.svg",
+];
+const LOGO_ALTS = [
+  "Client Logo", "Client Logo", "Client Logo", "Client Logo", "Client Logo",
+  "JSW", "Rolcon", "Sharp Laser Component", "TGT",
+];
 
 function LogoPill({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="logo-pill" style={{ flexShrink: 0 }}>
-      <Image src={src} alt={alt} width={160} height={48} className="object-contain" />
+      {src.endsWith(".svg") ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={src} alt={alt} width={160} height={48} className="object-contain" />
+      ) : (
+        <Image src={src} alt={alt} width={160} height={48} className="object-contain" />
+      )}
     </div>
   );
 }
@@ -25,7 +37,7 @@ export default function LogoCarouselSection({
 
   const logos = Array.from({ length: LOGO_COUNT }, (_, i) => ({
     src: data?.[`logo_${i + 1}_image`] || LOGO_SRCS[i % LOGO_SRCS.length],
-    alt: data?.[`logo_${i + 1}_alt`]   || "Client Logo",
+    alt: data?.[`logo_${i + 1}_alt`]   || LOGO_ALTS[i % LOGO_ALTS.length],
   }));
 
   const displayLogos = logos;

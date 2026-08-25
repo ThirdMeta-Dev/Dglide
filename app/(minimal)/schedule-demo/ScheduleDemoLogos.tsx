@@ -8,6 +8,14 @@ const LOGO_SRCS = [
   "/logos/logo-3.png",
   "/logos/logo-4.png",
   "/logos/logo-5.png",
+  "/logos/client-jsw.svg",
+  "/logos/client-rolcon.svg",
+  "/logos/client-sharplaser.svg",
+  "/logos/client-tgt.svg",
+];
+const LOGO_ALTS = [
+  "Client Logo", "Client Logo", "Client Logo", "Client Logo", "Client Logo",
+  "JSW", "Rolcon", "Sharp Laser Component", "TGT",
 ];
 
 export default function ScheduleDemoLogos({ data }: { data?: Record<string, string> }) {
@@ -16,7 +24,7 @@ export default function ScheduleDemoLogos({ data }: { data?: Record<string, stri
 
   const logos = LOGO_SRCS.map((src, i) => ({
     src: data?.[`logo_${i + 1}_image`] || src,
-    alt: data?.[`logo_${i + 1}_alt`]   || "Client Logo",
+    alt: data?.[`logo_${i + 1}_alt`]   || LOGO_ALTS[i % LOGO_ALTS.length],
   }));
 
   const doubled = [...logos, ...logos, ...logos];
@@ -41,7 +49,12 @@ export default function ScheduleDemoLogos({ data }: { data?: Record<string, stri
           >
             {doubled.map((logo, i) => (
               <div key={i} style={{ flexShrink: 0 }}>
-                <Image src={logo.src} alt={logo.alt} width={160} height={48} className="object-contain" />
+                {logo.src.endsWith(".svg") ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={logo.src} alt={logo.alt} width={160} height={48} className="object-contain" />
+                ) : (
+                  <Image src={logo.src} alt={logo.alt} width={160} height={48} className="object-contain" />
+                )}
               </div>
             ))}
           </div>
