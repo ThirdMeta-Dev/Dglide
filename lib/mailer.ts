@@ -11,6 +11,8 @@ export const NOTIFY_EMAILS = [
   "anjan@dglide.com",
   "drushti.gothi@hexanovate.com",
   "vamshi.vadali@hexanovate.com",
+  "samir@dglide.com",
+  "shweta.karve@hexanovate.com",
 ];
 
 function escapeHtml(str: string): string {
