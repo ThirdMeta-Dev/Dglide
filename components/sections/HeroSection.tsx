@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
+import heroPlatformFlow from "@/components/homepage-assets/hero-platform-flow.webp";
 
 const BASE_LOGOS = [
   "/logos/logo-1.png",
@@ -124,12 +125,13 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
         <ScrollReveal direction="up" delay={0.1}>
           <div className="dg-hero-img-wrap w-full" style={{ marginTop: "-80px" }}>
             <Image
-              src={data?.product_image ?? "/hero-product.png"}
+              src={heroPlatformFlow}
               alt="DGlide Platform"
               width={1200}
               height={680}
               className="hidden md:block w-full h-auto rounded-t-2xl object-cover"
               priority
+              unoptimized
             />
             {/* Portrait variant for mobile — desktop image is too wide to read small */}
             <Image
