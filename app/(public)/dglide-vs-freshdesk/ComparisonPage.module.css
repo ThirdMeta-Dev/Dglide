@@ -209,6 +209,15 @@
   margin-bottom: 30px;
 }
 
+.differentiatorCardEqual {
+  height: 100%;
+}
+
+.differentiatorCard img.differentiatorIconUpTeams {
+  width: 89px;
+  height: 48px;
+}
+
 .differentiatorCard h3,
 .winCopy h3,
 .valueCard h3 {

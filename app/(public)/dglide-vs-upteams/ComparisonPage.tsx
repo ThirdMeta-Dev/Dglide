@@ -159,8 +159,14 @@ function Differentiators() {
         <StaggerReveal className={styles.differentiatorGrid}>
           {differentiators.map((item) => (
             <StaggerItem key={item.title}>
-              <article className={styles.differentiatorCard}>
-                <Image src={item.icon} alt="" width={74} height={42} />
+              <article className={`${styles.differentiatorCard} ${styles.differentiatorCardEqual}`}>
+                <Image
+                  className={styles.differentiatorIconUpTeams}
+                  src={item.icon}
+                  alt=""
+                  width={89}
+                  height={48}
+                />
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
               </article>

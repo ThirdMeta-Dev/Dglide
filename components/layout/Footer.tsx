@@ -227,6 +227,13 @@ export default function Footer({
       resolvedLinks.push({ label: "DGlide vs Freshdesk", href: "/freshdesk-vs-dglide" });
     }
 
+    if (
+      def.heading === "Resources" &&
+      !resolvedLinks.some((link) => link.href === "/dglide-vs-upteams")
+    ) {
+      resolvedLinks.push({ label: "DGlide vs UpTeams", href: "/dglide-vs-upteams" });
+    }
+
     return {
       heading: colLinks.find((l) => l.column_heading)?.column_heading ?? def.heading,
       links: resolvedLinks,

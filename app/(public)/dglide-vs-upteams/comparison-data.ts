@@ -1,3 +1,11 @@
+import flatPricingIcon from "@/components/comparison-assets/upteams/flat-pricing.svg";
+import fieldVisitToTicketImage from "@/components/comparison-assets/upteams/field-visit-to-ticket.png";
+import noCodeWorkflowIcon from "@/components/comparison-assets/upteams/no-code-workflow.svg";
+import onePlatformImage from "@/components/comparison-assets/upteams/one-platform.png";
+import oneRecordIcon from "@/components/comparison-assets/upteams/one-record.svg";
+import processMovesImage from "@/components/comparison-assets/upteams/process-moves.png";
+import visitToTicketIcon from "@/components/comparison-assets/upteams/visit-to-ticket.svg";
+
 export type ComparisonRow = {
   feature: string;
   dglide: string;
@@ -13,22 +21,22 @@ export const differentiators = [
   {
     title: "Visit to ticket, automatically",
     description: "A distributor complaint raised mid-visit becomes a tracked ticket. Not a WhatsApp message nobody follows up on.",
-    icon: "/comparison/diff-native.png",
+    icon: visitToTicketIcon,
   },
   {
     title: "One record, not three tools",
     description: "Sales, field service, and IT ticketing share the same record instead of living in three disconnected systems.",
-    icon: "/comparison/diff-backbone.png",
+    icon: oneRecordIcon,
   },
   {
     title: "No-code workflow changes",
     description: "Add a form field or an approval step yourself, the same week you need it. No vendor ticket required.",
-    icon: "/comparison/diff-configurable.png",
+    icon: noCodeWorkflowIcon,
   },
   {
     title: "Flat pricing, not per-seat",
     description: "Modular pricing that stays flat as headcount grows, instead of scaling per rep like UpTeams does.",
-    icon: "/comparison/diff-included.png",
+    icon: flatPricingIcon,
   },
 ] as const;
 
@@ -66,19 +74,19 @@ export const winRows = [
     title: "From Field Visit to Resolved Ticket",
     description:
       "A rep finds a damaged shipment on a routine stop. DGlide logs the ticket from that visit, routes it to the right team, and closes it after resolution. UpTeams stops at the GPS check-in, leaving that complaint to a phone call.",
-    image: "/comparison/how-win-field-v2.png",
+    image: fieldVisitToTicketImage,
   },
   {
     title: "Your Process Moves. The System Follows.",
     description:
       "Add an approval step, a new escalation path, or a routing rule by configuration. Your operations lead ships the change in days. UpTeams' workflow stays fixed around attendance tracking, not process flexibility.",
-    image: "/comparison/how-win-workflow-v2.png",
+    image: processMovesImage,
   },
   {
     title: "One Platform Instead of a Stack",
     description:
       "UpTeams prices per rep, ₹199 to ₹299 per user per month, with no service or ticketing layer at any tier. DGlide scopes CRM, field service, and IT ticketing into one platform quote, priced to what you actually use.",
-    image: "/comparison/how-win-stack-v2.png",
+    image: onePlatformImage,
   },
 ] as const;
 
