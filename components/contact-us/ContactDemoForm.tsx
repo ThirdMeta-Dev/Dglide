@@ -71,7 +71,13 @@ function FieldError({ error }: { error?: string }) {
   );
 }
 
-export default function ContactDemoForm() {
+export default function ContactDemoForm({
+  formType = "Contact Form",
+  submitLabel = "Get the full story",
+}: {
+  formType?: string;
+  submitLabel?: string;
+}) {
   const router = useRouter();
   const [form, setForm] = useState<FormState>(initialForm);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -105,7 +111,11 @@ export default function ContactDemoForm() {
       const response = await fetch("/api/contact-requests", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, ...getBrowserLeadSource() }),
+        body: JSON.stringify({
+          ...form,
+          formType,
+          ...getBrowserLeadSource({ marketingParamsOnly: formType === "FSM India Ads" }),
+        }),
       });
       const result = (await response.json().catch(() => ({}))) as {
         error?: string;
@@ -296,7 +306,7 @@ export default function ContactDemoForm() {
         onMouseEnter={(e) => { if (!loading) (e.currentTarget as HTMLButtonElement).style.background = "linear-gradient(273deg, #0b148c 4.29%, #141fb5 95.71%)"; }}
         onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)"; }}
       >
-        {loading ? "Submitting..." : "Get the full story"}
+        {loading ? "Submitting..." : submitLabel}
         {!loading ? (
           <svg
             width="18"

@@ -3,11 +3,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { motionEase } from "@/components/animations/MotionPrimitives";
+import { isFsmIndiaAdsPath, openFsmIndiaLeadModal } from "@/lib/fsm-india-ads";
+import { fsmNavItems } from "@/data/fsmPageData";
+
+const FSM_ADS_HEADER_ITEMS = fsmNavItems.filter((item) => item.id !== "integrations");
 
 export type NavItemData = {
   label: string;
@@ -216,6 +220,10 @@ export default function Header({ navItems, settings }: Props) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const [adsActiveSection, setAdsActiveSection] = useState(FSM_ADS_HEADER_ITEMS[0].id);
+  const adsDesktopNavRef = useRef<HTMLElement>(null);
+  const adsDesktopLinkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const [adsNavFade, setAdsNavFade] = useState({ left: false, right: true });
 
   const sourceNav = (navItems && navItems.length > 0) ? navItems : DEFAULT_NAV;
   const findNav = (...labels: string[]) => sourceNav.find((item) =>
@@ -256,10 +264,139 @@ export default function Header({ navItems, settings }: Props) {
     { label: "Resources", has_dropdown: true, children: resourceChildren },
   ];
   const cfg = settings ?? DEFAULT_SETTINGS;
+  const isAdsLanding = isFsmIndiaAdsPath(pathname);
+
+  useEffect(() => {
+    if (!isAdsLanding) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setAdsActiveSection(visible[0].target.id);
+      },
+      { rootMargin: "-105px 0px -55% 0px", threshold: 0 }
+    );
+
+    FSM_ADS_HEADER_ITEMS.forEach(({ id }) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, [isAdsLanding]);
+
+  useEffect(() => {
+    if (!isAdsLanding) return;
+    const nav = adsDesktopNavRef.current;
+    const activeLink = adsDesktopLinkRefs.current[adsActiveSection];
+    if (!nav || !activeLink) return;
+
+    const targetLeft = activeLink.offsetLeft - nav.clientWidth / 2 + activeLink.offsetWidth / 2;
+    nav.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
+  }, [adsActiveSection, isAdsLanding]);
+
+  function updateAdsNavFade() {
+    const nav = adsDesktopNavRef.current;
+    if (!nav) return;
+    const maxScroll = nav.scrollWidth - nav.clientWidth;
+    setAdsNavFade({
+      left: nav.scrollLeft > 4,
+      right: nav.scrollLeft < maxScroll - 4,
+    });
+  }
+
+  function scrollToAdsSection(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
+    event.preventDefault();
+    const section = document.getElementById(id);
+    if (!section) return;
+    const headerOffset = window.innerWidth >= 1024 ? 104 : 126;
+    window.scrollTo({ top: section.getBoundingClientRect().top + window.scrollY - headerOffset, behavior: "smooth" });
+    setAdsActiveSection(id);
+  }
 
   function isActive(href: string) {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
+  }
+
+  if (isAdsLanding) {
+    return (
+      <header
+        className={cn("z-50 w-full", cfg.is_sticky && "sticky top-0")}
+        style={{ borderRadius: "0 0 25px 25px", background: "#FFF", boxShadow: "0 4px 10px 0 rgba(0,0,0,0.08)" }}
+      >
+        <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-5 px-5 lg:h-[88px] lg:px-8">
+          <Link href="/" className="flex-shrink-0" aria-label="DGlide home">
+            <div className="relative h-6 w-[120px] lg:h-[26px] lg:w-[145px]">
+              <Image src="/logo.png" alt="DGlide" fill className="object-contain object-left" priority />
+            </div>
+          </Link>
+
+          <div className="relative hidden min-w-0 flex-1 lg:block">
+            <nav
+              ref={adsDesktopNavRef}
+              onScroll={updateAdsNavFade}
+              className="flex min-w-0 items-center gap-6 overflow-x-auto px-1 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              aria-label="FSM page sections"
+            >
+              {FSM_ADS_HEADER_ITEMS.map((item) => (
+                <a
+                  key={item.id}
+                  ref={(element) => { adsDesktopLinkRefs.current[item.id] = element; }}
+                  href={`#${item.id}`}
+                  onClick={(event) => scrollToAdsSection(event, item.id)}
+                  className={cn(
+                    "shrink-0 whitespace-nowrap text-center text-[13px] font-medium leading-5 transition-colors [font-family:var(--font-sora)] xl:text-sm",
+                    adsActiveSection === item.id ? "text-[#FF7F1C]" : "text-[#222222] hover:text-[#1C2BFF]"
+                  )}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+            {adsNavFade.left ? (
+              <span className="pointer-events-none absolute inset-y-0 left-0 w-14 bg-gradient-to-r from-white via-white/90 to-transparent" aria-hidden="true" />
+            ) : null}
+            {adsNavFade.right ? (
+              <span className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white via-white/90 to-transparent" aria-hidden="true" />
+            ) : null}
+          </div>
+
+          <button
+            type="button"
+            onClick={openFsmIndiaLeadModal}
+            className="dg-btn-fill flex items-center gap-2 rounded-[40px] px-5 py-3 text-sm font-semibold text-white [font-family:var(--font-sora)] lg:px-8 lg:py-[14px] lg:text-base"
+            style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
+          >
+            {cfg.cta_label}
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        <nav
+          className="flex gap-5 overflow-x-auto border-t border-[#F1F1F1] px-5 py-3 lg:hidden"
+          aria-label="FSM page sections"
+        >
+          {FSM_ADS_HEADER_ITEMS.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={(event) => scrollToAdsSection(event, item.id)}
+              className={cn(
+                "shrink-0 whitespace-nowrap text-xs font-medium [font-family:var(--font-sora)]",
+                adsActiveSection === item.id ? "text-[#FF7F1C]" : "text-[#222222]"
+              )}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </header>
+    );
   }
 
   return (

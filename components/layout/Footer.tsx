@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 import FooterNewsletter from "./FooterNewsletter";
+import { isFsmIndiaAdsPath } from "@/lib/fsm-india-ads";
 
 export type FooterSettings = {
   newsletter_heading?:      string;
@@ -162,6 +166,7 @@ export default function Footer({
   settings?: FooterSettings;
   links?: FooterLink[];
 }) {
+  const pathname = usePathname();
   const newsletterHeading     = settings?.newsletter_heading      ?? "Subscribe to Our Newsletter";
   const newsletterPlaceholder = settings?.newsletter_placeholder  ?? "Enter Your Email";
   const newsletterButtonLabel = settings?.newsletter_button_label ?? "Subscribe Now";
@@ -193,6 +198,27 @@ export default function Footer({
     linkedin: "https://www.linkedin.com/company/dglide/posts/?feedView=all",
     instagram: "https://www.instagram.com/dglide.ai/",
   };
+
+  if (isFsmIndiaAdsPath(pathname)) {
+    return (
+      <footer className="mt-auto w-full border-t border-[#E5E5E5] bg-white">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-3 px-5 py-6 text-center sm:flex-row sm:px-12 sm:text-left">
+          <p className="m-0 text-sm font-normal leading-[22px] text-[#545454] [font-family:var(--font-montserrat)]">
+            {copyright}
+          </p>
+          <div className="flex items-center gap-2 text-sm font-normal text-[#545454] [font-family:var(--font-montserrat)]">
+            <Link href={privacyHref} className="transition-colors hover:text-[#1C2BFF]">
+              {privacyLabel}
+            </Link>
+            <span className="text-[#D5D5D5]">·</span>
+            <Link href={termsHref} className="transition-colors hover:text-[#1C2BFF]">
+              {termsLabel}
+            </Link>
+          </div>
+        </div>
+      </footer>
+    );
+  }
 
   const columns = DEFAULT_COLS.map((def, i) => {
     const colLinks = (links ?? []).filter((l) => l.column_index === i);

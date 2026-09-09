@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { getBrowserLeadSource } from "@/lib/lead-source";
 import type { CaseStudy } from "@/lib/case-studies-db";
 import styles from "@/app/(public)/case-studies/CaseStudiesPage.module.css";
@@ -55,6 +56,7 @@ export default function CaseStudyDownloadModal({
   study: CaseStudy;
   onClose: () => void;
 }) {
+  const router = useRouter();
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState("");
@@ -100,6 +102,7 @@ export default function CaseStudyDownloadModal({
         throw new Error(data?.error || "Something went wrong. Please try again.");
       }
       setSent(true);
+      router.push("/thank-you");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
