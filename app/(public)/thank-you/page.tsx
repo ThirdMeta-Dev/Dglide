@@ -26,6 +26,15 @@ export default async function ThankYouPage() {
 
   return (
     <AnimatedPublicPage className={styles.page} staticFirstCount={1}>
+      <noscript>
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-W8ZSJQM8"
+          height="0"
+          width="0"
+          style={{ display: "none", visibility: "hidden" }}
+        />
+      </noscript>
+
       {/* 1. Hero / Thank You header + "What happens next?" CTA card */}
       <ThankYouHero />
 
