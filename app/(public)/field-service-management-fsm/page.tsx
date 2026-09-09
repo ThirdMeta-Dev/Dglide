@@ -37,15 +37,20 @@ import {
   fsmFaqItems,
 } from "@/data/fsmPageData";
 import { integrationNodes } from "@/data/solutionsPageData";
+import FsmIndiaLeadModal from "@/components/ads/FsmIndiaLeadModal";
 
 export const metadata: Metadata = {
   title: { absolute: "Field Service Software That Adapts to Your Crew | DGlide" },
   description: "Stop coordinating field teams over WhatsApp and Excel. DGlide gives real-time visibility on visits, work orders, and scheduling.",
 };
 
-export default function FSMPage() {
+export default function FSMPage({ adsLanding = false }: { adsLanding?: boolean }) {
   return (
-    <AnimatedPublicPage className="solutions-page solutions-page--fsm solutions-page--shared-mobile-ui" staticFirstCount={2}>
+    <AnimatedPublicPage
+      className={`solutions-page solutions-page--fsm solutions-page--shared-mobile-ui${adsLanding ? " solutions-page--fsm-ads" : ""}`}
+      staticFirstCount={2}
+    >
+      {adsLanding ? <FsmIndiaLeadModal /> : null}
       <FSMHeroSection
         eyebrow={fsmHeroEyebrow}
         heading={fsmHeroHeading}
@@ -67,7 +72,7 @@ export default function FSMPage() {
         mobileImageSrc="/solutions/fsm-hero-mobile.png"
         imageAlt="DGlide FSM — field service management dashboard"
       />
-      <SolutionsSectionNav items={fsmNavItems} />
+      {!adsLanding ? <SolutionsSectionNav items={fsmNavItems} /> : null}
       <FieldServiceProblemSection
         heading={fsmProblemHeading}
         mobileHeading="Software That Fits the Way Your Service Works"

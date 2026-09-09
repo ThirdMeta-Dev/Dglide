@@ -17,4 +17,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default FSMPage;
+export default function FSMIndiaAdsPage() {
+  return <FSMPage adsLanding />;
+}

@@ -11,6 +11,7 @@ type ContactRequestBody = {
   contact?: unknown;
   company?: unknown;
   message?: unknown;
+  formType?: unknown;
   sourcePath?: unknown;
   sourceUrl?: unknown;
 };
@@ -79,7 +80,15 @@ export async function POST(req: Request) {
 
   try {
     const supabase = await createClient();
-    const source = readLeadSource(body as Record<string, unknown>, "Contact Form", req.headers.get("referer"));
+    const requestedFormType = readString(body.formType);
+    const sourcePathOnly = readString(body.sourcePath).split("?")[0].replace(/\/+$/, "");
+    const isFsmIndiaAdsLead = requestedFormType === "FSM India Ads"
+      && sourcePathOnly === "/field-service-management-fsm-india";
+    const source = readLeadSource(
+      body as Record<string, unknown>,
+      isFsmIndiaAdsLead ? "FSM India Ads" : "Contact Form",
+      req.headers.get("referer")
+    );
     if (source.sourcePath?.startsWith("/blogs/")) source.formType = "Blog Detail Form";
 
     const storedMessage = appendLeadSourceToMessage(values.message, source);
@@ -101,14 +110,14 @@ export async function POST(req: Request) {
       ...source,
     }).catch((err: unknown) => console.error("Contact request email error:", err));
 
-    await appendLeadToSheet('Contact Us', {
+    await appendLeadToSheet(isFsmIndiaAdsLead ? 'FSM India Ads' : 'Contact Us', {
       name: values.name,
       email: values.email,
       phone: values.contact,
       company: values.company,
       message: values.message,
       ...source,
-    }).catch(() => {});
+    }, isFsmIndiaAdsLead ? { destination: 'fsm-india', required: true } : undefined);
 
     return NextResponse.json({ success: true });
   } catch (err) {

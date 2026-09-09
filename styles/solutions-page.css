@@ -1742,6 +1742,12 @@
   transition: background 0.22s ease;
 }
 
+/* Ads landing hero: keep both CTA pills visually equal without changing other solution pages. */
+.solutions-page--fsm-ads .sol-hero-actions-desktop .sol-btn-outline {
+  box-sizing: border-box;
+  height: 48px;
+}
+
 .solutions-page .sol-btn-outline svg {
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
