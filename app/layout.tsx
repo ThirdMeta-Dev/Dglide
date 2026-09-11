@@ -111,6 +111,9 @@ export default function RootLayout({
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-T5K6SG2E0Z');
+          if (window.location.pathname.replace(/\/+$/, '') === '/thank-you') {
+            gtag('config', 'AW-18310414886');
+          }
         `}
       </Script>
       <Script id="microsoft-clarity" strategy="afterInteractive">
