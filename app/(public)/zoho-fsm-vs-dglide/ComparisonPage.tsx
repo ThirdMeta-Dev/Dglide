@@ -211,7 +211,7 @@ function FitSection() {
   return (
     <section className={styles.fitSection}>
       <div className={styles.container}>
-        <div className={styles.splitHeading}>
+        <div className={styles.splitHeading} style={{ alignItems: "start" }}>
           <ScrollReveal direction="left">
             <h2 className={styles.sectionTitle}>Pick by How Your Service Business Earns</h2>
           </ScrollReveal>
