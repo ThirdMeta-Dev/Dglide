@@ -260,6 +260,13 @@ export default function Footer({
       resolvedLinks.push({ label: "DGlide vs UpTeams", href: "/dglide-vs-upteams" });
     }
 
+    if (
+      def.heading === "Resources" &&
+      !resolvedLinks.some((link) => link.href === "/zoho-fsm-vs-dglide")
+    ) {
+      resolvedLinks.push({ label: "DGlide vs Zoho FSM", href: "/zoho-fsm-vs-dglide" });
+    }
+
     return {
       heading: colLinks.find((l) => l.column_heading)?.column_heading ?? def.heading,
       links: resolvedLinks,
