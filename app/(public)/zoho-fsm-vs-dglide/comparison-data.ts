@@ -1,19 +1,19 @@
-import flatPricingIcon from "@/components/comparison-assets/upteams/flat-pricing.svg";
-import fieldVisitToTicketImage from "@/components/comparison-assets/upteams/field-visit-to-ticket.png";
-import noCodeWorkflowIcon from "@/components/comparison-assets/upteams/no-code-workflow.svg";
-import onePlatformImage from "@/components/comparison-assets/upteams/one-platform.png";
-import oneRecordIcon from "@/components/comparison-assets/upteams/one-record.svg";
-import processMovesImage from "@/components/comparison-assets/upteams/process-moves.png";
-import visitToTicketIcon from "@/components/comparison-assets/upteams/visit-to-ticket.svg";
+import amcBuiltInIcon from "@/components/comparison-assets/zoho/amc-built-in.svg";
+import amcContractImage from "@/components/comparison-assets/zoho/amc-contract.png";
+import offlineSyncImage from "@/components/comparison-assets/zoho/offline-sync.png";
+import serialNumberFirstIcon from "@/components/comparison-assets/zoho/serial-number-first.svg";
+import tallySyncImage from "@/components/comparison-assets/zoho/tally-sync.png";
+import tallyGstReadyIcon from "@/components/comparison-assets/zoho/tally-gst-ready.svg";
+import worksWithoutSignalIcon from "@/components/comparison-assets/zoho/works-without-signal.svg";
 
 export type ComparisonRow = { feature: string; dglide: string; upteams: string };
 export type ComparisonGroup = { title: string; rows: ComparisonRow[] };
 
 export const differentiators = [
-  { title: "AMC Built-In", description: "Contracts, visit counts, and renewal alerts sit beside every job.", icon: visitToTicketIcon },
-  { title: "Serial Number First", description: "Every complaint opens against the machine and its warranty.", icon: oneRecordIcon },
-  { title: "Works Without Signal", description: "Technicians update status, parts, and sign-off offline, then sync.", icon: noCodeWorkflowIcon },
-  { title: "Tally and GST Ready", description: "GST invoices and Tally entries flow from the closed job.", icon: flatPricingIcon },
+  { title: "AMC Built-In", description: "Contracts, visit counts, and renewal alerts sit beside every job.", icon: amcBuiltInIcon },
+  { title: "Serial Number First", description: "Every complaint opens against the machine and its warranty.", icon: serialNumberFirstIcon },
+  { title: "Works Without Signal", description: "Technicians update status, parts, and sign-off offline, then sync.", icon: worksWithoutSignalIcon },
+  { title: "Tally and GST Ready", description: "GST invoices and Tally entries flow from the closed job.", icon: tallyGstReadyIcon },
 ] as const;
 
 export const fitCards = [
@@ -47,17 +47,17 @@ export const winRows = [
   {
     title: "AMC Contracts Live Inside the System",
     description: "Zoho FSM lists no contract module; contracts attach to an asset as documents. DGlide holds each AMC as a record: visits owed, visits done, expiry date, and a renewal alert your coordinator sees weeks before the contract lapses.",
-    image: fieldVisitToTicketImage,
+    image: amcContractImage,
   },
   {
     title: "The Job Keeps Moving Offline",
     description: "Zoho FSM's offline mode is read-only for the latest 200 appointments, and status updates wait for signal. DGlide technicians update status, parts used, photos, and customer sign-off offline, and the job syncs once the phone reconnects.",
-    image: processMovesImage,
+    image: offlineSyncImage,
   },
   {
     title: "Spares and Tally Without Extra Apps",
     description: "Zoho FSM needs Zoho Inventory and Zoho Books subscriptions for stock and serial numbers, and lists no Tally connector. DGlide tracks spares by machine, raises the GST invoice from the job, and syncs entries to Tally.",
-    image: onePlatformImage,
+    image: tallySyncImage,
   },
 ] as const;
 
