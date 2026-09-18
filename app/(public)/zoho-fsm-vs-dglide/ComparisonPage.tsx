@@ -8,6 +8,8 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 import WDFAQSection from "@/components/why-dglide/sections/WDFAQSection";
 import CTASection from "@/components/sections/CTASection";
+import WhiteDglideLogo from "@/components/comparison-assets/WhiteDglideLogo";
+import zohoFsmLogo from "@/components/comparison-assets/zoho/zoho-fsm-logo.png";
 import { integrationNodes } from "@/data/solutionsPageData";
 import ComparisonMatrix from "./ComparisonMatrix";
 import {
@@ -225,12 +227,17 @@ function FitSection() {
             <ScrollReveal direction={index === 0 ? "left" : "right"} key={card.title}>
               <article className={`${styles.fitCard} ${card.kind === "dglide" ? styles.fitCardDglide : styles.fitCardFreshdesk}`}>
                 <div className={styles.fitBrand}>
-                  <Image
-                    src={card.kind === "dglide" ? "/comparison/fit-dglide-icon.png" : "/comparison/fit-freshdesk-icon.png"}
-                    alt=""
-                    width={88}
-                    height={48}
-                  />
+                  {card.kind === "dglide" ? (
+                    <WhiteDglideLogo />
+                  ) : (
+                    <Image
+                      src={zohoFsmLogo}
+                      alt="Zoho FSM"
+                      width={101}
+                      height={48}
+                      style={{ width: 101, height: 48, objectFit: "contain" }}
+                    />
+                  )}
                 </div>
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
@@ -293,12 +300,22 @@ function FullComparison() {
             </ScrollReveal>
           </div>
           <div className={styles.matrixProductHeader} aria-label="DGlide and Zoho FSM comparison columns">
-            <Image
-              src="/comparison/comparison-product-header.png"
-              alt="DGlide compared with Zoho FSM"
-              width={369}
-              height={53}
-            />
+            <div className={styles.matrixProductBranding}>
+              <Image
+                src="/logo.png"
+                alt="DGlide"
+                width={152}
+                height={27}
+                style={{ width: 152, height: 27, objectFit: "contain" }}
+              />
+              <Image
+                src={zohoFsmLogo}
+                alt="Zoho FSM"
+                width={80}
+                height={38}
+                style={{ width: 80, height: 38, objectFit: "contain" }}
+              />
+            </div>
           </div>
         </div>
         <ComparisonMatrix />

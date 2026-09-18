@@ -8,6 +8,7 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 import WDFAQSection from "@/components/why-dglide/sections/WDFAQSection";
 import CTASection from "@/components/sections/CTASection";
+import WhiteDglideLogo from "@/components/comparison-assets/WhiteDglideLogo";
 import { fsmIntegrationsDescription, fsmIntegrationsHeading } from "@/data/fsmPageData";
 import { integrationNodes } from "@/data/solutionsPageData";
 import ComparisonMatrix from "./ComparisonMatrix";
@@ -190,12 +191,11 @@ function FitSection() {
             <ScrollReveal direction={index === 0 ? "left" : "right"} key={card.title}>
               <article className={`${styles.fitCard} ${card.kind === "dglide" ? styles.fitCardDglide : styles.fitCardFreshdesk}`}>
                 <div className={styles.fitBrand}>
-                  <Image
-                    src={card.kind === "dglide" ? "/comparison/fit-dglide-icon.png" : "/comparison/fit-freshdesk-icon.png"}
-                    alt=""
-                    width={88}
-                    height={48}
-                  />
+                  {card.kind === "dglide" ? (
+                    <WhiteDglideLogo />
+                  ) : (
+                    <Image src="/comparison/fit-freshdesk-icon.png" alt="" width={88} height={48} />
+                  )}
                 </div>
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
