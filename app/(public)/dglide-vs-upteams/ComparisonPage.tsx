@@ -8,6 +8,10 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 import WDFAQSection from "@/components/why-dglide/sections/WDFAQSection";
 import CTASection from "@/components/sections/CTASection";
+import WhiteDglideLogo from "@/components/comparison-assets/WhiteDglideLogo";
+import dglideLogoSource from "@/components/comparison-assets/upteams/dglide-logo-source.png";
+import dglideLogoText from "@/components/comparison-assets/upteams/dglide-logo-text.png";
+import upTeamsLogo from "@/components/comparison-assets/upteams/upteams-logo.png";
 import { fsmIntegrationsDescription, fsmIntegrationsHeading } from "@/data/fsmPageData";
 import { integrationNodes } from "@/data/solutionsPageData";
 import ComparisonMatrix from "./ComparisonMatrix";
@@ -55,6 +59,73 @@ function Arrow() {
     <svg viewBox="0 0 16 16" aria-hidden>
       <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  );
+}
+
+function FitBrandLogo({
+  kind,
+  placement = "card",
+}: {
+  kind: "dglide" | "freshdesk";
+  placement?: "card" | "matrix";
+}) {
+  const isMatrix = placement === "matrix";
+
+  if (kind === "dglide") {
+    const logoWidth = isMatrix ? 152 : 207;
+    const logoHeight = isMatrix ? 33 : 45;
+    const markWidth = isMatrix ? 37 : 51;
+    const gap = isMatrix ? 7 : 9;
+    const textWidth = isMatrix ? 108 : 147;
+    const textHeight = isMatrix ? 23 : 32;
+
+    if (!isMatrix) {
+      return <WhiteDglideLogo />;
+    }
+
+    return (
+      <div
+        role="img"
+        aria-label="DGlide"
+        style={{ display: "flex", alignItems: "center", gap, width: logoWidth, height: logoHeight }}
+      >
+        <span style={{ position: "relative", width: markWidth, height: logoHeight, overflow: "hidden", flexShrink: 0 }}>
+          <Image
+            src={dglideLogoSource}
+            alt=""
+            width={Math.round(logoHeight * 5.72)}
+            height={logoHeight}
+            style={{ position: "absolute", top: 0, left: -1, width: Math.round(logoHeight * 5.72), height: logoHeight, maxWidth: "none" }}
+          />
+        </span>
+        <Image
+          src={dglideLogoText}
+          alt=""
+          width={textWidth}
+          height={textHeight}
+          style={{ width: textWidth, height: textHeight }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      src={upTeamsLogo}
+      alt="UpTeams"
+      width={isMatrix ? 116 : 165}
+      height={isMatrix ? 38 : 54}
+      unoptimized
+      priority
+      style={{
+        display: "block",
+        width: isMatrix ? 116 : 165,
+        height: isMatrix ? 38 : 54,
+        objectFit: "contain",
+        opacity: 1,
+        visibility: "visible",
+      }}
+    />
   );
 }
 
@@ -195,13 +266,8 @@ function FitSection() {
           {fitCards.map((card, index) => (
             <ScrollReveal direction={index === 0 ? "left" : "right"} key={card.title}>
               <article className={`${styles.fitCard} ${card.kind === "dglide" ? styles.fitCardDglide : styles.fitCardFreshdesk}`}>
-                <div className={styles.fitBrand}>
-                  <Image
-                    src={card.kind === "dglide" ? "/comparison/fit-dglide-icon.png" : "/comparison/fit-freshdesk-icon.png"}
-                    alt=""
-                    width={88}
-                    height={48}
-                  />
+                <div className={styles.fitBrand} style={{ height: 54 }}>
+                  <FitBrandLogo kind={card.kind} />
                 </div>
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
@@ -264,12 +330,10 @@ function FullComparison() {
             </ScrollReveal>
           </div>
           <div className={styles.matrixProductHeader} aria-label="DGlide and UpTeams comparison columns">
-            <Image
-              src="/comparison/comparison-product-header.png"
-              alt="DGlide compared with UpTeams"
-              width={369}
-              height={53}
-            />
+            <div className={styles.matrixProductBranding}>
+              <FitBrandLogo kind="dglide" placement="matrix" />
+              <FitBrandLogo kind="freshdesk" placement="matrix" />
+            </div>
           </div>
         </div>
         <ComparisonMatrix />

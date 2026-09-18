@@ -520,6 +520,23 @@
   margin: 0 124px 0 auto;
 }
 
+.matrixProductBranding {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 369px;
+  height: 53px;
+  margin: 0 124px 0 auto;
+  padding: 0 18px;
+  border-radius: 16px 16px 0 0;
+  background: #fff0e5;
+}
+
+.matrixProductBranding img {
+  margin: 0;
+  object-fit: contain;
+}
+
 .matrixGroup {
   margin-top: 6px;
 }
