@@ -38,6 +38,8 @@ import {
 } from "@/data/fsmPageData";
 import { integrationNodes } from "@/data/solutionsPageData";
 import FsmIndiaLeadModal from "@/components/ads/FsmIndiaLeadModal";
+import FsmAdsTrustedLogos from "@/components/ads/FsmAdsTrustedLogos";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
 
 export const metadata: Metadata = {
   title: { absolute: "Field Service Software That Adapts to Your Crew | DGlide" },
@@ -72,6 +74,7 @@ export default function FSMPage({ adsLanding = false }: { adsLanding?: boolean }
         mobileImageSrc="/solutions/fsm-hero-mobile.png"
         imageAlt="DGlide FSM — field service management dashboard"
       />
+      {adsLanding ? <FsmAdsTrustedLogos /> : null}
       {!adsLanding ? <SolutionsSectionNav items={fsmNavItems} /> : null}
       <FieldServiceProblemSection
         heading={fsmProblemHeading}
@@ -179,6 +182,7 @@ export default function FSMPage({ adsLanding = false }: { adsLanding?: boolean }
         mobileFeatures={fsmConfigurableMobileFeatures}
         cards={fsmConfigurableCards}
       />
+      {adsLanding ? <TestimonialsSection /> : null}
       <GoLiveFasterSection
         heading={fsmGoLiveHeading}
         description={fsmGoLiveDescription}
