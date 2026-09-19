@@ -5,6 +5,7 @@ import { listPublishedCaseStudies } from "@/lib/case-studies-db";
 import HeroSection from "@/components/sections/HeroSection";
 import SoftwareWorksSection from "@/components/sections/SoftwareWorksSection";
 import ComparisonSection from "@/components/sections/ComparisonSection";
+import KeepYourProcessSection from "@/components/sections/KeepYourProcessSection";
 import FourReasonsSection from "@/components/sections/FourReasonsSection";
 import OneSystemSection from "@/components/sections/OneSystemSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
@@ -38,6 +39,7 @@ export default async function HomePage() {
       <HeroSection data={sections.hero} />
       <SoftwareWorksSection data={sections.software_works} />
       <ComparisonSection data={sections.comparison} />
+      <KeepYourProcessSection />
       <FourReasonsSection data={sections.four_reasons} />
       <OneSystemSection data={sections.one_system} />
       <HowItWorksSection data={sections.how_it_works} />
@@ -48,6 +50,11 @@ export default async function HomePage() {
       <CapabilitiesSection data={sections.capabilities} />
       <LogoCarouselSection data={sections.logo_carousel} />
       <TestimonialsSection data={sections.testimonials} />
+      <KeepYourProcessSection
+        titleLines={["Lost Leads, Slow Service, No Visibility -", "Fixed In A Quarter."]}
+        description="That Was A 50-Person Manufacturer. Tell Us How Your Operation Runs Today And We'll Show You, In 30 Minutes, Exactly Where DGlide Plugs The Leaks."
+        ctaLabel="Show me where DGlide fits"
+      />
       <LiveFasterSection data={sections.live_faster} />
       <UsefulResourcesSection latestPost={blogPosts[0]} latestCaseStudy={caseStudies[0]} />
       <CTASection data={sections.cta} />
