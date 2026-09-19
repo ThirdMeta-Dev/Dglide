@@ -14,6 +14,7 @@ import BuiltForSection from "@/components/solutions/sections/BuiltForSection";
 import OnePlatformSection from "@/components/solutions/sections/OnePlatformSection";
 import ServiceWorkflowSection from "@/components/solutions/sections/ServiceWorkflowSection";
 import CoreCapabilitiesSection from "@/components/solutions/sections/CoreCapabilitiesSection";
+import SolutionComparisonTable from "@/components/solutions/sections/SolutionComparisonTable";
 import TechnicianMobileSection from "@/components/solutions/sections/TechnicianMobileSection";
 import BetterWaySection from "@/components/solutions/sections/BetterWaySection";
 import WorkflowChangeSection from "@/components/solutions/sections/WorkflowChangeSection";
@@ -25,6 +26,7 @@ import IntegrationsHubSection from "@/components/solutions/sections/Integrations
 import SolutionsFinalCTA from "@/components/solutions/sections/SolutionsFinalCTA";
 import SolutionsFAQSection from "@/components/solutions/sections/SolutionsFAQSection";
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
+import { itsmComparison } from "@/data/solutionComparisonData";
 
 export const metadata: Metadata = {
   title: { absolute: "ITSM That Adapts to Your Workflow | DGlide" },
@@ -152,6 +154,7 @@ export default function SolutionsPage() {
           },
         ]}
       />
+      <SolutionComparisonTable content={itsmComparison} />
       <TechnicianMobileSection mobileHeading="Move Service Beyond the Inbox, Into One Workspace" />
       <BetterWaySection
         mobileHeading="Configurable Software That Scales With Your Business"

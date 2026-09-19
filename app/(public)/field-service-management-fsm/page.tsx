@@ -7,6 +7,7 @@ import BuiltForSection from "@/components/solutions/sections/BuiltForSection";
 import OnePlatformSection from "@/components/solutions/sections/OnePlatformSection";
 import ServiceWorkflowSection from "@/components/solutions/sections/ServiceWorkflowSection";
 import CoreCapabilitiesSection from "@/components/solutions/sections/CoreCapabilitiesSection";
+import SolutionComparisonTable from "@/components/solutions/sections/SolutionComparisonTable";
 import TechnicianMobileSection from "@/components/solutions/sections/TechnicianMobileSection";
 import BetterWaySection from "@/components/solutions/sections/BetterWaySection";
 import WorkflowChangeSection from "@/components/solutions/sections/WorkflowChangeSection";
@@ -40,6 +41,7 @@ import { integrationNodes } from "@/data/solutionsPageData";
 import FsmIndiaLeadModal from "@/components/ads/FsmIndiaLeadModal";
 import FsmAdsTrustedLogos from "@/components/ads/FsmAdsTrustedLogos";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import { fsmComparison } from "@/data/solutionComparisonData";
 
 export const metadata: Metadata = {
   title: { absolute: "Field Service Software That Adapts to Your Crew | DGlide" },
@@ -116,6 +118,7 @@ export default function FSMPage({ adsLanding = false }: { adsLanding?: boolean }
         heading={fsmCapabilitiesHeading}
         items={fsmCapabilityItems}
       />
+      {!adsLanding ? <SolutionComparisonTable content={fsmComparison} /> : null}
       <TechnicianMobileSection
         heading={fsmTechnicianHeading}
         mobileHeading="Give Technicians a Mobile Workflow, Not Phone Calls"

@@ -7,6 +7,7 @@ import BuiltForSection from "@/components/solutions/sections/BuiltForSection";
 import OnePlatformSection from "@/components/solutions/sections/OnePlatformSection";
 import ServiceWorkflowSection from "@/components/solutions/sections/ServiceWorkflowSection";
 import CoreCapabilitiesSection from "@/components/solutions/sections/CoreCapabilitiesSection";
+import SolutionComparisonTable from "@/components/solutions/sections/SolutionComparisonTable";
 import TechnicianMobileSection from "@/components/solutions/sections/TechnicianMobileSection";
 import BetterWaySection from "@/components/solutions/sections/BetterWaySection";
 import WorkflowChangeSection from "@/components/solutions/sections/WorkflowChangeSection";
@@ -15,6 +16,7 @@ import GoLiveFasterSection from "@/components/solutions/sections/GoLiveFasterSec
 import IntegrationsHubSection from "@/components/solutions/sections/IntegrationsHubSection";
 import SolutionsFinalCTA from "@/components/solutions/sections/SolutionsFinalCTA";
 import SolutionsFAQSection from "@/components/solutions/sections/SolutionsFAQSection";
+import { crmComparison } from "@/data/solutionComparisonData";
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 import {
   crmBetterWay,
@@ -256,6 +258,7 @@ export default function CRMPage() {
         mobileItems={crmMobileCapabilityItems}
         mobileInitialIndex={1}
       />
+      <SolutionComparisonTable content={crmComparison} />
       <TechnicianMobileSection
         heading={crmTechnician.heading}
         mobileHeading={"Every Visit Begins With\nComplete Customer Insight"}

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
@@ -110,7 +111,43 @@ export default function OneSystemSection({ data }: { data?: Record<string, strin
           </StaggerReveal>
 
         </div>
+
+        <ScrollReveal direction="up">
+          <div className="mx-auto mt-20 flex max-w-[1104px] flex-col items-center justify-center gap-11 text-center">
+            <h3
+              className="max-w-[832px] text-[25px] font-semibold leading-[1.35] text-black md:text-[29px] md:leading-[42px]"
+              style={{ fontFamily: "var(--font-tasa-orbiter)" }}
+            >
+              If Production Runs On Spreadsheets And Dispatch Finds Out Over WhatsApp, See How The Four Connect.
+            </h3>
+            <Link
+              href="/schedule-demo"
+              className="dg-btn-fill inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold text-white"
+              style={{
+                fontFamily: "Sora, sans-serif",
+                background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
+              }}
+            >
+              Get Started Now
+              <ArrowRight />
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
+  );
+}
+
+function ArrowRight() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M3 8h10M9 4l4 4-4 4"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
