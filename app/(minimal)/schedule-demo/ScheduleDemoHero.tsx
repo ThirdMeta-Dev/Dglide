@@ -7,15 +7,15 @@ import Link from "next/link";
 import { getBrowserLeadSource } from "@/lib/lead-source";
 
 const LOGO_SRCS = [
-  "/logos/logo-1.png",
-  "/logos/logo-2.png",
-  "/logos/logo-3.png",
-  "/logos/logo-4.png",
-  "/logos/logo-5.png",
-  "/logos/client-jsw.svg",
-  "/logos/client-rolcon.svg",
-  "/logos/client-sharplaser.svg",
-  "/logos/client-tgt.svg",
+  "/logos/power2u.png",
+  "/logos/armadillo.png",
+  "/logos/lead-controls.png",
+  "/logos/clarion.png",
+  "/logos/indo-tech.png",
+  "/logos/jsw.svg",
+  "/logos/rolcon.svg",
+  "/logos/sharp-laser-component.svg",
+  "/logos/tgt.svg",
 ];
 
 const BULLETS_DEFAULT = [

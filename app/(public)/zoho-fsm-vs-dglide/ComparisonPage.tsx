@@ -22,15 +22,15 @@ import {
 import styles from "../dglide-vs-freshdesk/ComparisonPage.module.css";
 
 const LOGOS = [
-  { src: "/logos/logo-1.png", alt: "Power2U" },
-  { src: "/logos/logo-2.png", alt: "Armadillo" },
-  { src: "/logos/logo-3.png", alt: "Lead Controls" },
-  { src: "/logos/logo-4.png", alt: "Clarion" },
-  { src: "/logos/logo-5.png", alt: "Indo Tech" },
-  { src: "/logos/client-jsw.svg", alt: "JSW" },
-  { src: "/logos/client-rolcon.svg", alt: "Rolcon" },
-  { src: "/logos/client-sharplaser.svg", alt: "Sharp Laser Component" },
-  { src: "/logos/client-tgt.svg", alt: "TGT" },
+  { src: "/logos/power2u.png", alt: "Power2U" },
+  { src: "/logos/armadillo.png", alt: "Armadillo" },
+  { src: "/logos/lead-controls.png", alt: "Lead Controls" },
+  { src: "/logos/clarion.png", alt: "Clarion" },
+  { src: "/logos/indo-tech.png", alt: "Indo Tech" },
+  { src: "/logos/jsw.svg", alt: "JSW" },
+  { src: "/logos/rolcon.svg", alt: "Rolcon" },
+  { src: "/logos/sharp-laser-component.svg", alt: "Sharp Laser Component" },
+  { src: "/logos/tgt.svg", alt: "TGT" },
 ];
 
 const howItWorksData = {

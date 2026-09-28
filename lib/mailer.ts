@@ -5,14 +5,8 @@ const FROM_EMAIL = "no-reply@dglide.com";
 const sesConfigured = Boolean(process.env.SES_ACCESS_KEY_ID && process.env.SES_SECRET_ACCESS_KEY);
 
 export const NOTIFY_EMAILS = [
-  "prathamesh@dglide.com",
-  "keerthi@dglide.com",
-  "arnav@dglide.com",
-  "anjan@dglide.com",
-  "drushti.gothi@hexanovate.com",
-  "vamshi.vadali@hexanovate.com",
   "samir@dglide.com",
-  "shweta.karve@hexanovate.com",
+  "vinayak@dglide.com",
 ];
 
 function escapeHtml(str: string): string {

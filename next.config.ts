@@ -50,6 +50,15 @@ const nextConfig: NextConfig = {
       },
       { source: '/customer-stories', destination: '/case-studies', permanent: true },
       { source: '/customer-stories/', destination: '/case-studies', permanent: true },
+      { source: '/logos/logo-1.png', destination: '/logos/power2u.png', permanent: true },
+      { source: '/logos/logo-2.png', destination: '/logos/armadillo.png', permanent: true },
+      { source: '/logos/logo-3.png', destination: '/logos/lead-controls.png', permanent: true },
+      { source: '/logos/logo-4.png', destination: '/logos/clarion.png', permanent: true },
+      { source: '/logos/logo-5.png', destination: '/logos/indo-tech.png', permanent: true },
+      { source: '/logos/client-jsw.svg', destination: '/logos/jsw.svg', permanent: true },
+      { source: '/logos/client-rolcon.svg', destination: '/logos/rolcon.svg', permanent: true },
+      { source: '/logos/client-sharplaser.svg', destination: '/logos/sharp-laser-component.svg', permanent: true },
+      { source: '/logos/client-tgt.svg', destination: '/logos/tgt.svg', permanent: true },
     ]
   },
   images: {
