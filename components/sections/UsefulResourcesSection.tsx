@@ -11,7 +11,6 @@ import CaseStudyDownloadModal from "@/components/case-studies/CaseStudyDownloadM
 const TABS = [
   { key: "blogs", label: "Blogs", comingSoon: false },
   { key: "case-studies", label: "Case Studies", comingSoon: false },
-  { key: "glossary", label: "Glossary", comingSoon: true },
 ] as const;
 
 type TabKey = (typeof TABS)[number]["key"];
@@ -111,18 +110,18 @@ export default function UsefulResourcesSection({
                 WebkitTextFillColor: "transparent",
               }}
             >
-              Useful Resources To Check
+              More Resources From DGlide
             </h2>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 400, lineHeight: "28px", color: "#6F7276", margin: 0 }}>
-              Dig Into Case Studies, Articles, And Operations Terms Explained Simply.
+              Ideas on operations, workflow fit, and software that adapts.
             </p>
           </div>
         </ScrollReveal>
 
-        <div className="urs-layout" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
+        <div className="urs-layout" style={{ display: "flex", gap: 48, alignItems: "stretch" }}>
 
           {/* Left tabs */}
-          <StaggerReveal className="urs-tabs" style={{ display: "flex", flexDirection: "column", gap: 16, width: 244, flexShrink: 0 }}>
+          <StaggerReveal className="urs-tabs" style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 16, width: 244, flexShrink: 0 }}>
             {TABS.map(({ key, label }) => (
               <StaggerItem key={key}>
                 <TabButton
@@ -239,7 +238,7 @@ export default function UsefulResourcesSection({
                   Coming Soon
                 </h3>
                 <p style={{ margin: 0, fontFamily: "Inter, sans-serif", fontSize: 15, color: "#6F7276", lineHeight: 1.6, maxWidth: 280 }}>
-                  We&apos;re working on our {activeTab === "case-studies" ? "Case Studies" : "Glossary"} library. Check back soon!
+                  We&apos;re working on our {activeTab === "case-studies" ? "Case Studies" : "Blogs"} library. Check back soon!
                 </p>
               </div>
             </div>

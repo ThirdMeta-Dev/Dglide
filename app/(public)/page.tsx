@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getHomepageSections } from "@/lib/supabase/sections";
-import { listBlogPosts } from "@/lib/blog-db";
-import { listPublishedCaseStudies } from "@/lib/case-studies-db";
+import { listBlogPostsFreshSafe } from "@/lib/blog-db";
+import { listPublishedCaseStudiesFresh } from "@/lib/case-studies-db";
 import HeroSection from "@/components/sections/HeroSection";
 import SoftwareWorksSection from "@/components/sections/SoftwareWorksSection";
 import ComparisonSection from "@/components/sections/ComparisonSection";
@@ -27,11 +27,14 @@ export const metadata: Metadata = {
     "One no-code platform for ITSM, field service, and CRM. Replaces ManageEngine, Zoho, and WhatsApp-run ops. Live in weeks, not months.",
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function HomePage() {
   const [sections, { docs: blogPosts }, caseStudies] = await Promise.all([
     getHomepageSections(),
-    listBlogPosts({ publishedOnly: true, limit: 1, sortField: 'publishedAt', sortDir: 'desc', fields: 'list' }),
-    listPublishedCaseStudies(),
+    listBlogPostsFreshSafe({ publishedOnly: true, limit: 1, sortField: 'publishedAt', sortDir: 'desc', fields: 'list' }),
+    listPublishedCaseStudiesFresh(),
   ]);
 
   return (

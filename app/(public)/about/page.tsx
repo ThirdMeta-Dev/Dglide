@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { listBlogPostsFreshSafe } from "@/lib/blog-db";
+import { listPublishedCaseStudiesFresh } from "@/lib/case-studies-db";
 import "@/styles/about-responsive.css";
 import AUHeroSection from "@/components/about/sections/AUHeroSection";
 import AUWhatIsSection from "@/components/about/sections/AUWhatIsSection";
@@ -13,7 +15,7 @@ import AUFounderQuoteSection from "@/components/about/sections/AUFounderQuoteSec
 import AUPeopleSection from "@/components/about/sections/AUPeopleSection";
 import LogoCarouselSection from "@/components/sections/LogoCarouselSection";
 import AUJourneySection from "@/components/about/sections/AUJourneySection";
-import AUResourcesSection from "@/components/about/sections/AUResourcesSection";
+import UsefulResourcesSection from "@/components/sections/UsefulResourcesSection";
 import AUFinalCTASection from "@/components/about/sections/AUFinalCTASection";
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
@@ -23,7 +25,21 @@ export const metadata: Metadata = {
     "DGlide exists because software should adapt to you, not the other way around. Meet the Pune-based team, backed by 20+ years in field ops and ITSM.",
 };
 
-export default function AboutPage() {
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+export default async function AboutPage() {
+  const [{ docs: blogPosts }, caseStudies] = await Promise.all([
+    listBlogPostsFreshSafe({
+      publishedOnly: true,
+      limit: 1,
+      sortField: "publishedAt",
+      sortDir: "desc",
+      fields: "list",
+    }),
+    listPublishedCaseStudiesFresh(),
+  ]);
+
   return (
     <AnimatedPublicPage className="bg-[#F3F3F3]">
       <AUHeroSection />
@@ -61,7 +77,7 @@ export default function AboutPage() {
       <div className="py-[60px] lg:py-16">
         <AUJourneySection />
       </div>
-      <AUResourcesSection />
+      <UsefulResourcesSection latestPost={blogPosts[0]} latestCaseStudy={caseStudies[0]} />
       <div className="pt-[60px] pb-[130px] lg:pt-16">
         <AUFinalCTASection />
       </div>
