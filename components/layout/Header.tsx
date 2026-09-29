@@ -367,11 +367,11 @@ export default function Header({ navItems, settings }: Props) {
           <button
             type="button"
             onClick={openFsmIndiaLeadModal}
-            className="dg-btn-fill flex items-center gap-2 rounded-[40px] px-5 py-3 text-sm font-semibold text-white [font-family:var(--font-sora)] lg:px-8 lg:py-[14px] lg:text-base"
+            className="dg-btn-fill flex items-center gap-1.5 whitespace-nowrap rounded-[40px] px-4 py-2 text-xs font-semibold text-white [font-family:var(--font-sora)] lg:gap-2 lg:px-8 lg:py-[14px] lg:text-base"
             style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
           >
             {cfg.cta_label}
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <svg className="h-4 w-4 lg:h-[18px] lg:w-[18px]" viewBox="0 0 18 18" fill="none" aria-hidden="true">
               <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>

@@ -1,6 +1,6 @@
 "use client";
 
-import { FunctionComponent } from "react";
+import { FunctionComponent, ReactNode } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { scrollToContact } from "@/lib/scroll-to-contact";
@@ -35,6 +35,7 @@ type FSMHeroSectionProps = {
   imageClassName?: string;
   actionsInline?: boolean;
   compactTop?: boolean;
+  mobileBeforeImage?: ReactNode;
 };
 
 const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
@@ -57,6 +58,7 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
   imageClassName = "",
   actionsInline = false,
   compactTop = false,
+  mobileBeforeImage,
 }) => {
   const router = useRouter();
 
@@ -153,6 +155,10 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
               </div>
             )}
           </div>
+
+          {mobileBeforeImage ? (
+            <div className="lg:hidden">{mobileBeforeImage}</div>
+          ) : null}
 
           {/* Right column — hero illustration */}
           <ScrollReveal direction="right" delay={0.1} className="flex justify-center lg:justify-end">
