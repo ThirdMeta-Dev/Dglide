@@ -16,9 +16,9 @@ const BASE_LOGOS = [
 
 const LOGOS = [...BASE_LOGOS, ...BASE_LOGOS, ...BASE_LOGOS];
 
-export default function FsmAdsTrustedLogos() {
+export default function FsmAdsTrustedLogos({ className = "" }: { className?: string }) {
   return (
-    <section className="bg-[#F3F3F3] pb-12 pt-10" aria-label="Trusted by">
+    <section className={`bg-[#F3F3F3] pb-12 pt-10 ${className}`.trim()} aria-label="Trusted by">
       <div className="hero-logos-row mx-auto flex max-w-[1280px] items-center gap-[60px] px-6 md:px-10 lg:px-16">
         <div className="hero-logos-label flex-shrink-0">
           <p

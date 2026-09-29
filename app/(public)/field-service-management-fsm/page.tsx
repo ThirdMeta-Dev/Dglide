@@ -75,8 +75,9 @@ export default function FSMPage({ adsLanding = false }: { adsLanding?: boolean }
         imageSrc="/solutions/fsm-hero-illustration.png"
         mobileImageSrc="/solutions/fsm-hero-mobile.png"
         imageAlt="DGlide FSM — field service management dashboard"
+        mobileBeforeImage={adsLanding ? <FsmAdsTrustedLogos /> : undefined}
       />
-      {adsLanding ? <FsmAdsTrustedLogos /> : null}
+      {adsLanding ? <FsmAdsTrustedLogos className="hidden lg:block" /> : null}
       {!adsLanding ? <SolutionsSectionNav items={fsmNavItems} /> : null}
       <FieldServiceProblemSection
         heading={fsmProblemHeading}
