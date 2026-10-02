@@ -16,10 +16,10 @@ const SAMIR_QUOTE: FounderQuote = {
     "“We built DGlide because we kept seeing businesses struggle with the same problem. Their operations were growing, but their software could not keep up. Standard tools forced compromise.",
     "DGlide was created to give businesses a practical middle path: systems that start fast, fit real workflows, and continue adapting after go-live.”",
   ],
-  name: "Mr Samir Tripathy",
-  role: "Founder CEO",
+  name: "Samir Tripathy",
+  role: "Founder CEO, DGlide",
   image: "/about/founder-quote/mr-samir.png",
-  imageAlt: "Mr Samir Tripathy",
+  imageAlt: "Samir Tripathy",
   imageWidth: 736,
   imageHeight: 920,
 };
