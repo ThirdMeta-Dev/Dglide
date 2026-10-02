@@ -3,21 +3,23 @@
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import ContactDemoForm from "@/components/contact-us/ContactDemoForm";
-import { FSM_INDIA_LEAD_MODAL_EVENT } from "@/lib/fsm-india-ads";
+import {
+  FSM_INDIA_BROCHURE_MODAL_TRIGGER_ID,
+  FSM_INDIA_LEAD_MODAL_TRIGGER_ID,
+  type FsmIndiaLeadIntent,
+} from "@/lib/fsm-india-ads";
 
 export default function FsmIndiaLeadModal() {
   const [open, setOpen] = useState(false);
+  const [intent, setIntent] = useState<FsmIndiaLeadIntent>("demo");
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    const handleOpen = () => {
-      previousFocusRef.current = document.activeElement as HTMLElement | null;
-      setOpen(true);
-    };
-    window.addEventListener(FSM_INDIA_LEAD_MODAL_EVENT, handleOpen);
-    return () => window.removeEventListener(FSM_INDIA_LEAD_MODAL_EVENT, handleOpen);
-  }, []);
+  const handleOpen = (nextIntent: FsmIndiaLeadIntent) => {
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    setIntent(nextIntent);
+    setOpen(true);
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -58,46 +60,79 @@ export default function FsmIndiaLeadModal() {
     };
   }, [open]);
 
-  if (!open) return null;
+  const isBrochure = intent === "brochure";
 
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/55 p-4 backdrop-blur-[2px]"
-      onMouseDown={(event) => {
-        if (event.target === event.currentTarget) setOpen(false);
-      }}
-    >
-      <div
-        ref={dialogRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="fsm-india-modal-title"
-        className="relative max-h-[calc(100vh-32px)] w-full max-w-[720px] overflow-y-auto rounded-[24px] bg-white px-5 py-6 shadow-2xl sm:px-9 sm:py-8"
-      >
-        <button
-          type="button"
-          onClick={() => setOpen(false)}
-          className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#F3F3F3] text-[#222] transition hover:bg-[#E7E7E7] focus:outline-none focus:ring-2 focus:ring-[#1C2BFF]/30"
-          aria-label="Close demo form"
+    <>
+      <button
+        id={FSM_INDIA_LEAD_MODAL_TRIGGER_ID}
+        type="button"
+        hidden
+        onClick={() => handleOpen("demo")}
+        aria-hidden="true"
+        tabIndex={-1}
+      />
+      <button
+        id={FSM_INDIA_BROCHURE_MODAL_TRIGGER_ID}
+        type="button"
+        hidden
+        onClick={() => handleOpen("brochure")}
+        aria-hidden="true"
+        tabIndex={-1}
+      />
+      {open ? (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/55 p-4 backdrop-blur-[2px]"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setOpen(false);
+          }}
         >
-          <X className="h-5 w-5" aria-hidden="true" />
-        </button>
-
-        <div className="mb-6 px-12 text-center">
-          <p className="mb-2 text-sm font-medium text-[#FF7F1C] [font-family:var(--font-sora)]">
-            Book a live DGlide walkthrough
-          </p>
-          <h2
-            id="fsm-india-modal-title"
-            className="m-0 text-[28px] font-normal leading-tight text-black sm:text-[36px]"
-            style={{ fontFamily: "var(--font-tasa-orbiter)" }}
+          <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="fsm-india-modal-title"
+            className="relative max-h-[calc(100vh-32px)] w-full max-w-[720px] overflow-y-auto rounded-[24px] bg-white px-5 py-6 shadow-2xl sm:px-9 sm:py-8"
           >
-            Tell us what&apos;s slowing you down
-          </h2>
-        </div>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#F3F3F3] text-[#222] transition hover:bg-[#E7E7E7] focus:outline-none focus:ring-2 focus:ring-[#1C2BFF]/30"
+              aria-label="Close demo form"
+            >
+              <X className="h-5 w-5" aria-hidden="true" />
+            </button>
 
-        <ContactDemoForm formType="FSM India Ads" submitLabel="Book My Demo" />
-      </div>
-    </div>
+            <div className="mb-6 px-12 text-center">
+              <p className="mb-2 text-sm font-medium text-[#FF7F1C] [font-family:var(--font-sora)]">
+                {isBrochure
+                  ? "Get the DGlide FSM brochure"
+                  : "Book a live DGlide walkthrough"}
+              </p>
+              <h2
+                id="fsm-india-modal-title"
+                className="m-0 text-[28px] font-normal leading-tight text-black sm:text-[36px]"
+                style={{ fontFamily: "var(--font-tasa-orbiter)" }}
+              >
+                {isBrochure
+                  ? "Tell us where to send it"
+                  : "Tell us what&apos;s slowing you down"}
+              </h2>
+            </div>
+
+            <ContactDemoForm
+              formType={isBrochure ? "FSM India Ads Brochure" : "FSM India Ads"}
+              submitLabel={isBrochure ? "Download Brochure" : "Book My Demo"}
+              redirectTo={isBrochure ? "/thank-you?brochure=fsm-hvac" : "/thank-you"}
+              introText={
+                isBrochure
+                  ? "Share your details and we'll email the brochure to you right away."
+                  : undefined
+              }
+            />
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }

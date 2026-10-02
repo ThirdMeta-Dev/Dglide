@@ -1,9 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
-import { sendNotification } from "@/lib/mailer";
+import { sendFsmBrochure, sendNotification } from "@/lib/mailer";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { appendLeadToSheet } from "@/lib/sheets";
 import { appendLeadSourceToMessage, readLeadSource } from "@/lib/lead-source";
+import { FSM_HVAC_BROCHURE_PATH } from "@/lib/fsm-india-ads";
 
 type ContactRequestBody = {
   name?: unknown;
@@ -82,11 +83,23 @@ export async function POST(req: Request) {
     const supabase = await createClient();
     const requestedFormType = readString(body.formType);
     const sourcePathOnly = readString(body.sourcePath).split("?")[0].replace(/\/+$/, "");
-    const isFsmIndiaAdsLead = requestedFormType === "FSM India Ads"
-      && sourcePathOnly === "/field-service-management-fsm-india";
+    const isFsmIndiaAdsPath = sourcePathOnly === "/field-service-management-fsm-india";
+    const isFsmBrochureLead =
+      requestedFormType === "FSM India Ads Brochure" && isFsmIndiaAdsPath;
+    const isFsmIndiaAdsLead = (
+      requestedFormType === "FSM India Ads" || isFsmBrochureLead
+    ) && isFsmIndiaAdsPath;
+    const isPartnershipLead =
+      requestedFormType === "Partnership Application" && sourcePathOnly === "/partnership";
     const source = readLeadSource(
       body as Record<string, unknown>,
-      isFsmIndiaAdsLead ? "FSM India Ads" : "Contact Form",
+      isFsmBrochureLead
+        ? "FSM India Ads Brochure"
+        : isFsmIndiaAdsLead
+          ? "FSM India Ads"
+          : isPartnershipLead
+            ? "Partnership Application"
+            : "Contact Form",
       req.headers.get("referer")
     );
     if (source.sourcePath?.startsWith("/blogs/")) source.formType = "Blog Detail Form";
@@ -101,23 +114,50 @@ export async function POST(req: Request) {
     });
     if (error) throw error;
 
-    await sendNotification(`New Contact Request — ${values.company}`, {
-      name: values.name,
-      email: values.email,
-      phone: values.contact,
-      company: values.company,
-      message: values.message,
-      ...source,
-    }).catch((err: unknown) => console.error("Contact request email error:", err));
+    await sendNotification(
+      isFsmBrochureLead
+        ? `New FSM Brochure Download — ${values.company}`
+        : `New Contact Request — ${values.company}`,
+      {
+        name: values.name,
+        email: values.email,
+        phone: values.contact,
+        company: values.company,
+        message: values.message,
+        ...source,
+      }
+    ).catch((err: unknown) => console.error("Contact request email error:", err));
 
-    await appendLeadToSheet(isFsmIndiaAdsLead ? 'FSM India Ads' : 'Contact Us', {
-      name: values.name,
-      email: values.email,
-      phone: values.contact,
-      company: values.company,
-      message: values.message,
-      ...source,
-    }, isFsmIndiaAdsLead ? { destination: 'fsm-india', required: true } : undefined);
+    await appendLeadToSheet(
+      isFsmBrochureLead
+        ? "FSM India Ads Brochure"
+        : isFsmIndiaAdsLead
+          ? "FSM India Ads"
+          : isPartnershipLead
+            ? "Partnership Application"
+            : "Contact Us",
+      {
+        name: values.name,
+        email: values.email,
+        phone: values.contact,
+        company: values.company,
+        message: values.message,
+        ...source,
+      },
+      isFsmIndiaAdsLead ? { destination: "fsm-india", required: true } : undefined
+    );
+
+    if (isFsmBrochureLead) {
+      const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.dglide.com").replace(
+        /\/+$/,
+        ""
+      );
+      await sendFsmBrochure({
+        to: values.email,
+        name: values.name,
+        pdfUrl: `${siteUrl}${FSM_HVAC_BROCHURE_PATH}`,
+      }).catch((err: unknown) => console.error("FSM brochure email error:", err));
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

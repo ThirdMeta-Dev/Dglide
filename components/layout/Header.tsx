@@ -366,7 +366,7 @@ export default function Header({ navItems, settings }: Props) {
 
           <button
             type="button"
-            onClick={openFsmIndiaLeadModal}
+            onClick={() => openFsmIndiaLeadModal()}
             className="dg-btn-fill flex items-center gap-1.5 whitespace-nowrap rounded-[40px] px-4 py-2 text-xs font-semibold text-white [font-family:var(--font-sora)] lg:gap-2 lg:px-8 lg:py-[14px] lg:text-base"
             style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
           >

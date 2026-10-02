@@ -74,9 +74,13 @@ function FieldError({ error }: { error?: string }) {
 export default function ContactDemoForm({
   formType = "Contact Form",
   submitLabel = "Get the full story",
+  redirectTo = "/thank-you",
+  introText = "Hi, I'm Vinayak from DGlide. Answer a couple of quick questions, and I'll tailor your demo.",
 }: {
   formType?: string;
   submitLabel?: string;
+  redirectTo?: string;
+  introText?: string;
 }) {
   const router = useRouter();
   const [form, setForm] = useState<FormState>(initialForm);
@@ -114,7 +118,7 @@ export default function ContactDemoForm({
         body: JSON.stringify({
           ...form,
           formType,
-          ...getBrowserLeadSource({ marketingParamsOnly: formType === "FSM India Ads" }),
+          ...getBrowserLeadSource({ marketingParamsOnly: formType.startsWith("FSM India Ads") }),
         }),
       });
       const result = (await response.json().catch(() => ({}))) as {
@@ -129,7 +133,7 @@ export default function ContactDemoForm({
 
       setSubmitted(true);
       setForm(initialForm);
-      router.push("/thank-you");
+      router.push(redirectTo);
     } catch (err) {
       setStatusError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
@@ -177,7 +181,7 @@ export default function ContactDemoForm({
         <div className="relative w-full rounded-xl bg-[#F3F3F3] px-7 py-4 text-center">
           <span className="absolute -top-3 left-1/2 h-6 w-6 -translate-x-1/2 rotate-45 rounded-sm bg-[#F3F3F3]" />
           <p className="relative m-0 text-[15px] leading-6 text-[#222222]" style={{ fontFamily: "var(--font-inter)" }}>
-            &quot;Hi, I&apos;m Vinayak from DGlide. Answer a couple of quick questions, and I&apos;ll tailor your demo.&quot;
+            &quot;{introText}&quot;
           </p>
         </div>
       </div>

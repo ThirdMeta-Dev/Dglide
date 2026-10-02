@@ -83,6 +83,7 @@ const DEFAULT_COLS = [
     links: [
       { label: "About DGlide",        href: "/about" },
       { label: "Contact / Book Demo", href: "/schedule-demo" },
+      { label: "Partnership",         href: "/partnership" },
     ],
   },
 ];
@@ -265,6 +266,13 @@ export default function Footer({
       !resolvedLinks.some((link) => link.href === "/zoho-fsm-vs-dglide")
     ) {
       resolvedLinks.push({ label: "DGlide vs Zoho FSM", href: "/zoho-fsm-vs-dglide" });
+    }
+
+    if (
+      def.heading === "Company" &&
+      !resolvedLinks.some((link) => link.href === "/partnership")
+    ) {
+      resolvedLinks.push({ label: "Partnership", href: "/partnership" });
     }
 
     return {

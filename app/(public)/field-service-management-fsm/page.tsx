@@ -68,10 +68,11 @@ export default function FSMPage({ adsLanding = false }: { adsLanding?: boolean }
           "Configurable workflows without custom build",
         ]}
         primaryCta={fsmHeroPrimaryCta}
-        secondaryCta={fsmHeroSecondaryCta}
-        mobilePrimaryCta="Pick your demo time"
-        mobileSecondaryCta="Explore The Platform"
-        secondaryScrollTargetId="core-capabilities"
+        secondaryCta={adsLanding ? "Download Brochure" : fsmHeroSecondaryCta}
+        mobilePrimaryCta={adsLanding ? fsmHeroPrimaryCta : "Pick your demo time"}
+        mobileSecondaryCta={adsLanding ? "Download Brochure" : "Explore The Platform"}
+        secondaryScrollTargetId={adsLanding ? undefined : "core-capabilities"}
+        secondaryOpensBrochure={adsLanding}
         imageSrc="/solutions/fsm-hero-illustration.png"
         mobileImageSrc="/solutions/fsm-hero-mobile.png"
         imageAlt="DGlide FSM — field service management dashboard"

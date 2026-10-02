@@ -14,7 +14,14 @@ export const metadata: Metadata = {
     "Thank you for reaching out. We have received your inquiry and will be in touch shortly.",
 };
 
-export default async function ThankYouPage() {
+type ThankYouPageProps = {
+  searchParams?: Promise<{ brochure?: string | string[] }>;
+};
+
+export default async function ThankYouPage({ searchParams }: ThankYouPageProps) {
+  const params = await searchParams;
+  const brochure = Array.isArray(params?.brochure) ? params?.brochure[0] : params?.brochure;
+  const showBrochureDownload = brochure === "fsm-hvac";
   const sections = await getHomepageSections();
 
   const testimonialData = {
@@ -36,7 +43,7 @@ export default async function ThankYouPage() {
       </noscript>
 
       {/* 1. Hero / Thank You header + "What happens next?" CTA card */}
-      <ThankYouHero />
+      <ThankYouHero showBrochureDownload={showBrochureDownload} />
 
       {/* 2. Four reasons section — Figma node 1374:16454 */}
       <ThankYouReasons />
