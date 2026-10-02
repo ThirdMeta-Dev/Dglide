@@ -3,6 +3,11 @@ import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 
 const FROM_EMAIL = "no-reply@dglide.com";
 const sesConfigured = Boolean(process.env.SES_ACCESS_KEY_ID && process.env.SES_SECRET_ACCESS_KEY);
+const localSmtpConfigured = Boolean(
+  process.env.NODE_ENV !== "production" && process.env.SMTP_USER && process.env.SMTP_PASS
+);
+const emailConfigured = sesConfigured || localSmtpConfigured;
+const senderEmail = sesConfigured ? FROM_EMAIL : process.env.SMTP_USER || FROM_EMAIL;
 
 export const NOTIFY_EMAILS = [
   "samir@dglide.com",
@@ -28,9 +33,21 @@ const sesClient = new SESv2Client({
     : undefined,
 });
 
-const transporter = nodemailer.createTransport({
-  SES: { sesClient, SendEmailCommand },
-});
+const transporter = sesConfigured
+  ? nodemailer.createTransport({
+      SES: { sesClient, SendEmailCommand },
+    })
+  : nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: localSmtpConfigured
+        ? {
+            user: process.env.SMTP_USER!,
+            pass: process.env.SMTP_PASS!,
+          }
+        : undefined,
+    });
 
 export type NotificationFields = {
   name: string;
@@ -54,7 +71,7 @@ export async function sendCaseStudyPdf(input: {
   company: string;
   pdfUrl: string;
 }) {
-  if (!sesConfigured) throw new Error("SES is not configured");
+  if (!emailConfigured) throw new Error("Email is not configured");
   const { to, name, title, company, pdfUrl } = input;
   const safeTitle = escapeHtml(title);
   const safeUrl = escapeHtml(pdfUrl);
@@ -86,7 +103,7 @@ export async function sendCaseStudyPdf(input: {
       .replace(/^-+|-+$/g, "")
       .slice(0, 80) || "case-study";
   await transporter.sendMail({
-    from: `DGlide <${FROM_EMAIL}>`,
+    from: `DGlide <${senderEmail}>`,
     to,
     subject: `Your DGlide case study: ${title}`,
     html,
@@ -96,11 +113,42 @@ export async function sendCaseStudyPdf(input: {
   });
 }
 
+export async function sendFsmBrochure(input: {
+  to: string;
+  name: string;
+  pdfUrl: string;
+}) {
+  if (!emailConfigured) throw new Error("Email is not configured");
+  const { to, name, pdfUrl } = input;
+  const safeUrl = escapeHtml(pdfUrl);
+  const html = `
+    <div style="font-family:Arial,sans-serif;font-size:15px;color:#333;line-height:1.65;max-width:620px;margin:0 auto">
+      <p style="margin:0 0 20px;color:#1C2BFF;font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase">DGlide Field Service Management</p>
+      <h2 style="margin:0 0 18px;color:#1a1a1a;font-size:26px">Your DGlide FSM brochure is ready</h2>
+      <p>Hi ${escapeHtml(name)},</p>
+      <p>Thank you for your interest in DGlide. The brochure shows how service teams can manage work orders, scheduling, technicians, customer communication, and reporting in one configurable platform.</p>
+      <p style="margin:28px 0">
+        <a href="${safeUrl}" style="background:#1C2BFF;color:#fff;text-decoration:none;padding:13px 28px;border-radius:40px;display:inline-block;font-weight:700">
+          Download Brochure
+        </a>
+      </p>
+      <p>If you would like to see DGlide mapped to your own field-service workflow, <a href="https://www.dglide.com/schedule-demo" style="color:#1C2BFF">book a live demo</a>.</p>
+      <p style="color:#888;font-size:13px;margin-top:30px">Regards,<br />The DGlide Team</p>
+    </div>
+  `;
+  await transporter.sendMail({
+    from: `DGlide <${senderEmail}>`,
+    to,
+    subject: "Your DGlide FSM brochure is ready",
+    html,
+  });
+}
+
 export async function sendNotification(
   subject: string,
   fields: NotificationFields
 ) {
-  if (!sesConfigured) return;
+  if (!emailConfigured) return;
   const { name, email, phone, company, message, formType, sourcePath, sourceUrl } = fields;
   const sourceLabel = sourcePath || sourceUrl || "";
   const html = `
@@ -117,7 +165,7 @@ export async function sendNotification(
     </table>
   `;
   await transporter.sendMail({
-    from: `DGlide <${FROM_EMAIL}>`,
+    from: `DGlide <${senderEmail}>`,
     to: NOTIFY_EMAILS,
     subject,
     html,

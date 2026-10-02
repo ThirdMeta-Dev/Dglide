@@ -4,6 +4,7 @@ import { FunctionComponent, ReactNode } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { scrollToContact } from "@/lib/scroll-to-contact";
+import { openFsmIndiaLeadModal } from "@/lib/fsm-india-ads";
 import SolutionsButton from "@/components/solutions/shared/SolutionsButton";
 import SolutionsContainer from "@/components/solutions/shared/SolutionsContainer";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
@@ -29,6 +30,7 @@ type FSMHeroSectionProps = {
   mobileSecondaryCta?: string;
   /* When set, the secondary button scrolls to this element id instead of the contact form */
   secondaryScrollTargetId?: string;
+  secondaryOpensBrochure?: boolean;
   imageSrc?: string;
   mobileImageSrc?: string;
   imageAlt?: string;
@@ -52,6 +54,7 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
   mobilePrimaryCta,
   mobileSecondaryCta,
   secondaryScrollTargetId,
+  secondaryOpensBrochure = false,
   imageSrc = "/solutions/itsm-hero-illustration.png",
   mobileImageSrc,
   imageAlt = "DGlide service management dashboard",
@@ -73,7 +76,9 @@ const FSMHeroSection: FunctionComponent<FSMHeroSectionProps> = ({
       <SolutionsButton
         variant="outline"
         onClick={() => {
-          if (secondaryScrollTargetId) {
+          if (secondaryOpensBrochure) {
+            openFsmIndiaLeadModal("brochure");
+          } else if (secondaryScrollTargetId) {
             document.getElementById(secondaryScrollTargetId)?.scrollIntoView({ behavior: "smooth" });
           } else {
             scrollToContact(router);

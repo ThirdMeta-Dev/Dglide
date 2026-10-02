@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { FSM_HVAC_BROCHURE_PATH } from "@/lib/fsm-india-ads";
 import styles from "./ThankYouPage.module.css";
 
 /* ─────────────────────────────────────────────────────────────
@@ -68,7 +69,11 @@ function ArrowIcon({ color = "#1C2BFF" }: { color?: string }) {
   );
 }
 
-export default function ThankYouHero() {
+export default function ThankYouHero({
+  showBrochureDownload = false,
+}: {
+  showBrochureDownload?: boolean;
+}) {
   return (
     <section className={styles.heroSection}>
       <div className={styles.heroInner}>
@@ -85,10 +90,21 @@ export default function ThankYouHero() {
           <div className={styles.heroActionGroup}>
             {/* ── CTA buttons ── */}
             <div className={styles.heroCtas}>
-              <Link href="/schedule-demo" className={styles.heroBtnPrimary}>
-                Pick your demo time
-                <ArrowIcon color="#fff" />
-              </Link>
+              {showBrochureDownload ? (
+                <a
+                  href={FSM_HVAC_BROCHURE_PATH}
+                  download="DGlide-FSM-HVAC-Brochure.pdf"
+                  className={styles.heroBtnPrimary}
+                >
+                  Download Brochure
+                  <ArrowIcon color="#fff" />
+                </a>
+              ) : (
+                <Link href="/schedule-demo" className={styles.heroBtnPrimary}>
+                  Pick your demo time
+                  <ArrowIcon color="#fff" />
+                </Link>
+              )}
               <Link href="/platform" className={styles.heroBtnSecondary}>
                 Explore The Platform
                 <ArrowIcon color="#1C2BFF" />
@@ -96,8 +112,9 @@ export default function ThankYouHero() {
             </div>
 
             <p className={styles.heroSubtext}>
-              You can book a time-slot or wait for Our Team to directly get in
-              touch with you.
+              {showBrochureDownload
+                ? "Your brochure has also been sent to your email. You can download it now."
+                : "You can book a time-slot or wait for Our Team to directly get in touch with you."}
             </p>
           </div>
         </div>
