@@ -2,19 +2,25 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Requires Node.js 20+.
 
 ```bash
+npm ci
+cp .env.example .env.local   # then fill in the Supabase keys
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Without the Supabase variables (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`) every page returns 500 and `npm run build` fails. See `.env.example` for the optional variables.
+
+Checks:
+
+```bash
+npm run lint
+node --test tests/*.test.mjs
+npm run build
+```
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
