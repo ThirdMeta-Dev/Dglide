@@ -4,6 +4,7 @@ import { sendNotification } from "@/lib/mailer";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { appendLeadToSheet } from "@/lib/sheets";
 import { appendLeadSourceToMessage, readLeadSource } from "@/lib/lead-source";
+import { grantThankYouAccess } from "@/lib/thank-you-access";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_CHARS_RE = /^[+\d\s().-]+$/;
@@ -61,7 +62,7 @@ export async function POST(req: Request) {
 
     await appendLeadToSheet('Demo Request', { name, email, phone: contact, company, message, ...source }).catch(() => {});
 
-    return NextResponse.json({ success: true });
+    return grantThankYouAccess(NextResponse.json({ success: true }));
   } catch (err) {
     console.error("Demo request error:", err);
     return NextResponse.json({ error: "We could not submit your request right now. Please try again in a moment." }, { status: 500 });

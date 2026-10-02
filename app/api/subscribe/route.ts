@@ -4,6 +4,7 @@ import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { sendNotification } from '@/lib/mailer'
 import { readLeadSource } from '@/lib/lead-source'
 import { supabaseService } from '@/lib/supabase-service'
+import { grantThankYouAccess } from '@/lib/thank-you-access'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -46,5 +47,5 @@ export async function POST(req: Request) {
     ...source,
   }).catch((err: unknown) => console.error('Newsletter subscribe email error:', err))
 
-  return NextResponse.json({ success: true })
+  return grantThankYouAccess(NextResponse.json({ success: true }))
 }
