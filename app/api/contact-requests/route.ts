@@ -5,6 +5,7 @@ import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { appendLeadToSheet } from "@/lib/sheets";
 import { appendLeadSourceToMessage, readLeadSource } from "@/lib/lead-source";
 import { FSM_HVAC_BROCHURE_PATH } from "@/lib/fsm-india-ads";
+import { grantThankYouAccess } from "@/lib/thank-you-access";
 
 type ContactRequestBody = {
   name?: unknown;
@@ -159,7 +160,7 @@ export async function POST(req: Request) {
       }).catch((err: unknown) => console.error("FSM brochure email error:", err));
     }
 
-    return NextResponse.json({ success: true });
+    return grantThankYouAccess(NextResponse.json({ success: true }));
   } catch (err) {
     console.error("Contact request error:", err);
     return NextResponse.json({ error: "Failed to submit" }, { status: 500 });

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getBrowserLeadSource } from "@/lib/lead-source";
+import { withThankYouAccessParam } from "@/lib/thank-you-access";
 
 type FieldName = "name" | "email" | "contact" | "company" | "message";
 type FormState = Record<FieldName, string>;
@@ -133,7 +134,7 @@ export default function ContactDemoForm({
 
       setSubmitted(true);
       setForm(initialForm);
-      router.push(redirectTo);
+      router.push(withThankYouAccessParam(redirectTo));
     } catch (err) {
       setStatusError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {

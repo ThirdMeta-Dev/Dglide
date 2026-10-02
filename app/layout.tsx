@@ -78,17 +78,6 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-T23WQK9J');
           `}
         </Script>
-        <Script id="google-tag-manager-thank-you" strategy="beforeInteractive">
-          {`
-            if (window.location.pathname.replace(/\\/+$/, '') === '/thank-you') {
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-W8ZSJQM8');
-            }
-          `}
-        </Script>
       </head>
       <body className="min-h-full flex flex-col bg-[#F3F3F3]">
         <noscript>
@@ -111,9 +100,6 @@ export default function RootLayout({
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-T5K6SG2E0Z');
-          if (window.location.pathname.replace(/\/+$/, '') === '/thank-you') {
-            gtag('config', 'AW-18310414886');
-          }
         `}
       </Script>
       <Script id="microsoft-clarity" strategy="afterInteractive">

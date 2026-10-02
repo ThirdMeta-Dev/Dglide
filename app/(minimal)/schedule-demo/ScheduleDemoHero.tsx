@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getBrowserLeadSource } from "@/lib/lead-source";
+import { withThankYouAccessParam } from "@/lib/thank-you-access";
 
 const LOGO_SRCS = [
   "/logos/power2u.png",
@@ -104,7 +105,7 @@ export default function ScheduleDemoHero({
         throw new Error(response.error || "We could not submit your request. Please try again.");
       }
       setSubmitted(true);
-      router.push("/thank-you");
+      router.push(withThankYouAccessParam("/thank-you"));
     } catch (submissionError) {
       setError(submissionError instanceof Error ? submissionError.message : "We could not submit your request. Please try again.");
     } finally {

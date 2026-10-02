@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getBrowserLeadSource } from "@/lib/lead-source";
+import { withThankYouAccessParam } from "@/lib/thank-you-access";
 
 interface Props {
   heading: string;
@@ -38,7 +39,7 @@ export default function FooterNewsletter({ heading, placeholder, buttonLabel }: 
         const data = await res.json().catch(() => ({}));
         throw new Error(data.error || "Failed");
       }
-      router.push("/thank-you");
+      router.push(withThankYouAccessParam("/thank-you"));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {

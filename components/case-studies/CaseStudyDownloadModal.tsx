@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getBrowserLeadSource } from "@/lib/lead-source";
+import { withThankYouAccessParam } from "@/lib/thank-you-access";
 import type { CaseStudy } from "@/lib/case-studies-db";
 import styles from "@/app/(public)/case-studies/CaseStudiesPage.module.css";
 
@@ -102,7 +103,7 @@ export default function CaseStudyDownloadModal({
         throw new Error(data?.error || "Something went wrong. Please try again.");
       }
       setSent(true);
-      router.push("/thank-you");
+      router.push(withThankYouAccessParam("/thank-you"));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {

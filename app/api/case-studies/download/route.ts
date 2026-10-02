@@ -4,6 +4,7 @@ import { sendCaseStudyPdf, sendNotification } from '@/lib/mailer'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { appendLeadToSheet } from '@/lib/sheets'
 import { readLeadSource } from '@/lib/lead-source'
+import { grantThankYouAccess } from '@/lib/thank-you-access'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_CHARS_RE = /^[+\d\s().-]+$/
@@ -108,5 +109,5 @@ export async function POST(req: Request) {
     ...source,
   }).catch(() => {})
 
-  return NextResponse.json({ success: true })
+  return grantThankYouAccess(NextResponse.json({ success: true }))
 }
