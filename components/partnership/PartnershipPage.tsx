@@ -88,6 +88,162 @@ export default function PartnershipPage() {
 
   return (
     <div className="partnership-page">
+      <style jsx global>{`
+        .partnership-page .partner-rate-card {
+          background: #f3f3f3;
+          border-color: #f3f3f3;
+        }
+
+        .partnership-page .partner-eligibility-grid > div:first-child {
+          box-shadow: -6px -6px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        .partnership-page #earnings,
+        .partnership-page .partner-protection {
+          position: relative;
+          overflow: hidden;
+          background: #fff;
+        }
+
+        .partnership-page .partner-protection {
+          padding-bottom: 128px;
+        }
+
+        .partnership-page #earnings::before,
+        .partnership-page #earnings::after,
+        .partnership-page .partner-protection::before,
+        .partnership-page .partner-protection::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          left: 0;
+          z-index: 0;
+          width: auto;
+          border: 0;
+          border-radius: 0;
+          background-image: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' width='2022' height='495' viewBox='0 0 2022 495' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='411' y='31' width='1200' height='368' rx='30' fill='white'/%3E%3Cellipse cx='1011' cy='107' rx='1011' ry='107' fill='white'/%3E%3Cellipse cx='1011' cy='388' rx='895' ry='107' fill='white' fill-opacity='.15'/%3E%3Cellipse cx='1011' cy='354' rx='895' ry='107' fill='white' fill-opacity='.4'/%3E%3Cellipse cx='1011' cy='318' rx='1011' ry='107' fill='white'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-size: 168.5% 496px;
+          box-shadow: none;
+          pointer-events: none;
+        }
+
+        .partnership-page #earnings::before,
+        .partnership-page .partner-protection::before {
+          top: 0;
+          bottom: auto;
+          height: 60px;
+          background-position: center top;
+        }
+
+        .partnership-page #earnings::before {
+          background-color: #f4f4f4;
+        }
+
+        .partnership-page #earnings::after,
+        .partnership-page .partner-protection::after {
+          top: auto;
+          bottom: 0;
+          height: 180px;
+          background-color: #f6f6f6;
+          background-position: center bottom;
+        }
+
+        .partnership-page #earnings > .partner-container,
+        .partnership-page .partner-protection > .partner-container {
+          position: relative;
+          z-index: 1;
+        }
+
+        .partnership-page .partner-founding-shell {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          gap: 36px;
+          text-align: center;
+        }
+
+        .partnership-page .partner-founding {
+          padding: 70px 0;
+          background: #f6f6f6;
+        }
+
+        .partnership-page .partner-faq,
+        .partnership-page .partner-apply {
+          background: #f6f6f6;
+        }
+
+        .partnership-page .partner-founding-shell::before {
+          content: "";
+          position: absolute;
+          inset: -4.75% -27.59% -69.06% -29.28%;
+          background: url("/contact-us/cta-waves.svg") center / 100% 100% no-repeat;
+          transform: scaleX(-1);
+          pointer-events: none;
+        }
+
+        .partnership-page .partner-founding-shell > * {
+          position: relative;
+          z-index: 1;
+        }
+
+        .partnership-page .partner-founding-shell > div:first-child {
+          display: flex;
+          max-width: 760px;
+          flex-direction: column;
+          align-items: center;
+          margin: 0 auto;
+        }
+
+        .partnership-page .partner-founding-shell > div:first-child > p:last-child {
+          max-width: 720px;
+          margin: 20px auto 0;
+          text-align: center;
+        }
+
+        .partnership-page .partner-founding-shell > div:last-child {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .partnership-page .partner-founding-shell > div:last-child p {
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+          gap: 14px;
+        }
+
+        .partnership-page .partner-founding-shell strong {
+          display: inline;
+          margin: 0;
+        }
+
+        .partnership-page .partner-founding h2 {
+          background: linear-gradient(90deg, var(--p-orange) 0%, #fff 8.469%);
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+        }
+
+        @media (max-width: 640px) {
+          .partnership-page .partner-protection {
+            padding-bottom: 104px;
+          }
+
+          .partnership-page .partner-founding {
+            padding: 56px 0;
+          }
+
+          .partnership-page .partner-founding-shell {
+            gap: 28px;
+            padding: 48px 22px;
+          }
+        }
+      `}</style>
       <section className="partner-hero">
         <div className="partner-container partner-hero-grid">
           <div>
