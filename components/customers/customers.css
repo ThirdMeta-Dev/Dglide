@@ -1,0 +1,80 @@
+/* Customers page. Tokens and type follow the Partnership page. */
+.cust-page {
+  --c-blue: #1c2bff;
+  --c-blue-dark: #141fb5;
+  --c-orange: #ff7f1c;
+  --c-ink: #171717;
+  --c-body: #555;
+  --c-line: #e8e8e8;
+  color: var(--c-ink);
+  font-family: var(--font-inter);
+  font-size: 16px;
+  line-height: 1.7;
+  background: #fff;
+}
+.cust-page * { box-sizing: border-box; }
+.cust-container { width: min(1104px, calc(100% - 40px)); margin-inline: auto; }
+
+.cust-hero { padding: 60px 0 72px; border-radius: 0 0 30px 30px; background: linear-gradient(180deg, #fff, #f4f4f4); }
+.cust-breadcrumb { display: flex; gap: 8px; margin-bottom: 24px; color: #858585; font-size: 13px; }
+.cust-breadcrumb a:hover { color: var(--c-orange); }
+.cust-eyebrow { margin: 0 0 18px; color: var(--c-orange); font: 500 13px/1 var(--font-sora); letter-spacing: 0.04em; text-transform: uppercase; }
+.cust-eyebrow::before { content: ""; display: inline-block; width: 2px; height: 11px; margin-right: 8px; vertical-align: -1px; background: var(--c-orange); }
+.cust-page h1 {
+  max-width: 820px;
+  margin: 0;
+  font: 400 clamp(40px, 4.2vw, 58px)/1.08 var(--font-tasa-orbiter);
+  letter-spacing: -0.025em;
+  background: linear-gradient(94deg, var(--c-orange), #381500 44%, #000 77%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.cust-lead { max-width: 680px; margin: 20px 0 0; color: var(--c-body); font-size: 17px; }
+
+.cust-list { display: grid; gap: 16px; padding: 64px 0 96px; margin: 0; list-style: none; }
+.cust-row {
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 28px 32px;
+  border: 1px solid var(--c-line);
+  border-radius: 18px;
+  background: #fff;
+  scroll-margin-top: 110px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.cust-row:target { border-color: var(--c-orange); box-shadow: 0 16px 40px rgba(255, 127, 28, 0.12); }
+.cust-id { display: flex; align-items: center; gap: 18px; }
+.cust-logo { display: grid; flex: 0 0 140px; width: 140px; height: 72px; place-items: center; padding: 4px 6px; border: 1px solid #f0f0f0; border-radius: 12px; background: #fff; }
+.cust-logo img { width: 100%; height: 100%; object-fit: contain; }
+.cust-monogram { display: grid; flex: 0 0 140px; width: 140px; height: 72px; place-items: center; border-radius: 12px; background: linear-gradient(145deg, #1119a8, #1c2bff); color: #fff; font: 600 18px var(--font-sora); }
+.cust-id h2 { margin: 0; font: 500 18px/1.3 var(--font-sora); }
+.cust-id p { margin: 4px 0 0; color: #888; font-size: 13px; line-height: 1.4; }
+.cust-summary { margin: 0; color: var(--c-body); font-size: 15px; }
+.cust-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 14px 0 0; list-style: none; }
+.cust-tags li { padding: 4px 12px; border-radius: 999px; background: #fff2e9; color: #b4530a; font: 500 12px/1.6 var(--font-sora); }
+
+.cust-cta { padding: 0 0 96px; text-align: center; }
+.cust-cta p { margin: 0 0 20px; color: var(--c-body); }
+.cust-btn { display: inline-flex; min-height: 48px; align-items: center; gap: 10px; padding: 13px 30px; border-radius: 40px; background: linear-gradient(103deg, var(--c-blue-dark), var(--c-blue)); color: #fff; font: 600 15px/1.2 var(--font-sora); box-shadow: 0 10px 24px rgba(28, 43, 255, 0.18); transition: transform 0.2s; }
+.cust-btn:hover { transform: translateY(-2px); }
+.cust-page a:focus-visible { outline: 3px solid rgba(255, 127, 28, 0.55); outline-offset: 3px; }
+
+@media (max-width: 900px) {
+  .cust-row { grid-template-columns: 1fr; gap: 18px; padding: 24px; }
+}
+@media (max-width: 640px) {
+  .cust-page { font-size: 15px; }
+  .cust-container { width: calc(100% - 32px); }
+  .cust-hero { padding: 44px 0 56px; }
+  .cust-page h1 { font-size: 36px; }
+  .cust-lead { font-size: 15px; }
+  .cust-list { padding: 44px 0 72px; }
+  .cust-logo, .cust-monogram { flex-basis: 96px; width: 96px; height: 56px; }
+  .cust-btn { width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cust-row, .cust-btn { transition: none; }
+}
