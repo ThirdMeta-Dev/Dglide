@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 import heroPlatformFlow from "@/components/homepage-assets/hero-platform-flow.webp";
+import { CUSTOMERS, LOGO_TO_SLUG } from "@/data/customersData";
 
 const BASE_LOGOS = [
   "/logos/power2u.png",
@@ -168,22 +169,32 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
               className="flex gap-3 w-max"
               style={{ animation: "scrollLeft 28s linear infinite" }}
             >
-              {LOGOS.map((src, i) => (
-                <div key={i} className="flex-shrink-0">
-                  {src.endsWith(".svg") ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={src} alt="Client logo" width={160} height={48} className="object-contain" />
-                  ) : (
-                    <Image
-                      src={src}
-                      alt="Client logo"
-                      width={160}
-                      height={48}
-                      className="object-contain"
-                    />
-                  )}
-                </div>
-              ))}
+              {LOGOS.map((src, i) => {
+                const customer = CUSTOMERS.find((c) => c.slug === LOGO_TO_SLUG[src]);
+                const alt = customer ? customer.name : "Client logo";
+                return (
+                  <a
+                    key={i}
+                    href={customer ? `/customers#${customer.slug}` : "/customers"}
+                    className="flex-shrink-0"
+                    aria-label={customer ? `See how ${customer.name} uses DGlide` : "See DGlide customers"}
+                    tabIndex={i < BASE_LOGOS.length ? undefined : -1}
+                  >
+                    {src.endsWith(".svg") ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={src} alt={alt} width={160} height={48} className="object-contain" />
+                    ) : (
+                      <Image
+                        src={src}
+                        alt={alt}
+                        width={160}
+                        height={48}
+                        className="object-contain"
+                      />
+                    )}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
