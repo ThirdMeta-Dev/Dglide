@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 const CAP_DEFAULTS = [
@@ -10,7 +11,21 @@ const CAP_DEFAULTS = [
   { title: "Mobile Access",           desc: "Field teams update jobs and visits from the site." },
 ];
 
-export default function CapabilitiesSection({ data }: { data?: Record<string, string> }) {
+type ExtraCapability = { id: string; title: string; desc: string; href?: string };
+
+function ExtraIcon({ id }: { id: string }) {
+  return (
+    <span style={{ display: "inline-grid", width: 56, height: 40, placeItems: "center", borderRadius: 12, background: "#FFF2E9", color: "#FF7F1C" }} aria-hidden="true">
+      {id === "ai" ? (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" /><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16z" fill="currentColor" /></svg>
+      ) : (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H9l-5 4V5z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" /><path d="M8 10h8M8 13h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
+      )}
+    </span>
+  );
+}
+
+export default function CapabilitiesSection({ data, extra = [] }: { data?: Record<string, string>; extra?: ExtraCapability[] }) {
   const sectionTitle = data?.title    ?? "One Platform. Every Capability Your Operation Needs";
   const subtitle     = data?.subtitle ?? "One set of capabilities, working across your whole operation.";
 
@@ -69,7 +84,7 @@ export default function CapabilitiesSection({ data }: { data?: Record<string, st
         </ScrollReveal>
 
         {/* 4-column cards */}
-        <StaggerReveal className="cap-grid" style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
+        <StaggerReveal className={extra.length ? "cap-grid cap-grid--grid" : "cap-grid"} style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
           {caps.map((cap, i) => (
             <StaggerItem key={i} className="cap-item" style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
               <div style={{ flexShrink: 0, marginBottom: 28 }}>
@@ -87,6 +102,24 @@ export default function CapabilitiesSection({ data }: { data?: Record<string, st
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 400, lineHeight: "24px", color: "#545454", margin: 0 }}>
                 {cap.desc}
               </p>
+            </StaggerItem>
+          ))}
+          {extra.map((cap) => (
+            <StaggerItem key={cap.id} className="cap-item" style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+              <div style={{ flexShrink: 0, marginBottom: 28 }}>
+                <ExtraIcon id={cap.id} />
+              </div>
+              <h3 style={{ fontFamily: "var(--font-tasa-orbiter)", fontSize: 17, fontWeight: 400, lineHeight: "25px", color: "#000", margin: "0 0 8px" }}>
+                {cap.title}
+              </h3>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 400, lineHeight: "24px", color: "#545454", margin: 0 }}>
+                {cap.desc}
+              </p>
+              {cap.href ? (
+                <Link href={cap.href} style={{ marginTop: 10, color: "#1C2BFF", fontFamily: "Sora, sans-serif", fontSize: 14, fontWeight: 600 }}>
+                  Explore the AI Engine →
+                </Link>
+              ) : null}
             </StaggerItem>
           ))}
         </StaggerReveal>

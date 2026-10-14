@@ -1,5 +1,6 @@
 "use client";
 
+import { UNVERIFIED_TESTIMONIAL_COMPANIES } from "@/data/homepageRevamp";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 
@@ -7,19 +8,19 @@ const FEATURED_TESTIMONIALS = [
   {
     quote: "IndiaMART leads now land straight in DGlide. We reply in 8 minutes, not 40+, and capture three times the Buy Leads.",
     name: "Rahul Sharma",
-    company: "Director - Prompt Lasers",
+    company: "Director, Prompt Lasers",
     image: "/case-studies/logos/prompt-lasers.png",
   },
   {
     quote: "Complaints, technicians and billing now run in one system. Service became a profit centre, with 3x revenue in Q1.",
     name: "Mohit Makkar",
-    company: "Director — Clarion Coolers",
+    company: "Director, Clarion Coolers",
     image: "https://yytdzxrryboagezbjiqa.supabase.co/storage/v1/object/public/dglide-blog-media/case-studies/logos/82c8b9d8-0919-4992-afa6-90cf8b4c69e9-clarion-coolers-logo.svg",
   },
   {
     quote: "We ran projects on spreadsheets and WhatsApp. Now every quote, crew and expense is live, with zero missed project costs.",
     name: "Malatesh Patil",
-    company: "Founder — Advanced Micro Services",
+    company: "Founder, Advanced Micro Services",
     image: "https://yytdzxrryboagezbjiqa.supabase.co/storage/v1/object/public/dglide-blog-media/case-studies/logos/b93e71b5-2743-452e-a4f6-ca45f91dae36-ams-name-plate.png",
   },
 ];
@@ -72,9 +73,10 @@ export default function TestimonialsSection({ data }: { data?: Record<string, st
   const subtitle     = data?.subtitle      ?? "These Are Operations Teams That Stopped Fighting Their Software Once They Picked DGlide";
 
   const cmsTestimonials = data ? parseTestimonials(data) : null;
-  const testimonials = cmsTestimonials
+  const testimonials = (cmsTestimonials
     ? [...FEATURED_TESTIMONIALS, ...cmsTestimonials.slice(3)]
-    : STATIC_TESTIMONIALS;
+    : STATIC_TESTIMONIALS
+  ).filter((t) => !UNVERIFIED_TESTIMONIAL_COMPANIES.includes(t.company.trim().toLowerCase()));
   const N = testimonials.length;
 
   const [current, setCurrent]     = useState(0);

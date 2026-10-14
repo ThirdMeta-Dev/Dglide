@@ -130,7 +130,7 @@ function getTabStyle(i: number, active: number): React.CSSProperties {
 }
 
 export default function BusinessTabsSection({ data }: { data?: Record<string, string> }) {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const tabRowRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -158,6 +158,8 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
       data?.[`tab_${i + 1}_bullet_2`] ?? t.bullets[1],
       data?.[`tab_${i + 1}_bullet_3`] ?? t.bullets[2],
     ],
+    ctaLabel: data?.[`tab_${i + 1}_cta_label`] ?? ctaLabel,
+    ctaHref:  data?.[`tab_${i + 1}_cta_href`]  ?? ctaHref,
   }));
 
   const tab = tabs[active];
@@ -339,7 +341,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
                 {/* CTA */}
                 <div style={{ marginTop: 60 }}>
                   <a
-                    href={ctaHref}
+                    href={tab.ctaHref}
                     className="dg-btn-fill"
                     style={{
                       display: "inline-flex",
@@ -357,7 +359,7 @@ export default function BusinessTabsSection({ data }: { data?: Record<string, st
                       cursor: "pointer",
                     }}
                   >
-                    {ctaLabel} <span style={{ fontSize: 18 }}>→</span>
+                    {tab.ctaLabel} <span style={{ fontSize: 18 }}>→</span>
                   </a>
                 </div>
               </motion.div>

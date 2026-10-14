@@ -600,3 +600,8 @@
     padding: 24px 22px 28px !important;
   }
 }
+
+/* Capabilities with extra cards (homepage revamp, Oct 2026): three columns, then two, then one. */
+.cap-grid.cap-grid--grid { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 40px !important; }
+@media (max-width: 900px) { .cap-grid.cap-grid--grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px !important; } }
+@media (max-width: 640px) { .cap-grid.cap-grid--grid { grid-template-columns: 1fr; } }

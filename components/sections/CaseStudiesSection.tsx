@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 
 function useCountUp(end: number, duration: number, active: boolean) {
@@ -22,9 +22,13 @@ function useCountUp(end: number, duration: number, active: boolean) {
   return count;
 }
 
+const subscribeNoop = () => () => {};
+
 function MetricCounter({ value }: { value: string }) {
   const match = value.match(/^(\d+(?:\.\d+)?)(.*)/);
   const [started, setStarted] = useState(false);
+  // Server HTML carries the real number (search and AI engines read it); the browser resets to 0 and counts up when in view.
+  const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     const el = ref.current;
@@ -37,7 +41,7 @@ function MetricCounter({ value }: { value: string }) {
   const suffix = match ? match[2] : value;
   const count = useCountUp(num, 1800, started);
   if (!match) return <span ref={ref}>{value}</span>;
-  return <span ref={ref}>{started ? count : 0}{suffix}</span>;
+  return <span ref={ref}>{!mounted ? num : started ? count : 0}{suffix}</span>;
 }
 
 const RIGHT_ITEM_DEFAULTS = [

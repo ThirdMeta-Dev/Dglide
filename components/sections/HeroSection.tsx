@@ -134,7 +134,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
               <ArrowRight stroke="white" />
             </Link>
             <Link
-              href="/platform#platform-backbone"
+              href={data?.cta_secondary_href ?? "/platform#platform-backbone"}
               className="dg-btn-outline inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-[#1C2BFF] text-[#1C2BFF] text-base transition-colors hover:bg-[#1C2BFF]/5"
               style={{ fontFamily: "Sora, sans-serif", fontWeight: 400 }}
             >
@@ -183,6 +183,16 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
                 {line}
               </p>
             ))}
+            {data?.logo_carousel_link_href && (
+              <Link
+                href={data.logo_carousel_link_href}
+                className="mt-1 inline-flex items-center gap-1.5 text-[13px] text-[#1C2BFF] hover:underline"
+                style={{ fontFamily: "Sora, sans-serif" }}
+              >
+                {data.logo_carousel_link_label ?? "See Our Customers"}
+                <ArrowRight stroke="currentColor" />
+              </Link>
+            )}
           </div>
 
           {/* Scrolling logo pills */}

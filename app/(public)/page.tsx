@@ -15,21 +15,81 @@ import BusinessTabsSection from "@/components/sections/BusinessTabsSection";
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 import CompetitorSection from "@/components/sections/CompetitorSection";
 import CapabilitiesSection from "@/components/sections/CapabilitiesSection";
-import LogoCarouselSection from "@/components/sections/LogoCarouselSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import LiveFasterSection from "@/components/sections/LiveFasterSection";
+import GoLiveSection from "@/components/sections/GoLiveSection";
+import HomeFaqSection from "@/components/sections/HomeFaqSection";
 import UsefulResourcesSection from "@/components/sections/UsefulResourcesSection";
 import CTASection from "@/components/sections/CTASection";
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
+import {
+  EXTRA_CAPABILITIES,
+  HOME_FAQS,
+  HOME_META,
+  HOME_OVERRIDES,
+  KEEP_PROCESS_BANDS,
+  ONE_SYSTEM_AI_NOTE,
+} from "@/data/homepageRevamp";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.dglide.com";
 
 export const metadata: Metadata = {
-  title: { absolute: "No-Code ITSM & Field Service Platform | DGlide" },
-  description:
-    "One no-code platform for ITSM, field service, and CRM. Replaces ManageEngine, Zoho, and WhatsApp-run ops. Live in weeks, not months.",
+  title: { absolute: HOME_META.title },
+  description: HOME_META.description,
+  alternates: { canonical: "/" },
 };
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "DGlide",
+      url: SITE_URL,
+      logo: `${SITE_URL}/logo.png`,
+      description: "DGlide is field service and operations software for manufacturers.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: "DGlide",
+      url: SITE_URL,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${SITE_URL}/#software`,
+      name: "DGlide",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web, Android, iOS",
+      description:
+        "Field service, AMC, production and CRM software for manufacturers, with an AI engine that builds no-code apps from a flow diagram.",
+      featureList: [
+        "Field service and work order management",
+        "AMC contract scheduling and renewal reminders",
+        "Complaints, helpdesk and SLA tracking",
+        "Production tracking",
+        "CRM with IndiaMART leads",
+        "WhatsApp and email request intake",
+        "Android and iOS apps for field teams",
+        "AI engine that builds apps from a flow diagram or written requirement",
+      ],
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      mainEntity: HOME_FAQS.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
 
 export default async function HomePage() {
   const [sections, { docs: blogPosts }, caseStudies] = await Promise.all([
@@ -38,31 +98,33 @@ export default async function HomePage() {
     listPublishedCaseStudiesFresh(),
   ]);
 
+  // Revamped copy is laid over the CMS values (see data/homepageRevamp.ts).
+  const section = (key: string) => ({ ...(sections[key] ?? {}), ...(HOME_OVERRIDES[key] ?? {}) });
+
   return (
+    <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
     <AnimatedPublicPage staticFirstCount={1}>
-      <HeroSection data={sections.hero} />
+      <HeroSection data={section("hero")} />
       <AiEngineTeaserSection />
-      <SoftwareWorksSection data={sections.software_works} />
-      <ComparisonSection data={sections.comparison} />
-      <KeepYourProcessSection />
-      <FourReasonsSection data={sections.four_reasons} />
-      <OneSystemSection data={sections.one_system} />
-      <HowItWorksSection data={sections.how_it_works} />
-      <LivingServiceSection data={sections.living_service} />
-      <BusinessTabsSection data={sections.business_tabs} />
-      <CaseStudiesSection data={sections.case_studies} />
-      <CompetitorSection data={sections.competitor} />
-      <CapabilitiesSection data={sections.capabilities} />
-      <LogoCarouselSection data={sections.logo_carousel} />
+      <SoftwareWorksSection data={section("software_works")} />
+      <ComparisonSection data={section("comparison")} />
+      <KeepYourProcessSection {...KEEP_PROCESS_BANDS.first} />
+      <FourReasonsSection data={section("four_reasons")} />
+      <OneSystemSection data={section("one_system")} aiNote={ONE_SYSTEM_AI_NOTE} />
+      <HowItWorksSection data={section("how_it_works")} />
+      <LivingServiceSection data={section("living_service")} />
+      <BusinessTabsSection data={section("business_tabs")} />
+      <CaseStudiesSection data={section("case_studies")} />
+      <CompetitorSection data={section("competitor")} />
+      <CapabilitiesSection data={section("capabilities")} extra={EXTRA_CAPABILITIES} />
       <TestimonialsSection data={sections.testimonials} />
-      <KeepYourProcessSection
-        titleLines={["Lost Leads, Slow Service, No Visibility -", "Fixed In A Quarter."]}
-        description="That Was A 50-Person Manufacturer. Tell Us How Your Operation Runs Today And We'll Show You, In 30 Minutes, Exactly Where DGlide Plugs The Leaks."
-        ctaLabel="Show me where DGlide fits"
-      />
-      <LiveFasterSection data={sections.live_faster} />
+      <KeepYourProcessSection {...KEEP_PROCESS_BANDS.second} />
+      <GoLiveSection />
+      <HomeFaqSection />
       <UsefulResourcesSection latestPost={blogPosts[0]} latestCaseStudy={caseStudies[0]} />
-      <CTASection data={sections.cta} />
+      <CTASection data={section("cta")} />
     </AnimatedPublicPage>
+    </>
   );
 }

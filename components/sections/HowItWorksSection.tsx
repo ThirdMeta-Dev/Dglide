@@ -79,8 +79,9 @@ export default function HowItWorksSection({
 
   return (
     <section
+      id="how-it-works"
       className="w-full py-24 overflow-hidden relative"
-      style={{ backgroundImage: `url('${data?.bg_image ?? "/how-it-works-bg.png"}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+      style={{ backgroundImage: `url('${data?.bg_image ?? "/how-it-works-bg.png"}')`, backgroundSize: "cover", backgroundPosition: "center", scrollMarginTop: 96 }}
     >
 
       <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">

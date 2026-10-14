@@ -14,7 +14,13 @@ const RIGHT_DEFAULTS = [
   { title: "Field Sales Management",          desc: "Plan Routes, Log Visits, Manage Territories." },
 ];
 
-export default function OneSystemSection({ data }: { data?: Record<string, string> }) {
+export default function OneSystemSection({
+  data,
+  aiNote,
+}: {
+  data?: Record<string, string>;
+  aiNote?: { text: string; linkLabel: string; href: string };
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -120,6 +126,17 @@ export default function OneSystemSection({ data }: { data?: Record<string, strin
             >
               If Production Runs On Spreadsheets And Dispatch Finds Out Over WhatsApp, See How The Four Connect.
             </h3>
+            {aiNote && (
+              <p className="-mt-5 max-w-[720px] text-[15px] leading-[1.6] text-[#555]" style={{ fontFamily: "Inter, sans-serif" }}>
+                <span className="mr-2 rounded-full bg-[#FF7F1C] px-2 py-1 align-middle text-[10px] font-semibold uppercase tracking-[0.06em] text-white" style={{ fontFamily: "Sora, sans-serif" }}>
+                  AI
+                </span>
+                {aiNote.text}{" "}
+                <Link href={aiNote.href} className="font-semibold text-[#1C2BFF] hover:underline">
+                  {aiNote.linkLabel}
+                </Link>
+              </p>
+            )}
             <Link
               href="/schedule-demo"
               className="dg-btn-fill inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold text-white"
