@@ -13,14 +13,20 @@ export const AI_DEMO_VIDEO: { src: string; poster: string; captions?: string } =
 export const AI_HERO = {
   eyebrow: "DGlide AI Engine",
   title: "Draw Your Process. Get a Working App.",
-  homeSubtitle:
-    "DGlide's AI engine turns a flow diagram or a plain-English description into a working no-code application, ready to edit, validate and run.",
   pageSubtitle:
     "Describe it or draw it, and DGlide's AI engine builds a working no-code application on the DGlide platform.",
   primaryCta: "See It Build Live",
 };
 
+// Homepage: the AI engine is an addition to the existing positioning, not the hero message.
+export const AI_ANNOUNCEMENT = {
+  full: "DGlide AI Engine: draw your process, get a working app",
+  short: "Meet the DGlide AI Engine",
+};
+
 export const AI_TEASER = {
+  intro:
+    "The same DGlide platform for field service, ITSM and CRM, now with an AI engine that turns a flow diagram or a written requirement into a working app.",
   title: "From Requirement to Running App, Built by AI and Governed by DGlide.",
   cards: [
     { title: "Describe or Draw It.", body: "Upload a flow diagram or write what you need." },

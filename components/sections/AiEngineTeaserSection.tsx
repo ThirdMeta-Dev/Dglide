@@ -12,6 +12,7 @@ export default function AiEngineTeaserSection() {
             DGlide AI Engine <span className="ai-new">New</span>
           </p>
           <h2 id="ai-teaser-title">{AI_TEASER.title}</h2>
+          <p className="ai-teaser-intro">{AI_TEASER.intro}</p>
         </header>
         <ol className="ai-teaser-grid">
           {AI_TEASER.cards.map((card, index) => (

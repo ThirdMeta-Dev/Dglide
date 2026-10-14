@@ -23,9 +23,9 @@ import CTASection from "@/components/sections/CTASection";
 import { AnimatedPublicPage } from "@/components/animations/MotionPrimitives";
 
 export const metadata: Metadata = {
-  title: { absolute: "No-Code Field Service Platform With an AI Engine | DGlide" },
+  title: { absolute: "No-Code ITSM & Field Service Platform | DGlide" },
   description:
-    "Draw your process and DGlide's AI engine builds a working no-code app. One platform for field service, ITSM and CRM, live in weeks, not months.",
+    "One no-code platform for ITSM, field service, and CRM. Replaces ManageEngine, Zoho, and WhatsApp-run ops. Live in weeks, not months.",
 };
 
 export const dynamic = "force-dynamic";

@@ -201,3 +201,5 @@
 
 /* Homepage sections use a top-to-bottom heading gradient; match it in the teaser. */
 .ai-teaser h2 { background: linear-gradient(180deg, #ff7f1c 0%, #000 55.42%); -webkit-background-clip: text; background-clip: text; }
+.ai-teaser-intro { max-width: 680px; margin: 18px auto 0; color: var(--a-body); font-size: 17px; }
+@media (max-width: 640px) { .ai-teaser-intro { margin-left: 0; font-size: 15px; } }
