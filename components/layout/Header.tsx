@@ -18,6 +18,7 @@ export type NavItemData = {
   href?: string;
   has_dropdown: boolean;
   children?: NavItemData[];
+  badge?: string;
 };
 
 export type HeaderSettings = {
@@ -53,6 +54,15 @@ const DEFAULT_SETTINGS: HeaderSettings = {
   is_sticky: true,
 };
 
+function NavBadge({ label }: { label?: string }) {
+  if (!label) return null;
+  return (
+    <span className="ml-1 rounded-full bg-[#FF7F1C] px-1.5 py-[3px] text-[9px] font-semibold uppercase leading-none tracking-[0.06em] text-white [font-family:var(--font-sora)]">
+      {label}
+    </span>
+  );
+}
+
 function NavItem({
   item,
   isActive,
@@ -84,7 +94,7 @@ function NavItem({
         <Link
           href={href}
           className={cn(
-            "flex items-center gap-1.5 whitespace-nowrap text-sm leading-[22.4px] transition-colors duration-200 group",
+            "flex items-center gap-1.5 whitespace-nowrap text-[12.5px] xl:text-sm leading-[22.4px] transition-colors duration-200 group",
             "[font-family:var(--font-sora)]",
             active ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
           )}
@@ -98,6 +108,7 @@ function NavItem({
             )}
           />
           <span>{item.label}</span>
+          <NavBadge label={item.badge} />
           {item.has_dropdown && (
             <motion.span
               className="inline-flex"
@@ -118,7 +129,7 @@ function NavItem({
         <button
           type="button"
           className={cn(
-            "flex items-center gap-1.5 whitespace-nowrap text-sm leading-[22.4px] transition-colors duration-200 group bg-transparent border-0 p-0 cursor-pointer",
+            "flex items-center gap-1.5 whitespace-nowrap text-[12.5px] xl:text-sm leading-[22.4px] transition-colors duration-200 group bg-transparent border-0 p-0 cursor-pointer",
             "[font-family:var(--font-sora)]",
             active ? "text-[#1C2BFF]" : "text-black hover:text-[#1C2BFF]"
           )}
@@ -257,6 +268,7 @@ export default function Header({ navItems, settings }: Props) {
   }
   const nav: NavItemData[] = [
     { label: "Platform", href: "/platform", has_dropdown: false },
+    { label: "AI Engine", href: "/ai-engine", has_dropdown: false, badge: "New" },
     { label: "Solution", has_dropdown: true, children: solutionChildren },
     { label: "Pricing", href: "/pricing", has_dropdown: false },
     { label: "Why DGlide?", href: "/why-dglide", has_dropdown: false },
@@ -405,14 +417,14 @@ export default function Header({ navItems, settings }: Props) {
       style={{ borderRadius: "0 0 25px 25px", background: "#FFF", boxShadow: "0 4px 10px 0 rgba(0,0,0,0.08)" }}
     >
       {/* Desktop */}
-      <div className="hidden lg:flex items-center justify-between h-[88px] px-8 max-w-[1280px] mx-auto gap-[52px]">
+      <div className="hidden lg:flex items-center justify-between h-[88px] px-4 xl:px-8 max-w-[1280px] mx-auto gap-4 xl:gap-6">
         <Link href="/" className="flex-shrink-0">
-          <div className="w-[160px] h-[28px] relative">
+          <div className="w-[118px] h-[22px] xl:w-[160px] xl:h-[28px] relative">
             <Image src="/logo.png" alt="DGlide" fill className="object-contain object-left" priority />
           </div>
         </Link>
 
-        <nav className="flex items-center gap-7">
+        <nav className="flex items-center gap-3 xl:gap-5">
           {nav.map((item) => (
             <NavItem
               key={item.label}
@@ -425,7 +437,7 @@ export default function Header({ navItems, settings }: Props) {
 
         <Link
           href={cfg.cta_href}
-          className="dg-btn-fill flex-shrink-0 flex items-center gap-2.5 px-8 py-[14px] rounded-[40px] text-white text-base font-semibold [font-family:var(--font-sora)] leading-[20.16px]"
+          className="dg-btn-fill flex-shrink-0 flex items-center gap-2 xl:gap-2.5 px-4 xl:px-8 py-[14px] rounded-[40px] text-white text-[13px] xl:text-base font-semibold [font-family:var(--font-sora)] leading-[20.16px]"
           style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
         >
           {cfg.cta_label}
@@ -509,6 +521,7 @@ export default function Header({ navItems, settings }: Props) {
                     >
                       {isActive(item.href) && <span className="w-1.5 h-1.5 rounded-full bg-[#1C2BFF]" />}
                       {item.label}
+                      <NavBadge label={item.badge} />
                     </Link>
                   ) : (
                     <span className="flex items-center gap-2 py-2.5 text-sm [font-family:var(--font-sora)] text-black">

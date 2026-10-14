@@ -241,6 +241,13 @@ export default function Footer({
       });
 
     if (
+      def.heading === "Platform" &&
+      !resolvedLinks.some((link) => link.href === "/ai-engine")
+    ) {
+      resolvedLinks.unshift({ label: "AI Engine", href: "/ai-engine" });
+    }
+
+    if (
       def.heading === "Resources" &&
       !resolvedLinks.some((link) => link.href === "/case-studies")
     ) {

@@ -7,6 +7,7 @@ export const revalidate = 86400
 
 const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: SITE_URL,                            priority: 1.0, changeFrequency: 'weekly',  lastModified: new Date() },
+  { url: `${SITE_URL}/ai-engine`,             priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/platform`,              priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/it-service-management-itsm`, priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
   { url: `${SITE_URL}/field-service-management-fsm`, priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },

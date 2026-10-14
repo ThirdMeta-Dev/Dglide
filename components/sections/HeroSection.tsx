@@ -6,6 +6,8 @@ import { useEffect, useRef } from "react";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
 import heroPlatformFlow from "@/components/homepage-assets/hero-platform-flow.webp";
 import { CUSTOMERS, LOGO_TO_SLUG } from "@/data/customersData";
+import { AI_DEMO_VIDEO, AI_HERO } from "@/data/aiEnginePageData";
+import { trackCta } from "@/components/ai-engine/TrackedLink";
 
 const BASE_LOGOS = [
   "/logos/power2u.png",
@@ -34,7 +36,8 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
     return () => obs.disconnect();
   }, []);
 
-  const fullTitle = data?.title ?? "Your Operations Run on Workarounds. They Shouldn’t.";
+  // The AI engine hero is set in code (data/aiEnginePageData.ts), not from the CMS hero fields.
+  const fullTitle = AI_HERO.title;
   const splitAt = fullTitle.lastIndexOf(". ");
   const titleLine1 = splitAt > 0 ? fullTitle.slice(0, splitAt + 1) : fullTitle;
   const titleLine2 = splitAt > 0 ? fullTitle.slice(splitAt + 2) : "";
@@ -93,7 +96,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
               margin: "0 auto 40px",
             }}
           >
-            {data?.subtitle ?? "DGlide gives you ready-to-run systems for field service, sales, and operations that adapt to how your business actually works."}
+            {AI_HERO.homeSubtitle}
           </p>
         </ScrollReveal>
 
@@ -101,22 +104,26 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
         <ScrollReveal direction="up" delay={0.24}>
           <div className="dg-hero-ctas relative z-10 flex flex-wrap gap-4 mb-0 justify-center">
             <Link
-              href="/schedule-demo"
+              href="/schedule-demo?src=home-hero-ai"
+              data-cta="home-hero-primary"
+              onClick={() => trackCta("home-hero-primary")}
               className="dg-btn-fill inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-base"
               style={{
                 fontFamily: "Sora, sans-serif",
                 background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)",
               }}
             >
-              {data?.cta_primary_label ?? "Book a Demo"}
+              {AI_HERO.primaryCta}
               <ArrowRight stroke="white" />
             </Link>
             <Link
-              href="/platform#platform-backbone"
+              href="/ai-engine#demo"
+              data-cta="home-hero-secondary"
+              onClick={() => trackCta("home-hero-secondary")}
               className="dg-btn-outline inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-[#1C2BFF] text-[#1C2BFF] text-base transition-colors hover:bg-[#1C2BFF]/5"
               style={{ fontFamily: "Sora, sans-serif", fontWeight: 400 }}
             >
-              {data?.cta_secondary_label ?? "See How It Works"}
+              {AI_DEMO_VIDEO.src ? "Watch the 60-Second Demo" : "See a Real Build"}
               <ArrowRight stroke="#1C2BFF" />
             </Link>
           </div>
