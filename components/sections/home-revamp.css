@@ -3,7 +3,7 @@
 .hr-section--soft { background: #f3f3f3; }
 .hr-inner { width: min(1168px, calc(100% - 48px)); margin-inline: auto; }
 .hr-head { max-width: 760px; margin: 0 auto 52px; text-align: center; }
-.hr-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 16px; color: #ff7f1c; font: 500 13px/1 var(--font-sora); letter-spacing: 0.04em; text-transform: uppercase; }
+.hr-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 16px; color: #ff7f1c; font: 500 13px/1 var(--font-sora); letter-spacing: 0.04em; }
 .hr-eyebrow::before { content: ""; width: 2px; height: 12px; background: #ff7f1c; }
 .hr-section h2 {
   margin: 0;
@@ -16,9 +16,14 @@
 .hr-head p { margin: 16px 0 0; color: #6f7276; font-size: 16px; line-height: 1.6; }
 
 .hr-golive { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; padding: 0; margin: 0; list-style: none; }
-.hr-golive li { display: flex; flex-direction: column; gap: 10px; padding: 26px 22px; border-radius: 18px; background: linear-gradient(180deg, #fff 0%, #fff 70%, #f6f6f6 100%); box-shadow: -6px -6px 10px rgba(0, 0, 0, 0.04); }
-.hr-golive li > span { display: inline-grid; width: 36px; height: 36px; place-items: center; margin-bottom: 8px; border-radius: 12px; background: #fff2e9; color: #ff7f1c; font: 500 12px var(--font-sora); }
-.hr-golive li.is-ai > span { background: #ff7f1c; color: #fff; }
+.hr-golive li { display: flex; flex-direction: column; gap: 10px; padding: 26px 22px; border: 1px solid transparent; border-radius: 18px; background: linear-gradient(180deg, #fff 0%, #fff 70%, #f6f6f6 100%); box-shadow: -6px -6px 10px rgba(0, 0, 0, 0.04); transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+.hr-golive li > span { display: inline-grid; width: 36px; height: 36px; place-items: center; margin-bottom: 8px; border-radius: 12px; background: #fff2e9; color: #ff7f1c; font: 500 12px var(--font-sora); transition: background 0.25s ease, color 0.25s ease; }
+/* Every card gets the same highlight on hover; none is highlighted by default. */
+@media (hover: hover) {
+  .hr-golive li:hover { transform: translateY(-4px); border-color: rgba(255, 127, 28, 0.35); box-shadow: 0 18px 36px rgba(28, 43, 255, 0.08); }
+  .hr-golive li:hover > span { background: #ff7f1c; color: #fff; }
+}
+@media (prefers-reduced-motion: reduce) { .hr-golive li, .hr-golive li > span { transition: none; } .hr-golive li:hover { transform: none; } }
 .hr-golive h3 { margin: 0; font: 500 17px/1.35 var(--font-sora); color: #000; }
 .hr-golive p { margin: 0; color: #545454; font-size: 14px; line-height: 1.6; }
 

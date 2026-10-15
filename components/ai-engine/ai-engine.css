@@ -33,7 +33,7 @@
 .ai-page h2, .ai-teaser h2 { font-size: clamp(30px, 3.4vw, 46px); line-height: 1.14; }
 .ai-page h3, .ai-teaser h3 { margin: 0 0 8px; font: 500 18px/1.35 var(--font-sora); }
 
-.ai-eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; color: var(--a-orange); font: 500 13px/1 var(--font-sora); letter-spacing: 0.04em; text-transform: uppercase; }
+.ai-eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; color: var(--a-orange); font: 500 13px/1 var(--font-sora); letter-spacing: 0.04em; }
 .ai-eyebrow::before { content: ""; display: inline-block; width: 2px; height: 11px; background: var(--a-orange); }
 .ai-eyebrow--light { color: #fff; justify-content: center; }
 .ai-eyebrow--light::before { background: #fff; }
@@ -64,7 +64,7 @@
 .ai-lead { margin: 20px 0 0; color: var(--a-body); font-size: 17px; }
 .ai-before-after { display: grid; gap: 12px; }
 .ai-shot { margin: 0; padding: 12px; border: 1px solid #ececec; border-radius: 18px; background: #fff; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06); }
-.ai-shot figcaption { margin: 0 0 8px 4px; color: #888; font: 600 11px var(--font-sora); letter-spacing: 0.06em; text-transform: uppercase; }
+.ai-shot figcaption { margin: 0 0 8px 4px; color: #888; font: 600 12px var(--font-sora); letter-spacing: 0.03em; }
 .ai-shot img { display: block; width: 100%; height: auto; border-radius: 10px; }
 .ai-shot--app { border-color: rgba(28, 43, 255, 0.25); box-shadow: 0 24px 50px rgba(28, 43, 255, 0.14); }
 .ai-shot--app figcaption { color: var(--a-blue); }
@@ -75,7 +75,7 @@
 .ai-split .ai-head { margin-bottom: 0; }
 .ai-compare-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .ai-code-card, .ai-app-card { display: flex; flex-direction: column; margin: 0; padding: 16px; border-radius: 18px; }
-.ai-code-card figcaption, .ai-app-card figcaption { margin-bottom: 10px; font: 600 11px var(--font-sora); letter-spacing: 0.06em; text-transform: uppercase; }
+.ai-code-card figcaption, .ai-app-card figcaption { margin-bottom: 10px; font: 600 12px var(--font-sora); letter-spacing: 0.03em; }
 .ai-code-card { background: #15151a; color: #c9c9d4; }
 .ai-code-card figcaption { color: #8d8da0; }
 .ai-code-card pre { flex: 1; margin: 0; overflow: hidden; color: #a5b4fc; font: 11px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; mask-image: linear-gradient(90deg, #000 75%, transparent); }

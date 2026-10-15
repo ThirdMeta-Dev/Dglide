@@ -13,7 +13,7 @@ export default function GoLiveSection() {
         </header>
         <ol className="hr-golive">
           {GO_LIVE.items.map((item, index) => (
-            <li key={item.title} className={item.title.startsWith("AI") ? "is-ai" : undefined}>
+            <li key={item.title}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{item.title}</h3>
               <p>{item.body}</p>

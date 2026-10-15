@@ -87,18 +87,18 @@ export default function AiEnginePage() {
       <section className="ai-section">
         <div className="ai-container ai-split">
           <header className="ai-head">
-            <Eyebrow>THE PROBLEM</Eyebrow>
+            <Eyebrow>The Problem</Eyebrow>
             <h2>{AI_PROBLEM.title}</h2>
             <p>{AI_PROBLEM.body}</p>
           </header>
           <div className="ai-compare-visual">
             <figure className="ai-code-card">
-              <figcaption>Code generators</figcaption>
+              <figcaption>Code Generators</figcaption>
               <pre aria-hidden="true">{CODE_LINES.join("\n")}</pre>
               <p>Files to host, secure and maintain</p>
             </figure>
             <figure className="ai-app-card">
-              <figcaption>DGlide AI engine</figcaption>
+              <figcaption>DGlide AI Engine</figcaption>
               <Image src="/ai-engine/schema-fields.webp" alt="Tables and fields of the job work app, editable in DGlide" width={1171} height={813} sizes="(max-width: 640px) 92vw, 300px" />
               <p>A working app you can edit</p>
             </figure>
@@ -110,7 +110,7 @@ export default function AiEnginePage() {
       <section className="ai-section ai-section--soft" id="how-it-works">
         <div className="ai-container">
           <header className="ai-head ai-head--center">
-            <Eyebrow>HOW IT WORKS</Eyebrow>
+            <Eyebrow>How It Works</Eyebrow>
             <h2>From Requirement to Running App in Four Steps</h2>
           </header>
           <ol className="ai-steps">
@@ -129,7 +129,7 @@ export default function AiEnginePage() {
       <section className="ai-section">
         <div className="ai-container ai-split">
           <header className="ai-head">
-            <Eyebrow>CHANGE IT BY ASKING</Eyebrow>
+            <Eyebrow>Change It by Asking</Eyebrow>
             <h2>{AI_CHANGE.title}</h2>
             <p>{AI_CHANGE.body}</p>
             <p className="ai-ask-bubble">{AI_CHANGE.example}</p>
@@ -145,7 +145,7 @@ export default function AiEnginePage() {
       <section className="ai-section ai-section--soft">
         <div className="ai-container">
           <header className="ai-head ai-head--center">
-            <Eyebrow>SAFE TO SHIP</Eyebrow>
+            <Eyebrow>Safe to Ship</Eyebrow>
             <h2>{AI_SAFE.title}</h2>
             <p>{AI_SAFE.body}</p>
           </header>
@@ -164,7 +164,7 @@ export default function AiEnginePage() {
       <section className="ai-section">
         <div className="ai-container">
           <header className="ai-head ai-head--center">
-            <Eyebrow>THE DIFFERENCE</Eyebrow>
+            <Eyebrow>The Difference</Eyebrow>
             <h2>{AI_COMPARISON.title}</h2>
           </header>
           <div className="ai-table-wrap">
@@ -198,7 +198,7 @@ export default function AiEnginePage() {
       <section className="ai-section ai-section--soft" id="demo">
         <div className="ai-container">
           <header className="ai-head ai-head--center">
-            <Eyebrow>DEMO</Eyebrow>
+            <Eyebrow>Demo</Eyebrow>
             <h2>{hasVideo ? "Watch the Demo" : "One Real Build, Step by Step"}</h2>
             <p>A manufacturing job work app, built on DGlide from a single flow diagram.{hasVideo ? "" : " These are screens from that build."}</p>
           </header>
@@ -249,7 +249,7 @@ export default function AiEnginePage() {
       {/* 9. Final CTA */}
       <section className="ai-cta">
         <div className="ai-cta-shell">
-          <Eyebrow light>BOOK A DEMO</Eyebrow>
+          <Eyebrow light>Book a Demo</Eyebrow>
           <h2>See It Build Live.</h2>
           <p>Bring a process diagram or a written requirement, and watch DGlide turn it into a working app.</p>
           <div className="ai-btn-row">

@@ -207,7 +207,7 @@ export const UNVERIFIED_TESTIMONIAL_COMPANIES = ["aero precision works", "nexus 
 
 // Risk block (buyer question: what could go wrong, what will it take). Replaces "From Demo to Live in Weeks".
 export const GO_LIVE = {
-  eyebrow: "BEFORE YOU SWITCH",
+  eyebrow: "Before You Switch",
   title: "What It Takes to Go Live",
   subtitle: "The questions owners and service heads ask before they switch, answered up front.",
   items: [

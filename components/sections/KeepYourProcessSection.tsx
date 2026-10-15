@@ -30,8 +30,8 @@ export default function KeepYourProcessSection({
             </div>
           </div>
 
-          <div className="relative z-10 flex min-h-[178px] flex-col justify-between gap-8 lg:flex-row lg:items-end lg:gap-[60px]">
-            <div className="flex min-w-0 flex-col gap-3">
+          <div className="relative z-10 flex min-h-[178px] flex-col justify-between gap-8 lg:flex-row lg:items-center lg:gap-[60px]">
+            <div className="flex min-w-0 flex-col gap-5">
               <h2
                 className="max-w-full bg-clip-text text-[36px] font-medium leading-[1.2] text-transparent md:w-[883px] md:max-w-none md:text-[48px] md:leading-[60px]"
                 style={{
@@ -43,7 +43,7 @@ export default function KeepYourProcessSection({
                 <br />
                 {titleLines[1]}
               </h2>
-              <p className="max-w-full text-[16px] font-normal leading-6 tracking-[0.2px] text-white md:w-[754px] md:max-w-none md:text-[17px]">
+              <p className="max-w-[640px] text-[16px] font-normal leading-[1.6] tracking-[0.2px] text-white/90 [text-wrap:balance] md:text-[17px]">
                 {description}
               </p>
             </div>

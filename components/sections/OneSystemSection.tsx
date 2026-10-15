@@ -85,7 +85,7 @@ export default function OneSystemSection({
             ))}
           </StaggerReveal>
 
-          {/* CENTER — image */}
+          {/* CENTER: image */}
           <ScrollReveal direction="up" delay={0.15}>
             <div className="flex items-center justify-center">
               <img
@@ -128,11 +128,8 @@ export default function OneSystemSection({
             </h3>
             {aiNote && (
               <p className="-mt-5 max-w-[860px] text-[15px] leading-[1.6] text-[#555]" style={{ fontFamily: "Inter, sans-serif" }}>
-                <span className="mr-2 rounded-full bg-[#FF7F1C] px-2 py-1 align-middle text-[10px] font-semibold uppercase tracking-[0.06em] text-white" style={{ fontFamily: "Sora, sans-serif" }}>
-                  AI
-                </span>
-                {aiNote.text}{" "}
-                <Link href={aiNote.href} className="font-semibold text-[#1C2BFF] hover:underline">
+                {aiNote.text}
+                <Link href={aiNote.href} className="mt-2 block font-semibold text-[#1C2BFF] hover:underline">
                   {aiNote.linkLabel}
                 </Link>
               </p>

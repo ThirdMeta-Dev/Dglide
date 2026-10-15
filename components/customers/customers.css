@@ -18,7 +18,7 @@
 .cust-hero { padding: 60px 0 72px; border-radius: 0 0 30px 30px; background: linear-gradient(180deg, #fff, #f4f4f4); }
 .cust-breadcrumb { display: flex; gap: 8px; margin-bottom: 24px; color: #858585; font-size: 13px; }
 .cust-breadcrumb a:hover { color: var(--c-orange); }
-.cust-eyebrow { margin: 0 0 18px; color: var(--c-orange); font: 500 13px/1 var(--font-sora); letter-spacing: 0.04em; text-transform: uppercase; }
+.cust-eyebrow { margin: 0 0 18px; color: var(--c-orange); font: 500 13px/1 var(--font-sora); letter-spacing: 0.04em; }
 .cust-eyebrow::before { content: ""; display: inline-block; width: 2px; height: 11px; margin-right: 8px; vertical-align: -1px; background: var(--c-orange); }
 .cust-page h1 {
   max-width: 820px;
