@@ -16,10 +16,10 @@ export const ENTITY_LINE = "DGlide is field service and operations software for 
 
 export const HOME_OVERRIDES: Record<string, SectionCopy> = {
   hero: {
-    badge_text: "Field Service and Operations Software for Manufacturers",
+    badge_text: "",
     title: "Service Calls, AMC Visits and Production, Off WhatsApp and Excel.",
     subtitle:
-      "Ready-to-run systems for field service, AMC contracts, production and sales, set up around how your team already works. Now with an AI engine that builds new apps from a flow diagram.",
+      "Field service and operations software for manufacturers. Ready-to-run systems for service calls, AMC contracts, production and sales, set up around how your team already works.",
     cta_primary_label: "Book a 30-Minute Demo",
     cta_secondary_label: "See How It Works",
     cta_secondary_href: "#how-it-works",
@@ -81,7 +81,7 @@ export const HOME_OVERRIDES: Record<string, SectionCopy> = {
     step_4_desc: "Ask for a new field, form or dashboard. No rebuild project.",
   },
   living_service: {
-    left_title: "The Living Service Model: Software That Keeps Up With You",
+    left_title: "The Living Service Model: It Keeps Up With You",
     left_body:
       "Your system is adjusted as your operation changes, quarter after quarter. With the AI engine, many changes now start with a single sentence.",
     feature_1: "Live Visibility",
@@ -89,7 +89,7 @@ export const HOME_OVERRIDES: Record<string, SectionCopy> = {
   },
   business_tabs: {
     section_title: "Built for Businesses Like Yours",
-    tab_1_label: "Equipment and Machinery Makers",
+    tab_1_label: "Equipment Makers",
     tab_1_title: "Equipment and Machinery Makers",
     tab_1_subtitle: "After-sales service, AMCs and spares for the machines you sell",
     tab_1_bullet_1: "When complaints come in by phone, WhatsApp and email.",
@@ -97,7 +97,7 @@ export const HOME_OVERRIDES: Record<string, SectionCopy> = {
     tab_1_bullet_3: "When engineers need the right manual and spare at the machine.",
     tab_1_cta_label: "See Field Service and AMC",
     tab_1_cta_href: "/field-service-management-fsm",
-    tab_2_label: "Manufacturing and Production",
+    tab_2_label: "Manufacturing",
     tab_2_title: "Manufacturing and Production",
     tab_2_subtitle: "Factories running production on spreadsheets and floor knowledge",
     tab_2_bullet_1: "When production updates travel by WhatsApp.",
@@ -105,7 +105,7 @@ export const HOME_OVERRIDES: Record<string, SectionCopy> = {
     tab_2_bullet_3: "When quality and dispatch work from different lists.",
     tab_2_cta_label: "See Production Tracking",
     tab_2_cta_href: "/manufacturing-management-software",
-    tab_3_label: "Service and AMC Businesses",
+    tab_3_label: "Service and AMC",
     tab_3_title: "Service and AMC Businesses",
     tab_3_subtitle: "Service teams juggling calls, visits and payouts",
     tab_3_bullet_1: "When technicians are assigned by phone.",
@@ -113,7 +113,7 @@ export const HOME_OVERRIDES: Record<string, SectionCopy> = {
     tab_3_bullet_3: "When monthly payouts are worked out by hand.",
     tab_3_cta_label: "See Field Service",
     tab_3_cta_href: "/field-service-management-fsm",
-    tab_4_label: "Internal Support Teams",
+    tab_4_label: "Support Teams",
     tab_4_title: "Internal Support Teams",
     tab_4_subtitle: "IT and support teams working from an inbox",
     tab_4_bullet_1: "When requests arrive by email with no owner.",
@@ -134,7 +134,7 @@ export const HOME_OVERRIDES: Record<string, SectionCopy> = {
     comp_2_label: "Standard Software",
     comp_2_bullet_1: "Fixed workflows you cannot change",
     comp_2_bullet_2: "Cheap upfront",
-    comp_3_label: "Custom Build or AI-Generated Code",
+    comp_3_label: "Custom Build or AI Code",
     comp_3_bullet_1: "Months to build, or minutes to generate",
     comp_3_bullet_2: "Either way, the code is yours to host, secure and fix",
     right_title: "With DGlide",
@@ -159,7 +159,7 @@ export const HOME_OVERRIDES: Record<string, SectionCopy> = {
   },
   cta: {
     badge_text: "Book a 30-Minute Demo",
-    title: "Bring One Workflow Your Team Runs Today. See It Set Up on DGlide, or Built by the AI Engine From Your Diagram.",
+    title: "Bring One Workflow. See It Run on DGlide, or Built by the AI Engine.",
     cta_label: "Book a Demo",
   },
 };
@@ -170,10 +170,12 @@ export const EXTRA_CAPABILITIES = [
     id: "ai",
     title: "AI Engine",
     desc: "Build forms, workflows and dashboards from a diagram or a sentence, checked by a second AI before go-live.",
+    icon: "/four-reasons/icon-3.png",
     href: "/ai-engine",
   },
   {
     id: "intake",
+    icon: "/one-system/icon-bl.png",
     title: "WhatsApp and Email Intake",
     desc: "Customers raise requests on WhatsApp or email, and each one becomes a ticket or work order.",
   },
@@ -195,8 +197,8 @@ export const KEEP_PROCESS_BANDS = {
   second: {
     titleLines: ["Lost Leads, Slow Service, No Visibility.", "Fixed in a Quarter."] as [string, string],
     description:
-      "That Was a 50-Person Manufacturer. Tell DGlide How Your Operation Runs Today, and See in 30 Minutes Where the Leaks Are.",
-    ctaLabel: "Show Me Where the Leaks Are",
+      "That Was a 50-Person Manufacturer. Show DGlide How Yours Runs, and See Where the Leaks Are in 30 Minutes.",
+    ctaLabel: "Find My Leaks",
   },
 };
 

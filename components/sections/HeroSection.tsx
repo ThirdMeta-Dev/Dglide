@@ -74,6 +74,8 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
         </ScrollReveal>
 
         {/* Badge — centered */}
+        {/* An empty badge_text hides the badge, so the hero carries one tag only (the announcement above). */}
+        {(data?.badge_text ?? "Configurable Operations Platform") !== "" && (
         <ScrollReveal direction="up" delay={0}>
           <div className="flex items-center justify-center gap-2 mb-6">
             <span className="w-0.5 h-5 bg-[#FF7F1C] rounded-full flex-shrink-0" />
@@ -82,6 +84,7 @@ export default function HeroSection({ data }: { data?: Record<string, string> })
             </span>
           </div>
         </ScrollReveal>
+        )}
 
         {/* Title — centered, vertical orange→black gradient */}
         <ScrollReveal direction="up" delay={0.08}>

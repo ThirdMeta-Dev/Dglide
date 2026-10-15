@@ -127,7 +127,7 @@ export default function OneSystemSection({
               If Production Runs On Spreadsheets And Dispatch Finds Out Over WhatsApp, See How The Four Connect.
             </h3>
             {aiNote && (
-              <p className="-mt-5 max-w-[720px] text-[15px] leading-[1.6] text-[#555]" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="-mt-5 max-w-[860px] text-[15px] leading-[1.6] text-[#555]" style={{ fontFamily: "Inter, sans-serif" }}>
                 <span className="mr-2 rounded-full bg-[#FF7F1C] px-2 py-1 align-middle text-[10px] font-semibold uppercase tracking-[0.06em] text-white" style={{ fontFamily: "Sora, sans-serif" }}>
                   AI
                 </span>
