@@ -43,7 +43,11 @@ import {
   Upload,
   ChevronRight,
 } from 'lucide-react'
-import { DEFAULT_BLOG_DETAIL_SETTINGS, type BlogAuthor, type BlogDetailSettings, type BlogPost, type BlogTag } from '@/lib/blog-db'
+import {
+  DEFAULT_BLOG_DETAIL_SETTINGS,
+  type BlogDetailSettings,
+} from '@/lib/blog-detail-settings'
+import type { BlogAuthor, BlogPost, BlogTag } from '@/lib/blog-db'
 import { slugify, countWords, calcReadingTime } from '@/lib/blog-utils'
 import MediaPicker from './MediaPicker'
 

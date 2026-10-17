@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import FSMPage from "../field-service-management-fsm/page";
+import FSMPageContent from "@/components/solutions/FSMPageContent";
 
 // Ads-only landing page: identical to /field-service-management-fsm but must
 // never be indexed — no canonical, excluded from sitemap.ts.
@@ -43,7 +43,7 @@ fbq('track', 'PageView');`}
           alt=""
         />
       </noscript>
-      <FSMPage adsLanding />
+      <FSMPageContent adsLanding />
     </>
   );
 }
