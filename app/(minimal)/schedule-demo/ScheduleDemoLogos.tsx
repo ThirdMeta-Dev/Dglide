@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { currentLogoSrc, logoAlt } from "@/lib/logo-paths";
 
 const LOGO_SRCS = [
   "/logos/power2u.png",
@@ -22,10 +23,10 @@ export default function ScheduleDemoLogos({ data }: { data?: Record<string, stri
   const headingLine1 = data?.heading_line_1 ?? "Trusted by";
   const headingLine2 = data?.heading_line_2 ?? "";
 
-  const logos = LOGO_SRCS.map((src, i) => ({
-    src: data?.[`logo_${i + 1}_image`] || src,
-    alt: data?.[`logo_${i + 1}_alt`]   || LOGO_ALTS[i % LOGO_ALTS.length],
-  }));
+  const logos = LOGO_SRCS.map((fallback, i) => {
+    const src = currentLogoSrc(data?.[`logo_${i + 1}_image`] || fallback);
+    return { src, alt: logoAlt(src, data?.[`logo_${i + 1}_alt`] || LOGO_ALTS[i % LOGO_ALTS.length]) };
+  });
 
   const doubled = [...logos, ...logos, ...logos];
 

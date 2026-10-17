@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ScrollReveal } from "@/components/animations/MotionPrimitives";
+import { currentLogoSrc, logoAlt } from "@/lib/logo-paths";
 
 const LOGO_COUNT = 9;
 const LOGO_SRCS = [
@@ -35,10 +36,10 @@ export default function LogoCarouselSection({
 }) {
   const heading = title ?? data?.title ?? "Trusted by";
 
-  const logos = Array.from({ length: LOGO_COUNT }, (_, i) => ({
-    src: data?.[`logo_${i + 1}_image`] || LOGO_SRCS[i % LOGO_SRCS.length],
-    alt: data?.[`logo_${i + 1}_alt`]   || LOGO_ALTS[i % LOGO_ALTS.length],
-  }));
+  const logos = Array.from({ length: LOGO_COUNT }, (_, i) => {
+    const src = currentLogoSrc(data?.[`logo_${i + 1}_image`] || LOGO_SRCS[i % LOGO_SRCS.length]);
+    return { src, alt: logoAlt(src, data?.[`logo_${i + 1}_alt`] || LOGO_ALTS[i % LOGO_ALTS.length]) };
+  });
 
   const displayLogos = logos;
   const duplicated = [...displayLogos, ...displayLogos, ...displayLogos];

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { currentLogoSrc, logoAlt } from "@/lib/logo-paths";
 import Link from "next/link";
 import { getBrowserLeadSource } from "@/lib/lead-source";
 import { withThankYouAccessParam } from "@/lib/thank-you-access";
@@ -54,10 +55,10 @@ export default function ScheduleDemoHero({
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const bullets = [1, 2, 3].map((n) => data?.[`bullet_${n}`] ?? BULLETS_DEFAULT[n - 1]);
-  const logos = LOGO_SRCS.map((src, i) => ({
-    src: logoData?.[`logo_${i + 1}_image`] || src,
-    alt: logoData?.[`logo_${i + 1}_alt`] || "Client Logo",
-  }));
+  const logos = LOGO_SRCS.map((fallback, i) => {
+    const src = currentLogoSrc(logoData?.[`logo_${i + 1}_image`] || fallback);
+    return { src, alt: logoAlt(src, logoData?.[`logo_${i + 1}_alt`]) };
+  });
   const doubledLogos = [...logos, ...logos, ...logos];
 
   const label = data?.label ?? "Book a Live DGlide Walkthrough";
