@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import AiEnginePage from "@/components/ai-engine/AiEnginePage";
 import { AI_FAQS } from "@/data/aiEnginePageData";
 import "@/components/ai-engine/ai-engine.css";
 
+// The Meta pixel loads site-wide through Google Tag Manager, so this page adds no pixel of its own.
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.dglide.com";
-const META_PIXEL_ID = "1286548570123704";
 
 export const metadata: Metadata = {
   title: "AI Engine: Turn a Diagram into a Working App",
@@ -53,21 +52,6 @@ export default function AiEngineRoute() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      {/* Meta pixel fires only on the live domain, so local and staging visits do not count as ad traffic. */}
-      <Script id="meta-pixel-ai-engine" strategy="afterInteractive">
-        {`if (["dglide.com", "www.dglide.com"].indexOf(location.hostname) !== -1) {
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '${META_PIXEL_ID}');
-fbq('track', 'PageView');
-}`}
-      </Script>
       <AiEnginePage />
     </>
   );
