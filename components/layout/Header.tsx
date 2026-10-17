@@ -8,10 +8,20 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { motionEase } from "@/components/animations/MotionPrimitives";
-import { isFsmIndiaAdsPath, openFsmIndiaLeadModal } from "@/lib/fsm-india-ads";
+import {
+  isFsmFocusedLandingPath,
+  isFsmIndiaAdsPath,
+  openFsmIndiaLeadModal,
+} from "@/lib/fsm-india-ads";
 import { fsmNavItems } from "@/data/fsmPageData";
 
 const FSM_ADS_HEADER_ITEMS = fsmNavItems.filter((item) => item.id !== "integrations");
+const FSM_FOCUSED_HEADER_ITEMS = [
+  { id: "what-fsm-does", label: "What DGlide FSM Does" },
+  { id: "core-fsm-capabilities", label: "Why DGlide Adapts" },
+  { id: "customer-stories", label: "Customer Stories" },
+  { id: "integrations", label: "Integrations" },
+];
 
 export type NavItemData = {
   label: string;
@@ -276,7 +286,11 @@ export default function Header({ navItems, settings }: Props) {
     { label: "Resources", has_dropdown: true, children: resourceChildren },
   ];
   const cfg = settings ?? DEFAULT_SETTINGS;
-  const isAdsLanding = isFsmIndiaAdsPath(pathname);
+  const isFocusedFsmLanding = isFsmFocusedLandingPath(pathname);
+  const isAdsLanding = isFsmIndiaAdsPath(pathname) || isFocusedFsmLanding;
+  const adsHeaderItems = isFocusedFsmLanding
+    ? FSM_FOCUSED_HEADER_ITEMS
+    : FSM_ADS_HEADER_ITEMS;
 
   useEffect(() => {
     if (!isAdsLanding) return;
@@ -291,13 +305,13 @@ export default function Header({ navItems, settings }: Props) {
       { rootMargin: "-105px 0px -55% 0px", threshold: 0 }
     );
 
-    FSM_ADS_HEADER_ITEMS.forEach(({ id }) => {
+    adsHeaderItems.forEach(({ id }) => {
       const section = document.getElementById(id);
       if (section) observer.observe(section);
     });
 
     return () => observer.disconnect();
-  }, [isAdsLanding]);
+  }, [adsHeaderItems, isAdsLanding]);
 
   useEffect(() => {
     if (!isAdsLanding) return;
@@ -339,7 +353,12 @@ export default function Header({ navItems, settings }: Props) {
         className={cn("z-50 w-full", cfg.is_sticky && "sticky top-0")}
         style={{ borderRadius: "0 0 25px 25px", background: "#FFF", boxShadow: "0 4px 10px 0 rgba(0,0,0,0.08)" }}
       >
-        <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-5 px-5 lg:h-[88px] lg:px-8">
+        <div
+          className={cn(
+            "mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-5 px-5 lg:h-[88px] lg:px-8",
+            isFocusedFsmLanding && "lg:grid lg:grid-cols-[minmax(220px,1fr)_minmax(0,480px)_minmax(220px,1fr)] xl:grid-cols-[minmax(250px,1fr)_minmax(0,600px)_minmax(250px,1fr)]"
+          )}
+        >
           <Link href="/" className="flex-shrink-0" aria-label="DGlide home">
             <div className="relative h-6 w-[120px] lg:h-[26px] lg:w-[145px]">
               <Image src="/logo.png" alt="DGlide" fill className="object-contain object-left" priority />
@@ -353,7 +372,7 @@ export default function Header({ navItems, settings }: Props) {
               className="flex min-w-0 items-center gap-6 overflow-x-auto px-1 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               aria-label="FSM page sections"
             >
-              {FSM_ADS_HEADER_ITEMS.map((item) => (
+              {adsHeaderItems.map((item) => (
                 <a
                   key={item.id}
                   ref={(element) => { adsDesktopLinkRefs.current[item.id] = element; }}
@@ -378,11 +397,14 @@ export default function Header({ navItems, settings }: Props) {
 
           <button
             type="button"
-            onClick={() => openFsmIndiaLeadModal()}
-            className="dg-btn-fill flex items-center gap-1.5 whitespace-nowrap rounded-[40px] px-4 py-2 text-xs font-semibold text-white [font-family:var(--font-sora)] lg:gap-2 lg:px-8 lg:py-[14px] lg:text-base"
+            onClick={() => openFsmIndiaLeadModal(isFocusedFsmLanding ? "brochure" : "demo")}
+            className={cn(
+              "dg-btn-fill flex items-center gap-1.5 whitespace-nowrap rounded-[40px] px-4 py-2 text-xs font-semibold text-white [font-family:var(--font-sora)] lg:gap-2 lg:px-8 lg:py-[14px] lg:text-base",
+              isFocusedFsmLanding && "lg:justify-self-end"
+            )}
             style={{ background: "linear-gradient(135deg, #1C2BFF 0%, #141FB5 100%)" }}
           >
-            {cfg.cta_label}
+            {isFocusedFsmLanding ? "Download Brochure" : cfg.cta_label}
             <svg className="h-4 w-4 lg:h-[18px] lg:w-[18px]" viewBox="0 0 18 18" fill="none" aria-hidden="true">
               <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -393,7 +415,7 @@ export default function Header({ navItems, settings }: Props) {
           className="flex gap-5 overflow-x-auto border-t border-[#F1F1F1] px-5 py-3 lg:hidden"
           aria-label="FSM page sections"
         >
-          {FSM_ADS_HEADER_ITEMS.map((item) => (
+          {adsHeaderItems.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}

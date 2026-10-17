@@ -5,7 +5,10 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/animations/MotionPrimitives";
 import FooterNewsletter from "./FooterNewsletter";
-import { isFsmIndiaAdsPath } from "@/lib/fsm-india-ads";
+import {
+  isFsmFocusedLandingPath,
+  isFsmIndiaAdsPath,
+} from "@/lib/fsm-india-ads";
 
 export type FooterSettings = {
   newsletter_heading?:      string;
@@ -200,7 +203,7 @@ export default function Footer({
     instagram: "https://www.instagram.com/dglide.ai/",
   };
 
-  if (isFsmIndiaAdsPath(pathname)) {
+  if (isFsmIndiaAdsPath(pathname) || isFsmFocusedLandingPath(pathname)) {
     return (
       <footer className="mt-auto w-full border-t border-[#E5E5E5] bg-white">
         <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-3 px-5 py-6 text-center sm:flex-row sm:px-12 sm:text-left">

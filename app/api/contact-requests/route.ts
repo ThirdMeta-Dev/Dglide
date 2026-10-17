@@ -84,7 +84,10 @@ export async function POST(req: Request) {
     const supabase = await createClient();
     const requestedFormType = readString(body.formType);
     const sourcePathOnly = readString(body.sourcePath).split("?")[0].replace(/\/+$/, "");
-    const isFsmIndiaAdsPath = sourcePathOnly === "/field-service-management-fsm-india";
+    const isFsmIndiaAdsPath = [
+      "/field-service-management-fsm-india",
+      "/FSM-India",
+    ].includes(sourcePathOnly);
     const isFsmBrochureLead =
       requestedFormType === "FSM India Ads Brochure" && isFsmIndiaAdsPath;
     const isFsmIndiaAdsLead = (
